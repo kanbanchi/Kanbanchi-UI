@@ -1,0 +1,34 @@
+.icon {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    width: $google-spacing * 2;
+    height: $google-spacing * 2;
+    line-height: $google-spacing * 2;
+    overflow: hidden;    
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility; /* Support for Safari and Chrome. */
+    -moz-osx-font-smoothing: grayscale;
+
+    &__svg {
+        width: 100%;
+        height: 100%;
+        opacity: .9;
+        background: inherit;
+        fill: currentColor;
+        transform: translateX(0);
+    }    
+
+    &--24 {
+        width: $google-spacing * 3;
+        height: $google-spacing * 3;
+        line-height: $google-spacing * 3;
+    }
+
+    &--96 {
+        width: $google-spacing * 12;
+        height: $google-spacing * 12;
+        line-height: $google-spacing * 12;
+    }
+
+}

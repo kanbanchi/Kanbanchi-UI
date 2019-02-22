@@ -1,0 +1,94 @@
+/*  ==================================================================  *\
+    10. Helpers (Some useful, global classes)
+\*  ==================================================================  */
+
+/*  Predefined Material Color Palette Classes
+   https://github.com/minusfive/sass-material-colors
+
+   Sample usage:
+       <div class=" color--cyan-400  bg--blue-grey-600 "></div>
+==================================================================  */
+@each $color-name, $color-variants in $material-colors {
+     @each $color-variant, $hex-value in $color-variants{
+        .color--#{$color-name}-#{$color-variant} {
+            color: #{$hex-value};
+        }
+
+        .bg--#{$color-name}-#{$color-variant} {
+            background-color: #{$hex-value};
+        }
+    }
+}
+
+/*  Predefined Material Placeholder Selectors
+    https://github.com/minusfive/sass-material-colors
+
+    Sample usage:
+        .my-cool-element {
+            @extend %color--cyan-400
+            @extend %bg--blue-grey-600
+        }
+==================================================================  */
+@each $color-name, $color-variants in $material-colors {
+     @each $color-variant, $hex-value in $color-variants{
+        %color--#{$color-name}-#{$color-variant} {
+            color: #{$hex-value};
+        }
+
+        %bg--#{$color-name}-#{$color-variant} {
+            background-color: #{$hex-value};
+        }
+    }
+}
+
+/*  Hide from both screenreaders and browsers: h5bp.com/u  */
+
+.hidden {
+    @include hidden;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*  Clearfix: contain floats  */
+
+.clearfix {
+    @include clearfix;
+}
+
+/*  Text ellipsis  */
+
+%text-ellipsis,
+.text-ellipsis {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: .5;
+    color: calc-color(tint, $color-base, 50);
+    box-shadow: none;
+}
+
+.full-size {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.portal {
+    position: absolute;
+    top: 0;
+}

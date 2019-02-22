@@ -1,0 +1,57 @@
+.page {
+    padding: 2em;
+}
+
+section {
+    margin: 0 0 2rem;
+
+    &.section-purple {
+        margin-left: -2em;
+        margin-right: -2em;
+        padding: 2em;
+        color: $color-white;
+        background: $color-purple;
+    }
+}
+
+.icons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2em;
+    text-align: center;
+
+    &__item {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: center;
+        width: $google-spacing * 16;
+        height: $google-spacing * 8;
+    }
+
+    &__icon,
+    &__text {
+        flex: 1 0 100%;
+    }
+
+    &__icon {
+        margin-top: 1rem;
+    }
+
+    &__text {
+        font-size: $piko-size;
+        color: calc-color(fade, $color-base, 50);
+    }
+
+    &--large {
+        .icons-grid__item {
+            height: $google-spacing * 16;
+        }
+    }
+}
+
+.snackbars {
+    .KUI-snackbar__container {
+        position: static;
+    }
+}
