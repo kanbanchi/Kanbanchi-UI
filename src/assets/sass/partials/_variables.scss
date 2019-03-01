@@ -87,3 +87,8 @@ $media-i8: 735px;
 $media-m: 640px;
 $media-i8p--w: 414px;
 $media-s: 320px;
+
+// shadows
+$shadow-default: 0 $google-spacing / 4  $google-spacing calc-color(fade, $color-base, 20);
+$shadow-hover: 0 $google-spacing / 2  $google-spacing * 2 calc-color(fade, $color-base, 30);
+$shadow-modal: 0 $google-spacing $google-spacing * 3 calc-color(fade, $color-base, 20);
