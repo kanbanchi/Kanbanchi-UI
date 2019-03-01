@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import styles from './buttons_group.module.scss';
 
-const ButtonsGroup = (props) => {
+export const ButtonsGroup = (props) => {
     let {
         children,
         className,

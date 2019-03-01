@@ -3,7 +3,7 @@ import { PropTypes, ClassNames } from '../utils';
 import styles from './button.module.scss';
 import { Icon } from '../../ui';
 
-const Button = (props) => {
+export const Button = (props) => {
     let {
         children,
         className,
