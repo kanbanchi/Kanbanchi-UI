@@ -18,8 +18,8 @@ Adds top & left margin to buttons
 ```
 
 ## margin
+> `small` *default*  
 > large  
-> `small` *default* 
 
 
 # Examples

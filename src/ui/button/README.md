@@ -24,8 +24,8 @@
 > icon
 
 ## size
+> `small` *default*  
 > large  
-> `small` *default* 
 
 ## type 
 > `button` *default*  
@@ -74,4 +74,15 @@ Wrap group of buttons in `ButtonsGroup` for default margin top & left between bu
     <Button>Button 1</Button>
     <Button>Button 2</Button>
 </ButtonsGroup>
+```
+
+# Segmented buttons
+
+Wrap group of buttons in `ButtonsSegmented` for combine them in one control iOS like.
+
+```html
+<ButtonsSegmented>
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+</ButtonsSegmented>
 ```
