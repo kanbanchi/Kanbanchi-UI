@@ -7,13 +7,9 @@
         margin-left: $google-spacing;
     }
     
-    &--m_large {
-        margin-top: -$google-spacing * 2;
-        margin-left: -$google-spacing * 2;
-
-        .button {
-            margin-top: $google-spacing * 2;
-            margin-left: $google-spacing * 2;
+    &__button {
+        &--active {
+            background: red;
         }
-    }       
+    }
 }

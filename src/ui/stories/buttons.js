@@ -106,10 +106,13 @@ class StoryButtons extends React.Component {
                 </section>
                 <section>
                     <h2>Segmented</h2>
-                    <ButtonsSegmented>
-                        <Button>Button 1</Button>
-                        <Button>Button 2</Button>
-                    </ButtonsSegmented>
+                    <ButtonsSegmented
+                        buttons={[
+                            { title: "Button 1" },
+                            { title: "Button 2" }
+                        ]}
+                        active={1}
+                    />
                 </section>
             </div>
         )

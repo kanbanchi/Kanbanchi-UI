@@ -4,17 +4,26 @@ import styles from './buttons_segmented.module.scss';
 
 const ButtonsSegmented = (props) => {
     let {
-        children,
+        active,
+        buttons,
         className,
-        margin,
         ...attributes
     } = props;
 
     className = ClassNames(
         styles.buttons_segmented,
-        styles['buttons_group--m_' + margin],
         className
     );
+
+    if (buttons.length) {
+        if (active > buttons.length - 1) active = 0;
+        buttons[active].className = ClassNames(
+            styles['buttons_segmented__button--active'],
+            className
+        );
+        let activeclassName =  || '';
+        
+    }
 
     return (
         <div
@@ -27,16 +36,13 @@ const ButtonsSegmented = (props) => {
 };
 
 ButtonsSegmented.propTypes = {
-    className: PropTypes.string,
-    margin: PropTypes.oneOf([
-        'small',
-        'large'
-    ])
+    buttons: PropTypes.array,
+    active: PropTypes.number
 };
 
 ButtonsSegmented.defaultProps = {
-    className: '',
-    margin: 'small'
+    buttons: [],
+    active: 0
 };
 
 export default ButtonsSegmented;
