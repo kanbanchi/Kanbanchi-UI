@@ -2,7 +2,7 @@
   "name": "kui",
   "version": "0.1.0",
   "private": true,
-  "main" : "index.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vladimirmagic/Kanbanchi-UI.git"
@@ -10,15 +10,10 @@
   "author": "Magic Web Solutions LTD",
   "dependencies": {
     "react": "^16.8.3",
-    "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-dom": "^16.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "start": "start-storybook -p 9001 -c .storybook"
   },
   "eslintConfig": {
     "extends": "react-app"

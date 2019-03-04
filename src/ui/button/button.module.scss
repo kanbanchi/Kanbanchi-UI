@@ -1,3 +1,4 @@
+@import '../../assets/sass/index.scss';
 .kui-button {
     position: relative;
     display: inline-flex;
@@ -20,7 +21,7 @@
     -moz-appearance: none;
     @include transition;
 
-    .button__icon {          
+    &__icon {          
         @include transition;
     }
 
@@ -34,7 +35,7 @@
         box-shadow: none;
     }        
 
-    &.button--disabled,
+    &--disabled,
     &:disabled {
         color: calc-color(tint, $color-purple, 30);        
     }
@@ -65,7 +66,7 @@
             box-shadow: 0 0 0 calc-color(fade, $color-purple, 0);
         }
 
-        &.button--disabled,
+        &.kui-button--disabled,
         &:disabled {
             color: $color-white;
             background: calc-color(tint, $color-purple, 30);
@@ -89,7 +90,7 @@
             background: calc-color(fade, $color-white, 30);
         }
 
-        &.button--disabled,
+        &.kui-button--disabled,
         &:disabled {
             background: calc-color(fade, $color-white, 30);
             opacity: .5;
@@ -119,7 +120,7 @@
             border: 2px solid calc-color(fade, $color-purple, 0);
         }
 
-        &.button--disabled,
+        &.kui-button--disabled,
         &:disabled {
             color: calc-color(fade, $color-purple, 30);
             background: none;
@@ -158,14 +159,14 @@
             box-shadow: 0 0 0 calc-color(fade, $color-purple, 0);
         }
 
-        &.button--disabled,
+        &.kui-button--disabled,
         &:disabled {
             color: $color-white;
             background: calc-color(tint, $color-purple, 30);
             box-shadow: 0 0 0 calc-color(fade, $color-purple, 0);
         }
 
-        &.button--large {
+        &.kui-button--large {
             width: $google-spacing * 7;
             height: $google-spacing * 7;
             min-width: $google-spacing * 7;        
@@ -180,7 +181,7 @@
         border: 2px solid calc-color(tint, $color-base, 20);
         border-radius: $big-radius;
 
-        .button__icon {
+        .kui-button__icon {
             margin-right: $google-spacing / 2;
             color: calc-color(tint, $color-base, 30);
         }
@@ -195,7 +196,7 @@
             color: calc-color(tint, $color-base, 80);
             border: 2px solid calc-color(tint, $color-base, 20);
 
-            .button__icon {
+            .kui-button__icon {
                 color: calc-color(tint, $color-base, 80);
             }
         }
@@ -203,47 +204,47 @@
         &:active {
             background: calc-color(fade, $color-base, 0);
 
-            .button__icon {
+            .kui-button__icon {
                 color: calc-color(tint, $color-base, 80);
             }
         }
 
-        &.button--disabled,
+        &.kui-button--disabled,
         &:disabled {
             color: calc-color(tint, $color-base, 30);
 
-            .button__icon {
+            .kui-button__icon {
                 color: calc-color(tint, $color-base, 30);
             }
         }
     }
 
     &--text {        
-        .button__icon {
+        .kui-button__icon {
             margin-left: $google-spacing / 2;
         }
 
         &:focus {
-            .button__icon {
+            .kui-button__icon {
                 transform: translateX($google-spacing / 2);
             }
         }
         
-        &:hover {            
-            .button__icon {
+        &:hover {
+            .kui-button__icon {
                 transform: translateX($google-spacing / 2);
             }
         }
 
         &:active {
-            .button__icon {
+            .kui-button__icon {
                 transform: translateX(0);
             }
         }
 
-        &.button--disabled,
+        &.kui-button--disabled,
         &:disabled {
-            .button__icon {
+            .kui-button__icon {
                 transform: translateX(0);
             }
         }
@@ -267,7 +268,7 @@
         &:active,
         &:focus,
         &:hover,
-        &.button--disabled,
+        &.kui-button--disabled,
         &:disabled {
             color: inherit;
             opacity: .9;
@@ -281,7 +282,7 @@
             opacity: 1;
         }
 
-        &.button--disabled,
+        &.kui-button--disabled,
         &:disabled {
             opacity: .1;
         }
