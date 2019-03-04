@@ -3,7 +3,7 @@ import { PropTypes, ClassNames } from '../utils';
 import styles from './snackbar.module.scss';
 import { Button, Icon } from '../../ui';
 
-const Snackbar = (props) => {
+export const Snackbar = (props) => {
 
     let {
         className,

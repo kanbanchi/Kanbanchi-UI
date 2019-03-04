@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import styles from './icon.module.scss';
 
-const Icon = (props) => {
+export const Icon = (props) => {
     let {
         className,
         size,

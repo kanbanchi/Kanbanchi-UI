@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import styles from './buttons_segmented.module.scss';
 
-const ButtonsSegmented = (props) => {
+export const ButtonsSegmented = (props) => {
     let {
         active,
         action,
