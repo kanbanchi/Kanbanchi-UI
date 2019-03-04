@@ -1,0 +1,20 @@
+@import '../../assets/sass/index.scss';
+.kui-buttons_group {
+    margin-top: -$google-spacing;
+    margin-left: -$google-spacing;
+
+    .kui-button {
+        margin-top: $google-spacing;
+        margin-left: $google-spacing;
+    }
+    
+    &--m_large {
+        margin-top: -$google-spacing * 2;
+        margin-left: -$google-spacing * 2;
+
+        .kui-button {
+            margin-top: $google-spacing * 2;
+            margin-left: $google-spacing * 2;
+        }
+    }       
+}

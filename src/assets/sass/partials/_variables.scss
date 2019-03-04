@@ -1,0 +1,94 @@
+/*  ==================================================================  *\
+    Variables to customize the look of application
+\*  ==================================================================  */
+
+// Paths
+
+$images-path:               "../img";
+
+// Old Colors
+$color-white:  #ffffff !default;
+$color-black:  #120021 !default;
+$color-base:   material-color("blue-grey", "900") !default;
+$color-red:    material-color("red", "500") !default;
+$color-green:  material-color("green", "500") !default;
+$color-blue:   material-color("blue", "500") !default;
+$color-yellow: material-color("yellow", "500") !default;
+$color-orange: material-color("orange", "500") !default;
+$color-pink:   material-color("pink", "500") !default;
+$color-purple: material-color("deep-purple", "500") !default;
+$color-cyan:   material-color("cyan", "500") !default;
+$color-background:          #ebedf2;
+
+// Trello import colors
+$color-sky:                 #00C2E0 !default;
+$color-lime:                #51E898 !default;
+$color-trelloBlack:         #4d4d4d !default;
+
+//  Fonts
+$font-family-sans-serif:    'Helvetica Neue', 'Segoe UI', 'Trebuchet MS', Geneva, Tahoma, sans-serif !default;
+$font-family-serif:         'Roboto Slab', 'Book Antiqua', Palatino, 'Palatino Linotype', 'Palatino LT STD', Georgia, serif !default;
+$font-family-monospace:     Monaco, Consolas, 'Lucida Console', monospace !default;
+$font-family-condensed:     'Roboto Condensed', 'Roboto', 'Helvetica Neue', Geneva, Tahoma, sans-serif !default;
+
+//  Typography
+$base-font-family:          $font-family-sans-serif !default;
+$base-font-size:            14px !default;
+$base-line-height:          20px !default;
+
+$h1-size:                   28px !default;
+$h2-size:                   22px !default;
+$h3-size:                   20px !default;
+$h4-size:                   18px !default;
+$h5-size:                   16px !default;
+$h6-size:                   $base-font-size !default;
+
+$milli-size:                13px !default;
+$nano-size:                 12px !default;
+$piko-size:                 11px !default;
+
+//  Spacing
+$base-spacing:              $base-line-height !default; // 20px
+$half-base-spacing:         $base-spacing / 2 !default; // 10px
+
+$google-spacing:            8px !default;
+
+//  Radius
+$small-radius:              2px !default;
+$base-radius:               4px !default;
+$big-radius:                6px !default;
+
+//  Z-index list
+$z-initials:                10 !default;
+$z-cardinfo:                10 !default;
+$z-userpic:                 20 !default;
+$z-fold:                    100 !default;
+$z-aside:                   100 !default;
+$z-dropdown:                1000 !default;
+$z-popover:                 1010 !default;
+$z-topbar:                  1030 !default;
+$z-modal:                   1040 !default;
+$z-modaltop:                1050 !default;
+$z-feedback:                1060 !default;
+$z-tooltip:                 1070 !default;
+$z-noty:                    1080 !default;
+$z-splash:                  2000 !default;
+$z-register:                2100 !default;
+$z-cookies:                 2110 !default;
+
+// iPad hacks
+$magic-delta-touch:         1px !default; // Магическое число для тачей по умолчанию для подгонки высоты
+$magic-delta-ipad:          58px !default;
+$magic-delta-crios:         1px !default;
+
+$media-default: 1200px;
+$media-l: 940px;
+$media-i8: 735px;
+$media-m: 640px;
+$media-i8p--w: 414px;
+$media-s: 320px;
+
+// shadows
+$shadow-default: 0 $google-spacing / 4  $google-spacing calc-color(fade, $color-base, 20);
+$shadow-hover: 0 $google-spacing / 2  $google-spacing * 2 calc-color(fade, $color-base, 30);
+$shadow-modal: 0 $google-spacing $google-spacing * 3 calc-color(fade, $color-base, 20);

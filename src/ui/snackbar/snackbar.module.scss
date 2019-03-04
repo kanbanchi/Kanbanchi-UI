@@ -1,0 +1,97 @@
+@import '../../assets/sass/index.scss';
+.kui-snackbar {    
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: $google-spacing * 7;
+    padding: $google-spacing $google-spacing * 2;
+    margin-top: $google-spacing * 2;
+    color: $color-white;
+    border-radius: $base-radius;
+    background-color: $color-purple;
+    box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-base, 10);
+    :global {
+        animation: snackbarShow .5s ease-in-out forwards;
+    }
+
+    &__container {
+        position: fixed;
+        z-index: $z-noty;
+        left: $google-spacing;
+        bottom: $google-spacing * 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: calc(100% - #{$google-spacing * 2});
+    }
+
+    &__icon {
+        flex: 0 0 $google-spacing * 3;
+        opacity: .5;
+    }
+
+    &__body {
+        margin: 0 0 0 $google-spacing * 2;
+    }
+
+    &__title {
+        font-weight: bold;
+    }
+
+    &__timer {
+        margin: 0 0 0 $google-spacing * 4;
+        font-weight: bold;
+        font-size: $h4-size;
+        white-space: nowrap;
+    }
+
+    &__timer_num {
+        display: inline-block;
+        :global {
+            animation: snackbarTimer 1s ease-in-out infinite;
+        }
+    }
+
+    &__button {
+        margin: 0 0 0 $google-spacing * 4;
+    }
+
+    &--warning {
+        background-color: $color-orange;
+    }
+
+    &--success {
+        background-color: $color-green;
+    }
+    @media (max-width: $media-i8p--w) {
+        &__timer {
+            margin: 0 0 0 $google-spacing * 2;
+            font-size: $h5-size;
+        }
+
+        &__button {
+            margin: 0 0 0 $google-spacing * 2;
+        }
+    }    
+}
+
+@keyframes:global(snackbarShow) {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {     
+        transform: none;
+    }
+}
+@keyframes:global(snackbarTimer) {
+    0%,
+    100% {
+        opacity: .2;
+        transform: scale(.2);
+    }
+    20%, 
+    80% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
