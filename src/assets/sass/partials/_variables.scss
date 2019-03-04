@@ -3,75 +3,7 @@
 \*  ==================================================================  */
 
 // Paths
-
 $images-path:               "../img";
-
-// Old Colors
-$color-white:  #ffffff !default;
-$color-black:  #120021 !default;
-$color-base:   material-color("blue-grey", "900") !default;
-$color-red:    material-color("red", "600") !default;
-$color-green:  material-color("green", "500") !default;
-$color-blue:   material-color("blue", "500") !default;
-$color-yellow: material-color("yellow", "600") !default;
-$color-orange: material-color("orange", "500") !default;
-$color-pink:   material-color("pink", "500") !default;
-$color-purple: material-color("deep-purple", "500") !default;
-$color-cyan:   material-color("cyan", "500") !default;
-$color-background:          #ebedf2;
-
-// New Colors 2019-01-28
-$color-jazzberry-jam:       material-color("pink", "800") !default; // Jazzberry Jam
-$color-swiss-coffee:        material-color("brown", "100") !default; // Swiss Coffee
-$color-persimmon:           material-color("orange", "900") !default; // Persimmon
-$color-paris-daisy:         material-color("lime", "a200") !default; // Paris Daisy
-$color-lawn-green:          material-color("light-green", "a400") !default; // Lawn Green
-$color-spring-green:        material-color("green", "a400") !default; // Spring Green
-$color-manz:                material-color("lime", "400") !default; // Manz
-$color-lucky:               material-color("lime", "800") !default; // Lucky
-$color-aqua:                material-color("cyan", "a400") !default; // Aqua
-$color-aquamarine:          material-color("teal", "a200") !default; // Aquamarine
-$color-light-sky-blue:      material-color("blue", "200") !default; // Light Sky Blue
-$color-neon-blue:           material-color("indigo", "a700") !default; // Neon Blue
-$color-electric-purple:     material-color("purple", "a700") !default; // Electric Purple
-$color-bright-purple:       material-color("purple", "a400") !default; // Bright Purple
-$color-bismark:             material-color("blue-grey", "600") !default; // Bismark
-$color-indigo:              #5E1172 !default; // Indigo
-
-// Trello import colors
-$color-sky:                 #00C2E0 !default;
-$color-lime:                #51E898 !default;
-$color-trelloBlack:         #4d4d4d !default;
-
-$colors: (
-        'red':              (color: $color-red), // Old Colors
-        'green':            (color: $color-green),
-        'blue':             (color: $color-blue),
-        'yellow':           (color: $color-yellow, text: $color-base),
-        'orange':           (color: $color-orange),
-        'pink':             (color: $color-pink),
-        'purple':           (color: $color-purple),
-        'cyan':             (color: $color-cyan),
-        'sky':              (color: $color-sky), // Trello Colors
-        'lime':             (color: $color-lime),
-        'black':            (color: $color-trelloBlack),
-        'jazzberry-jam':    (color: $color-jazzberry-jam), // New Colors 2019-01-28
-        'swiss-coffee':     (color: $color-swiss-coffee),
-        'persimmon':        (color: $color-persimmon),
-        'paris-daisy':      (color: $color-paris-daisy),
-        'lawn-green':       (color: $color-lawn-green, text: $color-base),
-        'spring-green':     (color: $color-spring-green, text: $color-base),
-        'manz':             (color: $color-manz),
-        'lucky':            (color: $color-lucky),
-        'aqua':             (color: $color-aqua, text: $color-base),
-        'aquamarine':       (color: $color-aquamarine),
-        'light-sky-blue':   (color: $color-light-sky-blue),
-        'neon-blue':        (color: $color-neon-blue),
-        'electric-purple':  (color: $color-electric-purple),
-        'bright-purple':    (color: $color-bright-purple),
-        'bismark':          (color: $color-bismark),
-        'indigo':           (color: $color-indigo)
-);
 
 //  Fonts
 $font-family-sans-serif:    'Helvetica Neue', 'Segoe UI', 'Trebuchet MS', Geneva, Tahoma, sans-serif !default;
