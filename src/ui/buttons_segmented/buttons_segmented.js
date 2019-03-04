@@ -5,24 +5,51 @@ import styles from './buttons_segmented.module.scss';
 const ButtonsSegmented = (props) => {
     let {
         active,
-        buttons,
+        action,
+        children,
         className,
         ...attributes
-    } = props;
+    } = props,
+        buttonHocs,
+        buttonClassName;
 
     className = ClassNames(
         styles.buttons_segmented,
         className
     );
 
-    if (buttons.length) {
-        if (active > buttons.length - 1) active = 0;
-        buttons[active].className = ClassNames(
-            styles['buttons_segmented__button--active'],
-            className
-        );
-        let activeclassName =  || '';
-        
+    if (children.length) {
+        if (active > children.length - 1) active = 0;
+
+        buttonHocs = React.Children.map(children, (child, i) => {
+            return React.cloneElement(child, {
+                className: ClassNames(
+                    styles.buttons_segmented__item,
+                    (i === active) ? styles['buttons_segmented__item--active'] : ''
+                ),
+                onClick: () => {
+                    action(i);
+                    if (child.props.onClick) child.props.onClick();
+                }
+            });
+        });
+/*    
+        for (let i = 0; i < children.length; i++) {
+            buttonClassName = ClassNames(
+                styles.buttons_segmented__item,
+                (i === active) ? styles['buttons_segmented__item--active'] : ''
+            );
+            buttonHocs.push(
+                <div
+                    key={i}
+                    onClick={() => action(i)}
+                    className={buttonClassName}
+                >
+                    {children[i]}
+                </div>
+            );
+        }
+*/        
     }
 
     return (
@@ -30,19 +57,19 @@ const ButtonsSegmented = (props) => {
             className={className}
             {...attributes}
         >
-            {children}
+            {buttonHocs}
         </div>
     );
 };
 
 ButtonsSegmented.propTypes = {
-    buttons: PropTypes.array,
-    active: PropTypes.number
+    active: PropTypes.number,
+    action: PropTypes.func
 };
 
 ButtonsSegmented.defaultProps = {
-    buttons: [],
-    active: 0
+    active: 0,
+    action: null
 };
 
 export default ButtonsSegmented;

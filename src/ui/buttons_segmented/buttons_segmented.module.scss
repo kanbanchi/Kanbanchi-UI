@@ -1,13 +1,41 @@
 .buttons_segmented {
-    margin-top: -$google-spacing;
-    margin-left: -$google-spacing;
+    display: inline-flex;
+    border: 2px solid calc-color(fade, $color-purple, 30);
+    border-radius: $big-radius;
+    z-index: $z-initials;
 
-    .button {
-        margin-top: $google-spacing;
-        margin-left: $google-spacing;
+    .btn-group & + & {
+        margin-left: -2px;
     }
-    
-    &__button {
+
+    &:first-of-type:not(.active) {
+        border-right-color: transparent;
+    }
+    &:last-of-type:not(.active) {
+        border-left-color: transparent;
+    }
+
+    &:focus,
+    &:hover {
+        border: 2px solid calc-color(fade, $color-base, 30);
+        box-shadow: none;
+        outline: none;
+    }
+
+    &.active {
+        color: $color-white;
+        background: $color-base;
+        border: 2px solid calc-color(fade, $color-base, 100);
+        cursor: default;
+        z-index: $z-initials;
+    }
+
+    &:not(.active):hover {
+        background: $color-background;
+    }
+
+    &__item {
+        background: grey;
         &--active {
             background: red;
         }
