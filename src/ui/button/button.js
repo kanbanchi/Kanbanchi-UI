@@ -32,16 +32,16 @@ export const Button = (props) => {
     }
 
     className = ClassNames(
-        styles.button,
-        styles['button--' + variant],
-        styles['button--' + size],
-        styles['button--' + disabled],
+        styles['kui-button'],
+        styles['kui-button--' + variant],
+        styles['kui-button--' + size],
+        styles['kui-button--' + disabled],
         className
     );
 
     if (Button.variantWithIcon.includes(variant)) {
         let iconProps = {
-            className: styles.button__icon,
+            className: styles['kui-button__icon'],
             size: 16
         }
         switch (variant) {

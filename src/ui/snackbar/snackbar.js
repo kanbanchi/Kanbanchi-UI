@@ -18,8 +18,8 @@ export const Snackbar = (props) => {
     } = props;
 
     className = ClassNames(
-        styles.snackbar,
-        styles['snackbar--' + variant],
+        styles['kui-snackbar'],
+        styles['kui-snackbar--' + variant],
         className
     );
 
@@ -32,20 +32,20 @@ export const Snackbar = (props) => {
     if (icon === 'default') xlink = Snackbar.defaultIcons[variant];
 
     if (title) titleDiv = (
-        <div className={styles.snackbar__title}>
+        <div className={styles['kui-snackbar__title']}>
             {title}
         </div>
     );
 
     if (text) textDiv = (
-        <div className={styles.snackbar__text}>
+        <div className={styles['kui-snackbar__text']}>
             {text}
         </div>
     );
 
     if (button) buttonDiv = (
         <Button
-            className={styles.snackbar__button}
+            className={styles['kui-snackbar__button']}
             variant="primary_white"
             onClick={action}
         >
@@ -54,19 +54,19 @@ export const Snackbar = (props) => {
     );
 
     if (timer) timerDiv = (
-        <div className={styles.snackbar__timer}>
-            <span className={styles.snackbar__timer_num}>{timer}</span> sec
+        <div className={styles['kui-snackbar__timer']}>
+            <span className={styles['kui-snackbar__timer_num']}>{timer}</span> sec
         </div>
     );
 
     return (
-        <div className={styles.snackbar__container}>
+        <div className={styles['kui-snackbar__container']}>
             <div
                 className={className}
                 {...attributes}
             >
-                <Icon xlink={xlink} size={24} className={styles.snackbar__icon} />
-                <div className={styles.snackbar__body}>
+                <Icon xlink={xlink} size={24} className={styles['kui-snackbar__icon']} />
+                <div className={styles['kui-snackbar__body']}>
                     {titleDiv}
                     {textDiv}
                 </div>

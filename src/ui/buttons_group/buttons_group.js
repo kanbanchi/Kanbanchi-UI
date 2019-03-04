@@ -11,8 +11,8 @@ export const ButtonsGroup = (props) => {
     } = props;
 
     className = ClassNames(
-        styles.buttons_group,
-        styles['buttons_group--m_' + margin],
+        styles['kui-buttons_group'],
+        styles['kui-buttons_group--m_' + margin],
         className
     );
 

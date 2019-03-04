@@ -22,8 +22,8 @@ export const Icon = (props) => {
     }
 
     className = ClassNames(
-        styles.icon,
-        styles['icon--' + size],
+        styles['kui-icon'],
+        styles['kui-icon--' + size],
         className
     );
     
@@ -32,7 +32,7 @@ export const Icon = (props) => {
             className={className}
             {...attributes}
         >
-            <Svg className={styles.icon__svg} />
+            <Svg className={styles['kui-icon__svg']} />
         </span>
     );
 };

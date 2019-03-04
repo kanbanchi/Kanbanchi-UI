@@ -14,7 +14,7 @@ export const ButtonsSegmented = (props) => {
         buttonClassName;
 
     className = ClassNames(
-        styles.buttons_segmented,
+        styles['kui-buttons_segmented'],
         className
     );
 
@@ -24,32 +24,15 @@ export const ButtonsSegmented = (props) => {
         buttonHocs = React.Children.map(children, (child, i) => {
             return React.cloneElement(child, {
                 className: ClassNames(
-                    styles.buttons_segmented__item,
-                    (i === active) ? styles['buttons_segmented__item--active'] : ''
+                    styles['kui-buttons_segmented__item'],
+                    (i === active) ? styles['kui-buttons_segmented__item--active'] : ''
                 ),
                 onClick: () => {
                     action(i);
                     if (child.props.onClick) child.props.onClick();
                 }
             });
-        });
-/*    
-        for (let i = 0; i < children.length; i++) {
-            buttonClassName = ClassNames(
-                styles.buttons_segmented__item,
-                (i === active) ? styles['buttons_segmented__item--active'] : ''
-            );
-            buttonHocs.push(
-                <div
-                    key={i}
-                    onClick={() => action(i)}
-                    className={buttonClassName}
-                >
-                    {children[i]}
-                </div>
-            );
-        }
-*/        
+        });       
     }
 
     return (
