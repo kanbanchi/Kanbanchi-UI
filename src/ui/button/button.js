@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import styles from './button.module.scss';
+import './button.module.scss';
 import { Icon } from '../../ui';
 
 export const Button = (props) => {
@@ -32,26 +32,26 @@ export const Button = (props) => {
     }
 
     className = ClassNames(
-        styles['kui-button'],
-        styles['kui-button--' + variant],
-        styles['kui-button--' + size],
-        styles['kui-button--' + disabled],
+        'kui-button',
+        'kui-button--' + variant,
+        'kui-button--' + size,
+        'kui-button--' + disabled,
         className
     );
 
     if (Button.variantWithIcon.includes(variant)) {
         let iconProps = {
-            className: styles['kui-button__icon'],
+            className: 'kui-button__icon',
             size: 16
-        }
+        };
         switch (variant) {
             case 'action':
                 iconProps.xlink = 'more-vertical';
-                iconBefore = <Icon {...iconProps} />
+                iconBefore = <Icon {...iconProps} />;
                 break;
             case 'text':
                 iconProps.xlink = 'arrow-long-right';
-                iconAfter = <Icon {...iconProps} />
+                iconAfter = <Icon {...iconProps} />;
                 break;
         }
     }

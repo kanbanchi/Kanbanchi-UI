@@ -3,27 +3,7 @@
 \*  ==================================================================  */
 
 // Paths
-
 $images-path:               "../img";
-
-// Old Colors
-$color-white:  #ffffff !default;
-$color-black:  #120021 !default;
-$color-base:   material-color("blue-grey", "900") !default;
-$color-red:    material-color("red", "500") !default;
-$color-green:  material-color("green", "500") !default;
-$color-blue:   material-color("blue", "500") !default;
-$color-yellow: material-color("yellow", "500") !default;
-$color-orange: material-color("orange", "500") !default;
-$color-pink:   material-color("pink", "500") !default;
-$color-purple: material-color("deep-purple", "500") !default;
-$color-cyan:   material-color("cyan", "500") !default;
-$color-background:          #ebedf2;
-
-// Trello import colors
-$color-sky:                 #00C2E0 !default;
-$color-lime:                #51E898 !default;
-$color-trelloBlack:         #4d4d4d !default;
 
 //  Fonts
 $font-family-sans-serif:    'Helvetica Neue', 'Segoe UI', 'Trebuchet MS', Geneva, Tahoma, sans-serif !default;
@@ -89,6 +69,5 @@ $media-i8p--w: 414px;
 $media-s: 320px;
 
 // shadows
-$shadow-default: 0 $google-spacing / 4  $google-spacing calc-color(fade, $color-base, 20);
-$shadow-hover: 0 $google-spacing / 2  $google-spacing * 2 calc-color(fade, $color-base, 30);
-$shadow-modal: 0 $google-spacing $google-spacing * 3 calc-color(fade, $color-base, 20);
+$shadow-default:    0 0 $google-spacing calc-color(fade, $color-base, 20);
+$shadow-modal:      0 $google-spacing $google-spacing * 2 calc-color(fade, $color-base, 20);

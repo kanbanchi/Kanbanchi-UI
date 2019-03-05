@@ -1,47 +1,3 @@
-/*  ==================================================================  *\
-    Snippets of reusable CSS to develop faster and keep code readable
-\*  ==================================================================  */
-
-/*  A mixin based on Material Color Palette  (mixin, sass placeholders, predefined classed)
-    https://github.com/minusfive/sass-material-colors
-
-    Params:
-        $color-name:     quoted, lower-case, dasherized color name (e.g. 'pink', 'amber')
-        $color-variant:  quoted, lowercase color variant (e.g. '200', 'a100')
-
-    Sample usage:
-        .my-cool-element {
-            color: material-color("cyan", "400");
-            background: material-color("blue-grey", "600")
-        }
-==================================================================  */
-
-@function material-color($color-name, $color-variant: "500", $debug: false) {
-    @if ($debug) {
-        @warn $color-name, $color-variant;
-    }
-
-    $colorMap: map-get($material-colors, $color-name);
-
-    @if ($debug) {
-        @warn $colorMap;
-    }
-
-    $color: map-get($colorMap, $color-variant);
-
-    @if ($debug) {
-        @warn $color;
-    }
-
-    @if $color {
-        @return $color;
-    }
-    @else {
-        // Libsass still doesn't seem to support @error
-        @warn "=> ERROR: COLOR NOT FOUND! <= | Your $color-name, $color-variant combination did not match any of the values in the $material-colors map.";
-    }
-}
-
 /*  A mixin based on Material Design box shadows with
     5 presets and a strength setting
     Params:
@@ -96,6 +52,16 @@
     } @else {
         @return $color-white; // Darker background, return light color
     }
+}
+
+@function get-text-color($item){
+    @if map-has-key($item, 'text') {
+        @return map-get($item, 'text');
+    }
+    @if map-has-key($item, 'color') {
+        @return calc-text-color(map-get($item, 'color'));
+    }
+    @return $color-base;
 }
 
 //  Hide elements
