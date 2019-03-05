@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import styles from './buttons_segmented.module.scss';
+import './buttons_segmented.module.scss';
 
 export const ButtonsSegmented = (props) => {
     let {
@@ -14,7 +14,7 @@ export const ButtonsSegmented = (props) => {
         buttonClassName;
 
     className = ClassNames(
-        styles['kui-buttons_segmented'],
+        'kui-buttons_segmented',
         className
     );
 
@@ -24,8 +24,8 @@ export const ButtonsSegmented = (props) => {
         buttonHocs = React.Children.map(children, (child, i) => {
             return React.cloneElement(child, {
                 className: ClassNames(
-                    styles['kui-buttons_segmented__item'],
-                    (i === active) ? styles['kui-buttons_segmented__item--active'] : ''
+                    'kui-buttons_segmented__item',
+                    (i === active) ? 'kui-buttons_segmented__item--active' : ''
                 ),
                 onClick: () => {
                     action(i);

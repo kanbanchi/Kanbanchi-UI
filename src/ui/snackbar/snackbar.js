@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import styles from './snackbar.module.scss';
 import { Button, Icon } from '../../ui';
+import './snackbar.module.scss';
 
 export const Snackbar = (props) => {
 
@@ -18,8 +18,8 @@ export const Snackbar = (props) => {
     } = props;
 
     className = ClassNames(
-        styles['kui-snackbar'],
-        styles['kui-snackbar--' + variant],
+        'kui-snackbar',
+        'kui-snackbar--' + variant,
         className
     );
 
@@ -32,20 +32,20 @@ export const Snackbar = (props) => {
     if (icon === 'default') xlink = Snackbar.defaultIcons[variant];
 
     if (title) titleDiv = (
-        <div className={styles['kui-snackbar__title']}>
+        <div className="kui-snackbar__title">
             {title}
         </div>
     );
 
     if (text) textDiv = (
-        <div className={styles['kui-snackbar__text']}>
+        <div className="kui-snackbar__text">
             {text}
         </div>
     );
 
     if (button) buttonDiv = (
         <Button
-            className={styles['kui-snackbar__button']}
+            className="kui-snackbar__button"
             variant="primary_white"
             onClick={action}
         >
@@ -54,19 +54,19 @@ export const Snackbar = (props) => {
     );
 
     if (timer) timerDiv = (
-        <div className={styles['kui-snackbar__timer']}>
-            <span className={styles['kui-snackbar__timer_num']}>{timer}</span> sec
+        <div className="kui-snackbar__timer">
+            <span className="kui-snackbar__timer_num">{timer}</span> sec
         </div>
     );
 
     return (
-        <div className={styles['kui-snackbar__container']}>
+        <div className="kui-snackbar__container">
             <div
                 className={className}
                 {...attributes}
             >
-                <Icon xlink={xlink} size={24} className={styles['kui-snackbar__icon']} />
-                <div className={styles['kui-snackbar__body']}>
+                <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
+                <div className="kui-snackbar__body">
                     {titleDiv}
                     {textDiv}
                 </div>

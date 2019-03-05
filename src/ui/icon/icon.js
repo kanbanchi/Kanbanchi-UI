@@ -29,7 +29,7 @@ export const Icon = (props) => {
 
     return (
         <span className={classNames} {...attributes} >
-            <Svg className={'kui-icon__svg'}/>
+            <Svg className="kui-icon__svg"/>
         </span>
     );
 };
