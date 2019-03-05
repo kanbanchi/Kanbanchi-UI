@@ -39,6 +39,17 @@ class StoryButtons extends React.Component {
                         <Button>Button 1</Button>
                         <Button onClick={() => alert(2)}>Button 2</Button>
                     </ButtonsSegmented>
+                    <div>
+                        <br />
+                        <ButtonsSegmented
+                            active={this.state.segmented}
+                            action={this.onSegmentedClick}
+                            className="segmented--base"
+                        >
+                            <Button>Button 0</Button>
+                            <Button>Button 1</Button>
+                        </ButtonsSegmented>
+                    </div>
                 </section>
                 <section>
                     <h2>Primary</h2>

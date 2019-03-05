@@ -1,44 +1,85 @@
 @import '../../assets/sass/index.scss';
+
 .kui-buttons_segmented {
     display: inline-flex;
     border: 2px solid calc-color(fade, $color-purple, 30);
     border-radius: $big-radius;
-    z-index: $z-initials;
-
-    .btn-group & + & {
-        margin-left: -2px;
-    }
-
-    &:first-of-type:not(.active) {
-        border-right-color: transparent;
-    }
-    &:last-of-type:not(.active) {
-        border-left-color: transparent;
-    }
-
-    &:focus,
-    &:hover {
-        border: 2px solid calc-color(fade, $color-base, 30);
-        box-shadow: none;
-        outline: none;
-    }
-
-    &.active {
-        color: $color-white;
-        background: $color-base;
-        border: 2px solid calc-color(fade, $color-base, 100);
-        cursor: default;
-        z-index: $z-initials;
-    }
-
-    &:not(.active):hover {
-        background: $color-background;
-    }
 
     &__item {
-        background: grey;
+        box-sizing: content-box;
+        margin-top: -2px;
+        margin-bottom: -2px;
+        color: $color-purple;
+        background: transparent;
+        border-radius: 0;
+        z-index: $z-initials;
+        transition-property: color, background;
+
+        &:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: calc(100% - 4px);
+            background: $color-white;
+            z-index: -$z-initials;
+            @include transition;
+        }
+
+        &:first-of-type,
+        &:first-of-type:before {
+            border-top-left-radius: $big-radius;
+            border-bottom-left-radius: $big-radius;
+        }
+
+        &:last-of-type, 
+        &:last-of-type:before {
+            border-top-right-radius: $big-radius;
+            border-bottom-right-radius: $big-radius;
+        }
+
+        &:active,
+        &:focus,
+        &:hover {
+            color: $color-purple;
+            background: transparent;
+            box-shadow: none;
+
+            &:before {
+                background: $color-background;
+            }
+        }
+
         &--active {
-            background: red;
+            color: $color-white;
+            background: $color-purple;
+            cursor: default;
+
+            &.kui-buttons_segmented__item {
+                &:first-of-type {
+                    margin-left: -2px;
+                    border-left: 2px solid transparent;
+                }
+
+                &:last-of-type {
+                    margin-right: -2px;
+                    border-right: 2px solid transparent;
+                }
+            }
+
+            &:before {
+                background: transparent;
+            }
+
+            &:active,
+            &:focus,
+            &:hover {
+                color: $color-white;
+                background: calc-color(tint, $color-purple, 90);
+
+                &:before {
+                    background: transparent;
+                }
+            }
         }
     }
 }
