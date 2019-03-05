@@ -82,4 +82,30 @@
             }
         }
     }
+
+    &--black {
+        border: 2px solid calc-color(fade, $color-base, 30);
+        
+        .kui-buttons_segmented__item {
+            color: $color-base;
+
+            &:active,
+            &:focus,
+            &:hover {
+                color: $color-base;
+            }
+
+            &--active {
+                color: $color-white;
+                background: $color-base;
+                
+                &:active,
+                &:focus,
+                &:hover {
+                    color: $color-white;
+                    background: calc-color(tint, $color-base, 90);
+                }
+            }
+        }
+    }
 }

@@ -1,39 +1,19 @@
-# ButtonsGroup
+# ButtonsSegmented
 
-Adds top & left margin to buttons
+Combines buttons in one control iOS like.
 
 ```html
 <!-- default small buttons with default margin -->
-<ButtonsGroup>
+<ButtonsSegmented
+    active={this.state.segmented}
+    action={this.onSegmentedClick}
+>
+    <Button>Button 0</Button>
     <Button>Button 1</Button>
-    <Button>Button 2</Button>
-</ButtonsGroup>
-
-<!-- large buttons with large margin -->
-<ButtonsGroup margin="large">
-    <Button variant="primary" size="large">Button 1</Button>
-    <Button variant="primary" size="large">Button 2</Button>
-</ButtonsGroup>
+</ButtonsSegmented>
 
 ```
 
-## margin
-> large  
-> `small` *default* 
-
-
-# Examples
-```html
-<!-- large buttons must be wrapped with large margins -->
-
-<!-- so as <Button variant="icon">, because of transparent area 48px -->
-<ButtonsGroup margin="large">
-    <Button variant="icon">
-        <Icon />
-    </Button>
-    <Button variant="icon">
-        <Icon />
-    </Button>
-</ButtonsGroup>
-
-```
+## variant
+> `null` *default*  
+> black  
