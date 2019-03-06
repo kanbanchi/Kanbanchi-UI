@@ -4,6 +4,7 @@
 
 // Paths
 $images-path:               "../img";
+$svg-path:                  "../svg";
 
 //  Fonts
 $font-family-sans-serif:    'Helvetica Neue', 'Segoe UI', 'Trebuchet MS', Geneva, Tahoma, sans-serif !default;
@@ -78,5 +79,6 @@ $media-screens: (
 );
 
 // shadows
-$shadow-default:    0 0 $google-spacing calc-color(fade, $color-base, 20);
-$shadow-modal:      0 $google-spacing $google-spacing * 2 calc-color(fade, $color-base, 20);
+$shadow-default: 0 $google-spacing / 4  $google-spacing calc-color(fade, $color-base, 20);
+$shadow-hover: 0 $google-spacing / 2  $google-spacing * 2 calc-color(fade, $color-base, 30);
+$shadow-modal: 0 $google-spacing $google-spacing * 3 calc-color(fade, $color-base, 20);
