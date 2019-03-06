@@ -8,6 +8,7 @@ export const ButtonsSegmented = (props) => {
         action,
         children,
         className,
+        variant,
         ...attributes
     } = props,
         buttonHocs,
@@ -17,6 +18,8 @@ export const ButtonsSegmented = (props) => {
         'kui-buttons_segmented',
         className
     );
+
+    if (variant) className += ' kui-buttons_segmented--' + variant;
 
     if (children.length) {
         if (active > children.length - 1) active = 0;
@@ -47,12 +50,16 @@ export const ButtonsSegmented = (props) => {
 
 ButtonsSegmented.propTypes = {
     active: PropTypes.number,
-    action: PropTypes.func
+    action: PropTypes.func,
+    variant: PropTypes.oneOf([
+        'black'
+    ])
 };
 
 ButtonsSegmented.defaultProps = {
     active: 0,
-    action: null
+    action: null,
+    variant: null
 };
 
 export default ButtonsSegmented;

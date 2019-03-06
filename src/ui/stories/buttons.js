@@ -28,18 +28,7 @@ class StoryButtons extends React.Component {
                     <label>
                         Disabled buttons <input type="checkbox" checked={this.state.disabled} onChange={this.toggleDisabled} />
                     </label>
-                </p>
-                <section>
-                    <h2>Segmented</h2>
-                    <ButtonsSegmented
-                        active={this.state.segmented}
-                        action={this.onSegmentedClick}
-                    >
-                        <Button>Button 0</Button>
-                        <Button>Button 1</Button>
-                        <Button onClick={() => alert(2)}>Button 2</Button>
-                    </ButtonsSegmented>
-                </section>
+                </p>                
                 <section>
                     <h2>Primary</h2>
                     <ButtonsGroup margin="large">
@@ -121,6 +110,28 @@ class StoryButtons extends React.Component {
                             <Icon xlink="settings" size={24} />
                         </Button>
                     </ButtonsGroup>
+                </section>
+                <section>
+                    <h2>Segmented</h2>
+                    <ButtonsSegmented
+                        active={this.state.segmented}
+                        action={this.onSegmentedClick}
+                    >
+                        <Button>Button 0</Button>
+                        <Button>Button 1</Button>
+                        <Button onClick={() => alert(2)}>Button 2</Button>
+                    </ButtonsSegmented>
+                    <div>
+                        <br />
+                        <ButtonsSegmented
+                            active={this.state.segmented}
+                            action={this.onSegmentedClick}
+                            variant="black"
+                        >
+                            <Button>Button 0</Button>
+                            <Button>Button 1</Button>
+                        </ButtonsSegmented>
+                    </div>
                 </section>
             </div>
         )
