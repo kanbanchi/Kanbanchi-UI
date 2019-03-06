@@ -63,7 +63,7 @@
     &--success {
         background-color: $color-green;
     }
-    @media (max-width: $media-i8p--w) {
+    @media (max-width: $media-iPlus) {
         &__timer {
             margin: 0 0 0 $google-spacing * 2;
             font-size: $h5-size;

@@ -62,11 +62,20 @@ $magic-delta-ipad:          58px !default;
 $magic-delta-crios:         1px !default;
 
 $media-default: 1200px;
-$media-l: 940px;
-$media-i8: 735px;
-$media-m: 640px;
-$media-i8p--w: 414px;
-$media-s: 320px;
+$media-tablet: 1024px;
+$media-iPad: 768px;
+$media-iPlus: 414px;
+$media-iPhone: 375px;
+$media-phone: 320px;
+
+$media-screens: (
+  default: $media-default,
+  tablet: $media-tablet,
+  iPad: $media-iPad,
+  iPlus: $media-iPlus,
+  iPhone: $media-iPhone,
+  phone: $media-phone
+);
 
 // shadows
 $shadow-default:    0 0 $google-spacing calc-color(fade, $color-base, 20);
