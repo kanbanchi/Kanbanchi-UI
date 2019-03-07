@@ -2,44 +2,22 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Icon } from '../../ui';
 
-const icons16 = [
-    'arrow-long-right',
-    'assign',
-    'attach',
-    'bell',
-    'board',
-    'change-list',
-    'color-tag',
-    'color-tags',
-    'comment',
-    'copy',
-    'date-due',
-    'date-start',
-    'deadline',    
-    'description',
-    'drop',    
-    'estimate',
-    'mention',
-    'move',
-    'ok',
-    'pen',
-    'plus',    
-    'settings',
-    'star',
-    'subcard',
-    'tag',
-    'x',
-];
-
-const icons24 = [
+const icons = [
     'arrow-back',
     'arrow-down',
     'arrow-drop',
     'arrow-forward',
-    'arrow-up-down',
+    'arrow-long-right',
     'arrow-up',
+    'arrow-up-down',
+    'assign',
+    'attach',
     'back',
+    'bell',
+    'board',
     'calendar',
+    'card',
+    'change-list',
     'chart',
     'checkbox-off',
     'checkbox-on',
@@ -47,11 +25,21 @@ const icons24 = [
     'clear',
     'close',
     'collapse',
+    'color-tag',
+    'color-tags',
+    'comment',
+    'copy',
     'credit-card',
+    'date-due',
+    'date-start',
+    'deadline',    
+    'description',
     'done',
+    'drop',    
     'email-new',
     'epic-card',
     'error',
+    'estimate',
     'expland',
     'filters',
     'gantt',
@@ -60,10 +48,15 @@ const icons24 = [
     'kanban',
     'knowlege',
     'list-view',
+    'mention',
     'more-vertical',
+    'move',
+    'ok',
     'overdue',
     'palette',
+    'pen',
     'pin',
+    'plus',    
     'predecessor',
     'print',
     'priority-critical',
@@ -78,14 +71,19 @@ const icons24 = [
     'related',
     'rocket',
     'search',
+    'settings',
+    'star',
     'status',
+    'subcard',
     'support',
+    'tag',
     'template',
     'trash',
     'trello',
     'update',
     'user',
     'wait',
+    'x',
 ];
 
 const icons96 = [
@@ -297,11 +295,11 @@ storiesOf('KUI', module)
                     <h2>New</h2>
                     <b>16px</b>
                     <div className="icons-grid">
-                        {iconsList({ arr: icons16, size: 16 })}
+                        {iconsList({ arr: icons, size: 16 })}
                     </div>
                     <b>24px</b>
                     <div className="icons-grid">
-                        {iconsList({ arr: icons24 })}
+                        {iconsList({ arr: icons })}
                     </div>
                     <b>96px</b>
                     <div className="icons-grid icons-grid--large">
