@@ -1,0 +1,87 @@
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { Button, Tabs, Input, Search, Switch, Radio, Checkbox, Datepicker, Dropdown } from '../../ui';
+class StoryControls extends React.Component {
+    constructor() {
+        super();
+        this.onTabsClick = this.onTabsClick.bind(this);
+        this.state = {
+            tab: 0
+        };
+    }
+    onTabsClick(i) {
+        this.setState({
+            tab: i
+        });
+    }
+    render() { 
+        return (
+            <div className="page">
+                <section>
+                    <h2>Tabs</h2>
+                    <Tabs
+                        active={this.state.tab}
+                        action={this.onTabsClick}
+                    >
+                        <Button>Tab 0</Button>
+                        <Button>Tab 1</Button>
+                        <Button>Tab 2</Button>
+                    </Tabs>
+                </section>
+
+                <section>
+                    <h2>Input</h2>
+                    <Input>
+                        Label
+                    </Input>
+                </section>
+
+                <section>
+                    <h2>Search</h2>
+                    <Search>
+                        Label
+                    </Search>
+                </section>
+
+                <section>
+                    <h2>Switch</h2>
+                    <Switch>
+                        Label
+                    </Switch>
+                </section>
+
+                <section>
+                    <h2>Radio</h2>
+                    <Radio>
+                        Label
+                    </Radio>
+                </section>
+
+                <section>
+                    <h2>Checkbox</h2>
+                    <Checkbox>
+                        Label
+                    </Checkbox>
+                </section>
+
+                <section>
+                    <h2>Datepicker</h2>
+                    <Datepicker>
+                        Label
+                    </Datepicker>
+                </section>
+
+                <section>
+                    <h2>Dropdown</h2>
+                    <Dropdown>
+                        Label
+                    </Dropdown>
+                </section>
+
+            </div>
+        )
+    } 
+};
+
+storiesOf('KUI', module)
+    .add('controls', () => <StoryControls/>);
