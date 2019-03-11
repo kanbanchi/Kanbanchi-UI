@@ -46,7 +46,7 @@ export const Button = (props) => {
         };
         switch (variant) {
             case 'action':
-                iconProps.xlink = 'more-vertical';
+                iconProps.xlink = 'dots';
                 iconBefore = <Icon {...iconProps} />;
                 break;
             case 'text':
