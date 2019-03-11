@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 
-const ClassNames = (...props) => {
-    return props.join(' ');
-};
+const ClassNames = (...props) => props.filter(i => !!i).join(' ');
 
 export {
     PropTypes,
