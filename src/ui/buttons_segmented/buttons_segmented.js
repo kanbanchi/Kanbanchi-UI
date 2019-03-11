@@ -15,10 +15,9 @@ export const ButtonsSegmented = (props) => {
 
     className = ClassNames(
         'kui-buttons_segmented',
+        (variant) ? 'kui-buttons_segmented--' + variant : null,
         className
     );
-
-    if (variant) className += ' kui-buttons_segmented--' + variant;
 
     if (children.length) {
         if (active > children.length - 1) active = 0;
