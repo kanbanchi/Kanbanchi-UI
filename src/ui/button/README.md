@@ -24,7 +24,7 @@
 > icon
 
 ## size
-> `small` *default*  
+> `null` *default*  
 > large  
 
 ## type 

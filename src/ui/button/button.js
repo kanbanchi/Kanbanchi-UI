@@ -27,15 +27,14 @@ export const Button = (props) => {
         delete attributes.type;
         if (disabled) {
             delete attributes.href;
-            disabled = 'disabled';
         }
     }
 
     className = ClassNames(
         'kui-button',
         'kui-button--' + variant,
-        'kui-button--' + size,
-        'kui-button--' + disabled,
+        (size) ? 'kui-button--' + size : null,
+        (disabled) ? 'kui-button--disabled' : null,
         className
     );
 
@@ -80,8 +79,7 @@ Button.propTypes = {
         'icon'
     ]),
     size: PropTypes.oneOf([
-        'large',
-        'small'
+        'large'
     ]),
     type: PropTypes.oneOf([
         'button',
@@ -97,9 +95,9 @@ Button.variantWithIcon = [
 ];
 
 Button.defaultProps = {
-    className: '',
+    className: null,
     variant: 'primary',
-    size: 'small',
+    size: null,
     type: 'button',
     href: null,
     disabled: false,
