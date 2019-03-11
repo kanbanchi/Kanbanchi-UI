@@ -11,8 +11,7 @@ export const ButtonsSegmented = (props) => {
         variant,
         ...attributes
     } = props,
-        buttonHocs,
-        buttonClassName;
+        buttonHocs;
 
     className = ClassNames(
         'kui-buttons_segmented',
