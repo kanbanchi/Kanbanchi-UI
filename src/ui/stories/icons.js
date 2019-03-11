@@ -3,6 +3,10 @@ import { storiesOf } from '@storybook/react';
 import { Icon } from '../../ui';
 
 const icons = [
+    'account',
+    'account-settings',
+    'account-swith',
+    'activity',
     'arrow-back',
     'arrow-down',
     'arrow-drop',
@@ -12,13 +16,20 @@ const icons = [
     'arrow-up-down',
     'assign',
     'attach',
+    
     'back',
     'bell',
+    'bell-plus',
     'board',
+    'board-favorite',
+    'board-template',
+    
     'calendar',
     'card',
     'change-list',
     'chart',
+    'cloud-backup',
+    'cloud-download',
     'checkbox-off',
     'checkbox-on',
     'checklist',
@@ -32,10 +43,11 @@ const icons = [
     'credit-card',
     'date-due',
     'date-start',
-    'deadline',    
+    'deadline',
     'description',
     'done',
-    'drop',    
+    'dots',
+    'drop',
     'email-new',
     'epic-card',
     'error',
@@ -47,16 +59,20 @@ const icons = [
     'info',
     'kanban',
     'knowlege',
+    
+    'linkedin',
     'list-view',
+    'lock',
     'mention',
-    'more-vertical',
     'move',
+    
+    'offline-data',
     'ok',
     'overdue',
     'palette',
     'pen',
     'pin',
-    'plus',    
+    'plus',
     'predecessor',
     'print',
     'priority-critical',
@@ -65,6 +81,10 @@ const icons = [
     'priority-medium',
     'priority-no',
     'priority-normal',
+    'project',
+    'project-favorite',
+    'project-template',
+
     'radio-button-off',
     'radio-button-on',
     'read-all',
@@ -72,6 +92,12 @@ const icons = [
     'rocket',
     'search',
     'settings',
+    'share-domain-link',
+    'share-domain',
+    'share-link',
+    'share-public',
+    'share-specific',
+    'sign-out',
     'star',
     'status',
     'subcard',
@@ -80,6 +106,7 @@ const icons = [
     'template',
     'trash',
     'trello',
+    'twitter',
     'update',
     'user',
     'wait',
@@ -95,16 +122,17 @@ const icons96 = [
     'content-production',
     'create-new-template',
     'development',
-    'done',
+    'done-b',
     'event-planning',
     'expired-date',
     'feature',
     'first-board',
     'get-premium',
     'kanban-priority',
-    'kanban',
+    'kanban-b',
     'mvp',
-    'search-empty',
+    'permission',
+    'search-reports',
     'search-folder',
     'search-seats',
     'starred-folder',
@@ -112,164 +140,13 @@ const icons96 = [
     'things-5',
     'user-template',
     'video-tutorials',
-    'weekly-planning',
-];
-
-const iconsOld = [
-    'notification-active',
-    'notification-assign',
-    'notification-attach',
-    'notification-board',
-    'notification-card',
-    'notification-color',
-    'notification-comment',
-    'notification-copy',
-    'notification-create',
-    'notification-datetime',
-    'notification-deadline',
-    'notification-delete',
-    'notification-description',
-    'notification-due',
-    'notification-edit',
-    'notification-edited',
-    'notification-hourglass',
-    'notification-lock',
-    'notification-mail',
-    'notification-mention',
-    'notification-move',
-    'notification-priority-no',
-    'notification-priority',
-    'notification-reload',
-    'notification-star',
-    'notification-tag',
-    'account-settings',
-    'account-switch',
-    'account',
-    'activity',
-    'add-box',
-    'add-calendar',
-    'add-card',
-    'add-circle',
-    'add-subcards',
-    'add',
-    'added-calendar',
-    'arrow-back',
-    'arrow-dropdown-down',
-    'arrow-dropdown-up',
-    'attachments',
-    'b-arrow',
-    'big-sector-100',
-    'big-sector-12_5',
-    'big-sector-25',
-    'big-sector-37_5',
-    'big-sector-50',
-    'big-sector-62_5',
-    'big-sector-75',
-    'big-sector-87_5',
-    'board-settings',
-    'board',
-    'boards',
-    'calendar',
-    'card-checklist',
-    'card',
-    'check',
-    'checkbox-done',
-    'checkbox',
-    'checklist',
-    'circle-pause',
-    'circle-play',
-    'circle-stop',
-    'close-small',
-    'close',
-    'cloud-backup',
-    'cloud-download',
-    'color-tag-finish',
-    'color-tag-start',
-    'colour-tag',
-    'comments',
-    'crown',
-    'deadline',
-    'delete',
-    'description',
-    'discard-spent-time',
-    'done-circle-outline',
-    'done-circle',
-    'drag-handle',
-    'drop',
-    'due',
-    'edit',
-    'estimate-time',
-    'face-smile',
-    'facebook',
-    'filter',
-    'fold',
-    'folder-plus',
-    'folder',
-    'gantt-view',
-    'google-plus',
-    'help-rounded',
-    'help',
-    'kanban-view',
-    'knowlege',
-    'l-arrow',
-    'linkedin',
-    'list-view',
-    'load',
-    'lock-small',
-    'mark-all-read',
-    'minus',
-    'more-vertical',    
-    'offline-data',
-    'overdue',
-    'palette',
-    'pause',
-    'pin',
-    'placeholder-attachments',
-    'placeholder-ckecklists',
-    'placeholder-comments',
-    'play',
-    'plus',
-    'printer',
-    'r-arrow',
-    'related-cards',
-    'remove-circle-outline',
-    'restore',
-    'search-square',
-    'search',
-    'send',
-    'settings',
-    'share-domain-link',
-    'share-domain',
-    'share-link',
-    'share-private',
-    'share-public',
-    'share-specific',
-    'shield-big',
-    'shield-green',
-    'shield-yellow',
-    'signout',
-    'sort',
-    'spent-time',
-    'star',
-    'starred-board',
-    'start-date',
-    'stop',
-    'subcards',
-    't-arrow',
-    'trello',
-    'tune',
-    'twitter',
-    'unfold',
-    'userpic-mask',
     'warning',
-    'watch',
-    'window-video',
-    'youtube',
+    'weekly-planning',
 ];
 
 function iconItem(options) {
     let { xlink, size = 24, title = '', key } = options;
-    title = (!title) ? xlink : title;    
+    title = (!title) ? xlink : title;
     return (
         <div className="icons-grid__item" key={key}>
             <div className="icons-grid__icon">
@@ -283,46 +160,41 @@ function iconItem(options) {
 };
 
 function iconsList(options) {
-    let { arr, size = 24 } = options;
-    return arr.map((i, key) => iconItem({ xlink: i, key, size }));
+    let { arr, size = 24 } = options,
+        letter = '';
+    return arr.sort().map((i, key) => {
+        let ret = [];
+        if (i[0] !== letter) {
+            letter = i[0];
+            ret.push(<div className="icons-grid__letter" key={key + '-letter'}>{letter}</div>);
+        }
+        ret.push(iconItem({ xlink: i, key, size }));
+        return ret;
+    });
 };
 
 storiesOf('KUI', module)
-    .add('Icons', () => {        
+    .add('Icons', () => {
         return (
             <div className="page">
                 <section>
-                    <h2>New</h2>
-                    <b>16px</b>
+                    <h2>16px</h2>
                     <div className="icons-grid">
                         {iconsList({ arr: icons, size: 16 })}
                     </div>
-                    <b>24px</b>
+                </section>
+                <section>
+                    <h2>24px</h2>
                     <div className="icons-grid">
                         {iconsList({ arr: icons })}
                     </div>
-                    <b>96px</b>
+                </section>
+                <section>
+                    <h2>96px</h2>
                     <div className="icons-grid icons-grid--large">
                         {iconsList({ arr: icons96, size: 96 })}
                     </div>
                 </section>
-
-                <section>
-                    <h2>Old</h2>
-                    <div className="icons-grid">
-                        {iconsList({ arr: iconsOld })}
-                    </div>
-                </section>
-
-                <section>
-                    <h2>Sizes</h2>
-                    <div className="icons-grid icons-grid--large">
-                        {iconItem({ xlink: 'attachments', size: 16, title: 16 })}
-                        {iconItem({ xlink: 'attachments', size: 24, title: 24 })}
-                        {iconItem({ xlink: 'attachments', size: 96, title: 96 })}
-                    </div>
-                </section>
-                                
-            </div>        
+            </div>
         )
     });
