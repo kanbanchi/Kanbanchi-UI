@@ -41,6 +41,8 @@ class StoryControls extends React.Component {
                             <Button>Tab 0</Button>
                             <Button>Tab 1</Button>
                             <Button>Tab 2</Button>
+                            <Button>Tab 3</Button>
+                            <Button>Tab 4</Button>
                         </Tabs>
                     </div>
                 </section>

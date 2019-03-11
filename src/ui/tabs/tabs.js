@@ -42,7 +42,9 @@ export const Tabs = (props) => {
             className={className}
             {...attributes}
         >
-            {buttonHocs}
+            <div className="kui-tabs__scroll">
+                {buttonHocs}
+            </div>
         </div>
     );
 };
