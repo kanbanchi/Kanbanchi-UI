@@ -2,7 +2,8 @@ export {Icon} from './icon/icon.js';
 
 export {Button} from './button/button.js';
 export {ButtonsGroup} from './buttons_group/buttons_group.js';
-export {ButtonsSegmented, ButtonsSegmented as Tabs} from './buttons_segmented/buttons_segmented.js';
+export {ButtonsSegmented} from './buttons_segmented/buttons_segmented.js';
+export {Tabs} from './tabs/tabs.js';
 
 export {Snackbar} from './snackbar/snackbar.js';
 

@@ -19,14 +19,30 @@ class StoryControls extends React.Component {
             <div className="page">
                 <section>
                     <h2>Tabs</h2>
-                    <Tabs
-                        active={this.state.tab}
-                        action={this.onTabsClick}
-                    >
-                        <Button>Tab 0</Button>
-                        <Button>Tab 1</Button>
-                        <Button>Tab 2</Button>
-                    </Tabs>
+                    <div>
+                        <p><b>Default</b></p>
+                        <Tabs
+                            active={this.state.tab}
+                            action={this.onTabsClick}
+                        >
+                            <Button>Tab 0</Button>
+                            <Button>Tab 1</Button>
+                            <Button>Tab 2</Button>
+                        </Tabs>
+                    </div>
+                    <br/>
+                    <div>
+                        <p><b>Large</b></p>
+                        <Tabs
+                            active={this.state.tab}
+                            action={this.onTabsClick}
+                            size="large"
+                        >
+                            <Button>Tab 0</Button>
+                            <Button>Tab 1</Button>
+                            <Button>Tab 2</Button>
+                        </Tabs>
+                    </div>
                 </section>
 
                 <section>
