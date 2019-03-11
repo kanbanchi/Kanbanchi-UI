@@ -68,7 +68,6 @@ export const Button = (props) => {
 };
 
 Button.propTypes = {
-    className: PropTypes.string,
     variant: PropTypes.oneOf([
         'primary',
         'primary_white',
@@ -95,7 +94,6 @@ Button.variantWithIcon = [
 ];
 
 Button.defaultProps = {
-    className: null,
     variant: 'primary',
     size: null,
     type: 'button',
