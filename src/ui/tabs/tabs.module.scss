@@ -21,7 +21,7 @@
         padding: $google-spacing * 2 $google-spacing * 2 $google-spacing;
         color: calc-color(tint, $color-base, 50);
         font-weight: normal;
-        background: $color-light-background;
+        background: transparent;
         border-radius: 0;
 
         &:after {
@@ -30,8 +30,8 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 2px;
-            background: transparent;
+            height: 1px;
+            background: $color-background;
             @include transition;
         }
 
@@ -39,7 +39,7 @@
         &:focus,
         &:hover {
             color: $color-base;
-            background: $color-light-background;
+            background: transparent;
             box-shadow: none;
         }
 
@@ -48,6 +48,7 @@
             cursor: default;
             
             &:after {
+                height: 2px;
                 background: $color-purple;
             }
         }
