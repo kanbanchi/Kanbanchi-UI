@@ -7,10 +7,18 @@ section {
     margin: 0 0 2rem;
     z-index: $z-initials;
 
+    &.section-grey,
     &.section-purple {
         margin-left: -2em;
         margin-right: -2em;
         padding: 2em;
+    }
+
+    &.section-grey {
+        background: $color-background;
+    }
+
+    &.section-purple {
         color: $color-white;
         background: $color-purple;
     }
