@@ -1,35 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PropTypes, ClassNames } from '../utils';
+import { Label } from '../../ui';
 import './input.module.scss';
 
 export const Input = (props) => {
     let {
-        children,
         className,
+        label,
+        disabled,
+        onChange,
         ...attributes
-    } = props;
+    } = props,
+        labelItem = null;
+
+    const [isFilled, setIsFilled] = useState(!!attributes.value);
 
     className = ClassNames(
         'kui-input',
+        (disabled) ? 'kui-input--disabled' : null,
+        (isFilled) ? 'kui-input--filled' : null,
         className
     );
 
+    attributes.type = 'text';
+    attributes.className = 'kui-input__item';
+    if (disabled) attributes.disabled = true;
+    attributes.onChange = e => {
+        setIsFilled(!!e.target.value);
+        if (onChange) onChange();
+    };
+
+    if (label) labelItem = (<div className="kui-label__item">{label}</div>);
+    
     return (
-        <div
-            className={className}
-            {...attributes}
-        >
-            {children}
-        </div>
+        <Label className={className}>
+            {labelItem}
+            <input {...attributes} />
+        </Label>
     );
 };
 
 Input.propTypes = {
-    className: PropTypes.string
+    label: PropTypes.string,
+    disabled: PropTypes.bool
 };
 
 Input.defaultProps = {
-    className: ''
+    label: null,
+    disabled: false
 };
 
 export default Input;

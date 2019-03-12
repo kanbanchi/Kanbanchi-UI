@@ -49,9 +49,18 @@ class StoryControls extends React.Component {
 
                 <section>
                     <h2>Input</h2>
-                    <Input>
-                        Label
-                    </Input>
+                    <Input label="Label" placeholder="Text input" />
+                    <br/>
+                    <Input placeholder="Without label" />
+                    <br/>
+                    <Input label="Label" placeholder="Disabled" disabled />
+                </section>
+
+                <section className="section-grey">
+                    <h2>Input</h2>
+                    <Input label="Label" placeholder="Text input" />
+                    <br/>
+                    <Input label="Label" placeholder="Disabled" disabled />
                 </section>
 
                 <section>

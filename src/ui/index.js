@@ -7,6 +7,7 @@ export {Tabs} from './tabs/tabs.js';
 
 export {Snackbar} from './snackbar/snackbar.js';
 
+export {Label} from './label/label.js';
 export {Input} from './input/input.js';
 export {Search} from './search/search.js';
 export {Switch} from './switch/switch.js';
