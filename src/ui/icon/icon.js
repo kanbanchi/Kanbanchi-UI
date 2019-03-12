@@ -21,9 +21,11 @@ export const Icon = (props) => {
         }
     }
 
+    if (size === 16) size = null;
+
     const classNames = ClassNames(
         'kui-icon',
-        'kui-icon--' + size,
+        (size) ? 'kui-icon--' + size : null,
         className
     );
 
@@ -36,7 +38,6 @@ export const Icon = (props) => {
 
 Icon.propTypes = {
     xlink: PropTypes.string.isRequired,
-    className: PropTypes.string,
     size: PropTypes.oneOf([
         16,
         24,
@@ -46,7 +47,6 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
     xlink: '',
-    className: '',
     size: 16
 };
 

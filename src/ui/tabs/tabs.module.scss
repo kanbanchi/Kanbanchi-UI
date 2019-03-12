@@ -1,0 +1,76 @@
+@import '../../assets/sass/index.scss';
+
+.kui-tabs {
+    max-width: 100%;
+    height: $google-spacing * 5.5;
+    overflow: hidden;    
+
+    &__scroll {
+        display: inline-flex;
+        max-width: 100%;
+        overflow-x: scroll;
+        
+        &::-webkit-scrollbar {
+            display: none; 
+        }
+    }
+
+    &__item {
+        min-width: $google-spacing * 16;
+        height: auto;
+        padding: $google-spacing * 2 $google-spacing * 2 $google-spacing;
+        color: calc-color(tint, $color-base, 50);
+        font-weight: normal;
+        background: $color-light-background;
+        border-radius: 0;
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: transparent;
+            @include transition;
+        }
+
+        &:active,
+        &:focus,
+        &:hover {
+            color: $color-base;
+            background: $color-light-background;
+            box-shadow: none;
+        }
+
+        &--active {
+            color: $color-base;
+            cursor: default;
+            
+            &:after {
+                background: $color-purple;
+            }
+        }
+    }
+
+    &--large {
+        height: $google-spacing * 7.5;
+        .kui-tabs__item {        
+            min-width: $google-spacing * 20;
+            padding: $google-spacing * 3 $google-spacing * 3 $google-spacing * 2;
+        }
+    }
+}
+
+@media (max-width: $media-iPad) {
+    .kui-tabs__item {
+        min-width: $google-spacing * 10;
+        padding: $google-spacing * 2 $google-spacing $google-spacing;
+    }
+    .kui-tabs--large {
+        .kui-tabs__item {
+            min-width: $google-spacing * 12;
+            padding: $google-spacing * 3 $google-spacing $google-spacing * 2;
+        }
+    }
+}

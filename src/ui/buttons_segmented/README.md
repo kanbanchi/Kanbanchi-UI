@@ -3,7 +3,6 @@
 Combines buttons in one control iOS like.
 
 ```html
-<!-- default small buttons with default margin -->
 <ButtonsSegmented
     active={this.state.segmented}
     action={this.onSegmentedClick}
@@ -11,7 +10,6 @@ Combines buttons in one control iOS like.
     <Button>Button 0</Button>
     <Button>Button 1</Button>
 </ButtonsSegmented>
-
 ```
 
 ## variant

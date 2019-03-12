@@ -242,8 +242,9 @@
             }
         }
 
-        &.kui-button--disabled,
-        &:disabled {
+        &.kui-button--disabled {
+            color: calc-color(tint, $color-purple, 30);
+
             .kui-button__icon {
                 transform: translateX(0);
             }

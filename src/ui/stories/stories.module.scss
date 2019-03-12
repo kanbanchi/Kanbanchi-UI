@@ -7,10 +7,18 @@ section {
     margin: 0 0 2rem;
     z-index: $z-initials;
 
+    &.section-grey,
     &.section-purple {
         margin-left: -2em;
         margin-right: -2em;
         padding: 2em;
+    }
+
+    &.section-grey {
+        background: $color-background;
+    }
+
+    &.section-purple {
         color: $color-white;
         background: $color-purple;
     }
@@ -29,6 +37,15 @@ section {
         justify-content: center;
         width: $google-spacing * 16;
         height: $google-spacing * 8;
+    }
+
+    &__letter {
+        margin: 1em 0 0;
+        width: 100%;
+        color: calc-color(tint, $color-base, 30);
+        text-align: left;
+        font-weight: bold;
+        text-transform: uppercase;
     }
 
     &__icon,

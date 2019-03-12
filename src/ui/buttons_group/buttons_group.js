@@ -12,7 +12,7 @@ export const ButtonsGroup = (props) => {
 
     className = ClassNames(
         'kui-buttons_group',
-        'kui-buttons_group--m_' + margin,
+        (margin) ? 'kui-buttons_group--m_' + margin : null,
         className
     );
 
@@ -27,16 +27,13 @@ export const ButtonsGroup = (props) => {
 };
 
 ButtonsGroup.propTypes = {
-    className: PropTypes.string,
     margin: PropTypes.oneOf([
-        'small',
         'large'
     ])
 };
 
 ButtonsGroup.defaultProps = {
-    className: '',
-    margin: 'small'
+    margin: null
 };
 
 export default ButtonsGroup;
