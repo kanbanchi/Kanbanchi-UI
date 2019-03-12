@@ -15,10 +15,9 @@ export const Tabs = (props) => {
 
     className = ClassNames(
         'kui-tabs',
+        (size) ? 'kui-tabs--' + size : null,
         className
     );
-    
-    if (size) className += ' kui-tabs--' + size;
 
     if (children.length) {
         if (active > children.length - 1) active = 0;

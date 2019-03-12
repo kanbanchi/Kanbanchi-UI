@@ -78,7 +78,6 @@ export const Snackbar = (props) => {
 };
 
 Snackbar.propTypes = {
-    className: PropTypes.string,
     variant: PropTypes.oneOf([
         'warning',
         'info',
@@ -99,7 +98,6 @@ Snackbar.defaultIcons = {
 };
 
 Snackbar.defaultProps = {
-    className: '',
     variant: 'info',
     icon: 'default',
     title: null,
