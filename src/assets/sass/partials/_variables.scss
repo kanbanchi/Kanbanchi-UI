@@ -79,6 +79,6 @@ $media-screens: (
 );
 
 // shadows
-$shadow-default: 0 $google-spacing / 4  $google-spacing calc-color(fade, $color-base, 20);
-$shadow-hover: 0 $google-spacing / 2  $google-spacing * 2 calc-color(fade, $color-base, 30);
-$shadow-modal: 0 $google-spacing $google-spacing * 3 calc-color(fade, $color-base, 20);
+$shadow-default: 0 $google-spacing / 4  $google-spacing rgba($color-base, .2);
+$shadow-hover: 0 $google-spacing / 2  $google-spacing * 2 rgba($color-base, .3);
+$shadow-modal: 0 $google-spacing $google-spacing * 3 rgba($color-base, .2);
