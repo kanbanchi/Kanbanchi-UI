@@ -4,8 +4,9 @@ Popup with icon, text, button
 
 ## variant
 > `info` *default*  
-> warning  
-> success
+> error  
+> success  
+> timer  
 
 ## icon
 

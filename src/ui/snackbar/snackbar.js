@@ -20,6 +20,7 @@ export const Snackbar = (props) => {
     className = ClassNames(
         'kui-snackbar',
         'kui-snackbar--' + variant,
+        (!title) ? 'kui-snackbar--notitle' : null,
         className
     );
 
@@ -79,9 +80,10 @@ export const Snackbar = (props) => {
 
 Snackbar.propTypes = {
     variant: PropTypes.oneOf([
-        'warning',
         'info',
-        'success'
+        'error',
+        'success',
+        'timer'
     ]),
     icon: PropTypes.string,
     title: PropTypes.string,
@@ -92,9 +94,10 @@ Snackbar.propTypes = {
 };
 
 Snackbar.defaultIcons = {
-    warning: 'error',
     info: 'info',
-    success: 'done'
+    error: 'error',
+    success: 'done',
+    timer: 'error'
 };
 
 Snackbar.defaultProps = {
