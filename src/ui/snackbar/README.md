@@ -3,9 +3,14 @@
 Popup with icon, text, button
 
 ## variant
+
+Change background & default icon.  
+Timer has block with countdown.
+
 > `info` *default*  
-> warning  
-> success
+> error  
+> success  
+> timer  
 
 ## icon
 
@@ -27,7 +32,13 @@ Adds button with given value
 
 ## timer
 
-Adds contdown block in seconds
+If not null, snackbar will hide in {timer} seconds
+
+If (variant === 'timer') timer default 10 seconds
+
+```html
+<Snackbar timer={5} variant="error" text="Error text shown 5 seconds" />
+```
 
 ## action
 
@@ -53,6 +64,5 @@ Fires on button click
 
 ## Timer
 
-In Storybook you can find examples of stateful components.  
-SnackbarTimer - shows Snackbar with animated countdown.  
-SnackbarsQueue - adds SnackbarTimers in queue and shows the first.
+In Storybook you can find example of stateful component SnackbarsQueue.  
+SnackbarsQueue adds Snackbars in queue and shows the first.

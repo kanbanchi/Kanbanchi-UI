@@ -1,5 +1,5 @@
 @import '../../assets/sass/index.scss';
-.kui-snackbar {    
+.kui-snackbar {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -36,12 +36,19 @@
 
     &__title {
         font-weight: bold;
+        font-size: $h5-size;
+    }
+
+    &__text {
+        font-size: $base-font-size;
     }
 
     &__timer {
-        margin: 0 0 0 $google-spacing * 4;
+        margin: 0 0 0 $google-spacing * 2;
+        min-width: $google-spacing * 8;
         font-weight: bold;
         font-size: $h4-size;
+        text-align: right;
         white-space: nowrap;
     }
 
@@ -56,13 +63,22 @@
         margin: 0 0 0 $google-spacing * 4;
     }
 
-    &--warning {
-        background-color: $color-orange;
+    &--error {
+        background-color: $color-red;
     }
 
     &--success {
         background-color: $color-green;
     }
+
+    &--timer {
+        background-color: $color-base;
+    }
+
+    &--notitle &__text {
+        font-size: $h5-size;
+    }
+
     @media (max-width: $media-iPlus) {
         &__timer {
             margin: 0 0 0 $google-spacing * 2;

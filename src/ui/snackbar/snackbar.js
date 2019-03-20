@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import { Button, Icon } from '../../ui';
 import './snackbar.module.scss';
@@ -20,46 +20,40 @@ export const Snackbar = (props) => {
     className = ClassNames(
         'kui-snackbar',
         'kui-snackbar--' + variant,
+        (!title) ? 'kui-snackbar--notitle' : null,
         className
     );
 
-    let xlink = icon,
-        titleDiv = '',
-        textDiv = '',
-        timerDiv = '',
-        buttonDiv = '';
+    let xlink = (icon === 'default') ? Snackbar.defaultIcons[variant] : icon;
 
-    if (icon === 'default') xlink = Snackbar.defaultIcons[variant];
+    if (variant === 'timer' && timer === null) timer = 10;
+    
+    const [timerHook, setTimerHook] = useState(timer);
+    const [isShownHook, setIsShownHook] = useState(true);
 
-    if (title) titleDiv = (
-        <div className="kui-snackbar__title">
-            {title}
-        </div>
-    );
+    const hide = () => {
+        if (action) action();
+        setTimerHook(0);
+        setIsShownHook(false);
+    };
 
-    if (text) textDiv = (
-        <div className="kui-snackbar__text">
-            {text}
-        </div>
-    );
+    if (timer !== null) {
+        let timeOut;
+        useEffect(() => {
+            if (timerHook < 1) {
+                hide();
+            } else {
+                timeOut = setTimeout(() => {
+                    setTimerHook(timerHook - 1);
+                }, 1000);
+            }
+            return () => {
+                clearTimeout(timeOut);
+            }
+        });
+    }
 
-    if (button) buttonDiv = (
-        <Button
-            className="kui-snackbar__button"
-            variant="primary_white"
-            onClick={action}
-        >
-            {button}
-        </Button>
-    );
-
-    if (timer) timerDiv = (
-        <div className="kui-snackbar__timer">
-            <span className="kui-snackbar__timer_num">{timer}</span> sec
-        </div>
-    );
-
-    return (
+    return isShownHook && (
         <div className="kui-snackbar__container">
             <div
                 className={className}
@@ -67,11 +61,31 @@ export const Snackbar = (props) => {
             >
                 <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
                 <div className="kui-snackbar__body">
-                    {titleDiv}
-                    {textDiv}
+                    {title &&
+                        <div className="kui-snackbar__title">
+                            {title}
+                        </div>
+                    }
+                    {text &&
+                        <div className="kui-snackbar__text">
+                            {text}
+                        </div>
+                    }
                 </div>
-                {timerDiv}
-                {buttonDiv}
+                {variant === 'timer' &&
+                    <div className="kui-snackbar__timer">
+                        <span className="kui-snackbar__timer_num">{timerHook}</span> sec
+                    </div>
+                }
+                {button &&
+                    <Button
+                        className="kui-snackbar__button"
+                        variant="primary_white"
+                        onClick={hide}
+                    >
+                        {button}
+                    </Button>
+                }
             </div>
         </div>
     );
@@ -79,9 +93,10 @@ export const Snackbar = (props) => {
 
 Snackbar.propTypes = {
     variant: PropTypes.oneOf([
-        'warning',
         'info',
-        'success'
+        'error',
+        'success',
+        'timer'
     ]),
     icon: PropTypes.string,
     title: PropTypes.string,
@@ -92,9 +107,10 @@ Snackbar.propTypes = {
 };
 
 Snackbar.defaultIcons = {
-    warning: 'error',
     info: 'info',
-    success: 'done'
+    error: 'error',
+    success: 'done',
+    timer: 'error'
 };
 
 Snackbar.defaultProps = {
@@ -103,7 +119,7 @@ Snackbar.defaultProps = {
     title: null,
     text: null,
     button: null,
-    timer: 0,
+    timer: null,
     action: null
 };
 
