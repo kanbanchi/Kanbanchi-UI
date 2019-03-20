@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import { Button, Icon } from '../../ui';
-import './snackbar.module.scss';
+import '../../../src/ui/snackbar/snackbar.module.scss';
 
 export const Snackbar = (props) => {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {PropTypes, ClassNames} from '../utils';
-import './icon.module.scss';
+import '../../../src/ui/icon/icon.module.scss';
 
 export const Icon = (props) => {
     let {
@@ -12,10 +12,10 @@ export const Icon = (props) => {
 
     let Svg;
     try {
-        Svg = require('!svg-react-loader!../../assets/icons/' + xlink + '.svg'); // small
+        Svg = require('!svg-react-loader!../../../src/assets/icons/' + xlink + '.svg'); // small
     } catch (e) {
         try {
-            Svg = require('!svg-react-loader!../../assets/icons/big/' + xlink + '.svg'); // big 96px
+            Svg = require('!svg-react-loader!../../../src/assets/icons/big/' + xlink + '.svg'); // big 96px
         } catch (e) {
             Svg = 'svg';
         }

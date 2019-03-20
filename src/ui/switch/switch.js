@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './switch.module.scss';
+import '../../../src/ui/switch/switch.module.scss';
 
 export const Switch = (props) => {
     let {

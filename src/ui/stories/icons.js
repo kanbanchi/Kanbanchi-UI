@@ -52,7 +52,7 @@ const icons = [
     'epic-card',
     'error',
     'estimate',
-    'expland',
+    'expand',
     'filters',
     'gantt',
     'help',

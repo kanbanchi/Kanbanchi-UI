@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './radio.module.scss';
+import '../../../src/ui/radio/radio.module.scss';
 
 export const Radio = (props) => {
     let {

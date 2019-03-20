@@ -1,6 +1,6 @@
 import React from 'react';
 import { ClassNames } from '../utils';
-import './label.module.scss';
+import '../../../src/ui/label/label.module.scss';
 
 export const Label = (props) => {
     let {

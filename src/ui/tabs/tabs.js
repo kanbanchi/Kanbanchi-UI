@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './tabs.module.scss';
+import '../../../src/ui/tabs/tabs.module.scss';
 
 export const Tabs = (props) => {
     let {
