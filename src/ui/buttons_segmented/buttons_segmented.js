@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './buttons_segmented.module.scss';
+import '../../../src/ui/buttons_segmented/buttons_segmented.module.scss';
 
 export const ButtonsSegmented = (props) => {
     let {

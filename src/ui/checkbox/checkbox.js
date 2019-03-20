@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './checkbox.module.scss';
+import '../../../src/ui/checkbox/checkbox.module.scss';
 
 export const Checkbox = (props) => {
     let {

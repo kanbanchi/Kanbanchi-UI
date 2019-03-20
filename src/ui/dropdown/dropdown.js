@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './dropdown.module.scss';
+import '../../../src/ui/dropdown/dropdown.module.scss';
 
 export const Dropdown = (props) => {
     let {

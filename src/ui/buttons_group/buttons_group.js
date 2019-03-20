@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './buttons_group.module.scss';
+import '../../../src/ui/buttons_group/buttons_group.module.scss';
 
 export const ButtonsGroup = (props) => {
     let {

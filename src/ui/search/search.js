@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './search.module.scss';
+import '../../../src/ui/search/search.module.scss';
 
 export const Search = (props) => {
     let {

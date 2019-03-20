@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './datepicker.module.scss';
+import '../../../src/ui/datepicker/datepicker.module.scss';
 
 export const Datepicker = (props) => {
     let {

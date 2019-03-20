@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import { Label } from '../../ui';
-import './input.module.scss';
+import '../../../src/ui/input/input.module.scss';
 
 export const Input = (props) => {
     let {

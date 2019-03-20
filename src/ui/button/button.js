@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
-import './button.module.scss';
+import '../../../src/ui/button/button.module.scss';
 import { Icon } from '../../ui';
 
 export const Button = (props) => {
