@@ -251,12 +251,13 @@
         }
     }
 
-    &--icon {                
+    &--icon,
+    &--icon-text {
         color: inherit;
         opacity: .3;
 
         &:before {
-            position: absolute;            
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -266,8 +267,11 @@
             border-radius: $google-spacing * 6;
         }
 
-        &:active,
-        &:focus,
+        &:focus {
+            color: inherit;
+            opacity: .4;
+        }
+
         &:hover,
         &.kui-button--disabled,
         &:disabled {
@@ -275,17 +279,24 @@
             opacity: .9;
         }
 
-        &:focus {
-            opacity: .4;
-        }
-
         &:active {
-            opacity: 1;
+            color: inherit;
+            opacity: .7;
         }
 
         &.kui-button--disabled,
         &:disabled {
             opacity: .1;
         }
+    }
+
+    &--icon-text {
+        &:before {
+            left: $google-spacing * 1.5;
+        }
+    }
+
+    &--icon-text &__text {
+        margin-left: $google-spacing;
     }
 }

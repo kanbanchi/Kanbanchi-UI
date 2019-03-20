@@ -112,6 +112,25 @@ class StoryButtons extends React.Component {
                     </ButtonsGroup>
                 </section>
                 <section>
+                    <h2>Icon+text</h2>
+                    <ButtonsGroup margin="large">
+                        <Button 
+                            variant="icon-text" 
+                            text="Button text"
+                        >
+                            <Icon xlink="archive" size={24} />                            
+                        </Button>
+                        <Button 
+                            variant="icon-text"
+                            text="Button text"
+                            title="Disabled"
+                            disabled={this.state.disabled}
+                        >
+                            <Icon xlink="knowlege" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                </section>
+                <section>
                     <h2>Segmented</h2>
                     <ButtonsSegmented
                         active={this.state.segmented}

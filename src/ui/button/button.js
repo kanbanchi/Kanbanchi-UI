@@ -9,6 +9,7 @@ export const Button = (props) => {
         className,
         size,
         variant,
+        text,
         ...attributes
     } = props;
 
@@ -62,6 +63,11 @@ export const Button = (props) => {
         >
             {iconBefore}
             {children}
+            {text &&
+                <span className="kui-button__text">
+                    {text}
+                </span>
+            }
             {iconAfter}
         </Tag>
     );
@@ -75,7 +81,8 @@ Button.propTypes = {
         'fab',
         'action',
         'text',
-        'icon'
+        'icon',
+        'icon-text',
     ]),
     size: PropTypes.oneOf([
         'large'
@@ -85,7 +92,8 @@ Button.propTypes = {
         'submit'
     ]),
     href: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    text: PropTypes.string
 };
 
 Button.variantWithIcon = [
@@ -99,6 +107,7 @@ Button.defaultProps = {
     type: 'button',
     href: null,
     disabled: false,
+    text: null
 };
 
 export default Button;

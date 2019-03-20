@@ -21,7 +21,8 @@
 > fab  
 > action  
 > text  
-> icon
+> icon  
+> icon-text  
 
 ## size
 > `null` *default*  
@@ -30,6 +31,14 @@
 ## type 
 > `button` *default*  
 > submit
+
+## text 
+Text value instead {children} wraps in <span>
+```html
+<Button variant="icon-text" text="Button text">
+    <Icon xlink="archive" size={24} />
+</Button>
+```
 
 # Icons
 
