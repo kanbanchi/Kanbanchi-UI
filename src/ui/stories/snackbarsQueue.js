@@ -1,5 +1,5 @@
 import React from 'react';
-import SnackbarTimer from './snackbarTimer';
+import { Snackbar } from '../../ui';
 
 class SnackbarsQueue extends React.Component {
     constructor() {
@@ -14,7 +14,7 @@ class SnackbarsQueue extends React.Component {
         this.setState(state => {
             const count = ++state.count;
             state.queue.push({
-                variant: 'warning',
+                variant: 'timer',
                 text: count + ' Licence for zarcas@narod.ru wiil be deleted in:',
                 button: 'Cancel',
                 key: count
@@ -32,8 +32,7 @@ class SnackbarsQueue extends React.Component {
     }    
     render() {
         return !!this.state.queue.length && (
-            <SnackbarTimer
-                isShown={true}
+            <Snackbar
                 action={this.showNext}
                 {...this.state.queue[0]}
             />

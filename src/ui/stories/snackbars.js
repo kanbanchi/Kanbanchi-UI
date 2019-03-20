@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, Snackbar } from '../../ui';
-import SnackbarTimer from './snackbarTimer';
 import SnackbarsQueue from './snackbarsQueue';
 
 class StorySnackbars extends React.Component {
@@ -22,22 +21,28 @@ class StorySnackbars extends React.Component {
                     <br />
                     <br />
 
-                    <h2>Warnings</h2>
+                    <h2>Error</h2>
                     <Snackbar
-                        variant="warning"
+                        variant="error"
                         text="The email address is not valid. Please, use name@domain.com format."
                     />
                     <Snackbar
-                        variant="warning"
+                        variant="error"
                         text="The maximum number of seats is exceeded. Click Manage subscription to buy more seats."
                         button="Close"
                     />
-                    <SnackbarTimer
-                        isShown={true}
-                        timer={5}
-                        variant="warning"
+
+                    <h2>Timer</h2>
+                    <Snackbar
+                        variant="timer"
                         text="Licence for zarcas@narod.ru wiil be deleted in:"
                         button="Cancel"
+                    />
+
+                    <Snackbar
+                        timer={5}
+                        variant="error"
+                        text="Error text shown 5 seconds"
                     />
                 </section>
                 <section className="snackbars">
