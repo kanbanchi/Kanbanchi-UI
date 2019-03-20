@@ -2,7 +2,7 @@
   "name": "kui",
   "version": "0.3.0",
   "private": true,
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vladimirmagic/Kanbanchi-UI.git"
@@ -13,7 +13,8 @@
     "react-dom": "^16.8.3"
   },
   "scripts": {
-    "start": "start-storybook -p 9001 -c .storybook"
+    "start": "start-storybook -p 9001 -c .storybook",
+    "postinstall": "babel src/ -d dist/"
   },
   "browserslist": [
     ">0.2%",
@@ -21,6 +22,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
     "@babel/core": "^7.3.3",
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/plugin-proposal-decorators": "^7.3.0",
