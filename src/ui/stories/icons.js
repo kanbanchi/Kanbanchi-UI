@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { Icon } from '../../ui';
 
 const icons = [
+    'archive',
+    'archive-epic',
     'account',
     'account-settings',
     'account-swith',
