@@ -84,6 +84,24 @@ class StoryButtons extends React.Component {
                             <Icon xlink="plus" size={24} />
                         </Button>
                     </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup margin="large">
+                        <Button variant="fab" text="Fab with text">
+                            <Icon xlink="plus" size={24} />
+                        </Button>
+                        <Button variant="fab" text="Fab with text" disabled={this.state.disabled}>
+                            <Icon xlink="plus" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup margin="large">
+                        <Button variant="fab" color="black" text="Fab with text">
+                            <Icon xlink="kanban" size={24} />
+                        </Button>
+                        <Button variant="fab" color="black" text="Fab with text" disabled={this.state.disabled}>
+                            <Icon xlink="kanban" size={24} />
+                        </Button>
+                    </ButtonsGroup>
                 </section>
                 <section>
                     <h2>Actions</h2>
@@ -117,6 +135,7 @@ class StoryButtons extends React.Component {
                         <Button 
                             variant="icon-text" 
                             text="Button text"
+                            style={{width: '200px'}}
                         >
                             <Icon xlink="archive" size={24} />                            
                         </Button>
