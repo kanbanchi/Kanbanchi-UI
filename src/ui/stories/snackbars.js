@@ -28,15 +28,19 @@ class StorySnackbars extends React.Component {
                     />
                     <Snackbar
                         variant="error"
-                        text="The maximum number of seats is exceeded. Click Manage subscription to buy more seats."
-                        button="Close"
+                        text="The maximum number of seats is exceeded. <br>Click Manage subscription to buy more seats."
+                        buttonAction="Close"
                     />
 
                     <h2>Timer</h2>
                     <Snackbar
                         variant="timer"
-                        text="Licence for zarcas@narod.ru wiil be deleted in:"
-                        button="Cancel"
+                        timer={55}
+                        text={"Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                        buttonAction="Ok"
+                        buttonCancel="Cancel"
+                        onAction={() => console.log('action')}
+                        onCancel={() => console.log('cancel')}
                     />
 
                     <Snackbar
@@ -50,7 +54,7 @@ class StorySnackbars extends React.Component {
                     <Snackbar
                         title="We've updated the app!"
                         text="Click to refresh the page and receive updates"
-                        button="Refresh"
+                        buttonAction="Refresh"
                     />
                 </section>
                 <section className="snackbars">
@@ -59,7 +63,7 @@ class StorySnackbars extends React.Component {
                         variant="success"
                         title="Data has been successfully exported"
                         text="We've sent you an email with the link"
-                        button="Open the link"
+                        buttonAction="Open the link"
                     />
                 </section>
 

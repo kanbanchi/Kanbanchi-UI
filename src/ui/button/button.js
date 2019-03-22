@@ -7,6 +7,7 @@ export const Button = (props) => {
     let {
         children,
         className,
+        color,
         size,
         variant,
         text,
@@ -20,7 +21,8 @@ export const Button = (props) => {
 
     let {
         iconBefore,
-        iconAfter
+        iconAfter,
+        childrenDiv
     } = {};
 
     const Tag = (href) ? 'a' : 'button';
@@ -31,9 +33,16 @@ export const Button = (props) => {
         }
     }
 
+    if (variant === 'fab') {
+        childrenDiv = (<div className="kui-button__children">{children}</div>);
+    } else {
+        childrenDiv = children;
+    }
+
     className = ClassNames(
         'kui-button',
         'kui-button--' + variant,
+        (color) ? 'kui-button--' + color: null,
         (size) ? 'kui-button--' + size : null,
         (disabled) ? 'kui-button--disabled' : null,
         className
@@ -62,7 +71,7 @@ export const Button = (props) => {
             {...attributes}
         >
             {iconBefore}
-            {children}
+            {childrenDiv}
             {text &&
                 <span className="kui-button__text">
                     {text}
@@ -84,6 +93,9 @@ Button.propTypes = {
         'icon',
         'icon-text',
     ]),
+    color: PropTypes.oneOf([
+        'black'
+    ]),
     size: PropTypes.oneOf([
         'large'
     ]),
@@ -103,6 +115,7 @@ Button.variantWithIcon = [
 
 Button.defaultProps = {
     variant: 'primary',
+    color: null,
     size: null,
     type: 'button',
     href: null,
