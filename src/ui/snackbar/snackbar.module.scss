@@ -1,8 +1,9 @@
 @import '../../assets/sass/index.scss';
 .kui-snackbar {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+    max-width: $media-iPad;
     min-height: $google-spacing * 7;
     padding: $google-spacing $google-spacing * 2;
     margin-top: $google-spacing * 2;
@@ -31,6 +32,7 @@
     }
 
     &__body {
+        flex: 1 1 auto;
         margin: 0 0 0 $google-spacing * 2;
     }
 
@@ -59,8 +61,8 @@
         }
     }
 
-    &__button {
-        margin: 0 0 0 $google-spacing * 4;
+    &__buttons {
+        margin-left: $google-spacing * 3;
     }
 
     &--error {
@@ -73,22 +75,52 @@
 
     &--timer {
         background-color: $color-base;
+
+        .kui-snackbar {
+            &__body {
+                overflow: hidden;
+            }
+            &__text {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
     }
 
     &--notitle &__text {
         font-size: $h5-size;
     }
 
-    @media (max-width: $media-iPlus) {
+    @media (max-width: $media-iPad) {
+        width: 100%;
+        flex-wrap: wrap;
+        padding: $google-spacing * 2;
+
+        &__container {
+            bottom: $google-spacing;
+        }
+
+        &__body {
+            order: -1;
+            margin: 0 0 $google-spacing * 2 0;
+            width: 100%;
+        }
+
+        &__title,
+        &--notitle &__text {
+            font-size: $base-font-size;
+        }
+
         &__timer {
-            margin: 0 0 0 $google-spacing * 2;
+            margin: 0;
             font-size: $h5-size;
         }
 
-        &__button {
-            margin: 0 0 0 $google-spacing * 2;
+        &__buttons {
+            margin-left: 0;
         }
-    }    
+    }
 }
 
 @keyframes:global(snackbarShow) {

@@ -15,9 +15,12 @@ class SnackbarsQueue extends React.Component {
             const count = ++state.count;
             state.queue.push({
                 variant: 'timer',
-                text: count + ' Licence for zarcas@narod.ru wiil be deleted in:',
-                button: 'Cancel',
-                key: count
+                timer: 5,
+                text: 'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                buttonAction: 'Ok',
+                buttonCancel: 'Cancel',
+                onAction: () => console.log('action1'),
+                onCancel: () => console.log('cancel1')
             });
             return {
                 queue: state.queue,
@@ -25,16 +28,25 @@ class SnackbarsQueue extends React.Component {
             };
         });
     }
+    onActionNext(actions) {
+        if (actions.onAction) actions.onAction();
+        this.showNext();    
+    }
+    onCancelNext(actions) {
+        if (actions.onCancel) actions.onCancel();
+        this.showNext();    
+    }
     showNext() {
         this.setState(state => ({
             queue: state.queue.slice(1)
         }));
-    }    
+    }
     render() {
         return !!this.state.queue.length && (
             <Snackbar
-                action={this.showNext}
                 {...this.state.queue[0]}
+                onAction={() => this.onActionNext(this.state.queue[0])}
+                onCancel={() => this.onCancelNext(this.state.queue[0])}
             />
         )
     }
