@@ -11,11 +11,8 @@ export const Snackbar = (props) => {
         icon,
         title,
         text,
-        buttonAction,
-        buttonCancel,
         timer,
-        onAction,
-        onCancel,
+        buttons,
         ...attributes
     } = props;
 
@@ -29,17 +26,48 @@ export const Snackbar = (props) => {
     let xlink = (icon === 'default') ? Snackbar.defaultIcons[variant] : icon;
 
     if (variant === 'timer' && timer === null) timer = 10;
-    
-    const [timerHook, setTimerHook] = useState(timer);
-    const [isShownHook, setIsShownHook] = useState(true);
 
-    const onActionHide = () => {
-        if (onAction) onAction();
+    let buttonsGroup = [],
+        buttonsGroupDiv = null,
+        onTimerDefault = null;
+
+    if (buttons) {
+        buttonsGroup = buttons.map((item, key) => {
+            let {
+                text,
+                onClick,
+                onTimer,
+                ...attributes
+            } = item;
+            
+            attributes.onClick = () => onButtonClick(item);
+            if (onTimer) onTimerDefault = attributes.onClick;
+            
+            return (
+                <Button
+                    className="kui-snackbar__button"
+                    variant="primary_white"
+                    key={key}
+                    {...attributes}
+                >
+                    {text}
+                </Button>
+            );
+        });
+        buttonsGroupDiv = (
+            <ButtonsGroup className="kui-snackbar__buttons">
+                {buttonsGroup}
+            </ButtonsGroup>
+        );
+    }
+
+    const onButtonClick = (button) => {
+        if (button.onClick) button.onClick();
         hide();
     };
 
-    const onCancelHide = () => {
-        if (onCancel) onCancel();
+    const onTimer = () => {
+        if (onTimerDefault) onTimerDefault();
         hide();
     };
 
@@ -47,6 +75,9 @@ export const Snackbar = (props) => {
         setTimerHook(null);
         setIsShownHook(false);
     };
+
+    const [timerHook, setTimerHook] = useState(timer);
+    const [isShownHook, setIsShownHook] = useState(true);
 
     if (timer !== null) {
         let timeOut;
@@ -56,7 +87,7 @@ export const Snackbar = (props) => {
                 return;
             }
             if (timerHook < 1) {
-                onActionHide();
+                onTimer();
             } else {
                 timeOut = setTimeout(() => {
                     setTimerHook(timerHook - 1);
@@ -66,32 +97,6 @@ export const Snackbar = (props) => {
                 clearTimeout(timeOut);
             }
         });
-    }
-
-    let buttonsGroup = null;
-    if (buttonAction || buttonCancel) {
-        buttonsGroup = (
-            <ButtonsGroup className="kui-snackbar__buttons">
-                {buttonCancel &&
-                    <Button
-                        className="kui-snackbar__button"
-                        variant="primary_white"
-                        onClick={onCancelHide}
-                    >
-                        {buttonCancel}
-                    </Button>
-                }
-                {buttonAction &&
-                    <Button
-                        className="kui-snackbar__button"
-                        variant="primary_white"
-                        onClick={onActionHide}
-                    >
-                        {buttonAction}
-                    </Button>
-                }
-            </ButtonsGroup>
-        );
     }
 
     return isShownHook && (
@@ -114,7 +119,7 @@ export const Snackbar = (props) => {
                         <span className="kui-snackbar__timer_num">{timerHook}</span> sec
                     </div>
                 }
-                {buttonsGroup}
+                {buttonsGroupDiv}
             </div>
         </div>
     );
@@ -130,11 +135,8 @@ Snackbar.propTypes = {
     icon: PropTypes.string,
     title: PropTypes.string,
     text: PropTypes.string,
-    buttonAction: PropTypes.string,
-    buttonCancel: PropTypes.string,
     timer: PropTypes.number,
-    onAction: PropTypes.func,
-    onCancel: PropTypes.func
+    buttons: PropTypes.array
 };
 
 Snackbar.defaultIcons = {
@@ -149,11 +151,8 @@ Snackbar.defaultProps = {
     icon: 'default',
     title: null,
     text: null,
-    buttonAction: null,
-    buttonCancel: null,
     timer: null,
-    onAction: null,
-    onCancel: null
+    buttons: null
 };
 
 export default Snackbar;

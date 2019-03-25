@@ -58,7 +58,7 @@
         &:hover {
             color: $color-white;
             background: calc-color(tint, $color-purple, 90);
-            box-shadow: $shadow-hover;
+            box-shadow: 0 $google-spacing / 2 10px calc-color(fade, $color-purple, 30);
         }
 
         &:active {
@@ -149,6 +149,7 @@
             background: $color-purple;
             border-radius: $google-spacing * 5;
             box-shadow: none;
+            @include transition;
         }
 
         &:focus {
@@ -160,7 +161,7 @@
         &:hover {
             .kui-button__children {
                 background: calc-color(tint, $color-purple, 90);
-                box-shadow: $shadow-hover;
+                box-shadow: 0 $google-spacing / 2 10px calc-color(fade, $color-purple, 30);
             }
         }
 
@@ -203,6 +204,12 @@
 
                 .kui-button__children {
                     background: calc-color(tint, $color-base, 90);
+                }
+            }
+
+            &:hover {
+                .kui-button__children {
+                    box-shadow: $shadow-hover;
                 }
             }
 

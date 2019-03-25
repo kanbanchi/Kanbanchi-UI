@@ -17,10 +17,17 @@ class SnackbarsQueue extends React.Component {
                 variant: 'timer',
                 timer: 5,
                 text: 'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                buttonAction: 'Ok',
-                buttonCancel: 'Cancel',
-                onAction: () => console.log('action1'),
-                onCancel: () => console.log('cancel1')
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        onClick: () => console.log('cancel')
+                    },
+                    {
+                        text: 'Ok',
+                        onClick: () => console.log('ok'),
+                        onTimer: true
+                    }
+                ]
             });
             return {
                 queue: state.queue,
@@ -28,12 +35,8 @@ class SnackbarsQueue extends React.Component {
             };
         });
     }
-    onActionNext(actions) {
-        if (actions.onAction) actions.onAction();
-        this.showNext();    
-    }
-    onCancelNext(actions) {
-        if (actions.onCancel) actions.onCancel();
+    onButtonClick(button) {
+        if (button.onClick) button.onClick();
         this.showNext();    
     }
     showNext() {
@@ -42,11 +45,27 @@ class SnackbarsQueue extends React.Component {
         }));
     }
     render() {
-        return !!this.state.queue.length && (
+        if (!this.state.queue.length) return null;
+        
+        let { ...snackbar } = this.state.queue[0];
+
+        if (snackbar.buttons && snackbar.buttons.length) {
+            let buttonsWithNext = snackbar.buttons.map((item) => {
+                let { 
+                    onClick,
+                    ...attributes
+                } = item;
+                
+                attributes.onClick = () => this.onButtonClick(item);
+                
+                return attributes;
+            });
+            snackbar.buttons = buttonsWithNext;      
+        }
+
+        return (
             <Snackbar
-                {...this.state.queue[0]}
-                onAction={() => this.onActionNext(this.state.queue[0])}
-                onCancel={() => this.onCancelNext(this.state.queue[0])}
+                {...snackbar}
             />
         )
     }
