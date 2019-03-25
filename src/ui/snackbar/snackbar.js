@@ -13,6 +13,7 @@ export const Snackbar = (props) => {
         text,
         timer,
         buttons,
+        onTimer,
         ...attributes
     } = props;
 
@@ -29,7 +30,7 @@ export const Snackbar = (props) => {
 
     let buttonsGroup = [],
         buttonsGroupDiv = null,
-        onTimerDefault = null;
+        onTimerDefault = onTimer;
 
     if (buttons) {
         buttonsGroup = buttons.map((item, key) => {
@@ -39,10 +40,10 @@ export const Snackbar = (props) => {
                 onTimer,
                 ...attributes
             } = item;
-            
+
             attributes.onClick = () => onButtonClick(item);
             if (onTimer) onTimerDefault = attributes.onClick;
-            
+
             return (
                 <Button
                     className="kui-snackbar__button"
@@ -66,7 +67,7 @@ export const Snackbar = (props) => {
         hide();
     };
 
-    const onTimer = () => {
+    const onTimerAction = () => {
         if (onTimerDefault) onTimerDefault();
         hide();
     };
@@ -87,7 +88,7 @@ export const Snackbar = (props) => {
                 return;
             }
             if (timerHook < 1) {
-                onTimer();
+                onTimerAction();
             } else {
                 timeOut = setTimeout(() => {
                     setTimerHook(timerHook - 1);
@@ -136,7 +137,8 @@ Snackbar.propTypes = {
     title: PropTypes.string,
     text: PropTypes.string,
     timer: PropTypes.number,
-    buttons: PropTypes.array
+    buttons: PropTypes.array,
+    onTimer: PropTypes.func
 };
 
 Snackbar.defaultIcons = {
@@ -152,7 +154,8 @@ Snackbar.defaultProps = {
     title: null,
     text: null,
     timer: null,
-    buttons: null
+    buttons: null,
+    onTimer: null
 };
 
 export default Snackbar;
