@@ -67,6 +67,7 @@ const icons = [
     'lock',
     'mention',
     'move',
+    'mouse-over',
     
     'offline-data',
     'ok',
