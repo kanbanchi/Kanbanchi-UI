@@ -15,9 +15,19 @@ class SnackbarsQueue extends React.Component {
             const count = ++state.count;
             state.queue.push({
                 variant: 'timer',
-                text: count + ' Licence for zarcas@narod.ru wiil be deleted in:',
-                button: 'Cancel',
-                key: count
+                timer: 5,
+                text: 'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        onClick: () => console.log('cancel')
+                    },
+                    {
+                        text: 'Ok',
+                        onClick: () => console.log('ok'),
+                        onTimer: true
+                    }
+                ]
             });
             return {
                 queue: state.queue,
@@ -25,16 +35,37 @@ class SnackbarsQueue extends React.Component {
             };
         });
     }
+    onButtonClick(button) {
+        if (button.onClick) button.onClick();
+        this.showNext();    
+    }
     showNext() {
         this.setState(state => ({
             queue: state.queue.slice(1)
         }));
-    }    
+    }
     render() {
-        return !!this.state.queue.length && (
+        if (!this.state.queue.length) return null;
+        
+        let { ...snackbar } = this.state.queue[0];
+
+        if (snackbar.buttons && snackbar.buttons.length) {
+            let buttonsWithNext = snackbar.buttons.map((item) => {
+                let { 
+                    onClick,
+                    ...attributes
+                } = item;
+                
+                attributes.onClick = () => this.onButtonClick(item);
+                
+                return attributes;
+            });
+            snackbar.buttons = buttonsWithNext;      
+        }
+
+        return (
             <Snackbar
-                action={this.showNext}
-                {...this.state.queue[0]}
+                {...snackbar}
             />
         )
     }
