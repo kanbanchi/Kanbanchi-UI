@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
-import { PropTypes, ClassNames } from '../utils';
-import { Label } from '../../ui';
+import React, {useState} from 'react';
+import {PropTypes, ClassNames} from '../utils';
+import {Label} from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
 export const Input = (props) => {
-    let {
-        className,
-        label,
-        disabled,
-        onChange,
-        ...attributes
-    } = props,
-        labelItem = null;
+    let {className, label, disabled, onChange, onKeyUp, value, onEnter, ...attributes} = props;
+    let labelItem = null;
 
-    const [isFilled, setIsFilled] = useState(!!attributes.value);
+    const [isFilled, setIsFilled] = useState(!!value);
+    const [inputValue, setName] = useState(value);
 
     className = ClassNames(
         'kui-input',
@@ -24,18 +19,34 @@ export const Input = (props) => {
 
     attributes.type = 'text';
     attributes.className = 'kui-input__item';
-    if (disabled) attributes.disabled = true;
+    if (disabled) {
+        attributes.disabled = true;
+    }
+
     attributes.onChange = e => {
         setIsFilled(!!e.target.value);
-        if (onChange) onChange();
+        setName(e.target.value);
+        if (onChange) {
+            onChange(e);
+        }
+    };
+    attributes.onKeyUp = e => {
+        if (onEnter && e && e.which == 13) {
+            onEnter(e);
+        }
+        if (onKeyUp) {
+            onKeyUp(e);
+        }
     };
 
-    if (label) labelItem = (<div className="kui-label__item">{label}</div>);
-    
+    if (label) {
+        labelItem = (<div className="kui-label__item">{label}</div>);
+    }
+
     return (
         <Label className={className}>
             {labelItem}
-            <input {...attributes} />
+            <input value={inputValue} {...attributes} />
         </Label>
     );
 };
