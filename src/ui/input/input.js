@@ -4,7 +4,7 @@ import {Label} from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
 export const Input = (props) => {
-    let {className, label, disabled, onChange, value, ...attributes} = props;
+    let {className, label, disabled, onChange, onKeyUp, value, onEnter, ...attributes} = props;
     let labelItem = null;
 
     const [isFilled, setIsFilled] = useState(!!value);
@@ -22,11 +22,20 @@ export const Input = (props) => {
     if (disabled) {
         attributes.disabled = true;
     }
+
     attributes.onChange = e => {
         setIsFilled(!!e.target.value);
         setName(e.target.value);
         if (onChange) {
-            onChange(e.target.value);
+            onChange(e);
+        }
+    };
+    attributes.onKeyUp = e => {
+        if (onEnter && e && e.which == 13) {
+            onEnter(e);
+        }
+        if (onKeyUp) {
+            onKeyUp(e);
         }
     };
 
