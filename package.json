@@ -13,7 +13,7 @@
     "react-dom": "^16.8.3"
   },
   "scripts": {
-    "start": "start-storybook -p 9001 -c .storybook",
+    "start": "start-storybook -p 9001 -c .storybook -s ./public",
     "babel": "babel src/ -d dist/",
     "postinstall": "babel src/ -d dist/"
   },
