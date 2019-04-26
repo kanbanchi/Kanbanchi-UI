@@ -11,7 +11,6 @@ export const Switch = (props) => {
         onChange,
         ...attributes
     } = props;
-    let labelItem = null;
 
     const [isChecked, setIsChecked] = useState(checked);
 
@@ -19,10 +18,6 @@ export const Switch = (props) => {
         'kui-switch',
         className
     );
-
-    if (children) {
-        labelItem = (<span className="kui-switch__label">{children}</span>);
-    }
 
     attributes.type = 'checkbox';
     attributes.className = 'kui-switch__input';
@@ -34,7 +29,7 @@ export const Switch = (props) => {
     return (
         <Label className={className}>
             <input checked={isChecked} {...attributes}/>
-            {labelItem}
+            <span className="kui-switch__label">{children}</span>
         </Label>
     );
 };

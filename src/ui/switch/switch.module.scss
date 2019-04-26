@@ -6,6 +6,7 @@
     &__label {
         position: relative;
         display: block;
+        min-height: $google-spacing * 3;
         cursor: pointer;
         padding-right: $google-spacing * 6;
         &:after,
