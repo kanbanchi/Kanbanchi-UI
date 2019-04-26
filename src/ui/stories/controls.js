@@ -60,7 +60,7 @@ class StoryControls extends React.Component {
                     </Search>
                 </section>
 
-                <section className="section-form-min">
+                <section className="section-form-min section-grey">
                     <h2>Switch</h2>
                     <Switch>Label</Switch>
                     <br/>
@@ -69,21 +69,13 @@ class StoryControls extends React.Component {
                     </Switch>
                 </section>
 
-                <section>
+                <section className="section-form-min section-grey">
                     <h2>Radio</h2>
-                    <Radio
-                        active={0}
-                    >
-                        Label
+                    <Radio onChange={i=>{console.log('Radio ' + i + ' active')}}>
+                        <div>Lorem ipsum</div>
+                        <div>Dolor sit amet</div>
+                        <div className="cusomClass"><b>Consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
                     </Radio>
-                    <Tabs
-                            
-                            action={this.onTabsClick}
-                        >
-                            <Button>Tab 0</Button>
-                            <Button>Tab 1</Button>
-                            <Button>Tab 2</Button>
-                        </Tabs>
                 </section>
 
                 <section>
