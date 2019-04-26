@@ -22,6 +22,10 @@ section {
         color: $color-white;
         background: $color-purple;
     }
+
+    &.section-form-min {
+        max-width: $google-spacing * 50;
+    }
 }
 
 .icons-grid {

@@ -70,10 +70,12 @@ class StoryControls extends React.Component {
                     </Search>
                 </section>
 
-                <section>
+                <section className="section-form-min">
                     <h2>Switch</h2>
-                    <Switch>
-                        Label
+                    <Switch>Label</Switch>
+                    <br/>
+                    <Switch checked={true} onChange={()=>{console.log('jopa')}}>
+                        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </Switch>
                 </section>
 
