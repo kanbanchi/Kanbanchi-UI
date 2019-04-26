@@ -16,8 +16,8 @@
     }
 
     &__item {
-        min-width: $google-spacing * 16;
-        height: auto;
+        min-width: $google-spacing * 12;
+        height: $google-spacing * 5;
         padding: $google-spacing * 2 $google-spacing * 2 $google-spacing;
         color: calc-color(tint, $color-base, 50);
         font-weight: normal;
@@ -56,9 +56,15 @@
 
     &--large {
         height: $google-spacing * 7.5;
-        .kui-tabs__item {        
-            min-width: $google-spacing * 20;
-            padding: $google-spacing * 3 $google-spacing * 3 $google-spacing * 2;
+        .kui-tabs__item {
+            height: $google-spacing * 7;
+            min-width: $google-spacing * 16;
+            padding: $google-spacing * 2.8 $google-spacing * 3 $google-spacing * 2.8;
+            &--active {
+                &:after {
+                    height: 3px;
+                }
+            }
         }
     }
 }
