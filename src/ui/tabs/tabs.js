@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import '../../../src/ui/tabs/tabs.module.scss';
 
 export const Tabs = (props) => {
     let {
         active,
-        action,
+        onChange,
         children,
         className,
         size,
@@ -21,15 +21,17 @@ export const Tabs = (props) => {
 
     if (children.length) {
         if (active > children.length - 1) active = 0;
+        const [checked, setChecked] = useState(active);
 
         buttonHocs = React.Children.map(children, (child, i) => {
             return React.cloneElement(child, {
                 className: ClassNames(
                     'kui-tabs__item',
-                    (i === active) ? 'kui-tabs__item--active' : ''
+                    (i === checked) ? 'kui-tabs__item--active' : ''
                 ),
                 onClick: () => {
-                    action(i);
+                    setChecked(i);
+                    if (onChange) onChange(i);
                     if (child.props.onClick) child.props.onClick();
                 }
             });
@@ -50,7 +52,7 @@ export const Tabs = (props) => {
 
 Tabs.propTypes = {
     active: PropTypes.number,
-    action: PropTypes.func,
+    onChange: PropTypes.func,
     size: PropTypes.oneOf([
         'large'
     ])
@@ -58,7 +60,7 @@ Tabs.propTypes = {
 
 Tabs.defaultProps = {
     active: 0,
-    action: null,
+    onChange: null,
     size: null
 };
 

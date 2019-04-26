@@ -4,15 +4,6 @@ import { Button, Tabs, Input, Search, Switch, Radio, Checkbox, Datepicker, Dropd
 class StoryControls extends React.Component {
     constructor() {
         super();
-        this.onTabsClick = this.onTabsClick.bind(this);
-        this.state = {
-            tab: 0
-        };
-    }
-    onTabsClick(i) {
-        this.setState({
-            tab: i
-        });
     }
     render() { 
         return (
@@ -22,8 +13,7 @@ class StoryControls extends React.Component {
                     <div>
                         <p><b>Default</b></p>
                         <Tabs
-                            active={this.state.tab}
-                            action={this.onTabsClick}
+                            active={0}
                         >
                             <Button>Tab 0</Button>
                             <Button>Tab 1</Button>
@@ -34,8 +24,8 @@ class StoryControls extends React.Component {
                     <div>
                         <p><b>Large</b></p>
                         <Tabs
-                            active={this.state.tab}
-                            action={this.onTabsClick}
+                            active={0}
+                            onChange={i=>{console.log('Tab ' + i + ' active')}}
                             size="large"
                         >
                             <Button>Tab 0</Button>
@@ -74,16 +64,26 @@ class StoryControls extends React.Component {
                     <h2>Switch</h2>
                     <Switch>Label</Switch>
                     <br/>
-                    <Switch checked={true} onChange={()=>{console.log('jopa')}}>
+                    <Switch checked={true} onChange={()=>{console.log('Switch')}}>
                         Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </Switch>
                 </section>
 
                 <section>
                     <h2>Radio</h2>
-                    <Radio>
+                    <Radio
+                        active={0}
+                    >
                         Label
                     </Radio>
+                    <Tabs
+                            
+                            action={this.onTabsClick}
+                        >
+                            <Button>Tab 0</Button>
+                            <Button>Tab 1</Button>
+                            <Button>Tab 2</Button>
+                        </Tabs>
                 </section>
 
                 <section>

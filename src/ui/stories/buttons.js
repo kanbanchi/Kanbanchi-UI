@@ -5,21 +5,14 @@ class StoryButtons extends React.Component {
     constructor() {
         super();
         this.toggleDisabled = this.toggleDisabled.bind(this);
-        this.onSegmentedClick = this.onSegmentedClick.bind(this);
         this.state = {
-            disabled: true,
-            segmented: 1
+            disabled: true
         };
     }
     toggleDisabled() {
         this.setState(prevState => ({
             disabled: !prevState.disabled
         }));
-    }
-    onSegmentedClick(i) {
-        this.setState({
-            segmented: i
-        });
     }
     render() { 
         return (
@@ -151,10 +144,7 @@ class StoryButtons extends React.Component {
                 </section>
                 <section>
                     <h2>Segmented</h2>
-                    <ButtonsSegmented
-                        active={this.state.segmented}
-                        action={this.onSegmentedClick}
-                    >
+                    <ButtonsSegmented active={0}>
                         <Button>Button 0</Button>
                         <Button>Button 1</Button>
                         <Button onClick={() => alert(2)}>Button 2</Button>
@@ -162,8 +152,8 @@ class StoryButtons extends React.Component {
                     <div>
                         <br />
                         <ButtonsSegmented
-                            active={this.state.segmented}
-                            action={this.onSegmentedClick}
+                            active={0}
+                            onChange={i=>{console.log('Segment ' + i + ' active')}}
                             variant="black"
                         >
                             <Button>Button 0</Button>

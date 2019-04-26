@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import '../../../src/ui/buttons_segmented/buttons_segmented.module.scss';
 
 export const ButtonsSegmented = (props) => {
     let {
         active,
-        action,
+        onChange,
         children,
         className,
         variant,
@@ -21,15 +21,17 @@ export const ButtonsSegmented = (props) => {
 
     if (children.length) {
         if (active > children.length - 1) active = 0;
+        const [checked, setChecked] = useState(active);
 
         buttonHocs = React.Children.map(children, (child, i) => {
             return React.cloneElement(child, {
                 className: ClassNames(
                     'kui-buttons_segmented__item',
-                    (i === active) ? 'kui-buttons_segmented__item--active' : ''
+                    (i === checked) ? 'kui-buttons_segmented__item--active' : ''
                 ),
                 onClick: () => {
-                    action(i);
+                    setChecked(i);
+                    if (onChange) onChange(i);
                     if (child.props.onClick) child.props.onClick();
                 }
             });
@@ -48,7 +50,7 @@ export const ButtonsSegmented = (props) => {
 
 ButtonsSegmented.propTypes = {
     active: PropTypes.number,
-    action: PropTypes.func,
+    onChange: PropTypes.func,
     variant: PropTypes.oneOf([
         'black'
     ])
@@ -56,7 +58,7 @@ ButtonsSegmented.propTypes = {
 
 ButtonsSegmented.defaultProps = {
     active: 0,
-    action: null,
+    onChange: null,
     variant: null
 };
 
