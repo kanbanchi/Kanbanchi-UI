@@ -26,7 +26,7 @@ export const Radio = (props) => {
             let buttonclassName = ClassNames(
                 'kui-radio__item',
                 (child.props.className) ? child.props.className : null,
-                (i === checked) ? 'kui-radio__item--active' : '',
+                (i === checked) ? 'kui-radio__item--active' : null,
             );
             let buttonAttributes = {
                 type: 'radio',
@@ -38,6 +38,10 @@ export const Radio = (props) => {
                 },
                 checked: i === checked
             };
+            if (child.props.disabled) {
+                buttonclassName += ' kui-radio__item--disabled';
+                buttonAttributes.disabled = true;
+            }
             return (
                 <Label className={buttonclassName}>
                     <input {...buttonAttributes} />

@@ -60,21 +60,24 @@ class StoryControls extends React.Component {
                     </Search>
                 </section>
 
-                <section className="section-form-min section-grey">
+                <section className="section-form-min">
                     <h2>Switch</h2>
                     <Switch>Label</Switch>
                     <br/>
                     <Switch checked={true} onChange={()=>{console.log('Switch')}}>
                         Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </Switch>
+                    <br/>
+                    <Switch disabled>Disabled</Switch>
                 </section>
 
-                <section className="section-form-min section-grey">
+                <section className="section-form-min">
                     <h2>Radio</h2>
                     <Radio onChange={i=>{console.log('Radio ' + i + ' active')}}>
                         <div>Lorem ipsum</div>
                         <div>Dolor sit amet</div>
                         <div className="cusomClass"><b>Consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                        <div disabled>Disabled</div>
                     </Radio>
                 </section>
 

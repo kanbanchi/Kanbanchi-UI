@@ -56,7 +56,20 @@
         min-height: $google-spacing * 3;
         padding-right: $google-spacing * 4;
         font-size: $milli-size;
+        user-select: none;
         cursor: pointer;
+
+        &--disabled {
+            pointer-events: none;
+
+            .kui-radio__label {
+                color: calc-color(fade, $color-base, 30);
+            }
+
+            .kui-radio__input {
+                border-color: calc-color(fade, $color-base, 10);
+            }
+        }
     }
 
     &__item + &__item {
