@@ -9,6 +9,7 @@
         min-height: $google-spacing * 3;
         padding-right: $google-spacing * 6;
         font-size: $milli-size;
+        user-select: none;
         cursor: pointer;
         &:after,
         &:before {
@@ -38,5 +39,17 @@
     }
     &__input:checked + &__label:after {
         transform: translateX(- $google-spacing / 4);
+    }
+
+    &--disabled {
+        pointer-events: none;
+
+        .kui-switch__label {
+            color: calc-color(fade, $color-base, 30);
+            
+            &:before {
+                opacity: .33;
+            }
+        }
     }
 }

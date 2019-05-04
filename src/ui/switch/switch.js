@@ -16,6 +16,7 @@ export const Switch = (props) => {
 
     className = ClassNames(
         'kui-switch',
+        (attributes.disabled) ? 'kui-switch--disabled' : null,
         className
     );
 
