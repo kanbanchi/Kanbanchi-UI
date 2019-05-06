@@ -37,7 +37,7 @@ class StoryControls extends React.Component {
                     </div>
                 </section>
 
-                <section>
+                <section className="section-form-min">
                     <h2>Input</h2>
                     <Input label="Label" placeholder="Text input" />
                     <br/>
@@ -46,7 +46,7 @@ class StoryControls extends React.Component {
                     <Input label="Label" placeholder="Disabled" disabled />
                 </section>
 
-                <section className="section-grey">
+                <section className="section-grey section-form-min">
                     <h2>Input</h2>
                     <Input label="Label" placeholder="Text input" />
                     <br/>
@@ -102,7 +102,18 @@ class StoryControls extends React.Component {
                 <section>
                     <h2>Dropdown</h2>
                     <Dropdown>
-                        Label
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </Dropdown>
+                    <br />
+                    <Dropdown>
+                        <ul>
+                            <li>
+                                Starter yearly
+                            </li>
+                            <li>
+                                Professional monthly
+                            </li>
+                        </ul>
                     </Dropdown>
                 </section>
 

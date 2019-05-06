@@ -1,15 +1,18 @@
 @import '../../assets/sass/index.scss';
 .kui-input {
-    &__item {
-        height: $google-spacing * 5;
+    &__item {        
+        height: auto;
+        resize: none;
         padding: $google-spacing $google-spacing * 2;
+        font-size: $milli-size;
+        line-height: $base-line-height;
         border-radius: $base-radius;
         border: 1px solid calc-color(tint, $color-base, 15);
         background: $color-white;
+        @include transition;
 
         &::placeholder {
             color: calc-color(tint, $color-base, 50);
-            text-align: center;
         }
 
         .kui-input--filled & {

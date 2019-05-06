@@ -1,15 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {PropTypes, ClassNames} from '../utils';
+import autosize from './autosize';
 import {Label} from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
 export const Input = (props) => {
-    let {className, label, disabled, onChange, onKeyUp, value, onEnter, ...attributes} = props;
+    let {
+        className,
+        disabled,
+        label,
+        value,
+        onChange,
+        onEnter,
+        onKeyUp,
+        ...attributes
+    } = props;
     let labelItem = null;
 
     const [isFilled, setIsFilled] = useState(!!value);
-    const [inputValue, setName] = useState(value);
-
+    const [inputValue, setInputValue] = useState(value);
+    const textarea = useRef(null);
+    
     className = ClassNames(
         'kui-input',
         (disabled) ? 'kui-input--disabled' : null,
@@ -25,7 +36,7 @@ export const Input = (props) => {
 
     attributes.onChange = e => {
         setIsFilled(!!e.target.value);
-        setName(e.target.value);
+        setInputValue(e.target.value);
         if (onChange) {
             onChange(e);
         }
@@ -43,10 +54,22 @@ export const Input = (props) => {
         labelItem = (<div className="kui-label__item">{label}</div>);
     }
 
+    useEffect(() => {
+        autosize(textarea.current);
+        console.log(textarea.current);
+    }, []);
+
+
     return (
         <Label className={className}>
             {labelItem}
-            <input value={inputValue} {...attributes} />
+            <textarea 
+                rows={1}
+                ref={textarea}
+                {...attributes}
+            >
+                {inputValue}
+            </textarea>
         </Label>
     );
 };
