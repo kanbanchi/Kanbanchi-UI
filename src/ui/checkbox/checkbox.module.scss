@@ -1,4 +1,51 @@
 @import '../../assets/sass/index.scss';
 .kui-checkbox {
+    &__input {
+        display: none;      
+    }
+    &__label {
+        position: relative;
+        display: block;
+        min-height: $google-spacing * 3;
+        padding-right: $google-spacing * 6;
+        font-size: $milli-size;
+        user-select: none;
+        cursor: pointer;
+    }
+    &__label:before,
+    &__checkmark {
+        position: absolute;
+        right: 0;
+        top: $google-spacing / 4;
+        height: $google-spacing * 2.25;
+        width: $google-spacing * 2.25;
+        @include transition;
+    }
+    &__label:before {
+        content: '';
+        border: 2px solid calc-color(fade, $color-base, 30);
+        border-radius: $small-radius;
+    }
+    &__checkmark {
+        color: $color-white;
+        transform: scale(.1);
+    }
+    &__input:checked + &__label:before {
+        background-color: $color-purple;
+        border-color: transparent;
+    }
+    &__input:checked + &__label &__checkmark {
+        transform: scale(1);
+    }
+    &--disabled {
+        pointer-events: none;
 
+        .kui-checkbox__label {
+            color: calc-color(fade, $color-base, 30);
+            
+            &:before {
+                opacity: .33;
+            }
+        }
+    }
 }

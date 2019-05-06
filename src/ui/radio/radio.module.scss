@@ -73,6 +73,6 @@
     }
 
     &__item + &__item {
-        margin-top: $google-spacing;
+        margin-top: $google-spacing * 2;
     }
 }
