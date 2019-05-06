@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Icon } from '../../ui';
 
 const iconsFiles = require.context(
-    './../../assets/icons/',
+    '!svg-react-loader!./../../assets/icons/',
     false,
     /\.svg$/
 );
@@ -11,7 +11,7 @@ const iconsFiles = require.context(
 const icons = iconsFiles.keys().map(file => file.replace(/(\.\/|\.svg$)/g, ''));
 
 const icons96Files = require.context(
-    './../../assets/icons/big/',
+    '!svg-react-loader!./../../assets/icons/big/',
     false,
     /\.svg$/
 );
