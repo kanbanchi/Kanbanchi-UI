@@ -17,10 +17,12 @@
 
         .kui-input--filled & {
             border-color: $color-base;
+            background: $color-light-background;
         }
 
         &:focus {
             border-color: $color-purple;
+            background: $color-light-background;
             box-shadow: none;
         }
 
