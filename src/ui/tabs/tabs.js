@@ -27,7 +27,8 @@ export const Tabs = (props) => {
             return React.cloneElement(child, {
                 className: ClassNames(
                     'kui-tabs__item',
-                    (i === checked) ? 'kui-tabs__item--active' : ''
+                    (child.props.className) ? child.props.className : null,
+                    (i === checked) ? 'kui-tabs__item--active' : null
                 ),
                 onClick: () => {
                     setChecked(i);

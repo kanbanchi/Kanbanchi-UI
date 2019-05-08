@@ -27,7 +27,8 @@ export const ButtonsSegmented = (props) => {
             return React.cloneElement(child, {
                 className: ClassNames(
                     'kui-buttons_segmented__item',
-                    (i === checked) ? 'kui-buttons_segmented__item--active' : ''
+                    (child.props.className) ? child.props.className : null,
+                    (i === checked) ? 'kui-buttons_segmented__item--active' : null
                 ),
                 onClick: () => {
                     setChecked(i);

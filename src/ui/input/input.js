@@ -56,7 +56,6 @@ export const Input = (props) => {
 
     useEffect(() => {
         autosize(textarea.current);
-        console.log(textarea.current);
     }, []);
 
 
