@@ -16,7 +16,7 @@
 
     &__container {
         position: fixed;
-        max-width: calc(100% - $google-spacing * 4);
+        max-width: calc(100% - #{$google-spacing * 4});
         left: 50%;
         transform: translateX(-50%);
         z-index: $z-noty;
@@ -99,7 +99,6 @@
 
         &__container {
             bottom: $google-spacing;
-            padding: 0 $google-spacing * 2;
             width: 100%;
         }
 
