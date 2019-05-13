@@ -75,6 +75,8 @@ section {
 
 .snackbars {
     .kui-snackbar__container {
-        position: static;
+        position: relative;
+        left: 0;
+        transform: translateX(0);
     }
 }
