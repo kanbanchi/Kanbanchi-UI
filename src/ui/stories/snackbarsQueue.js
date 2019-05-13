@@ -13,6 +13,7 @@ class SnackbarsQueue extends React.Component {
     AddSnackbar() {
         this.setState(state => {
             const count = ++state.count;
+            /*
             state.queue.push({
                 variant: 'timer',
                 timer: 5,
@@ -22,6 +23,19 @@ class SnackbarsQueue extends React.Component {
                         text: 'Cancel',
                         onClick: () => console.log('cancel')
                     },
+                    {
+                        text: 'Ok',
+                        onClick: () => console.log('ok'),
+                        onTimer: true
+                    }
+                ]
+            });
+            */
+            state.queue.push({
+                variant: 'error',
+                timer: 5,
+                text: 'The email address is not valid.',
+                buttons: [
                     {
                         text: 'Ok',
                         onClick: () => console.log('ok'),

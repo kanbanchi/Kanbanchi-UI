@@ -3,10 +3,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: $media-iPad;
+    max-width: $media-iPad - $google-spacing * 4;
     min-height: $google-spacing * 7;
     padding: $google-spacing $google-spacing * 2;
-    margin-top: $google-spacing * 2;
     color: $color-white;
     border-radius: $base-radius;
     background-color: $color-purple;
@@ -17,13 +16,14 @@
 
     &__container {
         position: fixed;
+        max-width: calc(100% - $google-spacing * 4);
+        left: 50%;
+        transform: translateX(-50%);
         z-index: $z-noty;
-        left: $google-spacing;
         bottom: $google-spacing * 8;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: calc(100% - #{$google-spacing * 2});
     }
 
     &__icon {
@@ -99,6 +99,8 @@
 
         &__container {
             bottom: $google-spacing;
+            padding: 0 $google-spacing * 2;
+            width: 100%;
         }
 
         &__body {
