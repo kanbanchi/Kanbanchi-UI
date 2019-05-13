@@ -2,6 +2,7 @@
 .kui-input {
     &__item {        
         height: auto;
+        min-height: $google-spacing * 5;
         resize: none;
         padding: $google-spacing $google-spacing * 2;
         font-size: $milli-size;
@@ -18,6 +19,11 @@
         .kui-input--filled & {
             border-color: $color-base;
             background: $color-light-background;
+        }
+
+        .kui-input--noresize & {
+            height: $google-spacing * 5;
+            overflow: hidden;
         }
 
         &:focus {

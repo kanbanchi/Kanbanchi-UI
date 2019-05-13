@@ -1,18 +1,18 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {PropTypes, ClassNames} from '../utils';
-import autosize from './autosize';
+import {default as autosizeLibray} from './autosize';
 import {Label} from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
 export const Input = (props) => {
     let {
+        autosize,
         className,
         disabled,
         label,
         value,
         onChange,
         onEnter,
-        onKeyUp,
         ...attributes
     } = props;
     let labelItem = null;
@@ -25,6 +25,7 @@ export const Input = (props) => {
         'kui-input',
         (disabled) ? 'kui-input--disabled' : null,
         (isFilled) ? 'kui-input--filled' : null,
+        (!autosize) ? 'kui-input--noresize' : null,
         className
     );
 
@@ -41,12 +42,11 @@ export const Input = (props) => {
             onChange(e);
         }
     };
-    attributes.onKeyUp = e => {
-        if (onEnter && e && e.which == 13) {
-            onEnter(e);
-        }
-        if (onKeyUp) {
-            onKeyUp(e);
+
+    attributes.onKeyDown = e => {
+        if (e && (e.which === 10 || e.which === 13)) {
+            if (!autosize) e.preventDefault();
+            if (onEnter) onEnter(e);
         }
     };
 
@@ -55,7 +55,7 @@ export const Input = (props) => {
     }
 
     useEffect(() => {
-        autosize(textarea.current);
+        if (autosize) autosizeLibray(textarea.current);
     }, []);
 
 
@@ -74,13 +74,15 @@ export const Input = (props) => {
 };
 
 Input.propTypes = {
-    label: PropTypes.string,
-    disabled: PropTypes.bool
+    autosize: PropTypes.bool,
+    disabled: PropTypes.bool,
+    label: PropTypes.string
 };
 
 Input.defaultProps = {
-    label: null,
-    disabled: false
+    autosize: true,
+    disabled: false,
+    label: null
 };
 
 export default Input;
