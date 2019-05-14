@@ -128,6 +128,7 @@ class StoryControls extends React.Component {
                     <h2>Select</h2>
                     <Select 
                         label="Select"
+                        editable={true}
                         variants={['arrow']}
                         className="max-width-g10"
                     >

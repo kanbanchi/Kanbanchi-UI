@@ -9,6 +9,7 @@ export const Select = (props) => {
         children,
         className,
         disabled,
+        editable,
         variants,
         onBlur,
         onChange,
@@ -79,6 +80,7 @@ export const Select = (props) => {
                 autosize={false}
                 value={valueHook}
                 variants={variantsInput}
+                readOnly={!editable}
                 {...attributes}
             />
             <Dropdown opened={isOpenedHook}>
@@ -94,15 +96,17 @@ Select.variantsOfInput = [
 
 Select.propTypes = {
     active: PropTypes.number,
-    label: PropTypes.string,
     disabled: PropTypes.bool,
+    editable: PropTypes.bool,
+    label: PropTypes.string,
     variants: PropTypes.arrayOf(PropTypes.string)
 };
 
 Select.defaultProps = {
     active: null,
-    label: null,
     disabled: false,
+    editable: false,
+    label: null,
     variants: []
 };
 
