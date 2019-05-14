@@ -80,3 +80,7 @@ section {
         transform: translateX(0);
     }
 }
+
+.max-width-g10 {
+    max-width: $google-spacing * 10;
+}

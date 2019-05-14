@@ -48,7 +48,7 @@ function iconsList(options) {
 };
 
 storiesOf('KUI', module)
-    .add('Icons', () => {
+    .add('icons', () => {
         return (
             <div className="page">
                 <section>

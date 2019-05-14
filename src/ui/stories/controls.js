@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Tabs, Input, Search, Switch, Radio, Checkbox, Datepicker, Dropdown } from '../../ui';
+import { Button, Tabs, Input, Search, Switch, Radio, Checkbox, Datepicker, Select, SelectList, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
@@ -39,9 +39,16 @@ class StoryControls extends React.Component {
 
                 <section className="section-form-min">
                     <h2>Input</h2>
-                    <Input label="Label" placeholder="Text input" />
+                    <Input label="Label" value="Text test"/>
                     <br/>
                     <Input placeholder="Without label" />
+                    <br/>
+                    <Input 
+                        label="No resize"
+                        autosize={false}
+                        onChange={e=>console.log('onChange', e.target.value)}
+                        onEnter={e=>console.log('onEnter', e.target.value)}
+                    />
                     <br/>
                     <Input label="Label" placeholder="Disabled" disabled />
                 </section>
@@ -100,22 +107,98 @@ class StoryControls extends React.Component {
                 </section>
 
                 <section>
-                    <h2>Dropdown</h2>
-                    <Dropdown>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </Dropdown>
+                    <h2>SelectList</h2>
+                    <SelectList fixActive={false}>
+                        <li>
+                            Copy card
+                        </li>
+                        <li divider>
+                            Print card
+                        </li>
+                        <li divider>
+                            Get link to card
+                        </li>
+                        <li disabled>
+                            Delete card
+                        </li>
+                    </SelectList>
+                </section>
+
+                <section>
+                    <h2>Select</h2>
+                    <Select 
+                        label="Select"
+                        variants={['arrow']}
+                        className="max-width-g10"
+                    >
+                        <SelectList>
+                            <li divider>0</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                            <li>7</li>
+                            <li>8</li>
+                            <li>9</li>
+                            <li divider>10</li>
+                            <li disabled>Disabled</li>
+                        </SelectList>
+                    </Select>
                     <br />
-                    <Dropdown>
-                        <ul>
-                            <li>
+                    <Select 
+                        active={0}
+                        label="Header"
+                        variants={['header', 'arrow']}
+                    >
+                        <SelectList>
+                            <li className="starter">
                                 Starter yearly
                             </li>
                             <li>
                                 Professional monthly
                             </li>
-                        </ul>
-                    </Dropdown>
+                        </SelectList>
+                    </Select>
                 </section>
+
+                <section>
+                    <h2>Actions</h2>
+                    <ButtonDropdown>
+                        <SelectList fixActive={false}>
+                            <li>
+                                Copy card
+                            </li>
+                            <li divider>
+                                Print card
+                            </li>
+                            <li divider>
+                                Get link to card
+                            </li>
+                            <li disabled>
+                                Delete card
+                            </li>
+                        </SelectList>
+                    </ButtonDropdown>
+                </section>
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
 
             </div>
         )
