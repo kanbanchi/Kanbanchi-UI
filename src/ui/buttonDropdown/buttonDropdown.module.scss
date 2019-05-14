@@ -1,0 +1,26 @@
+@import '../../assets/sass/index.scss';
+
+.kui-button-dropdown {
+    &__item {
+        color: calc-color(tint, $color-base, 50);
+        background: $color-white;
+        
+        .kui-button__icon {
+            color: calc-color(tint, $color-base, 30);
+        }
+
+        .kui-button-dropdown--opened & {
+            color: $color-base;
+            background: calc-color(fade, $color-background, 50);
+            
+            .kui-button__icon {
+                color: $color-base;
+            }
+        }
+    }
+
+    &--disabled {
+        cursor: default;
+        pointer-events: none;
+    }
+}
