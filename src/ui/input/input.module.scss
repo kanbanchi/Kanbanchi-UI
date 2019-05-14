@@ -1,5 +1,7 @@
 @import '../../assets/sass/index.scss';
 .kui-input {
+    position: relative;
+
     &__item {        
         height: auto;
         min-height: $google-spacing * 5;
@@ -8,12 +10,12 @@
         font-size: $milli-size;
         line-height: $base-line-height;
         border-radius: $base-radius;
-        border: 1px solid calc-color(tint, $color-base, 15);
+        border: 1px solid calc-color(fade, $color-base, 15);
         background: $color-white;
         @include transition;
 
         &::placeholder {
-            color: calc-color(tint, $color-base, 50);
+            color: calc-color(fade, $color-base, 50);
         }
 
         .kui-input--filled & {
@@ -24,6 +26,7 @@
         .kui-input--noresize & {
             height: $google-spacing * 5;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         &:focus {
@@ -40,6 +43,20 @@
     &--disabled {
         .kui-label__item {
             color: calc-color(fade, $color-base, 30);
+        }
+    }
+
+    &__icon-arrow {
+        position: absolute;
+        bottom: $google-spacing;
+        right: $google-spacing;
+        color: calc-color(fade, $color-base, 30);
+        @include transition;
+    }
+
+    &--variant_arrow {
+        .kui-input__item {
+            padding-right: $google-spacing * 5;
         }
     }
 }

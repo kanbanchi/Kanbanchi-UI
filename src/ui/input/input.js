@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {PropTypes, ClassNames} from '../utils';
+import React, { useState, useEffect, useRef } from 'react';
+import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import {default as autosizeLibray} from './autosize';
-import {Label} from '../../ui';
+import { Icon, Label } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
 export const Input = (props) => {
@@ -11,11 +11,15 @@ export const Input = (props) => {
         disabled,
         label,
         value,
+        variants,
         onChange,
         onEnter,
+        onKeyDown,
         ...attributes
-    } = props;
-    let labelItem = null;
+    } = props,
+        labelItem = null,
+        inputBefore = null,
+        inputAfter = null;
 
     const [isFilled, setIsFilled] = useState(!!value);
     const [inputValue, setInputValue] = useState(value);
@@ -26,6 +30,7 @@ export const Input = (props) => {
         (disabled) ? 'kui-input--disabled' : null,
         (isFilled) ? 'kui-input--filled' : null,
         (!autosize) ? 'kui-input--noresize' : null,
+        ClassVariants({variants, prefix: 'kui-input--variant_'}),
         className
     );
 
@@ -38,9 +43,7 @@ export const Input = (props) => {
     attributes.onChange = e => {
         setIsFilled(!!e.target.value);
         setInputValue(e.target.value);
-        if (onChange) {
-            onChange(e);
-        }
+        if (onChange) onChange(e);
     };
 
     attributes.onKeyDown = e => {
@@ -48,6 +51,7 @@ export const Input = (props) => {
             if (!autosize) e.preventDefault();
             if (onEnter) onEnter(e);
         }
+        if (onKeyDown) onKeyDown(e);
     };
 
     if (label) {
@@ -58,17 +62,25 @@ export const Input = (props) => {
         if (autosize) autosizeLibray(textarea.current);
     }, []);
 
+    useEffect(() => {
+        setInputValue(value);
+    }, [value]);
+
+    if (variants.includes('arrow')) {
+        inputAfter = <Icon xlink="arrow-down" size={24} className="kui-input__icon-arrow" />;
+    }
 
     return (
         <Label className={className}>
             {labelItem}
+            {inputBefore}
             <textarea 
                 rows={1}
                 ref={textarea}
+                value={inputValue}
                 {...attributes}
-            >
-                {inputValue}
-            </textarea>
+            ></textarea>
+            {inputAfter}
         </Label>
     );
 };
@@ -76,13 +88,17 @@ export const Input = (props) => {
 Input.propTypes = {
     autosize: PropTypes.bool,
     disabled: PropTypes.bool,
-    label: PropTypes.string
+    label: PropTypes.string,
+    value: PropTypes.string,
+    variants: PropTypes.arrayOf(PropTypes.string)
 };
 
 Input.defaultProps = {
     autosize: true,
     disabled: false,
-    label: null
+    label: null,
+    value: '',
+    variants: []
 };
 
 export default Input;
