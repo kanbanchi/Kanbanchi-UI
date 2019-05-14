@@ -29,7 +29,7 @@ export const ButtonDropdown = (props) => {
     }
 
     attributes.onBlur = (e) => {
-        setIsOpenedHook(false);
+        setTimeout(()=>setIsOpenedHook(false), 100); // it can be click on dropdown
         if (onBlur) onBlur(e);
     }
 
