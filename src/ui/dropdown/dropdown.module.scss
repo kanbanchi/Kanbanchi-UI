@@ -18,7 +18,7 @@ $dropdown: '.kui-dropdown';
 
 @keyframes animation_drop_down {
     0% {
-        transform: translateY($google-spacing * 4) scaleY(.98);
+        transform: translateY($google-spacing * 4) scaleY(.95);
     }
     99% {
         transform: translateY($google-spacing) scaleY(1);
