@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import {default as autosizeLibray} from './autosize';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
-export const Input = (props) => {
+export const Input = forwardRef((props, ref) => {
     let {
         autosize,
         className,
@@ -70,6 +70,15 @@ export const Input = (props) => {
         inputAfter = <Icon xlink="arrow-down" size={24} className="kui-input__icon-arrow" />;
     }
 
+    useImperativeHandle(ref, e => ({
+        onChange(e) {
+            setIsFilled(!!e.target.value);
+        },
+        blur() {
+            textarea.current.blur();
+        }
+    }));
+
     return (
         <Label className={className}>
             {labelItem}
@@ -83,7 +92,7 @@ export const Input = (props) => {
             {inputAfter}
         </Label>
     );
-};
+});
 
 Input.propTypes = {
     autosize: PropTypes.bool,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import { Divider } from '../../ui';
 import '../../../src/ui/selectList/selectList.module.scss';
@@ -20,9 +20,9 @@ export const SelectList = (props) => {
         className
     );
 
+    const [activeHook, setActiveHook] = useState(active);
+
     if (children.length) {
-        const [activeHook, setActiveHook] = useState(active);
-        
         items = React.Children.map(children, (child, index) => {
             const divider = (child.props.divider) ? <Divider /> : null;
             const item = [React.cloneElement(child, {
@@ -50,6 +50,10 @@ export const SelectList = (props) => {
             return item;
         });
     }
+
+    useEffect(() => {
+        setActiveHook(active);
+    }, [active]);
     
     return (
         <ul className={className} {...attributes}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
@@ -19,8 +19,10 @@ export const Select = (props) => {
         dropdownBody = null,
         list = [];
 
+    const [activeHook, setActiveHook] = useState(active);
     const [valueHook, setValueHook] = useState('');
     const [isOpenedHook, setIsOpenedHook] = useState(false);
+    const inputEl = useRef(null);
 
     className = ClassNames(
         'kui-select',
@@ -34,6 +36,9 @@ export const Select = (props) => {
         if (e.item) { // list item clicked
             setIsOpenedHook(false);
             setValueHook(e.item.children);
+            setActiveHook(e.index);
+            e.target = {value: e.item.children};
+            inputEl.current.onChange(e);
         }
         if (onChange) onChange(e);
     }
@@ -49,7 +54,7 @@ export const Select = (props) => {
     }
 
     const listAttributes = {
-        active,
+        active: activeHook,
         onChange: attributes.onChange
     };
 
@@ -62,6 +67,16 @@ export const Select = (props) => {
     } else if (children) {
         list = children.props.children;
         dropdownBody = React.cloneElement(children, listAttributes);
+    }
+
+    attributes.onEnter = (e) => {
+        setIsOpenedHook(false);
+        inputEl.current.blur();
+        let newIndex = null;
+        if (list.length) React.Children.forEach(list, (child, index) => {
+            if (child.props.children === e.target.value) newIndex = index;
+        });
+        setActiveHook(newIndex);
     }
 
     useEffect(() => {
@@ -81,6 +96,7 @@ export const Select = (props) => {
                 value={valueHook}
                 variants={variantsInput}
                 readOnly={!editable}
+                ref={inputEl}
                 {...attributes}
             />
             <Dropdown opened={isOpenedHook}>
