@@ -167,16 +167,16 @@ class StoryControls extends React.Component {
                     <h2>Actions</h2>
                     <ButtonDropdown>
                         <SelectList fixActive={false}>
-                            <li>
+                            <li onClick={e=>console.log(e.target.innerText)}>
                                 Copy card
                             </li>
-                            <li divider>
+                            <li divider onClick={e=>console.log(e.target.innerText)}>
                                 Print card
                             </li>
-                            <li divider>
+                            <li divider onClick={e=>console.log(e.target.innerText)}>
                                 Get link to card
                             </li>
-                            <li disabled>
+                            <li disabled onClick={e=>console.log(e.target.innerText)}>
                                 Delete card
                             </li>
                         </SelectList>

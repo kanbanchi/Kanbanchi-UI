@@ -32,15 +32,15 @@ export const SelectList = (props) => {
                     (fixActive && index === activeHook) ? 'kui-select-list__item--active' : null,
                     (child.props.disabled) ? 'kui-select-list__item--disabled' : null,
                 ),
-                onClick: () => {
+                onClick: (e) => {
                     if (!child.props.disabled) {
                         if (fixActive) setActiveHook(index);
-                        if (onChange) onChange({
+                        if (onChange) onChange(Object.assign({}, e, {
                             index,
                             item: child.props
-                        });
+                        }));
                     }
-                    if (child.props.onClick) child.props.onClick(child.props.value);
+                    if (child.props.onClick) child.props.onClick(e);
                 },
                 divider: null
             })];
