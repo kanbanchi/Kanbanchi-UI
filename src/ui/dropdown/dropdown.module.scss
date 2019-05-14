@@ -1,4 +1,42 @@
 @import '../../assets/sass/index.scss';
-.kui-dropdown {
+$dropdown: '.kui-dropdown';
 
+#{$dropdown} {
+    position: absolute;
+    z-index: $z-modal;
+    overflow: hidden;
+    border-radius: $base-radius;
+    box-shadow: $shadow-hover;
+    background: $color-white;
+    transform: translateY($google-spacing);
+    animation: animation_drop_up .3s ease forwards;
+
+    &--opened {
+        animation: animation_drop_down .3s ease forwards;
+    }
+}
+
+@keyframes animation_drop_down {
+    0% {
+        transform: translateY($google-spacing * 4) scaleY(.98);
+    }
+    99% {
+        transform: translateY($google-spacing) scaleY(1);
+    }
+    100% {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+@keyframes animation_drop_up {
+    0% {
+        transform: translateY($google-spacing);
+    }
+    99% {
+        transform: translateY($google-spacing * 4);
+    }
+    100% {
+        max-width: 0;
+        max-height: 0;
+    }
 }
