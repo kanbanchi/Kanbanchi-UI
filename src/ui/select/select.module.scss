@@ -45,4 +45,10 @@ $select: '.kui-select';
             width: $google-spacing * 30;
         }
     }
+
+    &--variant_search {
+        .kui-dropdown {
+            width: 100%;
+        }
+    }
 }

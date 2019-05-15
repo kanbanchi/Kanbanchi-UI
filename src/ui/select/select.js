@@ -17,7 +17,8 @@ export const Select = (props) => {
         ...attributes
     } = props,
         dropdownBody = null,
-        list = [];
+        list = [],
+        isSearch = variants.includes('search');
 
     const [activeHook, setActiveHook] = useState(active);
     const [valueHook, setValueHook] = useState('');
@@ -33,7 +34,7 @@ export const Select = (props) => {
     );
 
     attributes.onChange = (e) => {
-        if (e.item) { // list item clicked
+        if (!isSearch && e.item) { // list item clicked
             setIsOpenedHook(false);
             setValueHook(e.item.children);
             setActiveHook(e.index);
