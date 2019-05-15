@@ -2,8 +2,9 @@
 
 .kui-tabs {
     max-width: 100%;
-    height: $google-spacing * 5.5;
-    overflow: hidden;    
+    height: $google-spacing * 5;
+    overflow: hidden;
+    box-shadow: 0 -1px 0 calc-color(fade, $color-base, 20) inset;
 
     &__scroll {
         display: inline-flex;
@@ -19,7 +20,7 @@
         min-width: $google-spacing * 12;
         height: $google-spacing * 5;
         padding: $google-spacing * 2 $google-spacing * 2 $google-spacing;
-        color: calc-color(tint, $color-base, 50);
+        color: calc-color(fade, $color-base, 50);
         font-weight: normal;
         background: transparent;
         border-radius: 0;
@@ -31,7 +32,8 @@
             bottom: 0;
             width: 100%;
             height: 1px;
-            background: $color-background;
+            background: transparent;
+            transform: scaleX(.5);
             @include transition;
         }
 
@@ -50,6 +52,7 @@
             &:after {
                 height: 2px;
                 background: $color-purple;
+                transform: scaleX(1);
             }
         }
     }
