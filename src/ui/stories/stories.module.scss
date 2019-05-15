@@ -26,6 +26,10 @@ section {
     &.section-form-min {
         max-width: $google-spacing * 50;
     }
+
+    &.section-relative {
+        position: relative;
+    }
 }
 
 .icons-grid {

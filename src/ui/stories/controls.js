@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Tabs, Input, Search, Switch, Radio, Checkbox, Datepicker, Select, SelectList, ButtonDropdown } from '../../ui';
+import { Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
@@ -60,11 +60,27 @@ class StoryControls extends React.Component {
                     <Input label="Label" placeholder="Disabled" disabled />
                 </section>
 
-                <section>
+                <section className="section-relative">
                     <h2>Search</h2>
-                    <Search>
-                        Label
-                    </Search>
+                    <Select
+                        editable={true}
+                        variants={['search']}
+                    >
+                        <SelectList fixActive={false}>
+                            <SelectListItem
+                                icon="card"
+                                list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                            >
+                                Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </SelectListItem>
+                            <SelectListItem
+                                icon="archive"
+                                list="List"
+                            >
+                                Card name
+                            </SelectListItem>
+                        </SelectList>
+                    </Select>
                 </section>
 
                 <section className="section-form-min">

@@ -1,0 +1,37 @@
+@import '../../assets/sass/index.scss';
+$selectListItem: '.kui-select-list-item';
+
+#{$selectListItem} {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &__col {
+        display: flex;
+        align-items: center;
+        
+        &--icon {
+            flex: 0 0 $google-spacing * 3;
+            color: calc-color(fade, $color-base, 30);
+        }
+        &--title {
+            flex: 1 1 100%;
+            max-width: calc(60% - #{$google-spacing * 3});
+            padding-right: $google-spacing;
+            color: $color-base;
+        }
+        &--list {
+            display: block;
+            width: 40%;
+        }
+    }
+
+    &__list,
+    &__title {
+        @extend %text-ellipsis;
+    }
+
+    &__list {
+        color: calc-color(fade, $color-base, 60);
+    }
+}
