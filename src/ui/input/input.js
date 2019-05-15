@@ -70,6 +70,22 @@ export const Input = forwardRef((props, ref) => {
         inputAfter = <Icon xlink="arrow-down" size={24} className="kui-input__icon-arrow" />;
     }
 
+    const clearSearch = () => {
+        setIsFilled(false);
+        setInputValue('');
+        textarea.current.blur();
+    };
+
+    if (variants.includes('search')) {
+        inputBefore = (<span className="kui-input-search">
+            <Icon xlink="search" size={24} className="kui-input-search__icon" />
+            <span className="kui-input-search__placeholder">
+                Search
+            </span>
+        </span>);
+        inputAfter = <Icon xlink="clear" size={24} className="kui-input__icon-clear" onClick={clearSearch} />;
+    }
+
     useImperativeHandle(ref, e => ({
         onChange(e) {
             setIsFilled(!!e.target.value);
