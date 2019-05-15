@@ -60,27 +60,54 @@ class StoryControls extends React.Component {
                     <Input label="Label" placeholder="Disabled" disabled />
                 </section>
 
-                <section className="section-relative">
-                    <h2>Search</h2>
-                    <Select
-                        editable={true}
-                        variants={['search']}
-                    >
-                        <SelectList fixActive={false}>
-                            <SelectListItem
-                                icon="card"
-                                list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            >
-                                Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </SelectListItem>
-                            <SelectListItem
-                                icon="archive"
-                                list="List"
-                            >
-                                Card name
-                            </SelectListItem>
-                        </SelectList>
-                    </Select>
+                <section className="section-form-min">
+                    <div className="section-relative">
+                        <h2>Search</h2>
+                        <Select
+                            editable={true}
+                            variants={['search']}
+                        >
+                            <SelectList fixActive={false}>
+                                <SelectListItem
+                                    icon="card"
+                                    list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                                >
+                                    Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </SelectListItem>
+                                <SelectListItem
+                                    icon="archive"
+                                    list="List"
+                                >
+                                    Card name
+                                </SelectListItem>
+                            </SelectList>
+                        </Select>
+                    </div>
+                </section>
+
+                <section className="section-grey">
+                    <div className="section-relative">
+                        <h2>Search</h2>
+                        <Select
+                            editable={true}
+                            variants={['search', 'grey']}
+                        >
+                            <SelectList fixActive={false}>
+                                <SelectListItem
+                                    icon="card"
+                                    list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                                >
+                                    Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </SelectListItem>
+                                <SelectListItem
+                                    icon="archive"
+                                    list="List"
+                                >
+                                    Card name
+                                </SelectListItem>
+                            </SelectList>
+                        </Select>
+                    </div>
                 </section>
 
                 <section className="section-form-min">
@@ -122,7 +149,7 @@ class StoryControls extends React.Component {
                     </Datepicker>
                 </section>
 
-                <section>
+                <section className="section-form-min">
                     <h2>SelectList</h2>
                     <SelectList fixActive={false}>
                         <li>
@@ -143,8 +170,8 @@ class StoryControls extends React.Component {
                 <section>
                     <h2>Select</h2>
                     <Select 
-                        label="Select"
                         editable={true}
+                        label="Select"
                         variants={['arrow']}
                         className="max-width-g10"
                     >
