@@ -31,6 +31,10 @@ $select: '.kui-select';
         }
     }
 
+    &--disabled {
+        pointer-events: none;
+    }
+
     &--variant_header {
         width: $google-spacing * 30;
 

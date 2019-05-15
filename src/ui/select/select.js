@@ -109,7 +109,8 @@ export const Select = (props) => {
 
 Select.variantsOfInput = [
     'arrow',
-    'search'
+    'search',
+    'grey'
 ];
 
 Select.propTypes = {
