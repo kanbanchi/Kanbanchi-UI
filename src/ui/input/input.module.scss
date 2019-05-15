@@ -110,6 +110,11 @@
                 display: none;
             }
         }
+
+        .kui-select:not(.kui-select--opened) .kui-input:not(.kui-input--filled) & {
+            animation: animation_imput_search .6s ease forwards;
+        }
+
         .kui-select--disabled & {
             opacity: .3;
         }
