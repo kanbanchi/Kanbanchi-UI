@@ -413,4 +413,54 @@
         margin-left: $google-spacing;
         font-weight: normal;
     }
+
+    &--add {
+        width: 100%;
+        justify-content: space-between;
+        height: $google-spacing * 5;
+        padding: 0 $google-spacing 0 $google-spacing * 2;
+        color: $color-base;
+        border: 1px dashed calc-color(fade, $color-base, 15);
+        border-radius: $base-radius;
+
+        .kui-button__icon {
+            color: calc-color(fade, $color-base, 30);
+            @include transition;
+        }
+
+        &:focus {
+            color: $color-base;
+            border: 1px dashed calc-color(fade, $color-base, 15);
+
+            .kui-button__icon {
+                color: $color-base;
+            }
+        }
+
+        &:hover {
+            color: $color-base;
+            border: 1px dashed transparent;
+            box-shadow: $shadow-hover;
+
+            .kui-button__icon {
+                color: $color-base;
+            }
+        }
+
+        &:active {
+            background: calc-color(fade, $color-base, 5);
+            border: 1px dashed transparent;
+
+            .kui-button__icon {
+                color: $color-base;
+                transform: rotate(-45deg);
+            }
+        }
+
+        &.kui-button--disabled,
+        &:disabled {
+            color: calc-color(fade, $color-base, 30);
+            pointer-events: none;
+        }
+    }
 }

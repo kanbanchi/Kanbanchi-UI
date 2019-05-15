@@ -50,10 +50,14 @@ export const Button = (props) => {
 
     if (Button.variantWithIcon.includes(variant)) {
         let iconProps = {
-            className: 'kui-button__icon',
-            size: 16
+            className: 'kui-button__icon'
         };
         switch (variant) {
+            case 'add':
+                iconProps.xlink = 'plus';
+                iconProps.size = 24;
+                iconAfter = <Icon {...iconProps} />;
+                break;
             case 'action':
                 iconProps.xlink = 'dots';
                 iconBefore = <Icon {...iconProps} />;
@@ -88,6 +92,7 @@ Button.propTypes = {
         'secondary',
         'fab',
         'action',
+        'add',
         'text',
         'icon',
         'icon-text',
@@ -110,6 +115,7 @@ Button.propTypes = {
 };
 
 Button.variantWithIcon = [
+    'add',
     'action',
     'text'
 ];

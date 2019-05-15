@@ -199,6 +199,19 @@ class StoryButtons extends React.Component {
                         </ButtonsSegmented>
                     </div>
                 </section>
+                <section className="section-form-min">
+                    <h2>Add</h2>
+                    <Button variant="add">Add button</Button>
+                    <br />
+                    <br />
+                    <Button variant="add" disabled>Disabled</Button>
+                </section>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
         )
     } 
