@@ -58,7 +58,7 @@ export const Select = (props) => {
         onChange: attributes.onChange
     };
 
-    if (children.length) {
+    if (children && children.length) {
         dropdownBody = React.Children.map(children, (child) => {
             if (child.type.name !== 'SelectList') return child;
             list = child.props.children;
@@ -107,7 +107,8 @@ export const Select = (props) => {
 };
 
 Select.variantsOfInput = [
-    'arrow'
+    'arrow',
+    'search'
 ];
 
 Select.propTypes = {

@@ -22,7 +22,7 @@ export const SelectList = (props) => {
 
     const [activeHook, setActiveHook] = useState(active);
 
-    if (children.length) {
+    if (children && children.length) {
         items = React.Children.map(children, (child, index) => {
             const divider = (child.props.divider) ? <Divider /> : null;
             const item = [React.cloneElement(child, {
