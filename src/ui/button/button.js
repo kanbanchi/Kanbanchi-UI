@@ -85,7 +85,6 @@ export const Button = (props) => {
 Button.propTypes = {
     variant: PropTypes.oneOf([
         'primary',
-        'primary_white',
         'secondary',
         'fab',
         'action',
@@ -94,7 +93,9 @@ Button.propTypes = {
         'icon-text',
     ]),
     color: PropTypes.oneOf([
-        'black'
+        'black',
+        'purple',
+        'white'
     ]),
     size: PropTypes.oneOf([
         'large'

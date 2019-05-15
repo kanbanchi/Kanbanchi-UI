@@ -15,6 +15,11 @@ section {
         background: $color-purple;
     }
 
+    &-black {
+        color: $color-white;
+        background: $color-base;
+    }
+
     &-form-min {
         max-width: $google-spacing * 50;
     }

@@ -37,13 +37,13 @@ class StoryButtons extends React.Component {
                 <section className="section-purple">
                     <h2>Primary white</h2>
                     <ButtonsGroup margin="large">
-                        <Button variant="primary_white" size="large">Large</Button>
-                        <Button variant="primary_white" size="large" disabled={this.state.disabled}>Large Disabled</Button>
+                        <Button color="white" size="large">Large</Button>
+                        <Button color="white" size="large" disabled={this.state.disabled}>Large Disabled</Button>
                     </ButtonsGroup>
                     <br />
                     <ButtonsGroup>
-                        <Button variant="primary_white">Small</Button>
-                        <Button variant="primary_white" disabled={this.state.disabled}>Small Disabled</Button>
+                        <Button color="white">Small</Button>
+                        <Button color="white" disabled={this.state.disabled}>Small Disabled</Button>
                     </ButtonsGroup>
                 </section>
                 <section>
@@ -60,30 +60,48 @@ class StoryButtons extends React.Component {
                 </section>
                 <section>
                     <h2>FAB</h2>
-                    <ButtonsGroup margin="large">
-                        <Button variant="fab" size="large">
-                            <Icon xlink="plus" size={24} />
-                        </Button>
-                        <Button variant="fab" size="large" disabled={this.state.disabled}>
-                            <Icon xlink="plus" size={24} />
-                        </Button>
-                    </ButtonsGroup>
-                    <br />
                     <ButtonsGroup>
                         <Button variant="fab">
-                            <Icon xlink="plus" size={24} />
+                            <Icon xlink="search" size={24} />
                         </Button>
                         <Button variant="fab" disabled={this.state.disabled}>
-                            <Icon xlink="plus" size={24} />
+                            <Icon xlink="search" size={24} />
                         </Button>
                     </ButtonsGroup>
                     <br />
                     <ButtonsGroup margin="large">
                         <Button variant="fab" text="Fab with text">
-                            <Icon xlink="plus" size={24} />
+                            <Icon xlink="search" size={24} />
                         </Button>
                         <Button variant="fab" text="Fab with text" disabled={this.state.disabled}>
+                            <Icon xlink="search" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup>
+                        <Button variant="fab" color="purple">
                             <Icon xlink="plus" size={24} />
+                        </Button>
+                        <Button variant="fab" color="purple" disabled={this.state.disabled}>
+                            <Icon xlink="plus" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup margin="large">
+                        <Button variant="fab" color="purple" text="Fab with text">
+                            <Icon xlink="plus" size={24} />
+                        </Button>
+                        <Button variant="fab" color="purple" text="Fab with text" disabled={this.state.disabled}>
+                            <Icon xlink="plus" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup>
+                        <Button variant="fab" color="black">
+                            <Icon xlink="kanban" size={24} />
+                        </Button>
+                        <Button variant="fab" color="black" disabled={this.state.disabled}>
+                            <Icon xlink="kanban" size={24} />
                         </Button>
                     </ButtonsGroup>
                     <br />
@@ -93,6 +111,26 @@ class StoryButtons extends React.Component {
                         </Button>
                         <Button variant="fab" color="black" text="Fab with text" disabled={this.state.disabled}>
                             <Icon xlink="kanban" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                </section>
+                <section className="section-black">
+                    <h2>FAB white</h2>
+                    <ButtonsGroup>
+                        <Button variant="fab" color="white">
+                            <Icon xlink="search" size={24} />
+                        </Button>
+                        <Button variant="fab" color="white" disabled={this.state.disabled}>
+                            <Icon xlink="search" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup margin="large">
+                        <Button variant="fab" color="white" text="Fab with text">
+                            <Icon xlink="search" size={24} />
+                        </Button>
+                        <Button variant="fab" color="white" text="Fab with text" disabled={this.state.disabled}>
+                            <Icon xlink="search" size={24} />
                         </Button>
                     </ButtonsGroup>
                 </section>
