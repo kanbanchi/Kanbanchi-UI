@@ -4,7 +4,7 @@ $dropdown: '.kui-dropdown';
 #{$dropdown} {
     position: absolute;
     z-index: $z-modal;
-    overflow: hidden;
+    overflow: auto;
     border-radius: $base-radius;
     box-shadow: $shadow-hover;
     background: $color-white;
