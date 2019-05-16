@@ -1,6 +1,8 @@
 @import '../../assets/sass/index.scss';
 
 .kui-button-dropdown {
+    display: inline-block;
+
     &__item {
         color: calc-color(tint, $color-base, 50);
         background: $color-white;
@@ -17,6 +19,10 @@
                 color: $color-base;
             }
         }
+    }
+
+    &__dropdown {
+        min-width: $google-spacing * 25;
     }
 
     &--disabled {

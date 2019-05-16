@@ -54,7 +54,10 @@ export const ButtonDropdown = (props) => {
             >
                 Action
             </Button>
-            <Dropdown opened={isOpenedHook}>
+            <Dropdown
+                className="kui-button-dropdown__dropdown"
+                opened={isOpenedHook}
+            >
                 {list}
             </Dropdown>
         </div>
