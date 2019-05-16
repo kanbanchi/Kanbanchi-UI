@@ -35,16 +35,13 @@ export const ButtonDropdown = (props) => {
         if (onBlur) onBlur(e);
     }
 
-    if (children.length) {
+    if (children) {
+        if (!children.length) children = [children]; // if 1 child
         list = React.Children.map(children, (child) => {
             if (child.type.name !== 'SelectList') return child;
             return React.cloneElement(child, {
                 onChange: attributes.onChange
             });
-        });
-    } else if (children) {
-        list = React.cloneElement(children, {
-            onChange: attributes.onChange
         });
     }
 

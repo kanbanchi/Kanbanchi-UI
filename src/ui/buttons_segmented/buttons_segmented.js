@@ -19,7 +19,8 @@ export const ButtonsSegmented = (props) => {
         className
     );
 
-    if (children.length) {
+    if (children) {
+        if (!children.length) children = [children]; // if 1 child
         if (active > children.length - 1) active = 0;
         const [checked, setChecked] = useState(active);
 

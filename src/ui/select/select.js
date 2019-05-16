@@ -73,20 +73,16 @@ export const Select = (props) => {
         if (onClick) onClick(e);
     }
 
-    const listAttributes = {
-        active: activeHook,
-        onChange: attributes.onChange
-    };
-
-    if (children && children.length) {
+    if (children) {
+        if (!children.length) children = [children]; // if 1 child
         dropdownBody = React.Children.map(children, (child) => {
             if (child.type.name !== 'SelectList') return child;
             list = child.props.children;
-            return React.cloneElement(child, listAttributes);
+            return React.cloneElement(child, {
+                active: activeHook,
+                onChange: attributes.onChange
+            });
         });
-    } else if (children) {
-        list = children.props.children;
-        dropdownBody = React.cloneElement(children, listAttributes);
     }
 
     const findValue = (value) => {

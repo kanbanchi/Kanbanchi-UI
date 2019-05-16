@@ -202,6 +202,18 @@ class StoryControls extends React.Component {
                             </li>
                         </SelectList>
                     </Select>
+                    <br />
+                    <Select 
+                        active={0}
+                        label="Priority"
+                    >
+                        
+                    </Select>
+                    <SelectList className="priority">
+                        <SelectListItem icon="priority-no">
+                            No priority
+                        </SelectListItem>
+                    </SelectList>
                 </section>
 
                 <section>
@@ -222,6 +234,7 @@ class StoryControls extends React.Component {
                             </li>
                         </SelectList>
                     </ButtonDropdown>
+                    
                 </section>
 
                 <br />
