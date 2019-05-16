@@ -205,15 +205,29 @@ class StoryControls extends React.Component {
                     <br />
                     <Select 
                         active={0}
-                        label="Priority"
+                        variants={['priority']}
                     >
-                        
+                        <SelectList>
+                            <SelectListItem value="0" icon="priority-no">
+                                No priority
+                            </SelectListItem>
+                            <SelectListItem value="1" icon="priority-low">
+                                Low
+                            </SelectListItem>
+                            <SelectListItem value="2" icon="priority-normal">
+                                Normal
+                            </SelectListItem>
+                            <SelectListItem value="3" icon="priority-medium">
+                                Medium
+                            </SelectListItem>
+                            <SelectListItem value="4" icon="priority-high">
+                                High
+                            </SelectListItem>
+                            <SelectListItem value="5" icon="priority-critical">
+                                Critical
+                            </SelectListItem>
+                        </SelectList>
                     </Select>
-                    <SelectList className="priority">
-                        <SelectListItem icon="priority-no">
-                            No priority
-                        </SelectListItem>
-                    </SelectList>
                 </section>
 
                 <section>
