@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import {default as autosizeLibray} from './autosize';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
-export const Input = forwardRef((props, ref) => {
+export const Input = (props) => {
     let {
         autosize,
         className,
@@ -130,15 +130,6 @@ export const Input = forwardRef((props, ref) => {
 
     const Tag = (autosize) ? 'textarea' : 'input';
 
-    useImperativeHandle(ref, e => ({
-        onChange(e) {
-            setIsFilled(!!e.target.value);
-        },
-        blur() {
-            textarea.current.blur();
-        }
-    }));
-
     return (
         <Label className={className}>
             {labelItem}
@@ -152,7 +143,7 @@ export const Input = forwardRef((props, ref) => {
             {inputAfter}
         </Label>
     );
-});
+};
 
 Input.propTypes = {
     autosize: PropTypes.bool,

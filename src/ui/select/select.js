@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
@@ -21,14 +21,14 @@ export const Select = (props) => {
     } = props,
         dropdownBody = null,
         list = [],
-        isSearch = variants.includes('search');
+        isSearch = variants.includes('search'),
+        isPriority = variants.includes('priority');
 
     const [activeHook, setActiveHook] = useState(active);
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
-    const inputEl = useRef(null);
-
+    
     className = ClassNames(
         'kui-select',
         (disabled) ? 'kui-select--disabled' : null,
@@ -39,11 +39,10 @@ export const Select = (props) => {
 
     attributes.onChange = (e) => {
         if (!isSearch && e.item) { // list item clicked
+            if (isPriority) console.log(e.item);
             setIsOpenedHook(false);
             setValueHook(e.item.children);
             setActiveHook(e.index);
-            e.target = {value: e.item.children};
-            inputEl.current.onChange(e);
         }
         if (onChange) onChange(e);
     }
@@ -101,7 +100,6 @@ export const Select = (props) => {
 
     attributes.onEnter = (e) => {
         setIsOpenedHook(false);
-        inputEl.current.blur();
         setActiveHook(findValue(e.target.value));
     }
 
@@ -111,18 +109,13 @@ export const Select = (props) => {
         });
     }, []);
 
-    const variantsInput = variants.filter(variant => {
-        return Select.variantsOfInput.includes(variant);
-    });
-
     return (
         <div className={className}>
             <Input
                 autosize={false}
                 value={valueHook}
-                variants={variantsInput}
+                variants={variants}
                 readOnly={!editable}
-                ref={inputEl}
                 {...attributes}
             />
             <Dropdown opened={isOpenedHook}>
@@ -132,10 +125,12 @@ export const Select = (props) => {
     );
 };
 
-Select.variantsOfInput = [
+Select.variants = [
     'arrow',
-    'search',
-    'grey'
+    'grey',
+    'header',
+    'priority',
+    'search'
 ];
 
 Select.propTypes = {
