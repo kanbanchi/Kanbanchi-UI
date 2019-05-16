@@ -12,6 +12,8 @@ export const Input = forwardRef((props, ref) => {
         label,
         value,
         variants,
+        onBlur,
+        onFocus,
         onChange,
         onEnter,
         onKeyDown,
@@ -22,6 +24,7 @@ export const Input = forwardRef((props, ref) => {
         inputAfter = null;
 
     const [isFilled, setIsFilled] = useState(!!value);
+    const [isFocusedHook, setIsFocusedHook] = useState(false);
     const [inputValue, setInputValue] = useState(value);
     const textarea = useRef(null);
     
@@ -54,6 +57,31 @@ export const Input = forwardRef((props, ref) => {
         if (onKeyDown) onKeyDown(e);
     };
 
+    let blurTimeout; 
+
+    /**
+     * Проблема: при клике на иконку инпут получает одновременно onBlur и onFocus
+     */
+
+    attributes.onBlur = (e) => {
+        blurTimeout = setTimeout(() => {
+            if (isFocusedHook) {
+                setIsFocusedHook(false);
+                if (onBlur) onBlur(e);
+            }
+        }, 200);
+    }
+
+    attributes.onFocus = (e) => {
+        clearTimeout(blurTimeout);
+        setTimeout(() => {
+            if (!isFocusedHook) {
+                setIsFocusedHook(true);
+                if (onFocus) onFocus(e);
+            }
+        }, 100);
+    }
+
     if (label) {
         labelItem = (<div className="kui-label__item">{label}</div>);
     }
@@ -66,25 +94,41 @@ export const Input = forwardRef((props, ref) => {
         setInputValue(value);
     }, [value]);
 
-    if (variants.includes('arrow')) {
-        inputAfter = <Icon xlink="arrow-down" size={24} className="kui-input__icon-arrow" />;
-    }
-
     const clearSearch = () => {
         setIsFilled(false);
         setInputValue('');
-        textarea.current.blur();
+        setTimeout(() => {
+            if (isFocusedHook) textarea.current.blur();
+        }, 100);
     };
+
+    if (variants.includes('arrow')) {
+        inputAfter = <Icon
+            xlink="arrow-down"
+            size={24}
+            className="kui-input__icon-arrow"
+        />;
+    }
 
     if (variants.includes('search')) {
         inputBefore = (<span className="kui-input-search">
-            <Icon xlink="search" size={24} className="kui-input-search__icon" />
+            <Icon
+                xlink="search"
+                size={24}
+                className="kui-input-search__icon"
+            />
             <span className="kui-input-search__placeholder">
                 Search
             </span>
         </span>);
-        inputAfter = <Icon xlink="clear" size={24} className="kui-input__icon-clear" onClick={clearSearch} />;
+        inputAfter = <Icon
+            xlink="clear"
+            size={24}
+            className="kui-input__icon-clear"
+            onClick={clearSearch} />;
     }
+
+    const Tag = (autosize) ? 'textarea' : 'input';
 
     useImperativeHandle(ref, e => ({
         onChange(e) {
@@ -99,12 +143,12 @@ export const Input = forwardRef((props, ref) => {
         <Label className={className}>
             {labelItem}
             {inputBefore}
-            <textarea 
+            <Tag 
                 rows={1}
                 ref={textarea}
                 value={inputValue}
                 {...attributes}
-            ></textarea>
+            ></Tag>
             {inputAfter}
         </Label>
     );

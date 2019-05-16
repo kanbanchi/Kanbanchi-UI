@@ -2,7 +2,8 @@
 .kui-input {
     position: relative;
 
-    &__item {        
+    &__item {
+        width: 100%;
         height: auto;
         min-height: $google-spacing * 5;
         resize: none;
@@ -69,69 +70,19 @@
         position: absolute;
         bottom: $google-spacing;
         right: $google-spacing;
+        height: 0;
         color: calc-color(fade, $color-base, 30);
         opacity: 0;
         cursor: pointer;
-        @include transition;
+        @include transition($transition-property: opacity);
 
         .kui-input--filled & {
+            height: $google-spacing * 3;
             opacity: 1;
         }
 
         &:hover {
             color: $color-base;
         }
-    }
-
-    &-search {
-        position: absolute;
-        bottom: $google-spacing;
-        left: 50%;
-        transform: translateX(-50%);
-        color: calc-color(fade, $color-base, 30);
-        cursor: pointer;
-
-        &__placeholder {
-            padding-left: $google-spacing;
-            color: calc-color(fade, $color-base, 60);
-        }
-
-        .kui-select--opened &,
-        .kui-input--filled & {
-            left: $google-spacing * 2;
-            transform: translateX(0);
-
-            &__icon {
-                color: $color-base;
-                animation: animation_imput_search .3s ease forwards;
-            }
-
-            &__placeholder {
-                display: none;
-            }
-        }
-
-        .kui-select:not(.kui-select--opened) .kui-input:not(.kui-input--filled) & {
-            animation: animation_imput_search .6s ease forwards;
-        }
-
-        .kui-select--disabled & {
-            opacity: .3;
-        }
-    }
-
-    &--variant_search {
-        .kui-input__item {
-            padding-left: $google-spacing * 6;
-        }
-    }
-}
-
-@keyframes animation_imput_search {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
     }
 }

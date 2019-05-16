@@ -13,7 +13,9 @@ export const Select = (props) => {
         variants,
         onBlur,
         onChange,
+        onClick,
         onFocus,
+        onKeyUp,
         ...attributes
     } = props,
         dropdownBody = null,
@@ -22,6 +24,7 @@ export const Select = (props) => {
 
     const [activeHook, setActiveHook] = useState(active);
     const [valueHook, setValueHook] = useState('');
+    const [isFocusedHook, setIsFocusedHook] = useState(false);
     const [isOpenedHook, setIsOpenedHook] = useState(false);
     const inputEl = useRef(null);
 
@@ -45,13 +48,29 @@ export const Select = (props) => {
     }
 
     attributes.onFocus = (e) => {
-        setIsOpenedHook(true);
+        setTimeout(() => {
+            if (!isFocusedHook) {
+                setIsFocusedHook(true);
+                setIsOpenedHook(true);
+            }
+        }, 100); // delay after onClick
         if (onFocus) onFocus(e);
     }
 
     attributes.onBlur = (e) => {
-        setTimeout(()=>setIsOpenedHook(false), 100); // it can be click on dropdown
+        if (isFocusedHook) {
+            setIsFocusedHook(false);
+            setIsOpenedHook(false);
+        }
         if (onBlur) onBlur(e);
+    }
+
+    attributes.onClick = (e) => {
+        if (isFocusedHook) {
+            setIsOpenedHook(!isOpenedHook);
+            if (e) e.stopPropagation();
+        }
+        if (onClick) onClick(e);
     }
 
     const listAttributes = {
@@ -70,14 +89,23 @@ export const Select = (props) => {
         dropdownBody = React.cloneElement(children, listAttributes);
     }
 
+    const findValue = (value) => {
+        let newIndex = null;
+        if (list.length) React.Children.forEach(list, (child, index) => {
+            if (child.props.children === value) newIndex = index;
+        });
+        return newIndex;
+    }
+
+    attributes.onKeyUp = (e) => {
+        setActiveHook(findValue(e.target.value));
+        if (onKeyUp) onKeyUp(e);
+    }
+
     attributes.onEnter = (e) => {
         setIsOpenedHook(false);
         inputEl.current.blur();
-        let newIndex = null;
-        if (list.length) React.Children.forEach(list, (child, index) => {
-            if (child.props.children === e.target.value) newIndex = index;
-        });
-        setActiveHook(newIndex);
+        setActiveHook(findValue(e.target.value));
     }
 
     useEffect(() => {

@@ -1,7 +1,6 @@
 @import '../../assets/sass/index.scss';
-$select: '.kui-select';
 
-#{$select} {
+.kui-select {
     
     .kui-input {
         &__item {
@@ -47,12 +46,6 @@ $select: '.kui-select';
 
         .kui-dropdown {
             width: $google-spacing * 30;
-        }
-    }
-
-    &--variant_search {
-        .kui-dropdown {
-            width: 100%;
         }
     }
 }

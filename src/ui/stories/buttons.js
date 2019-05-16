@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, ButtonsGroup, ButtonsSegmented, Icon, Checkbox } from '../../ui';
+import { Button, ButtonsGroup, ButtonsSegmented, Icon, Switch } from '../../ui';
 class StoryButtons extends React.Component {
     constructor() {
         super();
@@ -18,9 +18,9 @@ class StoryButtons extends React.Component {
         return (
             <div className="page">
                 <section style={{width: 240}}>
-                    <Checkbox checked={this.state.disabled} onChange={this.toggleDisabled}>
+                    <Switch checked={this.state.disabled} onChange={this.toggleDisabled}>
                         Disable buttons
-                    </Checkbox>
+                    </Switch>
                 </section>                
                 <section>
                     <h2>Primary</h2>

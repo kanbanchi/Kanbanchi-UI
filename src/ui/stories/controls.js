@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
+import { Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
@@ -63,10 +63,7 @@ class StoryControls extends React.Component {
                 <section className="section-form-min">
                     <div className="section-relative">
                         <h2>Search</h2>
-                        <Select
-                            editable={true}
-                            variants={['search']}
-                        >
+                        <Search editable={true}>
                             <SelectList fixActive={false}>
                                 <SelectListItem
                                     icon="card"
@@ -81,16 +78,16 @@ class StoryControls extends React.Component {
                                     Card name
                                 </SelectListItem>
                             </SelectList>
-                        </Select>
+                        </Search>
                     </div>
                 </section>
 
                 <section className="section-grey">
                     <div className="section-relative">
                         <h2>Search</h2>
-                        <Select
+                        <Search
                             editable={true}
-                            variants={['search', 'grey']}
+                            variants={['grey']}
                         >
                             <SelectList fixActive={false}>
                                 <SelectListItem
@@ -106,7 +103,7 @@ class StoryControls extends React.Component {
                                     Card name
                                 </SelectListItem>
                             </SelectList>
-                        </Select>
+                        </Search>
                     </div>
                 </section>
 
