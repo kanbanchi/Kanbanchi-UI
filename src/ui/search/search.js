@@ -1,11 +1,13 @@
 import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
+import { Select } from '../../ui';
 import '../../../src/ui/search/search.module.scss';
 
 export const Search = (props) => {
     let {
         children,
         className,
+        variants,
         ...attributes
     } = props;
 
@@ -14,22 +16,25 @@ export const Search = (props) => {
         className
     );
 
+    if (!variants.includes('search')) variants.push('search');
+
     return (
-        <div
+        <Select
             className={className}
+            variants={variants}
             {...attributes}
         >
             {children}
-        </div>
+        </Select>
     );
 };
 
 Search.propTypes = {
-    className: PropTypes.string
+    variants: PropTypes.arrayOf(PropTypes.string)
 };
 
 Search.defaultProps = {
-    className: ''
+    variants: []
 };
 
 export default Search;
