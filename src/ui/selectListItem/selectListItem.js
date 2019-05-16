@@ -21,7 +21,7 @@ export const SelectListItem = (props) => {
     );
 
     if (icon) {
-        iconEl = <Icon xlink={icon} />;
+        iconEl = <Icon xlink={icon} className="kui-select-list-item__icon" />;
     }
 
     if (list) {
