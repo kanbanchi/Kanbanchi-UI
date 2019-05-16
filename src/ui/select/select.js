@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
@@ -27,6 +27,7 @@ export const Select = (props) => {
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
+    const select = useRef(null);
     
     className = ClassNames(
         'kui-select',
@@ -42,6 +43,9 @@ export const Select = (props) => {
             setValueHook(e.item.children);
             setActiveHook(e.index);
         }
+        setTimeout(() => {
+            select.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+        }, 200); // wait for mobile keyboard hide
         if (onChange) onChange(e);
     }
 
@@ -108,7 +112,7 @@ export const Select = (props) => {
     }, []);
 
     return (
-        <div className={className}>
+        <div className={className} ref={select}>
             <Input
                 autosize={false}
                 value={valueHook}
