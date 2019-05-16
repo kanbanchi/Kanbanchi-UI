@@ -10,6 +10,7 @@ export const Select = (props) => {
         className,
         disabled,
         editable,
+        opened,
         variants,
         onBlur,
         onChange,
@@ -24,8 +25,8 @@ export const Select = (props) => {
 
     const [activeHook, setActiveHook] = useState(active);
     const [valueHook, setValueHook] = useState('');
-    const [isFocusedHook, setIsFocusedHook] = useState(false);
-    const [isOpenedHook, setIsOpenedHook] = useState(false);
+    const [isFocusedHook, setIsFocusedHook] = useState(opened);
+    const [isOpenedHook, setIsOpenedHook] = useState(opened);
     const inputEl = useRef(null);
 
     className = ClassNames(
@@ -142,6 +143,7 @@ Select.propTypes = {
     disabled: PropTypes.bool,
     editable: PropTypes.bool,
     label: PropTypes.string,
+    opened: PropTypes.bool,
     variants: PropTypes.arrayOf(PropTypes.string)
 };
 
@@ -150,6 +152,7 @@ Select.defaultProps = {
     disabled: false,
     editable: false,
     label: null,
+    opened: false,
     variants: []
 };
 
