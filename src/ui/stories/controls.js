@@ -55,9 +55,9 @@ class StoryControls extends React.Component {
 
                 <section className="section-grey section-form-min">
                     <h2>Input</h2>
-                    <Input label="Label" placeholder="Text input" />
+                    <Input variants={['grey']} label="Label" placeholder="Text input" />
                     <br/>
-                    <Input label="Label" placeholder="Disabled" disabled />
+                    <Input variants={['grey']} label="Label" placeholder="Disabled" disabled />
                 </section>
 
                 <section className="section-form-min">
