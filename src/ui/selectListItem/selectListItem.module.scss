@@ -1,7 +1,5 @@
 @import '../../assets/sass/index.scss';
-$selectListItem: '.kui-select-list-item';
-
-#{$selectListItem} {
+.kui-select-list-item {
     position: relative;
     display: flex;
     align-items: center;
@@ -16,9 +14,13 @@ $selectListItem: '.kui-select-list-item';
         }
         &--title {
             flex: 1 1 100%;
-            max-width: calc(60% - #{$google-spacing * 3});
-            padding-right: $google-spacing;
+            max-width: calc(100% - #{$google-spacing * 3});
             color: $color-base;
+
+            .kui-select-list-item--with-list & {
+                max-width: calc(60% - #{$google-spacing * 3});
+                padding-right: $google-spacing;
+            }
         }
         &--list {
             display: block;

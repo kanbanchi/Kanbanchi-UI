@@ -16,6 +16,7 @@ export const SelectListItem = (props) => {
 
     className = ClassNames(
         'kui-select-list-item',
+        (list) ? 'kui-select-list-item--with-list' : null,
         className
     );
 
