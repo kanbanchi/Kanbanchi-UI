@@ -424,8 +424,8 @@
         border-radius: $base-radius;
 
         .kui-button__icon {
+            margin-left: $google-spacing;
             color: calc-color(fade, $color-base, 30);
-            @include transition;
         }
 
         &:focus {
@@ -447,9 +447,11 @@
             }
         }
 
+        .kui-button-dropdown--opened &,
         &:active {
             background: calc-color(fade, $color-base, 5);
             border: 1px dashed transparent;
+            box-shadow: $shadow-hover;
 
             .kui-button__icon {
                 color: $color-base;
