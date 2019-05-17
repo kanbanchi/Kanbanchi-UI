@@ -10,8 +10,13 @@ const ClassVariants = ({variants, prefix}) => {
     return ret;
 };
 
+const isMobileDevice = () => 
+    (typeof window.orientation !== 'undefined')
+    || (navigator.userAgent.indexOf('IEMobile') !== -1);
+
 export {
     PropTypes,
     ClassNames,
-    ClassVariants
+    ClassVariants,
+    isMobileDevice
 };
