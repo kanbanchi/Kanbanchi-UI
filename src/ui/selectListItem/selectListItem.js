@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import { Icon } from '../../ui';
 import '../../../src/ui/selectListItem/selectListItem.module.scss';
 
-export const SelectListItem = (props) => {
+export const SelectListItem = forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -33,7 +33,11 @@ export const SelectListItem = (props) => {
     }
 
     return (
-        <li className={className} {...attributes}>
+        <li
+            className={className}
+            ref={ref}
+            {...attributes}
+        >
             <span className="kui-select-list-item__col kui-select-list-item__col--icon">
                 {iconEl}
             </span>
@@ -45,7 +49,7 @@ export const SelectListItem = (props) => {
             {listEl}
         </li>
     );
-};
+});
 
 SelectListItem.propTypes = {
     icon: PropTypes.string,
