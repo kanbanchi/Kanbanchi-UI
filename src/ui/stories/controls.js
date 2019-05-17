@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
+import { ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
@@ -166,27 +166,30 @@ class StoryControls extends React.Component {
 
                 <section>
                     <h2>Select</h2>
-                    <Select 
-                        editable={true}
-                        label="Select"
-                        variants={['arrow']}
-                        className="max-width-g10"
-                    >
-                        <SelectList>
-                            <li divider>0</li>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
-                            <li>5</li>
-                            <li>6</li>
-                            <li>7</li>
-                            <li>8</li>
-                            <li>9</li>
-                            <li divider>10</li>
-                            <li disabled>Disabled</li>
-                        </SelectList>
-                    </Select>
+                    <div className="section-relative">
+                        <Select 
+                            editable={true}
+                            label="Select"
+                            variants={['arrow']}
+                            className="max-width-g10"
+                        >
+                            <SelectList>
+                                <li divider>0</li>
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                                <li>6</li>
+                                <li>7</li>
+                                <li>8</li>
+                                <li>9</li>
+                                <li divider>10</li>
+                                <li disabled>Disabled</li>
+                            </SelectList>
+                        </Select>
+                    </div>
+                    
                     <br />
                     <Select 
                         active={0}
@@ -232,23 +235,46 @@ class StoryControls extends React.Component {
 
                 <section>
                     <h2>Actions</h2>
-                    <ButtonDropdown>
-                        <SelectList fixActive={false}>
-                            <li onClick={e=>console.log(e.target.innerText)}>
-                                Copy card
-                            </li>
-                            <li divider onClick={e=>console.log(e.target.innerText)}>
-                                Print card
-                            </li>
-                            <li divider onClick={e=>console.log(e.target.innerText)}>
-                                Get link to card
-                            </li>
-                            <li disabled onClick={e=>console.log(e.target.innerText)}>
-                                Delete card
-                            </li>
-                        </SelectList>
-                    </ButtonDropdown>
-                    
+                    <ButtonsGroup margin="large" style={{justifyContent: 'space-between'}}>
+                        <ButtonDropdown>
+                            <Button variant="add">
+                                Add smth
+                            </Button>
+                            <SelectList fixActive={false}>
+                                <SelectListItem
+                                    icon="card"
+                                    list="List Ut enim ad minim veniam!"
+                                >
+                                    Card Lorem ipsum dolor sit amet?
+                                </SelectListItem>
+                                <SelectListItem
+                                    icon="archive"
+                                    list="List"
+                                >
+                                    Card name
+                                </SelectListItem>
+                            </SelectList>
+                        </ButtonDropdown>
+                        <ButtonDropdown variants={['right']}>
+                            <Button variant="action">
+                                Actions Right
+                            </Button>
+                            <SelectList fixActive={false}>
+                                <li onClick={e=>console.log(e.target.innerText)}>
+                                    Copy card
+                                </li>
+                                <li divider onClick={e=>console.log(e.target.innerText)}>
+                                    Print card
+                                </li>
+                                <li divider onClick={e=>console.log(e.target.innerText)}>
+                                    Get link to card
+                                </li>
+                                <li disabled onClick={e=>console.log(e.target.innerText)}>
+                                    Delete card
+                                </li>
+                            </SelectList>
+                        </ButtonDropdown>
+                    </ButtonsGroup>
                 </section>
 
                 <br />

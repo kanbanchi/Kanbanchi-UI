@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { PropTypes, ClassNames, isMobileDevice } from '../utils';
+import { PropTypes, ClassNames, ClassVariants, isMobileDevice } from '../utils';
 import { Button, Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
@@ -8,10 +8,12 @@ export const ButtonDropdown = (props) => {
         children,
         className,
         disabled,
+        variants,
         onBlur,
         onClick,
         ...attributes
     } = props,
+        btn = null,
         list = null;
 
     const [isOpenedHook, setIsOpenedHook] = useState(false);
@@ -21,6 +23,7 @@ export const ButtonDropdown = (props) => {
         'kui-button-dropdown',
         (disabled) ? 'kui-button-dropdown--disabled' : null,
         (isOpenedHook) ? 'kui-button-dropdown--opened' : null,
+        ClassVariants({variants, prefix: 'kui-button-dropdown--variant_'}),
         className
     );
 
@@ -41,6 +44,14 @@ export const ButtonDropdown = (props) => {
     if (children) {
         if (!children.length) children = [children]; // if 1 child
         list = React.Children.map(children, (child) => {
+            if (child.type.name === 'Button') {
+                attributes.className = ClassNames(
+                    'kui-button-dropdown__item',
+                    child.props.className
+                ),
+                btn = React.cloneElement(child, attributes);
+                return null;
+            }
             if (child.type.name !== 'SelectList') return child;
             return React.cloneElement(child, {
                 onChange: attributes.onChange
@@ -50,13 +61,7 @@ export const ButtonDropdown = (props) => {
 
     return (
         <div className={className} ref={buttonRef}>
-            <Button 
-                className="kui-button-dropdown__item"
-                variant="action"
-                {...attributes}
-            >
-                Action
-            </Button>
+            {btn}
             <Dropdown
                 className="kui-button-dropdown__dropdown"
                 opened={isOpenedHook}
@@ -67,12 +72,18 @@ export const ButtonDropdown = (props) => {
     );
 };
 
+ButtonDropdown.variants = [
+    'right'
+];
+
 ButtonDropdown.propTypes = {
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    variants: PropTypes.arrayOf(PropTypes.string)
 };
 
 ButtonDropdown.defaultProps = {
-    disabled: false
+    disabled: false,
+    variants: []
 };
 
 export default ButtonDropdown;

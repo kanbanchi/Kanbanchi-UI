@@ -1,6 +1,7 @@
 @import '../../assets/sass/index.scss';
 
 .kui-button-dropdown {
+    position: relative;
     display: inline-block;
 
     &__item {
@@ -28,5 +29,11 @@
     &--disabled {
         cursor: default;
         pointer-events: none;
+    }
+
+    &--variant_right {
+        .kui-button-dropdown__dropdown {
+            right: 0;
+        }
     }
 }
