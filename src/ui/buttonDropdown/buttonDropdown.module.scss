@@ -1,7 +1,6 @@
 @import '../../assets/sass/index.scss';
 
 .kui-button-dropdown {
-    position: relative;
     display: inline-block;
 
     &__item {
@@ -31,6 +30,8 @@
     }
 
     &--variant_right {
+        position: relative;
+
         .kui-button-dropdown__dropdown {
             right: 0;
         }
