@@ -3,6 +3,7 @@
     position: absolute;
     z-index: $z-modal;
     overflow: auto;
+    scroll-behavior: smooth;
     max-width: 100%;
     border-radius: $base-radius;
     box-shadow: $shadow-hover;
@@ -25,7 +26,7 @@
         transform: translateY($google-spacing) scaleY(1);
     }
     100% {
-        max-height: 100vh;
+        max-height: 80vh;
     }
 }
 @keyframes animation_drop_up {

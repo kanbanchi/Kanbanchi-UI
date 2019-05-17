@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import '../../../src/ui/dropdown/dropdown.module.scss';
 
-export const Dropdown = (props) => {
+export const Dropdown = forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -17,11 +17,15 @@ export const Dropdown = (props) => {
     );
 
     return (
-        <div className={className} {...attributes}>
+        <div
+            className={className}
+            ref={ref}
+            {...attributes}
+        >
             {children}
         </div>
     );
-};
+});
 
 Dropdown.propTypes = {
     opened: PropTypes.bool
