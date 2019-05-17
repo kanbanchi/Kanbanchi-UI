@@ -39,6 +39,7 @@
 
     &--disabled,
     &:disabled {
+        pointer-events: none;
         color: $color-purple-light;
     }
 
