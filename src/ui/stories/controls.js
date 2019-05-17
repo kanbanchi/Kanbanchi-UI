@@ -190,6 +190,7 @@ class StoryControls extends React.Component {
                                 </SelectList>
                             </Select>
                             <Select 
+                                active={40}
                                 editable={true}
                                 label="Time"
                                 icon="deadline"

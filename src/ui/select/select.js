@@ -27,9 +27,12 @@ export const Select = (props) => {
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
+    const [itemsRefsHook, setItemsRefsHook] = useState([]);
+
+    const dropdownRef = useRef(null);
     const inputRef = useRef(null);
     const selectRef = useRef(null);
-    
+
     className = ClassNames(
         'kui-select',
         (disabled) ? 'kui-select--disabled' : null,
@@ -38,11 +41,24 @@ export const Select = (props) => {
         className
     );
 
+    const onSelectListInit = (refs) => {
+        setItemsRefsHook(refs);
+    }
+
+    const onOpenedScrollToActive = () => {
+        if (itemsRefsHook[activeHook]) {
+            setTimeout(() => {
+                dropdownRef.current.scrollTop = itemsRefsHook[activeHook].current.offsetTop - itemsRefsHook[activeHook].current.offsetHeight; // scroll to item - 1
+                if (dropdownRef.current.scrollHeight > dropdownRef.current.offsetHeight) selectRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
+            }, 300); // wait for dropdown animation
+        }
+    }
+
     attributes.onChange = (e) => {
         if (!isSearch && e.item) { // list item clicked
             setIsOpenedHook(false);
-            setValueHook(e.item.children);
             setActiveHook(e.index);
+            setValueHook(e.item.children);
             inputRef.current.setIsFilled(true);
         }
         setTimeout(() => {
@@ -57,6 +73,7 @@ export const Select = (props) => {
                 setIsFocusedHook(true);
                 setIsOpenedHook(true);
                 if (isMobileDevice()) selectRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
+                onOpenedScrollToActive();
             }
         }, 100); // delay after onClick
         if (onFocus) onFocus(e);
@@ -72,7 +89,9 @@ export const Select = (props) => {
 
     attributes.onClick = (e) => {
         if (isFocusedHook) {
+            let isOpened = isOpenedHook;
             setIsOpenedHook(!isOpenedHook);
+            if (!isOpened) onOpenedScrollToActive();
             if (e) e.stopPropagation();
         }
         if (onClick) onClick(e);
@@ -85,7 +104,8 @@ export const Select = (props) => {
             list = child.props.children;
             return React.cloneElement(child, {
                 active: activeHook,
-                onChange: attributes.onChange
+                onChange: attributes.onChange,
+                onSelectListInit
             });
         });
     }
@@ -116,9 +136,11 @@ export const Select = (props) => {
     }
 
     useEffect(() => {
-        if (active !== null && list.length) React.Children.forEach(list, (child, index) => {
-            if (active === index) setValueHook(child.props.children); // initial Select value
-        });
+        if (active !== null && list.length) {
+            let val = list[active].props.children;
+            setValueHook(val); // initial Select value
+            inputRef.current.setIsFilled(val);
+        }
     }, []);
 
     return (
@@ -131,7 +153,10 @@ export const Select = (props) => {
                 variants={variants}
                 {...attributes}
             />
-            <Dropdown opened={isOpenedHook}>
+            <Dropdown
+                opened={isOpenedHook}
+                ref={dropdownRef}
+            >
                 {dropdownBody}
             </Dropdown>
         </div>
