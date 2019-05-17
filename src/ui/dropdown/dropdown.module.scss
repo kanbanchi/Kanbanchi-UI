@@ -3,6 +3,7 @@
     position: absolute;
     z-index: $z-modal;
     overflow: auto;
+    max-width: 100%;
     border-radius: $base-radius;
     box-shadow: $shadow-hover;
     background: $color-white;
