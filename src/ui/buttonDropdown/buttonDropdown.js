@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { PropTypes, ClassNames } from '../utils';
+import React, { useState, useRef } from 'react';
+import { PropTypes, ClassNames, isMobileDevice } from '../utils';
 import { Button, Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
@@ -15,6 +15,7 @@ export const ButtonDropdown = (props) => {
         list = null;
 
     const [isOpenedHook, setIsOpenedHook] = useState(false);
+    const buttonRef = useRef(null);
 
     className = ClassNames(
         'kui-button-dropdown',
@@ -24,7 +25,9 @@ export const ButtonDropdown = (props) => {
     );
 
     attributes.onClick = (e) => {
+        let isOpened = isOpenedHook;
         setIsOpenedHook(!isOpenedHook);
+        if (!isOpened && isMobileDevice()) buttonRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
         if (onClick) onClick(e);
     }
 
@@ -46,7 +49,7 @@ export const ButtonDropdown = (props) => {
     }
 
     return (
-        <div className={className}>
+        <div className={className} ref={buttonRef}>
             <Button 
                 className="kui-button-dropdown__item"
                 variant="action"

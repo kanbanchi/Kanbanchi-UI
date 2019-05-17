@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { PropTypes, ClassNames, ClassVariants } from '../utils';
+import { PropTypes, ClassNames, ClassVariants, isMobileDevice } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 
@@ -27,7 +27,7 @@ export const Select = (props) => {
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
-    const select = useRef(null);
+    const selectRef = useRef(null);
     
     className = ClassNames(
         'kui-select',
@@ -44,7 +44,7 @@ export const Select = (props) => {
             setActiveHook(e.index);
         }
         setTimeout(() => {
-            select.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }, 200); // wait for mobile keyboard hide
         if (onChange) onChange(e);
     }
@@ -54,6 +54,7 @@ export const Select = (props) => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
                 setIsOpenedHook(true);
+                if (isMobileDevice()) selectRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
             }
         }, 100); // delay after onClick
         if (onFocus) onFocus(e);
@@ -112,7 +113,7 @@ export const Select = (props) => {
     }, []);
 
     return (
-        <div className={className} ref={select}>
+        <div className={className} ref={selectRef}>
             <Input
                 autosize={false}
                 value={valueHook}
