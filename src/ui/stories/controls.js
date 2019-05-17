@@ -233,7 +233,7 @@ class StoryControls extends React.Component {
                     </Select>
                 </section>
 
-                <section>
+                <section className="section-form-min">
                     <h2>Actions</h2>
                     <ButtonsGroup margin="large" style={{justifyContent: 'space-between'}}>
                         <ButtonDropdown>

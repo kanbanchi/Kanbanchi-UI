@@ -288,7 +288,7 @@
     &--action {
         height: $google-spacing * 4;
         padding: 0 $google-spacing * 2 0 $google-spacing;
-        color: calc-color(fade, $color-base, 80);
+        color: calc-color(tint, $color-base, 50);
         border: 2px solid calc-color(tint, $color-base, 20);
         border-radius: $big-radius;
 

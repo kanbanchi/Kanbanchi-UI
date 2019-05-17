@@ -5,7 +5,6 @@
     display: inline-block;
 
     &__item {
-        color: calc-color(tint, $color-base, 50);
         background: $color-white;
         
         .kui-button__icon {
