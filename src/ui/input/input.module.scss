@@ -51,6 +51,21 @@
         }
     }
 
+    &__icon {
+        position: absolute;
+        bottom: $google-spacing;
+        right: $google-spacing;
+        color: calc-color(fade, $color-base, 30);
+        cursor: pointer;
+        @include transition;
+    }
+
+    &--variant_withicon {
+        .kui-input__item {
+            padding-right: $google-spacing * 5;
+        }
+    }
+
     &__icon-arrow {
         position: absolute;
         bottom: $google-spacing;

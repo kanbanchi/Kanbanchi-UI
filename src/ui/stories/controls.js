@@ -167,27 +167,87 @@ class StoryControls extends React.Component {
                 <section>
                     <h2>Select</h2>
                     <div className="section-relative">
-                        <Select 
-                            editable={true}
-                            label="Select"
-                            variants={['arrow']}
-                            className="max-width-g10"
-                        >
-                            <SelectList>
-                                <li divider>0</li>
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
-                                <li>4</li>
-                                <li>5</li>
-                                <li>6</li>
-                                <li>7</li>
-                                <li>8</li>
-                                <li>9</li>
-                                <li divider>10</li>
-                                <li disabled>Disabled</li>
-                            </SelectList>
-                        </Select>
+                        <ButtonsGroup margin="large">
+                            <Select 
+                                editable={true}
+                                label="Select"
+                                variants={['arrow']}
+                                style={{width: 100}}
+                            >
+                                <SelectList>
+                                    <li divider>0</li>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li divider>10</li>
+                                    <li disabled>Disabled</li>
+                                </SelectList>
+                            </Select>
+                            <Select 
+                                editable={true}
+                                label="Time"
+                                icon="deadline"
+                                variants={['withicon']}
+                                style={{width: 120}}
+                            >
+                                <SelectList>
+                                    <li>12:00 AM</li>
+                                    <li>12:30 AM</li>
+                                    <li>01:00 AM</li>
+                                    <li>01:30 AM</li>
+                                    <li>02:00 AM</li>
+                                    <li>02:30 AM</li>
+                                    <li>03:00 AM</li>
+                                    <li>03:30 AM</li>
+                                    <li>04:00 AM</li>
+                                    <li>04:30 AM</li>
+                                    <li>05:00 AM</li>
+                                    <li>05:30 AM</li>
+                                    <li>06:00 AM</li>
+                                    <li>06:30 AM</li>
+                                    <li>07:00 AM</li>
+                                    <li>07:30 AM</li>
+                                    <li>08:00 AM</li>
+                                    <li>08:30 AM</li>
+                                    <li>09:00 AM</li>
+                                    <li>09:30 AM</li>
+                                    <li>10:00 AM</li>
+                                    <li>10:30 AM</li>
+                                    <li>11:00 AM</li>
+                                    <li divider>11:30 AM</li>
+                                    <li>12:00 PM</li>
+                                    <li>12:30 PM</li>
+                                    <li>01:00 PM</li>
+                                    <li>01:30 PM</li>
+                                    <li>02:00 PM</li>
+                                    <li>02:30 PM</li>
+                                    <li>03:00 PM</li>
+                                    <li>03:30 PM</li>
+                                    <li>04:00 PM</li>
+                                    <li>04:30 PM</li>
+                                    <li>05:00 PM</li>
+                                    <li>05:30 PM</li>
+                                    <li>06:00 PM</li>
+                                    <li>06:30 PM</li>
+                                    <li>07:00 PM</li>
+                                    <li>07:30 PM</li>
+                                    <li>08:00 PM</li>
+                                    <li>08:30 PM</li>
+                                    <li>09:00 PM</li>
+                                    <li>09:30 PM</li>
+                                    <li>10:00 PM</li>
+                                    <li>10:30 PM</li>
+                                    <li>11:00 PM</li>
+                                    <li>11:30 PM</li>
+                                </SelectList>
+                            </Select>
+                        </ButtonsGroup>
                     </div>
                     
                     <br />
@@ -235,7 +295,7 @@ class StoryControls extends React.Component {
 
                 <section>
                     <div className="section-relative">
-                    <h2>Actions</h2>
+                        <h2>Actions</h2>
                         <ButtonsGroup margin="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
                             <ButtonDropdown>
                                 <Button variant="add">

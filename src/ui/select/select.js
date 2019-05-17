@@ -27,6 +27,7 @@ export const Select = (props) => {
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
+    const inputRef = useRef(null);
     const selectRef = useRef(null);
     
     className = ClassNames(
@@ -42,6 +43,7 @@ export const Select = (props) => {
             setIsOpenedHook(false);
             setValueHook(e.item.children);
             setActiveHook(e.index);
+            inputRef.current.setIsFilled(true);
         }
         setTimeout(() => {
             selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
@@ -89,21 +91,28 @@ export const Select = (props) => {
     }
 
     const findValue = (value) => {
-        let newIndex = null;
-        if (list.length) React.Children.forEach(list, (child, index) => {
-            if (child.props.children === value) newIndex = index;
+        if (!value || !list || !list.length) return null;
+        let found = null;
+        React.Children.forEach(list, (child, index) => {
+            if (found === null &&
+                ((child.props.children === value)
+                || child.props.children.includes(value))
+            ) found = {index, value: child.props.children};
         });
-        return newIndex;
+        return found;
     }
 
     attributes.onKeyUp = (e) => {
-        setActiveHook(findValue(e.target.value));
+        let findVal = findValue(e.target.value) || {index: null, value: ''}
+        setActiveHook(findVal.index);
+        if (e && (e.which === 39)) { // arrow right
+            setValueHook(findVal.value);
+        }
         if (onKeyUp) onKeyUp(e);
     }
 
     attributes.onEnter = (e) => {
         setIsOpenedHook(false);
-        setActiveHook(findValue(e.target.value));
     }
 
     useEffect(() => {
@@ -116,9 +125,10 @@ export const Select = (props) => {
         <div className={className} ref={selectRef}>
             <Input
                 autosize={false}
+                readOnly={!editable}
+                ref={inputRef}
                 value={valueHook}
                 variants={variants}
-                readOnly={!editable}
                 {...attributes}
             />
             <Dropdown opened={isOpenedHook}>
@@ -132,6 +142,7 @@ Select.variants = [
     'arrow',
     'grey',
     'header',
+    'withicon',
     'priority',
     'search'
 ];
@@ -140,6 +151,7 @@ Select.propTypes = {
     active: PropTypes.number,
     disabled: PropTypes.bool,
     editable: PropTypes.bool,
+    icon: PropTypes.string,
     label: PropTypes.string,
     opened: PropTypes.bool,
     variants: PropTypes.arrayOf(PropTypes.string)
@@ -149,6 +161,7 @@ Select.defaultProps = {
     active: null,
     disabled: false,
     editable: false,
+    icon: null,
     label: null,
     opened: false,
     variants: []

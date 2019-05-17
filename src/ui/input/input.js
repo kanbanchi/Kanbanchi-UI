@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import {default as autosizeLibray} from './autosize';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
-export const Input = (props) => {
+export const Input = forwardRef((props, ref) => {
     let {
         autosize,
         className,
         disabled,
+        icon,
         label,
         value,
         variants,
@@ -128,7 +129,21 @@ export const Input = (props) => {
             onClick={clearSearch} />;
     }
 
+    if (icon && variants.includes('withicon')) {
+        inputAfter = <Icon
+            xlink={icon}
+            size={24}
+            className="kui-input__icon"
+        />;
+    }
+
     const Tag = (autosize) ? 'textarea' : 'input';
+
+    useImperativeHandle(ref, () => ({
+        setIsFilled(value) {
+            setIsFilled(!!value);
+        }
+    }));
 
     return (
         <Label className={className}>
@@ -143,11 +158,12 @@ export const Input = (props) => {
             {inputAfter}
         </Label>
     );
-};
+});
 
 Input.propTypes = {
     autosize: PropTypes.bool,
     disabled: PropTypes.bool,
+    icon: PropTypes.string,
     label: PropTypes.string,
     value: PropTypes.string,
     variants: PropTypes.arrayOf(PropTypes.string)
@@ -156,6 +172,7 @@ Input.propTypes = {
 Input.defaultProps = {
     autosize: true,
     disabled: false,
+    icon: null,
     label: null,
     value: '',
     variants: []

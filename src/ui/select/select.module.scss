@@ -49,6 +49,15 @@
         }
     }
 
+    &--variant_withicon {
+        &:hover,
+        &.kui-select--opened {
+            .kui-input__icon {
+                color: $color-base;
+            }
+        }
+    }
+
     &--variant_priority { // todo надо перенести, это не селект
         width: $google-spacing * 13;
 
