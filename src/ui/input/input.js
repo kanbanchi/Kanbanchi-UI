@@ -51,7 +51,7 @@ export const Input = forwardRef((props, ref) => {
     };
 
     attributes.onKeyDown = e => {
-        if (e && (e.which === 10 || e.which === 13)) {
+        if (e && e.which === 13) {
             if (!autosize) e.preventDefault();
             if (onEnter) onEnter(e);
         }
