@@ -1,7 +1,7 @@
 @import '../../assets/sass/index.scss';
 .kui-dropdown {
     position: relative;
-    display: none;
+    animation: animation_display_off .3s ease forwards;
 
     &__item {
         position: absolute;
@@ -84,6 +84,19 @@
         max-height: 0;
     }
 }
+
+@keyframes animation_display_off {
+    0% {
+        display: block;
+    }
+    99% {
+        display: block;
+    }
+    100% {
+        display: none;
+    }
+}
+
 
 @media (max-width: $media-iPlus) {
     .kui-dropdown__item {
