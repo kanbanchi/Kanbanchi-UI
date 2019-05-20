@@ -45,7 +45,7 @@ export const Select = (props) => {
         setItemsRefsHook(refs);
     }
 
-    const onOpenedScrollToActive = () => {
+    const scrollToActive = () => {
         if (itemsRefsHook[activeHook]) {
             setTimeout(() => {
                 dropdownRef.current.scrollTop = itemsRefsHook[activeHook].current.offsetTop - itemsRefsHook[activeHook].current.offsetHeight; // scroll to item - 1
@@ -55,16 +55,20 @@ export const Select = (props) => {
     }
 
     attributes.onChange = (e) => {
-        if (!isSearch && e.item) { // list item clicked
+        if (e.item) { // list item clicked
             setIsOpenedHook(false);
-            setActiveHook(e.index);
-            setValueHook(e.item.children);
-            inputRef.current.setIsFilled(true);
+            setActiveHook(e.item.index);
+            setTimeout(() => {
+                selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            }, 200); // wait for mobile keyboard hide
+            if (isSearch) { // dont update search input value
+                if (onChange) onChange(e);
+            } else if (e.item.text !== valueHook) {
+                inputRef.current.setIsFilled(true);
+                setValueHook(e.item.text);
+                if (onChange) onChange(e);        
+            }
         }
-        setTimeout(() => {
-            selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-        }, 200); // wait for mobile keyboard hide
-        if (onChange) onChange(e);
     }
 
     attributes.onFocus = (e) => {
@@ -73,7 +77,7 @@ export const Select = (props) => {
                 setIsFocusedHook(true);
                 setIsOpenedHook(true);
                 if (isMobileDevice()) selectRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
-                onOpenedScrollToActive();
+                scrollToActive();
             }
         }, 100); // delay after onClick
         if (onFocus) onFocus(e);
@@ -91,7 +95,7 @@ export const Select = (props) => {
         if (isFocusedHook) {
             let isOpened = isOpenedHook;
             setIsOpenedHook(!isOpenedHook);
-            if (!isOpened) onOpenedScrollToActive();
+            if (!isOpened) scrollToActive();
             if (e) e.stopPropagation();
         }
         if (onClick) onClick(e);
@@ -111,23 +115,36 @@ export const Select = (props) => {
     }
 
     const findValue = (value) => {
-        if (!value || !list || !list.length) return null;
-        let found = null;
-        React.Children.forEach(list, (child, index) => {
-            if (found === null &&
-                ((child.props.children === value)
-                || child.props.children.includes(value))
-            ) found = {index, value: child.props.children};
+        return new Promise(function(resolve, reject) {
+            if (!value || !list || !list.length) reject();
+            let val = value.toLowerCase();
+            React.Children.forEach(list, (child, index) => {
+                let item = child.props.children.toLowerCase();
+                if ((item === val) || item.includes(val)) {
+                    resolve({
+                        index,
+                        value: child.props.value,
+                        text: child.props.children
+                    });
+                }
+            });
+            reject();
         });
-        return found;
     }
 
     attributes.onKeyUp = (e) => {
-        let findVal = findValue(e.target.value) || {index: null, value: ''}
-        setActiveHook(findVal.index);
-        if (e && (e.which === 39)) { // arrow right
-            setValueHook(findVal.value);
-        }
+        e.persist();
+        findValue(e.target.value)
+            .then(found => {
+                setActiveHook(found.index);
+                if (e && (e.which === 39)) { // arrow right
+                    setValueHook(found.text);
+                }
+                if (onChange) onChange(Object.assign({}, e, {item: found}));
+            })
+            .catch(() => {
+                setActiveHook(null);
+            });
         if (onKeyUp) onKeyUp(e);
     }
 
@@ -142,6 +159,10 @@ export const Select = (props) => {
             inputRef.current.setIsFilled(val);
         }
     }, []);
+
+    useEffect(() => {
+        scrollToActive();
+    }, [activeHook]);
 
     return (
         <div className={className} ref={selectRef}>

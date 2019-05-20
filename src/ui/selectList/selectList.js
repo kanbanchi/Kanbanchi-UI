@@ -42,8 +42,11 @@ export const SelectList = (props) => {
                     if (!child.props.disabled) {
                         if (fixActive) setActiveHook(index);
                         if (onChange) onChange(Object.assign({}, e, {
-                            index,
-                            item: child.props
+                            item: {
+                                index,
+                                value: child.props.value,
+                                text: child.props.children
+                            }
                         }));
                     }
                     if (child.props.onClick) child.props.onClick(e);

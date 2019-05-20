@@ -196,6 +196,7 @@ class StoryControls extends React.Component {
                                 icon="deadline"
                                 variants={['withicon']}
                                 style={{width: 120}}
+                                onChange={i=>{console.log('Time', i.item)}}
                             >
                                 <SelectList>
                                     <li>12:00 AM</li>
@@ -256,12 +257,13 @@ class StoryControls extends React.Component {
                         active={0}
                         label="Header"
                         variants={['header', 'arrow']}
+                        onChange={i=>{console.log('Plan', i.item)}}
                     >
                         <SelectList>
-                            <li className="starter">
+                            <li className="starter" value="sy" >
                                 Starter yearly
                             </li>
-                            <li>
+                            <li value="pm">
                                 Professional monthly
                             </li>
                         </SelectList>
