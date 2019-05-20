@@ -21,10 +21,12 @@ export const Dropdown = forwardRef((props, ref) => {
     return (
         <div
             className={className}
-            ref={ref}
             {...attributes}
         >
-            <div className="kui-dropdown__item">
+            <div
+                className="kui-dropdown__item"
+                ref={ref}
+            >
                 {children}
             </div>
         </div>
