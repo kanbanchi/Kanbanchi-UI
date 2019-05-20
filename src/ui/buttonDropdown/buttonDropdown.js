@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { PropTypes, ClassNames, ClassVariants, isMobileDevice } from '../utils';
-import { Button, Dropdown } from '../../ui';
+import { PropTypes, ClassNames, ClassVariants } from '../utils';
+import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
 export const ButtonDropdown = (props) => {
     let {
         children,
         className,
+        direction,
         disabled,
         variants,
         onBlur,
@@ -16,8 +17,10 @@ export const ButtonDropdown = (props) => {
         btn = null,
         list = null;
 
+    const [directionHook, setDirectionHook] = useState(direction);
     const [isOpenedHook, setIsOpenedHook] = useState(false);
     const buttonRef = useRef(null);
+    const dropdownRef = useRef(null);
 
     className = ClassNames(
         'kui-button-dropdown',
@@ -27,10 +30,23 @@ export const ButtonDropdown = (props) => {
         className
     );
 
+    const calcDirection = () => {
+        if (direction !== 'auto') return;
+        let el = buttonRef.current.getBoundingClientRect();
+        let dir = (el.top > window.innerHeight / 2) ? 'up' : 'down';
+        setDirectionHook(dir);
+    }
+
+    const dropdownAnimationEnd = () => {
+        dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+    }
+
     attributes.onClick = (e) => {
         let isOpened = isOpenedHook;
         setIsOpenedHook(!isOpenedHook);
-        if (!isOpened && isMobileDevice()) buttonRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
+        if (!isOpened) {
+            calcDirection();
+        }
         if (onClick) onClick(e);
     }
 
@@ -63,8 +79,11 @@ export const ButtonDropdown = (props) => {
         <div className={className} ref={buttonRef}>
             {btn}
             <Dropdown
+                direction={directionHook}
                 className="kui-button-dropdown__dropdown"
                 opened={isOpenedHook}
+                ref={dropdownRef}
+                onAnimationEnd={dropdownAnimationEnd}
             >
                 {list}
             </Dropdown>
@@ -77,11 +96,17 @@ ButtonDropdown.variants = [
 ];
 
 ButtonDropdown.propTypes = {
+    direction: PropTypes.oneOf([
+        'auto',
+        'down',
+        'up'
+    ]),
     disabled: PropTypes.bool,
     variants: PropTypes.arrayOf(PropTypes.string)
 };
 
 ButtonDropdown.defaultProps = {
+    direction: 'auto',
     disabled: false,
     variants: []
 };
