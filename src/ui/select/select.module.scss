@@ -68,9 +68,8 @@
             border-radius: $google-spacing * 4;
         }
 
-        .kui-dropdown,
         .kui-dropdown__item {
-            width: $google-spacing * 25;
+            min-width: $google-spacing * 25;
         }
 
         .kui-select-list-item {

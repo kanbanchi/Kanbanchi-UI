@@ -8,6 +8,7 @@ export const Select = (props) => {
         active,
         children,
         className,
+        direction,
         disabled,
         editable,
         opened,
@@ -24,6 +25,7 @@ export const Select = (props) => {
         isSearch = variants.includes('search');
 
     const [activeHook, setActiveHook] = useState(active);
+    const [directionHook, setDirectionHook] = useState(direction);
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
@@ -54,6 +56,16 @@ export const Select = (props) => {
         }
     }
 
+    const calcDirection = () => {
+        if (direction !== 'auto') return;
+        let el = selectRef.current.getBoundingClientRect();
+        if (el.top > window.innerHeight / 3 * 2) {
+            setDirectionHook('up');
+        } else {
+            setDirectionHook('down');
+        }
+    }
+
     attributes.onChange = (e) => {
         if (e.item) { // list item clicked
             setIsOpenedHook(false);
@@ -76,6 +88,7 @@ export const Select = (props) => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
                 setIsOpenedHook(true);
+                calcDirection();
                 if (isMobileDevice()) selectRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
                 scrollToActive();
             }
@@ -95,7 +108,10 @@ export const Select = (props) => {
         if (isFocusedHook) {
             let isOpened = isOpenedHook;
             setIsOpenedHook(!isOpenedHook);
-            if (!isOpened) scrollToActive();
+            if (!isOpened) {
+                calcDirection();
+                scrollToActive();
+            }
             if (e) e.stopPropagation();
         }
         if (onClick) onClick(e);
@@ -175,6 +191,7 @@ export const Select = (props) => {
                 {...attributes}
             />
             <Dropdown
+                direction={directionHook}
                 opened={isOpenedHook}
                 ref={dropdownRef}
             >
@@ -195,6 +212,11 @@ Select.variants = [
 
 Select.propTypes = {
     active: PropTypes.number,
+    direction: PropTypes.oneOf([
+        'auto',
+        'down',
+        'up'
+    ]),
     disabled: PropTypes.bool,
     editable: PropTypes.bool,
     icon: PropTypes.string,
@@ -205,6 +227,7 @@ Select.propTypes = {
 
 Select.defaultProps = {
     active: null,
+    direction: 'auto',
     disabled: false,
     editable: false,
     icon: null,
