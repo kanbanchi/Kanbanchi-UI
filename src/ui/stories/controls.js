@@ -271,6 +271,8 @@ class StoryControls extends React.Component {
                     <br />
                     <Select 
                         active={0}
+                        direction="up"
+                        label="Direction up force"
                         variants={['priority']}
                     >
                         <SelectList>

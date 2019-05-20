@@ -6,12 +6,14 @@ export const Dropdown = forwardRef((props, ref) => {
     let {
         children,
         className,
+        direction,
         opened,
         ...attributes
     } = props;
 
     className = ClassNames(
         'kui-dropdown',
+        (direction) ? 'kui-dropdown--direction_' + direction : null,
         (opened) ? 'kui-dropdown--opened' : null,
         className
     );
@@ -22,16 +24,20 @@ export const Dropdown = forwardRef((props, ref) => {
             ref={ref}
             {...attributes}
         >
-            {children}
+            <div className="kui-dropdown__item">
+                {children}
+            </div>
         </div>
     );
 });
 
 Dropdown.propTypes = {
+    direction: PropTypes.string, 
     opened: PropTypes.bool
 };
 
 Dropdown.defaultProps = {
+    direction: null,
     opened: false
 };
 
