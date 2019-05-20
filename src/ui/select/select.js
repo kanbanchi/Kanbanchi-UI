@@ -26,6 +26,7 @@ export const Select = (props) => {
 
     const [activeHook, setActiveHook] = useState(active);
     const [directionHook, setDirectionHook] = useState(direction);
+    const [initialValue, setInitialValue] = useState('');
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
@@ -48,22 +49,27 @@ export const Select = (props) => {
     }
 
     const scrollToActive = () => {
-        if (itemsRefsHook[activeHook]) {
+        if (direction !== 'auto') return;
+        let el = selectRef.current.getBoundingClientRect();
+        let dir = (el.top > window.innerHeight / 3 * 2) ? 'up' : 'down';
+        setDirectionHook(dir);
+        let block = (dir === 'up') ? 'end' : 'start';
+        if (isMobileDevice()) {
+            selectRef.current.scrollIntoView({block, behavior: 'smooth'});
+        }
+        if (itemsRefsHook[activeHook] && itemsRefsHook[activeHook].current) {
             setTimeout(() => {
                 dropdownRef.current.scrollTop = itemsRefsHook[activeHook].current.offsetTop - itemsRefsHook[activeHook].current.offsetHeight; // scroll to item - 1
-                if (dropdownRef.current.scrollHeight > dropdownRef.current.offsetHeight) selectRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
+                if (dropdownRef.current.scrollHeight > dropdownRef.current.offsetHeight) {
+                    selectRef.current.scrollIntoView({block, behavior: 'smooth'});
+                }
             }, 300); // wait for dropdown animation
         }
     }
 
-    const calcDirection = () => {
-        if (direction !== 'auto') return;
-        let el = selectRef.current.getBoundingClientRect();
-        if (el.top > window.innerHeight / 3 * 2) {
-            setDirectionHook('up');
-        } else {
-            setDirectionHook('down');
-        }
+    const setValue = (value) => {
+        setValueHook(value);
+        inputRef.current.setIsFilled(value);
     }
 
     attributes.onChange = (e) => {
@@ -76,8 +82,7 @@ export const Select = (props) => {
             if (isSearch) { // dont update search input value
                 if (onChange) onChange(e);
             } else if (e.item.text !== valueHook) {
-                inputRef.current.setIsFilled(true);
-                setValueHook(e.item.text);
+                setValue(e.item.text);
                 if (onChange) onChange(e);        
             }
         }
@@ -88,8 +93,6 @@ export const Select = (props) => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
                 setIsOpenedHook(true);
-                calcDirection();
-                if (isMobileDevice()) selectRef.current.scrollIntoView({block: 'start', behavior: 'smooth'});
                 scrollToActive();
             }
         }, 100); // delay after onClick
@@ -109,7 +112,6 @@ export const Select = (props) => {
             let isOpened = isOpenedHook;
             setIsOpenedHook(!isOpenedHook);
             if (!isOpened) {
-                calcDirection();
                 scrollToActive();
             }
             if (e) e.stopPropagation();
@@ -132,7 +134,10 @@ export const Select = (props) => {
 
     const findValue = (value) => {
         return new Promise(function(resolve, reject) {
-            if (!value || !list || !list.length) reject();
+            if (!value || !list || !list.length) {
+                reject();
+                return;
+            }
             let val = value.toLowerCase();
             React.Children.forEach(list, (child, index) => {
                 let item = child.props.children.toLowerCase();
@@ -149,19 +154,32 @@ export const Select = (props) => {
     }
 
     attributes.onKeyUp = (e) => {
+        if (!e) return;
+        if (onKeyUp) onKeyUp(e);
         e.persist();
         findValue(e.target.value)
             .then(found => {
                 setActiveHook(found.index);
-                if (e && (e.which === 39)) { // arrow right
-                    setValueHook(found.text);
+                if (e.which === 39 || e.which === 13) { // arrow right || enter
+                    setValue(found.text);
+                }
+                if (!isOpenedHook && e.which !== 13) { // open if closed
+                    setIsOpenedHook(true);
+                    scrollToActive();
                 }
                 if (onChange) onChange(Object.assign({}, e, {item: found}));
             })
             .catch(() => {
                 setActiveHook(null);
+            })
+            .then(() => { // dont know why it works only in then
+                if (e.which === 27) { // esc
+                    setValueHook(initialValue + 'jopa'); // doesnt reset to initialValue without it
+                    setIsOpenedHook(false);
+                    setActiveHook(active);
+                    setValue(initialValue);
+                }
             });
-        if (onKeyUp) onKeyUp(e);
     }
 
     attributes.onEnter = (e) => {
@@ -170,9 +188,8 @@ export const Select = (props) => {
 
     useEffect(() => {
         if (active !== null && list.length) {
-            let val = list[active].props.children;
-            setValueHook(val); // initial Select value
-            inputRef.current.setIsFilled(val);
+            setInitialValue(list[active].props.children);
+            setValue(list[active].props.children);
         }
     }, []);
 
