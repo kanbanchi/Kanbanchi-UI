@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { PropTypes, ClassNames, ClassVariants, isMobileDevice } from '../utils';
+import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 
@@ -30,7 +30,7 @@ export const Select = (props) => {
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
-    const [itemsRefsHook, setItemsRefsHook] = useState([]);
+    const [itemsRefsHook, setItemsRefsHook] = useState([]); // list items for auto scroll in dropdown
 
     const dropdownRef = useRef(null);
     const inputRef = useRef(null);
@@ -48,22 +48,27 @@ export const Select = (props) => {
         setItemsRefsHook(refs);
     }
 
-    const scrollToActive = () => {
+    const calcDirection = () => {
         if (direction !== 'auto') return;
         let el = selectRef.current.getBoundingClientRect();
-        let dir = (el.top > window.innerHeight / 3 * 2) ? 'up' : 'down';
+        let dir = (el.top > window.innerHeight / 2) ? 'up' : 'down';
         setDirectionHook(dir);
-        let block = (dir === 'up') ? 'end' : 'start';
-        if (isMobileDevice()) {
-            selectRef.current.scrollIntoView({block, behavior: 'smooth'});
+    }
+
+    const dropdownAnimationEnd = () => {
+        if (isOpenedHook) {
+            dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            onActiveChanged();
+        } else {
+            selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
+    }
+
+    const onActiveChanged = () => {
         if (itemsRefsHook[activeHook] && itemsRefsHook[activeHook].current) {
-            setTimeout(() => {
-                dropdownRef.current.scrollTop = itemsRefsHook[activeHook].current.offsetTop - itemsRefsHook[activeHook].current.offsetHeight; // scroll to item - 1
-                if (dropdownRef.current.scrollHeight > dropdownRef.current.offsetHeight) {
-                    selectRef.current.scrollIntoView({block, behavior: 'smooth'});
-                }
-            }, 300); // wait for dropdown animation
+            let lines = Math.floor(dropdownRef.current.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
+            let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
+            dropdownRef.current.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
         }
     }
 
@@ -76,9 +81,6 @@ export const Select = (props) => {
         if (e.item) { // list item clicked
             setIsOpenedHook(false);
             setActiveHook(e.item.index);
-            setTimeout(() => {
-                selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-            }, 200); // wait for mobile keyboard hide
             if (isSearch) { // dont update search input value
                 if (onChange) onChange(e);
             } else if (e.item.text !== valueHook) {
@@ -93,7 +95,7 @@ export const Select = (props) => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
                 setIsOpenedHook(true);
-                scrollToActive();
+                calcDirection();
             }
         }, 100); // delay after onClick
         if (onFocus) onFocus(e);
@@ -112,7 +114,7 @@ export const Select = (props) => {
             let isOpened = isOpenedHook;
             setIsOpenedHook(!isOpenedHook);
             if (!isOpened) {
-                scrollToActive();
+                calcDirection();
             }
             if (e) e.stopPropagation();
         }
@@ -165,7 +167,7 @@ export const Select = (props) => {
                 }
                 if (!isOpenedHook && e.which !== 13) { // open if closed
                     setIsOpenedHook(true);
-                    scrollToActive();
+                    calcDirection();
                 }
                 if (onChange) onChange(Object.assign({}, e, {item: found}));
             })
@@ -194,7 +196,7 @@ export const Select = (props) => {
     }, []);
 
     useEffect(() => {
-        scrollToActive();
+        onActiveChanged();
     }, [activeHook]);
 
     return (
@@ -211,6 +213,7 @@ export const Select = (props) => {
                 direction={directionHook}
                 opened={isOpenedHook}
                 ref={dropdownRef}
+                onAnimationEnd={dropdownAnimationEnd}
             >
                 {dropdownBody}
             </Dropdown>
