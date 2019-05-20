@@ -57,8 +57,8 @@ export const Select = (props) => {
 
     const dropdownAnimationEnd = () => {
         if (isOpenedHook) {
-            dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
             onActiveChanged();
+            dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         } else {
             selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
