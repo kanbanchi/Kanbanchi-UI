@@ -16,6 +16,7 @@ export const Select = (props) => {
         onBlur,
         onChange,
         onClick,
+        onEnter,
         onFocus,
         onKeyUp,
         ...attributes
@@ -52,7 +53,7 @@ export const Select = (props) => {
     const calcDirection = () => {
         if (direction !== 'auto') return;
         let el = selectRef.current.getBoundingClientRect();
-        let dir = (el.top > window.innerHeight / 2) ? 'up' : 'down';
+        let dir = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
         setDirectionHook(dir);
     }
 
@@ -194,8 +195,11 @@ export const Select = (props) => {
     }
 
     attributes.onEnter = (e) => {
-        setIsOpenedHook(false);
-        setIsClosedHook(true);
+        if (!isSearch) {
+            setIsOpenedHook(false);
+            setIsClosedHook(true);
+        }
+        if (onEnter) onEnter();
     }
 
     useEffect(() => {

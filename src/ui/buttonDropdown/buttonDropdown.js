@@ -34,7 +34,7 @@ export const ButtonDropdown = (props) => {
     const calcDirection = () => {
         if (direction !== 'auto') return;
         let el = buttonRef.current.getBoundingClientRect();
-        let dir = (el.top > window.innerHeight / 2) ? 'up' : 'down';
+        let dir = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
         setDirectionHook(dir);
     }
 
