@@ -1,6 +1,7 @@
 @import '../../assets/sass/index.scss';
 .kui-buttons_group {
     display: flex;
+    flex-wrap: wrap;
     margin-top: -$google-spacing;
     margin-left: -$google-spacing;
 
