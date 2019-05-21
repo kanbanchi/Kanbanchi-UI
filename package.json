@@ -1,6 +1,6 @@
 {
   "name": "kui",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "private": true,
   "main": "index.js",
   "repository": {
@@ -10,6 +10,7 @@
   "author": "Magic Web Solutions LTD",
   "dependencies": {
     "react": "^16.8.3",
+    "react-datepicker": "^2.5.0",
     "react-dom": "^16.8.3"
   },
   "scripts": {
