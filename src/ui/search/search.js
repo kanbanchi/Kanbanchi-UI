@@ -7,6 +7,7 @@ export const Search = (props) => {
     let {
         children,
         className,
+        type,
         variants,
         ...attributes
     } = props;
@@ -17,6 +18,8 @@ export const Search = (props) => {
     );
 
     if (!variants.includes('search')) variants.push('search');
+
+    attributes.type = type || 'search';
 
     return (
         <Select

@@ -38,7 +38,6 @@ export const Input = forwardRef((props, ref) => {
         className
     );
 
-    attributes.type = 'text';
     attributes.className = 'kui-input__item';
     if (disabled) {
         attributes.disabled = true;

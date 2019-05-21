@@ -2,6 +2,19 @@
 .kui-input {
     position: relative;
 
+    input::-webkit-outer-spin-button, 
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    
+    input::-webkit-search-cancel-button {
+       display: none;
+    }
+ 
+    input {
+        -moz-appearance: textfield;
+    }
+
     &__item {
         width: 100%;
         height: auto;
@@ -42,6 +55,10 @@
 
         &:disabled {
             opacity: .5;
+        }
+
+        &:invalid {
+            box-shadow: none;
         }
     }
 

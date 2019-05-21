@@ -4,7 +4,49 @@ import { ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker,
 class StoryControls extends React.Component {
     constructor() {
         super();
+        this.types = [
+            //'button',
+            //'checkbox',
+            //'color',
+            'date',
+            'datetime-local',
+            'email',
+            //'file',
+            //'hidden',
+            //'image',
+            'month',
+            'number',
+            'password',
+            //'radio',
+            //'range',
+            //'reset',
+            'search',
+            //'submit',
+            'tel',
+            'text',
+            'time',
+            'url',
+            //'week'
+        ];
+        this.inputTypes = this.types.map(type => 
+            <Input 
+                autosize={false}
+                label={type} type={type} key={type}
+                style={{width: 200}}
+            />
+        );
+
+        this.selectTypes = this.types.map(type => 
+            <Select 
+                editable={true}
+                label={type} type={type} key={type}
+                style={{width: 200}}
+            >
+                <SelectList><li>¯\_(ツ)_/¯</li></SelectList>
+            </Select>
+        );
     }
+
     render() { 
         return (
             <div className="page">
@@ -58,6 +100,20 @@ class StoryControls extends React.Component {
                     <Input variants={['grey']} label="Label" placeholder="Text input" />
                     <br/>
                     <Input variants={['grey']} label="Label" placeholder="Disabled" disabled />
+                </section>
+
+                <section>
+                    <h2>Input types</h2>
+                    <ButtonsGroup margin="large">
+                        {this.inputTypes}
+                    </ButtonsGroup>
+                </section>
+
+                <section>
+                    <h2>Select types</h2>
+                    <ButtonsGroup margin="large">
+                        {this.selectTypes}
+                    </ButtonsGroup>
                 </section>
 
                 <section className="section-form-min">
@@ -170,9 +226,10 @@ class StoryControls extends React.Component {
                         <ButtonsGroup margin="large">
                             <Select 
                                 editable={true}
-                                label="Select"
-                                variants={['arrow']}
+                                label="Number"
                                 style={{width: 100}}
+                                type="number"
+                                variants={['arrow']}
                             >
                                 <SelectList>
                                     <li divider>0</li>
