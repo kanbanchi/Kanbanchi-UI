@@ -30,6 +30,7 @@ export const Select = (props) => {
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
+    const [isClosedHook, setIsClosedHook] = useState(false); // after closing
     const [itemsRefsHook, setItemsRefsHook] = useState([]); // list items for auto scroll in dropdown
 
     const dropdownRef = useRef(null);
@@ -59,13 +60,16 @@ export const Select = (props) => {
         if (isOpenedHook) {
             onActiveChanged();
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-        } else {
+        } else if (isClosedHook) {
             selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
     }
 
     const onActiveChanged = () => {
-        if (itemsRefsHook[activeHook] && itemsRefsHook[activeHook].current) {
+        if (isFocusedHook 
+            && itemsRefsHook[activeHook] 
+            && itemsRefsHook[activeHook].current) 
+        {
             let lines = Math.floor(dropdownRef.current.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
             let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
             dropdownRef.current.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
@@ -80,6 +84,7 @@ export const Select = (props) => {
     attributes.onChange = (e) => {
         if (e.item) { // list item clicked
             setIsOpenedHook(false);
+            setIsClosedHook(true);
             setActiveHook(e.item.index);
             if (isSearch) { // dont update search input value
                 if (onChange) onChange(e);
@@ -105,6 +110,7 @@ export const Select = (props) => {
         if (isFocusedHook) {
             setIsFocusedHook(false);
             setIsOpenedHook(false);
+            setIsClosedHook(true);
         }
         if (onBlur) onBlur(e);
     }
@@ -113,7 +119,9 @@ export const Select = (props) => {
         if (isFocusedHook) {
             let isOpened = isOpenedHook;
             setIsOpenedHook(!isOpenedHook);
-            if (!isOpened) {
+            if (isOpened) {
+                setIsClosedHook(true);
+            } else {
                 calcDirection();
             }
             if (e) e.stopPropagation();
@@ -178,6 +186,7 @@ export const Select = (props) => {
                 if (e.which === 27) { // esc
                     setValueHook(initialValue + 'jopa'); // doesnt reset to initialValue without it
                     setIsOpenedHook(false);
+                    setIsClosedHook(true);
                     setActiveHook(active);
                     setValue(initialValue);
                 }
@@ -186,6 +195,7 @@ export const Select = (props) => {
 
     attributes.onEnter = (e) => {
         setIsOpenedHook(false);
+        setIsClosedHook(true);
     }
 
     useEffect(() => {
