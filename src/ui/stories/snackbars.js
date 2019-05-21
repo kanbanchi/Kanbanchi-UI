@@ -22,11 +22,6 @@ class StorySnackbars extends React.Component {
                     <br />
 
                     <h2>Error</h2>
-                    1
-                    <br />
-                    2
-                    <br />
-                    3
                     <Snackbar
                         variant="error"
                         text="The email address is not valid. Please, use name@domain.com format."

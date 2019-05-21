@@ -1,0 +1,92 @@
+@import '../../assets/sass/index.scss';
+
+.kui-select {
+    
+    .kui-input {
+        &__item {
+            color: $color-base;
+            cursor: pointer;
+        }
+    }
+
+    &:hover,
+    &--opened {
+        .kui-input {
+            &__item {
+                color: $color-base;
+                box-shadow: $shadow-hover;
+                border-color: transparent;
+            }
+        }
+
+        .kui-input__icon-arrow {
+            color: $color-base;
+        }
+    }
+
+    &--opened {
+        .kui-input__icon-arrow {
+            transform: scaleY(-1);
+        }
+    }
+
+    &--disabled {
+        pointer-events: none;
+    }
+
+    &--variant_header {
+        width: $google-spacing * 30;
+
+        .kui-input__item {
+            font-size: $base-font-size;
+            font-weight: bold;
+            border-color: transparent;
+            background: $color-white;
+        }
+
+        .kui-dropdown__item {
+            width: $google-spacing * 30;
+        }
+    }
+
+    &--variant_withicon {
+        &:hover,
+        &.kui-select--opened {
+            .kui-input__icon {
+                color: $color-base;
+            }
+        }
+    }
+
+    &--variant_priority { // todo надо перенести, это не селект
+        width: $google-spacing * 13;
+
+        .kui-input__item {
+            height: $google-spacing * 4;
+            font-weight: bold;
+            border: 1px dashed calc-color(fade, $color-base, 15);
+            border-radius: $google-spacing * 4;
+        }
+
+        .kui-dropdown__item {
+            min-width: $google-spacing * 25;
+        }
+
+        .kui-select-list-item {
+            &__col {
+                &--icon {
+                    flex: 0 0 $google-spacing * 4;
+                    color: $color-base;
+                }
+                &--title {
+                    max-width: calc(100% - #{$google-spacing * 4});
+                }
+            }
+
+            &__icon {
+                width: $google-spacing * 3;
+                height: $google-spacing * 3;
+            }
+        }
+    }
+}

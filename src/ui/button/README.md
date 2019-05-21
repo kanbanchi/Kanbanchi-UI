@@ -56,7 +56,7 @@ Text value instead {children} wraps in <span>
 
 <Button variant="secondary">Secondary Small</Button>
 
-<Button variant="primary_white">White</Button>
+<Button color="white">White</Button>
 <!-- for dark background -->
 
 <Button variant="fab" size="large">

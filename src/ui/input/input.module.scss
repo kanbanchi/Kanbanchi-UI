@@ -1,34 +1,125 @@
 @import '../../assets/sass/index.scss';
 .kui-input {
+    position: relative;
+
+    input::-webkit-clear-button,
+    input::-webkit-datetime-edit,
+    input::-webkit-outer-spin-button, 
+    input::-webkit-inner-spin-button,
+    input::-webkit-search-cancel-button {
+       -webkit-appearance: none;
+       display: none;
+    }
+ 
+    input {
+        -moz-appearance: textfield;
+    }
+
     &__item {
-        height: $google-spacing * 5;
+        width: 100%;
+        height: auto;
+        min-height: $google-spacing * 5;
+        resize: none;
         padding: $google-spacing $google-spacing * 2;
+        font-size: $milli-size;
+        line-height: $base-line-height;
         border-radius: $base-radius;
-        border: 1px solid calc-color(tint, $color-base, 15);
+        border: 1px solid calc-color(fade, $color-base, 15);
         background: $color-white;
+        @include transition;
 
         &::placeholder {
-            color: calc-color(tint, $color-base, 50);
-            text-align: center;
+            color: calc-color(fade, $color-base, 50);
         }
 
         .kui-input--filled & {
             border-color: $color-base;
+            background: $color-light-background;
+        }
+
+        .kui-input--noresize & {
+            height: $google-spacing * 5;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .kui-input--variant_grey & {
+            border-color: transparent;
         }
 
         &:focus {
             border-color: $color-purple;
+            background: $color-light-background;
             box-shadow: none;
         }
 
         &:disabled {
             opacity: .5;
         }
+
+        &:invalid {
+            box-shadow: none;
+        }
     }
 
     &--disabled {
         .kui-label__item {
             color: calc-color(fade, $color-base, 30);
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        bottom: $google-spacing;
+        right: $google-spacing;
+        color: calc-color(fade, $color-base, 30);
+        cursor: pointer;
+        @include transition;
+    }
+
+    &--variant_withicon {
+        .kui-input__item {
+            padding-right: $google-spacing * 5;
+        }
+
+        .kui-input__item:focus + .kui-input__icon,
+        &:hover .kui-input__icon {
+            color: $color-base;
+        }
+    }
+
+    &__icon-arrow {
+        position: absolute;
+        bottom: $google-spacing;
+        right: $google-spacing;
+        color: calc-color(fade, $color-base, 30);
+        cursor: pointer;
+        @include transition;
+    }
+
+    &--variant_arrow {
+        .kui-input__item {
+            padding-right: $google-spacing * 5;
+        }
+    }
+
+    &__icon-clear {
+        position: absolute;
+        bottom: $google-spacing;
+        right: $google-spacing;
+        height: 0;
+        color: calc-color(fade, $color-base, 30);
+        opacity: 0;
+        cursor: pointer;
+        @include transition($transition-property: opacity);
+
+        .kui-input--filled & {
+            height: $google-spacing * 3;
+            opacity: 1;
+        }
+
+        &:hover {
+            color: $color-base;
         }
     }
 }

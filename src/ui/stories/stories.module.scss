@@ -1,26 +1,31 @@
 @import '../../assets/sass/index.scss';
-.page {
-    padding: 2em;
-}
 
 section {
-    margin: 0 0 2rem;
+    padding: 2em;
     z-index: $z-initials;
+}
 
-    &.section-grey,
-    &.section-purple {
-        margin-left: -2em;
-        margin-right: -2em;
-        padding: 2em;
-    }
-
-    &.section-grey {
+.section {
+    &-grey {
         background: $color-background;
     }
 
-    &.section-purple {
+    &-purple {
         color: $color-white;
         background: $color-purple;
+    }
+
+    &-black {
+        color: $color-white;
+        background: $color-base;
+    }
+
+    &-form-min {
+        max-width: $google-spacing * 50;
+    }
+
+    &-relative {
+        position: relative;
     }
 }
 

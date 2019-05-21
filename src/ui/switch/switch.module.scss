@@ -1,4 +1,55 @@
 @import '../../assets/sass/index.scss';
 .kui-switch {
+    &__input {
+        display: none;      
+    }
+    &__label {
+        position: relative;
+        display: block;
+        min-height: $google-spacing * 3;
+        padding-right: $google-spacing * 6;
+        font-size: $milli-size;
+        user-select: none;
+        cursor: pointer;
+        &:after,
+        &:before {
+            top: $google-spacing / 4;
+            content: '';
+            position: absolute;
+            right: 0;
+            @include transition;
+        }
+        &:before {
+            width: $google-spacing * 5;
+            height: $google-spacing * 2.5;
+            background-color: calc-color(fade, $color-base, 30);
+            border-radius: $google-spacing * 2;
+        }
+        &:after {
+            top: $google-spacing / 2;
+            width: $google-spacing * 2;
+            height: $google-spacing * 2;
+            background-color: $color-white;
+            border-radius: $google-spacing;
+            transform: translateX(- $google-spacing * 2.7);
+        }
+    }
+    &__input:checked + &__label:before {
+        background-color: $color-purple;
+    }
+    &__input:checked + &__label:after {
+        transform: translateX(- $google-spacing / 4);
+    }
 
+    &--disabled {
+        pointer-events: none;
+
+        .kui-switch__label {
+            color: calc-color(fade, $color-base, 30);
+            
+            &:before {
+                opacity: .33;
+            }
+        }
+    }
 }

@@ -92,3 +92,7 @@
     position: absolute;
     top: 0;
 }
+
+/* calc colors */
+$color-purple-hover: calc-color(tint, $color-purple, 90);
+$color-purple-light: calc-color(fade, $color-purple, 30);
