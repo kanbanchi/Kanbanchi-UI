@@ -159,6 +159,13 @@ export const Input = forwardRef((props, ref) => {
     );
 });
 
+Input.variants = [
+    'arrow',
+    'grey',
+    'withicon',
+    'search'
+];
+
 Input.propTypes = {
     autosize: PropTypes.bool,
     disabled: PropTypes.bool,

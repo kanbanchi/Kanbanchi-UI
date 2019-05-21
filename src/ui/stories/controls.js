@@ -8,7 +8,7 @@ class StoryControls extends React.Component {
             //'button',
             //'checkbox',
             //'color',
-            'date',
+            //'date',
             'datetime-local',
             'email',
             //'file',
@@ -197,9 +197,7 @@ class StoryControls extends React.Component {
 
                 <section>
                     <h2>Datepicker</h2>
-                    <Datepicker>
-                        Label
-                    </Datepicker>
+                    <div className="section-relative" style={{width: 200}}><Datepicker/></div>
                 </section>
 
                 <section className="section-form-min">

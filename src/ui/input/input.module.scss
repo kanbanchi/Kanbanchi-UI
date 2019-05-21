@@ -2,12 +2,12 @@
 .kui-input {
     position: relative;
 
+    input::-webkit-clear-button,
+    input::-webkit-datetime-edit,
     input::-webkit-outer-spin-button, 
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-    }
-    
+    input::-webkit-inner-spin-button,
     input::-webkit-search-cancel-button {
+       -webkit-appearance: none;
        display: none;
     }
  
@@ -80,6 +80,11 @@
     &--variant_withicon {
         .kui-input__item {
             padding-right: $google-spacing * 5;
+        }
+
+        .kui-input__item:focus + .kui-input__icon,
+        &:hover .kui-input__icon {
+            color: $color-base;
         }
     }
 
