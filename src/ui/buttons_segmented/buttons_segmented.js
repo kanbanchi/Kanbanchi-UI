@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { PropTypes, ClassNames } from '../utils';
 import '../../../src/ui/buttons_segmented/buttons_segmented.module.scss';
 
@@ -22,17 +22,15 @@ export const ButtonsSegmented = (props) => {
     if (children) {
         if (!children.length) children = [children]; // if 1 child
         if (active > children.length - 1) active = 0;
-        const [checked, setChecked] = useState(active);
-
+        
         buttonHocs = React.Children.map(children, (child, i) => {
             return React.cloneElement(child, {
                 className: ClassNames(
                     'kui-buttons_segmented__item',
                     (child.props.className) ? child.props.className : null,
-                    (i === checked) ? 'kui-buttons_segmented__item--active' : null
+                    (i === active) ? 'kui-buttons_segmented__item--active' : null
                 ),
                 onClick: () => {
-                    setChecked(i);
                     if (onChange) onChange(i);
                     if (child.props.onClick) child.props.onClick();
                 }

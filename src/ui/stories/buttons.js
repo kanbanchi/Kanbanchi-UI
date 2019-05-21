@@ -5,8 +5,10 @@ class StoryButtons extends React.Component {
     constructor() {
         super();
         this.toggleDisabled = this.toggleDisabled.bind(this);
+        this.setStateProp = this.setStateProp.bind(this);
         this.state = {
-            disabled: true
+            disabled: true,
+            tabs: [0, 1]
         };
     }
     toggleDisabled() {
@@ -14,13 +16,27 @@ class StoryButtons extends React.Component {
             disabled: !prevState.disabled
         }));
     }
+    setStateProp({prop, propIndex, val}) {
+        this.setState((prevState) => {
+            if (propIndex === null) return {[prop]: index};
+            return {
+                ...prevState,
+                [prop]: {
+                    ...prevState[prop],
+                    [propIndex]: val
+                }
+            };
+        });
+    }
     render() { 
         return (
             <div className="page">
-                <section style={{width: 240}}>
-                    <Switch checked={this.state.disabled} onChange={this.toggleDisabled}>
-                        Disable buttons
-                    </Switch>
+                <section className="section-grey" style={{position: 'sticky', top: 0}}>
+                    <div style={{width: 240}}>
+                        <Switch checked={this.state.disabled} onChange={this.toggleDisabled}>
+                            Disable buttons
+                        </Switch>
+                    </div>
                 </section>                
                 <section>
                     <h2>Primary</h2>
@@ -182,22 +198,24 @@ class StoryButtons extends React.Component {
                 </section>
                 <section>
                     <h2>Segmented</h2>
-                    <ButtonsSegmented active={0}>
+                    <ButtonsSegmented
+                        active={+this.state.tabs[0]}
+                        onChange={val=>this.setStateProp({prop: 'tabs', propIndex: 0, val})}
+                    >
                         <Button>Button 0</Button>
                         <Button>Button 1</Button>
                         <Button onClick={() => alert(2)}>Button 2</Button>
                     </ButtonsSegmented>
-                    <div>
-                        <br />
-                        <ButtonsSegmented
-                            active={0}
-                            onChange={i=>{console.log('Segment ' + i + ' active')}}
-                            variant="black"
-                        >
-                            <Button>Button 0</Button>
-                            <Button>Button 1</Button>
-                        </ButtonsSegmented>
-                    </div>
+                    <br />
+                    <br />
+                    <ButtonsSegmented
+                        active={+this.state.tabs[1]}
+                        onChange={val=>this.setStateProp({prop: 'tabs', propIndex: 1, val})}
+                        variant="black"
+                    >
+                        <Button>Button 0</Button>
+                        <Button>Button 1</Button>
+                    </ButtonsSegmented>
                 </section>
                 <section className="section-form-min">
                     <h2>Add</h2>
