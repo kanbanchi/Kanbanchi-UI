@@ -31,7 +31,6 @@ export const Select = (props) => {
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
-    const [isClosedHook, setIsClosedHook] = useState(false); // after closing
     const [itemsRefsHook, setItemsRefsHook] = useState([]); // list items for auto scroll in dropdown
 
     const dropdownRef = useRef(null);
@@ -61,8 +60,6 @@ export const Select = (props) => {
         if (isOpenedHook) {
             onActiveChanged();
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-        } else if (isClosedHook) {
-            selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
     }
 
@@ -85,7 +82,6 @@ export const Select = (props) => {
     attributes.onChange = (e) => {
         if (e.item) { // list item clicked
             setIsOpenedHook(false);
-            setIsClosedHook(true);
             setActiveHook(e.item.index);
             if (isSearch) { // dont update search input value
                 if (onChange) onChange(e);
@@ -111,7 +107,6 @@ export const Select = (props) => {
         if (isFocusedHook) {
             setIsFocusedHook(false);
             setIsOpenedHook(false);
-            setIsClosedHook(true);
         }
         if (onBlur) onBlur(e);
     }
@@ -120,9 +115,7 @@ export const Select = (props) => {
         if (isFocusedHook) {
             let isOpened = isOpenedHook;
             setIsOpenedHook(!isOpenedHook);
-            if (isOpened) {
-                setIsClosedHook(true);
-            } else {
+            if (!isOpened) {
                 calcDirection();
             }
             if (e) e.stopPropagation();
@@ -187,7 +180,6 @@ export const Select = (props) => {
                 if (e.which === 27) { // esc
                     setValueHook(initialValue + 'jopa'); // doesnt reset to initialValue without it
                     setIsOpenedHook(false);
-                    setIsClosedHook(true);
                     setActiveHook(active);
                     setValue(initialValue);
                 }
@@ -197,7 +189,6 @@ export const Select = (props) => {
     attributes.onEnter = (e) => {
         if (!isSearch) {
             setIsOpenedHook(false);
-            setIsClosedHook(true);
         }
         if (onEnter) onEnter();
     }

@@ -19,7 +19,6 @@ export const ButtonDropdown = (props) => {
 
     const [directionHook, setDirectionHook] = useState(direction);
     const [isOpenedHook, setIsOpenedHook] = useState(false);
-    const [isClosedHook, setIsClosedHook] = useState(false); // after closing
     const buttonRef = useRef(null);
     const dropdownRef = useRef(null);
 
@@ -41,17 +40,13 @@ export const ButtonDropdown = (props) => {
     const dropdownAnimationEnd = () => {
         if (isOpenedHook) {
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-        } else if (isClosedHook) {
-            buttonRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
     }
 
     attributes.onClick = (e) => {
         let isOpened = isOpenedHook;
         setIsOpenedHook(!isOpenedHook);
-        if (isOpened) {
-            setIsClosedHook(true);
-        } else {
+        if (!isOpened) {
             calcDirection();
         }
         if (onClick) onClick(e);
@@ -60,7 +55,6 @@ export const ButtonDropdown = (props) => {
     attributes.onBlur = (e) => {
         setTimeout(() => {
             setIsOpenedHook(false);
-            setIsClosedHook(true);
         }, 200); // delay after onClick
         if (onBlur) onBlur(e);
     }
