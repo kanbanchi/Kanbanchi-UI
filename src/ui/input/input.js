@@ -86,27 +86,17 @@ export const Input = forwardRef((props, ref) => {
         labelItem = (<div className="kui-label__item">{label}</div>);
     }
 
-    useEffect(() => {
-        if (autosize) autosizeLibray(textarea.current);
-    }, []);
-
-    useEffect(() => {
-        setInputValue(value);
-    }, [value]);
-
-    const clearSearch = () => {
+    const clearInput = (e) => {
+        e.preventDefault();
         setIsFilled(false);
         setInputValue('');
-        setTimeout(() => {
-            if (isFocusedHook) textarea.current.blur();
-        }, 100);
     };
 
     if (variants.includes('arrow')) {
         inputAfter = <Icon
             xlink="arrow-down"
             size={24}
-            className="kui-input__icon-arrow"
+            className="kui-input__icon kui-input__icon--arrow"
         />;
     }
 
@@ -124,8 +114,8 @@ export const Input = forwardRef((props, ref) => {
         inputAfter = <Icon
             xlink="clear"
             size={24}
-            className="kui-input__icon-clear"
-            onClick={clearSearch} />;
+            className="kui-input__icon kui-input__icon--clear"
+            onClick={clearInput} />;
     }
 
     if (icon && variants.includes('withicon')) {
@@ -136,7 +126,33 @@ export const Input = forwardRef((props, ref) => {
         />;
     }
 
+    if (variants.includes('datepicker')) {
+        autosize = false;
+        icon = icon || 'calendar';
+        attributes.readOnly = true;
+        const iconCalendar = <Icon
+            xlink={icon}
+            size={24}
+            className="kui-input__icon"
+        />;
+        const iconClear = <Icon
+            xlink="clear"
+            size={24}
+            className="kui-input__icon kui-input__icon--clear"
+            onClick={clearInput}
+        />;
+        inputAfter = (isFilled) ? iconClear : iconCalendar;
+    }
+
     const Tag = (autosize) ? 'textarea' : 'input';
+
+    useEffect(() => {
+        if (autosize) autosizeLibray(textarea.current);
+    }, []);
+
+    useEffect(() => {
+        setInputValue(value);
+    }, [value]);
 
     useImperativeHandle(ref, () => ({
         setIsFilled(value) {
@@ -161,6 +177,7 @@ export const Input = forwardRef((props, ref) => {
 
 Input.variants = [
     'arrow',
+    'datepicker',
     'grey',
     'withicon',
     'search'

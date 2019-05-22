@@ -75,6 +75,23 @@
         color: calc-color(fade, $color-base, 30);
         cursor: pointer;
         @include transition;
+
+        &--clear {
+            height: 0;
+            opacity: 0;
+            color: calc-color(fade, $color-base, 30);
+            @include transition;
+            transition-property: color, opacity;
+
+            .kui-input--filled & {
+                height: $google-spacing * 3;
+                opacity: 1;
+            }
+
+            &:hover {
+                color: $color-base;
+            }
+        }
     }
 
     &--variant_withicon {
@@ -88,38 +105,10 @@
         }
     }
 
-    &__icon-arrow {
-        position: absolute;
-        bottom: $google-spacing;
-        right: $google-spacing;
-        color: calc-color(fade, $color-base, 30);
-        cursor: pointer;
-        @include transition;
-    }
-
     &--variant_arrow {
         .kui-input__item {
             padding-right: $google-spacing * 5;
         }
     }
 
-    &__icon-clear {
-        position: absolute;
-        bottom: $google-spacing;
-        right: $google-spacing;
-        height: 0;
-        color: calc-color(fade, $color-base, 30);
-        opacity: 0;
-        cursor: pointer;
-        @include transition($transition-property: opacity);
-
-        .kui-input--filled & {
-            height: $google-spacing * 3;
-            opacity: 1;
-        }
-
-        &:hover {
-            color: $color-base;
-        }
-    }
 }
