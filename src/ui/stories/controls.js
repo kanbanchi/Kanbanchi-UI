@@ -4,6 +4,10 @@ import { ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker,
 class StoryControls extends React.Component {
     constructor() {
         super();
+        this.setDate = this.setDate.bind(this);
+        this.state = {
+            dates: [null]
+        };
         this.types = [
             //'button',
             //'checkbox',
@@ -47,6 +51,19 @@ class StoryControls extends React.Component {
         );
     }
 
+    setDate({prop, propIndex, val}) {
+        this.setState((prevState) => {
+            if (propIndex === null) return {[prop]: index};
+            return {
+                ...prevState,
+                [prop]: {
+                    ...prevState[prop],
+                    [propIndex]: val
+                }
+            };
+        });
+    }
+
     render() { 
         return (
             <div className="page">
@@ -79,11 +96,26 @@ class StoryControls extends React.Component {
                     </div>
                 </section>
 
+                <section>
+                    <h2>Datepicker</h2>
+                    <Datepicker
+                        selected={this.state.dates[0]}
+                        onSelect={(val)=>this.setDate({prop: 'dates', propIndex: 0, val})}
+                        minDate={new Date()}
+                        highlightDates={[
+                            { "react-datepicker__day--highlighted": [
+                            new Date('2019-05-24'),
+                            new Date('2019-05-25')
+                            ]}
+                        ]}
+                    />
+                </section>
+
                 <section className="section-form-min">
                     <h2>Input</h2>
                     <Input label="Label" value="Text test"/>
                     <br/>
-                    <Input placeholder="Without label" />
+                    <Input placeholder="Without label & readonly" readOnly={true} />
                     <br/>
                     <Input 
                         label="No resize"
@@ -193,11 +225,6 @@ class StoryControls extends React.Component {
                     </Checkbox>
                     <br/>
                     <Checkbox disabled>Disabled</Checkbox>
-                </section>
-
-                <section>
-                    <h2>Datepicker</h2>
-                    <div className="section-relative" style={{width: 200}}><Datepicker/></div>
                 </section>
 
                 <section className="section-form-min">

@@ -1,4 +1,184 @@
 @import '../../assets/sass/index.scss';
 .kui-datepicker {
+    width: $google-spacing * 18;
+    .kui-input__item {
+        color: $color-base;
+        border-color: calc-color(fade, $color-base, 15);
+        cursor: pointer;
+    }
+    .kui-input--filled {
+        .kui-input__item {
+            border-color: $color-base;
+            background: $color-light-background;
+        }
+    }
+    &:hover,
+    .kui-input.react-datepicker-ignore-onclickoutside {
+        .kui-input {
+            &__item {
+                color: $color-base;
+                box-shadow: $shadow-hover;
+                border-color: transparent;
+            }
+        }
 
+        .kui-input__icon:not(.kui-input__icon--clear) {
+            color: $color-base;
+        }
+    }
+
+    .react-datepicker-popper {
+        z-index: $z-modal;
+        border-radius: $base-radius;
+        box-shadow: $shadow-hover;
+        background: $color-white;
+        user-select: none;
+
+        &[data-placement^="bottom"] {
+            margin-top: $google-spacing;
+        }
+
+        &[data-placement^="top"] {
+            margin-bottom: $google-spacing;
+        }
+
+        &[data-placement^="right"] {
+            margin-left: $google-spacing;
+        }
+
+        &[data-placement^="left"] {
+            margin-right: $google-spacing;
+        }
+    }
+
+    .react-datepicker {
+        font-family: inherit;
+        font-size: $milli-size;
+        background-color: $color-white;
+        color: $color-base;
+        border: 0 none;
+        border-radius: $base-radius;
+    }
+
+    .react-datepicker__triangle {
+        display: none;
+    }
+
+    .react-datepicker__header {
+        padding-top: 0;
+        background-color: $color-white;
+        border-bottom: 0 none;
+        border-top-left-radius: $base-radius;
+        border-top-right-radius: $base-radius;
+
+        .react-datepicker__current-month,
+        .react-datepicker-time__header,
+        .react-datepicker-year-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: $google-spacing * 5;
+            line-height: $google-spacing * 4;
+            color: $color-base;
+            font-size: $milli-size;
+        }
+
+        .react-datepicker__day-names {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 $google-spacing;
+            background-color: $color-purple;
+
+            .react-datepicker__day-name {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: $google-spacing * 2;
+                width: $google-spacing * 4;
+                color: $color-white;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .react-datepicker__month {
+        padding: $google-spacing;
+        margin: 0;
+
+        .react-datepicker__week {
+            display: flex;
+
+            .react-datepicker__day {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: $google-spacing * 4;
+                width: $google-spacing * 4;
+                font-size: $milli-size;
+                @include transition;
+
+                &--outside-month {
+                    color: calc-color('tint', $color-base, 30);
+                }
+
+                &:hover {
+                    color: $color-base;
+                    background-color: $color-background;
+                    border-radius: $base-radius;
+                }
+
+                &--selected,
+                &--keyboard-selected,
+                &--highlighted {
+                    border-radius: $base-radius;
+                }
+
+                &--highlighted {
+                    color: $color-base;
+                    background-color: calc-color('fade', $color-purple, 30);
+                }
+
+                &--selected,
+                &--selected:hover,
+                &--keyboard-selected,
+                &--keyboard-selected:hover {
+                    color: $color-white;
+                    background-color: $color-purple;
+                }
+
+                &--disabled,
+                &--disabled:hover {
+                    cursor: default;
+                    color: calc-color('tint', $color-base, 30);
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    .react-datepicker__navigation {
+        position: absolute;
+        top: $google-spacing;
+        width: $google-spacing * 3;
+        height: $google-spacing * 3;
+        background: no-repeat;
+        box-shadow: none;
+        border: 0 none;
+        opacity: .3;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &--previous {
+            left: $google-spacing;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.7 8.1a1 1 0 0 0 0-1.4 1 1 0 0 0-1.4 0l-4.6 4.6a1 1 0 0 0 0 1.4l4.6 4.6a1 1 0 0 0 1.4-1.4L10.8 12l3.9-3.9z'/%3E%3C/svg%3E");
+        }
+
+        &--next {
+            right: $google-spacing;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10.7 6.7a1 1 0 0 0-1.4 1.4l3.9 3.9-3.9 3.9a1 1 0 0 0 0 1.4c.4.4 1 .4 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4l-4.6-4.6z'/%3E%3C/svg%3E");
+        }
+    }
 }
