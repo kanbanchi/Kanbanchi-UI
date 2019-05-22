@@ -1,6 +1,8 @@
 @import '../../assets/sass/index.scss';
 .kui-datepicker {
+    display: inline-block;
     width: $google-spacing * 18;
+    
     .kui-input__item {
         color: $color-base;
         border-color: calc-color(fade, $color-base, 15);
