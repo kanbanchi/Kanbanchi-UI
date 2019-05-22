@@ -1,0 +1,86 @@
+@import '../../assets/sass/index.scss';
+
+$cubic: cubic-bezier(.4,.4,.15,1.4);
+
+.kui-loader {
+    position: absolute;
+
+    &__item {
+        position: absolute;
+        width: $google-spacing * 2;
+        height: $google-spacing * 2;
+        color: $color-white;
+        border-radius: $base-radius;
+        background: $color-purple;
+
+        &--01 {
+            animation: animation_loader_01 2s infinite;
+        }
+
+        &--02 {
+            opacity: .5;
+            animation: animation_loader_01 2s .1s infinite;
+        }
+
+        &--03 {
+            opacity: .4;
+            animation: animation_loader_01 2s .2s infinite;
+        }
+        
+        &--04 {
+            opacity: .3;
+            animation: animation_loader_01 2s .3s infinite;
+        }
+
+        &--05 {
+            opacity: .2;
+            animation: animation_loader_01 2s .4s infinite;
+        }
+    }
+
+    &--small {
+        .kui-loader__item {
+            &--01 {
+                animation: animation_loader_02 2s infinite;
+            }
+
+            &--02 {
+                animation: animation_loader_02 2s .5s infinite;
+            }
+
+            &--03 {
+                opacity: .2;
+                background: $color-white;
+                animation: animation_loader_02 2s 1s infinite;
+            }
+
+            &--04,
+            &--05 {
+                display: none;
+            }
+        }
+        
+    }    
+}
+
+@keyframes animation_loader_01 {
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+        animation-timing-function: $cubic;
+    }
+    50% { 
+        transform: translateX($google-spacing * 8) rotate(270deg);
+        animation-timing-function: $cubic;
+    }
+}
+
+@keyframes animation_loader_02 {
+    0%, 100% {
+        transform: scale(1);
+        animation-timing-function: ease-in-out;
+    }
+    50% { 
+        transform: scale(.1);
+        animation-timing-function: ease-in-out;
+    }
+}

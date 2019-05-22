@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
+import { Loader, ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
@@ -68,6 +68,26 @@ class StoryControls extends React.Component {
         return (
             <div className="page">
                 <section>
+                    <h2>Loader</h2>
+                    <Loader/>
+                </section>
+
+                <section>
+                    <h2>Datepicker</h2>
+                    <Datepicker
+                        selected={this.state.dates[0]}
+                        onSelect={(val)=>this.setDate({prop: 'dates', propIndex: 0, val})}
+                        minDate={new Date('2019-05-22')}
+                        highlightDates={[
+                            { "react-datepicker__day--highlighted": [
+                            new Date('2019-05-24'),
+                            new Date('2019-05-25')
+                            ]}
+                        ]}
+                    /><Loader small className="stories-loader-small"/>
+                </section>
+
+                <section>
                     <h2>Tabs</h2>
                     <div>
                         <p><b>Default</b></p>
@@ -94,21 +114,6 @@ class StoryControls extends React.Component {
                             <Button>Tab 4</Button>
                         </Tabs>
                     </div>
-                </section>
-
-                <section>
-                    <h2>Datepicker</h2>
-                    <Datepicker
-                        selected={this.state.dates[0]}
-                        onSelect={(val)=>this.setDate({prop: 'dates', propIndex: 0, val})}
-                        minDate={new Date()}
-                        highlightDates={[
-                            { "react-datepicker__day--highlighted": [
-                            new Date('2019-05-24'),
-                            new Date('2019-05-25')
-                            ]}
-                        ]}
-                    />
                 </section>
 
                 <section className="section-form-min">

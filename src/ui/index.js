@@ -20,3 +20,5 @@ export {Dropdown} from './dropdown/dropdown.js';
 export {Select} from './select/select.js';
 export {SelectList} from './selectList/selectList.js';
 export {SelectListItem} from './selectListItem/selectListItem.js';
+
+export {Loader} from './loader/loader.js';
