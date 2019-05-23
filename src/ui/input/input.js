@@ -57,31 +57,6 @@ export const Input = forwardRef((props, ref) => {
         if (onKeyDown) onKeyDown(e);
     };
 
-    let blurTimeout; 
-
-    /**
-     * Проблема: при клике на иконку инпут получает одновременно onBlur и onFocus
-     */
-
-    attributes.onBlur = (e) => {
-        blurTimeout = setTimeout(() => {
-            if (isFocusedHook) {
-                setIsFocusedHook(false);
-                if (onBlur) onBlur(e);
-            }
-        }, 200);
-    }
-
-    attributes.onFocus = (e) => {
-        clearTimeout(blurTimeout);
-        setTimeout(() => {
-            if (!isFocusedHook) {
-                setIsFocusedHook(true);
-                if (onFocus) onFocus(e);
-            }
-        }, 100);
-    }
-
     if (label) {
         labelItem = (<div className="kui-label__item">{label}</div>);
     }
@@ -146,8 +121,40 @@ export const Input = forwardRef((props, ref) => {
 
     const Tag = (autosize) ? 'textarea' : 'input';
 
+    const [attributesHook, setAttributesHook] = useState(attributes);
+
     useEffect(() => {
         if (autosize) autosizeLibray(textarea.current);
+        
+        /**
+         * Проблема: при клике на иконку инпут получает одновременно onBlur и onFocus
+         */
+        let blurTimeout;
+
+        attributes.onBlur = (e) => {
+            blurTimeout = setTimeout(() => {
+                if (isFocusedHook) {
+                    setIsFocusedHook(false);
+                    if (onBlur) onBlur(e);
+                }
+            }, 200);
+        }
+
+        attributes.onFocus = (e) => {
+            clearTimeout(blurTimeout);
+            setTimeout(() => {
+                if (!isFocusedHook) {
+                    setIsFocusedHook(true);
+                    if (onFocus) onFocus(e);
+                }
+            }, 100);
+        }
+        
+        setAttributesHook(attributes);
+
+        return () => {
+            clearTimeout(blurTimeout);
+        };
     }, []);
 
     useEffect(() => {
@@ -168,7 +175,7 @@ export const Input = forwardRef((props, ref) => {
                 rows={1}
                 ref={textarea}
                 value={inputValue}
-                {...attributes}
+                {...attributesHook}
             ></Tag>
             {inputAfter}
         </Label>
