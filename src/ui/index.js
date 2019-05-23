@@ -15,3 +15,5 @@ export {Radio} from './radio/radio.js';
 export {Checkbox} from './checkbox/checkbox.js';
 export {Datepicker} from './datepicker/datepicker.js';
 export {Dropdown} from './dropdown/dropdown.js';
+
+export {TestComponent} from './testComponent/testComponent';
