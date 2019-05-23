@@ -34,6 +34,7 @@ export const Input = forwardRef((props, ref) => {
         'kui-input',
         (disabled) ? 'kui-input--disabled' : null,
         (isFilled) ? 'kui-input--filled' : null,
+        (isFocusedHook) ? 'kui-input--focus' : null,
         (!autosize) ? 'kui-input--noresize' : null,
         ClassVariants({variants, prefix: 'kui-input--variant_'}),
         className
