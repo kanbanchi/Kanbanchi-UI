@@ -22,7 +22,23 @@ module.exports = {
                         loader: 'sass-loader'
                     }
                 ]
-            }
+            },
+
+            //TS
+            {
+                test: /\.ts[x]?$/,
+                exclude: /node_modules/,
+                use: [
+                    'babel-loader',
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true,
+                        }
+                    }
+                ]
+
+            },
         ]
     },
     resolve: {
