@@ -42,5 +42,17 @@ $selectList: '.kui-select-list';
             background: none;
             cursor: default;
         }
+
+        &.kui-loader-block {
+            visibility: hidden;
+        }
+    }
+
+    &--loading {
+        min-height: $google-spacing * 10;
+
+        #{$selectList}__item.kui-loader-block {
+            visibility: visible;
+        }
     }
 }

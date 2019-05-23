@@ -19,13 +19,13 @@
             }
         }
 
-        .kui-input__icon-arrow {
+        .kui-input__icon:not(.kui-input__icon--clear) {
             color: $color-base;
         }
     }
 
     &--opened {
-        .kui-input__icon-arrow {
+        .kui-input__icon--arrow {
             transform: scaleY(-1);
         }
     }
@@ -46,15 +46,6 @@
 
         .kui-dropdown__item {
             width: $google-spacing * 30;
-        }
-    }
-
-    &--variant_withicon {
-        &:hover,
-        &.kui-select--opened {
-            .kui-input__icon {
-                color: $color-base;
-            }
         }
     }
 

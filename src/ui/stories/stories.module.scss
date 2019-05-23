@@ -81,3 +81,11 @@ section {
         transform: translateX(0);
     }
 }
+
+.stories-loader-small {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: $google-spacing * 5;
+    width: $google-spacing * 5;
+}

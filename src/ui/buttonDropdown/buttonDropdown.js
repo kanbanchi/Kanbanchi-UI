@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
@@ -19,7 +19,7 @@ export const ButtonDropdown = (props) => {
 
     const [directionHook, setDirectionHook] = useState(direction);
     const [isOpenedHook, setIsOpenedHook] = useState(false);
-    const [isClosedHook, setIsClosedHook] = useState(false); // after closing
+    const [timeoutHook, setTimeoutHook] = useState(null);
     const buttonRef = useRef(null);
     const dropdownRef = useRef(null);
 
@@ -41,27 +41,22 @@ export const ButtonDropdown = (props) => {
     const dropdownAnimationEnd = () => {
         if (isOpenedHook) {
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-        } else if (isClosedHook) {
-            buttonRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
     }
 
     attributes.onClick = (e) => {
         let isOpened = isOpenedHook;
         setIsOpenedHook(!isOpenedHook);
-        if (isOpened) {
-            setIsClosedHook(true);
-        } else {
+        if (!isOpened) {
             calcDirection();
         }
         if (onClick) onClick(e);
     }
 
     attributes.onBlur = (e) => {
-        setTimeout(() => {
+        setTimeoutHook(setTimeout(() => {
             setIsOpenedHook(false);
-            setIsClosedHook(true);
-        }, 200); // delay after onClick
+        }, 200)); // delay after onClick
         if (onBlur) onBlur(e);
     }
 
@@ -82,6 +77,12 @@ export const ButtonDropdown = (props) => {
             });
         });
     }
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(timeoutHook);
+        };
+    }, [timeoutHook]);
 
     return (
         <div className={className} ref={buttonRef}>

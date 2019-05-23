@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { storiesOf } from '@storybook/react';
-import { ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
+import { LoaderBlock, Loader, ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
+        this.setStateProp = this.setStateProp.bind(this);
+        this.loadList = this.loadList.bind(this);
+        this.state = {
+            dates: [null],
+            listWithLoader: [],
+            loading: false
+        };
         this.types = [
             //'button',
             //'checkbox',
@@ -45,11 +52,96 @@ class StoryControls extends React.Component {
                 <SelectList><li>¯\_(ツ)_/¯</li></SelectList>
             </Select>
         );
+
+        this.loadTimeout = null;
+    }
+
+    setStateProp({prop, propIndex, val}) {
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                [prop]: {
+                    ...prevState[prop],
+                    [propIndex]: val
+                }
+            };
+        });
+    }
+
+    loadList(success = true) {
+        let val = [];
+        this.setState({loading: true});
+        clearTimeout(this.loadTimeout);
+        this.loadTimeout = setTimeout(() => {
+            if (success) {
+                val.push(<SelectListItem 
+                    key="0"
+                    icon="card"
+                    list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                >
+                    Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </SelectListItem>);
+                val.push(<SelectListItem
+                    key="1"
+                    icon="archive"
+                    list="List"
+                >
+                    Card name
+                </SelectListItem>);
+                val.push(<SelectListItem
+                    key="2"
+                    icon="card"
+                    list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                >
+                    Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </SelectListItem>);
+                val.push(<SelectListItem
+                    key="3"
+                    icon="archive"
+                    list="List"
+                >
+                    Card name
+                </SelectListItem>);
+            } else {
+                val.push(<SelectListItem >
+                    ¯\_(ツ)_/¯
+                </SelectListItem>);
+            }
+            this.setState({
+                listWithLoader: val,
+                loading: false
+            });
+        }, 3000);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.loadTimeout);
     }
 
     render() { 
         return (
             <div className="page">
+                
+                <section>
+                    <h2>Loader</h2>
+                    <Loader/>
+                </section>
+
+                <section>
+                    <h2>Datepicker</h2>
+                    <Datepicker
+                        selected={this.state.dates[0]}
+                        onSelect={(val)=>this.setStateProp({prop: 'dates', propIndex: 0, val})}
+                        minDate={new Date('2019-05-22')}
+                        highlightDates={[
+                            { "react-datepicker__day--highlighted": [
+                            new Date('2019-05-24'),
+                            new Date('2019-05-25')
+                            ]}
+                        ]}
+                    /><Loader small className="stories-loader-small"/>
+                </section>
+
                 <section>
                     <h2>Tabs</h2>
                     <div>
@@ -81,9 +173,11 @@ class StoryControls extends React.Component {
 
                 <section className="section-form-min">
                     <h2>Input</h2>
-                    <Input label="Label" value="Text test"/>
+                    <Input label="Label" value="Text test"
+                        onBlur={e=>console.log('onBlur', e.target.value)}
+                    />
                     <br/>
-                    <Input placeholder="Without label" />
+                    <Input placeholder="Without label & readonly" readOnly={true} />
                     <br/>
                     <Input 
                         label="No resize"
@@ -119,20 +213,13 @@ class StoryControls extends React.Component {
                 <section className="section-form-min">
                     <div className="section-relative">
                         <h2>Search</h2>
-                        <Search editable={true}>
-                            <SelectList fixActive={false}>
-                                <SelectListItem
-                                    icon="card"
-                                    list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                                >
-                                    Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                </SelectListItem>
-                                <SelectListItem
-                                    icon="archive"
-                                    list="List"
-                                >
-                                    Card name
-                                </SelectListItem>
+                        <Search 
+                            editable={true}
+                            onOpen={()=>this.loadList()}
+                        >
+                            <SelectList fixActive={false} loading={this.state.loading}>
+                                {this.state.listWithLoader}
+                                <LoaderBlock/>
                             </SelectList>
                         </Search>
                     </div>
@@ -193,11 +280,6 @@ class StoryControls extends React.Component {
                     </Checkbox>
                     <br/>
                     <Checkbox disabled>Disabled</Checkbox>
-                </section>
-
-                <section>
-                    <h2>Datepicker</h2>
-                    <div className="section-relative" style={{width: 200}}><Datepicker/></div>
                 </section>
 
                 <section className="section-form-min">

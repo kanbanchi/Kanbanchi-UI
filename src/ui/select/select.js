@@ -19,6 +19,7 @@ export const Select = (props) => {
         onEnter,
         onFocus,
         onKeyUp,
+        onOpen,
         ...attributes
     } = props,
         dropdownBody = null,
@@ -31,7 +32,6 @@ export const Select = (props) => {
     const [valueHook, setValueHook] = useState('');
     const [isFocusedHook, setIsFocusedHook] = useState(opened);
     const [isOpenedHook, setIsOpenedHook] = useState(opened);
-    const [isClosedHook, setIsClosedHook] = useState(false); // after closing
     const [itemsRefsHook, setItemsRefsHook] = useState([]); // list items for auto scroll in dropdown
 
     const dropdownRef = useRef(null);
@@ -50,6 +50,12 @@ export const Select = (props) => {
         setItemsRefsHook(refs);
     }
 
+    const openDropdown = (e) => {
+        setIsOpenedHook(true);
+        calcDirection();
+        if (onOpen) onOpen(e);
+    }
+
     const calcDirection = () => {
         if (direction !== 'auto') return;
         let el = selectRef.current.getBoundingClientRect();
@@ -61,8 +67,6 @@ export const Select = (props) => {
         if (isOpenedHook) {
             onActiveChanged();
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-        } else if (isClosedHook) {
-            selectRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
     }
 
@@ -85,13 +89,12 @@ export const Select = (props) => {
     attributes.onChange = (e) => {
         if (e.item) { // list item clicked
             setIsOpenedHook(false);
-            setIsClosedHook(true);
             setActiveHook(e.item.index);
             if (isSearch) { // dont update search input value
                 if (onChange) onChange(e);
             } else if (e.item.text !== valueHook) {
                 setValue(e.item.text);
-                if (onChange) onChange(e);        
+                if (onChange) onChange(e);
             }
         }
     }
@@ -100,8 +103,7 @@ export const Select = (props) => {
         setTimeout(() => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
-                setIsOpenedHook(true);
-                calcDirection();
+                openDropdown(e);
             }
         }, 100); // delay after onClick
         if (onFocus) onFocus(e);
@@ -111,19 +113,16 @@ export const Select = (props) => {
         if (isFocusedHook) {
             setIsFocusedHook(false);
             setIsOpenedHook(false);
-            setIsClosedHook(true);
         }
         if (onBlur) onBlur(e);
     }
 
     attributes.onClick = (e) => {
         if (isFocusedHook) {
-            let isOpened = isOpenedHook;
-            setIsOpenedHook(!isOpenedHook);
-            if (isOpened) {
-                setIsClosedHook(true);
+            if (!isOpenedHook) {
+                openDropdown(e);
             } else {
-                calcDirection();
+                setIsOpenedHook(!isOpenedHook);
             }
             if (e) e.stopPropagation();
         }
@@ -170,24 +169,26 @@ export const Select = (props) => {
         e.persist();
         findValue(e.target.value)
             .then(found => {
-                setActiveHook(found.index);
-                if (e.which === 39 || e.which === 13) { // arrow right || enter
-                    setValue(found.text);
-                }
                 if (!isOpenedHook && e.which !== 13) { // open if closed
-                    setIsOpenedHook(true);
-                    calcDirection();
+                    openDropdown(e);
                 }
-                if (onChange) onChange(Object.assign({}, e, {item: found}));
+                if (!isSearch) {
+                    if (e.which === 39 || e.which === 13) { // arrow right || enter
+                        setValue(found.text);
+                    }
+                    if (onChange) onChange(Object.assign({}, e, {item: found}));
+                }
             })
             .catch(() => {
                 setActiveHook(null);
+                if (!isOpenedHook && e.which !== 13) { // open if closed
+                    openDropdown(e);
+                }
             })
             .then(() => { // dont know why it works only in then
                 if (e.which === 27) { // esc
                     setValueHook(initialValue + 'jopa'); // doesnt reset to initialValue without it
                     setIsOpenedHook(false);
-                    setIsClosedHook(true);
                     setActiveHook(active);
                     setValue(initialValue);
                 }
@@ -197,7 +198,6 @@ export const Select = (props) => {
     attributes.onEnter = (e) => {
         if (!isSearch) {
             setIsOpenedHook(false);
-            setIsClosedHook(true);
         }
         if (onEnter) onEnter();
     }
@@ -256,7 +256,8 @@ Select.propTypes = {
     icon: PropTypes.string,
     label: PropTypes.string,
     opened: PropTypes.bool,
-    variants: PropTypes.arrayOf(PropTypes.string)
+    variants: PropTypes.arrayOf(PropTypes.string),
+    onOpen: PropTypes.func
 };
 
 Select.defaultProps = {
@@ -267,7 +268,8 @@ Select.defaultProps = {
     icon: null,
     label: null,
     opened: false,
-    variants: []
+    variants: [],
+    onOpen: null
 };
 
 export default Select;
