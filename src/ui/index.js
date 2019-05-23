@@ -22,3 +22,4 @@ export {SelectList} from './selectList/selectList.js';
 export {SelectListItem} from './selectListItem/selectListItem.js';
 
 export {Loader} from './loader/loader.js';
+export {LoaderBlock} from './loaderBlock/loaderBlock.js';
