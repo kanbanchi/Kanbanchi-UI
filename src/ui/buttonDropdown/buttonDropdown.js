@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { PropTypes, ClassNames, ClassVariants } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
@@ -52,30 +52,42 @@ export const ButtonDropdown = (props) => {
         if (onClick) onClick(e);
     }
 
-    attributes.onBlur = (e) => {
-        setTimeout(() => {
-            setIsOpenedHook(false);
-        }, 200); // delay after onClick
-        if (onBlur) onBlur(e);
-    }
+    const [attributesHook, setAttributesHook] = useState(attributes);
 
     if (children) {
         if (!children.length) children = [children]; // if 1 child
         list = React.Children.map(children, (child) => {
             if (child.type.name === 'Button') {
-                attributes.className = ClassNames(
+                attributesHook.className = ClassNames(
                     'kui-button-dropdown__item',
                     child.props.className
-                ),
-                btn = React.cloneElement(child, attributes);
+                );
+                btn = React.cloneElement(child, attributesHook);
                 return null;
             }
             if (child.type.name !== 'SelectList') return child;
             return React.cloneElement(child, {
-                onChange: attributes.onChange
+                onChange: attributesHook.onChange
             });
         });
     }
+    
+    useEffect(() => {
+        let blurTimeout;
+
+        attributesHook.onBlur = (e) => {
+            blurTimeout = setTimeout(() => {
+                setIsOpenedHook(false);
+            }, 200); // delay after onClick
+            if (onBlur) onBlur(e);
+        }
+        
+        setAttributesHook(attributesHook);
+
+        return () => {
+            clearTimeout(blurTimeout);
+        };
+    }, []);
 
     return (
         <div className={className} ref={buttonRef}>
