@@ -26,6 +26,7 @@ class StorySnackbars extends React.Component {
                         variant="error"
                         text="The email address is not valid. Please, use name@domain.com format."
                     />
+                    <br />
                     <Snackbar
                         variant="error"
                         text="The maximum number of seats is exceeded. <br>Click Manage subscription to buy more seats."
@@ -51,7 +52,7 @@ class StorySnackbars extends React.Component {
                             }
                         ]}
                     />
-
+                    <br />
                     <Snackbar
                         timer={5}
                         variant="error"

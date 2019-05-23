@@ -47,7 +47,7 @@ export const Snackbar = (props) => {
             return (
                 <Button
                     className="kui-snackbar__button"
-                    variant="primary_white"
+                    color="white"
                     key={key}
                     {...attributes}
                 >

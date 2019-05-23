@@ -1,35 +1,46 @@
-import React from 'react';
-import { PropTypes, ClassNames } from '../utils';
+import React, {useState} from 'react';
+import {PropTypes, ClassNames} from '../utils';
+import {Label} from '../../ui';
 import '../../../src/ui/switch/switch.module.scss';
 
 export const Switch = (props) => {
     let {
         children,
         className,
+        checked,
+        onChange,
         ...attributes
     } = props;
 
+    const [isChecked, setIsChecked] = useState(checked);
+
     className = ClassNames(
         'kui-switch',
+        (attributes.disabled) ? 'kui-switch--disabled' : null,
         className
     );
 
+    attributes.type = 'checkbox';
+    attributes.className = 'kui-switch__input';
+    attributes.onChange = e => {
+        setIsChecked(!isChecked);
+        if (onChange) onChange(e);
+    };
+
     return (
-        <div
-            className={className}
-            {...attributes}
-        >
-            {children}
-        </div>
+        <Label className={className}>
+            <input checked={isChecked} {...attributes}/>
+            <span className="kui-switch__label">{children}</span>
+        </Label>
     );
 };
 
 Switch.propTypes = {
-    className: PropTypes.string
+    checked: PropTypes.bool
 };
 
 Switch.defaultProps = {
-    className: ''
+    checked: false
 };
 
 export default Switch;

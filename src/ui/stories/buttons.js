@@ -1,14 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, ButtonsGroup, ButtonsSegmented, Icon } from '../../ui';
+import { Button, ButtonsGroup, ButtonsSegmented, Icon, Switch } from '../../ui';
 class StoryButtons extends React.Component {
     constructor() {
         super();
         this.toggleDisabled = this.toggleDisabled.bind(this);
-        this.onSegmentedClick = this.onSegmentedClick.bind(this);
+        this.setStateProp = this.setStateProp.bind(this);
         this.state = {
             disabled: true,
-            segmented: 1
+            tabs: [0, 1]
         };
     }
     toggleDisabled() {
@@ -16,19 +16,27 @@ class StoryButtons extends React.Component {
             disabled: !prevState.disabled
         }));
     }
-    onSegmentedClick(i) {
-        this.setState({
-            segmented: i
+    setStateProp({prop, propIndex, val}) {
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                [prop]: {
+                    ...prevState[prop],
+                    [propIndex]: val
+                }
+            };
         });
     }
     render() { 
         return (
             <div className="page">
-                <p>
-                    <label>
-                        Disabled buttons <input type="checkbox" checked={this.state.disabled} onChange={this.toggleDisabled} />
-                    </label>
-                </p>                
+                <section className="section-grey" style={{position: 'sticky', top: 0}}>
+                    <div style={{width: 240}}>
+                        <Switch checked={this.state.disabled} onChange={this.toggleDisabled}>
+                            Disable buttons
+                        </Switch>
+                    </div>
+                </section>                
                 <section>
                     <h2>Primary</h2>
                     <ButtonsGroup margin="large">
@@ -44,13 +52,13 @@ class StoryButtons extends React.Component {
                 <section className="section-purple">
                     <h2>Primary white</h2>
                     <ButtonsGroup margin="large">
-                        <Button variant="primary_white" size="large">Large</Button>
-                        <Button variant="primary_white" size="large" disabled={this.state.disabled}>Large Disabled</Button>
+                        <Button color="white" size="large">Large</Button>
+                        <Button color="white" size="large" disabled={this.state.disabled}>Large Disabled</Button>
                     </ButtonsGroup>
                     <br />
                     <ButtonsGroup>
-                        <Button variant="primary_white">Small</Button>
-                        <Button variant="primary_white" disabled={this.state.disabled}>Small Disabled</Button>
+                        <Button color="white">Small</Button>
+                        <Button color="white" disabled={this.state.disabled}>Small Disabled</Button>
                     </ButtonsGroup>
                 </section>
                 <section>
@@ -67,30 +75,48 @@ class StoryButtons extends React.Component {
                 </section>
                 <section>
                     <h2>FAB</h2>
-                    <ButtonsGroup margin="large">
-                        <Button variant="fab" size="large">
-                            <Icon xlink="plus" size={24} />
-                        </Button>
-                        <Button variant="fab" size="large" disabled={this.state.disabled}>
-                            <Icon xlink="plus" size={24} />
-                        </Button>
-                    </ButtonsGroup>
-                    <br />
                     <ButtonsGroup>
                         <Button variant="fab">
-                            <Icon xlink="plus" size={24} />
+                            <Icon xlink="search" size={24} />
                         </Button>
                         <Button variant="fab" disabled={this.state.disabled}>
-                            <Icon xlink="plus" size={24} />
+                            <Icon xlink="search" size={24} />
                         </Button>
                     </ButtonsGroup>
                     <br />
                     <ButtonsGroup margin="large">
                         <Button variant="fab" text="Fab with text">
-                            <Icon xlink="plus" size={24} />
+                            <Icon xlink="search" size={24} />
                         </Button>
                         <Button variant="fab" text="Fab with text" disabled={this.state.disabled}>
+                            <Icon xlink="search" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup>
+                        <Button variant="fab" color="purple">
                             <Icon xlink="plus" size={24} />
+                        </Button>
+                        <Button variant="fab" color="purple" disabled={this.state.disabled}>
+                            <Icon xlink="plus" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup margin="large">
+                        <Button variant="fab" color="purple" text="Fab with text">
+                            <Icon xlink="plus" size={24} />
+                        </Button>
+                        <Button variant="fab" color="purple" text="Fab with text" disabled={this.state.disabled}>
+                            <Icon xlink="plus" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup>
+                        <Button variant="fab" color="black">
+                            <Icon xlink="kanban" size={24} />
+                        </Button>
+                        <Button variant="fab" color="black" disabled={this.state.disabled}>
+                            <Icon xlink="kanban" size={24} />
                         </Button>
                     </ButtonsGroup>
                     <br />
@@ -100,6 +126,26 @@ class StoryButtons extends React.Component {
                         </Button>
                         <Button variant="fab" color="black" text="Fab with text" disabled={this.state.disabled}>
                             <Icon xlink="kanban" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                </section>
+                <section className="section-black">
+                    <h2>FAB white</h2>
+                    <ButtonsGroup>
+                        <Button variant="fab" color="white">
+                            <Icon xlink="search" size={24} />
+                        </Button>
+                        <Button variant="fab" color="white" disabled={this.state.disabled}>
+                            <Icon xlink="search" size={24} />
+                        </Button>
+                    </ButtonsGroup>
+                    <br />
+                    <ButtonsGroup margin="large">
+                        <Button variant="fab" color="white" text="Fab with text">
+                            <Icon xlink="search" size={24} />
+                        </Button>
+                        <Button variant="fab" color="white" text="Fab with text" disabled={this.state.disabled}>
+                            <Icon xlink="search" size={24} />
                         </Button>
                     </ButtonsGroup>
                 </section>
@@ -152,25 +198,37 @@ class StoryButtons extends React.Component {
                 <section>
                     <h2>Segmented</h2>
                     <ButtonsSegmented
-                        active={this.state.segmented}
-                        action={this.onSegmentedClick}
+                        active={+this.state.tabs[0]}
+                        onChange={val=>this.setStateProp({prop: 'tabs', propIndex: 0, val})}
                     >
                         <Button>Button 0</Button>
                         <Button>Button 1</Button>
                         <Button onClick={() => alert(2)}>Button 2</Button>
                     </ButtonsSegmented>
-                    <div>
-                        <br />
-                        <ButtonsSegmented
-                            active={this.state.segmented}
-                            action={this.onSegmentedClick}
-                            variant="black"
-                        >
-                            <Button>Button 0</Button>
-                            <Button>Button 1</Button>
-                        </ButtonsSegmented>
-                    </div>
+                    <br />
+                    <br />
+                    <ButtonsSegmented
+                        active={+this.state.tabs[1]}
+                        onChange={val=>this.setStateProp({prop: 'tabs', propIndex: 1, val})}
+                        variant="black"
+                    >
+                        <Button>Button 0</Button>
+                        <Button>Button 1</Button>
+                    </ButtonsSegmented>
                 </section>
+                <section className="section-form-min">
+                    <h2>Add</h2>
+                    <Button variant="add">Add button</Button>
+                    <br />
+                    <br />
+                    <Button variant="add" disabled>Disabled</Button>
+                </section>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
         )
     } 

@@ -1,0 +1,16 @@
+@import '../../assets/sass/index.scss';
+$divider: '.kui-divider';
+
+#{$divider} {
+    height: $google-spacing;
+    margin: 0;
+    padding-top: $google-spacing / 2;
+    box-sizing: border-box;
+    box-shadow: none;
+    &:before {
+        content: '';
+        display: block;
+        height: 1px;
+        background: calc-color(fade, $color-base, 30);
+    }
+}

@@ -1,0 +1,39 @@
+@import '../../assets/sass/index.scss';
+
+.kui-button-dropdown {
+    display: inline-block;
+
+    &__item {
+        background: $color-white;
+        
+        .kui-button__icon {
+            color: calc-color(tint, $color-base, 30);
+        }
+
+        .kui-button-dropdown--opened & {
+            color: $color-base;
+            background: calc-color(fade, $color-background, 50);
+            
+            .kui-button__icon {
+                color: $color-base;
+            }
+        }
+    }
+
+    .kui-dropdown__item {
+        min-width: $google-spacing * 25;
+    }
+
+    &--disabled {
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &--variant_right {
+        position: relative;
+
+        .kui-button-dropdown__dropdown .kui-dropdown__item {
+            right: 0;
+        }
+    }
+}

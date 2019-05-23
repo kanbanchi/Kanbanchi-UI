@@ -1,0 +1,40 @@
+@import '../../assets/sass/index.scss';
+.kui-select-list-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &__col {
+        display: flex;
+        align-items: center;
+        
+        &--icon {
+            flex: 0 0 $google-spacing * 3;
+            color: calc-color(fade, $color-base, 30);
+        }
+        &--title {
+            flex: 1 1 100%;
+            max-width: calc(100% - #{$google-spacing * 3});
+            color: $color-base;
+
+            .kui-select-list-item--with-list & {
+                max-width: calc(60% - #{$google-spacing * 3});
+                padding-right: $google-spacing;
+            }
+        }
+        &--list {
+            display: block;
+            width: 40%;
+            text-align: right;
+        }
+    }
+
+    &__list,
+    &__title {
+        @extend %text-ellipsis;
+    }
+
+    &__list {
+        color: calc-color(fade, $color-base, 60);
+    }
+}

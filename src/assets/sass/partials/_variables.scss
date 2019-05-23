@@ -14,8 +14,8 @@ $font-family-condensed:     'Roboto Condensed', 'Roboto', 'Helvetica Neue', Gene
 
 //  Typography
 $base-font-family:          $font-family-sans-serif !default;
-$base-font-size:            14px !default;
-$base-line-height:          20px !default;
+$base-font-size:            16px !default;
+$base-line-height:          1.5 !default;
 
 $h1-size:                   28px !default;
 $h2-size:                   22px !default;
@@ -24,12 +24,12 @@ $h4-size:                   18px !default;
 $h5-size:                   16px !default;
 $h6-size:                   $base-font-size !default;
 
-$milli-size:                13px !default;
+$milli-size:                14px !default;
 $nano-size:                 12px !default;
 $piko-size:                 11px !default;
 
 //  Spacing
-$base-spacing:              $base-line-height !default; // 20px
+$base-spacing:              20px !default; // 20px
 $half-base-spacing:         $base-spacing / 2 !default; // 10px
 
 $google-spacing:            8px !default;
@@ -44,10 +44,10 @@ $z-initials:                10 !default;
 $z-cardinfo:                10 !default;
 $z-userpic:                 20 !default;
 $z-fold:                    100 !default;
+$z-aside:                   100 !default;
 $z-dropdown:                1000 !default;
 $z-popover:                 1010 !default;
 $z-topbar:                  1030 !default;
-$z-aside:                   1035 !default;
 $z-modal:                   1040 !default;
 $z-modaltop:                1050 !default;
 $z-feedback:                1060 !default;
