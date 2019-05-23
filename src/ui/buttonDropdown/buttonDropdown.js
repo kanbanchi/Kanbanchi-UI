@@ -19,6 +19,7 @@ export const ButtonDropdown = (props) => {
 
     const [directionHook, setDirectionHook] = useState(direction);
     const [isOpenedHook, setIsOpenedHook] = useState(false);
+    const [timeoutHook, setTimeoutHook] = useState(null);
     const buttonRef = useRef(null);
     const dropdownRef = useRef(null);
 
@@ -52,42 +53,36 @@ export const ButtonDropdown = (props) => {
         if (onClick) onClick(e);
     }
 
-    const [attributesHook, setAttributesHook] = useState(attributes);
+    attributes.onBlur = (e) => {
+        setTimeoutHook(setTimeout(() => {
+            setIsOpenedHook(false);
+        }, 200)); // delay after onClick
+        if (onBlur) onBlur(e);
+    }
 
     if (children) {
         if (!children.length) children = [children]; // if 1 child
         list = React.Children.map(children, (child) => {
             if (child.type.name === 'Button') {
-                attributesHook.className = ClassNames(
+                attributes.className = ClassNames(
                     'kui-button-dropdown__item',
                     child.props.className
-                );
-                btn = React.cloneElement(child, attributesHook);
+                ),
+                btn = React.cloneElement(child, attributes);
                 return null;
             }
             if (child.type.name !== 'SelectList') return child;
             return React.cloneElement(child, {
-                onChange: attributesHook.onChange
+                onChange: attributes.onChange
             });
         });
     }
-    
+
     useEffect(() => {
-        let blurTimeout;
-
-        attributesHook.onBlur = (e) => {
-            blurTimeout = setTimeout(() => {
-                setIsOpenedHook(false);
-            }, 200); // delay after onClick
-            if (onBlur) onBlur(e);
-        }
-        
-        setAttributesHook(attributesHook);
-
         return () => {
-            clearTimeout(blurTimeout);
+            clearTimeout(timeoutHook);
         };
-    }, []);
+    }, [timeoutHook]);
 
     return (
         <div className={className} ref={buttonRef}>
