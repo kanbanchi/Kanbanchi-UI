@@ -64,6 +64,7 @@ export const Input = forwardRef((props, ref) => {
      */
 
     attributes.onBlur = (e) => {
+        e.persist();
         setTimeoutHook(setTimeout(() => {
             if (isFocusedHook) {
                 setIsFocusedHook(false);

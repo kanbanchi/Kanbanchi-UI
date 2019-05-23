@@ -173,7 +173,9 @@ class StoryControls extends React.Component {
 
                 <section className="section-form-min">
                     <h2>Input</h2>
-                    <Input label="Label" value="Text test"/>
+                    <Input label="Label" value="Text test"
+                        onBlur={e=>console.log('onBlur', e.target.value)}
+                    />
                     <br/>
                     <Input placeholder="Without label & readonly" readOnly={true} />
                     <br/>
