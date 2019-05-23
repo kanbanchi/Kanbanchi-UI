@@ -18,7 +18,6 @@ class StoryButtons extends React.Component {
     }
     setStateProp({prop, propIndex, val}) {
         this.setState((prevState) => {
-            if (propIndex === null) return {[prop]: index};
             return {
                 ...prevState,
                 [prop]: {

@@ -9,6 +9,7 @@ export const SelectList = (props) => {
         children,
         className,
         fixActive,
+        loading,
         onChange,
         onSelectListInit,
         ...attributes
@@ -18,46 +19,47 @@ export const SelectList = (props) => {
     className = ClassNames(
         'kui-select-list',
         (!fixActive) ? 'kui-select-list--noactive' : null,
+        (loading) ? 'kui-select-list--loading' : null,
         className
     );
 
     const [activeHook, setActiveHook] = useState(active);
-    const itemsRefs = [];
+    
+    if (!children) children = [];
+    if (!children.length) children = [children]; // if 1 child
 
-    if (children) {
-        if (!children.length) children = [children]; // if 1 child
-        items = React.Children.map(children, (child, index) => {
-            itemsRefs[index] = useRef(null);
-            const divider = (child.props.divider) ? <Divider /> : null;
-            const item = [React.cloneElement(child, {
-                className: ClassNames(
-                    'kui-select-list__item',
-                    child.props.className,
-                    (fixActive && index === activeHook) ? 'kui-select-list__item--active' : null,
-                    (child.props.disabled) ? 'kui-select-list__item--disabled' : null,
-                ),
-                divider: null,
-                ref: itemsRefs[index],
-                onClick: (e) => {
-                    if (!child.props.disabled) {
-                        if (fixActive) setActiveHook(index);
-                        if (onChange) onChange(Object.assign({}, e, {
-                            item: {
-                                index,
-                                value: child.props.value,
-                                text: child.props.children
-                            }
-                        }));
-                    }
-                    if (child.props.onClick) child.props.onClick(e);
+    const itemsRefs = Array.from({ length: children.length }, () => useRef(null));
+
+    items = React.Children.map(children, (child, index) => {
+        const divider = (child.props.divider) ? <Divider /> : null;
+        const item = [React.cloneElement(child, {
+            className: ClassNames(
+                'kui-select-list__item',
+                child.props.className,
+                (fixActive && index === activeHook) ? 'kui-select-list__item--active' : null,
+                (child.props.disabled) ? 'kui-select-list__item--disabled' : null,
+            ),
+            divider: null,
+            ref: itemsRefs[index],
+            onClick: (e) => {
+                if (!child.props.disabled) {
+                    if (fixActive) setActiveHook(index);
+                    if (onChange) onChange(Object.assign({}, e, {
+                        item: {
+                            index,
+                            value: child.props.value,
+                            text: child.props.children
+                        }
+                    }));
                 }
-            })];
-            if (divider) {
-                item.push(divider);
+                if (child.props.onClick) child.props.onClick(e);
             }
-            return item;
-        });
-    }
+        })];
+        if (divider) {
+            item.push(divider);
+        }
+        return item;
+    });
 
     useEffect(() => {
         setActiveHook(active);
@@ -77,12 +79,14 @@ export const SelectList = (props) => {
 SelectList.propTypes = {
     active: PropTypes.number, // index of active item
     fixActive: PropTypes.bool, // --noactive class for actions,
+    loading: PropTypes.bool,
     onSelectListInit: PropTypes.func,
 };
 
 SelectList.defaultProps = {
     active: null,
     fixActive: true,
+    loading: false,
     onSelectListInit: null
 };
 
