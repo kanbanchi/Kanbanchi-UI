@@ -19,6 +19,7 @@ export const Select = (props) => {
         onEnter,
         onFocus,
         onKeyUp,
+        onOpen,
         ...attributes
     } = props,
         dropdownBody = null,
@@ -87,7 +88,7 @@ export const Select = (props) => {
                 if (onChange) onChange(e);
             } else if (e.item.text !== valueHook) {
                 setValue(e.item.text);
-                if (onChange) onChange(e);        
+                if (onChange) onChange(e);
             }
         }
     }
@@ -98,6 +99,7 @@ export const Select = (props) => {
                 setIsFocusedHook(true);
                 setIsOpenedHook(true);
                 calcDirection();
+                if (onOpen) onOpen(e);
             }
         }, 100); // delay after onClick
         if (onFocus) onFocus(e);
@@ -117,6 +119,7 @@ export const Select = (props) => {
             setIsOpenedHook(!isOpenedHook);
             if (!isOpened) {
                 calcDirection();
+                if (onOpen) onOpen(e);
             }
             if (e) e.stopPropagation();
         }
@@ -170,6 +173,7 @@ export const Select = (props) => {
                 if (!isOpenedHook && e.which !== 13) { // open if closed
                     setIsOpenedHook(true);
                     calcDirection();
+                    if (onOpen) onOpen(e);
                 }
                 if (onChange) onChange(Object.assign({}, e, {item: found}));
             })
@@ -247,7 +251,8 @@ Select.propTypes = {
     icon: PropTypes.string,
     label: PropTypes.string,
     opened: PropTypes.bool,
-    variants: PropTypes.arrayOf(PropTypes.string)
+    variants: PropTypes.arrayOf(PropTypes.string),
+    onOpen: PropTypes.func
 };
 
 Select.defaultProps = {
@@ -258,7 +263,8 @@ Select.defaultProps = {
     icon: null,
     label: null,
     opened: false,
-    variants: []
+    variants: [],
+    onOpen: null
 };
 
 export default Select;
