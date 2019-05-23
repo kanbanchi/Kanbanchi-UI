@@ -18,11 +18,10 @@ export const Radio = (props) => {
         className
     );
 
+    const [checked, setChecked] = useState(active);
+
     if (children) {
         if (!children.length) children = [children]; // if 1 child
-        if (active > children.length - 1) active = 0;
-        const [checked, setChecked] = useState(active);
-
         buttonHocs = React.Children.map(children, (child, i) => {
             let buttonclassName = ClassNames(
                 'kui-radio__item',
