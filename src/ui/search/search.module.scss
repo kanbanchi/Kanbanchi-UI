@@ -28,7 +28,7 @@
     }
 }
 
-.kui-select--opened,
+.kui-input--focus,
 .kui-input--filled {
     .kui-input-search {
         left: $google-spacing * 2;
@@ -45,7 +45,7 @@
     }
 }
 
-.kui-select:not(.kui-select--opened) .kui-input:not(.kui-input--filled) {
+.kui-input:not(.kui-input--filled):not(.kui-input--focus) {
     .kui-input-search {
         animation: animation_imput_search .6s ease forwards;
     }

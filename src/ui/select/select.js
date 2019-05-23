@@ -50,6 +50,12 @@ export const Select = (props) => {
         setItemsRefsHook(refs);
     }
 
+    const openDropdown = (e) => {
+        setIsOpenedHook(true);
+        calcDirection();
+        if (onOpen) onOpen(e);
+    }
+
     const calcDirection = () => {
         if (direction !== 'auto') return;
         let el = selectRef.current.getBoundingClientRect();
@@ -97,9 +103,7 @@ export const Select = (props) => {
         setTimeout(() => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
-                setIsOpenedHook(true);
-                calcDirection();
-                if (onOpen) onOpen(e);
+                openDropdown(e);
             }
         }, 100); // delay after onClick
         if (onFocus) onFocus(e);
@@ -115,11 +119,10 @@ export const Select = (props) => {
 
     attributes.onClick = (e) => {
         if (isFocusedHook) {
-            let isOpened = isOpenedHook;
-            setIsOpenedHook(!isOpenedHook);
-            if (!isOpened) {
-                calcDirection();
-                if (onOpen) onOpen(e);
+            if (!isOpenedHook) {
+                openDropdown(e);
+            } else {
+                setIsOpenedHook(!isOpenedHook);
             }
             if (e) e.stopPropagation();
         }
@@ -166,19 +169,21 @@ export const Select = (props) => {
         e.persist();
         findValue(e.target.value)
             .then(found => {
-                setActiveHook(found.index);
-                if (e.which === 39 || e.which === 13) { // arrow right || enter
-                    setValue(found.text);
-                }
                 if (!isOpenedHook && e.which !== 13) { // open if closed
-                    setIsOpenedHook(true);
-                    calcDirection();
-                    if (onOpen) onOpen(e);
+                    openDropdown(e);
                 }
-                if (onChange) onChange(Object.assign({}, e, {item: found}));
+                if (!isSearch) {
+                    if (e.which === 39 || e.which === 13) { // arrow right || enter
+                        setValue(found.text);
+                    }
+                    if (onChange) onChange(Object.assign({}, e, {item: found}));
+                }
             })
             .catch(() => {
                 setActiveHook(null);
+                if (!isOpenedHook && e.which !== 13) { // open if closed
+                    openDropdown(e);
+                }
             })
             .then(() => { // dont know why it works only in then
                 if (e.which === 27) { // esc
