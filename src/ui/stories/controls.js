@@ -223,9 +223,9 @@ class StoryControls extends React.Component {
 
                 <section className="section-grey section-form-min">
                     <h2>Input</h2>
-                    <Input variants={['grey']} label="Label" placeholder="Text input" />
+                    <Input color="grey" label="Label" placeholder="Text input" />
                     <br/>
-                    <Input variants={['grey']} label="Label" placeholder="Disabled" disabled />
+                    <Input color="grey" label="Label" placeholder="Disabled" disabled />
                 </section>
 
                 <section>
@@ -262,7 +262,7 @@ class StoryControls extends React.Component {
                         <h2>Search</h2>
                         <Search
                             editable={true}
-                            variants={['grey']}
+                            color="grey"
                         >
                             <SelectList fixActive={false}>
                                 <SelectListItem
