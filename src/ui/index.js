@@ -2,7 +2,7 @@ export {Icon} from './icon/icon.js';
 
 export {Button} from './button/button.js';
 export {ButtonDropdown} from './buttonDropdown/buttonDropdown.js';
-export {ButtonsGroup} from './buttons_group/buttons_group.js';
+export {ButtonsGroup} from './buttonsGroup/buttonsGroup';
 export {ButtonsSegmented} from './buttons_segmented/buttons_segmented.js';
 export {Tabs} from './tabs/tabs.js';
 
@@ -23,5 +23,3 @@ export {SelectListItem} from './selectListItem/selectListItem.js';
 
 export {Loader} from './loader/loader.js';
 export {LoaderBlock} from './loaderBlock/loaderBlock.js';
-
-export {TestComponent} from './testComponent/testComponent';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { TestComponent } from '../../ui';
+import { TestComponent } from '../../ui/testComponent/testComponent';
 class StoryTestComponent extends React.Component {
     render() { 
         return (

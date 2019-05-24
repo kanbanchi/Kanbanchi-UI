@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ITestComponentProps } from './types';
+import { ButtonsGroup } from '../../ui';
 
 export const TestComponent: React.SFC<ITestComponentProps> = 
     (props) => {
@@ -8,7 +9,11 @@ export const TestComponent: React.SFC<ITestComponentProps> =
                 className="test-component"
                 onClick={props.doWork}
             >
-                {props.isBlack ? 'Black' : 'White'}
+                <ButtonsGroup size="large">
+                    <div>
+                        {props.isBlack ? 'Black' : 'White'}
+                    </div>
+                </ButtonsGroup>
             </div>
         );
     }
