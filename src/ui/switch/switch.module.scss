@@ -41,6 +41,12 @@
         transform: translateX(- $google-spacing / 4);
     }
 
+    &--color_black {
+        .kui-switch__input:checked + .kui-switch__label:before {
+            background-color: $color-black;
+        }
+    }
+
     &--disabled {
         pointer-events: none;
 

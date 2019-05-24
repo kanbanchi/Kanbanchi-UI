@@ -8,6 +8,7 @@ class StoryControls extends React.Component {
         this.loadList = this.loadList.bind(this);
         this.state = {
             dates: [null],
+            switch: [false, true, true, true],
             listWithLoader: [],
             loading: false
         };
@@ -122,6 +123,37 @@ class StoryControls extends React.Component {
         return (
             <div className="page">
                 
+                <section className="section-form-min">
+                    <h2>Switch</h2>
+                    <Switch
+                        checked={this.state.switch[0]}
+                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 0, val: !this.state.switch[0]})}
+                    >
+                        Label
+                    </Switch>
+                    <br/>
+                    <Switch 
+                        checked={this.state.switch[1]}
+                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 1, val: !this.state.switch[1]})}
+                    >
+                        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </Switch>
+                    <br/>
+                    <Switch
+                        checked={this.state.switch[2]}
+                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 2, val: !this.state.switch[2]})}
+                        color="black"
+                    >
+                        Black
+                    </Switch>
+                    <br/>
+                    <Switch
+                        checked
+                        color="black"
+                        disabled
+                    ></Switch>
+                </section>
+
                 <section>
                     <h2>Loader</h2>
                     <Loader/>
@@ -248,17 +280,6 @@ class StoryControls extends React.Component {
                             </SelectList>
                         </Search>
                     </div>
-                </section>
-
-                <section className="section-form-min">
-                    <h2>Switch</h2>
-                    <Switch>Label</Switch>
-                    <br/>
-                    <Switch checked={true} onChange={()=>{console.log('Switch')}}>
-                        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </Switch>
-                    <br/>
-                    <Switch disabled>Disabled</Switch>
                 </section>
 
                 <section className="section-form-min">
