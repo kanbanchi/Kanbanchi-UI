@@ -198,14 +198,14 @@ class StoryControls extends React.Component {
 
                 <section>
                     <h2>Input types</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         {this.inputTypes}
                     </ButtonsGroup>
                 </section>
 
                 <section>
                     <h2>Select types</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         {this.selectTypes}
                     </ButtonsGroup>
                 </section>
@@ -303,7 +303,7 @@ class StoryControls extends React.Component {
                 <section>
                     <h2>Select</h2>
                     <div className="section-relative">
-                        <ButtonsGroup margin="large">
+                        <ButtonsGroup size="large">
                             <Select 
                                 editable={true}
                                 label="Number"
@@ -438,7 +438,7 @@ class StoryControls extends React.Component {
                 <section>
                     <div className="section-relative">
                         <h2>Actions</h2>
-                        <ButtonsGroup margin="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
+                        <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
                             <ButtonDropdown>
                                 <Button variant="add">
                                     Add smth

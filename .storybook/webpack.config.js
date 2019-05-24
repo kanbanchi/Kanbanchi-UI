@@ -23,13 +23,33 @@ module.exports = {
                     }
                 ]
             },
+
             {
                 test: /\.css$/,
                 use: [
                     { loader: 'style-loader' },
                     { loader: 'css-loader' }
                 ]
+            },
+
+            //TS
+            {
+                test: /\.ts[x]?$/,
+                exclude: /node_modules/,
+                use: [
+                    'babel-loader',
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true,
+                        }
+                    }
+                ]
+
             }
         ]
+    },
+    resolve: {
+        extensions: ['.js', '.ts', '.tsx', '.sass', '.scss']
     }
 };
