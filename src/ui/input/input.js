@@ -8,6 +8,7 @@ export const Input = forwardRef((props, ref) => {
     let {
         autosize,
         className,
+        color,
         disabled,
         icon,
         label,
@@ -32,6 +33,7 @@ export const Input = forwardRef((props, ref) => {
     
     className = ClassNames(
         'kui-input',
+        (color) ? 'kui-input--color_' + color: null,
         (disabled) ? 'kui-input--disabled' : null,
         (isFilled) ? 'kui-input--filled' : null,
         (isFocusedHook) ? 'kui-input--focus' : null,
@@ -185,13 +187,15 @@ export const Input = forwardRef((props, ref) => {
 Input.variants = [
     'arrow',
     'datepicker',
-    'grey',
     'withicon',
     'search'
 ];
 
 Input.propTypes = {
     autosize: PropTypes.bool,
+    color: PropTypes.oneOf([
+        'grey'
+    ]),
     disabled: PropTypes.bool,
     icon: PropTypes.string,
     label: PropTypes.string,
@@ -201,6 +205,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
     autosize: true,
+    color: null,
     disabled: false,
     icon: null,
     label: null,
