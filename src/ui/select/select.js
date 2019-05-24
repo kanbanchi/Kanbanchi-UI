@@ -237,7 +237,6 @@ export const Select = (props) => {
 
 Select.variants = [
     'arrow',
-    'grey',
     'header',
     'withicon',
     'priority',
@@ -246,6 +245,9 @@ Select.variants = [
 
 Select.propTypes = {
     active: PropTypes.number,
+    color: PropTypes.oneOf([
+        'grey'
+    ]),
     direction: PropTypes.oneOf([
         'auto',
         'down',
@@ -262,6 +264,7 @@ Select.propTypes = {
 
 Select.defaultProps = {
     active: null,
+    color: null,
     direction: 'auto',
     disabled: false,
     editable: false,
