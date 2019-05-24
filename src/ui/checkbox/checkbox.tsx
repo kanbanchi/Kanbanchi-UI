@@ -1,28 +1,33 @@
-import React, {useState} from 'react';
-import {PropTypes, ClassNames} from '../utils';
-import {Icon, Label} from '../../ui';
+import * as React from 'react';
+import { ICheckboxProps } from './types';
+import { ClassNames } from '../utils';
+import { Icon, Label } from '../../ui';
 import '../../../src/ui/checkbox/checkbox.module.scss';
 
-export const Checkbox = (props) => {
+export const Checkbox: React.SFC<
+    ICheckboxProps
+    & React.InputHTMLAttributes<HTMLElement>
+> = (props) => {
     let {
         children,
         className,
         checked,
         onChange,
-        ...attributes
-    } = props;
+        ...attributesOriginal
+    } = props,
+        attributes:React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
 
-    const [isChecked, setIsChecked] = useState(checked);
+    const [isChecked, setIsChecked] = React.useState(checked);
 
     className = ClassNames(
         'kui-checkbox',
-        (attributes.disabled) ? 'kui-checkbox--disabled' : null,
+        (props.disabled) ? 'kui-checkbox--disabled' : null,
         className
     );
 
     attributes.type = 'checkbox';
     attributes.className = 'kui-checkbox__input';
-    attributes.onChange = e => {
+    attributes.onChange = (e) => {
         setIsChecked(!isChecked);
         if (onChange) onChange(e);
     };
@@ -36,14 +41,10 @@ export const Checkbox = (props) => {
             </span>
         </Label>
     );
-};
-
-Checkbox.propTypes = {
-    checked: PropTypes.bool
-};
+}
 
 Checkbox.defaultProps = {
     checked: false
-};
+}
 
-export default Checkbox;
+Checkbox.displayName = 'Checkbox';
