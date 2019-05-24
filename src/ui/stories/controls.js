@@ -8,6 +8,7 @@ class StoryControls extends React.Component {
         this.loadList = this.loadList.bind(this);
         this.state = {
             dates: [null],
+            switch: [false, true, true, true],
             listWithLoader: [],
             loading: false
         };
@@ -122,6 +123,37 @@ class StoryControls extends React.Component {
         return (
             <div className="page">
                 
+                <section className="section-form-min">
+                    <h2>Switch</h2>
+                    <Switch
+                        checked={this.state.switch[0]}
+                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 0, val: !this.state.switch[0]})}
+                    >
+                        Label
+                    </Switch>
+                    <br/>
+                    <Switch 
+                        checked={this.state.switch[1]}
+                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 1, val: !this.state.switch[1]})}
+                    >
+                        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </Switch>
+                    <br/>
+                    <Switch
+                        checked={this.state.switch[2]}
+                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 2, val: !this.state.switch[2]})}
+                        color="black"
+                    >
+                        Black
+                    </Switch>
+                    <br/>
+                    <Switch
+                        checked
+                        color="black"
+                        disabled
+                    ></Switch>
+                </section>
+
                 <section>
                     <h2>Loader</h2>
                     <Loader/>
@@ -198,14 +230,14 @@ class StoryControls extends React.Component {
 
                 <section>
                     <h2>Input types</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         {this.inputTypes}
                     </ButtonsGroup>
                 </section>
 
                 <section>
                     <h2>Select types</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         {this.selectTypes}
                     </ButtonsGroup>
                 </section>
@@ -251,17 +283,6 @@ class StoryControls extends React.Component {
                 </section>
 
                 <section className="section-form-min">
-                    <h2>Switch</h2>
-                    <Switch>Label</Switch>
-                    <br/>
-                    <Switch checked={true} onChange={()=>{console.log('Switch')}}>
-                        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </Switch>
-                    <br/>
-                    <Switch disabled>Disabled</Switch>
-                </section>
-
-                <section className="section-form-min">
                     <h2>Radio</h2>
                     <Radio onChange={i=>{console.log('Radio ' + i + ' active')}}>
                         <div>Lorem ipsum</div>
@@ -303,7 +324,7 @@ class StoryControls extends React.Component {
                 <section>
                     <h2>Select</h2>
                     <div className="section-relative">
-                        <ButtonsGroup margin="large">
+                        <ButtonsGroup size="large">
                             <Select 
                                 editable={true}
                                 label="Number"
@@ -438,7 +459,7 @@ class StoryControls extends React.Component {
                 <section>
                     <div className="section-relative">
                         <h2>Actions</h2>
-                        <ButtonsGroup margin="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
+                        <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
                             <ButtonDropdown>
                                 <Button variant="add">
                                     Add smth

@@ -39,7 +39,7 @@ class StoryButtons extends React.Component {
                 </section>                
                 <section>
                     <h2>Primary</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button size="large">Large</Button>
                         <Button size="large" disabled={this.state.disabled}>Disabled</Button>
                     </ButtonsGroup>
@@ -51,7 +51,7 @@ class StoryButtons extends React.Component {
                 </section>
                 <section className="section-purple">
                     <h2>Primary white</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button color="white" size="large">Large</Button>
                         <Button color="white" size="large" disabled={this.state.disabled}>Large Disabled</Button>
                     </ButtonsGroup>
@@ -63,7 +63,7 @@ class StoryButtons extends React.Component {
                 </section>
                 <section>
                     <h2>Secondary</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button variant="secondary" size="large">Large</Button>
                         <Button variant="secondary" size="large" disabled={this.state.disabled}>Large Disabled</Button>
                     </ButtonsGroup>
@@ -84,7 +84,7 @@ class StoryButtons extends React.Component {
                         </Button>
                     </ButtonsGroup>
                     <br />
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button variant="fab" text="Fab with text">
                             <Icon xlink="search" size={24} />
                         </Button>
@@ -102,7 +102,7 @@ class StoryButtons extends React.Component {
                         </Button>
                     </ButtonsGroup>
                     <br />
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button variant="fab" color="purple" text="Fab with text">
                             <Icon xlink="plus" size={24} />
                         </Button>
@@ -120,7 +120,7 @@ class StoryButtons extends React.Component {
                         </Button>
                     </ButtonsGroup>
                     <br />
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button variant="fab" color="black" text="Fab with text">
                             <Icon xlink="kanban" size={24} />
                         </Button>
@@ -140,7 +140,7 @@ class StoryButtons extends React.Component {
                         </Button>
                     </ButtonsGroup>
                     <br />
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button variant="fab" color="white" text="Fab with text">
                             <Icon xlink="search" size={24} />
                         </Button>
@@ -158,7 +158,7 @@ class StoryButtons extends React.Component {
                 </section>
                 <section>
                     <h2>Text</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button variant="text" href="#">Link</Button>
                         <Button variant="text" href="#" disabled={this.state.disabled}>Disabled link</Button>
                     </ButtonsGroup>
@@ -166,7 +166,7 @@ class StoryButtons extends React.Component {
                 <section>
                     <h2>Icon</h2>
                     <p>With extended transparent interaction area for touch</p>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button variant="icon" title="Settings">
                             <Icon xlink="settings" size={24} />
                         </Button>
@@ -177,7 +177,7 @@ class StoryButtons extends React.Component {
                 </section>
                 <section>
                     <h2>Icon+text</h2>
-                    <ButtonsGroup margin="large">
+                    <ButtonsGroup size="large">
                         <Button 
                             variant="icon-text" 
                             text="Button text"
