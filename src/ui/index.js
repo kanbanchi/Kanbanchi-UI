@@ -1,27 +1,28 @@
-export {Button} from './button/button.js';
-export {ButtonDropdown} from './buttonDropdown/buttonDropdown.js';
+export {Button} from './button/button';
+export {ButtonDropdown} from './buttonDropdown/buttonDropdown';
 export {ButtonsGroup} from './buttonsGroup/buttonsGroup'; // ts
-export {ButtonsSegmented} from './buttons_segmented/buttons_segmented.js';
+export {ButtonsSegmented} from './buttons_segmented/buttons_segmented';
 
 export {Checkbox} from './checkbox/checkbox'; // ts
 
+export {Datepicker} from './datepicker/datepicker';
+export {Divider} from './divider/divider';
+export {Dropdown} from './dropdown/dropdown';
+
 export {Icon} from './icon/icon';
+export {Input} from './input/input';
 
-export {Tabs} from './tabs/tabs.js';
+export {Label} from './label/label';
+export {Loader} from './loader/loader';
+export {LoaderBlock} from './loaderBlock/loaderBlock';
 
-export {Snackbar} from './snackbar/snackbar.js';
+export {Radio} from './radio/radio';
 
-export {Divider} from './divider/divider.js';
-export {Label} from './label/label.js';
-export {Input} from './input/input.js';
-export {Search} from './search/search.js';
-export {Switch} from './switch/switch.js';
-export {Radio} from './radio/radio.js';
-export {Datepicker} from './datepicker/datepicker.js';
-export {Dropdown} from './dropdown/dropdown.js';
-export {Select} from './select/select.js';
-export {SelectList} from './selectList/selectList.js';
-export {SelectListItem} from './selectListItem/selectListItem.js';
+export {Search} from './search/search';
+export {Select} from './select/select';
+export {SelectList} from './selectList/selectList';
+export {SelectListItem} from './selectListItem/selectListItem';
+export {Snackbar} from './snackbar/snackbar';
+export {Switch} from './switch/switch'; // ts
 
-export {Loader} from './loader/loader.js';
-export {LoaderBlock} from './loaderBlock/loaderBlock.js';
+export {Tabs} from './tabs/tabs';
