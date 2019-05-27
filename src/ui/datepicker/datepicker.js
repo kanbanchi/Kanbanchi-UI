@@ -13,12 +13,14 @@ const defaultDateFormat = 'd MMM yyyy';
 export const Datepicker = (props) => {
     let {
         className,
+        color,
         dateFormat,
         isClearable,
-        variants,
+        variant,
         onSelect,
         ...attributes
-    } = props;
+    } = props,
+        inputAttributes = {};
 
     className = ClassNames(
         'kui-datepicker',
@@ -31,11 +33,9 @@ export const Datepicker = (props) => {
 
     attributes.isClearable = (isClearable !== null) ? isClearable : true;
 
-    if (!variants) {
-        variants = ['datepicker'];
-    } else if (!variants.includes('datepicker')) {
-        variants.push('datepicker');
-    }
+    inputAttributes.variant = variant || 'datepicker';
+    
+    if (color) inputAttributes.color = color;
 
     attributes.onSelect = (e) => {
         pickerRef.current.input.setIsFilled(e);
@@ -45,7 +45,7 @@ export const Datepicker = (props) => {
     return (
         <div className={className}>
             <ReactDatepicker
-                customInput={<Input variants={variants}/>}
+                customInput={<Input {...inputAttributes}/>}
                 locale="en-GB"
                 ref={pickerRef}
                 {...attributes}
@@ -55,11 +55,21 @@ export const Datepicker = (props) => {
 };
 
 Datepicker.propTypes = {
-    variants: PropTypes.arrayOf(PropTypes.string) // Input.variants
+    color: PropTypes.oneOf([
+        'grey'
+    ]),
+    variant: PropTypes.oneOf([
+        'arrow',
+        'header',
+        'datepicker',
+        'search',
+        'withicon'
+    ])
 };
 
 Datepicker.defaultProps = {
-    variants: []
+    color: null,
+    variant: null
 };
 
 export default Datepicker;
