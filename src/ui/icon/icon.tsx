@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { IIconProps } from './types';
 import { ClassNames } from '../utils';
-import { Label } from '../../ui';
 import '../../../src/ui/icon/icon.module.scss';
 
 export const Icon: React.SFC<
