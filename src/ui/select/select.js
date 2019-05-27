@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { PropTypes, ClassNames, ClassVariants } from '../utils';
+import { PropTypes, ClassNames } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 
@@ -12,7 +12,7 @@ export const Select = (props) => {
         disabled,
         editable,
         opened,
-        variants,
+        variant,
         onBlur,
         onChange,
         onClick,
@@ -24,7 +24,7 @@ export const Select = (props) => {
     } = props,
         dropdownBody = null,
         list = [],
-        isSearch = variants.includes('search');
+        isSearch = variant === 'search';
 
     const [activeHook, setActiveHook] = useState(active);
     const [directionHook, setDirectionHook] = useState(direction);
@@ -42,7 +42,7 @@ export const Select = (props) => {
         'kui-select',
         (disabled) ? 'kui-select--disabled' : null,
         (isOpenedHook) ? 'kui-select--opened' : null,
-        ClassVariants({variants, prefix: 'kui-select--variant_'}),
+        (variant) ? 'kui-select--variant_' + variant : null,
         className
     );
 
@@ -220,7 +220,7 @@ export const Select = (props) => {
                 readOnly={!editable}
                 ref={inputRef}
                 value={valueHook}
-                variants={variants}
+                variant={variant}
                 {...attributes}
             />
             <Dropdown
@@ -234,14 +234,6 @@ export const Select = (props) => {
         </div>
     );
 };
-
-Select.variants = [
-    'arrow',
-    'header',
-    'withicon',
-    'priority',
-    'search'
-];
 
 Select.propTypes = {
     active: PropTypes.number,
@@ -258,7 +250,13 @@ Select.propTypes = {
     icon: PropTypes.string,
     label: PropTypes.string,
     opened: PropTypes.bool,
-    variants: PropTypes.arrayOf(PropTypes.string),
+    variant: PropTypes.oneOf([
+        'arrow',
+        'header',
+        'priority',
+        'search',
+        'withicon'
+    ]),
     onOpen: PropTypes.func
 };
 
@@ -271,7 +269,7 @@ Select.defaultProps = {
     icon: null,
     label: null,
     opened: false,
-    variants: [],
+    variant: null,
     onOpen: null
 };
 
