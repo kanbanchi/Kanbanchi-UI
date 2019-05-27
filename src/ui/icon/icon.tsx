@@ -1,8 +1,13 @@
-import React from 'react';
-import {PropTypes, ClassNames} from '../utils';
+import * as React from 'react';
+import { IIconProps } from './types';
+import { ClassNames } from '../utils';
+import { Label } from '../../ui';
 import '../../../src/ui/icon/icon.module.scss';
 
-export const Icon = (props) => {
+export const Icon: React.SFC<
+    IIconProps
+    & React.InputHTMLAttributes<HTMLElement>
+> = (props) => {
     let {
         className,
         size,
@@ -34,20 +39,11 @@ export const Icon = (props) => {
             <Svg className="kui-icon__svg"/>
         </span>
     );
-};
-
-Icon.propTypes = {
-    xlink: PropTypes.string.isRequired,
-    size: PropTypes.oneOf([
-        16,
-        24,
-        96
-    ])
-};
+}
 
 Icon.defaultProps = {
     xlink: '',
     size: 16
-};
+}
 
-export default Icon;
+Icon.displayName = 'Icon';

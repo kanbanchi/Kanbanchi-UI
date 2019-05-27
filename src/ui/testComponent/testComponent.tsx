@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITestComponentProps } from './types';
-import { ButtonsGroup } from '../../ui';
+import { ButtonsGroup, Icon } from '../../ui';
 
 export const TestComponent: React.SFC<ITestComponentProps> = 
     (props) => {
@@ -14,6 +14,7 @@ export const TestComponent: React.SFC<ITestComponentProps> =
                         {props.isBlack ? 'Black' : 'White'}
                     </div>
                 </ButtonsGroup>
+                <Icon xlink="search" size={24} />
             </div>
         );
     }
