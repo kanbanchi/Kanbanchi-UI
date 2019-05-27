@@ -1,4 +1,4 @@
 export interface IIconProps {
-    xlink: string,
-    size?: 16 | 24 | 96
+    xlink: string;
+    size?: 16 | 24 | 96;
 }
