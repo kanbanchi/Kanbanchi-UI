@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { PropTypes, ClassNames, ClassVariants } from '../utils';
+import { PropTypes, ClassNames } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
@@ -9,7 +9,7 @@ export const ButtonDropdown = (props) => {
         className,
         direction,
         disabled,
-        variants,
+        variant,
         onBlur,
         onClick,
         ...attributes
@@ -27,7 +27,7 @@ export const ButtonDropdown = (props) => {
         'kui-button-dropdown',
         (disabled) ? 'kui-button-dropdown--disabled' : null,
         (isOpenedHook) ? 'kui-button-dropdown--opened' : null,
-        ClassVariants({variants, prefix: 'kui-button-dropdown--variant_'}),
+        (variant) ? 'kui-button-dropdown--variant_' + variant : null,
         className
     );
 
@@ -100,10 +100,6 @@ export const ButtonDropdown = (props) => {
     );
 };
 
-ButtonDropdown.variants = [
-    'right'
-];
-
 ButtonDropdown.propTypes = {
     direction: PropTypes.oneOf([
         'auto',
@@ -111,13 +107,15 @@ ButtonDropdown.propTypes = {
         'up'
     ]),
     disabled: PropTypes.bool,
-    variants: PropTypes.arrayOf(PropTypes.string)
+    variant: PropTypes.oneOf([
+        'right'
+    ])
 };
 
 ButtonDropdown.defaultProps = {
     direction: 'auto',
     disabled: false,
-    variants: []
+    variant: null
 };
 
 export default ButtonDropdown;
