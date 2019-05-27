@@ -12,10 +12,10 @@ export interface IInputProps extends
     IInputStateProps,
     IInputDispatchProps
 {
-    autosize?: boolean,
-    color?: 'grey',
-    disabled?: boolean,
-    icon?: string,
-    label?: string,
-    variant?: IInputVariant
+    autosize?: boolean;
+    color?: 'grey';
+    disabled?: boolean;
+    icon?: string;
+    label?: string;
+    variant?: IInputVariant;
 }
