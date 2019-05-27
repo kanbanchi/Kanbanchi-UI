@@ -8,7 +8,7 @@ export const Search = (props) => {
         children,
         className,
         type,
-        variants,
+        variant,
         ...attributes
     } = props;
 
@@ -17,14 +17,13 @@ export const Search = (props) => {
         className
     );
 
-    if (!variants.includes('search')) variants.push('search');
+    attributes.variant = variant || 'search';
 
     attributes.type = type || 'search';
 
     return (
         <Select
             className={className}
-            variants={variants}
             {...attributes}
         >
             {children}
@@ -33,11 +32,17 @@ export const Search = (props) => {
 };
 
 Search.propTypes = {
-    variants: PropTypes.arrayOf(PropTypes.string)
+    variant: PropTypes.oneOf([
+        'arrow',
+        'header',
+        'datepicker',
+        'search',
+        'withicon'
+    ])
 };
 
 Search.defaultProps = {
-    variants: []
+    variant: null
 };
 
 export default Search;

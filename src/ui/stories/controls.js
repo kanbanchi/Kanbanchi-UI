@@ -223,9 +223,9 @@ class StoryControls extends React.Component {
 
                 <section className="section-grey section-form-min">
                     <h2>Input</h2>
-                    <Input variants={['grey']} label="Label" placeholder="Text input" />
+                    <Input color="grey" label="Label" placeholder="Text input" />
                     <br/>
-                    <Input variants={['grey']} label="Label" placeholder="Disabled" disabled />
+                    <Input color="grey" label="Label" placeholder="Disabled" disabled />
                 </section>
 
                 <section>
@@ -262,7 +262,7 @@ class StoryControls extends React.Component {
                         <h2>Search</h2>
                         <Search
                             editable={true}
-                            variants={['grey']}
+                            color="grey"
                         >
                             <SelectList fixActive={false}>
                                 <SelectListItem
@@ -330,7 +330,7 @@ class StoryControls extends React.Component {
                                 label="Number"
                                 style={{width: 100}}
                                 type="number"
-                                variants={['arrow']}
+                                variant="arrow"
                             >
                                 <SelectList>
                                     <li divider>0</li>
@@ -352,7 +352,7 @@ class StoryControls extends React.Component {
                                 editable={true}
                                 label="Time"
                                 icon="deadline"
-                                variants={['withicon']}
+                                variant="withicon"
                                 style={{width: 120}}
                                 onChange={i=>{console.log('Time', i.item)}}
                             >
@@ -414,7 +414,7 @@ class StoryControls extends React.Component {
                     <Select 
                         active={0}
                         label="Header"
-                        variants={['header', 'arrow']}
+                        variant="header"
                         onChange={i=>{console.log('Plan', i.item)}}
                     >
                         <SelectList>
@@ -431,7 +431,7 @@ class StoryControls extends React.Component {
                         active={0}
                         direction="up"
                         label="Direction up force"
-                        variants={['priority']}
+                        variant="priority"
                     >
                         <SelectList>
                             <SelectListItem value="0" icon="priority-no">
@@ -479,7 +479,7 @@ class StoryControls extends React.Component {
                                     </SelectListItem>
                                 </SelectList>
                             </ButtonDropdown>
-                            <ButtonDropdown variants={['right']}>
+                            <ButtonDropdown variant="right">
                                 <Button variant="action">
                                     Actions Right
                                 </Button>

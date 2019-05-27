@@ -43,10 +43,6 @@
             white-space: nowrap;
         }
 
-        .kui-input--variant_grey & {
-            border-color: transparent;
-        }
-
         &:focus {
             border-color: $color-purple;
             background: $color-light-background;
@@ -111,4 +107,9 @@
         }
     }
 
+    &--color_grey:not(&--focus):not(&--filled) {
+        .kui-input__item {
+            border-color: transparent;
+        }
+    }
 }
