@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
-import { PropTypes, ClassNames, ClassVariants } from '../utils';
+import { PropTypes, ClassNames } from '../utils';
 import {default as autosizeLibray} from './autosize';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
@@ -13,7 +13,7 @@ export const Input = forwardRef((props, ref) => {
         icon,
         label,
         value,
-        variants,
+        variant,
         onBlur,
         onFocus,
         onChange,
@@ -38,7 +38,7 @@ export const Input = forwardRef((props, ref) => {
         (isFilled) ? 'kui-input--filled' : null,
         (isFocusedHook) ? 'kui-input--focus' : null,
         (!autosize) ? 'kui-input--noresize' : null,
-        ClassVariants({variants, prefix: 'kui-input--variant_'}),
+        (variant) ? 'kui-input--variant_' + variant : null,
         className
     );
 
@@ -95,41 +95,14 @@ export const Input = forwardRef((props, ref) => {
         setInputValue('');
     };
 
-    if (variants.includes('arrow')) {
+    if (variant === 'arrow' || variant === 'header') {
         inputAfter = <Icon
             xlink="arrow-down"
             size={24}
             className="kui-input__icon kui-input__icon--arrow"
         />;
-    }
-
-    if (variants.includes('search')) {
-        inputBefore = (<span className="kui-input-search">
-            <Icon
-                xlink="search"
-                size={24}
-                className="kui-input-search__icon"
-            />
-            <span className="kui-input-search__placeholder">
-                Search
-            </span>
-        </span>);
-        inputAfter = <Icon
-            xlink="clear"
-            size={24}
-            className="kui-input__icon kui-input__icon--clear"
-            onClick={clearInput} />;
-    }
-
-    if (icon && variants.includes('withicon')) {
-        inputAfter = <Icon
-            xlink={icon}
-            size={24}
-            className="kui-input__icon"
-        />;
-    }
-
-    if (variants.includes('datepicker')) {
+    } else if 
+        (variant === 'datepicker') {
         autosize = false;
         icon = icon || 'calendar';
         attributes.readOnly = true;
@@ -145,6 +118,30 @@ export const Input = forwardRef((props, ref) => {
             onClick={clearInput}
         />;
         inputAfter = (isFilled) ? iconClear : iconCalendar;
+    } else if
+        (variant === 'search') {
+        inputBefore = (<span className="kui-input-search">
+            <Icon
+                xlink="search"
+                size={24}
+                className="kui-input-search__icon"
+            />
+            <span className="kui-input-search__placeholder">
+                Search
+            </span>
+        </span>);
+        inputAfter = <Icon
+            xlink="clear"
+            size={24}
+            className="kui-input__icon kui-input__icon--clear"
+            onClick={clearInput} />;
+    } else if 
+        (icon && variant === 'withicon') {
+        inputAfter = <Icon
+            xlink={icon}
+            size={24}
+            className="kui-input__icon"
+        />;
     }
 
     const Tag = (autosize) ? 'textarea' : 'input';
@@ -184,13 +181,6 @@ export const Input = forwardRef((props, ref) => {
     );
 });
 
-Input.variants = [
-    'arrow',
-    'datepicker',
-    'withicon',
-    'search'
-];
-
 Input.propTypes = {
     autosize: PropTypes.bool,
     color: PropTypes.oneOf([
@@ -200,7 +190,14 @@ Input.propTypes = {
     icon: PropTypes.string,
     label: PropTypes.string,
     value: PropTypes.string,
-    variants: PropTypes.arrayOf(PropTypes.string)
+    variant: PropTypes.oneOf([
+        'arrow',
+        'header',
+        'datepicker',
+        'priority',
+        'search',
+        'withicon'
+    ])
 };
 
 Input.defaultProps = {
@@ -210,7 +207,7 @@ Input.defaultProps = {
     icon: null,
     label: null,
     value: '',
-    variants: []
+    variant: null
 };
 
 export default Input;
