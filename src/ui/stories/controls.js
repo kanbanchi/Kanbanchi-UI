@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { LoaderBlock, Loader, ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Datepicker, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
+import { LoaderBlock, Loader, ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
@@ -157,22 +157,7 @@ class StoryControls extends React.Component {
                 <section>
                     <h2>Loader</h2>
                     <Loader/>
-                </section>
-
-                <section>
-                    <h2>Datepicker</h2>
-                    <Datepicker
-                        selected={this.state.dates[0]}
-                        label="From"
-                        onChange={(val)=>this.setStateProp({prop: 'dates', propIndex: 0, val})}
-                        minDate={new Date('2019-05-22')}
-                        highlightDates={[
-                            { "react-datepicker__day--highlighted": [
-                            new Date('2019-05-24'),
-                            new Date('2019-05-25')
-                            ]}
-                        ]}
-                    /><Loader small className="stories-loader-small"/>
+                    <Loader small className="stories-loader-small"/>
                 </section>
 
                 <section>
