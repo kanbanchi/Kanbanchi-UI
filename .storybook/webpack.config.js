@@ -46,6 +46,13 @@ module.exports = {
                     }
                 ]
 
+            },
+
+            {
+                test: /\.js?$/,
+                include: path.resolve(__dirname, '../src/ui/stories/'),
+                loaders: [require.resolve('@storybook/addon-storysource/loader')],
+                enforce: 'pre',
             }
         ]
     },

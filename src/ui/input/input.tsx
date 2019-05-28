@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
-import { PropTypes, ClassNames } from '../utils';
-import {default as autosizeLibray} from './autosize';
+import * as React from 'react';
+import { IInputProps } from './types';
+import { ClassNames } from '../utils';
+import * as autosizeLibray from './autosize';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
-export const Input = forwardRef((props, ref) => {
+export const Input: React.SFC<
+    IInputProps
+    & React.InputHTMLAttributes<HTMLElement>
+> = React.forwardRef((props, ref) => {
     let {
         autosize,
         className,
@@ -15,21 +19,22 @@ export const Input = forwardRef((props, ref) => {
         value,
         variant,
         onBlur,
-        onFocus,
         onChange,
         onEnter,
+        onFocus,
         onKeyDown,
-        ...attributes
+        ...attributesOriginal
     } = props,
+        attributes:React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
         labelItem = null,
         inputBefore = null,
         inputAfter = null;
 
-    const [isFilled, setIsFilled] = useState(!!value);
-    const [isFocusedHook, setIsFocusedHook] = useState(false);
-    const [inputValue, setInputValue] = useState(value);
-    const [timeoutHook, setTimeoutHook] = useState(null);
-    const textarea = useRef(null);
+    const [isFilled, setIsFilled] = React.useState(!!value);
+    const [isFocusedHook, setIsFocusedHook] = React.useState(false);
+    const [inputValue, setInputValue] = React.useState(value);
+    const [timeoutHook, setTimeoutHook] = React.useState(null);
+    const textarea = React.useRef(null);
     
     className = ClassNames(
         'kui-input',
@@ -47,13 +52,13 @@ export const Input = forwardRef((props, ref) => {
         attributes.disabled = true;
     }
 
-    attributes.onChange = e => {
+    attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsFilled(!!e.target.value);
         setInputValue(e.target.value);
         if (onChange) onChange(e);
     };
 
-    attributes.onKeyDown = e => {
+    attributes.onKeyDown = (e) => {
         if (e && e.which === 13) {
             if (!autosize) e.preventDefault();
             if (onEnter) onEnter(e);
@@ -89,10 +94,11 @@ export const Input = forwardRef((props, ref) => {
         labelItem = (<div className="kui-label__item">{label}</div>);
     }
 
-    const clearInput = (e) => {
+    const clearInput = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         setIsFilled(false);
         setInputValue('');
+        if (onChange) onChange(e);
     };
 
     if (variant === 'arrow' || variant === 'header') {
@@ -146,22 +152,22 @@ export const Input = forwardRef((props, ref) => {
 
     const Tag = (autosize) ? 'textarea' : 'input';
 
-    useEffect(() => {
-        if (autosize) autosizeLibray(textarea.current);
+    React.useEffect(() => {
+        if (autosize) autosizeLibray.default(textarea.current);
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         return () => {
             clearTimeout(timeoutHook);
         };
     }, [timeoutHook]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         setInputValue(value);
     }, [value]);
 
-    useImperativeHandle(ref, () => ({
-        setIsFilled(value) {
+    React.useImperativeHandle(ref, () => ({
+        setIsFilled(value: string) {
             setIsFilled(!!value);
         }
     }));
@@ -181,25 +187,6 @@ export const Input = forwardRef((props, ref) => {
     );
 });
 
-Input.propTypes = {
-    autosize: PropTypes.bool,
-    color: PropTypes.oneOf([
-        'grey'
-    ]),
-    disabled: PropTypes.bool,
-    icon: PropTypes.string,
-    label: PropTypes.string,
-    value: PropTypes.string,
-    variant: PropTypes.oneOf([
-        'arrow',
-        'header',
-        'datepicker',
-        'priority',
-        'search',
-        'withicon'
-    ])
-};
-
 Input.defaultProps = {
     autosize: true,
     color: null,
@@ -207,7 +194,8 @@ Input.defaultProps = {
     icon: null,
     label: null,
     value: '',
-    variant: null
-};
+    variant: null,
+    onEnter: (): void => undefined
+}
 
-export default Input;
+Input.displayName = 'Input';
