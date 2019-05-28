@@ -13,6 +13,7 @@ export const Datepicker: React.SFC<IDatepickerProps> = (props) => {
     let {
         className,
         color,
+        label,
         selected,
         variant,
         onChange,
@@ -28,11 +29,11 @@ export const Datepicker: React.SFC<IDatepickerProps> = (props) => {
 
     const inputAttributes = {
         color,
+        label,
         variant
     };
 
     const onChangeHandler = (date: Date) => {
-        console.log('input', date);
         pickerRef.current.input.setIsFilled(date);
         if (onChange) onChange(date);
     }
@@ -54,6 +55,7 @@ export const Datepicker: React.SFC<IDatepickerProps> = (props) => {
 Datepicker.defaultProps = {
     color: null,
     dateFormat: 'd MMM yyyy',
+    label: null,
     selected: null,
     variant: 'datepicker',
     onChange: (): void => undefined

@@ -5,7 +5,7 @@ import '../../../src/ui/icon/icon.module.scss';
 
 export const Icon: React.SFC<
     IIconProps
-    & React.InputHTMLAttributes<HTMLElement>
+    & React.ImgHTMLAttributes<HTMLImageElement>
 > = (props) => {
     let {
         className,
