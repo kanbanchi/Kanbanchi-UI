@@ -15,6 +15,7 @@ export const Input: React.SFC<
         color,
         disabled,
         icon,
+        isClearable,
         label,
         value,
         variant,
@@ -117,13 +118,17 @@ export const Input: React.SFC<
             size={24}
             className="kui-input__icon"
         />;
-        const iconClear = <Icon
-            xlink="clear"
-            size={24}
-            className="kui-input__icon kui-input__icon--clear"
-            onClick={clearInput}
-        />;
-        inputAfter = (isFilled) ? iconClear : iconCalendar;
+        if (isClearable) {
+            const iconClear = <Icon
+                xlink="clear"
+                size={24}
+                className="kui-input__icon kui-input__icon--clear"
+                onClick={clearInput}
+            />;
+            inputAfter = (isFilled) ? iconClear : iconCalendar;
+        } else {
+            inputAfter = iconCalendar;
+        }
     } else if
         (variant === 'search') {
         inputBefore = (<span className="kui-input-search">
@@ -192,6 +197,7 @@ Input.defaultProps = {
     color: null,
     disabled: false,
     icon: null,
+    isClearable: false,
     label: null,
     value: '',
     variant: null,
