@@ -36,16 +36,16 @@ class StoryControls extends React.Component {
             'url',
             //'week'
         ];
-        this.inputTypes = this.types.map(type => 
-            <Input 
+        this.inputTypes = this.types.map(type =>
+            <Input
                 autosize={false}
                 label={type} type={type} key={type}
                 style={{width: 200}}
             />
         );
 
-        this.selectTypes = this.types.map(type => 
-            <Select 
+        this.selectTypes = this.types.map(type =>
+            <Select
                 editable={true}
                 label={type} type={type} key={type}
                 style={{width: 200}}
@@ -75,7 +75,7 @@ class StoryControls extends React.Component {
         clearTimeout(this.loadTimeout);
         this.loadTimeout = setTimeout(() => {
             if (success) {
-                val.push(<SelectListItem 
+                val.push(<SelectListItem
                     key="0"
                     icon="card"
                     list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
@@ -119,10 +119,10 @@ class StoryControls extends React.Component {
         clearTimeout(this.loadTimeout);
     }
 
-    render() { 
+    render() {
         return (
             <div className="page">
-                
+
                 <section className="section-form-min">
                     <h2>Switch</h2>
                     <Switch
@@ -132,7 +132,7 @@ class StoryControls extends React.Component {
                         Label
                     </Switch>
                     <br/>
-                    <Switch 
+                    <Switch
                         checked={this.state.switch[1]}
                         onChange={()=>this.setStateProp({prop: 'switch', propIndex: 1, val: !this.state.switch[1]})}
                     >
@@ -163,6 +163,7 @@ class StoryControls extends React.Component {
                     <h2>Datepicker</h2>
                     <Datepicker
                         selected={this.state.dates[0]}
+                        label="From"
                         onChange={(val)=>this.setStateProp({prop: 'dates', propIndex: 0, val})}
                         minDate={new Date('2019-05-22')}
                         highlightDates={[
@@ -211,7 +212,7 @@ class StoryControls extends React.Component {
                     <br/>
                     <Input placeholder="Without label & readonly" readOnly={true} />
                     <br/>
-                    <Input 
+                    <Input
                         label="No resize"
                         autosize={false}
                         onChange={e=>console.log('onChange', e.target.value)}
@@ -245,7 +246,7 @@ class StoryControls extends React.Component {
                 <section className="section-form-min">
                     <div className="section-relative">
                         <h2>Search</h2>
-                        <Search 
+                        <Search
                             editable={true}
                             onOpen={()=>this.loadList()}
                         >
@@ -325,7 +326,7 @@ class StoryControls extends React.Component {
                     <h2>Select</h2>
                     <div className="section-relative">
                         <ButtonsGroup size="large">
-                            <Select 
+                            <Select
                                 editable={true}
                                 label="Number"
                                 style={{width: 100}}
@@ -347,7 +348,7 @@ class StoryControls extends React.Component {
                                     <li disabled>Disabled</li>
                                 </SelectList>
                             </Select>
-                            <Select 
+                            <Select
                                 active={40}
                                 editable={true}
                                 label="Time"
@@ -409,9 +410,9 @@ class StoryControls extends React.Component {
                             </Select>
                         </ButtonsGroup>
                     </div>
-                    
+
                     <br />
-                    <Select 
+                    <Select
                         active={0}
                         label="Header"
                         variant="header"
@@ -427,7 +428,7 @@ class StoryControls extends React.Component {
                         </SelectList>
                     </Select>
                     <br />
-                    <Select 
+                    <Select
                         active={0}
                         direction="up"
                         label="Direction up force"
@@ -521,7 +522,7 @@ class StoryControls extends React.Component {
 
             </div>
         )
-    } 
+    }
 };
 
 storiesOf('KUI', module)
