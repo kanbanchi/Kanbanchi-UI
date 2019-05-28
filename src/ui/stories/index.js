@@ -4,4 +4,6 @@ import Buttons from './buttons';
 import Snackbars from './snackbars';
 import Controls from './controls';
 
-import TestComponent from './testComponent';
+import Datepicker from './controls/datepicker';
+
+import TestComponent from './wip/testComponent';

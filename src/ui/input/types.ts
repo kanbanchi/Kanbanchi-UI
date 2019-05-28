@@ -23,6 +23,7 @@ export interface IInputPublicProps {
     color?: IInputColor;
     disabled?: boolean;
     icon?: string;
+    isClearable?: boolean;
     label?: string;
     variant?: IInputVariant;
 }

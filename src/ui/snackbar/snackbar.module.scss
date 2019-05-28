@@ -62,6 +62,7 @@
     }
 
     &__buttons {
+        flex-wrap: nowrap;
         margin-left: $google-spacing * 3;
     }
 
@@ -124,7 +125,7 @@
     }
 }
 
-@keyframes:global(snackbarShow) {
+@keyframes snackbarShow {
     0% {
         transform: translateY(100%);
     }
@@ -132,7 +133,7 @@
         transform: none;
     }
 }
-@keyframes:global(snackbarTimer) {
+@keyframes snackbarTimer {
     0%,
     100% {
         opacity: .2;
