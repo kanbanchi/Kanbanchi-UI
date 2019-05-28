@@ -1,4 +1,4 @@
 export interface ITestComponentProps {
-    isBlack: boolean;
-    doWork: () => void;
+    isBlack?: boolean;
+    doWork?: () => void;
 }
