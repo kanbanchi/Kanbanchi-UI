@@ -10,11 +10,12 @@ type IInputVariant =
     | 'withicon';
 
 export interface IInputStateProps {
-    value: string;
+    value?: string;
 }
 
 export interface IInputDispatchProps {
-    onEnter: (event: React.KeyboardEvent<HTMLElement>) => void;
+    onChange?: (event: React.SyntheticEvent<HTMLElement>) => void;
+    onEnter?: (event: React.KeyboardEvent<HTMLElement>) => void;
 }
 
 export interface IInputPublicProps {

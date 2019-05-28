@@ -98,6 +98,7 @@ export const Input: React.SFC<
         e.preventDefault();
         setIsFilled(false);
         setInputValue('');
+        if (onChange) onChange(e);
     };
 
     if (variant === 'arrow' || variant === 'header') {
