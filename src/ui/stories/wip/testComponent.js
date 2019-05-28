@@ -15,5 +15,5 @@ const Story = () => {
     );
 };
 
-storiesOf('test', module)
-    .add('testComponent', () => <Story/>);
+storiesOf('WIP', module)
+    .add('TestComponent', () => <Story/>);

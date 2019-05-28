@@ -3,7 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { Datepicker } from './../../../ui';
 
 const Story = () => {
-    const [date, setDate] = useState(Date.now());
+    const [date, setDate] = useState();
+    const [date01, setDate01] = useState(Date.now());
 
     return (
         <div className="page">
@@ -11,17 +12,19 @@ const Story = () => {
                 <h2>Datepicker</h2>
 
                 <Datepicker
+                    selected={date}
+                    onChange={(val)=>setDate(val)}
+                />
+
+                <br/><br/>
+
+                <Datepicker
+                    isClearable={false}
                     label="From"
                     minDate={new Date('2019-05-22')}
                     popperPlacement="bottom-start"
-                    selected={date}
-                    onChange={(val)=>setDate(val)}
-                    highlightDates={[
-                        { "react-datepicker__day--highlighted": [
-                        new Date('2019-05-24'),
-                        new Date('2019-05-25')
-                        ]}
-                    ]}
+                    selected={date01}
+                    onChange={(val)=>setDate01(val)}
                 />
 
             </section>
@@ -29,5 +32,14 @@ const Story = () => {
     );
 };
 
-storiesOf('controls', module)
-    .add('datepicker', () => <Story/>);
+storiesOf('Controls', module)
+    .add('Datepicker', () => <Story/>);
+
+/*
+highlightDates={[
+    { "react-datepicker__day--highlighted": [
+    new Date('2019-05-24'),
+    new Date('2019-05-25')
+    ]}
+]}
+*/
