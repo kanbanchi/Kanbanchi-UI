@@ -7,7 +7,7 @@ class StoryControls extends React.Component {
         this.setStateProp = this.setStateProp.bind(this);
         this.loadList = this.loadList.bind(this);
         this.state = {
-            dates: [null],
+            dates: [Date.now()],
             switch: [false, true, true, true],
             listWithLoader: [],
             loading: false
@@ -163,7 +163,7 @@ class StoryControls extends React.Component {
                     <h2>Datepicker</h2>
                     <Datepicker
                         selected={this.state.dates[0]}
-                        onSelect={(val)=>this.setStateProp({prop: 'dates', propIndex: 0, val})}
+                        onChange={(val)=>this.setStateProp({prop: 'dates', propIndex: 0, val})}
                         minDate={new Date('2019-05-22')}
                         highlightDates={[
                             { "react-datepicker__day--highlighted": [
