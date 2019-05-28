@@ -1,8 +1,12 @@
-import React from 'react';
+import * as React from 'react';
+import { ILabelProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/label/label.module.scss';
 
-export const Label = (props) => {
+export const Label: React.SFC<
+    ILabelProps
+    & React.LabelHTMLAttributes<HTMLLabelElement>
+> = (props) => {
     let {
         className,
         children,
@@ -22,6 +26,6 @@ export const Label = (props) => {
             {children}
         </label>
     );
-};
+}
 
-export default Label;
+Label.displayName = 'Label';
