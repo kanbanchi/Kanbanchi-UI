@@ -14,6 +14,7 @@ export const Datepicker: React.SFC<IDatepickerProps> = (props) => {
         className,
         color,
         label,
+        isClearable,
         selected,
         variant,
         onChange,
@@ -29,6 +30,7 @@ export const Datepicker: React.SFC<IDatepickerProps> = (props) => {
 
     const inputAttributes = {
         color,
+        isClearable,
         label,
         variant
     };
@@ -55,6 +57,7 @@ export const Datepicker: React.SFC<IDatepickerProps> = (props) => {
 Datepicker.defaultProps = {
     color: null,
     dateFormat: 'd MMM yyyy',
+    isClearable: true,
     label: null,
     selected: null,
     variant: 'datepicker',
