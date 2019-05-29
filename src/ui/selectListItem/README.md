@@ -1,3 +1,3 @@
-# SelectList
+# SelectListItem
 
-List for Select control
+Item of List for Select control
