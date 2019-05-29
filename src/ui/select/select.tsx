@@ -1,14 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { PropTypes, ClassNames } from '../utils';
+import * as React from 'react';
+import { ISelectProps, ISelectActiveProps } from './types';
+import { IDropdownDirectionVertical } from './../dropdown/types';
+import { ClassNames } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 
-export const Select = (props) => {
+export const Select: React.SFC<
+    ISelectProps
+    & React.HTMLAttributes<HTMLElement>
+> = (props) => {
     let {
         active,
         children,
         className,
-        direction,
+        color,
+        directionVertical,
+        directionHorizontal,
         disabled,
         editable,
         opened,
@@ -20,23 +27,24 @@ export const Select = (props) => {
         onFocus,
         onKeyUp,
         onOpen,
-        ...attributes
+        ...attributesOriginal
     } = props,
+        attributes:React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
         dropdownBody = null,
-        list = [],
+        list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
 
-    const [activeHook, setActiveHook] = useState(active);
-    const [directionHook, setDirectionHook] = useState(direction);
-    const [initialValue, setInitialValue] = useState('');
-    const [valueHook, setValueHook] = useState('');
-    const [isFocusedHook, setIsFocusedHook] = useState(opened);
-    const [isOpenedHook, setIsOpenedHook] = useState(opened);
-    const [itemsRefsHook, setItemsRefsHook] = useState([]); // list items for auto scroll in dropdown
+    const [activeHook, setActiveHook] = React.useState(active);
+    const [directionHook, setDirectionHook] = React.useState(directionVertical);
+    const [initialValue, setInitialValue] = React.useState('');
+    const [valueHook, setValueHook] = React.useState('');
+    const [isFocusedHook, setIsFocusedHook] = React.useState(opened);
+    const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
+    const [itemsRefsHook, setItemsRefsHook] = React.useState([]); // list items for auto scroll in dropdown
 
-    const dropdownRef = useRef(null);
-    const inputRef = useRef(null);
-    const selectRef = useRef(null);
+    const dropdownRef = React.useRef(null);
+    const inputRef = React.useRef(null);
+    const selectRef = React.useRef(null);
 
     className = ClassNames(
         'kui-select',
@@ -46,20 +54,20 @@ export const Select = (props) => {
         className
     );
 
-    const onSelectListInit = (refs) => {
+    const onSelectListInit = (refs: Array<{}>) => {
         setItemsRefsHook(refs);
     }
 
-    const openDropdown = (e) => {
+    const openDropdown = () => {
         setIsOpenedHook(true);
         calcDirection();
-        if (onOpen) onOpen(e);
+        if (onOpen) onOpen();
     }
 
     const calcDirection = () => {
-        if (direction !== 'auto') return;
+        if (directionVertical !== 'auto') return;
         let el = selectRef.current.getBoundingClientRect();
-        let dir = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+        let dir: IDropdownDirectionVertical = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
         setDirectionHook(dir);
     }
 
@@ -81,12 +89,12 @@ export const Select = (props) => {
         }
     }
 
-    const setValue = (value) => {
+    const setValue = (value: string) => {
         setValueHook(value);
         inputRef.current.setIsFilled(value);
     }
 
-    attributes.onChange = (e) => {
+    attributes.onChange = (e: any) => {
         if (e.item) { // list item clicked
             setIsOpenedHook(false);
             setActiveHook(e.item.index);
@@ -103,7 +111,7 @@ export const Select = (props) => {
         setTimeout(() => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
-                openDropdown(e);
+                openDropdown();
             }
         }, 100); // delay after onClick
         if (onFocus) onFocus(e);
@@ -120,7 +128,7 @@ export const Select = (props) => {
     attributes.onClick = (e) => {
         if (isFocusedHook) {
             if (!isOpenedHook) {
-                openDropdown(e);
+                openDropdown();
             } else {
                 setIsOpenedHook(!isOpenedHook);
             }
@@ -129,27 +137,27 @@ export const Select = (props) => {
         if (onClick) onClick(e);
     }
 
-    if (children) {
-        if (!children.length) children = [children]; // if 1 child
-        dropdownBody = React.Children.map(children, (child) => {
-            if (child.type.name !== 'SelectList') return child;
-            list = child.props.children;
-            return React.cloneElement(child, {
-                active: activeHook,
-                onChange: attributes.onChange,
-                onSelectListInit
-            });
-        });
-    }
+    let childrenArray: Array<{}> = // children could be string, we need array
+        (Array.isArray(children)) ? children : [children];
 
-    const findValue = (value) => {
+    dropdownBody = React.Children.map(childrenArray, (child: any) => {
+        if (child.type.displayName !== 'SelectList') return child;
+        list = child.props.children;
+        return React.cloneElement(child, {
+            active: activeHook,
+            onChange: attributes.onChange,
+            onSelectListInit
+        });
+    });
+
+    const findValue = (value: string) => {
         return new Promise(function(resolve, reject) {
             if (!value || !list || !list.length) {
                 reject();
                 return;
             }
             let val = value.toLowerCase();
-            React.Children.forEach(list, (child, index) => {
+            React.Children.forEach(list, (child: React.ReactElement, index) => {
                 let item = child.props.children.toLowerCase();
                 if ((item === val) || item.includes(val)) {
                     resolve({
@@ -163,14 +171,14 @@ export const Select = (props) => {
         });
     }
 
-    attributes.onKeyUp = (e) => {
+    attributes.onKeyUp = (e: any) => {
         if (!e) return;
         if (onKeyUp) onKeyUp(e);
         e.persist();
         findValue(e.target.value)
-            .then(found => {
+            .then((found: ISelectActiveProps) => {
                 if (!isOpenedHook && e.which !== 13) { // open if closed
-                    openDropdown(e);
+                    openDropdown();
                 }
                 if (!isSearch) {
                     if (e.which === 39 || e.which === 13) { // arrow right || enter
@@ -182,7 +190,7 @@ export const Select = (props) => {
             .catch(() => {
                 setActiveHook(null);
                 if (!isOpenedHook && e.which !== 13) { // open if closed
-                    openDropdown(e);
+                    openDropdown();
                 }
             })
             .then(() => { // dont know why it works only in then
@@ -195,21 +203,21 @@ export const Select = (props) => {
             });
     }
 
-    attributes.onEnter = (e) => {
+    const onEnterHandler = (e: React.KeyboardEvent<HTMLElement>) => {
         if (!isSearch) {
             setIsOpenedHook(false);
         }
-        if (onEnter) onEnter();
+        if (onEnter) onEnter(e);
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (active !== null && list.length) {
             setInitialValue(list[active].props.children);
             setValue(list[active].props.children);
         }
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         onActiveChanged();
     }, [activeHook]);
 
@@ -217,14 +225,17 @@ export const Select = (props) => {
         <div className={className} ref={selectRef}>
             <Input
                 autosize={false}
+                color={color as any}
                 readOnly={!editable}
                 ref={inputRef}
-                value={valueHook}
+                value={valueHook as any}
                 variant={variant}
+                onEnter={onEnterHandler}
                 {...attributes}
             />
             <Dropdown
-                direction={directionHook}
+                directionVertical={directionHook}
+                directionHorizontal={directionHorizontal}
                 opened={isOpenedHook}
                 ref={dropdownRef}
                 onAnimationEnd={dropdownAnimationEnd}
@@ -235,42 +246,17 @@ export const Select = (props) => {
     );
 };
 
-Select.propTypes = {
-    active: PropTypes.number,
-    color: PropTypes.oneOf([
-        'grey'
-    ]),
-    direction: PropTypes.oneOf([
-        'auto',
-        'down',
-        'up'
-    ]),
-    disabled: PropTypes.bool,
-    editable: PropTypes.bool,
-    icon: PropTypes.string,
-    label: PropTypes.string,
-    opened: PropTypes.bool,
-    variant: PropTypes.oneOf([
-        'arrow',
-        'header',
-        'priority',
-        'search',
-        'withicon'
-    ]),
-    onOpen: PropTypes.func
-};
-
 Select.defaultProps = {
     active: null,
     color: null,
-    direction: 'auto',
+    directionVertical: 'auto',
+    directionHorizontal: 'left',
     disabled: false,
     editable: false,
-    icon: null,
-    label: null,
     opened: false,
-    variant: null,
-    onOpen: null
+    onChange: (): void => undefined,
+    onEnter: () => undefined,
+    onOpen: () => undefined
 };
 
-export default Select;
+Select.displayName = 'Select';
