@@ -43,9 +43,9 @@ export const Button: React.SFC<
 
     className = ClassNames(
         'kui-button',
-        'kui-button--' + variant,
-        (color) ? 'kui-button--' + color: null,
-        (size) ? 'kui-button--' + size : null,
+        'kui-button--variant_' + variant,
+        (color) ? 'kui-button--color_' + color: null,
+        (size) ? 'kui-button--size_' + size : null,
         (disabled) ? 'kui-button--disabled' : null,
         className
     );
