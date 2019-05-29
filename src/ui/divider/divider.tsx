@@ -1,8 +1,9 @@
-import React from 'react';
-import { PropTypes, ClassNames } from '../utils';
+import * as React from 'react';
+import { ClassNames } from '../utils';
 import '../../../src/ui/divider/divider.module.scss';
 
-export const Divider = (props) => {
+export const Divider: React.SFC<React.HTMLAttributes<HTMLElement>>
+= (props) => {
     let {
         className,
         ...attributes
@@ -18,8 +19,6 @@ export const Divider = (props) => {
     );
 };
 
-Divider.propTypes = {};
-
 Divider.defaultProps = {};
 
-export default Divider;
+Divider.displayName = 'Divider';
