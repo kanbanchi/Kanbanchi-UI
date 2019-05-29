@@ -5,6 +5,8 @@ import Snackbars from './snackbars';
 import Controls from './controls';
 
 import Datepicker from './controls/datepicker';
+import SelectList from './controls/selectList';
+import Select from './controls/select';
 import Switch from './controls/switch';
 import Tabs from './controls/tabs';
 
