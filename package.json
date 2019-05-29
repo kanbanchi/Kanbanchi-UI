@@ -9,6 +9,7 @@
   },
   "author": "Magic Web Solutions LTD",
   "dependencies": {
+    "moment": "^2.24.0",
     "react": "^16.8.3",
     "react-datepicker": "^2.5.0",
     "react-dom": "^16.8.3"
