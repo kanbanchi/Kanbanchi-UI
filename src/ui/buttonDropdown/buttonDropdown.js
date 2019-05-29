@@ -71,7 +71,7 @@ export const ButtonDropdown = (props) => {
                 btn = React.cloneElement(child, attributes);
                 return null;
             }
-            if (child.type.name !== 'SelectList') return child;
+            if (child.type.displayName !== 'SelectList') return child;
             return React.cloneElement(child, {
                 onChange: attributes.onChange
             });
