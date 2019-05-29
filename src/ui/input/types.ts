@@ -1,14 +1,3 @@
-type IInputColor = 
-    'grey';
-
-type IInputVariant = 
-    'arrow'
-    | 'datepicker'
-    | 'header'
-    | 'priority'
-    | 'search'
-    | 'withicon';
-
 export interface IInputStateProps {
     value?: string;
 }
@@ -20,16 +9,25 @@ export interface IInputDispatchProps {
 
 export interface IInputPublicProps {
     autosize?: boolean;
-    color?: IInputColor;
+    color?: 'grey';
     disabled?: boolean;
     icon?: string;
     isClearable?: boolean;
     label?: string;
-    variant?: IInputVariant;
+    type?: string;
+    variant?:
+        'arrow'
+        | 'datepicker'
+        | 'header'
+        | 'priority'
+        | 'search'
+        | 'withicon';
 }
 
 export interface IInputProps extends
     IInputStateProps,
     IInputDispatchProps,
     IInputPublicProps
-{}
+{
+    ref?: any;
+}
