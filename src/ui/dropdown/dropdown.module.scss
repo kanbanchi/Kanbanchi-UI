@@ -33,6 +33,10 @@
     &--direction_up.kui-dropdown--opened &__item {
         animation: animation_up_on .3s ease forwards;
     }
+
+    &--direction_right &__item {
+        right: 0;
+    }
 }
 
 @keyframes animation_down_on {
