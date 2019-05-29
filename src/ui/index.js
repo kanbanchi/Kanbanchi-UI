@@ -1,7 +1,7 @@
 export {Button} from './button/button';
 export {ButtonDropdown} from './buttonDropdown/buttonDropdown';
 export {ButtonsGroup} from './buttonsGroup/buttonsGroup'; // ts
-export {ButtonsSegmented} from './buttons_segmented/buttons_segmented';
+export {ButtonsSegmented} from './buttonsSegmented/buttonsSegmented';
 
 export {Checkbox} from './checkbox/checkbox'; // ts
 
