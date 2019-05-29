@@ -1,14 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { LoaderBlock, Loader, ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
+import { LoaderBlock, Loader, ButtonsGroup, Button, Tabs, Input, Radio, Checkbox, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
         this.setStateProp = this.setStateProp.bind(this);
         this.loadList = this.loadList.bind(this);
         this.state = {
-            dates: [Date.now()],
-            switch: [false, true, true, true],
             listWithLoader: [],
             loading: false
         };
@@ -122,37 +120,6 @@ class StoryControls extends React.Component {
     render() {
         return (
             <div className="page">
-
-                <section className="section-form-min">
-                    <h2>Switch</h2>
-                    <Switch
-                        checked={this.state.switch[0]}
-                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 0, val: !this.state.switch[0]})}
-                    >
-                        Label
-                    </Switch>
-                    <br/>
-                    <Switch
-                        checked={this.state.switch[1]}
-                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 1, val: !this.state.switch[1]})}
-                    >
-                        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </Switch>
-                    <br/>
-                    <Switch
-                        checked={this.state.switch[2]}
-                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 2, val: !this.state.switch[2]})}
-                        color="black"
-                    >
-                        Black
-                    </Switch>
-                    <br/>
-                    <Switch
-                        checked
-                        color="black"
-                        disabled
-                    ></Switch>
-                </section>
 
                 <section>
                     <h2>Loader</h2>

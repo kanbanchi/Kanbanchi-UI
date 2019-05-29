@@ -13,7 +13,7 @@ const Story = () => {
 
                 <Datepicker
                     selected={date}
-                    onChange={(val)=>setDate(val)}
+                    onChange={val=>setDate(val)}
                 />
 
                 <br/><br/>

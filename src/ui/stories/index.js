@@ -5,5 +5,6 @@ import Snackbars from './snackbars';
 import Controls from './controls';
 
 import Datepicker from './controls/datepicker';
+import Switch from './controls/switch';
 
 import TestComponent from './wip/testComponent';
