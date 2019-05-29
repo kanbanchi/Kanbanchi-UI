@@ -1,9 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { PropTypes, ClassNames } from '../utils';
+import * as React from 'react';
+import { ISelectListProps } from './types';
+import { ClassNames, ClassList } from '../utils';
 import { Divider } from '../../ui';
 import '../../../src/ui/selectList/selectList.module.scss';
 
-export const SelectList = (props) => {
+export const SelectList: React.SFC<
+    ISelectListProps
+    & React.HTMLAttributes<HTMLElement>
+> = (props) => {
     let {
         active,
         children,
@@ -23,27 +27,34 @@ export const SelectList = (props) => {
         className
     );
 
-    const [activeHook, setActiveHook] = useState(active);
-    
-    if (!children) children = [];
-    if (!children.length) children = [children]; // if 1 child
+    const childrenArray: Array<{}> = // children could be string, we need array
+        (Array.isArray(children)) ? children : [children];
 
-    const itemsRefs = Array.from({ length: children.length }, () => useRef(null));
+    const [activeHook, setActiveHook] = React.useState(active);
 
-    items = React.Children.map(children, (child, index) => {
-        const divider = (child.props.divider) ? <Divider /> : null;
+    const itemsRefs = Array.from({ length: childrenArray.length }, () => React.useRef(null));
+
+    items = React.Children.map(childrenArray, (child: React.ReactElement, index) => {
+        const classList = ClassList(child.props.className);
+
+        let indexDivider = classList.indexOf('divider');
+        const divider = ~indexDivider ? <Divider /> : null;
+        if (~indexDivider) classList.splice(indexDivider, 1);
+
+        let indexDisabled = classList.indexOf('disabled');
+        const disabled = ~indexDisabled;
+        if (~indexDisabled) classList.splice(indexDisabled, 1);
+
         const item = [React.cloneElement(child, {
             className: ClassNames(
                 'kui-select-list__item',
-                child.props.className,
-                (fixActive && index === activeHook) ? 'kui-select-list__item--active' : null,
-                (child.props.disabled) ? 'kui-select-list__item--disabled' : null,
+                classList,
+                (index === activeHook) ? 'kui-select-list__item--active' : null,
+                disabled ? 'kui-select-list__item--disabled' : null,
             ),
-            divider: null,
             ref: itemsRefs[index],
-            onClick: (e) => {
-                if (!child.props.disabled) {
-                    if (fixActive) setActiveHook(index);
+            onClick: (e: React.SyntheticEvent<HTMLElement>) => {
+                if (!disabled) {
                     if (onChange) onChange(Object.assign({}, e, {
                         item: {
                             index,
@@ -61,11 +72,11 @@ export const SelectList = (props) => {
         return item;
     });
 
-    useEffect(() => {
+    React.useEffect(() => {
         setActiveHook(active);
     }, [active]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (onSelectListInit) onSelectListInit(itemsRefs);
     }, []);
     
@@ -76,18 +87,11 @@ export const SelectList = (props) => {
     );
 };
 
-SelectList.propTypes = {
-    active: PropTypes.number, // index of active item
-    fixActive: PropTypes.bool, // --noactive class for actions,
-    loading: PropTypes.bool,
-    onSelectListInit: PropTypes.func,
-};
-
 SelectList.defaultProps = {
     active: null,
     fixActive: true,
     loading: false,
-    onSelectListInit: null
+    onSelectListInit: () => undefined
 };
 
-export default SelectList;
+SelectList.displayName = 'SelectList';
