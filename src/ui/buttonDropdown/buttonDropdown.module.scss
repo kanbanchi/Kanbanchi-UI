@@ -28,12 +28,4 @@
         cursor: default;
         pointer-events: none;
     }
-
-    &--variant_right {
-        position: relative;
-
-        .kui-button-dropdown__dropdown .kui-dropdown__item {
-            right: 0;
-        }
-    }
 }
