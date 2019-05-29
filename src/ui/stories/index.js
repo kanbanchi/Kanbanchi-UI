@@ -14,3 +14,4 @@ import Switch from './controls/switch';
 import Tabs from './controls/tabs';
 
 import TestComponent from './wip/testComponent';
+import DetailedProductivityReport from './wip/DetailedProductivityReport';
