@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { LoaderBlock, Loader, ButtonsGroup, Button, Tabs, Input, Radio, Checkbox, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
+import { LoaderBlock, Loader, ButtonsGroup, Button, Input, Radio, Checkbox, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
@@ -125,35 +125,6 @@ class StoryControls extends React.Component {
                     <h2>Loader</h2>
                     <Loader/>
                     <Loader small className="stories-loader-small"/>
-                </section>
-
-                <section>
-                    <h2>Tabs</h2>
-                    <div>
-                        <p><b>Default</b></p>
-                        <Tabs
-                            active={0}
-                        >
-                            <Button>Tab 0</Button>
-                            <Button>Tab 1</Button>
-                            <Button>Tab 2</Button>
-                        </Tabs>
-                    </div>
-                    <br/>
-                    <div>
-                        <p><b>Large</b></p>
-                        <Tabs
-                            active={0}
-                            onChange={i=>{console.log('Tab ' + i + ' active')}}
-                            size="large"
-                        >
-                            <Button>Tab 0</Button>
-                            <Button>Tab 1</Button>
-                            <Button>Tab 2</Button>
-                            <Button>Tab 3</Button>
-                            <Button>Tab 4</Button>
-                        </Tabs>
-                    </div>
                 </section>
 
                 <section className="section-form-min">

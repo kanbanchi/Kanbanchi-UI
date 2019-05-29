@@ -6,5 +6,6 @@ import Controls from './controls';
 
 import Datepicker from './controls/datepicker';
 import Switch from './controls/switch';
+import Tabs from './controls/tabs';
 
 import TestComponent from './wip/testComponent';
