@@ -13,7 +13,7 @@ const Story = () => {
 
                 <Tabs
                     active={val}
-                    onChange={i=>setVal(i)}
+                    onChange={(i: any)=>setVal(i)}
                 >
                     <Button>Tab 0</Button>
                     <Button>Tab 1</Button>
@@ -25,7 +25,7 @@ const Story = () => {
                 <h4>size="large"</h4>
                 <Tabs
                     active={val01}
-                    onChange={i=>setVal01(i)}
+                    onChange={(i: any)=>setVal01(i)}
                     size="large"
                 >
                     <Button>Tab 0</Button>
