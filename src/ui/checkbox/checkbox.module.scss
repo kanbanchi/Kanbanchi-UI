@@ -13,12 +13,13 @@
         cursor: pointer;
     }
     &__label:before,
-    &__checkmark {
+    & &__checkmark {
         position: absolute;
         right: 0;
         top: $google-spacing / 4;
         height: $google-spacing * 2.25;
         width: $google-spacing * 2.25;
+        color: $color-white;
         @include transition;
     }
     &__label:before {
@@ -27,7 +28,6 @@
         border-radius: $small-radius;
     }
     &__checkmark {
-        color: $color-white;
         transform: scale(.1);
     }
     &__input:checked + &__label:before {

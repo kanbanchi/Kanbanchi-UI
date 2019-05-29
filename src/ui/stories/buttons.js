@@ -195,27 +195,7 @@ class StoryButtons extends React.Component {
                         </Button>
                     </ButtonsGroup>
                 </section>
-                <section>
-                    <h2>Segmented</h2>
-                    <ButtonsSegmented
-                        active={+this.state.tabs[0]}
-                        onChange={val=>this.setStateProp({prop: 'tabs', propIndex: 0, val})}
-                    >
-                        <Button>Button 0</Button>
-                        <Button>Button 1</Button>
-                        <Button onClick={() => alert(2)}>Button 2</Button>
-                    </ButtonsSegmented>
-                    <br />
-                    <br />
-                    <ButtonsSegmented
-                        active={+this.state.tabs[1]}
-                        onChange={val=>this.setStateProp({prop: 'tabs', propIndex: 1, val})}
-                        variant="black"
-                    >
-                        <Button>Button 0</Button>
-                        <Button>Button 1</Button>
-                    </ButtonsSegmented>
-                </section>
+                
                 <section className="section-form-min">
                     <h2>Add</h2>
                     <Button variant="add">Add button</Button>

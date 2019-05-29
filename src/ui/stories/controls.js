@@ -1,14 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { LoaderBlock, Loader, ButtonsGroup, Button, Tabs, Input, Switch, Radio, Checkbox, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
+import { LoaderBlock, Loader, ButtonsGroup, Button, Input, Radio, Checkbox, Search, Select, SelectList, SelectListItem, ButtonDropdown } from '../../ui';
 class StoryControls extends React.Component {
     constructor() {
         super();
         this.setStateProp = this.setStateProp.bind(this);
         this.loadList = this.loadList.bind(this);
         this.state = {
-            dates: [Date.now()],
-            switch: [false, true, true, true],
             listWithLoader: [],
             loading: false
         };
@@ -123,70 +121,10 @@ class StoryControls extends React.Component {
         return (
             <div className="page">
 
-                <section className="section-form-min">
-                    <h2>Switch</h2>
-                    <Switch
-                        checked={this.state.switch[0]}
-                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 0, val: !this.state.switch[0]})}
-                    >
-                        Label
-                    </Switch>
-                    <br/>
-                    <Switch
-                        checked={this.state.switch[1]}
-                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 1, val: !this.state.switch[1]})}
-                    >
-                        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </Switch>
-                    <br/>
-                    <Switch
-                        checked={this.state.switch[2]}
-                        onChange={()=>this.setStateProp({prop: 'switch', propIndex: 2, val: !this.state.switch[2]})}
-                        color="black"
-                    >
-                        Black
-                    </Switch>
-                    <br/>
-                    <Switch
-                        checked
-                        color="black"
-                        disabled
-                    ></Switch>
-                </section>
-
                 <section>
                     <h2>Loader</h2>
                     <Loader/>
                     <Loader small className="stories-loader-small"/>
-                </section>
-
-                <section>
-                    <h2>Tabs</h2>
-                    <div>
-                        <p><b>Default</b></p>
-                        <Tabs
-                            active={0}
-                        >
-                            <Button>Tab 0</Button>
-                            <Button>Tab 1</Button>
-                            <Button>Tab 2</Button>
-                        </Tabs>
-                    </div>
-                    <br/>
-                    <div>
-                        <p><b>Large</b></p>
-                        <Tabs
-                            active={0}
-                            onChange={i=>{console.log('Tab ' + i + ' active')}}
-                            size="large"
-                        >
-                            <Button>Tab 0</Button>
-                            <Button>Tab 1</Button>
-                            <Button>Tab 2</Button>
-                            <Button>Tab 3</Button>
-                            <Button>Tab 4</Button>
-                        </Tabs>
-                    </div>
                 </section>
 
                 <section className="section-form-min">
@@ -289,204 +227,7 @@ class StoryControls extends React.Component {
                     <Checkbox disabled>Disabled</Checkbox>
                 </section>
 
-                <section className="section-form-min">
-                    <h2>SelectList</h2>
-                    <SelectList fixActive={false}>
-                        <li>
-                            Copy card
-                        </li>
-                        <li divider>
-                            Print card
-                        </li>
-                        <li divider>
-                            Get link to card
-                        </li>
-                        <li disabled>
-                            Delete card
-                        </li>
-                    </SelectList>
-                </section>
-
-                <section>
-                    <h2>Select</h2>
-                    <div className="section-relative">
-                        <ButtonsGroup size="large">
-                            <Select
-                                editable={true}
-                                label="Number"
-                                style={{width: 100}}
-                                type="number"
-                                variant="arrow"
-                            >
-                                <SelectList>
-                                    <li divider>0</li>
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>4</li>
-                                    <li>5</li>
-                                    <li>6</li>
-                                    <li>7</li>
-                                    <li>8</li>
-                                    <li>9</li>
-                                    <li divider>10</li>
-                                    <li disabled>Disabled</li>
-                                </SelectList>
-                            </Select>
-                            <Select
-                                active={40}
-                                editable={true}
-                                label="Time"
-                                icon="deadline"
-                                variant="withicon"
-                                style={{width: 120}}
-                                onChange={i=>{console.log('Time', i.item)}}
-                            >
-                                <SelectList>
-                                    <li>12:00 AM</li>
-                                    <li>12:30 AM</li>
-                                    <li>01:00 AM</li>
-                                    <li>01:30 AM</li>
-                                    <li>02:00 AM</li>
-                                    <li>02:30 AM</li>
-                                    <li>03:00 AM</li>
-                                    <li>03:30 AM</li>
-                                    <li>04:00 AM</li>
-                                    <li>04:30 AM</li>
-                                    <li>05:00 AM</li>
-                                    <li>05:30 AM</li>
-                                    <li>06:00 AM</li>
-                                    <li>06:30 AM</li>
-                                    <li>07:00 AM</li>
-                                    <li>07:30 AM</li>
-                                    <li>08:00 AM</li>
-                                    <li>08:30 AM</li>
-                                    <li>09:00 AM</li>
-                                    <li>09:30 AM</li>
-                                    <li>10:00 AM</li>
-                                    <li>10:30 AM</li>
-                                    <li>11:00 AM</li>
-                                    <li divider>11:30 AM</li>
-                                    <li>12:00 PM</li>
-                                    <li>12:30 PM</li>
-                                    <li>01:00 PM</li>
-                                    <li>01:30 PM</li>
-                                    <li>02:00 PM</li>
-                                    <li>02:30 PM</li>
-                                    <li>03:00 PM</li>
-                                    <li>03:30 PM</li>
-                                    <li>04:00 PM</li>
-                                    <li>04:30 PM</li>
-                                    <li>05:00 PM</li>
-                                    <li>05:30 PM</li>
-                                    <li>06:00 PM</li>
-                                    <li>06:30 PM</li>
-                                    <li>07:00 PM</li>
-                                    <li>07:30 PM</li>
-                                    <li>08:00 PM</li>
-                                    <li>08:30 PM</li>
-                                    <li>09:00 PM</li>
-                                    <li>09:30 PM</li>
-                                    <li>10:00 PM</li>
-                                    <li>10:30 PM</li>
-                                    <li>11:00 PM</li>
-                                    <li>11:30 PM</li>
-                                </SelectList>
-                            </Select>
-                        </ButtonsGroup>
-                    </div>
-
-                    <br />
-                    <Select
-                        active={0}
-                        label="Header"
-                        variant="header"
-                        onChange={i=>{console.log('Plan', i.item)}}
-                    >
-                        <SelectList>
-                            <li className="starter" value="sy" >
-                                Starter yearly
-                            </li>
-                            <li value="pm">
-                                Professional monthly
-                            </li>
-                        </SelectList>
-                    </Select>
-                    <br />
-                    <Select
-                        active={0}
-                        direction="up"
-                        label="Direction up force"
-                        variant="priority"
-                    >
-                        <SelectList>
-                            <SelectListItem value="0" icon="priority-no">
-                                No priority
-                            </SelectListItem>
-                            <SelectListItem value="1" icon="priority-low">
-                                Low
-                            </SelectListItem>
-                            <SelectListItem value="2" icon="priority-normal">
-                                Normal
-                            </SelectListItem>
-                            <SelectListItem value="3" icon="priority-medium">
-                                Medium
-                            </SelectListItem>
-                            <SelectListItem value="4" icon="priority-high">
-                                High
-                            </SelectListItem>
-                            <SelectListItem value="5" icon="priority-critical">
-                                Critical
-                            </SelectListItem>
-                        </SelectList>
-                    </Select>
-                </section>
-
-                <section>
-                    <div className="section-relative">
-                        <h2>Actions</h2>
-                        <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
-                            <ButtonDropdown>
-                                <Button variant="add">
-                                    Add smth
-                                </Button>
-                                <SelectList fixActive={false}>
-                                    <SelectListItem
-                                        icon="card"
-                                        list="List Ut enim ad minim veniam!"
-                                    >
-                                        Card Lorem ipsum dolor sit amet?
-                                    </SelectListItem>
-                                    <SelectListItem
-                                        icon="archive"
-                                        list="List"
-                                    >
-                                        Card name
-                                    </SelectListItem>
-                                </SelectList>
-                            </ButtonDropdown>
-                            <ButtonDropdown variant="right">
-                                <Button variant="action">
-                                    Actions Right
-                                </Button>
-                                <SelectList fixActive={false}>
-                                    <li onClick={e=>console.log(e.target.innerText)}>
-                                        Copy card
-                                    </li>
-                                    <li divider onClick={e=>console.log(e.target.innerText)}>
-                                        Print card
-                                    </li>
-                                    <li divider onClick={e=>console.log(e.target.innerText)}>
-                                        Get link to card
-                                    </li>
-                                    <li disabled onClick={e=>console.log(e.target.innerText)}>
-                                        Delete card
-                                    </li>
-                                </SelectList>
-                            </ButtonDropdown>
-                        </ButtonsGroup>
-                    </div>
-                </section>
+                
 
                 <br />
                 <br />

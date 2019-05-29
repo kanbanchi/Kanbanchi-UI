@@ -43,7 +43,7 @@
         color: $color-purple-light;
     }
 
-    &--primary {
+    &--variant_primary {
         height: $google-spacing * 4;
         padding: 0 $google-spacing;
         color: $color-white;
@@ -62,7 +62,7 @@
             box-shadow: 0 $google-spacing / 2 10px calc-color(fade, $color-purple, 30);
         }
 
-        &.kui-button--large:hover {
+        &.kui-button--size_large:hover {
             box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-purple, 50);
         }
 
@@ -80,7 +80,7 @@
         }
     }
 
-    &--white {
+    &--color_white {
         background: calc-color(fade, $color-white, 30);
 
         &:focus {
@@ -103,7 +103,7 @@
         }
     }
 
-    &--secondary {
+    &--variant_secondary {
         height: $google-spacing * 4;
         padding: 0 $google-spacing;
         border: 2px solid $color-purple-light;
@@ -134,13 +134,13 @@
         }
     }
 
-    &--large {
+    &--size_large {
         min-width: $google-spacing * 16;
         height: $google-spacing * 5;
         padding: 0 $google-spacing * 3;
     }
 
-    &--fab {
+    &--variant_fab {
         min-width: 0;
         color: calc-color(fade, $color-base, 50);
 
@@ -194,7 +194,7 @@
             }
         }
 
-        &.kui-button--purple {
+        &.kui-button--color_purple {
             color: $color-purple;
 
             .kui-button__children {
@@ -215,7 +215,7 @@
             }
         }
 
-        &.kui-button--black {
+        &.kui-button--color_black {
             color: $color-base;
 
             .kui-button__children {
@@ -252,7 +252,7 @@
             }
         }
 
-        &.kui-button--white {
+        &.kui-button--color_white {
             color: $color-white;
             background: transparent;
 
@@ -286,7 +286,7 @@
         }
     }
 
-    &--action {
+    &--variant_action {
         height: $google-spacing * 4;
         padding: 0 $google-spacing * 2 0 $google-spacing;
         color: calc-color(tint, $color-base, 50);
@@ -331,7 +331,7 @@
         }
     }
 
-    &--text {        
+    &--variant_text {        
         .kui-button__icon {
             margin-left: $google-spacing / 2;
         }
@@ -363,8 +363,8 @@
         }
     }
 
-    &--icon,
-    &--icon-text {
+    &--variant_icon,
+    &--variant_icon-text {
         min-width: 0;
         color: inherit;
         opacity: .3;
@@ -403,7 +403,7 @@
         }
     }
 
-    &--icon-text {
+    &--variant_icon-text {
         justify-content: flex-start;
         &:before {
             left: $google-spacing * 1.5;
@@ -415,7 +415,7 @@
         font-weight: normal;
     }
 
-    &--add {
+    &--variant_add {
         width: 100%;
         justify-content: space-between;
         height: $google-spacing * 5;

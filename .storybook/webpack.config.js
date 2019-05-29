@@ -37,7 +37,12 @@ module.exports = {
                 test: /\.ts[x]?$/,
                 exclude: /node_modules/,
                 use: [
-                    'babel-loader',
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ["@babel/env", "@babel/react", "@babel/typescript"],
+                        }
+                    },
                     {
                         loader: 'ts-loader',
                         options: {
@@ -49,7 +54,7 @@ module.exports = {
             },
 
             {
-                test: /\.js?$/,
+                test: /\.(js|tsx)?$/,
                 include: path.resolve(__dirname, '../src/ui/stories/'),
                 loaders: [require.resolve('@storybook/addon-storysource/loader')],
                 enforce: 'pre',
