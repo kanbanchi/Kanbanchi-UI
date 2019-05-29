@@ -227,51 +227,7 @@ class StoryControls extends React.Component {
                     <Checkbox disabled>Disabled</Checkbox>
                 </section>
 
-                <section>
-                    <div className="section-relative">
-                        <h2>Actions</h2>
-                        <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
-                            <ButtonDropdown>
-                                <Button variant="add">
-                                    Add smth
-                                </Button>
-                                <SelectList fixActive={false}>
-                                    <SelectListItem
-                                        icon="card"
-                                        list="List Ut enim ad minim veniam!"
-                                    >
-                                        Card Lorem ipsum dolor sit amet?
-                                    </SelectListItem>
-                                    <SelectListItem
-                                        icon="archive"
-                                        list="List"
-                                    >
-                                        Card name
-                                    </SelectListItem>
-                                </SelectList>
-                            </ButtonDropdown>
-                            <ButtonDropdown variant="right">
-                                <Button variant="action">
-                                    Actions Right
-                                </Button>
-                                <SelectList fixActive={false}>
-                                    <li onClick={e=>console.log(e.target.innerText)}>
-                                        Copy card
-                                    </li>
-                                    <li divider onClick={e=>console.log(e.target.innerText)}>
-                                        Print card
-                                    </li>
-                                    <li divider onClick={e=>console.log(e.target.innerText)}>
-                                        Get link to card
-                                    </li>
-                                    <li disabled onClick={e=>console.log(e.target.innerText)}>
-                                        Delete card
-                                    </li>
-                                </SelectList>
-                            </ButtonDropdown>
-                        </ButtonsGroup>
-                    </div>
-                </section>
+                
 
                 <br />
                 <br />
