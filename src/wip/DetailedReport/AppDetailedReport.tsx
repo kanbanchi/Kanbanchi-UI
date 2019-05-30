@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Chart} from 'react-google-charts'
 import { IAppProductivityDetailedProps } from './types';
 import { reportSettingsInitial } from './constants';
 
@@ -14,3 +15,4 @@ AppDetailedProductivityChart.defaultProps = {
     reportData: {},
     reportSettings: reportSettingsInitial,
 }
+
