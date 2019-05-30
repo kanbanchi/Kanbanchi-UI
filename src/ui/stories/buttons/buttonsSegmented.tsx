@@ -9,7 +9,7 @@ const Story = () => {
     return (
         <div className="page">
             <section>
-                <h2>Segmented</h2>
+                <h2>ButtonsSegmented</h2>
                 <ButtonsSegmented
                     active={+val}
                     onChange={(i: any)=>setVal(i)}
@@ -18,8 +18,12 @@ const Story = () => {
                     <Button>Button 1</Button>
                     <Button onClick={() => alert(2)}>Button 2</Button>
                 </ButtonsSegmented>
-                <br />
-                <br />
+                
+            </section>
+
+            <section>
+                <h4>Color="black"</h4>
+
                 <ButtonsSegmented
                     active={+val01}
                     color="black"
@@ -34,4 +38,4 @@ const Story = () => {
 };
 
 storiesOf('Buttons', module)
-    .add('Segmented', () => <Story/>);
+    .add('__Segmented', () => <Story/>);

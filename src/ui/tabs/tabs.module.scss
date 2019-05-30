@@ -57,7 +57,7 @@
         }
     }
 
-    &--large {
+    &--size_large {
         height: $google-spacing * 7;
         .kui-tabs__item {
             height: $google-spacing * 7;
@@ -77,7 +77,7 @@
         min-width: $google-spacing * 10;
         padding: $google-spacing * 2 $google-spacing $google-spacing;
     }
-    .kui-tabs--large {
+    .kui-tabs--size_large {
         .kui-tabs__item {
             min-width: $google-spacing * 12;
             padding: $google-spacing * 3 $google-spacing $google-spacing * 2;
