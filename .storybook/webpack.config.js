@@ -5,7 +5,7 @@ module.exports = {
         rules: [
             {
                 test: /\.module\.(scss|sass)$/,
-                include: path.resolve(__dirname, '../src/ui'),
+                include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../stories')],
                 use: [{
                         loader: 'style-loader',
                     },
@@ -55,7 +55,7 @@ module.exports = {
 
             {
                 test: /\.(js|tsx)?$/,
-                include: path.resolve(__dirname, '../src/ui/stories/'),
+                include: path.resolve(__dirname, '../stories/'),
                 loaders: [require.resolve('@storybook/addon-storysource/loader')],
                 enforce: 'pre',
             }
