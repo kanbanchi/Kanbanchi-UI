@@ -2,6 +2,8 @@ import './stories.module.scss';
 import Snackbars from './snackbars';
 import Controls from './controls';
 
+import Loader from './animations/loader';
+
 import Action from './buttons/action';
 import Add from './buttons/add';
 import Fab from './buttons/fab';

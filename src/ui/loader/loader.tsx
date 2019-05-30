@@ -1,17 +1,21 @@
-import React from 'react';
-import {PropTypes, ClassNames} from '../utils';
+import * as React from 'react';
+import { ILoaderProps } from './types';
+import { ClassNames } from '../utils';
 import '../../../src/ui/loader/loader.module.scss';
 
-export const Loader = (props) => {
+export const Loader: React.SFC<
+    ILoaderProps
+    & React.HTMLAttributes<HTMLElement>
+> = (props) => {
     let {
         className,
-        small,
+        size,
         ...attributes
     } = props;
 
     const classNames = ClassNames(
         'kui-loader',
-        (small) ? 'kui-loader--small' : null,
+        (size) ? 'kui-loader--size_' + size : null,
         className
     );
 
@@ -26,12 +30,8 @@ export const Loader = (props) => {
     );
 };
 
-Loader.propTypes = {
-    small: PropTypes.bool
-};
-
 Loader.defaultProps = {
-    small: false
+    size: null
 };
 
-export default Loader;
+Loader.displayName = 'Loader';
