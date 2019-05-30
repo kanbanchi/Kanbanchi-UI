@@ -22,11 +22,11 @@ const Story = () => {
             </section>
             
             <section>
-                <h4>size="large"</h4>
+                <h4>Size="large"</h4>
                 <Tabs
                     active={val01}
-                    onChange={(i: any)=>setVal01(i)}
                     size="large"
+                    onChange={(i: any)=>setVal01(i)}
                 >
                     <Button>Tab 0</Button>
                     <Button>Tab 1</Button>
