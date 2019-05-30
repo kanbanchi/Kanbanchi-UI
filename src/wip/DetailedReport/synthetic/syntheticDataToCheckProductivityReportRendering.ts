@@ -3,14 +3,25 @@ import { userDetails, reportSettingsInitial, IUserDetails } from '../constants';
 import { makeUser, getRandomInt, plussRandomDays, makeProductivityNodeData } from './syntheticDataHelper';
 import { IProductivityReportLine, IProductivityReportData } from '../types';
 
-const users = userDetails.map((userDetails) => makeUser(userDetails.id, userDetails.name));
-
-const reportSettings: IReportSettings = reportSettingsInitial;
-reportSettings.users = users;
+export const getSyntheticProductivitySettings =
+(
+    userDetails: IUserDetails[],
+    dateStart: number,
+    dateEnd: number,
+) => {
+    const users = userDetails.map((userDetails) => makeUser(userDetails.id, userDetails.name));
+    const reportSettings: IReportSettings = {
+        ...reportSettingsInitial,
+        dateStart,
+        dateEnd,
+        users
+    };
+    return reportSettings;
+}
 
 // reports settings
 
-const getProductivityReportLine =
+export const getProductivityReportLine =
 (
     userId: string,
     dateStart: number,
@@ -26,7 +37,7 @@ const getProductivityReportLine =
     return result;
 }
 
-const ProductivityReportData =
+const getSyntheticProductivityData =
 (
     users: IUserDetails[]
 ): IProductivityReportData => {
