@@ -12,15 +12,17 @@ export const Checkbox: React.SFC<
         children,
         className,
         checked,
+        color,
         onChange,
         ...attributesOriginal
     } = props,
-        attributes:React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
+        attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
 
     const [isChecked, setIsChecked] = React.useState(checked);
 
     className = ClassNames(
         'kui-checkbox',
+        (color) ? 'kui-checkbox--color_' + color : null,
         (props.disabled) ? 'kui-checkbox--disabled' : null,
         className
     );
@@ -44,7 +46,9 @@ export const Checkbox: React.SFC<
 }
 
 Checkbox.defaultProps = {
-    checked: false
+    checked: false,
+    onChange: (): void => undefined,
+    color: null
 }
 
 Checkbox.displayName = 'Checkbox';

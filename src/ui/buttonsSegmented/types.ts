@@ -8,7 +8,7 @@ export interface IButtonsSegmentedDispatchProps {
 
 export interface IButtonsSegmentedProps extends
     IButtonsSegmentedStateProps,
-    IButtonsSegmentedDispatchProps 
+    IButtonsSegmentedDispatchProps
 {
     color?: 'black';
 }

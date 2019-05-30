@@ -29,7 +29,7 @@ const Story = () => {
                         </li>
                     </SelectList>
                 </Select>
-                
+
             </section>
 
             <section>
@@ -122,14 +122,14 @@ const Story = () => {
                             </Select>
                         </ButtonsGroup>
                     </div>
-            
+
             </section>
 
             <section>
                     <h2>Direction</h2>
 
                     <p>directionVertical="up"</p>
-                    
+
                     <Select
                         active={val03}
                         directionVertical="up"

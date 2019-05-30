@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Loader } from '../../src/ui';
 
-const Story = () => {    
+const Story = () => {
     return (
         <div className="page">
              <section>
@@ -21,7 +21,7 @@ const Story = () => {
                 }}>
                     <Loader size="large"/>
                 </div>
-                
+
                 <br />
 
                 <p>On input data sync</p>
@@ -37,7 +37,6 @@ const Story = () => {
                     <Loader className="stories-loader-small"/>
                 </div>
 
-                
             </section>
         </div>
     );

@@ -13,7 +13,7 @@ export const Divider: React.SFC<React.HTMLAttributes<HTMLElement>>
         'kui-divider',
         className
     );
-    
+
     return (
         <hr className={className} {...attributes} />
     );

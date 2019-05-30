@@ -79,7 +79,7 @@ export const SelectList: React.SFC<
     React.useEffect(() => {
         if (onSelectListInit) onSelectListInit(itemsRefs);
     }, []);
-    
+
     return (
         <ul className={className} {...attributes}>
             {items}

@@ -8,7 +8,7 @@ export interface ISwitchDispatchProps {
 
 export interface ISwitchProps extends
     ISwitchStateProps,
-    ISwitchDispatchProps 
+    ISwitchDispatchProps
 {
     color?: 'black';
 }

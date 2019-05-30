@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonsGroup } from '../../src/ui';
 
-const Story = () => {    
+const Story = () => {
     return (
         <div className="page">
              <section>
@@ -12,7 +12,7 @@ const Story = () => {
                     <Button variant="text" href="#">Link</Button>
                     <Button variant="text" href="#" disabled>Disabled link</Button>
                 </ButtonsGroup>
-                
+
             </section>
         </div>
     );

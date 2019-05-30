@@ -8,7 +8,7 @@ export interface ITabsDispatchProps {
 
 export interface ITabsProps extends
     ITabsStateProps,
-    ITabsDispatchProps 
+    ITabsDispatchProps
 {
     size?: 'large';
 }

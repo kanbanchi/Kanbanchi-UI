@@ -31,7 +31,7 @@ const Story = () => {
                                 </SelectListItem>
                             </SelectList>
                         </ButtonDropdown>
-                        
+
                         <ButtonDropdown directionHorizontal="right">
                             <Button variant="action">
                                 Actions Right
