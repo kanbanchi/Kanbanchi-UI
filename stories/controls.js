@@ -66,30 +66,7 @@ class StoryControls extends React.Component {
         return (
             <div className="page">
 
-                <section className="section-form-min">
-                    <h2>Input</h2>
-                    <Input label="Label" value="Text test"
-                        onBlur={e=>console.log('onBlur', e.target.value)}
-                    />
-                    <br/>
-                    <Input placeholder="Without label & readonly" readOnly={true} />
-                    <br/>
-                    <Input
-                        label="No resize"
-                        autosize={false}
-                        onChange={e=>console.log('onChange', e.target.value)}
-                        onEnter={e=>console.log('onEnter', e.target.value)}
-                    />
-                    <br/>
-                    <Input label="Label" placeholder="Disabled" disabled />
-                </section>
-
-                <section className="section-grey section-form-min">
-                    <h2>Input</h2>
-                    <Input color="grey" label="Label" placeholder="Text input" />
-                    <br/>
-                    <Input color="grey" label="Label" placeholder="Disabled" disabled />
-                </section>
+                
 
                 <section>
                     <h2>Input types</h2>
