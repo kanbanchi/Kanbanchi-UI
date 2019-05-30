@@ -13,7 +13,7 @@ class SnackbarsQueue extends React.Component {
     AddSnackbar() {
         this.setState(state => {
             const count = ++state.count;
-            /*
+            
             state.queue.push({
                 variant: 'timer',
                 timer: 5,
@@ -30,7 +30,7 @@ class SnackbarsQueue extends React.Component {
                     }
                 ]
             });
-            */
+            /*
             state.queue.push({
                 variant: 'error',
                 timer: 5,
@@ -43,6 +43,7 @@ class SnackbarsQueue extends React.Component {
                     }
                 ]
             });
+            */
             return {
                 queue: state.queue,
                 count
