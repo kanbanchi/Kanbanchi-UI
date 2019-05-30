@@ -1,11 +1,17 @@
-import { IReportSettings } from '../appDomainTypes';
+import { IReportSettings, IReportsUser } from '../appDomainTypes';
 import { IProductivityReportData } from '../types';
 import { productivityDetailedDefault } from './settingsTransformerConstants';
-import { dateColumn, numberColumn, stringColumn, tooltipColumn } from './settingsTransformerHelper';
+import { dateColumn, numberColumn, tooltipColumn, IGoogleChartColumn, getStringDat, getStringDatesIntervalesInterval } from './settingsTransformerHelper';
+
+export interface ITooltipData {
+    name: string;
+    done: number;
+    overdue: number;
+}
 
 export class ProductivitySettingsTransformer {
     private reportSettings: IReportSettings;
-    private reportData;
+    private reportData: IProductivityReportData;
 
     constructor(
         reportSettings: IReportSettings,
@@ -20,7 +26,7 @@ export class ProductivitySettingsTransformer {
     }
 
     getProductivityDetailedColumns() {
-        let columns = [
+        let columns: IGoogleChartColumn[] = [
             dateColumn('days')
         ];
         const selectedUsers = this.reportSettings.users.filter(user => user.isSelected);
@@ -33,5 +39,22 @@ export class ProductivitySettingsTransformer {
                 tooltipColumn(),
             ]
         });
+        return columns;
+    }
+
+    makeDatailedTooltip(tooltipData: ITooltipData[]) {
+        return (`
+        <div className="productivity-detailed-tooltip__container">
+            <div className="productivity-detailed-tooltip__body">
+                ${tooltipData.map((data) => ( `<span className="tooltip">${data.name} - ${data.done} - ${data.overdue}</span>` ))}
+            </div>
+        </div>`
+        );
+    }
+
+    getProductivityDetailedData() {
+        const {dateStart, dateEnd} = this.reportSettings;
+        const datesInInterval = getStringDatesInterval(dateStart, dateEnd);
+
     }
 }
