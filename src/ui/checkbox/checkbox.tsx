@@ -15,7 +15,7 @@ export const Checkbox: React.SFC<
         onChange,
         ...attributesOriginal
     } = props,
-        attributes:React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
+        attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
 
     const [isChecked, setIsChecked] = React.useState(checked);
 

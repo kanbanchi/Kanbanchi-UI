@@ -20,7 +20,7 @@ const Story = () => {
                     <Button>Tab 2</Button>
                 </Tabs>
             </section>
-            
+
             <section>
                 <h4>Size="large"</h4>
                 <Tabs

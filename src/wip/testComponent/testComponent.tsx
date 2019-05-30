@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ITestComponentProps } from './types';
 import { ButtonsGroup, Icon } from '../../ui';
 
-export const TestComponent: React.SFC<ITestComponentProps> = 
+export const TestComponent: React.SFC<ITestComponentProps> =
     (props) => {
         return (
             <div

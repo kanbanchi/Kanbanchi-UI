@@ -22,7 +22,7 @@ const Story = () => {
                         Delete card
                     </li>
                 </SelectList>
-                
+
             </section>
 
             <section>

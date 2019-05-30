@@ -29,7 +29,7 @@ export const Select: React.SFC<
         onOpen,
         ...attributesOriginal
     } = props,
-        attributes:React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
+        attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
         dropdownBody = null,
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
@@ -79,9 +79,9 @@ export const Select: React.SFC<
     }
 
     const onActiveChanged = () => {
-        if (isFocusedHook 
-            && itemsRefsHook[activeHook] 
-            && itemsRefsHook[activeHook].current) 
+        if (isFocusedHook
+            && itemsRefsHook[activeHook]
+            && itemsRefsHook[activeHook].current)
         {
             let lines = Math.floor(dropdownRef.current.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
             let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;

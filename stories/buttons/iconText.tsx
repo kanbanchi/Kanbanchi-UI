@@ -2,23 +2,23 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonsGroup, Icon } from '../../src/ui';
 
-const Story = () => {    
+const Story = () => {
     return (
         <div className="page">
              <section>
                 <h2>IconText</h2>
-                
+
                 <ButtonsGroup size="large">
-                    
-                    <Button 
+
+                    <Button
                         style={{width: '160px'}}
                         text="Button text"
-                        variant="icon-text" 
+                        variant="icon-text"
                     >
-                        <Icon xlink="archive" size={24} />                            
+                        <Icon xlink="archive" size={24} />
                     </Button>
 
-                    <Button 
+                    <Button
                         disabled
                         text="Button text"
                         title="Disabled"

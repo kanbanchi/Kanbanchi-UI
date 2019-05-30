@@ -18,7 +18,7 @@ const Story = () => {
                     <Button>Button 1</Button>
                     <Button onClick={() => alert(2)}>Button 2</Button>
                 </ButtonsSegmented>
-                
+
             </section>
 
             <section>
