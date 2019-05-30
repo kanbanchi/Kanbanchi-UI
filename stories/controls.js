@@ -121,15 +121,6 @@ class StoryControls extends React.Component {
         return (
             <div className="page">
 
-                <section>
-                    <h2>Loader</h2>
-                    <Loader size="large"/>
-
-                    <br /><br />
-
-                    <Loader className="stories-loader-small"/>
-                </section>
-
                 <section className="section-form-min">
                     <h2>Input</h2>
                     <Input label="Label" value="Text test"
@@ -178,7 +169,12 @@ class StoryControls extends React.Component {
                         >
                             <SelectList fixActive={false} loading={this.state.loading}>
                                 {this.state.listWithLoader}
-                                <LoaderBlock/>
+                                <LoaderBlock
+                                    style={{
+                                        width: '100%',
+                                        height: '100%'
+                                    }}
+                                />
                             </SelectList>
                         </Search>
                     </div>
