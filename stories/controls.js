@@ -106,16 +106,7 @@ class StoryControls extends React.Component {
                 </section>
 
                 
-                <section className="section-form-min">
-                    <h2>Checkbox</h2>
-                    <Checkbox>Label</Checkbox>
-                    <br/>
-                    <Checkbox checked={true} onChange={()=>{console.log('Checkbox')}}>
-                        Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </Checkbox>
-                    <br/>
-                    <Checkbox disabled>Disabled</Checkbox>
-                </section>
+                
 
                 
 
