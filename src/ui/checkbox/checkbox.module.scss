@@ -37,6 +37,13 @@
     &__input:checked + &__label &__checkmark {
         transform: scale(1);
     }
+    
+    &--color_black {
+        .kui-checkbox__input:checked + .kui-checkbox__label:before {
+            background-color: $color-base;
+        }
+    }
+
     &--disabled {
         pointer-events: none;
 
