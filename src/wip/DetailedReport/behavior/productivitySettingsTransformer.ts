@@ -1,9 +1,10 @@
 import { IReportSettings } from '../appDomainTypes';
 import { IProductivityReportData } from '../types';
 import { productivityDetailedDefault } from './settingsTransformerConstants';
+import { dateColumn, numberColumn, stringColumn, tooltipColumn } from './settingsTransformerHelper';
 
 export class ProductivitySettingsTransformer {
-    private reportSettings;
+    private reportSettings: IReportSettings;
     private reportData;
 
     constructor(
@@ -19,6 +20,18 @@ export class ProductivitySettingsTransformer {
     }
 
     getProductivityDetailedColumns() {
-        
+        let columns = [
+            dateColumn('days')
+        ];
+        const selectedUsers = this.reportSettings.users.filter(user => user.isSelected);
+        selectedUsers.forEach((user) => {
+            columns = [
+                ...columns,
+                numberColumn(`${user.fullName} Done`),
+                tooltipColumn(),
+                numberColumn(`${user.fullName} Overdue`),
+                tooltipColumn(),
+            ]
+        });
     }
 }
