@@ -1,14 +1,16 @@
-import React from 'react';
-import { PropTypes, ClassNames } from '../utils';
+import * as React from 'react';
+import { ISearchProps } from './types';
+import { ClassNames } from '../utils';
 import { Select } from '../../ui';
 import '../../../src/ui/search/search.module.scss';
 
-export const Search = (props) => {
+export const Search: React.SFC<
+    ISearchProps
+    & React.HTMLAttributes<HTMLElement>
+> = (props) => {
     let {
         children,
         className,
-        type,
-        variant,
         ...attributes
     } = props;
 
@@ -16,10 +18,6 @@ export const Search = (props) => {
         'kui-search',
         className
     );
-
-    attributes.variant = variant || 'search';
-
-    attributes.type = type || 'search';
 
     return (
         <Select
@@ -31,18 +29,13 @@ export const Search = (props) => {
     );
 };
 
-Search.propTypes = {
-    variant: PropTypes.oneOf([
-        'arrow',
-        'header',
-        'datepicker',
-        'search',
-        'withicon'
-    ])
-};
-
 Search.defaultProps = {
-    variant: null
+    editable: true,
+    type: 'search',
+    variant: 'search',
+    onChange: (): void => undefined,
+    onEnter: () => undefined,
+    onOpen: () => undefined
 };
 
-export default Search;
+Search.displayName = 'Search';
