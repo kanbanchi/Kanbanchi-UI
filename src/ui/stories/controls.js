@@ -123,8 +123,11 @@ class StoryControls extends React.Component {
 
                 <section>
                     <h2>Loader</h2>
-                    <Loader/>
-                    <Loader small className="stories-loader-small"/>
+                    <Loader size="large"/>
+
+                    <br /><br />
+
+                    <Loader className="stories-loader-small"/>
                 </section>
 
                 <section className="section-form-min">

@@ -8,13 +8,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     background: calc-color('fade', $color-white, 70);
     pointer-events: none;
     @include transition;
-
-    &__item {
-        transform: translate(-$google-spacing * 4, -$google-spacing);
-    }
 }
