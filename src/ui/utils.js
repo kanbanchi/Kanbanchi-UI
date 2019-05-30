@@ -1,7 +1,3 @@
-import PropTypes from 'prop-types';
-
-export { PropTypes };
-
 export const ClassNames = (...props) => 
     props
         .map(i => (Array.isArray(i)) ? i.join(' ') : i)
