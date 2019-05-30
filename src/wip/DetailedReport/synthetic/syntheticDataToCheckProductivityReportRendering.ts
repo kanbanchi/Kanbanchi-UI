@@ -1,7 +1,7 @@
-import { IReportSettings, IReportData } from '../appDomainTypes';
-import { userDetails, reportSettingsInitial, IUserDetails } from '../constants';
-import { makeUser, getRandomInt, plussRandomDays, makeProductivityNodeData } from './syntheticDataHelper';
-import { IProductivityReportLine, IProductivityReportData } from '../types';
+import { IReportSettings } from '../appDomainTypes';
+import { reportSettingsInitial, IUserDetails } from '../constants';
+import { makeUser, getProductivityReportLine } from './syntheticDataHelper';
+import { IProductivityReportData } from '../types';
 
 export const getSyntheticProductivitySettings =
 (
@@ -21,26 +21,13 @@ export const getSyntheticProductivitySettings =
 
 // reports settings
 
-export const getProductivityReportLine =
+export const getSyntheticProductivityData =
 (
-    userId: string,
+    users: IUserDetails[],
     dateStart: number,
     dateEnd: number,
-) => {
-    let currentDate = dateStart;
-    const result: IProductivityReportLine = {};
-    do {
-        result[currentDate.toString()] = makeProductivityNodeData();
-        currentDate = plussRandomDays(currentDate);
-    } while (currentDate < dateEnd);
-
-    return result;
-}
-
-const getSyntheticProductivityData =
-(
-    users: IUserDetails[]
 ): IProductivityReportData => {
-    const result = {};
+    const result = {} as IProductivityReportData;
+    users.forEach((user) => result[user.id] = getProductivityReportLine(user.id, dateStart, dateEnd));
     return result;
 }

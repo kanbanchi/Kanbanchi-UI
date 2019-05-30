@@ -1,7 +1,7 @@
 import { IReportsUser } from '../appDomainTypes';
 import { colors } from '../constants';
 import * as moment from 'moment';
-import { IProductivityReportNodeData } from '../types';
+import { IProductivityReportNodeData, IProductivityReportLine } from '../types';
 
 export const makeUser =
 (
@@ -48,3 +48,18 @@ export const makeProductivityNodeData = (): IProductivityReportNodeData => {
     }
 }
 
+export const getProductivityReportLine =
+(
+    userId: string,
+    dateStart: number,
+    dateEnd: number,
+) => {
+    let currentDate = dateStart;
+    const result: IProductivityReportLine = {};
+    do {
+        result[currentDate.toString()] = makeProductivityNodeData();
+        currentDate = plussRandomDays(currentDate);
+    } while (currentDate < dateEnd);
+
+    return result;
+}
