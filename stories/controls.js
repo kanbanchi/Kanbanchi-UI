@@ -5,11 +5,7 @@ class StoryControls extends React.Component {
     constructor() {
         super();
         this.setStateProp = this.setStateProp.bind(this);
-        this.loadList = this.loadList.bind(this);
-        this.state = {
-            listWithLoader: [],
-            loading: false
-        };
+        
         this.types = [
             //'button',
             //'checkbox',
@@ -52,7 +48,6 @@ class StoryControls extends React.Component {
             </Select>
         );
 
-        this.loadTimeout = null;
     }
 
     setStateProp({prop, propIndex, val}) {
@@ -65,56 +60,6 @@ class StoryControls extends React.Component {
                 }
             };
         });
-    }
-
-    loadList(success = true) {
-        let val = [];
-        this.setState({loading: true});
-        clearTimeout(this.loadTimeout);
-        this.loadTimeout = setTimeout(() => {
-            if (success) {
-                val.push(<SelectListItem
-                    key="0"
-                    icon="card"
-                    list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                >
-                    Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </SelectListItem>);
-                val.push(<SelectListItem
-                    key="1"
-                    icon="archive"
-                    list="List"
-                >
-                    Card name
-                </SelectListItem>);
-                val.push(<SelectListItem
-                    key="2"
-                    icon="card"
-                    list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                >
-                    Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </SelectListItem>);
-                val.push(<SelectListItem
-                    key="3"
-                    icon="archive"
-                    list="List"
-                >
-                    Card name
-                </SelectListItem>);
-            } else {
-                val.push(<SelectListItem >
-                    ¯\_(ツ)_/¯
-                </SelectListItem>);
-            }
-            this.setState({
-                listWithLoader: val,
-                loading: false
-            });
-        }, 3000);
-    }
-
-    componentWillUnmount() {
-        clearTimeout(this.loadTimeout);
     }
 
     render() {
@@ -160,53 +105,7 @@ class StoryControls extends React.Component {
                     </ButtonsGroup>
                 </section>
 
-                <section className="section-form-min">
-                    <div className="section-relative">
-                        <h2>Search</h2>
-                        <Search
-                            editable={true}
-                            onOpen={()=>this.loadList()}
-                        >
-                            <SelectList fixActive={false} loading={this.state.loading}>
-                                {this.state.listWithLoader}
-                                <LoaderBlock
-                                    style={{
-                                        width: '100%',
-                                        height: '100%'
-                                    }}
-                                />
-                            </SelectList>
-                        </Search>
-                    </div>
-                </section>
-
-                <section className="section-grey">
-                    <div className="section-relative">
-                        <h2>Search</h2>
-                        <Search
-                            editable={true}
-                            color="grey"
-                        >
-                            <SelectList fixActive={false}>
-                                <SelectListItem
-                                    icon="card"
-                                    list="List Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                                >
-                                    Card Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                </SelectListItem>
-                                <SelectListItem
-                                    icon="archive"
-                                    list="List"
-                                >
-                                    Card name
-                                </SelectListItem>
-                            </SelectList>
-                        </Search>
-                    </div>
-                </section>
-
                 
-
                 <section className="section-form-min">
                     <h2>Checkbox</h2>
                     <Checkbox>Label</Checkbox>

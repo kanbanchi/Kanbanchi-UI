@@ -22,6 +22,7 @@ import Large from './icons/large';
 import ButtonDropdown from './controls/buttonDropdown';
 import Datepicker from './controls/datepicker';
 import Radio from './controls/radio';
+import Search from './controls/search';
 import SelectList from './controls/selectList';
 import Select from './controls/select';
 import Switch from './controls/switch';
