@@ -4,8 +4,11 @@ import { AppDetailedProductivityChart } from '../../src/wip/DetailedReport/AppDe
 import { userDetails } from '../../src/wip/DetailedReport/constants';
 import { getSyntheticProductivityData, getSyntheticProductivitySettings } from '../../src/wip/DetailedReport/synthetic/syntheticDataToCheckProductivityReportRendering';
 
+// const dateStart = new Date(2019, 0, 1).valueOf();
+// const dateEnd = new Date(2019, 8, 15).valueOf();
+
 const dateStart = new Date(2019, 0, 1).valueOf();
-const dateEnd = new Date(2019, 8, 15).valueOf();
+const dateEnd = new Date(2019, 0, 15).valueOf();
 
 const reportData = getSyntheticProductivityData(userDetails, dateStart, dateEnd);
 const reportSettings = getSyntheticProductivitySettings(userDetails, dateStart, dateEnd);
