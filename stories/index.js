@@ -35,3 +35,5 @@ import TestComponent from './wip/testComponent';
 import NotificationListItemComponent from './wip/testNotificationListItemComponent';
 import DetailedProductivityReport from './wip/DetailedProductivityReport';
 import AddNotificationComponent from './wip/addNotificationComponent';
+import NotificationsContainerHOC from './wip/testNotificationsContainerHOC';
+

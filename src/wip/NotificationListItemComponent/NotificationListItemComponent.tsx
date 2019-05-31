@@ -8,6 +8,25 @@ const units = ['MINUTE', 'HOUR', 'DAY'];
 const defaultUnit = 'MINUTE';
 const defaultValue = 5;
 
+export const notificationListItemMockProps: INotificationListItemProps = {
+    id: defaultValue,
+    units,
+    value: defaultValue,
+    orderNumber: defaultValue,
+    onValueChange: (value) => {
+        console.log(Number(value));
+        return Number(value)
+    },
+    onUnitsChange: (unit) => {
+        console.log(unit);
+        return unit
+    },
+    onTrash: () => {
+        console.log('onTrash');
+        return
+    }
+};
+
 export const NotificationListItemComponent: React.SFC<INotificationListItemProps> =
     (props) => {
         const {value, onValueChange, onUnitsChange, onTrash} = props;
@@ -69,18 +88,7 @@ export const NotificationListItemComponent: React.SFC<INotificationListItemProps
     };
 
 NotificationListItemComponent.defaultProps = {
-    onValueChange: value => {
-        console.log(Number(value));
-        return Number(value)
-    },
-    onUnitsChange: unit => {
-        console.log(unit);
-        return unit
-    },
-    onTrash: () => {
-        console.log('onTrash');
-        return
-    }
+    ...notificationListItemMockProps
 };
 
 NotificationListItemComponent.displayName = 'NotificationListItemComponent';

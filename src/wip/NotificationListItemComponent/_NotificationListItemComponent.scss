@@ -11,6 +11,11 @@
     margin-right: $google-spacing * 7;
     line-height: $google-spacing * 5;
   }
+  &:not(:first-of-type) {
+    .notification-list-item__label {
+      opacity: 0;
+    }
+  }
 
   .value-input--container {
     position: relative;

@@ -4,7 +4,7 @@ export interface INotificationListItemOwnProps {
 
 export interface INotificationListItemStateProps {
     value?: number;
-    units: string;
+    units: string[];
     orderNumber: number
 }
 
