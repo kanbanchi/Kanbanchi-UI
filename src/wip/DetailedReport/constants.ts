@@ -1,5 +1,5 @@
 import { IReportList, IReportsUser, IReportSettings, IDoneCardsOptions } from './appDomainTypes';
-import { IAppProductivityChartPrivateProps } from './types';
+import { IAppProductivityChartPrivateProps, IProductivityReportNodeData } from './types';
 
 export const colors = ['red', 'green', 'black', 'blue', 'gray', 'aqua'];
 
@@ -52,4 +52,22 @@ export const initialProductivityPrivateProps: IAppProductivityChartPrivateProps 
     width: '100%',
     height: 550,
     chartType: 'LineChart',
+}
+
+export const emptyProductivityRecord: IProductivityReportNodeData = {
+    signifyData: {
+        value: 0,
+        label: 'Done'
+    },
+    asideData: [
+        {
+            label: 'Overdue',
+            value: 0,
+        }
+    ]
+}
+
+export const getEmptyProductivityRecord = (): IProductivityReportNodeData => {
+    const result = JSON.parse(JSON.stringify(emptyProductivityRecord));
+    return result;
 }
