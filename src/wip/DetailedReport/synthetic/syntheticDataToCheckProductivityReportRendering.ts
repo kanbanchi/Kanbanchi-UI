@@ -9,7 +9,7 @@ export const getSyntheticProductivitySettings =
     dateStart: number,
     dateEnd: number,
 ) => {
-    const users = userDetails.map((userDetails) => makeUser(userDetails.id, userDetails.name));
+    const users = userDetails.map((userDetails) => makeUser(userDetails.name, userDetails.id));
     const reportSettings: IReportSettings = {
         ...reportSettingsInitial,
         dateStart,
