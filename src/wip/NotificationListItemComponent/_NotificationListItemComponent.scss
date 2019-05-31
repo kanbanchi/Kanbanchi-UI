@@ -22,9 +22,11 @@
 
   .units-select--container {
     position: relative;
+    .units-select--list, .units-select {
+      width: $google-spacing * 14;
+    }
     .units-select {
       text-transform: capitalize;
-      width: $google-spacing * 11;
       .units-select--item {
         text-transform: capitalize;
       }

@@ -22,9 +22,10 @@ export const NotificationListItemComponent: React.SFC<INotificationListItemProps
                 </span>
                 <span className="units-select--container">
                     <Select className="units-select"
+                            variant="arrow"
                             active={0}
                             onChange={(e: any) => onUnitsChange(e.item.value)}>
-                        <SelectList>
+                        <SelectList className="units-select--list">
                             {
                                 units.map(unit => {
                                     return (
