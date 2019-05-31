@@ -2,6 +2,7 @@ import { IReportsUser } from '../appDomainTypes';
 import { colors } from '../constants';
 import * as moment from 'moment';
 import { IProductivityReportNodeData, IProductivityReportLine } from '../types';
+import { formatDateStatisticStyle } from '../behavior/settingsTransformerHelper';
 
 export const makeUser =
 (
@@ -57,7 +58,7 @@ export const getProductivityReportLine =
     let currentDate = dateStart;
     const result: IProductivityReportLine = {};
     do {
-        result[currentDate.toString()] = makeProductivityNodeData();
+        result[formatDateStatisticStyle(currentDate)] = makeProductivityNodeData();
         currentDate = plussRandomDays(currentDate);
     } while (currentDate < dateEnd);
 

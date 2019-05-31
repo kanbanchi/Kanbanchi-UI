@@ -2,6 +2,7 @@ import { IReportSettings, IReportsUser } from '../appDomainTypes';
 import { IProductivityReportData, IProductivityReportLine } from '../types';
 import { productivityDetailedDefault } from './settingsTransformerConstants';
 import { dateColumn, numberColumn, tooltipColumn, IGoogleChartColumn, getStringDatesInterval, makeDateOfString } from './settingsTransformerHelper';
+import { getEmptyProductivityRecord } from '../constants';
 
 export interface ITooltipData {
     name: string;
@@ -29,7 +30,24 @@ export class ProductivitySettingsTransformer {
     }
 
     public getProductivityDetailedOptions() {
-        return JSON.parse(JSON.stringify(productivityDetailedDefault))
+        const defaultOptions = JSON.parse(JSON.stringify(productivityDetailedDefault))
+        let series = {};
+        this.reportSettings.users.forEach((user, index) => {
+            const doneCardsIndex = index * 2;
+            const overdueCardsIndex = index * 2 + 1;
+            series[doneCardsIndex] = {
+                color: user.color
+            };
+            series[overdueCardsIndex] = {
+                color: user.color,
+                lineDashStyle: [4, 2],
+            }
+        });
+        defaultOptions.series = series;
+
+        return defaultOptions;
+
+        // add options lineDashStyle
     }
 
     _getProductivityDetailedColumns() {
@@ -72,7 +90,10 @@ export class ProductivitySettingsTransformer {
 
                 const todayRecord = irregularData[userId][date];
 
-                if (!todayRecord && !previosRecord) break;
+                if (!todayRecord && !previosRecord) {
+                    const emptyRecord = getEmptyProductivityRecord();
+                    regularSeriesData[date] = {...emptyRecord};
+                };
 
                 if (todayRecord) {
                     regularSeriesData[date] = {...todayRecord};
@@ -96,7 +117,7 @@ export class ProductivitySettingsTransformer {
             let todayRecord: any[] = [today];
 
             this.selectedUsers.forEach((user) => {
-                const todayDone = this.reportData[user.userId][date].signifyData.label;
+                const todayDone = this.reportData[user.userId][date].signifyData.value;
                 const todayOverdue = this.reportData[user.userId][date].asideData[0].value;
                 todayRecord = [
                     ...todayRecord,
