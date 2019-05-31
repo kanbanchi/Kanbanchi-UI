@@ -1,6 +1,18 @@
 const path = require('path');
 
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+
 module.exports = {
+    plugins: [
+        new ForkTsCheckerWebpackPlugin({
+            tsconfig: path.resolve(process.cwd(), './tsconfig.json'),
+            tslint:path.resolve(process.cwd(), './tslint.json'),
+            async: true,
+        }),
+        // system notifier for typescript checking
+        new ForkTsCheckerNotifierWebpackPlugin()
+    ],
     module: {
         rules: [
             {
@@ -40,7 +52,7 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ["@babel/env", "@babel/react", "@babel/typescript"],
+                            presets: ["@babel/env", "@babel/react"],
                         }
                     },
                     {
