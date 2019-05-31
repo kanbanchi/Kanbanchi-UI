@@ -1,18 +1,18 @@
 @import '../../assets/sass/index.scss';
 
 .notification-list-item {
-  &__label {
-    margin-right: $google-spacing * 7;
-    line-height: $google-spacing * 5;
-  }
   display: flex;
   flex-direction: row;
   margin-top: $google-spacing;
   margin-bottom: $google-spacing;
   list-style-type: none;
 
-  .value-input--container {
+  .notification-list-item__label {
+    margin-right: $google-spacing * 7;
+    line-height: $google-spacing * 5;
+  }
 
+  .value-input--container {
     position: relative;
     .value-input {
       width: $google-spacing * 8;
@@ -34,12 +34,5 @@
   .trash-notification--icon {
     margin-top: $google-spacing;
     margin-left: $google-spacing * 7;
-    @include transition;
-    &:hover {
-      color: calc-color(tint, $color-base, 75); // TODO check later with designer
-    }
-    &:active {
-      color: calc-color(tint, $color-base, 50); // TODO check later with designer
-    }
   }
 }
