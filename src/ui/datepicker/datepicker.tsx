@@ -7,9 +7,14 @@ import { Input } from '../../ui';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
 
+const ReactDatepickerElement = ReactDatepicker as any;
+
 registerLocale('en-GB', enGB); // Weeks start on Monday
 
-export const Datepicker: React.SFC<IDatepickerProps> = (props) => {
+export const Datepicker: React.SFC<
+    IDatepickerProps
+    & React.HTMLAttributes<HTMLElement>
+> = (props) => {
     let {
         className,
         color,
@@ -42,7 +47,7 @@ export const Datepicker: React.SFC<IDatepickerProps> = (props) => {
 
     return (
         <div className={className}>
-            <ReactDatepicker
+            <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
                 locale="en-GB"
                 ref={pickerRef}
