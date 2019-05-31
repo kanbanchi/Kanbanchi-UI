@@ -1,0 +1,11 @@
+@import '../../assets/sass/index.scss';
+
+.add-notifications--icon {
+  @include transition;
+  &:hover {
+    color: calc-color(tint, $color-base, 75); // TODO check later with designer
+  }
+  &:active {
+    color: calc-color(tint, $color-base, 50); // TODO check later with designer
+  }
+}

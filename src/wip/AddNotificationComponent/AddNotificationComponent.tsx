@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {IAddNotificationComponentProps} from "./types";
 import {Icon} from '../../ui';
+import './_AddNotificationComponent.scss'
 
 export const AddNotificationComponent: React.SFC<IAddNotificationComponentProps> =
     props => {
