@@ -33,3 +33,4 @@ import Snackbars from './snackbars';
 
 import TestComponent from './wip/testComponent';
 import DetailedProductivityReport from './wip/DetailedProductivityReport';
+import AddNotificationComponent from './wip/addNotificationComponent';
