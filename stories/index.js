@@ -32,5 +32,6 @@ import Tabs from './controls/tabs';
 import Snackbars from './snackbars';
 
 import TestComponent from './wip/testComponent';
+import NotificationListItemComponent from './wip/testNotificationListItemComponent';
 import DetailedProductivityReport from './wip/DetailedProductivityReport';
 import AddNotificationComponent from './wip/addNotificationComponent';
