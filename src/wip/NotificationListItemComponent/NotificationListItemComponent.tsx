@@ -7,7 +7,7 @@ import './_NotificationListItemComponent.scss';
 const units = ['MINUTE', 'HOUR', 'DAY'];
 
 export const NotificationListItemComponent: React.SFC<INotificationListItemProps> =
-    props => {
+    (props) => {
         const {value, onValueChange, onUnitsChange, onTrash} = props;
         return (
             <li className="notification-list-item">
