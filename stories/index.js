@@ -1,6 +1,7 @@
 import './stories.module.scss';
 
 import Loader from './animations/loader';
+import Snackbars from './animations/snackbars';
 
 import Action from './buttons/action';
 import Add from './buttons/add';
@@ -28,8 +29,6 @@ import SelectList from './controls/selectList';
 import Select from './controls/select';
 import Switch from './controls/switch';
 import Tabs from './controls/tabs';
-
-import Snackbars from './snackbars';
 
 import TestComponent from './wip/testComponent';
 import DetailedProductivityReport from './wip/DetailedProductivityReport';

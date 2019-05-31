@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Snackbar } from '../src/ui';
-import SnackbarsQueue from './snackbarsQueue';
+import { Button, Snackbar } from './../../src/ui';
+import SnackbarsQueue from './../snackbarsQueue';
 
 const Story = () => {
     const queueRef = React.useRef(null);
@@ -89,5 +89,5 @@ const Story = () => {
     );
 };
 
-storiesOf('Snackbars', module)
-    .add('snackbars', () => <Story />);
+storiesOf('Animations', module)
+    .add('Snackbars', () => <Story />);
