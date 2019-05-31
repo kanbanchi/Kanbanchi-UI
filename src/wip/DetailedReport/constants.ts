@@ -1,4 +1,5 @@
 import { IReportList, IReportsUser, IReportSettings, IDoneCardsOptions } from './appDomainTypes';
+import { IAppProductivityChartPrivateProps } from './types';
 
 export const colors = ['red', 'green', 'black', 'blue', 'gray', 'aqua'];
 
@@ -46,3 +47,9 @@ export const userDetails: IUserDetails[] = [
         name: 'Gal Mormonth'
     },
 ];
+
+export const initialProductivityPrivateProps: IAppProductivityChartPrivateProps = {
+    width: '100%',
+    height: 550,
+    chartType: 'LineChart',
+}
