@@ -1,5 +1,4 @@
 import * as moment from 'moment'
-import {} from '../constants';
 
 const dateColumnType = 'date';
 const numberColumnType = 'number';
@@ -86,4 +85,21 @@ export const formatDateStatisticStyle =
 (date: number) => {
     const formattedDate = moment(date).format(statisticServerTimeFormat);
     return formattedDate;
+}
+
+export const makeDateOfString =
+(
+    dateString: string
+) => {
+    const parsedDate = parseDateStatisticStyle(dateString);
+    const day = parsedDate.date();
+    const month = parsedDate.month();
+    const year = parsedDate.year();
+    return new Date(year, month, day);
+}
+
+export const parseDateStatisticStyle =
+(dateString: string) => {
+    const parsedDate = moment(dateString, statisticServerTimeFormat);
+    return parsedDate;
 }
