@@ -19,12 +19,6 @@ export const NotificationListItemComponent: React.SFC<INotificationListItemProps
                         className='value-input'
                         onChange={(e: any) => onValueChange(e.target.value)}
                     />
-                    {
-                        /**
-                         * TODO decide how to transform/validate input value
-                         * (allow only numbers / highlight input on letters entered)
-                         */
-                    }
                 </span>
                 <span className='units-select--container'>
                     <Select className='units-select'
