@@ -5,7 +5,7 @@ import '../../../src/ui/buttonsGroup/buttonsGroup.module.scss';
 
 export const ButtonsGroup: React.SFC<
     IButtonsGroupProps
-    & React.HTMLAttributes<HTMLDivElement>
+    & React.HTMLAttributes<HTMLElement>
 > = (props) => {
     let {
         children,
