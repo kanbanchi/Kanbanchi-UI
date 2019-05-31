@@ -2,7 +2,7 @@ import * as React from 'react';
 import {INotificationListItemProps} from './types';
 import {capitalize, pluralize} from './behaviour/NotificationListItemComponentHelper';
 import {Icon, Input, Select, SelectList} from '../../ui';
-import './NotificationListItemComponent.css';
+import './_NotificationListItemComponent.scss';
 
 const units = ['MINUTE', 'HOUR', 'DAY'];
 
