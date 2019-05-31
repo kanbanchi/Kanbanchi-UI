@@ -5,4 +5,3 @@ export const capitalize = (str: string) => {
 export const pluralize = (num: number, str: string) => {
     return num === 1 ? str : str + 's'
 };
-
