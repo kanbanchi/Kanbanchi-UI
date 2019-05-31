@@ -27,4 +27,5 @@ import Switch from './controls/switch';
 import Tabs from './controls/tabs';
 
 import TestComponent from './wip/testComponent';
+import NotificationListItemComponent from './wip/testNotificationListItemComponent';
 import DetailedProductivityReport from './wip/DetailedProductivityReport';
