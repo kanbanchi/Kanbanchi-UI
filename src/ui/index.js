@@ -1,9 +1,9 @@
 export {Button} from './button/button';
 export {ButtonDropdown} from './buttonDropdown/buttonDropdown';
-export {ButtonsGroup} from './buttonsGroup/buttonsGroup'; // ts
+export {ButtonsGroup} from './buttonsGroup/buttonsGroup';
 export {ButtonsSegmented} from './buttonsSegmented/buttonsSegmented';
 
-export {Checkbox} from './checkbox/checkbox'; // ts
+export {Checkbox} from './checkbox/checkbox';
 
 export {Datepicker} from './datepicker/datepicker';
 export {Divider} from './divider/divider';
@@ -23,6 +23,6 @@ export {Select} from './select/select';
 export {SelectList} from './selectList/selectList';
 export {SelectListItem} from './selectListItem/selectListItem';
 export {Snackbar} from './snackbar/snackbar';
-export {Switch} from './switch/switch'; // ts
+export {Switch} from './switch/switch';
 
 export {Tabs} from './tabs/tabs';

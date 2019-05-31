@@ -5,7 +5,7 @@ import '../../../src/ui/buttonsSegmented/buttonsSegmented.module.scss';
 
 export const ButtonsSegmented: React.SFC<
     IButtonsSegmentedProps
-    & React.HTMLAttributes<HTMLDivElement>
+    & React.HTMLAttributes<HTMLElement>
 > = (props) => {
     let {
         active,

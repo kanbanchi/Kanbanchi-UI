@@ -6,7 +6,7 @@ import '../../../src/ui/selectListItem/selectListItem.module.scss';
 
 export const SelectListItem: React.SFC<
     ISelectListItemProps
-    & React.HTMLAttributes<HTMLLIElement>
+    & React.HTMLAttributes<HTMLElement>
 > = React.forwardRef((props, ref) => {
     let {
         children,

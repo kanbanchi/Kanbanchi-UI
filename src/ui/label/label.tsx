@@ -5,7 +5,7 @@ import '../../../src/ui/label/label.module.scss';
 
 export const Label: React.SFC<
     ILabelProps
-    & React.LabelHTMLAttributes<HTMLLabelElement>
+    & React.LabelHTMLAttributes<HTMLElement>
 > = (props) => {
     let {
         className,

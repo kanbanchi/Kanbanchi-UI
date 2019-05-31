@@ -15,7 +15,6 @@ export interface IDatepickerProps extends
     IDatepickerDispatchProps,
     IInputPublicProps
 {
-    className?: string;
     dateFormat?: string;
     popperPlacement?: string;
 }
