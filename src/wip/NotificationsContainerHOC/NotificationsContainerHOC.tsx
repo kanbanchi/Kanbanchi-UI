@@ -8,8 +8,8 @@ import {INotificationsContainerProps} from './types';
 export const NotificationsContainer: React.SFC<INotificationsContainerProps> = (props) => {
     const {notifications} = props;
     return (
-        // notifications.map(element => {
-        //     const {id} = element;
+        // notifications.map(notification => {
+        //     const {id} = notification;
         //     return (
         //         <NotificationListItemComponent id={id}/>
         //     )
