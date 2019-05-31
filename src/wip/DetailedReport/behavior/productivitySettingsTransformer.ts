@@ -2,7 +2,7 @@ import { IReportSettings, IReportsUser } from '../appDomainTypes';
 import { IProductivityReportData, IProductivityReportLine } from '../types';
 import { productivityDetailedDefault } from './settingsTransformerConstants';
 import { dateColumn, numberColumn, tooltipColumn, IGoogleChartColumn, getStringDatesInterval, makeDateOfString } from './settingsTransformerHelper';
-import { getEmptyProductivityRecord } from '../constants';
+import { getEmptyProductivityRecord, IUserDetails } from '../constants';
 
 export interface ITooltipData {
     name: string;
@@ -66,7 +66,10 @@ export class ProductivitySettingsTransformer {
         return columns;
     }
 
-    makeDatailedTooltip(tooltipData: ITooltipData[]) {
+    makeDatailedTooltip(
+        date: number,
+        tooltipData: ITooltipData[]
+        ) {
         return (`
         <div className="productivity-detailed-tooltip__container">
             <div className="productivity-detailed-tooltip__body">
@@ -119,6 +122,14 @@ export class ProductivitySettingsTransformer {
             this.selectedUsers.forEach((user) => {
                 const todayDone = this.reportData[user.userId][date].signifyData.value;
                 const todayOverdue = this.reportData[user.userId][date].asideData[0].value;
+
+                // const tooltipData: ITooltipData[] = this.selectedUsers.map((user): ITooltipData => {
+                //     return {
+                //         name: user.fullName,
+                //         done: 
+                //     }
+                // });
+
                 todayRecord = [
                     ...todayRecord,
                     todayDone,
