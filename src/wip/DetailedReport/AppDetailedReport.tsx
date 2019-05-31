@@ -14,7 +14,7 @@ export const AppDetailedProductivityChart: React.SFC<IAppProductivityDetailedPro
 
     const resultProps = {
         ...initialProductivityPrivateProps,
-        ...productivityOptions,
+        options: productivityOptions,
         data,
     }
 
