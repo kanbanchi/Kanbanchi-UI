@@ -19,18 +19,18 @@ const Story = () => {
                 >
                     01. Label
                 </Switch>
-                
+
                 <br/>
-                
+
                 <Switch
                     checked={val01}
                     onChange={()=>setVal01(!val01)}
                 >
                     02. Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </Switch>
-                
+
                 <br/>
-                
+
                 <Switch
                     checked={val02}
                     onChange={()=>setVal02(!val02)}
@@ -38,9 +38,9 @@ const Story = () => {
                 >
                     03. Black
                 </Switch>
-                
+
                 <br/>
-                
+
                 <Switch
                     checked={val03}
                     onChange={()=>setVal03(!val03)}

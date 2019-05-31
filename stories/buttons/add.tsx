@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '../../src/ui';
 
-const Story = () => {    
+const Story = () => {
     return (
         <div className="page">
              <section className="section-form-min">

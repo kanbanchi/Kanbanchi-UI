@@ -2,7 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonsGroup, Icon } from '../../src/ui';
 
-const Story = () => {    
+const Story = () => {
     return (
         <div className="page">
              <section>
@@ -26,7 +26,7 @@ const Story = () => {
                         <Icon xlink="search" size={24} />
                     </Button>
                 </ButtonsGroup>
-                
+
             </section>
             <section>
                 <h2>Color="purple"</h2>
@@ -38,7 +38,7 @@ const Story = () => {
                         <Icon xlink="plus" size={24} />
                     </Button>
                 </ButtonsGroup>
-                
+
                 <br />
 
                 <ButtonsGroup size="large">
@@ -49,7 +49,7 @@ const Story = () => {
                         <Icon xlink="plus" size={24} />
                     </Button>
                 </ButtonsGroup>
-                
+
             </section>
             <section>
                 <h2>Color="black"</h2>
@@ -62,7 +62,7 @@ const Story = () => {
                         <Icon xlink="kanban" size={24} />
                     </Button>
                 </ButtonsGroup>
-                
+
                 <br />
 
                 <ButtonsGroup size="large">

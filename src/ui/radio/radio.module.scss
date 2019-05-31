@@ -69,6 +69,10 @@
             .kui-radio__input {
                 border-color: calc-color(fade, $color-base, 10);
             }
+
+            .kui-radio__input:checked:after {
+                background-color: calc-color(fade, $color-base, 30);
+            }
         }
     }
 

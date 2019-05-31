@@ -89,7 +89,7 @@ export const Button: React.SFC<
 Button.defaultProps = {
     color: null,
     disabled: false,
-    href: null,    
+    href: null,
     size: null,
     text: null,
     type: 'button',

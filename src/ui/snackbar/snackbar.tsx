@@ -1,30 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { PropTypes, ClassNames } from '../utils';
+import * as React from 'react';
+import { ISnackbarProps, ISnackbarButtonProps, ISnackbarDefaultIcons } from './types';
+import { ClassNames } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
 
-export const Snackbar = (props) => {
+export const Snackbar: React.SFC<
+    ISnackbarProps
+    & React.HTMLAttributes<HTMLElement>
+> = (props) => {
 
     let {
         className,
-        variant,
+        buttons,
         icon,
-        title,
         text,
         timer,
-        buttons,
+        title,
+        variant,
         onTimer,
         ...attributes
     } = props;
 
     className = ClassNames(
         'kui-snackbar',
-        'kui-snackbar--' + variant,
+        'kui-snackbar--variant_' + variant,
         (!title) ? 'kui-snackbar--notitle' : null,
         className
     );
 
-    let xlink = (icon === 'default') ? Snackbar.defaultIcons[variant] : icon;
+    let xlink = (icon === null) ? ISnackbarDefaultIcons[variant] : icon;
 
     if (variant === 'timer' && timer === null) timer = 10;
 
@@ -41,14 +45,14 @@ export const Snackbar = (props) => {
                 ...attributes
             } = item;
 
-            attributes.onClick = () => onButtonClick(item);
-            if (onTimer) onTimerDefault = attributes.onClick;
+            if (onTimer) onTimerDefault = onClick;
 
             return (
                 <Button
                     className="kui-snackbar__button"
                     color="white"
                     key={key}
+                    onClick={()=>onButtonClick(item)}
                     {...attributes}
                 >
                     {text}
@@ -62,43 +66,41 @@ export const Snackbar = (props) => {
         );
     }
 
-    const onButtonClick = (button) => {
+    const onButtonClick = (button: ISnackbarButtonProps) => {
         if (button.onClick) button.onClick();
-        hide();
+        hideSnackbar();
     };
 
     const onTimerAction = () => {
         if (onTimerDefault) onTimerDefault();
-        hide();
+        hideSnackbar();
     };
 
-    const hide = () => {
+    const hideSnackbar = () => {
         setTimerHook(null);
         setIsShownHook(false);
     };
 
-    const [timerHook, setTimerHook] = useState(timer);
-    const [isShownHook, setIsShownHook] = useState(true);
+    const [timerHook, setTimerHook] = React.useState(timer);
+    const [timeoutHook, setTimeoutHook] = React.useState(null);
+    const [isShownHook, setIsShownHook] = React.useState(true);
 
-    if (timer !== null) {
-        let timeOut;
-        useEffect(() => {
-            if (timerHook === null) {
-                clearTimeout(timeOut);
-                return;
-            }
-            if (timerHook < 1) {
-                onTimerAction();
-            } else {
-                timeOut = setTimeout(() => {
-                    setTimerHook(timerHook - 1);
-                }, 1000);
-            }
-            return () => {
-                clearTimeout(timeOut);
-            }
-        });
-    }
+    React.useEffect(() => {
+        if (timerHook === null) {
+            clearTimeout(timeoutHook);
+            return;
+        }
+        if (timerHook < 1) {
+            onTimerAction();
+        } else {
+            setTimeoutHook(setTimeout(() => {
+                setTimerHook(timerHook - 1);
+            }, 1000));
+        }
+        return () => {
+            clearTimeout(timeoutHook);
+        }
+    }, [timerHook]);
 
     return isShownHook && (
         <div className="kui-snackbar__container">
@@ -126,36 +128,14 @@ export const Snackbar = (props) => {
     );
 };
 
-Snackbar.propTypes = {
-    variant: PropTypes.oneOf([
-        'info',
-        'error',
-        'success',
-        'timer'
-    ]),
-    icon: PropTypes.string,
-    title: PropTypes.string,
-    text: PropTypes.string,
-    timer: PropTypes.number,
-    buttons: PropTypes.array,
-    onTimer: PropTypes.func
-};
-
-Snackbar.defaultIcons = {
-    info: 'info',
-    error: 'error',
-    success: 'done',
-    timer: 'error'
-};
-
 Snackbar.defaultProps = {
-    variant: 'info',
-    icon: 'default',
-    title: null,
+    buttons: null,
+    icon: null,
     text: null,
     timer: null,
-    buttons: null,
-    onTimer: null
+    title: null,
+    variant: 'info',
+    onTimer: () => undefined,
 };
 
-export default Snackbar;
+Snackbar.displayName = 'Snackbar';

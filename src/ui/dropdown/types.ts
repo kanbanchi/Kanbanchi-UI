@@ -1,6 +1,6 @@
-export type IDropdownDirectionVertical = 
-    'auto' 
-    | 'down' 
+export type IDropdownDirectionVertical =
+    'auto'
+    | 'down'
     | 'up';
 
 export interface IDropdownPublicProps {

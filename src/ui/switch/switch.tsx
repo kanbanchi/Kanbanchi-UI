@@ -14,7 +14,7 @@ export const Switch: React.SFC<
         color,
         ...attributesOriginal
     } = props,
-        attributes:React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
+        attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
 
     className = ClassNames(
         'kui-switch',
@@ -24,10 +24,10 @@ export const Switch: React.SFC<
     );
 
     if (attributes.disabled) attributes.checked = false;
-    
+
     return (
         <Label className={className}>
-            <input 
+            <input
                 className="kui-switch__input"
                 type="checkbox"
                 {...attributes}

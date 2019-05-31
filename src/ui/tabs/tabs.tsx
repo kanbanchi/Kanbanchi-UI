@@ -5,7 +5,7 @@ import '../../../src/ui/tabs/tabs.module.scss';
 
 export const Tabs: React.SFC<
     ITabsProps
-    & React.HTMLAttributes<HTMLDivElement>
+    & React.HTMLAttributes<HTMLElement>
 > = (props) => {
     let {
         active,

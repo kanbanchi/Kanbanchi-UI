@@ -1,9 +1,12 @@
 import * as React from 'react';
+import { IDividerProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/divider/divider.module.scss';
 
-export const Divider: React.SFC<React.HTMLAttributes<HTMLElement>>
-= (props) => {
+export const Divider: React.SFC<
+    IDividerProps
+    & React.HTMLAttributes<HTMLElement>
+> = (props) => {
     let {
         className,
         ...attributes
@@ -13,7 +16,7 @@ export const Divider: React.SFC<React.HTMLAttributes<HTMLElement>>
         'kui-divider',
         className
     );
-    
+
     return (
         <hr className={className} {...attributes} />
     );

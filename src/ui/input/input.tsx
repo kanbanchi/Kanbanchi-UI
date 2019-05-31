@@ -26,7 +26,7 @@ export const Input: React.SFC<
         onKeyDown,
         ...attributesOriginal
     } = props,
-        attributes:React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
+        attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
         labelItem = null,
         inputBefore = null,
         inputAfter = null;
@@ -36,7 +36,7 @@ export const Input: React.SFC<
     const [inputValue, setInputValue] = React.useState(value);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
     const textarea = React.useRef(null);
-    
+
     className = ClassNames(
         'kui-input',
         (color) ? 'kui-input--color_' + color: null,
@@ -108,7 +108,7 @@ export const Input: React.SFC<
             size={24}
             className="kui-input__icon kui-input__icon--arrow"
         />;
-    } else if 
+    } else if
         (variant === 'datepicker') {
         autosize = false;
         icon = icon || 'calendar';
@@ -146,7 +146,7 @@ export const Input: React.SFC<
             size={24}
             className="kui-input__icon kui-input__icon--clear"
             onClick={clearInput} />;
-    } else if 
+    } else if
         (icon && variant === 'withicon') {
         inputAfter = <Icon
             xlink={icon}
@@ -181,7 +181,7 @@ export const Input: React.SFC<
         <Label className={className}>
             {labelItem}
             {inputBefore}
-            <Tag 
+            <Tag
                 rows={1}
                 ref={textarea}
                 value={inputValue}
