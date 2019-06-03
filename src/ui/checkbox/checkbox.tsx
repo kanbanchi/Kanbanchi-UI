@@ -27,7 +27,7 @@ export const Checkbox: React.SFC<ICheckboxInheritedProps> =
 
     attributes.type = 'checkbox';
     attributes.className = 'kui-checkbox__input';
-    attributes.onChange = (e) => {
+    attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(!isChecked);
         if (onChange) onChange(e);
     };

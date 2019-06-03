@@ -21,5 +21,5 @@ export type IConflictFreeHTMLAttributes<E> =
 
 export interface ICheckboxInheritedProps extends
     ICheckboxProps,
-    IConflictFreeHTMLAttributes<HTMLElement>
+    IConflictFreeHTMLAttributes<HTMLInputElement>
 {}
