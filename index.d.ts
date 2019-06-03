@@ -5,7 +5,7 @@ import {IButtonsSegmentedProps} from './src/ui/buttonsSegmented/types';
 
 import {ICheckboxProps} from './src/ui/checkbox/types';
 
-import {IDatepickerProps} from './src/ui/datepicker/types';
+import {IDatePickerInheritedProps} from './src/ui/datepicker/types';
 import {IDividerProps} from './src/ui/divider/types';
 import {IDropdownProps} from './src/ui/dropdown/types';
 
@@ -34,7 +34,7 @@ export declare const ButtonsSegmented: React.SFC<IButtonsSegmentedProps & React.
 
 export declare const Checkbox: React.SFC<ICheckboxProps & React.InputHTMLAttributes<HTMLElement>>;
 
-export declare const Datepicker: React.SFC<IDatepickerProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Datepicker: React.SFC<IDatePickerInheritedProps>;
 export declare const Divider: React.SFC<IDividerProps & React.HTMLAttributes<HTMLElement>>;
 export declare const Dropdown: React.SFC<IDropdownProps & React.HTMLAttributes<HTMLElement>>;
 
@@ -47,11 +47,11 @@ export declare const LoaderBlock: React.SFC<ILoaderBlockProps & React.HTMLAttrib
 
 export declare const Radio: React.SFC<IRadioProps & React.HTMLAttributes<HTMLElement>>;
 
-export declare const ISearchProps: React.SFC<ISearchProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISelectProps: React.SFC<ISelectProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISelectListProps: React.SFC<ISelectListProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISelectListItemProps: React.SFC<ISelectListItemProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISnackbarProps: React.SFC<ISnackbarProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISwitchProps: React.SFC<ISwitchProps & React.InputHTMLAttributes<HTMLElement>>;
+export declare const Search: React.SFC<ISearchProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Select: React.SFC<ISelectProps & React.HTMLAttributes<HTMLElement>>;
+export declare const SelectList: React.SFC<ISelectListProps & React.HTMLAttributes<HTMLElement>>;
+export declare const SelectListItem: React.SFC<ISelectListItemProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Snackbar: React.SFC<ISnackbarProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Switch: React.SFC<ISwitchProps & React.InputHTMLAttributes<HTMLElement>>;
 
-export declare const ITabsProps: React.SFC<ITabsProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Tabs: React.SFC<ITabsProps & React.HTMLAttributes<HTMLElement>>;

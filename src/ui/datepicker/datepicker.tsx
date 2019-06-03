@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IDatepickerProps } from './types';
+import { IDatePickerInheritedProps } from './types';
 import ReactDatepicker, { registerLocale } from 'react-datepicker';
 import * as enGB from 'date-fns/locale/en-GB';
 import { ClassNames } from '../utils';
@@ -11,10 +11,8 @@ const ReactDatepickerElement = ReactDatepicker as any;
 
 registerLocale('en-GB', enGB); // Weeks start on Monday
 
-export const Datepicker: React.SFC<
-    IDatepickerProps
-    & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+export const Datepicker: React.SFC<IDatePickerInheritedProps> =
+(props) => {
     let {
         className,
         color,
