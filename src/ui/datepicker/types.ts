@@ -18,3 +18,11 @@ export interface IDatepickerProps extends
     dateFormat?: string;
     popperPlacement?: string;
 }
+
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>, 'color' | 'onChange'>>;
+
+export interface IDatePickerInheritedProps extends
+    IDatepickerProps,
+    IConflictFreeHTMLAttributes<HTMLElement>
+{}
