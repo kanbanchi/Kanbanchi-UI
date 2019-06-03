@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ISelectListItemProps } from './types';
+import { ISelectListItemInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Icon } from '../../ui';
 import '../../../src/ui/selectListItem/selectListItem.module.scss';
 
-export const SelectListItem: React.SFC<
-    ISelectListItemProps
-    & React.HTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const SelectListItem: React.SFC<ISelectListItemInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
