@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ISwitchProps } from './types';
+import { ISwitchInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Label } from '../../ui';
 import '../../../src/ui/switch/switch.module.scss';
 
-export const Switch: React.SFC<
-    ISwitchProps
-    & React.InputHTMLAttributes<HTMLElement>
-> = (props) => {
+export const Switch: React.SFC<ISwitchInheritedProps> =
+(props) => {
     let {
         children,
         className,

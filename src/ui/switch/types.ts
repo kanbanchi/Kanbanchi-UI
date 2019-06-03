@@ -12,3 +12,15 @@ export interface ISwitchProps extends
 {
     color?: 'black';
 }
+
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,
+        'checked'
+        | 'color'
+        | 'onChange'
+    >>;
+
+export interface ISwitchInheritedProps extends
+    ISwitchProps,
+    IConflictFreeHTMLAttributes<HTMLInputElement>
+{}
