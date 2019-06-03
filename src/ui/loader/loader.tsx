@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { ILoaderProps } from './types';
+import { ILoaderInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/loader/loader.module.scss';
 
-export const Loader: React.SFC<
-    ILoaderProps
-    & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+export const Loader: React.SFC<ILoaderInheritedProps> =
+(props) => {
     let {
         className,
         size,
