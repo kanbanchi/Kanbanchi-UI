@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { ISelectProps, ISelectActiveProps } from './types';
+import { ISelectInheritedProps, ISelectActiveProps } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
 import { ClassNames } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 
-export const Select: React.SFC<
-    ISelectProps
-    & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+export const Select: React.SFC<ISelectInheritedProps> =
+(props) => {
     let {
         active,
         children,
