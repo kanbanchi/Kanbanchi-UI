@@ -1,7 +1,7 @@
 import { IReportSettings, IReportsUser } from '../appDomainTypes';
 import { IProductivityReportData, IProductivityReportLine } from '../types';
 import { productivityDetailedDefault } from './settingsTransformerConstants';
-import { dateColumn, numberColumn, tooltipColumn, IGoogleChartColumn, getStringDatesInterval, makeDateOfString } from './settingsTransformerHelper';
+import { dateColumn, numberColumn, tooltipColumn, IGoogleChartColumn, getStringDatesInterval, makeDateOfString, formatDateForTooltip } from './settingsTransformerHelper';
 import { getEmptyProductivityRecord, IUserDetails } from '../constants';
 
 export interface ITooltipData {
@@ -70,10 +70,13 @@ export class ProductivitySettingsTransformer {
         date: number,
         tooltipData: ITooltipData[]
         ) {
+        const humanReadableDate = formatDateForTooltip(date);
+        const tooltipBody = tooltipData.map((data) => ( `<span className="tooltip">${data.name} - ${data.done} - ${data.overdue}</span> ` ));
         return (`
         <div className="productivity-detailed-tooltip__container">
+            <span>${humanReadableDate}</span>
             <div className="productivity-detailed-tooltip__body">
-                ${tooltipData.map((data) => ( `<span className="tooltip">${data.name} - ${data.done} - ${data.overdue}</span>` ))}
+                ${tooltipBody}
             </div>
         </div>`
         );
@@ -123,13 +126,6 @@ export class ProductivitySettingsTransformer {
                 const todayDone = this.reportData[user.userId][date].signifyData.value;
                 const todayOverdue = this.reportData[user.userId][date].asideData[0].value;
 
-                // const tooltipData: ITooltipData[] = this.selectedUsers.map((user): ITooltipData => {
-                //     return {
-                //         name: user.fullName,
-                //         done: 
-                //     }
-                // });
-
                 todayRecord = [
                     ...todayRecord,
                     todayDone,
@@ -140,7 +136,46 @@ export class ProductivitySettingsTransformer {
             });
             chartData = [...chartData, todayRecord];
         });
+
+        const tooltips = this.calculateTooltips(chartData);
+        console.log(tooltips);
+
         this.chartData = chartData;
+    }
+
+    calculateTooltips(chartData: any[]) {
+        const userNames = this.selectedUsers.map((user) => user.fullName);
+
+        const tooltips = chartData.reduce((accum, chartDataRow, index, collection) => {
+            if (index === 0) {
+                return [ ...accum ];
+            } else {
+                const date = (chartDataRow[0] as Date).valueOf();
+                let dailyTooltipData: ITooltipData[] = [];
+
+                userNames.forEach((userName, index) => {
+                    const baseIndex = index * 4;
+                    const doneCardsIndex = baseIndex + 1;
+                    const overdueCardsIndex = baseIndex + 3;
+                    const correspondingName = userName;
+
+                    const newRecord: ITooltipData = {
+                        name: correspondingName,
+                        done: chartDataRow[doneCardsIndex],
+                        overdue: chartDataRow[overdueCardsIndex],
+                    }
+
+                    dailyTooltipData = [...dailyTooltipData,  newRecord];
+                });
+                const dateTooltip = this.makeDatailedTooltip(date, dailyTooltipData);
+                return [
+                    ...accum,
+                    dateTooltip,
+                ];
+            }
+        }, []);
+
+        return tooltips;
     }
 
     getChartData() {

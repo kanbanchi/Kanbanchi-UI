@@ -103,3 +103,8 @@ export const parseDateStatisticStyle =
     const parsedDate = moment(dateString, statisticServerTimeFormat);
     return parsedDate;
 }
+
+export const formatDateForTooltip =
+(date: number) => {
+    return moment(date).format('MM MMMM');
+}
