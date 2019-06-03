@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { IButtonDropdownProps } from './types';
+import { IButtonDropdownInheritedProps } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
 import { ClassNames } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
-export const ButtonDropdown: React.SFC<
-    IButtonDropdownProps
-    & React.ButtonHTMLAttributes<HTMLButtonElement>
-> = (props) => {
+export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
+(props) => {
     let {
         children,
         className,
