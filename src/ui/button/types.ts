@@ -22,9 +22,12 @@ export interface IButtonProps {
 }
 
 export type IConflictFreeHTMLAttributes<E> =
-    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>, 'color'>>;
+    Pick<React.ButtonHTMLAttributes<E>, Exclude<keyof React.ButtonHTMLAttributes<E>,
+        'color'
+        | 'type'
+    >>;
 
 export interface IButtonInheritedProps extends
     IButtonProps,
-    IConflictFreeHTMLAttributes<HTMLElement>
+    IConflictFreeHTMLAttributes<HTMLButtonElement>
 {}
