@@ -105,7 +105,7 @@ export const Select: React.SFC<ISelectInheritedProps> =
         }
     }
 
-    attributes.onFocus = (e) => {
+    attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         setTimeout(() => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
@@ -115,7 +115,7 @@ export const Select: React.SFC<ISelectInheritedProps> =
         if (onFocus) onFocus(e);
     }
 
-    attributes.onBlur = (e) => {
+    attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         if (isFocusedHook) {
             setIsFocusedHook(false);
             setIsOpenedHook(false);
@@ -123,7 +123,7 @@ export const Select: React.SFC<ISelectInheritedProps> =
         if (onBlur) onBlur(e);
     }
 
-    attributes.onClick = (e) => {
+    attributes.onClick = (e: React.MouseEvent<HTMLInputElement>) => {
         if (isFocusedHook) {
             if (!isOpenedHook) {
                 openDropdown();
