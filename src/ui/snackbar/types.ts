@@ -29,3 +29,10 @@ export interface ISnackbarProps extends
         | 'success'
         | 'timer';
 }
+
+export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
+
+export interface ISnackbarInheritedProps extends
+    ISnackbarProps,
+    IConflictFreeHTMLAttributes<HTMLElement>
+{}
