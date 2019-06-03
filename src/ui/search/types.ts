@@ -9,3 +9,14 @@ export interface ISearchProps extends
 {
     editable?: boolean;
 }
+
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,
+        'color'
+        | 'onChange'
+    >>;
+
+export interface ISearchInheritedProps extends
+    ISearchProps,
+    IConflictFreeHTMLAttributes<HTMLInputElement>
+{}
