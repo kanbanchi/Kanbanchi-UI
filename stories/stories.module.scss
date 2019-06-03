@@ -89,3 +89,27 @@ section {
     height: $google-spacing * 5;
     width: $google-spacing * 5;
 }
+
+.stories-tooltips {
+    display: flex;
+    justify-content: space-between;
+    align-items: space-between;
+    flex-wrap: wrap;
+    height: $google-spacing * 30;
+
+    & > * {
+        flex: 1 1 33%;
+    }
+
+    &__left {
+        text-align: left;
+    }
+
+    &__center {
+        text-align: center;
+    }
+
+    &__right {
+        text-align: right;
+    }
+}
