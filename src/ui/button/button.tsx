@@ -7,7 +7,7 @@ import '../../../src/ui/button/button.module.scss';
 export const Button: React.SFC<
     IButtonProps
     & React.ButtonHTMLAttributes<HTMLButtonElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -72,6 +72,7 @@ export const Button: React.SFC<
     return (
         <Tag
             className={className}
+            ref={ref}
             {...attributes}
         >
             {iconBefore}
@@ -84,7 +85,7 @@ export const Button: React.SFC<
             {iconAfter}
         </Tag>
     );
-};
+});
 
 Button.defaultProps = {
     color: null,

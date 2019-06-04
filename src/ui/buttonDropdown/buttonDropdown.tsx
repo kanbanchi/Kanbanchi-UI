@@ -8,7 +8,7 @@ import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 export const ButtonDropdown: React.SFC<
     IButtonDropdownProps
     & React.ButtonHTMLAttributes<HTMLButtonElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -26,7 +26,7 @@ export const ButtonDropdown: React.SFC<
     const [directionHook, setDirectionHook] = React.useState(directionVertical);
     const [isOpenedHook, setIsOpenedHook] = React.useState(false);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
-    const buttonRef = React.useRef(null);
+    const buttonRef = ref as any;
     const dropdownRef = React.useRef(null);
 
     className = ClassNames(
@@ -104,7 +104,7 @@ export const ButtonDropdown: React.SFC<
             </Dropdown>
         </div>
     );
-};
+});
 
 ButtonDropdown.defaultProps = {
     directionVertical: 'auto',
