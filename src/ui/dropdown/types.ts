@@ -14,3 +14,10 @@ export interface IDropdownProps extends
 {
     ref?: any;
 }
+
+export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
+
+export interface IDropdownInheritedProps extends
+    IDropdownProps,
+    IConflictFreeHTMLAttributes<HTMLElement>
+{}

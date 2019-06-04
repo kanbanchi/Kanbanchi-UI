@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { IButtonProps } from './types';
+import { IButtonInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Icon } from '../../ui';
 import '../../../src/ui/button/button.module.scss';
 
-export const Button: React.SFC<
-    IButtonProps
-    & React.ButtonHTMLAttributes<HTMLButtonElement>
-> = React.forwardRef((props, ref) => {
+export const Button: React.SFC<IButtonInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         children,
         className,

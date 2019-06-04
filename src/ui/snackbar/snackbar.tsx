@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ISnackbarProps, ISnackbarButtonProps, ISnackbarDefaultIcons } from './types';
+import { ISnackbarInheritedProps, ISnackbarButtonProps, ISnackbarDefaultIcons } from './types';
 import { ClassNames } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
 
-export const Snackbar: React.SFC<
-    ISnackbarProps
-    & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+export const Snackbar: React.SFC<ISnackbarInheritedProps> =
+(props) => {
 
     let {
         className,

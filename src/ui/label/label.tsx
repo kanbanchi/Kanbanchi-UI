@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { ILabelProps } from './types';
+import { ILabelInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/label/label.module.scss';
 
-export const Label: React.SFC<
-    ILabelProps
-    & React.LabelHTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const Label: React.SFC<ILabelInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         className,
         children,

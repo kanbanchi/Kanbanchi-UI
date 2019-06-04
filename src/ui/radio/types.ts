@@ -14,3 +14,10 @@ export interface IRadioProps extends
     IRadioStateProps,
     IRadioActiveProps
 {}
+
+export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
+
+export interface IRadioInheritedProps extends
+    IRadioProps,
+    IConflictFreeHTMLAttributes<HTMLElement>
+{}

@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { IRadioProps } from './types';
+import { IRadioInheritedProps } from './types';
 import { ClassNames, ClassList } from '../utils';
 import {Label} from '../../ui';
 import '../../../src/ui/radio/radio.module.scss';
 
-export const Radio: React.SFC<
-    IRadioProps
-    & React.HTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const Radio: React.SFC<IRadioInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         active,
         onChange,

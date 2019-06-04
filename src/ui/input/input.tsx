@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { IInputProps } from './types';
+import { IInputInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import * as autosizeLibray from './autosize';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
-export const Input: React.SFC<
-    IInputProps
-    & React.InputHTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const Input: React.SFC<IInputInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         autosize,
         className,
@@ -59,7 +57,7 @@ export const Input: React.SFC<
         if (onChange) onChange(e);
     };
 
-    attributes.onKeyDown = (e) => {
+    attributes.onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e && e.which === 13) {
             if (!autosize) e.preventDefault();
             if (onEnter) onEnter(e);
@@ -71,7 +69,7 @@ export const Input: React.SFC<
      * Проблема: при клике на иконку инпут получает одновременно onBlur и onFocus
      */
 
-    attributes.onBlur = (e) => {
+    attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         e.persist();
         setTimeoutHook(setTimeout(() => {
             if (isFocusedHook) {
@@ -81,7 +79,7 @@ export const Input: React.SFC<
         }, 200));
     }
 
-    attributes.onFocus = (e) => {
+    attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         clearTimeout(timeoutHook);
         setTimeoutHook(setTimeout(() => {
             if (!isFocusedHook) {

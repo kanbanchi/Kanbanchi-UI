@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { ISelectProps, ISelectActiveProps } from './types';
+import { ISelectInheritedProps, ISelectActiveProps } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
 import { ClassNames } from '../utils';
 import { Input, Dropdown } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 
-export const Select: React.SFC<
-    ISelectProps
-    & React.HTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const Select: React.SFC<ISelectInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         active,
         children,
@@ -107,7 +105,7 @@ export const Select: React.SFC<
         }
     }
 
-    attributes.onFocus = (e) => {
+    attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         setTimeout(() => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
@@ -117,7 +115,7 @@ export const Select: React.SFC<
         if (onFocus) onFocus(e);
     }
 
-    attributes.onBlur = (e) => {
+    attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         if (isFocusedHook) {
             setIsFocusedHook(false);
             setIsOpenedHook(false);
@@ -125,7 +123,7 @@ export const Select: React.SFC<
         if (onBlur) onBlur(e);
     }
 
-    attributes.onClick = (e) => {
+    attributes.onClick = (e: React.MouseEvent<HTMLInputElement>) => {
         if (isFocusedHook) {
             if (!isOpenedHook) {
                 openDropdown();

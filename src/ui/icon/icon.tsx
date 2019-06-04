@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { IIconProps } from './types';
+import { IIconInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/icon/icon.module.scss';
 
-export const Icon: React.SFC<
-    IIconProps
-    & React.ImgHTMLAttributes<HTMLImageElement>
-> = React.forwardRef((props, ref) => {
+export const Icon: React.SFC<IIconInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         className,
         size,

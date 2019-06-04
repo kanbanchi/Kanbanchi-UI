@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ILoaderBlockProps } from './types';
+import { ILoaderBlockInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Loader } from '../../ui';
 import '../../../src/ui/loaderBlock/loaderBlock.module.scss';
 
-export const LoaderBlock: React.SFC<
-    ILoaderBlockProps
-    & React.HTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const LoaderBlock: React.SFC<ILoaderBlockInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         className,
         ...attributes

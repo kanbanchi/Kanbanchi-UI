@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { IDividerProps } from './types';
+import { IDividerInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/divider/divider.module.scss';
 
-export const Divider: React.SFC<
-    IDividerProps
-    & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+export const Divider: React.SFC<IDividerInheritedProps> =
+(props) => {
     let {
         className,
         ...attributes

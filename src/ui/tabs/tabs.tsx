@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { ITabsProps } from './types';
+import { ITabsInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/tabs/tabs.module.scss';
 
-export const Tabs: React.SFC<
-    ITabsProps
-    & React.HTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const Tabs: React.SFC<ITabsInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         active,
         children,

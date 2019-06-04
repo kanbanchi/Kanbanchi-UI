@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ISelectListProps } from './types';
+import { ISelectListInheritedProps } from './types';
 import { ClassNames, ClassList } from '../utils';
 import { Divider } from '../../ui';
 import '../../../src/ui/selectList/selectList.module.scss';
 
-export const SelectList: React.SFC<
-    ISelectListProps
-    & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+export const SelectList: React.SFC<ISelectListInheritedProps> =
+(props) => {
     let {
         active,
         children,

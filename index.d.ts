@@ -1,59 +1,59 @@
-import {IButtonProps} from './src/ui/button/types';
-import {IButtonDropdownProps} from './src/ui/buttonDropdown/types';
-import {IButtonsGroupProps} from './src/ui/buttonsGroup/types';
-import {IButtonsSegmentedProps} from './src/ui/buttonsSegmented/types';
+import {IButtonInheritedProps} from './src/ui/button/types';
+import {IButtonDropdownInheritedProps} from './src/ui/buttonDropdown/types';
+import {IButtonsGroupInheritedProps} from './src/ui/buttonsGroup/types';
+import {IButtonsSegmentedInheritedProps} from './src/ui/buttonsSegmented/types';
 
-import {ICheckboxProps} from './src/ui/checkbox/types';
+import {ICheckboxInheritedProps} from './src/ui/checkbox/types';
 
-import {IDatepickerProps} from './src/ui/datepicker/types';
-import {IDividerProps} from './src/ui/divider/types';
-import {IDropdownProps} from './src/ui/dropdown/types';
+import {IDatePickerInheritedProps} from './src/ui/datepicker/types';
+import {IDividerInheritedProps} from './src/ui/divider/types';
+import {IDropdownInheritedProps} from './src/ui/dropdown/types';
 
-import {IIconProps} from './src/ui/icon/types';
-import {IInputProps} from './src/ui/input/types';
+import {IIconInheritedProps} from './src/ui/icon/types';
+import {IInputInheritedProps} from './src/ui/input/types';
 
-import {ILabelProps} from './src/ui/label/types';
-import {ILoaderProps} from './src/ui/loader/types';
-import {ILoaderBlockProps} from './src/ui/loaderBlock/types';
+import {ILabelInheritedProps} from './src/ui/label/types';
+import {ILoaderInheritedProps} from './src/ui/loader/types';
+import {ILoaderBlockInheritedProps} from './src/ui/loaderBlock/types';
 
-import {IRadioProps} from './src/ui/radio/types';
+import {IRadioInheritedProps} from './src/ui/radio/types';
 
-import {ISearchProps} from './src/ui/search/types';
-import {ISelectProps} from './src/ui/select/types';
-import {ISelectListProps} from './src/ui/selectList/types';
-import {ISelectListItemProps} from './src/ui/selectListItem/types';
-import {ISnackbarProps} from './src/ui/snackbar/types';
-import {ISwitchProps} from './src/ui/switch/types';
+import {ISearchInheritedProps} from './src/ui/search/types';
+import {ISelectInheritedProps} from './src/ui/select/types';
+import {ISelectListInheritedProps} from './src/ui/selectList/types';
+import {ISelectListItemInheritedProps} from './src/ui/selectListItem/types';
+import {ISnackbarInheritedProps} from './src/ui/snackbar/types';
+import {ISwitchInheritedProps} from './src/ui/switch/types';
 
-import {ITabsProps} from './src/ui/tabs/types';
+import {ITabsInheritedProps} from './src/ui/tabs/types';
 import {ITooltipInheritedProps} from './src/ui/tooltip/types';
 
-export declare const Button: React.SFC<IButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>>;
-export declare const ButtonDropdown: React.SFC<IButtonDropdownProps & React.ButtonHTMLAttributes<HTMLButtonElement>>;
-export declare const ButtonsGroup: React.SFC<IButtonsGroupProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ButtonsSegmented: React.SFC<IButtonsSegmentedProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Button: React.SFC<IButtonInheritedProps>;
+export declare const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps>;
+export declare const ButtonsGroup: React.SFC<IButtonsGroupInheritedProps>;
+export declare const ButtonsSegmented: React.SFC<IButtonsSegmentedInheritedProps>;
 
-export declare const Checkbox: React.SFC<ICheckboxProps & React.InputHTMLAttributes<HTMLElement>>;
+export declare const Checkbox: React.SFC<ICheckboxInheritedProps>;
 
-export declare const Datepicker: React.SFC<IDatepickerProps & React.HTMLAttributes<HTMLElement>>;
-export declare const Divider: React.SFC<IDividerProps & React.HTMLAttributes<HTMLElement>>;
-export declare const Dropdown: React.SFC<IDropdownProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Datepicker: React.SFC<IDatePickerInheritedProps>;
+export declare const Divider: React.SFC<IDividerInheritedProps>;
+export declare const Dropdown: React.SFC<IDropdownInheritedProps>;
 
-export declare const Icon: React.SFC<IIconProps & React.ImgHTMLAttributes<HTMLImageElement>>;
-export declare const Input: React.SFC<IInputProps & React.InputHTMLAttributes<HTMLElement>>;
+export declare const Icon: React.SFC<IIconInheritedProps>;
+export declare const Input: React.SFC<IInputInheritedProps>;
 
-export declare const Label: React.SFC<ILabelProps & React.LabelHTMLAttributes<HTMLElement>>;
-export declare const Loader: React.SFC<ILoaderProps & React.HTMLAttributes<HTMLElement>>;
-export declare const LoaderBlock: React.SFC<ILoaderBlockProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Label: React.SFC<ILabelInheritedProps>;
+export declare const Loader: React.SFC<ILoaderInheritedProps>;
+export declare const LoaderBlock: React.SFC<ILoaderBlockInheritedProps>;
 
-export declare const Radio: React.SFC<IRadioProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Radio: React.SFC<IRadioInheritedProps>;
 
-export declare const ISearchProps: React.SFC<ISearchProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISelectProps: React.SFC<ISelectProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISelectListProps: React.SFC<ISelectListProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISelectListItemProps: React.SFC<ISelectListItemProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISnackbarProps: React.SFC<ISnackbarProps & React.HTMLAttributes<HTMLElement>>;
-export declare const ISwitchProps: React.SFC<ISwitchProps & React.InputHTMLAttributes<HTMLElement>>;
+export declare const Search: React.SFC<ISearchInheritedProps>;
+export declare const Select: React.SFC<ISelectInheritedProps>;
+export declare const SelectList: React.SFC<ISelectListInheritedProps>;
+export declare const SelectListItem: React.SFC<ISelectListItemInheritedProps>;
+export declare const Snackbar: React.SFC<ISnackbarInheritedProps>;
+export declare const Switch: React.SFC<ISwitchInheritedProps>;
 
-export declare const ITabsProps: React.SFC<ITabsProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Tabs: React.SFC<ITabsInheritedProps>;
 export declare const Tooltip: React.SFC<ITooltipInheritedProps>;

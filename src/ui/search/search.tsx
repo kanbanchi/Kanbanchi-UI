@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ISearchProps } from './types';
+import { ISearchInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Select } from '../../ui';
 import '../../../src/ui/search/search.module.scss';
 
-export const Search: React.SFC<
-    ISearchProps
-    & React.HTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const Search: React.SFC<ISearchInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
