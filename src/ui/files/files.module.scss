@@ -1,0 +1,50 @@
+@import '../../assets/sass/index.scss';
+.kui-files-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: $google-spacing * 5;
+    margin-top: $google-spacing;
+    padding: $google-spacing;
+    font-size: $milli-size;
+    border-radius: $base-radius;
+    border: 1px solid calc-color(fade, $color-base, 15);
+    background: $color-white;
+
+    &:hover {
+        box-shadow: $shadow-hover;
+        border-color: transparent;
+    }
+
+    &__col {
+        display: flex;
+        align-items: center;
+        
+        &--icon {
+            flex: 0 0 $google-spacing * 3;
+            color: calc-color(fade, $color-base, 30);
+        }
+        &--title {
+            flex: 1 1 100%;
+            max-width: calc(100% - #{$google-spacing * 14});
+            padding-right: $google-spacing;
+            color: $color-base;
+
+            .kui-files-item--default & {
+                max-width: calc(100% - #{$google-spacing * 3});
+            }
+        }
+        &--actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: $google-spacing * 11;
+            text-align: right;
+        }
+    }
+
+    &__title {
+        @extend %text-ellipsis;
+    }
+}

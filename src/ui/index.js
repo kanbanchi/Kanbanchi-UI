@@ -9,6 +9,8 @@ export {Datepicker} from './datepicker/datepicker';
 export {Divider} from './divider/divider';
 export {Dropdown} from './dropdown/dropdown';
 
+export {Files} from './files/files';
+
 export {Icon} from './icon/icon';
 export {Input} from './input/input';
 

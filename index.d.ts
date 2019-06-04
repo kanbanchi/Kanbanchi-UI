@@ -9,6 +9,8 @@ import {IDatePickerInheritedProps} from './src/ui/datepicker/types';
 import {IDividerInheritedProps} from './src/ui/divider/types';
 import {IDropdownInheritedProps} from './src/ui/dropdown/types';
 
+import {IFilesInheritedProps} from './src/ui/files/types';
+
 import {IIconInheritedProps} from './src/ui/icon/types';
 import {IInputInheritedProps} from './src/ui/input/types';
 
@@ -37,6 +39,8 @@ export declare const Checkbox: React.SFC<ICheckboxInheritedProps>;
 export declare const Datepicker: React.SFC<IDatePickerInheritedProps>;
 export declare const Divider: React.SFC<IDividerInheritedProps>;
 export declare const Dropdown: React.SFC<IDropdownInheritedProps>;
+
+export declare const Files: React.SFC<IFilesInheritedProps>;
 
 export declare const Icon: React.SFC<IIconInheritedProps>;
 export declare const Input: React.SFC<IInputInheritedProps>;
