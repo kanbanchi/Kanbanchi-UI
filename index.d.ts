@@ -26,6 +26,7 @@ import {ISnackbarProps} from './src/ui/snackbar/types';
 import {ISwitchProps} from './src/ui/switch/types';
 
 import {ITabsProps} from './src/ui/tabs/types';
+import {ITooltipInheritedProps} from './src/ui/tooltip/types';
 
 export declare const Button: React.SFC<IButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>>;
 export declare const ButtonDropdown: React.SFC<IButtonDropdownProps & React.ButtonHTMLAttributes<HTMLButtonElement>>;
@@ -55,3 +56,4 @@ export declare const ISnackbarProps: React.SFC<ISnackbarProps & React.HTMLAttrib
 export declare const ISwitchProps: React.SFC<ISwitchProps & React.InputHTMLAttributes<HTMLElement>>;
 
 export declare const ITabsProps: React.SFC<ITabsProps & React.HTMLAttributes<HTMLElement>>;
+export declare const Tooltip: React.SFC<ITooltipInheritedProps>;
