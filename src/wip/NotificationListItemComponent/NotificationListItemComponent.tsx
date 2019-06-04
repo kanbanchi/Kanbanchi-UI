@@ -1,23 +1,23 @@
 import * as React from 'react';
 import {INotificationListItemProps} from './types';
-import {capitalize, pluralize} from './behaviour/NotificationListItemComponentHelper';
+import {capitalize, singularize} from './behaviour/NotificationListItemComponentHelper';
 import {Button, Icon, Input, Select, SelectList} from '../../ui';
 import './_NotificationListItemComponent.scss';
+import {ITimeUnits as units} from './types'
 
-const units = ['MINUTE', 'HOUR', 'DAY'];
-const defaultUnit = 'MINUTE';
-const defaultValue = 5;
+const defaultUnit = 'MINUTES';
+const defaultInterval = 5;
 
-export const notificationListItemMockProps: INotificationListItemProps = {
-    id: defaultValue,
-    units,
-    value: defaultValue,
-    orderNumber: defaultValue,
-    onValueChange: (value) => {
+export const notificationListItemMockProps = {
+    id: 0,
+    unit: defaultUnit,
+    interval: defaultInterval,
+    orderNumber: 0,
+    onValueChange: (value: any) => {
         console.log(Number(value));
         return Number(value)
     },
-    onUnitsChange: (unit) => {
+    onUnitsChange: (unit: any) => {
         console.log(unit);
         return unit
     },
@@ -29,22 +29,22 @@ export const notificationListItemMockProps: INotificationListItemProps = {
 
 export const NotificationListItemComponent: React.SFC<INotificationListItemProps> =
     (props) => {
-        const {value, onValueChange, onUnitsChange, onTrash} = props;
-        let currentValue = defaultValue;
-        let currentUnit = units.indexOf(defaultUnit);
+        const {interval, onValueChange, onUnitsChange, onTrash} = props;
+        let currentInterval = defaultInterval;
+        let currentUnitIndex = Object.keys(units).indexOf(defaultUnit);
 
         const onUnitsSelectChange = (e: any) => {
             if (e && e.item && e.item.value) {
                 const unit = e.item.value;
                 onUnitsChange(unit);
-                currentUnit = units.indexOf(unit);
+                currentUnitIndex = Object.keys(units).indexOf(unit);
             }
         };
 
         const onValueInputChange = (e: any) => {
             if (e && e.target && e.target.value) {
-                currentValue = e.target.value;
-                onValueChange(currentValue)
+                currentInterval = e.target.value;
+                onValueChange(currentInterval)
             }
         };
 
@@ -55,21 +55,21 @@ export const NotificationListItemComponent: React.SFC<INotificationListItemProps
                     <Input
                         className="value-input"
                         type="number"
-                        value={currentValue.toString()}
+                        value={currentInterval.toString()}
                         onChange={(e: any) => onValueInputChange(e)}
                     />
                 </span>
                 <span className="units-select--container">
                     <Select className="units-select"
                             variant="arrow"
-                            active={currentUnit}
+                            active={currentUnitIndex}
                             onChange={(e: any) => onUnitsSelectChange(e)}>
                         <SelectList className="units-select--list">
                             {
-                                units.map(unit => {
+                                Object.keys(units).map(unit => {
                                     return (
                                         <li className="units-select--item" value={unit}>
-                                            {capitalize(pluralize(value, unit))}
+                                            {capitalize(singularize(interval, unit))}
                                         </li>
                                     )
                                 })

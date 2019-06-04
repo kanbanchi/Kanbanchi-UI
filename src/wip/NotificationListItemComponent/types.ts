@@ -1,17 +1,25 @@
+//taken from Kanbanchi: src/main/war/js/app/types/model.ts
+
+export enum ITimeUnits {
+    MINUTES = 'MINUTES',
+    HOURS = 'HOURS',
+    DAYS = 'DAYS',
+}
+
 export interface INotificationListItemOwnProps {
     id: number;
 }
 
 export interface INotificationListItemStateProps {
-    value?: number;
+    interval?: number;
     unit: string
-    units: string[];
+    units: ITimeUnits;
     orderNumber: number
 }
 
 export interface INotificationListItemDispatchProps {
-    onValueChange: (value: number) => number;
-    onUnitsChange: (units: string) => string;
+    onValueChange: (interval: number) => number;
+    onUnitsChange: (unit: string) => string;
     onTrash: () => void;
 }
 
