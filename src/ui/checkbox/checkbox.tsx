@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ICheckboxProps } from './types';
+import { ICheckboxInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/checkbox/checkbox.module.scss';
 
-export const Checkbox: React.SFC<
-    ICheckboxProps
-    & React.InputHTMLAttributes<HTMLElement>
-> = (props) => {
+export const Checkbox: React.SFC<ICheckboxInheritedProps> =
+(props) => {
     let {
         children,
         className,
@@ -29,7 +27,7 @@ export const Checkbox: React.SFC<
 
     attributes.type = 'checkbox';
     attributes.className = 'kui-checkbox__input';
-    attributes.onChange = (e) => {
+    attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(!isChecked);
         if (onChange) onChange(e);
     };

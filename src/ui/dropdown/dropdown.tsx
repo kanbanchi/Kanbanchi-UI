@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { IDropdownProps } from './types';
+import { IDropdownInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/dropdown/dropdown.module.scss';
 
-export const Dropdown: React.SFC<
-    IDropdownProps
-    & React.HTMLAttributes<HTMLElement>
-> = React.forwardRef((props, ref) => {
+export const Dropdown: React.SFC<IDropdownInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         children,
         className,

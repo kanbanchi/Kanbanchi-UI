@@ -12,3 +12,14 @@ export interface IButtonsSegmentedProps extends
 {
     color?: 'black';
 }
+
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
+        'color'
+        | 'onChange'
+    >>;
+
+export interface IButtonsSegmentedInheritedProps extends
+    IButtonsSegmentedProps,
+    IConflictFreeHTMLAttributes<HTMLElement>
+{}

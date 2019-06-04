@@ -20,7 +20,10 @@ export interface IDatepickerProps extends
 }
 
 export type IConflictFreeHTMLAttributes<E> =
-    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>, 'color' | 'onChange'>>;
+    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
+        'color'
+        | 'onChange'
+    >>;
 
 export interface IDatePickerInheritedProps extends
     IDatepickerProps,

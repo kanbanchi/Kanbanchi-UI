@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { ITabsProps } from './types';
+import { ITabsInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/tabs/tabs.module.scss';
 
-export const Tabs: React.SFC<
-    ITabsProps
-    & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+export const Tabs: React.SFC<ITabsInheritedProps> =
+(props) => {
     let {
         active,
         children,

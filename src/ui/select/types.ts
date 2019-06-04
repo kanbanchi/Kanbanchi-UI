@@ -25,3 +25,14 @@ export interface ISelectProps extends
 {
     editable?: boolean;
 }
+
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,
+        'color'
+        | 'onChange'
+    >>;
+
+export interface ISelectInheritedProps extends
+    ISelectProps,
+    IConflictFreeHTMLAttributes<HTMLInputElement>
+{}

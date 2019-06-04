@@ -31,3 +31,15 @@ export interface IInputProps extends
 {
     ref?: any;
 }
+
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,
+        'color'
+        | 'value'
+        | 'onChange'
+    >>;
+
+export interface IInputInheritedProps extends
+    IInputProps,
+    IConflictFreeHTMLAttributes<HTMLInputElement>
+{}

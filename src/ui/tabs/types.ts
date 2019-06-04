@@ -12,3 +12,13 @@ export interface ITabsProps extends
 {
     size?: 'large';
 }
+
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
+        'onChange'
+    >>;
+
+export interface ITabsInheritedProps extends
+    ITabsProps,
+    IConflictFreeHTMLAttributes<HTMLElement>
+{}

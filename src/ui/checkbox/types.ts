@@ -12,3 +12,14 @@ export interface ICheckboxProps extends
 {
     color?: 'black';
 }
+
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,
+        'color'
+        | 'onChange'
+    >>;
+
+export interface ICheckboxInheritedProps extends
+    ICheckboxProps,
+    IConflictFreeHTMLAttributes<HTMLInputElement>
+{}
