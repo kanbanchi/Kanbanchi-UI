@@ -6,7 +6,7 @@ import '../../../src/ui/tabs/tabs.module.scss';
 export const Tabs: React.SFC<
     ITabsProps
     & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         active,
         children,
@@ -42,6 +42,7 @@ export const Tabs: React.SFC<
     return (
         <div
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             <div className="kui-tabs__scroll">
@@ -49,7 +50,7 @@ export const Tabs: React.SFC<
             </div>
         </div>
     );
-};
+});
 
 Tabs.defaultProps = {
     active: 0,

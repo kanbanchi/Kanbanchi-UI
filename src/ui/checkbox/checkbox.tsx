@@ -7,7 +7,7 @@ import '../../../src/ui/checkbox/checkbox.module.scss';
 export const Checkbox: React.SFC<
     ICheckboxProps
     & React.InputHTMLAttributes<HTMLElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -35,7 +35,10 @@ export const Checkbox: React.SFC<
     };
 
     return (
-        <Label className={className}>
+        <Label
+            className={className}
+            ref={ref as any}
+        >
             <input checked={isChecked} {...attributes}/>
             <span className="kui-checkbox__label">
                 {children}
@@ -43,7 +46,7 @@ export const Checkbox: React.SFC<
             </span>
         </Label>
     );
-}
+});
 
 Checkbox.defaultProps = {
     checked: false,

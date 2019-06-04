@@ -24,4 +24,5 @@ export interface ISelectProps extends
     IInputPublicProps
 {
     editable?: boolean;
+    ref?: any;
 }

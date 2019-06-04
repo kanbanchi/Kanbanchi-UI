@@ -6,7 +6,7 @@ import '../../../src/ui/buttonsSegmented/buttonsSegmented.module.scss';
 export const ButtonsSegmented: React.SFC<
     IButtonsSegmentedProps
     & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         active,
         children,
@@ -42,12 +42,13 @@ export const ButtonsSegmented: React.SFC<
     return (
         <div
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             {buttonHocs}
         </div>
     );
-};
+});
 
 ButtonsSegmented.defaultProps = {
     active: 0,

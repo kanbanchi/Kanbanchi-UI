@@ -6,7 +6,7 @@ import '../../../src/ui/label/label.module.scss';
 export const Label: React.SFC<
     ILabelProps
     & React.LabelHTMLAttributes<HTMLElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         className,
         children,
@@ -21,11 +21,12 @@ export const Label: React.SFC<
     return (
         <label
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             {children}
         </label>
     );
-}
+});
 
 Label.displayName = 'Label';

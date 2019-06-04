@@ -14,7 +14,7 @@ registerLocale('en-GB', enGB); // Weeks start on Monday
 export const Datepicker: React.SFC<
     IDatepickerProps
     & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         className,
         color,
@@ -37,6 +37,7 @@ export const Datepicker: React.SFC<
         color,
         isClearable,
         label,
+        ref,
         variant
     };
 
@@ -46,7 +47,9 @@ export const Datepicker: React.SFC<
     }
 
     return (
-        <div className={className}>
+        <div
+            className={className}
+        >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
                 locale="en-GB"
@@ -57,7 +60,7 @@ export const Datepicker: React.SFC<
             />
         </div>
     );
-}
+});
 
 Datepicker.defaultProps = {
     color: null,

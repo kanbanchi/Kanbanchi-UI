@@ -7,7 +7,7 @@ import '../../../src/ui/search/search.module.scss';
 export const Search: React.SFC<
     ISearchProps
     & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -22,12 +22,13 @@ export const Search: React.SFC<
     return (
         <Select
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             {children}
         </Select>
     );
-};
+});
 
 Search.defaultProps = {
     editable: true,

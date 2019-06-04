@@ -6,7 +6,7 @@ import '../../../src/ui/icon/icon.module.scss';
 export const Icon: React.SFC<
     IIconProps
     & React.ImgHTMLAttributes<HTMLImageElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         className,
         size,
@@ -34,11 +34,15 @@ export const Icon: React.SFC<
     );
 
     return (
-        <span className={classNames} {...attributes} >
+        <span
+            className={classNames}
+            ref={ref as any}
+            {...attributes}
+        >
             <Svg className="kui-icon__svg"/>
         </span>
     );
-}
+});
 
 Icon.defaultProps = {
     xlink: '',

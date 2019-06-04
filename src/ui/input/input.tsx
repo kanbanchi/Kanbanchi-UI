@@ -174,11 +174,17 @@ export const Input: React.SFC<
     React.useImperativeHandle(ref, () => ({
         setIsFilled(value: string) {
             setIsFilled(!!value);
+        },
+        getBoundingClientRect() {
+            return textarea.current.getBoundingClientRect();
         }
     }));
 
     return (
-        <Label className={className}>
+        <Label
+            className={className}
+            ref={ref as any}
+        >
             {labelItem}
             {inputBefore}
             <Tag

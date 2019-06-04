@@ -8,7 +8,7 @@ import '../../../src/ui/select/select.module.scss';
 export const Select: React.SFC<
     ISelectProps
     & React.HTMLAttributes<HTMLElement>
-> = (props) => {
+> = React.forwardRef((props, ref) => {
     let {
         active,
         children,
@@ -43,7 +43,7 @@ export const Select: React.SFC<
     const [itemsRefsHook, setItemsRefsHook] = React.useState([]); // list items for auto scroll in dropdown
 
     const dropdownRef = React.useRef(null);
-    const inputRef = React.useRef(null);
+    const inputRef = ref as any;
     const selectRef = React.useRef(null);
 
     className = ClassNames(
@@ -244,7 +244,7 @@ export const Select: React.SFC<
             </Dropdown>
         </div>
     );
-};
+});
 
 Select.defaultProps = {
     active: null,
