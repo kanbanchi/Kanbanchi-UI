@@ -10,3 +10,10 @@ export interface ITooltipProps {
         | 'down-right';
     value: string;
 }
+
+export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
+
+export interface ITooltipInheritedProps extends
+    ITooltipProps,
+    IConflictFreeHTMLAttributes<HTMLElement>
+{}

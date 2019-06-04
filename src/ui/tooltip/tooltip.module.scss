@@ -2,11 +2,12 @@
 
 .kui-tooltip {
     position: absolute;
-    z-index: $z-modal;
+    z-index: $z-tooltip;
     width: max-content; // only need if parent with relative position
-    min-height: $google-spacing * 5;
-    padding: $google-spacing $google-spacing * 2;
+    min-height: $google-spacing * 4;
+    padding: $google-spacing / 2 $google-spacing * 2;
     color: $color-white;
+    font-size: $milli-size;
     border-radius: $google-spacing * 2.5;
     background: $color-base;
     visibility: hidden;
@@ -61,7 +62,7 @@
 
 @keyframes tooltip_down_center_show {
     0% {
-        z-index: $z-modal + 5;
+        z-index: $z-tooltip + 5;
         transform: translateX(-50%) translateY($google-spacing * 2);
     }
     100% {
@@ -70,10 +71,12 @@
 }
 @keyframes tooltip_down_center_hide {
     0% {
+        opacity: 1;
         visibility: visible;
         transform: translateX(-50%) translateY($google-spacing);
     }
     100% {
+        opacity: 0;
         visibility: hidden;
         transform: translateX(-50%) translateY($google-spacing * 2);
     }
@@ -81,7 +84,7 @@
 
 @keyframes tooltip_up_center_show {
     0% {
-        z-index: $z-modal + 5;
+        z-index: $z-tooltip + 5;
         transform: translateX(-50%) translateY(-$google-spacing * 2);
     }
     100% {
@@ -90,10 +93,12 @@
 }
 @keyframes tooltip_up_center_hide {
     0% {
+        opacity: 1;
         visibility: visible;
         transform: translateX(-50%) translateY(-$google-spacing);
     }
     100% {
+        opacity: 0;
         visibility: hidden;
         transform: translateX(-50%) translateY(-$google-spacing * 2);
     }
@@ -101,7 +106,7 @@
 
 @keyframes tooltip_left_show {
     0% {
-        z-index: $z-modal + 5;
+        z-index: $z-tooltip + 5;
         transform: translateX(-$google-spacing * 2) translateY(-50%);
     }
     100% {
@@ -110,10 +115,12 @@
 }
 @keyframes tooltip_left_hide {
     0% {
+        opacity: 1;
         visibility: visible;
         transform: translateX(-$google-spacing) translateY(-50%);
     }
     100% {
+        opacity: 0;
         visibility: hidden;
         transform: translateX(-$google-spacing * 2) translateY(-50%);
     }
@@ -121,7 +128,7 @@
 
 @keyframes tooltip_right_show {
     0% {
-        z-index: $z-modal + 5;
+        z-index: $z-tooltip + 5;
         transform: translateX($google-spacing * 2) translateY(-50%);
     }
     100% {
@@ -130,10 +137,12 @@
 }
 @keyframes tooltip_right_hide {
     0% {
+        opacity: 1;
         visibility: visible;
         transform: translateX($google-spacing) translateY(-50%);
     }
     100% {
+        opacity: 0;
         visibility: hidden;
         transform: translateX($google-spacing * 2) translateY(-50%);
     }
@@ -141,7 +150,7 @@
 
 @keyframes tooltip_down_show {
     0% {
-        z-index: $z-modal + 5;
+        z-index: $z-tooltip + 5;
         transform: translateY($google-spacing * 2);
     }
     100% {
@@ -150,10 +159,12 @@
 }
 @keyframes tooltip_down_hide {
     0% {
+        opacity: 1;
         visibility: visible;
         transform: translateY($google-spacing);
     }
     100% {
+        opacity: 0;
         visibility: hidden;
         transform: translateY($google-spacing * 2);
     }
@@ -161,7 +172,7 @@
 
 @keyframes tooltip_up_show {
     0% {
-        z-index: $z-modal + 5;
+        z-index: $z-tooltip + 5;
         transform: translateY(-$google-spacing * 2);
     }
     100% {
@@ -170,10 +181,12 @@
 }
 @keyframes tooltip_up_hide {
     0% {
+        opacity: 1;
         visibility: visible;
         transform: translateY(-$google-spacing);
     }
     100% {
+        opacity: 0;
         visibility: hidden;
         transform: translateY(-$google-spacing * 2);
     }
