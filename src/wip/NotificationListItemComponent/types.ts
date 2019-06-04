@@ -18,8 +18,8 @@ export interface INotificationListItemStateProps {
 }
 
 export interface INotificationListItemDispatchProps {
-    onValueChange: (interval: number) => number;
-    onUnitsChange: (unit: string) => string;
+    onValueChange: (interval: number) => void;
+    onUnitsChange: (unit: string) => void;
     onTrash: () => void;
 }
 
