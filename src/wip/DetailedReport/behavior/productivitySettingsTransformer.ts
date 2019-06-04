@@ -71,7 +71,7 @@ export class ProductivitySettingsTransformer {
         tooltipData: ITooltipData[]
         ) {
         const humanReadableDate = formatDateForTooltip(date);
-        const tooltipBody = tooltipData.map((data) => ( `<span className="tooltip">${data.name} - ${data.done} - ${data.overdue}</span> ` ));
+        const tooltipBody = tooltipData.map((data) => ( `<span className="tooltip">${data.name} - ${data.done} - ${data.overdue}</span> ` )).join('\n');
         return (`
         <div className="productivity-detailed-tooltip__container">
             <span>${humanReadableDate}</span>
@@ -146,7 +146,9 @@ export class ProductivitySettingsTransformer {
     calculateTooltips(chartData: any[]) {
         const userNames = this.selectedUsers.map((user) => user.fullName);
 
-        const tooltips = chartData.reduce((accum, chartDataRow, index, collection) => {
+
+        // This datesInterval reduce
+        const tooltips = chartData.reduce((accum, chartDataRow, index) => {
             if (index === 0) {
                 return [ ...accum ];
             } else {
