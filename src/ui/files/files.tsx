@@ -4,6 +4,20 @@ import { ClassNames } from '../utils';
 import { Button } from '..';
 import '../../../src/ui/files/files.module.scss';
 
+const DefaultFileView: React.SFC<any> = (props: any) => (
+    <div className={'kui-files-item'}>
+        <span className="kui-files-item__col kui-files-item__col--icon">
+            <img src={props.file.iconUrl} />
+        </span>
+        <span className="kui-files-item__col kui-files-item__col--title">
+            <span className="kui-files-item__title">
+                {props.file.title}
+            </span>
+        </span>
+        <span className="kui-files-item__col kui-files-item__col--actions" />
+    </div>
+);
+
 export const Files: React.SFC<IFilesInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
@@ -11,48 +25,14 @@ React.forwardRef((props, ref) => {
         className,
         disabled,
         files,
-        view,
+        FileView,
         ...attributes
     } = props;
 
-    className = ClassNames(
-        'kui-files',
-        className
-    );
-
-    const defaultView = (props: any) => (
-        <div
-            className={'kui-files-item'}
-        >
-            <span className="
-                kui-files-item__col
-                kui-files-item__col--icon
-            ">
-                <img src={props.file.iconUrl}/>
-            </span>
-            <span className="
-                kui-files-item__col
-                kui-files-item__col--title
-            ">
-                <span className="kui-files-item__title">
-                    {props.file.title}
-                </span>
-            </span>
-            <span className="
-                kui-files-item__col
-                kui-files-item__col--actions
-            ">
-            </span>
-        </div>
-    );
-
-    const View = view || defaultView;
+    className = ClassNames('kui-files', className);
 
     const fileList = files.map((file, index) => (
-        <View
-            file={file}
-            key={index}
-        />
+        <FileView file={file} key={index} />
     ));
 
     return (
@@ -75,7 +55,7 @@ React.forwardRef((props, ref) => {
 Files.defaultProps = {
     disabled: false,
     files: [],
-    view: null
+    FileView: DefaultFileView
 };
 
 Files.displayName = 'Files';

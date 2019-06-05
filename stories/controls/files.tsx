@@ -9,27 +9,16 @@ const Story = () => {
     ];
 
     const cardView = (props: any) => (
-        <div
-            className={'kui-files-item'}
-        >
-            <span className="
-                kui-files-item__col
-                kui-files-item__col--icon
-            ">
+        <div className='kui-files-item'>
+            <span className="kui-files-item__col kui-files-item__col--icon">
                 <img src={props.file.iconUrl}/>
             </span>
-            <span className="
-                kui-files-item__col
-                kui-files-item__col--title
-            ">
+            <span className="kui-files-item__col kui-files-item__col--title">
                 <span className="kui-files-item__title">
                     {props.file.title}
                 </span>
             </span>
-            <span className="
-                kui-files-item__col
-                kui-files-item__col--actions
-            ">
+            <span className="kui-files-item__col kui-files-item__col--actions">
                 <ButtonsGroup style={{ flexWrap: 'nowrap' }}>
                     <Button variant="icon"><Icon xlink="pin" size={24} /></Button>
                     <Button variant="icon"><Icon xlink="cloud-download" size={24} /></Button>
@@ -41,24 +30,24 @@ const Story = () => {
 
     return (
         <div className="page">
-             <section className="section-form-min">
-                <h2>Files</h2>
+            <section className="section-form-min">
+            <h2>Files</h2>
 
-                <Files files={files}>
-                    Attach files
-                </Files>
+            <Files files={files}>
+                Attach files
+            </Files>
 
-                <br/ ><br/ ><br/ >
+            <br /><br /><br />
 
-                <Files files={files} view={cardView}>
-                    Attach files
-                </Files>
+            <Files files={files} FileView={cardView}>
+                Attach files
+            </Files>
 
-                <br/ ><br/ ><br/ >
+            <br /><br /><br />
 
-                <Files disabled>
-                    Disabled
-                </Files>
+            <Files disabled>
+                Disabled
+            </Files>
 
             </section>
         </div>

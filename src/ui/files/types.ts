@@ -10,7 +10,7 @@ export interface IFilesProps extends
     IFilesDispatchProps
 {
     disabled?: boolean;
-    view?: any;
+    FileView?: any;
 }
 
 export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
