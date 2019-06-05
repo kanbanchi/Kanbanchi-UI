@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IButtonInheritedProps } from './types';
 import { ClassNames } from '../utils';
-import { Icon } from '../../ui';
+import { ButtonTitle, Icon } from '../../ui';
 import '../../../src/ui/button/button.module.scss';
 
 export const Button: React.SFC<IButtonInheritedProps> =
@@ -76,9 +76,9 @@ React.forwardRef((props, ref) => {
             {iconBefore}
             {childrenDiv}
             {text &&
-                <span className="kui-button__text">
+                <ButtonTitle>
                     {text}
-                </span>
+                </ButtonTitle>
             }
             {iconAfter}
         </Tag>

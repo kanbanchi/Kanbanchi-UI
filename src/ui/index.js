@@ -2,12 +2,15 @@ export {Button} from './button/button';
 export {ButtonDropdown} from './buttonDropdown/buttonDropdown';
 export {ButtonsGroup} from './buttonsGroup/buttonsGroup';
 export {ButtonsSegmented} from './buttonsSegmented/buttonsSegmented';
+export {ButtonTitle} from './buttonTitle/buttonTitle';
 
 export {Checkbox} from './checkbox/checkbox';
 
 export {Datepicker} from './datepicker/datepicker';
 export {Divider} from './divider/divider';
 export {Dropdown} from './dropdown/dropdown';
+
+export {Files} from './files/files';
 
 export {Icon} from './icon/icon';
 export {Input} from './input/input';

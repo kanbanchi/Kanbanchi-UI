@@ -144,6 +144,11 @@
         min-width: 0;
         color: calc-color(fade, $color-base, 50);
 
+        .kui-button__text {
+            margin-left: $google-spacing;
+            font-weight: normal;
+        }
+
         .kui-button__children {
             display: flex;
             justify-content: center;
@@ -408,11 +413,11 @@
         &:before {
             left: $google-spacing * 1.5;
         }
-    }
 
-    &__text {
-        margin-left: $google-spacing;
-        font-weight: normal;
+        .kui-button__text {
+            margin-left: $google-spacing;
+            font-weight: normal;
+        }
     }
 
     &--variant_add {

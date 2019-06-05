@@ -25,4 +25,4 @@ const Story = () => {
 };
 
 storiesOf('Buttons', module)
-    .add('__Group', () => <Story/>);
+    .add('ButtonsGroup', () => <Story/>);

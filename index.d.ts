@@ -2,12 +2,15 @@ import {IButtonInheritedProps} from './src/ui/button/types';
 import {IButtonDropdownInheritedProps} from './src/ui/buttonDropdown/types';
 import {IButtonsGroupInheritedProps} from './src/ui/buttonsGroup/types';
 import {IButtonsSegmentedInheritedProps} from './src/ui/buttonsSegmented/types';
+import {IButtonTitleInheritedProps} from './src/ui/buttonTitle/types';
 
 import {ICheckboxInheritedProps} from './src/ui/checkbox/types';
 
 import {IDatePickerInheritedProps} from './src/ui/datepicker/types';
 import {IDividerInheritedProps} from './src/ui/divider/types';
 import {IDropdownInheritedProps} from './src/ui/dropdown/types';
+
+import {IFilesInheritedProps} from './src/ui/files/types';
 
 import {IIconInheritedProps} from './src/ui/icon/types';
 import {IInputInheritedProps} from './src/ui/input/types';
@@ -32,12 +35,15 @@ export declare const Button: React.SFC<IButtonInheritedProps>;
 export declare const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps>;
 export declare const ButtonsGroup: React.SFC<IButtonsGroupInheritedProps>;
 export declare const ButtonsSegmented: React.SFC<IButtonsSegmentedInheritedProps>;
+export declare const ButtonTitle: React.SFC<IButtonTitleInheritedProps>;
 
 export declare const Checkbox: React.SFC<ICheckboxInheritedProps>;
 
 export declare const Datepicker: React.SFC<IDatePickerInheritedProps>;
 export declare const Divider: React.SFC<IDividerInheritedProps>;
 export declare const Dropdown: React.SFC<IDropdownInheritedProps>;
+
+export declare const Files: React.SFC<IFilesInheritedProps>;
 
 export declare const Icon: React.SFC<IIconInheritedProps>;
 export declare const Input: React.SFC<IInputInheritedProps>;
