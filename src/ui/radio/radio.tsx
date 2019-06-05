@@ -5,7 +5,7 @@ import {Label} from '../../ui';
 import '../../../src/ui/radio/radio.module.scss';
 
 export const Radio: React.SFC<IRadioInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         active,
         onChange,
@@ -61,12 +61,13 @@ export const Radio: React.SFC<IRadioInheritedProps> =
     return (
         <div
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             {buttonHocs}
         </div>
     );
-};
+});
 
 Radio.defaultProps = {
     active: null,

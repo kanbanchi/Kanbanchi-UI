@@ -29,3 +29,4 @@ export {Snackbar} from './snackbar/snackbar';
 export {Switch} from './switch/switch';
 
 export {Tabs} from './tabs/tabs';
+export {Tooltip} from './tooltip/tooltip';

@@ -6,7 +6,7 @@ import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
 export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -24,7 +24,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
     const [directionHook, setDirectionHook] = React.useState(directionVertical);
     const [isOpenedHook, setIsOpenedHook] = React.useState(false);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
-    const buttonRef = React.useRef(null);
+    const buttonRef = ref as any;
     const dropdownRef = React.useRef(null);
 
     className = ClassNames(
@@ -102,7 +102,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
             </Dropdown>
         </div>
     );
-};
+});
 
 ButtonDropdown.defaultProps = {
     directionVertical: 'auto',

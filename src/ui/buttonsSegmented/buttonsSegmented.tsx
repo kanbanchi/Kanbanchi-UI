@@ -4,7 +4,7 @@ import { ClassNames } from '../utils';
 import '../../../src/ui/buttonsSegmented/buttonsSegmented.module.scss';
 
 export const ButtonsSegmented: React.SFC<IButtonsSegmentedInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         active,
         children,
@@ -40,12 +40,13 @@ export const ButtonsSegmented: React.SFC<IButtonsSegmentedInheritedProps> =
     return (
         <div
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             {buttonHocs}
         </div>
     );
-};
+});
 
 ButtonsSegmented.defaultProps = {
     active: 0,

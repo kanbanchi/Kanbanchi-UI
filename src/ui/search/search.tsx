@@ -5,7 +5,7 @@ import { Select } from '../../ui';
 import '../../../src/ui/search/search.module.scss';
 
 export const Search: React.SFC<ISearchInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -20,12 +20,13 @@ export const Search: React.SFC<ISearchInheritedProps> =
     return (
         <Select
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             {children}
         </Select>
     );
-};
+});
 
 Search.defaultProps = {
     editable: true,

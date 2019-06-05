@@ -4,7 +4,7 @@ import { ClassNames } from '../utils';
 import '../../../src/ui/label/label.module.scss';
 
 export const Label: React.SFC<ILabelInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         className,
         children,
@@ -19,11 +19,12 @@ export const Label: React.SFC<ILabelInheritedProps> =
     return (
         <label
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             {children}
         </label>
     );
-}
+});
 
 Label.displayName = 'Label';

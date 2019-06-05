@@ -1,5 +1,5 @@
 export interface ILabelProps {
-
+    ref?: any;
 }
 
 export type IConflictFreeHTMLAttributes<E> = React.LabelHTMLAttributes<E>;

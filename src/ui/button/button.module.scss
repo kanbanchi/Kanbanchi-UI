@@ -379,10 +379,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: $google-spacing * 6;
-            height: $google-spacing * 6;
+            width: $google-spacing * 5;
+            height: $google-spacing * 5;
             content: '';
-            border-radius: $google-spacing * 6;
+            border-radius: $google-spacing * 5;
         }
 
         &:focus {

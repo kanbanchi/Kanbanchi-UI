@@ -4,7 +4,7 @@ import { ClassNames } from '../utils';
 import '../../../src/ui/buttonsGroup/buttonsGroup.module.scss';
 
 export const ButtonsGroup: React.SFC<IButtonsGroupInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -21,12 +21,13 @@ export const ButtonsGroup: React.SFC<IButtonsGroupInheritedProps> =
     return (
         <div
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             {children}
         </div>
     );
-}
+});
 
 ButtonsGroup.defaultProps = {
     size: null

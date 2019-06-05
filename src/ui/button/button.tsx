@@ -5,7 +5,7 @@ import { ButtonTitle, Icon } from '../../ui';
 import '../../../src/ui/button/button.module.scss';
 
 export const Button: React.SFC<IButtonInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -70,6 +70,7 @@ export const Button: React.SFC<IButtonInheritedProps> =
     return (
         <Tag
             className={className}
+            ref={ref}
             {...attributes}
         >
             {iconBefore}
@@ -82,7 +83,7 @@ export const Button: React.SFC<IButtonInheritedProps> =
             {iconAfter}
         </Tag>
     );
-};
+});
 
 Button.defaultProps = {
     color: null,

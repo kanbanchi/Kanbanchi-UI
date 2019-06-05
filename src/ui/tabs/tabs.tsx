@@ -4,7 +4,7 @@ import { ClassNames } from '../utils';
 import '../../../src/ui/tabs/tabs.module.scss';
 
 export const Tabs: React.SFC<ITabsInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         active,
         children,
@@ -40,6 +40,7 @@ export const Tabs: React.SFC<ITabsInheritedProps> =
     return (
         <div
             className={className}
+            ref={ref as any}
             {...attributes}
         >
             <div className="kui-tabs__scroll">
@@ -47,7 +48,7 @@ export const Tabs: React.SFC<ITabsInheritedProps> =
             </div>
         </div>
     );
-};
+});
 
 Tabs.defaultProps = {
     active: 0,
