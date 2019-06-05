@@ -11,8 +11,9 @@ import Primary from './buttons/primary';
 import Secondary from './buttons/secondary';
 import Text from './buttons/text';
 
-import ButtonsGroup from './buttons/buttonsGroup';
-import ButtonsSegmented from './buttons/buttonsSegmented';
+import ButtonsGroup from './buttons/_buttonsGroup';
+import ButtonsSegmented from './buttons/_buttonsSegmented';
+import ButtonTitle from './buttons/_buttonTitle';
 
 import Small from './icons/small';
 import Large from './icons/large';

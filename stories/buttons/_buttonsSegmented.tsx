@@ -38,4 +38,4 @@ const Story = () => {
 };
 
 storiesOf('Buttons', module)
-    .add('__Segmented', () => <Story/>);
+    .add('ButtonsSegmented', () => <Story/>);
