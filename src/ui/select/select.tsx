@@ -41,7 +41,7 @@ React.forwardRef((props, ref) => {
     const [itemsRefsHook, setItemsRefsHook] = React.useState([]); // list items for auto scroll in dropdown
 
     const dropdownRef = React.useRef(null);
-    const inputRef = ref as any;
+    const inputRef = React.useRef(null);
     const selectRef = React.useRef(null);
 
     className = ClassNames(
