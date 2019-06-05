@@ -193,7 +193,7 @@ React.forwardRef((props, ref) => {
             })
             .then(() => { // dont know why it works only in then
                 if (e.which === 27) { // esc
-                    setValueHook(initialValue + 'jopa'); // doesnt reset to initialValue without it
+                    setValueHook(initialValue + ' '); // doesnt reset to initialValue without it
                     setIsOpenedHook(false);
                     setActiveHook(active);
                     setValue(initialValue);
