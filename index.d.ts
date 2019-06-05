@@ -2,6 +2,7 @@ import {IButtonInheritedProps} from './src/ui/button/types';
 import {IButtonDropdownInheritedProps} from './src/ui/buttonDropdown/types';
 import {IButtonsGroupInheritedProps} from './src/ui/buttonsGroup/types';
 import {IButtonsSegmentedInheritedProps} from './src/ui/buttonsSegmented/types';
+import {IButtonTitleInheritedProps} from './src/ui/buttonTitle/types';
 
 import {ICheckboxInheritedProps} from './src/ui/checkbox/types';
 
@@ -33,6 +34,7 @@ export declare const Button: React.SFC<IButtonInheritedProps>;
 export declare const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps>;
 export declare const ButtonsGroup: React.SFC<IButtonsGroupInheritedProps>;
 export declare const ButtonsSegmented: React.SFC<IButtonsSegmentedInheritedProps>;
+export declare const ButtonTitle: React.SFC<IButtonTitleInheritedProps>;
 
 export declare const Checkbox: React.SFC<ICheckboxInheritedProps>;
 
