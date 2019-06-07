@@ -9,6 +9,7 @@ const Story = () => {
     const [val02, setVal02] = React.useState(40);
     const [val03, setVal03] = React.useState(0);
     const [val04, setVal04] = React.useState(null);
+    const [val05, setVal05] = React.useState(0);
 
     return (
         <div className="page">
@@ -17,7 +18,7 @@ const Story = () => {
 
                 <Select
                     active={val04}
-                    label="Options"
+                    label="Options Object"
                     options={{
                         0: 'Option 0',
                         1: 'Option 1',
@@ -25,6 +26,21 @@ const Story = () => {
                     }}
                     variant="arrow"
                     onChange={(i: any)=>setVal04(i.item.index)}
+                >
+                </Select>
+
+                <br/><br/>
+
+                <Select
+                    active={val05}
+                    label="Options Array"
+                    options={[
+                        {value: 0, text: 'Option 0'},
+                        {value: 1, text: 'Option 1'},
+                        {value: '2', text: 'Option 2'},
+                    ]}
+                    variant="arrow"
+                    onChange={(i: any)=>setVal05(i.item.index)}
                 >
                 </Select>
 

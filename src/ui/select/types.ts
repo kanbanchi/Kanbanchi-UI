@@ -7,9 +7,15 @@ export interface ISelectActiveProps {
     text?: string;
 }
 
+export type ISelectOptionsObject = {[key: string]: string}
+export type ISelectOptionsArray = Array<{
+    value: number | string;
+    text?: string;
+}>
+
 export interface ISelectStateProps {
     active?: number;
-    options?: {[key: string]: string}
+    options?: ISelectOptionsObject | ISelectOptionsArray;
 }
 
 export interface ISelectDispatchProps {

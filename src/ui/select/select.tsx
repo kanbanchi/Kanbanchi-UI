@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ISelectInheritedProps, ISelectActiveProps } from './types';
+import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
 import { ClassNames } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
@@ -153,11 +153,20 @@ React.forwardRef((props, ref) => {
             return React.cloneElement(child, attributesSelectList);
         });
     } else if (options) {
-        list = Object.keys(options).map(value => (
-            <li key={value} value={value}>
-                {options[value]}
-            </li>
-        ));
+        if (Array.isArray(options)) {
+            list = options.map(option => (
+                <li key={option.value} value={option.value}>
+                    {option.text || option.value}
+                </li>
+            ));
+        } else {
+            const optionsObj = options as ISelectOptionsObject;
+            list = Object.keys(optionsObj).map(value => (
+                <li key={value} value={value}>
+                    {optionsObj[value]}
+                </li>
+            ));
+        }
         dropdownBody = (
             <SelectList {...attributesSelectList}>
                 {list}
