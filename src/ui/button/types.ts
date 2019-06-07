@@ -5,6 +5,7 @@ export interface IButtonProps {
         | 'white';
     disabled?: boolean;
     href?: string;
+    progress?: number; // percentage 0..100
     size?: 'large';
     text?: string;
     type?:
