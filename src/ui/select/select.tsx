@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { ISelectInheritedProps, ISelectActiveProps } from './types';
+import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
 import { ClassNames } from '../utils';
-import { Input, Dropdown } from '../../ui';
+import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
+import { options } from 'date-fns/locale/et';
 
 export const Select: React.SFC<ISelectInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -17,6 +18,7 @@ React.forwardRef((props, ref) => {
         disabled,
         editable,
         opened,
+        options,
         variant,
         onBlur,
         onChange,
@@ -71,12 +73,12 @@ React.forwardRef((props, ref) => {
 
     const dropdownAnimationEnd = () => {
         if (isOpenedHook) {
-            onActiveChanged();
+            scrollList();
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
     }
 
-    const onActiveChanged = () => {
+    const scrollList = () => {
         if (isFocusedHook
             && itemsRefsHook[activeHook]
             && itemsRefsHook[activeHook].current)
@@ -135,18 +137,42 @@ React.forwardRef((props, ref) => {
         if (onClick) onClick(e);
     }
 
-    let childrenArray: Array<{}> = // children could be string, we need array
-        (Array.isArray(children)) ? children : [children];
+    const attributesSelectList = {
+        active: activeHook,
+        onChange: attributes.onChange,
+        onSelectListInit
+    };
 
-    dropdownBody = React.Children.map(childrenArray, (child: any) => {
-        if (child.type.displayName !== 'SelectList') return child;
-        list = child.props.children;
-        return React.cloneElement(child, {
-            active: activeHook,
-            onChange: attributes.onChange,
-            onSelectListInit
+    if (children) {
+        let childrenArray: Array<{}> = // children could be string, we need array
+            (Array.isArray(children)) ? children : [children];
+
+        dropdownBody = React.Children.map(childrenArray, (child: any) => {
+            if (child.type.displayName !== 'SelectList') return child;
+            list = child.props.children;
+            return React.cloneElement(child, attributesSelectList);
         });
-    });
+    } else if (options) {
+        if (Array.isArray(options)) {
+            list = options.map(option => (
+                <li key={option.value} value={option.value}>
+                    {option.text || option.value}
+                </li>
+            ));
+        } else {
+            const optionsObj = options as ISelectOptionsObject;
+            list = Object.keys(optionsObj).map(value => (
+                <li key={value} value={value}>
+                    {optionsObj[value]}
+                </li>
+            ));
+        }
+        dropdownBody = (
+            <SelectList {...attributesSelectList}>
+                {list}
+            </SelectList>
+        );
+    }
 
     const findValue = (value: string) => {
         return new Promise(function(resolve, reject) {
@@ -208,16 +234,24 @@ React.forwardRef((props, ref) => {
         if (onEnter) onEnter(e);
     }
 
-    React.useEffect(() => {
-        if (active !== null && list.length) {
-            setInitialValue(list[active].props.children);
-            setValue(list[active].props.children);
-        }
-    }, []);
+    const onActiveChanged = () => {
+        if (active === null || !list.length || !list[active]) return;
+        setInitialValue(list[active].props.children);
+        setValue(list[active].props.children);
+    }
 
     React.useEffect(() => {
         onActiveChanged();
+    }, []);
+
+    React.useEffect(() => {
+        scrollList();
     }, [activeHook]);
+
+    React.useEffect(() => {
+        setActiveHook(active);
+        onActiveChanged();
+    }, [active]);
 
     return (
         <div className={className} ref={selectRef}>
@@ -252,6 +286,7 @@ Select.defaultProps = {
     disabled: false,
     editable: false,
     opened: false,
+    options: null,
     onChange: (): void => undefined,
     onEnter: () => undefined,
     onOpen: () => undefined
