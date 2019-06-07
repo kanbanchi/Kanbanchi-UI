@@ -71,12 +71,12 @@ React.forwardRef((props, ref) => {
 
     const dropdownAnimationEnd = () => {
         if (isOpenedHook) {
-            onActiveChanged();
+            scrollList();
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
     }
 
-    const onActiveChanged = () => {
+    const scrollList = () => {
         if (isFocusedHook
             && itemsRefsHook[activeHook]
             && itemsRefsHook[activeHook].current)
@@ -135,18 +135,20 @@ React.forwardRef((props, ref) => {
         if (onClick) onClick(e);
     }
 
-    let childrenArray: Array<{}> = // children could be string, we need array
-        (Array.isArray(children)) ? children : [children];
+    if (children) {
+        let childrenArray: Array<{}> = // children could be string, we need array
+            (Array.isArray(children)) ? children : [children];
 
-    dropdownBody = React.Children.map(childrenArray, (child: any) => {
-        if (child.type.displayName !== 'SelectList') return child;
-        list = child.props.children;
-        return React.cloneElement(child, {
-            active: activeHook,
-            onChange: attributes.onChange,
-            onSelectListInit
+        dropdownBody = React.Children.map(childrenArray, (child: any) => {
+            if (child.type.displayName !== 'SelectList') return child;
+            list = child.props.children;
+            return React.cloneElement(child, {
+                active: activeHook,
+                onChange: attributes.onChange,
+                onSelectListInit
+            });
         });
-    });
+    }
 
     const findValue = (value: string) => {
         return new Promise(function(resolve, reject) {
@@ -208,16 +210,24 @@ React.forwardRef((props, ref) => {
         if (onEnter) onEnter(e);
     }
 
-    React.useEffect(() => {
-        if (active !== null && list.length) {
-            setInitialValue(list[active].props.children);
-            setValue(list[active].props.children);
-        }
-    }, []);
+    const onActiveChanged = () => {
+        if (active === null || !list.length || !list[active]) return;
+        setInitialValue(list[active].props.children);
+        setValue(list[active].props.children);
+    }
 
     React.useEffect(() => {
         onActiveChanged();
+    }, []);
+
+    React.useEffect(() => {
+        scrollList();
     }, [activeHook]);
+
+    React.useEffect(() => {
+        setActiveHook(active);
+        onActiveChanged();
+    }, [active]);
 
     return (
         <div className={className} ref={selectRef}>
