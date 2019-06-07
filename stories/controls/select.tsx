@@ -12,12 +12,11 @@ const Story = () => {
 
     return (
         <div className="page">
-            <section>
+            <section className="section-form-min">
                 <h2>Select</h2>
 
                 <Select
                     active={val04}
-                    className="w100px"
                     label="Options"
                     options={{
                         0: 'Option 0',
