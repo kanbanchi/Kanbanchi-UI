@@ -1,12 +1,17 @@
 @import '../../assets/sass/index.scss';
 
 .kui-select {
+    position: relative;
     
     .kui-input {
         &__item {
             color: $color-base;
             cursor: pointer;
         }
+    }
+
+    .kui-dropdown__item {
+        min-width: 100%;
     }
 
     &:hover,
