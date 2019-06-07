@@ -10,6 +10,7 @@ React.forwardRef((props, ref) => {
         children,
         className,
         color,
+        progress,
         size,
         variant,
         text,
@@ -45,6 +46,7 @@ React.forwardRef((props, ref) => {
         (color) ? 'kui-button--color_' + color: null,
         (size) ? 'kui-button--size_' + size : null,
         (disabled) ? 'kui-button--disabled' : null,
+        (progress !== null) ? 'kui-button--progress' : null,
         className
     );
 
@@ -80,6 +82,12 @@ React.forwardRef((props, ref) => {
                     {text}
                 </ButtonTitle>
             }
+            {progress !== null &&
+                <div
+                    className="kui-button__progress"
+                    style={{width: progress + '%'}}>
+                </div>
+            }
             {iconAfter}
         </Tag>
     );
@@ -89,6 +97,7 @@ Button.defaultProps = {
     color: null,
     disabled: false,
     href: null,
+    progress: null,
     size: null,
     text: null,
     type: 'button',
