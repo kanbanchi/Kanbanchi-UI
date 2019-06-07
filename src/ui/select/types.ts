@@ -9,6 +9,7 @@ export interface ISelectActiveProps {
 
 export interface ISelectStateProps {
     active?: number;
+    options?: {[key: string]: string}
 }
 
 export interface ISelectDispatchProps {
