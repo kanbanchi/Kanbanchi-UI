@@ -7,6 +7,12 @@ export interface ISelectActiveProps {
     text?: string;
 }
 
+export interface ISelectActiveInheritedProps extends
+    React.SyntheticEvent<HTMLElement>
+{
+    item: ISelectActiveProps;
+}
+
 export type ISelectOptionsObject = {[key: string]: string}
 export type ISelectOptionsArray = Array<{
     value: number | string;
@@ -19,7 +25,7 @@ export interface ISelectStateProps {
 }
 
 export interface ISelectDispatchProps {
-    onChange: (event: React.SyntheticEvent<HTMLElement> & ISelectActiveProps) => void;
+    onChange: (event: ISelectActiveInheritedProps) => void;
     onEnter?: (event: React.KeyboardEvent<HTMLElement>) => void;
     onOpen?: () => void;
 }
