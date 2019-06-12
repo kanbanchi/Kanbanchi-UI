@@ -159,7 +159,7 @@
             color: calc-color(fade, $color-base, 30);
             background: $color-white;
             border: 1px solid calc-color(fade, $color-base, 15);
-            border-radius: $base-radius;            
+            border-radius: $big-radius;            
             box-shadow: none;
             @include transition;
         }
@@ -296,7 +296,7 @@
         padding: 0 $google-spacing * 2 0 $google-spacing;
         color: calc-color(tint, $color-base, 50);
         border: 2px solid calc-color(tint, $color-base, 20);
-        border-radius: $big-radius;
+        border-radius: $base-radius;
 
         .kui-button__icon {
             margin-right: $google-spacing / 2;
