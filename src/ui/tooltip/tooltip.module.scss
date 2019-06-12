@@ -191,3 +191,11 @@
         transform: translateY(-$google-spacing * 2);
     }
 }
+
+@each $media, $size in $media-screens {
+    @media (min-width: $size) {
+        .kui-tooltip--maxwidth_#{$media} {
+            visibility: hidden !important;
+        }
+    }
+}
