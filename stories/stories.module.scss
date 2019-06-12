@@ -117,3 +117,9 @@ section {
 .w100px {
     width: 100px;
 }
+
+.story-tags-max-width-100 {
+    .kui-tag__text {
+        max-width: 100px;
+    }
+}

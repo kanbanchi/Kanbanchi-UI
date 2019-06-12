@@ -32,6 +32,7 @@ import SelectList from './controls/selectList';
 import Select from './controls/select';
 import Switch from './controls/switch';
 import Tabs from './controls/tabs';
+import Tags from './controls/tags';
 
 import TestComponent from './wip/testComponent';
 import NotificationListItemComponent from './wip/testNotificationListItemComponent';
