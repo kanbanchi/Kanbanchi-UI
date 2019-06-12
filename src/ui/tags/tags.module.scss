@@ -1,0 +1,52 @@
+@import '../../assets/sass/index.scss';
+.kui-tags {
+    &__inner {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: -$google-spacing;
+        margin-left: -$google-spacing;
+
+        & > * {
+            margin-top: $google-spacing;
+            margin-left: $google-spacing;
+        }
+    }
+}
+
+.kui-tag {
+    display: flex;
+    align-items: center;
+    height: $google-spacing * 4;
+    padding: $google-spacing;
+    font-size: $nano-size;
+    font-weight: bold;
+    background: $color-background;
+    border-radius: $base-radius;
+
+    &__text {
+        @extend %text-ellipsis;
+    }
+
+    &__clear {
+        margin-left: $google-spacing / 2;
+        color: calc-color(fade, $color-base, 30);
+        @include transition;
+
+        &:hover {
+            color: calc-color(fade, $color-base, 90);
+        }
+    }
+
+    &--clickable {
+        cursor: pointer;
+        @include transition;
+
+        &:hover {
+            background: calc-color(shade, $color-background, 5);
+        }
+    }
+
+    &--clearable {
+        padding-right: $google-spacing / 2;
+    }
+}
