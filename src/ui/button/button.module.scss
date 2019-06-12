@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     vertical-align: baseline;
+    max-width: 100%;
     min-width: $google-spacing * 8;
     padding: 0;
     line-height: inherit;
@@ -469,6 +470,18 @@
         &:disabled {
             color: calc-color(fade, $color-base, 30);
             pointer-events: none;
+        }
+    }
+}
+
+@each $media, $size in $media-screens {
+    @media (max-width: $size) {
+        .kui-button--maxwidth_#{$media} {
+            &.kui-button--variant_icon-text {
+                .kui-button__text {
+                    display: none;
+                }
+            }
         }
     }
 }

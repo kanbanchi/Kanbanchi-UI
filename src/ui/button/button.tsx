@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { IButtonInheritedProps } from './types';
 import { ClassNames } from '../utils';
-import { ButtonTitle, Icon } from '../../ui';
+import { ButtonTitle, Icon, Tooltip } from '../../ui';
 import '../../../src/ui/button/button.module.scss';
+import { ITooltipProps } from '../tooltip/types';
 
 export const Button: React.SFC<IButtonInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -10,9 +11,11 @@ React.forwardRef((props, ref) => {
         children,
         className,
         color,
+        maxWidth,
         size,
-        variant,
         text,
+        tooltip,
+        variant,
         ...attributes
     } = props,
         iconBefore = null,
@@ -45,6 +48,7 @@ React.forwardRef((props, ref) => {
         (color) ? 'kui-button--color_' + color: null,
         (size) ? 'kui-button--size_' + size : null,
         (disabled) ? 'kui-button--disabled' : null,
+        (maxWidth) ? 'kui-button--maxwidth_' + maxWidth : null,
         className
     );
 
@@ -67,7 +71,7 @@ React.forwardRef((props, ref) => {
             break;
     }
 
-    return (
+    const buttonElement = (
         <Tag
             className={className}
             ref={ref}
@@ -83,14 +87,29 @@ React.forwardRef((props, ref) => {
             {iconAfter}
         </Tag>
     );
+
+    if (tooltip) {
+        const tooltipProps = (typeof tooltip === 'string')
+            ? { value: tooltip }
+            : tooltip;
+        return (
+            <Tooltip {...tooltipProps}>
+                {buttonElement}
+            </Tooltip>
+        )
+    }
+
+    return buttonElement;
 });
 
 Button.defaultProps = {
     color: null,
     disabled: false,
     href: null,
+    maxWidth: null,
     size: null,
     text: null,
+    tooltip: null,
     type: 'button',
     variant: 'primary'
 };

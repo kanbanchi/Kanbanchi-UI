@@ -1,12 +1,25 @@
-export interface IButtonProps {
+import { ITooltipProps } from './../tooltip/types';
+import { IMediaScreens } from './../types';
+
+export interface IButtonStateProps {
+    disabled?: boolean;
+    text?: string;
+}
+
+export interface IButtonDispatchProps {}
+
+export interface IButtonProps extends
+    IButtonStateProps,
+    IButtonDispatchProps
+{
     color?:
         'black'
         | 'purple'
         | 'white';
-    disabled?: boolean;
     href?: string;
+    maxWidth?: IMediaScreens;
     size?: 'large';
-    text?: string;
+    tooltip?: string | ITooltipProps;
     type?:
         'button'
         | 'submit';
