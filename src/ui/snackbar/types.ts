@@ -10,6 +10,7 @@ export interface ISnackbarDispatchProps {
 }
 
 export interface ISnackbarButtonProps {
+    progress?: number; // percentage 0..100
     text: string;
     onClick?: () => void;
     onTimer?: boolean;
