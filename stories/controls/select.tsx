@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { ButtonsGroup, Select, SelectList, SelectListItem } from '../../src/ui';
+import { ISelectActiveInheritedProps } from '../../src/ui/select/types';
+
 
 const Story = () => {
 
@@ -25,7 +27,7 @@ const Story = () => {
                         '2': 'Option 2'
                     }}
                     variant="arrow"
-                    onChange={(i: any)=>setVal04(i.item.index)}
+                    onChange={(i: ISelectActiveInheritedProps)=>setVal04(i.item.index)}
                 >
                 </Select>
 
@@ -40,7 +42,7 @@ const Story = () => {
                         {value: '2', text: 'Option 2'},
                     ]}
                     variant="arrow"
-                    onChange={(i: any)=>setVal05(i.item.index)}
+                    onChange={(i: ISelectActiveInheritedProps)=>setVal05(i.item.index)}
                 >
                 </Select>
 
@@ -50,7 +52,7 @@ const Story = () => {
                     active={val}
                     label="Header"
                     variant="header"
-                    onChange={(i: any)=>setVal(i.item.index)}
+                    onChange={(i: ISelectActiveInheritedProps)=>setVal(i.item.index)}
                 >
                     <SelectList>
                         <li className="starter" value="sy" >
@@ -75,7 +77,7 @@ const Story = () => {
                                 style={{width: 100}}
                                 type="number"
                                 variant="arrow"
-                                onChange={(i: any)=>setVal01(i.item.index)}
+                                onChange={(i: ISelectActiveInheritedProps)=>setVal01(i.item.index)}
                             >
                                 <SelectList>
                                     <li className="divider">0</li>
@@ -99,7 +101,7 @@ const Story = () => {
                                 icon="deadline"
                                 variant="withicon"
                                 style={{width: 120}}
-                                onChange={(i: any)=>setVal02(i.item.index)}
+                                onChange={(i: ISelectActiveInheritedProps)=>setVal02(i.item.index)}
                             >
                                 <SelectList>
                                     <li>12:00 AM</li>
@@ -166,7 +168,7 @@ const Story = () => {
                         active={val03}
                         directionVertical="up"
                         variant="priority"
-                        onChange={(i: any)=>setVal03(i.item.index)}
+                        onChange={(i: ISelectActiveInheritedProps)=>setVal03(i.item.index)}
                     >
                         <SelectList>
                             <SelectListItem value="0" icon="priority-no">
