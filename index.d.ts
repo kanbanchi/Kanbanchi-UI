@@ -30,6 +30,7 @@ import {ISnackbarInheritedProps} from './src/ui/snackbar/types';
 import {ISwitchInheritedProps} from './src/ui/switch/types';
 
 import {ITabsInheritedProps} from './src/ui/tabs/types';
+import {ITagInheritedProps, ITagsInheritedProps} from './src/ui/tags/types';
 import {ITooltipInheritedProps} from './src/ui/tooltip/types';
 
 export declare const Button: React.SFC<IButtonInheritedProps>;
@@ -64,4 +65,6 @@ export declare const Snackbar: React.SFC<ISnackbarInheritedProps>;
 export declare const Switch: React.SFC<ISwitchInheritedProps>;
 
 export declare const Tabs: React.SFC<ITabsInheritedProps>;
+export declare const Tag: React.SFC<ITagInheritedProps>;
+export declare const Tags: React.SFC<ITagsInheritedProps>;
 export declare const Tooltip: React.SFC<ITooltipInheritedProps>;

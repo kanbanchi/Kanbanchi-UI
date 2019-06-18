@@ -132,7 +132,6 @@ React.forwardRef((props, ref) => {
             } else {
                 setIsOpenedHook(!isOpenedHook);
             }
-            if (e) e.stopPropagation();
         }
         if (onClick) onClick(e);
     }
