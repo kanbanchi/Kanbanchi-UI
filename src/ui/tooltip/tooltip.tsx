@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
-import { ClassNames } from '../utils';
+import { ClassNames, getScrollClient } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal } from './../portal/portal';
 
@@ -37,14 +37,17 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const calcTooltip = (index: number = 0) => {
         let target = targetsRefs[index].current || targetsRefs[index];
         let targetRect = target.getBoundingClientRect();
+        const scrollClient = getScrollClient();
+        console.log(scrollClient);
+
         let targetObj: any = {
-            x: targetRect.left,
-            y: targetRect.top,
+            x: targetRect.left + scrollClient.scrollLeft - scrollClient.clientLeft,
+            y: targetRect.top + scrollClient.scrollTop - scrollClient.clientTop,
             width: targetRect.width || targetRect.right - targetRect.left,
             height: targetRect.height || targetRect.bottom - targetRect.top,
         };
-        targetObj.right = targetRect.left + targetObj.width;
-        targetObj.bottom = targetRect.top + targetObj.height;
+        targetObj.right = targetObj.x + targetObj.width;
+        targetObj.bottom = targetObj.y + targetObj.height;
 
         let item = itemRef.current;
         let itemRect = item.getBoundingClientRect();
