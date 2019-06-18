@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
+import { Portal } from './../portal/portal';
 
 export const Tooltip: React.SFC<ITooltipInheritedProps> =
 (props) => {
@@ -37,8 +38,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         let target = targetsRefs[index].current || targetsRefs[index];
         let targetRect = target.getBoundingClientRect();
         let targetObj: any = {
-            x: target.offsetLeft,
-            y: target.offsetTop,
+            x: targetRect.left,
+            y: targetRect.top,
             width: targetRect.width || targetRect.right - targetRect.left,
             height: targetRect.height || targetRect.bottom - targetRect.top,
         };
@@ -164,13 +165,15 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     return (
         <>
             {targets}
-            <div
-                className={classHook}
-                ref={itemRef}
-                onClick={closeTooltip}
-            >
-                {value}
-            </div>
+            <Portal>
+                <div
+                    className={classHook}
+                    ref={itemRef}
+                    onClick={closeTooltip}
+                >
+                    {value}
+                </div>
+            </Portal>
         </>
     );
 };
