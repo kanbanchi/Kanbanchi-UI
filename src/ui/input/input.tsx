@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IInputInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import * as autosizeLibray from './autosize';
-import { Icon, Label } from '../../ui';
+import { Icon, Label, Tooltip } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
 export const Input: React.SFC<IInputInheritedProps> =
@@ -15,6 +15,8 @@ React.forwardRef((props, ref) => {
         icon,
         isClearable,
         label,
+        state,
+        tooltip,
         value,
         variant,
         onBlur,
@@ -42,6 +44,7 @@ React.forwardRef((props, ref) => {
         (isFilled) ? 'kui-input--filled' : null,
         (isFocusedHook) ? 'kui-input--focus' : null,
         (!autosize) ? 'kui-input--noresize' : null,
+        (state) ? 'kui-input--state_' + state : null,
         (variant) ? 'kui-input--variant_' + variant : null,
         className
     );
@@ -156,6 +159,7 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
+        console.log(textarea);
         if (autosize) autosizeLibray.default(textarea.current);
     }, []);
 
@@ -178,6 +182,28 @@ React.forwardRef((props, ref) => {
         }
     }));
 
+    let inputElement = (
+        <Tag
+            rows={1}
+            ref={textarea}
+            value={inputValue}
+            {...attributes}
+        />
+    );
+
+    if (tooltip) {
+        const tooltipProps = (typeof tooltip === 'string')
+            ? { value: tooltip }
+            : tooltip;
+
+        if (state && !tooltipProps.state) tooltipProps.state = state;
+        inputElement = (
+            <Tooltip {...tooltipProps}>
+                {inputElement}
+            </Tooltip>
+        )
+    }
+
     return (
         <Label
             className={className}
@@ -185,12 +211,7 @@ React.forwardRef((props, ref) => {
         >
             {labelItem}
             {inputBefore}
-            <Tag
-                rows={1}
-                ref={textarea}
-                value={inputValue}
-                {...attributes}
-            ></Tag>
+            {inputElement}
             {inputAfter}
         </Label>
     );
@@ -203,6 +224,8 @@ Input.defaultProps = {
     icon: null,
     isClearable: false,
     label: null,
+    state: null,
+    tooltip: null,
     value: '',
     variant: null,
     onEnter: (): void => undefined

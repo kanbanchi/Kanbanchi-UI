@@ -8,6 +8,30 @@ const Story = () => {
             <section className="section-form-min">
                 <h2>Input</h2>
 
+                <Input
+                    label="Error"
+                    placeholder="Hover for tooltip"
+                    state="error"
+                    tooltip={{
+                        direction: 'right',
+                        value: 'Error Tooltip'
+                    }}
+                />
+
+                <br/>
+
+                <Input
+                    label="Success"
+                    placeholder="Hover for tooltip"
+                    state="success"
+                    tooltip={{
+                        direction: 'down-right',
+                        value: 'Success Tooltip'
+                    }}
+                />
+
+                <br/>
+
                 <Input label="Label" placeholder="Your text"
                     onBlur={(e: any)=>console.log('onBlur', e.target.value)}
                 />
