@@ -20,6 +20,7 @@
     user-select: none;
     text-decoration: none;
     outline: 0;
+    overflow: hidden;
     -webkit-appearance: none;
     -moz-appearance: none;
     @include transition;
@@ -470,6 +471,26 @@
         &:disabled {
             color: calc-color(fade, $color-base, 30);
             pointer-events: none;
+        }
+    }
+
+    &--progress {
+        pointer-events: none;
+    }
+
+    &__progress {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: calc-color(fade, $color-white, 30);
+
+        .kui-button--variant_secondary & {
+            background: calc-color(fade, $color-purple, 30);
+        }
+        .kui-button--variant_secondary.kui-button--disabled &,
+        .kui-button--variant_secondary:disabled & {
+            background: calc-color(fade, $color-purple, 20);
         }
     }
 }

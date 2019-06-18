@@ -18,6 +18,7 @@ export interface IButtonProps extends
         | 'white';
     href?: string;
     maxWidth?: IMediaScreens;
+    progress?: number; // percentage 0..100
     size?: 'large';
     tooltip?: string | ITooltipProps;
     type?:

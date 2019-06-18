@@ -12,6 +12,7 @@ React.forwardRef((props, ref) => {
         className,
         color,
         maxWidth,
+        progress,
         size,
         text,
         tooltip,
@@ -49,6 +50,7 @@ React.forwardRef((props, ref) => {
         (size) ? 'kui-button--size_' + size : null,
         (disabled) ? 'kui-button--disabled' : null,
         (maxWidth) ? 'kui-button--maxwidth_' + maxWidth : null,
+        (progress !== null) ? 'kui-button--progress' : null,
         className
     );
 
@@ -84,6 +86,12 @@ React.forwardRef((props, ref) => {
                     {text}
                 </ButtonTitle>
             }
+            {progress !== null &&
+                <div
+                    className="kui-button__progress"
+                    style={{width: progress + '%'}}>
+                </div>
+            }
             {iconAfter}
         </Tag>
     );
@@ -107,6 +115,7 @@ Button.defaultProps = {
     disabled: false,
     href: null,
     maxWidth: null,
+    progress: null,
     size: null,
     text: null,
     tooltip: null,
