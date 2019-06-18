@@ -250,7 +250,7 @@ React.forwardRef((props, ref) => {
     React.useEffect(() => {
         setActiveHook(active);
         onActiveChanged();
-    }, [active]);
+    }, [active, options]);
 
     return (
         <div className={className} ref={selectRef}>
