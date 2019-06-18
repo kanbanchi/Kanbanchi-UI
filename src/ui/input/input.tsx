@@ -158,7 +158,6 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        console.log(textarea);
         if (autosize) autosizeLibray.default(textarea.current);
     }, []);
 
