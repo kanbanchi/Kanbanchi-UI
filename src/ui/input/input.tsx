@@ -56,7 +56,6 @@ React.forwardRef((props, ref) => {
 
     attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsFilled(!!e.target.value);
-        setInputValue(e.target.value);
         if (onChange) onChange(e);
     };
 

@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Input } from '../../src/ui';
 
 const Story = () => {
+    const [val, setVal] = React.useState('');
     return (
         <div className="page">
             <section className="section-form-min">
@@ -16,6 +17,8 @@ const Story = () => {
                         direction: 'right',
                         value: 'Error Tooltip'
                     }}
+                    value={val}
+                    onChange={(e: any)=>setVal(e.target.value)}
                 />
 
                 <br/>
