@@ -11,6 +11,14 @@
     border-radius: $google-spacing * 2.5;
     background: $color-base;
     visibility: hidden;
+
+    &--state_error {
+        background: $color-red;
+    }
+
+    &--state_success {
+        background: $color-green;
+    }
     
     &--show {
         visibility: visible;

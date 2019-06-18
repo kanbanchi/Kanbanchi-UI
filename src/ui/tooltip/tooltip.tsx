@@ -10,6 +10,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         className,
         direction,
         maxWidth,
+        state,
         value
     } = props;
 
@@ -17,6 +18,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         'kui-tooltip',
         'kui-tooltip--direction_' + direction,
         (maxWidth) ? 'kui-tooltip--maxwidth_' + maxWidth : null,
+        (state) ? 'kui-tooltip--state_' + state : null,
         className
     );
 
@@ -32,7 +34,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const [isTouchHook, setIsTouchHook] = React.useState(false);
 
     const calcTooltip = (index: number = 0) => {
-        let target = targetsRefs[index].current;
+        let target = targetsRefs[index].current || targetsRefs[index];
         let targetRect = target.getBoundingClientRect();
         let targetObj: any = {
             x: target.offsetLeft,
@@ -133,7 +135,15 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
     const targets = React.Children.map(childrenArray, (child: any, index) => {
         return React.cloneElement(child, {
-            ref: targetsRefs[index],
+            ref: (node: any) => {
+                targetsRefs[index] = node;
+                const {ref} = child;
+                if (typeof ref === 'function') {
+                    ref(node);
+                } else if (ref !== null) {
+                    ref.current = node;
+                }
+            },
             title: null,
             tooltip: null,
             onBlur: (e) => {
@@ -168,6 +178,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 Tooltip.defaultProps = {
     direction: 'down',
     maxWidth: null,
+    state: null,
     value: null
 };
 

@@ -11,6 +11,7 @@ export interface ITooltipProps {
         | 'down-left'
         | 'down-right';
     maxWidth?: IMediaScreens;
+    state?: 'error' | 'success';
     value: string;
 }
 

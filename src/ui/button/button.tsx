@@ -3,7 +3,6 @@ import { IButtonInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { ButtonTitle, Icon, Tooltip } from '../../ui';
 import '../../../src/ui/button/button.module.scss';
-import { ITooltipProps } from '../tooltip/types';
 
 export const Button: React.SFC<IButtonInheritedProps> =
 React.forwardRef((props, ref) => {

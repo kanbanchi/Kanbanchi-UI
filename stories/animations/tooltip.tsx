@@ -94,8 +94,9 @@ const Story = () => {
                     </div>
                     <div className="stories-tooltips__right">
                         <Tooltip
-                            value="Direction up-left"
+                            value="Error Direction up-left"
                             direction="up-left"
+                            state="error"
                         >
                             <Button variant="icon">
                                 <Icon xlink="help" size={24} />
