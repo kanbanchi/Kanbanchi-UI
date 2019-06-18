@@ -33,3 +33,5 @@ export {Tabs} from './tabs/tabs';
 export {Tag} from './tags/tag';
 export {Tags} from './tags/tags';
 export {Tooltip} from './tooltip/tooltip';
+
+export {Userpic} from './userpic/userpic';
