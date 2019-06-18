@@ -10,6 +10,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         className,
         direction,
         maxWidth,
+        state,
         value
     } = props;
 
@@ -17,6 +18,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         'kui-tooltip',
         'kui-tooltip--direction_' + direction,
         (maxWidth) ? 'kui-tooltip--maxwidth_' + maxWidth : null,
+        (state) ? 'kui-tooltip--state_' + state : null,
         className
     );
 
@@ -168,6 +170,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 Tooltip.defaultProps = {
     direction: 'down',
     maxWidth: null,
+    state: null,
     value: null
 };
 
