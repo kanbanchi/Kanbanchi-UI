@@ -4,7 +4,6 @@ import { IDropdownDirectionVertical } from './../dropdown/types';
 import { ClassNames } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
-import { options } from 'date-fns/locale/et';
 
 export const Select: React.SFC<ISelectInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -104,6 +103,8 @@ React.forwardRef((props, ref) => {
                 setValue(e.item.text);
                 if (onChange) onChange(e);
             }
+        } else { // input changed
+            setValue(e.target.value);
         }
     }
 
