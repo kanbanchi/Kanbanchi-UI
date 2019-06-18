@@ -22,6 +22,7 @@ export {LoaderBlock} from './loaderBlock/loaderBlock';
 export {Radio} from './radio/radio';
 
 export {Search} from './search/search';
+export {SectionAccordion} from './sectionAccordion/sectionAccordion';
 export {Select} from './select/select';
 export {SelectList} from './selectList/selectList';
 export {SelectListItem} from './selectListItem/selectListItem';

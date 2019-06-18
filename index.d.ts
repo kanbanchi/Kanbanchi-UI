@@ -22,6 +22,7 @@ import {ILoaderBlockInheritedProps} from './src/ui/loaderBlock/types';
 import {IRadioInheritedProps} from './src/ui/radio/types';
 
 import {ISearchInheritedProps} from './src/ui/search/types';
+import {ISectionAccordionInheritedProps} from './src/ui/sectionAccordion/types';
 import {ISelectInheritedProps} from './src/ui/select/types';
 import {ISelectListInheritedProps} from './src/ui/selectList/types';
 import {ISelectListItemInheritedProps} from './src/ui/selectListItem/types';
@@ -55,6 +56,7 @@ export declare const LoaderBlock: React.SFC<ILoaderBlockInheritedProps>;
 export declare const Radio: React.SFC<IRadioInheritedProps>;
 
 export declare const Search: React.SFC<ISearchInheritedProps>;
+export declare const SectionAccordion: React.SFC<ISectionAccordionInheritedProps>;
 export declare const Select: React.SFC<ISelectInheritedProps>;
 export declare const SelectList: React.SFC<ISelectListInheritedProps>;
 export declare const SelectListItem: React.SFC<ISelectListItemInheritedProps>;
