@@ -34,7 +34,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const [isTouchHook, setIsTouchHook] = React.useState(false);
 
     const calcTooltip = (index: number = 0) => {
-        let target = targetsRefs[index].current;
+        let target = targetsRefs[index].current || targetsRefs[index];
         let targetRect = target.getBoundingClientRect();
         let targetObj: any = {
             x: target.offsetLeft,
@@ -135,7 +135,15 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
     const targets = React.Children.map(childrenArray, (child: any, index) => {
         return React.cloneElement(child, {
-            ref: targetsRefs[index],
+            ref: (node: any) => {
+                targetsRefs[index] = node;
+                const {ref} = child;
+                if (typeof ref === 'function') {
+                    ref(node);
+                } else if (ref !== null) {
+                    ref.current = node;
+                }
+            },
             title: null,
             tooltip: null,
             onBlur: (e) => {
