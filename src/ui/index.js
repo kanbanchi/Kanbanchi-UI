@@ -22,6 +22,7 @@ export {LoaderBlock} from './loaderBlock/loaderBlock';
 export {Radio} from './radio/radio';
 
 export {Search} from './search/search';
+export {SectionAccordion} from './sectionAccordion/sectionAccordion';
 export {Select} from './select/select';
 export {SelectList} from './selectList/selectList';
 export {SelectListItem} from './selectListItem/selectListItem';
@@ -29,4 +30,6 @@ export {Snackbar} from './snackbar/snackbar';
 export {Switch} from './switch/switch';
 
 export {Tabs} from './tabs/tabs';
+export {Tag} from './tags/tag';
+export {Tags} from './tags/tags';
 export {Tooltip} from './tooltip/tooltip';

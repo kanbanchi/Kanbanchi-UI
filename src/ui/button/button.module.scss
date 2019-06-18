@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     vertical-align: baseline;
+    max-width: 100%;
     min-width: $google-spacing * 8;
     padding: 0;
     line-height: inherit;
@@ -19,6 +20,7 @@
     user-select: none;
     text-decoration: none;
     outline: 0;
+    overflow: hidden;
     -webkit-appearance: none;
     -moz-appearance: none;
     @include transition;
@@ -469,6 +471,38 @@
         &:disabled {
             color: calc-color(fade, $color-base, 30);
             pointer-events: none;
+        }
+    }
+
+    &--progress {
+        pointer-events: none;
+    }
+
+    &__progress {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: calc-color(fade, $color-white, 30);
+
+        .kui-button--variant_secondary & {
+            background: calc-color(fade, $color-purple, 30);
+        }
+        .kui-button--variant_secondary.kui-button--disabled &,
+        .kui-button--variant_secondary:disabled & {
+            background: calc-color(fade, $color-purple, 20);
+        }
+    }
+}
+
+@each $media, $size in $media-screens {
+    @media (max-width: $size) {
+        .kui-button--maxwidth_#{$media} {
+            &.kui-button--variant_icon-text {
+                .kui-button__text {
+                    display: none;
+                }
+            }
         }
     }
 }

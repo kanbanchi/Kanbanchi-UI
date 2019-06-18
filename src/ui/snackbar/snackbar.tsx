@@ -37,6 +37,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
     if (buttons) {
         buttonsGroup = buttons.map((item, key) => {
             let {
+                progress,
                 text,
                 onClick,
                 onTimer,
@@ -50,6 +51,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                     className="kui-snackbar__button"
                     color="white"
                     key={key}
+                    progress={progress}
                     onClick={()=>onButtonClick(item)}
                     {...attributes}
                 >

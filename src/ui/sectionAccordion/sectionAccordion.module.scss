@@ -1,0 +1,130 @@
+@import '../../assets/sass/index.scss';
+
+.kui-section-accordion {
+    position: relative;
+
+    & + & {
+        margin-top: $google-spacing * 2;
+    }
+
+    &-header {
+        position: sticky;
+        z-index: 1;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: $google-spacing 0 $google-spacing / 2;
+        border-bottom: 1px solid calc-color(fade, $color-base, 20);
+        background: $color-white;
+    }
+
+    &-button {
+        opacity: 1;
+
+        &:active,
+        &:focus {
+            opacity: 1;
+        }
+
+        &__icon {
+            color: calc-color(fade, $color-base, 30);
+            @include transition;
+        }
+
+        &__title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: calc-color(fade, $color-base, 60);
+            @include transition;
+        }
+
+        &:hover &__icon {
+            color: calc-color(fade, $color-base, 60);
+        }
+
+        &:hover &__title {
+            color: $color-base;
+        }
+    }
+
+    &__arrow {
+        margin-left: $google-spacing;
+        @include transition;
+    }
+    
+    &-action {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-left: $google-spacing * 2;
+
+        &__button {
+            opacity: .5;
+        }
+    }
+
+    &-body {
+        overflow: hidden;
+        display: none;
+        @include transition;
+    }
+
+    &--closed {
+        .kui-section-accordion-body {
+            display: block;
+            animation: animation_height_close .3s ease forwards;
+        }
+    }
+
+    &--opened {
+        .kui-section-accordion-body {
+            display: block;
+            animation: animation_height_open .3s ease forwards;
+        }
+    }
+
+    &--opened-default {
+        .kui-section-accordion-body {
+            display: block;
+        }
+    }
+
+    &--opened,
+    &--opened-default {
+        .kui-section-accordion__arrow {
+            transform: scaleY(-1);
+        }
+    }
+
+    &--color_grey {
+        .kui-section-accordion-header {
+            background: $color-background;
+        }
+    }
+}
+
+@keyframes animation_height_open {
+    0% {
+        height: auto;
+        max-height: 0;
+    }
+
+    90% {
+        max-height: 100vh;
+    }
+    
+    100% {
+        max-height: auto;
+    }
+}
+@keyframes animation_height_close {
+    0% {
+        max-height: 100vh;
+    }
+
+    100% {
+        max-height: 0;
+    }
+}

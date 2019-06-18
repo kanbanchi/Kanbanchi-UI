@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IButtonTitleInheritedProps } from './types';
 import { ClassNames } from '../utils';
-import '../../../src/ui/buttonsGroup/buttonsGroup.module.scss';
+import '../../../src/ui/buttonTitle/buttonTitle.module.scss';
 
 export const ButtonTitle: React.SFC<IButtonTitleInheritedProps> =
 (props) => {

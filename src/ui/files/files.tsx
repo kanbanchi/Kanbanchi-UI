@@ -7,11 +7,11 @@ import '../../../src/ui/files/files.module.scss';
 const DefaultFileView: React.SFC<any> = (props: any) => (
     <div className={'kui-files-item'}>
         <span className="kui-files-item__col kui-files-item__col--icon">
-            <img src={props.file.iconUrl} />
+            <img src={props.iconUrl} />
         </span>
         <span className="kui-files-item__col kui-files-item__col--title">
             <span className="kui-files-item__title">
-                {props.file.title}
+                {props.title}
             </span>
         </span>
         <span className="kui-files-item__col kui-files-item__col--actions" />
@@ -32,7 +32,7 @@ React.forwardRef((props, ref) => {
     className = ClassNames('kui-files', className);
 
     const fileList = files.map((file, index) => (
-        <FileView file={file} key={index} />
+        <FileView {...file} key={index} />
     ));
 
     return (
