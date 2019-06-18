@@ -38,8 +38,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         let target = targetsRefs[index].current || targetsRefs[index];
         let targetRect = target.getBoundingClientRect();
         let targetObj: any = {
-            x: targetRect.x,
-            y: targetRect.y,
+            x: targetRect.left,
+            y: targetRect.top,
             width: targetRect.width || targetRect.right - targetRect.left,
             height: targetRect.height || targetRect.bottom - targetRect.top,
         };
