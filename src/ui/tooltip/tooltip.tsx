@@ -9,12 +9,14 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         children,
         className,
         direction,
+        maxWidth,
         value
     } = props;
 
     className = ClassNames(
         'kui-tooltip',
         'kui-tooltip--direction_' + direction,
+        (maxWidth) ? 'kui-tooltip--maxwidth_' + maxWidth : null,
         className
     );
 
@@ -29,64 +31,59 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     s.touchHook = touchHook;
     const [isTouchHook, setIsTouchHook] = React.useState(false);
 
-    const toggleTooltip = (index: number = 0, show: boolean = false) => {
-        setIsShown(show);
-        if (!show) {
-            setClassHook(ClassNames(
-                className,
-                'kui-tooltip--hide'
-            ));
-        } else {
-            let target = targetsRefs[index].current;
-            let targetRect = target.getBoundingClientRect();
-            let targetObj: any = {
-                x: target.offsetLeft,
-                y: target.offsetTop,
-                width: targetRect.width || targetRect.right - targetRect.left,
-                height: targetRect.height || targetRect.bottom - targetRect.top,
-            };
-            targetObj.right = target.offsetLeft + targetObj.width;
-            targetObj.bottom = target.offsetTop + targetObj.height;
+    const calcTooltip = (index: number = 0) => {
+        let target = targetsRefs[index].current;
+        let targetRect = target.getBoundingClientRect();
+        let targetObj: any = {
+            x: target.offsetLeft,
+            y: target.offsetTop,
+            width: targetRect.width || targetRect.right - targetRect.left,
+            height: targetRect.height || targetRect.bottom - targetRect.top,
+        };
+        targetObj.right = target.offsetLeft + targetObj.width;
+        targetObj.bottom = target.offsetTop + targetObj.height;
 
-            let item = itemRef.current;
-            let itemRect = item.getBoundingClientRect();
-            let itemObj: any = {
-                width: itemRect.width || itemRect.right - itemRect.left,
-                height: itemRect.height || itemRect.bottom - itemRect.top
-            };
+        let item = itemRef.current;
+        let itemRect = item.getBoundingClientRect();
+        let itemObj: any = {
+            width: itemRect.width || itemRect.right - itemRect.left,
+            height: itemRect.height || itemRect.bottom - itemRect.top
+        };
 
-            if (direction.includes('down')) {
-                item.style.top = targetObj.bottom + 'px';
+        if (direction.includes('down')) {
+            item.style.top = targetObj.bottom + 'px';
 
-            } else if (direction.includes('up')) {
-                item.style.top = targetObj.y - itemObj.height + 'px';
+        } else if (direction.includes('up')) {
+            item.style.top = targetObj.y - itemObj.height + 'px';
 
-            } else if (direction === 'left' || direction === 'right') {
-                item.style.top = targetObj.y + targetObj.height / 2 + 'px';
-            }
-
-            if (direction === ('down') || direction === ('up')) {
-                item.style.left = targetObj.x + targetObj.width / 2 + 'px';
-
-            } else if (direction.includes('-left')) {
-                item.style.left = targetObj.right - itemObj.width + 'px';
-
-            } else if (direction.includes('-right')) {
-                item.style.left = targetObj.x + 'px';
-
-            } else if (direction === 'left') {
-                item.style.left = targetObj.x - itemObj.width + 'px';
-
-            } else if (direction === 'right') {
-                item.style.left = targetObj.right + 'px';
-
-            }
-
-            setClassHook(ClassNames(
-                className,
-                'kui-tooltip--show'
-            ));
+        } else if (direction === 'left' || direction === 'right') {
+            item.style.top = targetObj.y + targetObj.height / 2 + 'px';
         }
+
+        if (direction === ('down') || direction === ('up')) {
+            item.style.left = targetObj.x + targetObj.width / 2 + 'px';
+
+        } else if (direction.includes('-left')) {
+            item.style.left = targetObj.right - itemObj.width + 'px';
+
+        } else if (direction.includes('-right')) {
+            item.style.left = targetObj.x + 'px';
+
+        } else if (direction === 'left') {
+            item.style.left = targetObj.x - itemObj.width + 'px';
+
+        } else if (direction === 'right') {
+            item.style.left = targetObj.right + 'px';
+
+        }
+    };
+
+    const toggleTooltip = (show: boolean = false) => {
+        setIsShown(show);
+        setClassHook(ClassNames(
+            className,
+            'kui-tooltip--' + (show ? 'show' : 'hide')
+        ));
     };
 
     const toggleMouse = (index: number, show: boolean) => {
@@ -94,28 +91,30 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         if (!show) {
             clearTimeout(timeoutHook);
             setTimeoutHook(null);
-            toggleTooltip(index, show);
-        } else {
-            setTimeoutHook(setTimeout(() => {
-                if (getTimeoutHook()) {
-                    toggleTooltip(index, show);
-                }
-            }, 300));
+            toggleTooltip();
+            return;
         }
+        calcTooltip(index);
+        setTimeoutHook(setTimeout(() => {
+            if (getTimeoutHook()) {
+                toggleTooltip(show);
+            }
+        }, 300));
     };
 
     const toggleTouch = (index: number, show: boolean) => {
         if (!show) {
             clearTimeout(touchHook);
             setTouchHook(null);
-        } else {
-            setIsTouchHook(true);
-            setTouchHook(setTimeout(() => {
-                if (getTouchHook()) {
-                    toggleTooltip(index, show);
-                }
-            }, 300));
+            return;
         }
+        setIsTouchHook(true);
+        calcTooltip(index);
+        setTouchHook(setTimeout(() => {
+            if (getTouchHook()) {
+                toggleTooltip(show);
+            }
+        }, 300));
     };
 
     const closeTooltip = () => {
@@ -136,6 +135,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         return React.cloneElement(child, {
             ref: targetsRefs[index],
             title: null,
+            tooltip: null,
             onBlur: (e) => {
                 closeTooltip();
                 if (child.props.onBlur) child.props.onBlur(e);
@@ -167,6 +167,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
 Tooltip.defaultProps = {
     direction: 'down',
+    maxWidth: null,
     value: null
 };
 

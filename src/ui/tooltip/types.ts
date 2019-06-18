@@ -1,3 +1,5 @@
+import { IMediaScreens } from './../types';
+
 export interface ITooltipProps {
     direction?:
         'up'
@@ -8,6 +10,7 @@ export interface ITooltipProps {
         | 'down'
         | 'down-left'
         | 'down-right';
+    maxWidth?: IMediaScreens;
     value: string;
 }
 
