@@ -1,6 +1,7 @@
 import './stories.module.scss';
 
 import Loader from './animations/loader';
+import SectionAccordion from './animations/sectionAccordion';
 import Snackbars from './animations/snackbars';
 import Tooltip from './animations/tooltip';
 
@@ -10,6 +11,7 @@ import Fab from './buttons/fab';
 import Icon from './buttons/icon';
 import IconText from './buttons/iconText';
 import Primary from './buttons/primary';
+import Progress from './buttons/progress';
 import Secondary from './buttons/secondary';
 import Text from './buttons/text';
 
@@ -32,6 +34,7 @@ import SelectList from './controls/selectList';
 import Select from './controls/select';
 import Switch from './controls/switch';
 import Tabs from './controls/tabs';
+import Tags from './controls/tags';
 
 import TestComponent from './wip/testComponent';
 import NotificationListItemComponent from './wip/testNotificationListItemComponent';

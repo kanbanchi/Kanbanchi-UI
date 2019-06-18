@@ -9,6 +9,23 @@ const Story = () => {
         queueRef.current.AddSnackbar();
     }
 
+    const [progressHook, setProgressHook] = React.useState(0);
+    const [s] = React.useState<any>({});
+    const [getProgressHook] = React.useState(() => () => s.progressHook);
+    s.progressHook = progressHook;
+    const [intervalHook, setIntervalHook] = React.useState(null);
+
+    React.useEffect(() => {
+        setIntervalHook(setInterval(() => {
+            let progress = (getProgressHook() >= 100) ? 0 : getProgressHook() + 1;
+            setProgressHook(progress);
+        }, 100));
+
+        return () => {
+            clearInterval(intervalHook);
+        };
+    }, []);
+
     return (
         <div className="page">
             <section className="snackbars">
@@ -69,6 +86,21 @@ const Story = () => {
                     ]}
                 />
             </section>
+
+            <section className="snackbars">
+                <h2>Progress</h2>
+                <Snackbar
+                    title="We are moving your board"
+                    text="It may take some time"
+                    buttons={[
+                        {
+                            progress: progressHook,
+                            text: progressHook + '%'
+                        }
+                    ]}
+                />
+            </section>
+
             <section className="snackbars">
                 <h2>Success</h2>
                 <Snackbar

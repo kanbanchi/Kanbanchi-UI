@@ -1,3 +1,5 @@
+import { ITooltipProps } from './../tooltip/types';
+
 export interface IInputStateProps {
     value?: string;
 }
@@ -14,6 +16,8 @@ export interface IInputPublicProps {
     icon?: string;
     isClearable?: boolean;
     label?: string;
+    state?: 'error' | 'success';
+    tooltip?: string | ITooltipProps;
     type?: string;
     variant?:
         'arrow'

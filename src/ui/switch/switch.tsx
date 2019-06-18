@@ -5,7 +5,7 @@ import { Label } from '../../ui';
 import '../../../src/ui/switch/switch.module.scss';
 
 export const Switch: React.SFC<ISwitchInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -24,7 +24,7 @@ export const Switch: React.SFC<ISwitchInheritedProps> =
     if (attributes.disabled) attributes.checked = false;
 
     return (
-        <Label className={className}>
+        <Label className={className} ref={ref as any}>
             <input
                 className="kui-switch__input"
                 type="checkbox"
@@ -35,7 +35,7 @@ export const Switch: React.SFC<ISwitchInheritedProps> =
             </span>
         </Label>
     );
-}
+});
 
 Switch.defaultProps = {
     checked: false,
