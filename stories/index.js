@@ -10,6 +10,7 @@ import Fab from './buttons/fab';
 import Icon from './buttons/icon';
 import IconText from './buttons/iconText';
 import Primary from './buttons/primary';
+import Progress from './buttons/progress';
 import Secondary from './buttons/secondary';
 import Text from './buttons/text';
 
