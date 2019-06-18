@@ -11,6 +11,7 @@
     border-radius: $base-radius;
     border: 1px solid calc-color(fade, $color-base, 15);
     background: $color-white;
+    @include transition;
 
     &:hover {
         box-shadow: $shadow-hover;
