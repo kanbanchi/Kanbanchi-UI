@@ -11,11 +11,11 @@ const Story = () => {
     const cardView = (props: any) => (
         <div className='kui-files-item'>
             <span className="kui-files-item__col kui-files-item__col--icon">
-                <img src={props.file.iconUrl}/>
+                <img src={props.iconUrl}/>
             </span>
             <span className="kui-files-item__col kui-files-item__col--title">
                 <span className="kui-files-item__title">
-                    {props.file.title}
+                    {props.title}
                 </span>
             </span>
             <span className="kui-files-item__col kui-files-item__col--actions">
