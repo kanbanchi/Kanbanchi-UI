@@ -58,6 +58,22 @@
         }
     }
 
+    &--state_error {
+        .kui-input__item {
+            border-color: $color-red;
+        }
+
+        .kui-label__item {
+            color: $color-red;
+        }
+    }
+
+    &--state_success {
+        .kui-input__item {
+            border-color: $color-green;
+        }
+    }
+
     &--disabled {
         .kui-label__item {
             color: calc-color(fade, $color-base, 30);
