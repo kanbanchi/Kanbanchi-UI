@@ -45,7 +45,7 @@ const Story = () => {
 
                 <Userpic
                     background="#64ffda"
-                    size={32}
+                    size={24}
                     src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
                     tooltip={{
                         direction: 'down-right',
@@ -57,7 +57,7 @@ const Story = () => {
 
                 <Userpic
                     background="#2196f3"
-                    size={32}
+                    size={24}
                     src="https://cdn.pixabay.com/photo/2019/05/19/12/45/woman-4214001_960_720.jpg"
                     tooltip={{
                         direction: 'down-right',
