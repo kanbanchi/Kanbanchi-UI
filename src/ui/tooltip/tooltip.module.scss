@@ -12,6 +12,10 @@
     background: $color-base;
     visibility: hidden;
 
+    &--empty {
+        visibility: hidden !important;
+    }
+
     &--state_error {
         background: $color-red;
     }
