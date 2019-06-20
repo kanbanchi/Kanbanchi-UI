@@ -20,6 +20,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         'kui-tooltip--direction_' + direction,
         (maxWidth) ? 'kui-tooltip--maxwidth_' + maxWidth : null,
         (state) ? 'kui-tooltip--state_' + state : null,
+        (!value) ? 'kui-tooltip--empty' : null,
         className
     );
 
@@ -163,6 +164,10 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             onTouchEnd: () => toggleTouch(index, false)
         });
     });
+
+    React.useEffect(() => {
+        setClassHook(className);
+    }, [value]);
 
     return (
         <>
