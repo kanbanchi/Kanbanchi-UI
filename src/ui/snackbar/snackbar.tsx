@@ -72,19 +72,15 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
     const [timeoutHook, setTimeoutHook] = React.useState(null);
 
     React.useEffect(() => {
-        if (timerHook === null) {
-            clearTimeout(timeoutHook);
-            return;
-        }
+        if (timerHook === null) return;
         if (timerHook < 1) {
             onTimerAction();
+            clearTimeout(timeoutHook);
+            setTimeoutHook('umounted');
         } else {
             setTimeoutHook(setTimeout(() => {
-                setTimerHook(timerHook - 1);
+                if (timeoutHook) setTimerHook(timerHook - 1);
             }, 1000));
-        }
-        return () => {
-            clearTimeout(timeoutHook);
         }
     }, [timerHook]);
 
