@@ -73,4 +73,4 @@ export declare const Tooltip: React.SFC<ITooltipInheritedProps>;
 
 export declare const Userpic: React.SFC<IUserpicInheritedProps>;
 
-export {ISnackbarProps} from './src/ui/snackbar/types';
+export {ISnackbarInheritedProps};
