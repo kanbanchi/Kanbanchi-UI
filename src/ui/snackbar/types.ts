@@ -1,3 +1,19 @@
+export interface ISnackbarButtonStateProps {
+    progress?: number; // percentage 0..100
+    text: string;
+}
+
+export interface ISnackbarButtonDispatchProps {
+    onClick?: () => void;
+}
+
+export interface ISnackbarButtonProps extends
+    ISnackbarButtonStateProps,
+    ISnackbarButtonDispatchProps
+{
+    onTimer?: boolean;
+}
+
 export enum ISnackbarDefaultIcons {
     error = 'error',
     info = 'info',
@@ -7,13 +23,6 @@ export enum ISnackbarDefaultIcons {
 
 export interface ISnackbarDispatchProps {
     onTimer?: () => void;
-}
-
-export interface ISnackbarButtonProps {
-    progress?: number; // percentage 0..100
-    text: string;
-    onClick?: () => void;
-    onTimer?: boolean;
 }
 
 export interface ISnackbarProps extends
