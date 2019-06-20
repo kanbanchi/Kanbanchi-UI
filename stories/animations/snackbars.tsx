@@ -16,12 +16,15 @@ const Story = () => {
     const [intervalHook, setIntervalHook] = React.useState(null);
 
     React.useEffect(() => {
+        let unmounted = false;
         setIntervalHook(setInterval(() => {
+            if (unmounted) return;
             let progress = (getProgressHook() >= 100) ? 0 : getProgressHook() + 1;
             setProgressHook(progress);
         }, 100));
 
         return () => {
+            unmounted = true;
             clearInterval(intervalHook);
         };
     }, []);
