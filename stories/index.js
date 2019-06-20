@@ -36,6 +36,8 @@ import Switch from './controls/switch';
 import Tabs from './controls/tabs';
 import Tags from './controls/tags';
 
+import Userpic from './stuff/userpic';
+
 import TestComponent from './wip/testComponent';
 import NotificationListItemComponent from './wip/testNotificationListItemComponent';
 import DetailedProductivityReport from './wip/DetailedProductivityReport';
