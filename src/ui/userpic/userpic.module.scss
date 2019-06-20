@@ -1,0 +1,86 @@
+@import '../../assets/sass/index.scss';
+.kui-userpic {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: $google-spacing * 2;
+    min-width: $google-spacing * 2;
+    height: $google-spacing * 2;
+    background: $color-background;
+    border-radius: $base-radius;
+    overflow: hidden;
+    cursor: pointer;
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        background: $color-background;
+        background-size: cover;
+    }
+
+    &--size_16 {
+        width: $google-spacing * 2;
+        min-width: $google-spacing * 2;
+        height: $google-spacing * 2;
+    }
+
+    &--size_24 {
+        width: $google-spacing * 3;
+        min-width: $google-spacing * 3;
+        height: $google-spacing * 3;
+    }
+
+    &--size_32 {
+        width: $google-spacing * 4;
+        min-width: $google-spacing * 4;
+        height: $google-spacing * 4;
+        border-radius: $big-radius;
+    }
+
+    &--size_40 {
+        width: $google-spacing * 5;
+        min-width: $google-spacing * 5;
+        height: $google-spacing * 5;
+        border-radius: $big-radius;
+    }
+
+    &--background {
+        background: calc-color(fade, $color-white, 10);
+        border: $google-spacing / 4 solid $color-background;
+
+        .kui-userpic__img {
+            border-radius: $small-radius;
+        }
+
+        &.kui-userpic--size_16 {
+            .kui-userpic__img {
+                width: $google-spacing;
+                height: $google-spacing;
+            }
+        }
+
+        &.kui-userpic--size_24 {
+            .kui-userpic__img {
+                width: $google-spacing * 2;
+                height: $google-spacing * 2;
+            }
+        }
+
+        &.kui-userpic--size_32 {
+            .kui-userpic__img {
+                width: $google-spacing * 3;
+                height: $google-spacing * 3;
+                border-radius: $base-radius;
+            }
+        }
+
+        &.kui-userpic--size_40 {
+            .kui-userpic__img {
+                width: $google-spacing * 4;
+                height: $google-spacing * 4;
+                border-radius: $base-radius;
+            }
+        }
+    }
+}

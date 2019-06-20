@@ -33,3 +33,15 @@ export const ClassesList = (element: HTMLElement, names: string | Array<string> 
 export const isMobileDevice = () =>
     (typeof window.orientation !== 'undefined')
     || (navigator.userAgent.indexOf('IEMobile') !== -1);
+
+export const getScrollClient = () => {
+    const body = document.body;
+    const docEl = document.documentElement;
+
+    return {
+        scrollLeft: window.pageXOffset || docEl.scrollLeft || body.scrollLeft,
+        scrollTop: window.pageYOffset || docEl.scrollTop || body.scrollTop,
+        clientLeft: docEl.clientLeft || body.clientLeft || 0,
+        clientTop: docEl.clientTop || body.clientTop || 0
+    }
+}

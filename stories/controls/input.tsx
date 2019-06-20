@@ -4,10 +4,30 @@ import { Input } from '../../src/ui';
 
 const Story = () => {
     const [val, setVal] = React.useState('');
+    const [val1, setVal1] = React.useState('');
+    const [tt, setTt] = React.useState(null);
     return (
         <div className="page">
             <section className="section-form-min">
                 <h2>Input</h2>
+
+                <Input
+                    label="Error"
+                    placeholder="Hover for tooltip"
+                    state={tt ? 'error' : null}
+                    tooltip={{
+                        direction: 'right',
+                        value: tt
+                    }}
+                    value={val1}
+                    onChange={(e: any)=>{
+                            setTt((e.target.value === '5') ? 'error' : null);
+                            setVal1(e.target.value)
+                        }
+                    }
+                />
+
+                <br/>
 
                 <Input
                     label="Error"
