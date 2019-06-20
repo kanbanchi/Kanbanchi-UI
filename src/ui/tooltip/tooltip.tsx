@@ -38,7 +38,6 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         let target = targetsRefs[index].current || targetsRefs[index];
         let targetRect = target.getBoundingClientRect();
         const scrollClient = getScrollClient();
-        console.log(scrollClient);
 
         let targetObj: any = {
             x: targetRect.left + scrollClient.scrollLeft - scrollClient.clientLeft,
