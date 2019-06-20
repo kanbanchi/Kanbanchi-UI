@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ISnackbarInheritedProps, ISnackbarButtonProps, ISnackbarDefaultIcons } from './types';
+import { ISnackbarInheritedProps, ISnackbarDefaultIcons } from './types';
 import { ClassNames } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
@@ -39,12 +39,11 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
             let {
                 progress,
                 text,
-                onClick,
                 onTimer,
                 ...attributes
             } = item;
 
-            if (onTimer) onTimerDefault = onClick;
+            if (onTimer) onTimerDefault = attributes.onClick;
 
             return (
                 <Button
@@ -52,7 +51,6 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                     color="white"
                     key={key}
                     progress={progress}
-                    onClick={()=>onButtonClick(item)}
                     {...attributes}
                 >
                     {text}
@@ -66,43 +64,33 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         );
     }
 
-    const onButtonClick = (button: ISnackbarButtonProps) => {
-        if (button.onClick) button.onClick();
-        hideSnackbar();
-    };
-
     const onTimerAction = () => {
         if (onTimerDefault) onTimerDefault();
-        hideSnackbar();
-    };
-
-    const hideSnackbar = () => {
-        setTimerHook(null);
-        setIsShownHook(false);
     };
 
     const [timerHook, setTimerHook] = React.useState(timer);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
-    const [isShownHook, setIsShownHook] = React.useState(true);
 
     React.useEffect(() => {
-        if (timerHook === null) {
-            clearTimeout(timeoutHook);
-            return;
-        }
+        if (timerHook === null) return;
         if (timerHook < 1) {
             onTimerAction();
+            clearTimeout(timeoutHook);
+            setTimeoutHook('umounted');
         } else {
             setTimeoutHook(setTimeout(() => {
-                setTimerHook(timerHook - 1);
+                if (timeoutHook) setTimerHook(timerHook - 1);
             }, 1000));
-        }
-        return () => {
-            clearTimeout(timeoutHook);
         }
     }, [timerHook]);
 
-    return isShownHook && (
+    React.useEffect(() => {
+        return () => {
+            clearTimeout(timeoutHook);
+        }
+    }, []);
+
+    return (
         <div className="kui-snackbar__container">
             <div
                 className={className}

@@ -68,3 +68,5 @@ export declare const Tabs: React.SFC<ITabsInheritedProps>;
 export declare const Tag: React.SFC<ITagInheritedProps>;
 export declare const Tags: React.SFC<ITagsInheritedProps>;
 export declare const Tooltip: React.SFC<ITooltipInheritedProps>;
+
+export {ISnackbarProps} from './src/ui/snackbar/types';
