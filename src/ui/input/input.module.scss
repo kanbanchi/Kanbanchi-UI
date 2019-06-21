@@ -43,9 +43,13 @@
             white-space: nowrap;
         }
 
+        &:hover {
+            background: $color-white;
+        }
+
         &:focus {
             border-color: $color-purple;
-            background: $color-light-background;
+            background: $color-white;
             box-shadow: none;
         }
 

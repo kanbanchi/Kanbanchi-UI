@@ -34,6 +34,15 @@ export const isMobileDevice = () =>
     (typeof window.orientation !== 'undefined')
     || (navigator.userAgent.indexOf('IEMobile') !== -1);
 
+export const userAgentsInclude = (agents: Array<string>) => {
+    const ua = navigator.userAgent.toLowerCase();
+    let includes = false;
+    agents.forEach((agent: string) => {
+        if (ua.includes(agent)) includes = true;
+    });
+    return includes;
+}
+
 export const getScrollClient = () => {
     const body = document.body;
     const docEl = document.documentElement;
