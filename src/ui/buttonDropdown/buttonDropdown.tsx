@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IButtonDropdownInheritedProps } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
-import { ClassNames } from '../utils';
+import { ClassNames, userAgentsInclude } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
@@ -42,7 +42,10 @@ React.forwardRef((props, ref) => {
     }
 
     const dropdownAnimationEnd = () => {
-        if (isOpenedHook) {
+        if (
+            isOpenedHook
+            && !userAgentsInclude(['edge', 'safari'])
+        ) {
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
     }

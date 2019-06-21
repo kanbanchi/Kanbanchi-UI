@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
-import { ClassNames } from '../utils';
+import { ClassNames, userAgentsInclude } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 
@@ -71,7 +71,10 @@ React.forwardRef((props, ref) => {
     }
 
     const dropdownAnimationEnd = () => {
-        if (isOpenedHook) {
+        if (
+            isOpenedHook
+            && !userAgentsInclude(['edge', 'safari'])
+        ) {
             scrollList();
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }

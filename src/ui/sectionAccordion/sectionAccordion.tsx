@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ISectionAccordionInheritedProps } from './types';
-import { ClassNames } from '../utils';
+import { ClassNames, userAgentsInclude } from '../utils';
 import '../../../src/ui/sectionAccordion/sectionAccordion.module.scss';
 import { Button, ButtonTitle, Icon } from '../../ui';
 
@@ -41,7 +41,10 @@ React.forwardRef((props, ref) => {
     }
 
     const bodyAnimationEnd = () => {
-        if (isOpenedHook) {
+        if (
+            isOpenedHook
+            && !userAgentsInclude(['edge', 'safari'])
+        ) {
             setTimeout(() => {
                 headerRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
             }, 100);
