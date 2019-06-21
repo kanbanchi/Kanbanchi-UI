@@ -24,6 +24,7 @@
     }
 
     .kui-input__item {
+        -webkit-appearance: textfield;
         padding-left: $google-spacing * 6;
     }
 }
