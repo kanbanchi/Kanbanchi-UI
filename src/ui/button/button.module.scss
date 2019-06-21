@@ -447,8 +447,7 @@
 
         &:hover {
             color: $color-base;
-            border: 1px dashed transparent;
-            box-shadow: $shadow-hover;
+            border: 1px solid $color-base;
 
             .kui-button__icon {
                 color: $color-base;
@@ -458,8 +457,7 @@
         .kui-button-dropdown--opened &,
         &:active {
             background: calc-color(fade, $color-base, 5);
-            border: 1px dashed transparent;
-            box-shadow: $shadow-hover;
+            border: 1px solid $color-base;
 
             .kui-button__icon {
                 color: $color-base;
