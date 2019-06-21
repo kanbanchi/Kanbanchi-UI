@@ -14,6 +14,7 @@
 
     &--empty {
         visibility: hidden !important;
+        animation: none !important;
     }
 
     &--state_error {
@@ -208,6 +209,7 @@
     @media (min-width: $size) {
         .kui-tooltip--maxwidth_#{$media} {
             visibility: hidden !important;
+            animation: none !important;
         }
     }
 }
