@@ -35,7 +35,7 @@ const Story = () => {
                 <h2>Promt</h2>
                 <Snackbar
                     variant="promt"
-                    text={'It may take some time'}
+                    text={'Please, don\'t close this page during the process to avoid data loss'}
                     title={'We will move your board'}
                     buttons={[
                         {
@@ -68,8 +68,8 @@ const Story = () => {
                 <h2>Success</h2>
                 <Snackbar
                     variant="success"
-                    text = "Teamdrive long name Lorem ipsum / Board long name Lorem ipsum"
-                    title = "Board has been moved"
+                    text = "To Teamdrive long name Lorem ipsum"
+                    title = "Board 'Board long name Lorem ipsum' has been moved"
                     buttons={[
                         {
                             text: 'Ok'
