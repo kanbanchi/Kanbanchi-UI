@@ -59,13 +59,14 @@ const Story = () => {
                     text={'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
                     buttons={[
                         {
-                            text: 'Cancel',
-                            onClick: () => console.log('cancel')
-                        },
-                        {
                             text: 'Ok',
+                            isPrimary: true,
                             onClick: () => console.log('ok'),
                             onTimer: true
+                        },
+                        {
+                            text: 'Cancel',
+                            onClick: () => console.log('cancel')
                         }
                     ]}
                 />
@@ -76,6 +77,7 @@ const Story = () => {
                     text="Error text shown 5 seconds"
                 />
             </section>
+
             <section className="snackbars">
                 <h2>Info</h2>
                 <Snackbar
@@ -85,6 +87,25 @@ const Story = () => {
                         {
                             text: 'Refresh',
                             onClick: () => window.location.reload()
+                        }
+                    ]}
+                />
+            </section>
+
+            <section className="snackbars">
+                <h2>Promt</h2>
+                <Snackbar
+                    variant="promt"
+                    text={'It may take some time'}
+                    title={'We will move your board'}
+                    buttons={[
+                        {
+                            text: 'Start',
+                            isPrimary: true,
+                            onTimer: true
+                        },
+                        {
+                            text: 'Cancel'
                         }
                     ]}
                 />

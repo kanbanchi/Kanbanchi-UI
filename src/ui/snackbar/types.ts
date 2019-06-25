@@ -11,12 +11,14 @@ export interface ISnackbarButtonProps extends
     ISnackbarButtonStateProps,
     ISnackbarButtonDispatchProps
 {
+    isPrimary?: boolean;
     onTimer?: boolean;
 }
 
 export enum ISnackbarDefaultIcons {
     error = 'error',
     info = 'info',
+    promt = 'help',
     success = 'done',
     timer = 'error'
 }
@@ -36,6 +38,7 @@ export interface ISnackbarProps extends
     variant?:
         'error'
         | 'info'
+        | 'promt'
         | 'success'
         | 'timer';
 }

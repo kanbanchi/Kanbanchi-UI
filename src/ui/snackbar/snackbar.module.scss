@@ -70,6 +70,10 @@
         background-color: $color-red;
     }
 
+    &--variant_promt {
+        background-color: $color-base;
+    }
+
     &--variant_success {
         background-color: $color-green;
     }
@@ -89,8 +93,13 @@
         }
     }
 
-    &--notitle &__text {
-        font-size: $h5-size;
+    &__button--primary {
+        background: calc-color(fade, $color-white, 50);
+
+        &:focus,
+        &:hover {
+            background: calc-color(fade, $color-white, 60);
+        }
     }
 
     @media (max-width: $media-iPad) {
@@ -109,8 +118,7 @@
             width: 100%;
         }
 
-        &__title,
-        &--notitle &__text {
+        &__title {
             font-size: $base-font-size;
         }
 
