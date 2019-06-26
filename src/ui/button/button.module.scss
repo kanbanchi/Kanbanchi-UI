@@ -20,7 +20,6 @@
     user-select: none;
     text-decoration: none;
     outline: 0;
-    overflow: hidden;
     -webkit-appearance: none;
     -moz-appearance: none;
     @include transition;
@@ -160,33 +159,10 @@
             height: $google-spacing * 5;
             color: calc-color(fade, $color-base, 30);
             background: $color-white;
-            border: 1px solid calc-color(fade, $color-base, 15);
+            border: 2px solid calc-color(fade, $color-base, 15);
             border-radius: $big-radius;            
             box-shadow: none;
             @include transition;
-        }
-
-        &:focus {
-            .kui-button__children {
-                color: $color-white;
-                background: $color-purple-hover;
-            }
-        }
-
-        &:hover {
-            .kui-button__children {
-                color: $color-white;
-                background: $color-purple-hover;
-                box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-purple, 50);
-            }
-        }
-
-        &:active {
-            .kui-button__children {
-                color: $color-white;
-                background: $color-purple;
-                box-shadow: none;
-            }
         }
 
         &.kui-button--disabled,
@@ -201,6 +177,30 @@
             }
         }
 
+        &:focus {
+            color: calc-color(fade, $color-base, 90);
+
+            .kui-button__children {
+                color: calc-color(fade, $color-base, 50);
+            }
+        }
+
+        &:hover {
+            color: calc-color(fade, $color-base, 90);
+
+            .kui-button__children {
+                color: calc-color(fade, $color-base, 90);
+            }
+        }
+
+        &:active {
+            .kui-button__children {
+                color: $color-white;
+                background: $color-purple;
+                box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-purple, 50);
+            }
+        }
+
         &.kui-button--color_purple {
             color: $color-purple;
 
@@ -208,6 +208,29 @@
                 color: $color-white;
                 background: $color-purple;
                 border-color: transparent;
+            }
+
+            &:focus {
+                .kui-button__children {
+                    color: $color-white;
+                    background: $color-purple-hover;
+                }
+            }
+
+            &:hover {
+                .kui-button__children {
+                    color: $color-white;
+                    background: $color-purple-hover;
+                    box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-purple, 50);
+                }
+            }
+
+            &:active {
+                .kui-button__children {
+                    color: $color-white;
+                    background: $color-purple;
+                    box-shadow: none;
+                }
             }
 
             &.kui-button--disabled,
@@ -474,6 +497,7 @@
 
     &--progress {
         pointer-events: none;
+        overflow: hidden;
     }
 
     &__progress {
@@ -482,6 +506,7 @@
         top: 0;
         height: 100%;
         background: calc-color(fade, $color-white, 30);
+        @include transition;
 
         .kui-button--variant_secondary & {
             background: calc-color(fade, $color-purple, 30);
