@@ -18,9 +18,9 @@ import {IButtonTitleInheritedProps} from './src/ui/buttonTitle/types';
 export declare const ButtonTitle: React.SFC<IButtonTitleInheritedProps>;
 export {IButtonTitleInheritedProps};
 
-import {ICheckboxInheritedProps} from './src/ui/checkbox/types';
+import { ICheckboxStateProps, ICheckboxDispatchProps, ICheckboxProps, ICheckboxInheritedProps } from './src/ui/checkbox/types';
 export declare const Checkbox: React.SFC<ICheckboxInheritedProps>;
-export {ICheckboxInheritedProps};
+export { ICheckboxStateProps, ICheckboxDispatchProps, ICheckboxProps, ICheckboxInheritedProps };
 
 import {IDatePickerInheritedProps} from './src/ui/datepicker/types';
 export declare const Datepicker: React.SFC<IDatePickerInheritedProps>;
