@@ -10,9 +10,9 @@ import {IButtonsGroupInheritedProps} from './src/ui/buttonsGroup/types';
 export declare const ButtonsGroup: React.SFC<IButtonsGroupInheritedProps>;
 export {IButtonsGroupInheritedProps};
 
-import {IButtonsSegmentedInheritedProps} from './src/ui/buttonsSegmented/types';
+import { IButtonsSegmentedStateProps, IButtonsSegmentedDispatchProps, IButtonsSegmentedProps, IButtonsSegmentedInheritedProps } from './src/ui/buttonsSegmented/types';
 export declare const ButtonsSegmented: React.SFC<IButtonsSegmentedInheritedProps>;
-export {IButtonsSegmentedInheritedProps};
+export { IButtonsSegmentedStateProps, IButtonsSegmentedDispatchProps, IButtonsSegmentedProps, IButtonsSegmentedInheritedProps };
 
 import {IButtonTitleInheritedProps} from './src/ui/buttonTitle/types';
 export declare const ButtonTitle: React.SFC<IButtonTitleInheritedProps>;

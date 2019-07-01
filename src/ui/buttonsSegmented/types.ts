@@ -1,5 +1,6 @@
 export interface IButtonsSegmentedStateProps {
     active: number;
+    color?: 'black';
 }
 
 export interface IButtonsSegmentedDispatchProps {
@@ -9,9 +10,7 @@ export interface IButtonsSegmentedDispatchProps {
 export interface IButtonsSegmentedProps extends
     IButtonsSegmentedStateProps,
     IButtonsSegmentedDispatchProps
-{
-    color?: 'black';
-}
+{}
 
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
@@ -20,6 +19,6 @@ export type IConflictFreeHTMLAttributes<E> =
     >>;
 
 export interface IButtonsSegmentedInheritedProps extends
-    IButtonsSegmentedProps,
-    IConflictFreeHTMLAttributes<HTMLElement>
+    IConflictFreeHTMLAttributes<HTMLElement>,
+    IButtonsSegmentedProps
 {}
