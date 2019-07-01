@@ -1,6 +1,6 @@
-import {IButtonInheritedProps} from './src/ui/button/types';
+import { IButtonStateProps, IButtonDispatchProps, IButtonProps, IButtonInheritedProps } from './src/ui/button/types';
 export declare const Button: React.SFC<IButtonInheritedProps>;
-export {IButtonInheritedProps};
+export { IButtonStateProps, IButtonDispatchProps, IButtonProps, IButtonInheritedProps };
 
 import {IButtonDropdownInheritedProps} from './src/ui/buttonDropdown/types';
 export declare const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps>;
