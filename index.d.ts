@@ -35,9 +35,9 @@ export declare const Dropdown: React.SFC<IDropdownInheritedProps>;
 export {IDropdownInheritedProps};
 export {IDropdownPublicProps} from './src/ui/dropdown/types';
 
-import {IFilesInheritedProps} from './src/ui/files/types';
+import { IFilesStateProps, IFilesDispatchProps, IFilesProps, IFilesInheritedProps } from './src/ui/files/types';
 export declare const Files: React.SFC<IFilesInheritedProps>;
-export {IFilesInheritedProps};
+export { IFilesStateProps, IFilesDispatchProps, IFilesProps, IFilesInheritedProps };
 
 import {IIconInheritedProps} from './src/ui/icon/types';
 export declare const Icon: React.SFC<IIconInheritedProps>;
