@@ -22,9 +22,9 @@ import { ICheckboxStateProps, ICheckboxDispatchProps, ICheckboxProps, ICheckboxI
 export declare const Checkbox: React.SFC<ICheckboxInheritedProps>;
 export { ICheckboxStateProps, ICheckboxDispatchProps, ICheckboxProps, ICheckboxInheritedProps };
 
-import {IDatePickerInheritedProps} from './src/ui/datepicker/types';
+import { IDatepickerStateProps, IDatepickerDispatchProps, IDatepickerProps, IDatePickerInheritedProps } from './src/ui/datepicker/types';
 export declare const Datepicker: React.SFC<IDatePickerInheritedProps>;
-export {IDatePickerInheritedProps};
+export { IDatepickerStateProps, IDatepickerDispatchProps, IDatepickerProps, IDatePickerInheritedProps };
 
 import {IDividerInheritedProps} from './src/ui/divider/types';
 export declare const Divider: React.SFC<IDividerInheritedProps>;
