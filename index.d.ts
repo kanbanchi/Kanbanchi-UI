@@ -43,10 +43,9 @@ import {IIconInheritedProps} from './src/ui/icon/types';
 export declare const Icon: React.SFC<IIconInheritedProps>;
 export {IIconInheritedProps};
 
-import {IInputInheritedProps} from './src/ui/input/types';
+import { IInputStateProps, IInputDispatchProps, IInputPublicProps, IInputProps, IInputInheritedProps } from './src/ui/input/types';
 export declare const Input: React.SFC<IInputInheritedProps>;
-export {IInputInheritedProps};
-export {IInputPublicProps} from './src/ui/input/types';
+export { IInputStateProps, IInputDispatchProps, IInputPublicProps, IInputProps, IInputInheritedProps };
 
 import {ILabelInheritedProps} from './src/ui/label/types';
 export declare const Label: React.SFC<ILabelInheritedProps>;
