@@ -34,14 +34,14 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Promt</h2>
                 <Snackbar
+                    key="1"
                     variant="promt"
                     text={'Please, don\'t close this page during the process to avoid data loss'}
                     title={'We will move your board'}
                     buttons={[
                         {
                             text: 'Start',
-                            isPrimary: true,
-                            onTimer: true
+                            isPrimary: true
                         },
                         {
                             text: 'Cancel'
@@ -53,6 +53,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Progress</h2>
                 <Snackbar
+                    key="1"
                     title="We are moving your board"
                     text="It may take some time"
                     buttons={[
@@ -67,6 +68,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Success</h2>
                 <Snackbar
+                    key="1"
                     variant="success"
                     text = "To Teamdrive long name Lorem ipsum"
                     title = "Board 'Board long name Lorem ipsum' has been moved"

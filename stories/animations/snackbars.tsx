@@ -40,11 +40,13 @@ const Story = () => {
 
                 <h2>Error</h2>
                 <Snackbar
+                    key="1"
                     variant="error"
                     text="The <b>email</b> address is not valid. Please, use name@domain.com format."
                 />
                 <br />
                 <Snackbar
+                    key="1"
                     variant="error"
                     text="The maximum number of seats is exceeded. <br>Click Manage subscription to buy more seats."
                     buttons={[
@@ -54,6 +56,7 @@ const Story = () => {
 
                 <h2>Timer</h2>
                 <Snackbar
+                    key="1"
                     variant="timer"
                     timer={55}
                     text={'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
@@ -61,8 +64,7 @@ const Story = () => {
                         {
                             text: 'Ok',
                             isPrimary: true,
-                            onClick: () => console.log('ok'),
-                            onTimer: true
+                            onClick: () => console.log('ok')
                         },
                         {
                             text: 'Cancel',
@@ -72,6 +74,7 @@ const Story = () => {
                 />
                 <br />
                 <Snackbar
+                    key="1"
                     timer={5}
                     variant="error"
                     text="Error text shown 5 seconds"
@@ -81,6 +84,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Info</h2>
                 <Snackbar
+                    key="1"
                     title="We've updated the app!"
                     text="Click to refresh the page and receive updates"
                     buttons={[
@@ -95,14 +99,14 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Promt</h2>
                 <Snackbar
+                    key="1"
                     variant="promt"
                     text={'It may take some time'}
                     title={'We will move your board'}
                     buttons={[
                         {
                             text: 'Start',
-                            isPrimary: true,
-                            onTimer: true
+                            isPrimary: true
                         },
                         {
                             text: 'Cancel'
@@ -114,6 +118,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Progress</h2>
                 <Snackbar
+                    key="1"
                     title="We are moving your board"
                     text="It may take some time"
                     buttons={[
@@ -128,6 +133,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Success</h2>
                 <Snackbar
+                    key="1"
                     variant="success"
                     title="Data has been successfully exported"
                     text="We've sent you an email with the link"
