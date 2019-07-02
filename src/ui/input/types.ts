@@ -1,6 +1,9 @@
 import { ITooltipProps } from './../tooltip/types';
 
 export interface IInputStateProps {
+    disabled?: boolean;
+    state?: 'error' | 'success';
+    tooltip?: string | ITooltipProps;
     value?: string;
 }
 
@@ -9,15 +12,13 @@ export interface IInputDispatchProps {
     onEnter?: (event: React.KeyboardEvent<HTMLElement>) => void;
 }
 
-export interface IInputPublicProps {
+export interface IInputOwnProps {
     autosize?: boolean;
     color?: 'grey';
-    disabled?: boolean;
     icon?: string;
     isClearable?: boolean;
     label?: string;
-    state?: 'error' | 'success';
-    tooltip?: string | ITooltipProps;
+    ref?: any;
     type?: string;
     variant?:
         'arrow'
@@ -31,10 +32,13 @@ export interface IInputPublicProps {
 export interface IInputProps extends
     IInputStateProps,
     IInputDispatchProps,
-    IInputPublicProps
-{
-    ref?: any;
-}
+    IInputOwnProps
+{}
+
+export interface IInputPublicProps extends
+    IInputStateProps,
+    IInputOwnProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,

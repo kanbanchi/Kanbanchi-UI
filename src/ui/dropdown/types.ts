@@ -9,11 +9,14 @@ export interface IDropdownPublicProps {
     opened?: boolean;
 }
 
-export interface IDropdownProps extends
-    IDropdownPublicProps
-{
+export interface IDropdownOwnProps {
     ref?: any;
 }
+
+export interface IDropdownProps extends
+    IDropdownPublicProps,
+    IDropdownOwnProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
 

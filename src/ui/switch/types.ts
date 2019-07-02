@@ -6,12 +6,15 @@ export interface ISwitchDispatchProps {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface ISwitchProps extends
-    ISwitchStateProps,
-    ISwitchDispatchProps
-{
+export interface ISwitchOwnProps {
     color?: 'black';
 }
+
+export interface ISwitchProps extends
+    ISwitchStateProps,
+    ISwitchDispatchProps,
+    ISwitchOwnProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,

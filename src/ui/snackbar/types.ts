@@ -7,13 +7,15 @@ export interface ISnackbarButtonDispatchProps {
     onClick?: () => void;
 }
 
+export interface ISnackbarButtonOwnProps {
+    isPrimary?: boolean;
+}
+
 export interface ISnackbarButtonProps extends
     ISnackbarButtonStateProps,
-    ISnackbarButtonDispatchProps
-{
-    isPrimary?: boolean;
-    onTimer?: boolean;
-}
+    ISnackbarButtonDispatchProps,
+    ISnackbarButtonOwnProps
+{}
 
 export enum ISnackbarDefaultIcons {
     error = 'error',
@@ -23,29 +25,38 @@ export enum ISnackbarDefaultIcons {
     timer = 'error'
 }
 
+export interface ISnackbarStateProps {
+    buttons?: Array<ISnackbarButtonProps>;
+    text?: string;
+    title?: string;
+}
+
 export interface ISnackbarDispatchProps {
     onTimer?: () => void;
 }
 
-export interface ISnackbarProps extends
-    ISnackbarDispatchProps
-{
-    buttons?: Array<ISnackbarButtonProps>;
+export type SnackbarVariant =
+    'error' |
+    'info' |
+    'promt' |
+    'success' |
+    'timer';
+export interface ISnackbarOwnProps {
     icon?: string;
-    text?: string;
+    key: string;
     timer?: number;
-    title?: string;
-    variant?:
-        'error'
-        | 'info'
-        | 'promt'
-        | 'success'
-        | 'timer';
+    variant?: SnackbarVariant;
 }
+
+export interface ISnackbarProps extends
+    ISnackbarStateProps,
+    ISnackbarDispatchProps,
+    ISnackbarOwnProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
 
 export interface ISnackbarInheritedProps extends
-    ISnackbarProps,
-    IConflictFreeHTMLAttributes<HTMLElement>
+    IConflictFreeHTMLAttributes<HTMLElement>,
+    ISnackbarProps
 {}

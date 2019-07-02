@@ -31,15 +31,13 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
     if (variant === 'timer' && timer === null) timer = 10;
 
     let buttonsGroup = [],
-        buttonsGroupDiv = null,
-        onTimerDefault = onTimer;
+        buttonsGroupDiv = null;
 
     if (buttons) {
         buttonsGroup = buttons.map((item, key) => {
             let {
                 isPrimary,
                 text,
-                onTimer,
                 ...attributes
             } = item;
 
@@ -47,8 +45,6 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                 'kui-snackbar__button',
                 (isPrimary) ? 'kui-snackbar__button--primary' : null
             );
-
-            if (onTimer) onTimerDefault = attributes.onClick;
 
             return (
                 <Button
@@ -68,10 +64,6 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         );
     }
 
-    const onTimerAction = () => {
-        if (onTimerDefault) onTimerDefault();
-    };
-
     const [timerHook, setTimerHook] = React.useState(timer);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
     const [s] = React.useState<any>({});
@@ -84,7 +76,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         setTimeoutHook(setInterval(() => {
             if (unmounted) return;
             if (getTimerHook() < 1) {
-                onTimerAction();
+                if (onTimer) onTimer();
                 clearInterval(timeoutHook);
             } else {
                 setTimerHook(getTimerHook() - 1);

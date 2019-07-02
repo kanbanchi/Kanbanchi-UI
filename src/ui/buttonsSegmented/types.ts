@@ -6,12 +6,15 @@ export interface IButtonsSegmentedDispatchProps {
     onChange: (index: number) => void;
 }
 
-export interface IButtonsSegmentedProps extends
-    IButtonsSegmentedStateProps,
-    IButtonsSegmentedDispatchProps
-{
+export interface IButtonsSegmentedOwnProps {
     color?: 'black';
 }
+
+export interface IButtonsSegmentedProps extends
+    IButtonsSegmentedStateProps,
+    IButtonsSegmentedDispatchProps,
+    IButtonsSegmentedOwnProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
@@ -20,6 +23,6 @@ export type IConflictFreeHTMLAttributes<E> =
     >>;
 
 export interface IButtonsSegmentedInheritedProps extends
-    IButtonsSegmentedProps,
-    IConflictFreeHTMLAttributes<HTMLElement>
+    IConflictFreeHTMLAttributes<HTMLElement>,
+    IButtonsSegmentedProps
 {}

@@ -1,31 +1,7 @@
 import { ITooltipProps } from './../tooltip/types';
 import { IMediaScreens } from './../types';
 
-export interface IButtonStateProps {
-    disabled?: boolean;
-    text?: string;
-}
-
-export interface IButtonDispatchProps {}
-
-export interface IButtonProps extends
-    IButtonStateProps,
-    IButtonDispatchProps
-{
-    color?:
-        'black'
-        | 'purple'
-        | 'white';
-    href?: string;
-    maxWidth?: IMediaScreens;
-    progress?: number; // percentage 0..100
-    size?: 'large';
-    tooltip?: string | ITooltipProps;
-    type?:
-        'button'
-        | 'submit';
-    variant?:
-        'action'
+type ButtonVariant = 'action'
         | 'add'
         | 'fab'
         | 'icon'
@@ -33,15 +9,46 @@ export interface IButtonProps extends
         | 'primary'
         | 'secondary'
         | 'text';
+
+export interface IButtonStateProps {
+    disabled?: boolean;
+    href?: string;
+    progress?: number; // percentage 0..100
+    text?: string;
+    tooltip?: string | ITooltipProps;
 }
+
+export interface IButtonDispatchProps {
+    onClick?: () => void;
+}
+
+export interface IButtonOwnProps {
+    color?:
+        'black'
+        | 'purple'
+        | 'white';
+    maxWidth?: IMediaScreens;
+    size?: 'large';
+    type?:
+        'button'
+        | 'submit';
+    variant?: ButtonVariant;
+}
+
+export interface IButtonProps extends
+    IButtonStateProps,
+    IButtonDispatchProps,
+    IButtonOwnProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.ButtonHTMLAttributes<E>, Exclude<keyof React.ButtonHTMLAttributes<E>,
         'color'
         | 'type'
+        | 'onClick'
     >>;
 
 export interface IButtonInheritedProps extends
-    IButtonProps,
-    IConflictFreeHTMLAttributes<HTMLButtonElement>
+    IConflictFreeHTMLAttributes<HTMLButtonElement>,
+    IButtonProps
 {}

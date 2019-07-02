@@ -1,7 +1,7 @@
 export type IMediaScreens =
-    'default'
-    | 'tablet'
-    | 'iPad'
-    | 'iPlus'
-    | 'iPhone'
-    | 'phone';
+    'default' |
+    'tablet' |
+    'iPad' |
+    'iPlus' |
+    'iPhone' |
+    'phone';
