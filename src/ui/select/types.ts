@@ -18,10 +18,11 @@ export type ISelectOptionsArray = Array<{
     value: number | string;
     text?: string;
 }>
+export type ISelectOptions = ISelectOptionsObject | ISelectOptionsArray;
 
 export interface ISelectStateProps {
     active?: number;
-    options?: ISelectOptionsObject | ISelectOptionsArray;
+    options?: ISelectOptions;
 }
 
 export interface ISelectDispatchProps {
@@ -30,20 +31,24 @@ export interface ISelectDispatchProps {
     onOpen?: () => void;
 }
 
-export interface ISelectProps extends
-    ISelectStateProps,
-    ISelectDispatchProps,
-    IDropdownPublicProps,
-    IInputPublicProps
-{
+export interface ISelectOwnProps {
     editable?: boolean;
     ref?: any;
 }
 
+export interface ISelectProps extends
+    ISelectStateProps,
+    ISelectDispatchProps,
+    ISelectOwnProps,
+    IDropdownPublicProps,
+    IInputPublicProps
+{}
+
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,
-        'color'
-        | 'onChange'
+        'color' |
+        'value' |
+        'onChange'
     >>;
 
 export interface ISelectInheritedProps extends

@@ -9,15 +9,18 @@ export interface ISectionAccordionDispatchProps {
     onOpen?: () => void;
 }
 
-export interface ISectionAccordionProps extends
-    ISectionAccordionStateProps,
-    ISectionAccordionDispatchProps
-{
+export interface ISectionAccordionOwnProps {
     Action?: React.SFC<IButtonInheritedProps>;
     color?: 'grey';
     icon?: string;
     title?: string;
 }
+
+export interface ISectionAccordionProps extends
+    ISectionAccordionStateProps,
+    ISectionAccordionDispatchProps,
+    ISectionAccordionOwnProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,

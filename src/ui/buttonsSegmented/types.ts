@@ -1,15 +1,19 @@
 export interface IButtonsSegmentedStateProps {
     active: number;
-    color?: 'black';
 }
 
 export interface IButtonsSegmentedDispatchProps {
     onChange: (index: number) => void;
 }
 
+export interface IButtonsSegmentedOwnProps {
+    color?: 'black';
+}
+
 export interface IButtonsSegmentedProps extends
     IButtonsSegmentedStateProps,
-    IButtonsSegmentedDispatchProps
+    IButtonsSegmentedDispatchProps,
+    IButtonsSegmentedOwnProps
 {}
 
 export type IConflictFreeHTMLAttributes<E> =

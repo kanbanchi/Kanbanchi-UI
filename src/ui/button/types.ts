@@ -11,30 +11,34 @@ type ButtonVariant = 'action'
         | 'text';
 
 export interface IButtonStateProps {
-    color?:
-        'black'
-        | 'purple'
-        | 'white';
     disabled?: boolean;
     href?: string;
-    maxWidth?: IMediaScreens;
     progress?: number; // percentage 0..100
-    size?: 'large';
     text?: string;
     tooltip?: string | ITooltipProps;
-    type?:
-        'button'
-        | 'submit';
-    variant?: ButtonVariant;
 }
 
 export interface IButtonDispatchProps {
     onClick?: () => void;
 }
 
+export interface IButtonOwnProps {
+    color?:
+        'black'
+        | 'purple'
+        | 'white';
+    maxWidth?: IMediaScreens;
+    size?: 'large';
+    type?:
+        'button'
+        | 'submit';
+    variant?: ButtonVariant;
+}
+
 export interface IButtonProps extends
     IButtonStateProps,
-    IButtonDispatchProps
+    IButtonDispatchProps,
+    IButtonOwnProps
 {}
 
 export type IConflictFreeHTMLAttributes<E> =

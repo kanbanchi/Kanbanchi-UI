@@ -12,9 +12,18 @@ export interface IDatepickerDispatchProps {
     onChange: (date: Date) => void;
 }
 
+export interface IDatepickerOwnProps {
+    dateFormat?: string;
+    maxDate?: Date;
+    minDate?: Date;
+    popperPlacement?: string;
+    selected: Date;
+}
+
 export interface IDatepickerProps extends
     IDatepickerStateProps,
     IDatepickerDispatchProps,
+    IDatepickerOwnProps,
     IInputPublicProps
 {}
 

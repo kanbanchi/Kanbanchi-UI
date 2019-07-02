@@ -1,15 +1,19 @@
 export interface ICheckboxStateProps {
     checked?: boolean;
-    color?: 'black';
 }
 
 export interface ICheckboxDispatchProps {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface ICheckboxOwnProps {
+    color?: 'black';
+}
+
 export interface ICheckboxProps extends
     ICheckboxStateProps,
-    ICheckboxDispatchProps
+    ICheckboxDispatchProps,
+    ICheckboxOwnProps
 {}
 
 export type IConflictFreeHTMLAttributes<E> =
