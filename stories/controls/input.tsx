@@ -6,8 +6,34 @@ const Story = () => {
     const [val, setVal] = React.useState('');
     const [val1, setVal1] = React.useState('');
     const [tt, setTt] = React.useState(null);
+    const [val2, setVal2] = React.useState('');
+    const [val3, setVal3] = React.useState('');
     return (
         <div className="page">
+            <section className="section-form-min">
+                <h2>Search</h2>
+
+                <Input
+                    autosize={false}
+                    variant="search"
+                    value={val2}
+                    onChange={(e: any) => setVal2(e.target.value)}
+                />
+            </section>
+
+            <section className="section-grey section-form-min">
+                <h2>Search Color="grey"</h2>
+
+                <Input
+                    autosize={false}
+                    color="grey"
+                    variant="search"
+                    value={val3}
+                    onChange={(e: any) => setVal3(e.target.value)}
+                />
+
+            </section>
+
             <section className="section-form-min">
                 <h2>Input</h2>
 
