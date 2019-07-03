@@ -8,7 +8,7 @@ export interface IInputStateProps {
 }
 
 export interface IInputDispatchProps {
-    onChange?: (event: React.SyntheticEvent<HTMLElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onEnter?: (event: React.KeyboardEvent<HTMLElement>) => void;
 }
 

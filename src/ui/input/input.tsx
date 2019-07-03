@@ -99,7 +99,12 @@ React.forwardRef((props, ref) => {
         e.preventDefault();
         setIsFilled(false);
         setInputValue('');
-        if (onChange) onChange(e);
+        const changeEvent = {
+            target: {
+                value: ''
+            }
+        } as React.ChangeEvent<HTMLInputElement>;
+        if (onChange) onChange(changeEvent);
     };
 
     if (variant === 'arrow' || variant === 'header') {
