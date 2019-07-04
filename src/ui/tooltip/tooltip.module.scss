@@ -2,6 +2,8 @@
 
 .kui-tooltip {
     position: absolute;
+    top: 0;
+    left: 0;
     z-index: $z-tooltip;
     width: max-content; // only need if parent with relative position
     min-height: $google-spacing * 4;
