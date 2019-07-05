@@ -7,9 +7,10 @@
     box-shadow: 0 -1px 0 calc-color(fade, $color-base, 20) inset;
 
     &__scroll {
-        display: inline-flex;
         max-width: 100%;
+        height: $google-spacing * 10;
         overflow-x: scroll;
+        white-space: nowrap;
         
         &::-webkit-scrollbar {
             display: none; 
@@ -74,13 +75,13 @@
 
 @media (max-width: $media-iPad) {
     .kui-tabs__item {
-        min-width: $google-spacing * 10;
+        min-width: 0;
         padding: $google-spacing * 2 $google-spacing $google-spacing;
     }
     .kui-tabs--size_large {
         .kui-tabs__item {
-            min-width: $google-spacing * 12;
-            padding: $google-spacing * 3 $google-spacing $google-spacing * 2;
+            min-width: 0;
+            padding: $google-spacing * 3 $google-spacing * 2 $google-spacing * 2;
         }
     }
 }
