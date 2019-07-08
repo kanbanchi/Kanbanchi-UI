@@ -185,6 +185,7 @@
             }
         }
 
+        &.kui-button--hover,
         &:hover {
             color: calc-color(fade, $color-base, 90);
 
@@ -217,6 +218,7 @@
                 }
             }
 
+            &.kui-button--hover,
             &:hover {
                 .kui-button__children {
                     color: $color-white;
@@ -255,6 +257,7 @@
                 box-shadow: none;
             }
 
+            &.kui-button--hover,
             &:focus,
             &:hover {
                 color: calc-color(tint, $color-base, 90);
@@ -293,6 +296,7 @@
                 box-shadow: none;
             }
 
+            &.kui-button--hover,
             &:focus,
             &:hover {
                 .kui-button__children {
