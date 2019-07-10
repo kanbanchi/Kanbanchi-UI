@@ -9,42 +9,40 @@
 
     &-header {
         position: sticky;
-        z-index: 1;
+        z-index: $z-fold;
         top: 0;
         display: flex;
         justify-content: space-between;
         padding: $google-spacing 0 $google-spacing / 2;
         border-bottom: 1px solid calc-color(fade, $color-base, 20);
         background: $color-white;
+
+        &:before { // hide shadow of hovered items
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -$google-spacing * 2;
+            background: $color-white;
+            width: calc(100% + #{$google-spacing * 4});
+            height: 100%;
+        }
     }
 
     &-button {
-        opacity: 1;
-
-        &:active,
+        
+        &,
         &:focus {
-            opacity: 1;
+            opacity: .6;
         }
 
-        &__icon {
-            color: calc-color(fade, $color-base, 30);
-            @include transition;
+        &:hover {
+            opacity: 1;
         }
 
         &__title {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            color: calc-color(fade, $color-base, 60);
-            @include transition;
-        }
-
-        &:hover &__icon {
-            color: calc-color(fade, $color-base, 60);
-        }
-
-        &:hover &__title {
-            color: $color-base;
         }
     }
 
@@ -52,7 +50,7 @@
         margin-left: $google-spacing;
         @include transition;
     }
-    
+
     &-action {
         position: relative;
         display: flex;
@@ -61,12 +59,19 @@
         padding-left: $google-spacing * 2;
 
         &__button {
-            opacity: .5;
+
+            &,
+            &:focus {
+                opacity: .6;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 
     &-body {
-        overflow: hidden;
         display: none;
         @include transition;
     }
@@ -74,6 +79,7 @@
     &--closed {
         .kui-section-accordion-body {
             display: block;
+            overflow: hidden;
             animation: animation_height_close .3s ease forwards;
         }
     }
@@ -101,6 +107,10 @@
     &--color_grey {
         .kui-section-accordion-header {
             background: $color-background;
+
+            &:before {
+                background: $color-background;
+            }
         }
     }
 }
@@ -114,9 +124,10 @@
     90% {
         max-height: 100vh;
     }
-    
+
     100% {
         max-height: auto;
+        overflow: visible;
     }
 }
 @keyframes animation_height_close {

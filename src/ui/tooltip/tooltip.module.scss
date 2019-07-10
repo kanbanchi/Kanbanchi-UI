@@ -2,10 +2,10 @@
 
 .kui-tooltip {
     position: absolute;
+    display: inline-block;
     top: 0;
     left: 0;
     z-index: $z-tooltip;
-    width: max-content; // only need if parent with relative position
     min-height: $google-spacing * 4;
     padding: $google-spacing / 2 $google-spacing * 2;
     color: $color-white;
@@ -26,7 +26,7 @@
     &--state_success {
         background: $color-green;
     }
-    
+
     &--show {
         visibility: visible;
         animation: tooltip_down_center_show .2s ease forwards;
