@@ -29,6 +29,7 @@ const Story = () => {
         <div className="page">
             <section className="section-grey">
                 <h2>SectionAccordion</h2>
+                <div className="stories-accordions">
                 <SectionAccordion
                     Action={actionButton}
                     color="grey"
@@ -61,7 +62,7 @@ const Story = () => {
                     <p>body</p>
                     <p>body</p>
                 </SectionAccordion>
-
+                </div>
             </section>
 
             <section>

@@ -123,3 +123,15 @@ section {
         max-width: 100px;
     }
 }
+
+.stories-accordions {
+    position: relative;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    @include wrap-scroll;
+
+    .kui-section-accordion {
+        @include wrap-scroll-inner;
+    }
+}
