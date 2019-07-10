@@ -15,7 +15,8 @@
         -moz-appearance: textfield;
     }
 
-    &__item {
+    &__item,
+    &__item[readonly] {
         width: 100%;
         height: auto;
         min-height: $google-spacing * 5;
