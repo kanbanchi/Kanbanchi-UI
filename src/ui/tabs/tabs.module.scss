@@ -1,14 +1,15 @@
 @import '../../assets/sass/index.scss';
 
 .kui-tabs {
+    position: relative;
     max-width: 100%;
-    height: $google-spacing * 5;
+    height: $google-spacing * 7;
     overflow: hidden;
     box-shadow: 0 -1px 0 calc-color(fade, $color-base, 20) inset;
 
     &__scroll {
         max-width: 100%;
-        height: $google-spacing * 10;
+        height: calc(100% + 20px); // hide scroll 
         overflow-x: scroll;
         white-space: nowrap;
         
@@ -18,9 +19,12 @@
     }
 
     &__item {
-        min-width: $google-spacing * 12;
-        height: $google-spacing * 5;
-        padding: $google-spacing * 2 $google-spacing * 2 $google-spacing;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        min-width: $google-spacing * 16;
+        height: $google-spacing * 7;
+        padding: 0 $google-spacing * 3;
         color: calc-color(fade, $color-base, 50);
         font-weight: normal;
         background: transparent;
@@ -51,7 +55,7 @@
             cursor: default;
             
             &:after {
-                height: 2px;
+                height: 3px;
                 background: $color-purple;
                 transform: scaleX(1);
             }
@@ -59,16 +63,10 @@
     }
 
     &--size_large {
-        height: $google-spacing * 7;
+        height: $google-spacing * 9;
+        
         .kui-tabs__item {
-            height: $google-spacing * 7;
-            min-width: $google-spacing * 16;
-            padding: $google-spacing * 2.8 $google-spacing * 3 $google-spacing * 2.8;
-            &--active {
-                &:after {
-                    height: 3px;
-                }
-            }
+            height: $google-spacing * 9;
         }
     }
 }
@@ -76,12 +74,6 @@
 @media (max-width: $media-iPad) {
     .kui-tabs__item {
         min-width: 0;
-        padding: $google-spacing * 2 $google-spacing $google-spacing;
-    }
-    .kui-tabs--size_large {
-        .kui-tabs__item {
-            min-width: 0;
-            padding: $google-spacing * 3 $google-spacing * 2 $google-spacing * 2;
-        }
+        padding: 0 $google-spacing * 2;
     }
 }

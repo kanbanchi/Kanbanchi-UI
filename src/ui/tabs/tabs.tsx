@@ -20,6 +20,8 @@ React.forwardRef((props, ref) => {
         className
     );
 
+    const activeRef = React.useRef(null);
+
     let childrenArray: Array<{}> = // children could be string, we need array
         (Array.isArray(children)) ? children : [children];
 
@@ -30,12 +32,17 @@ React.forwardRef((props, ref) => {
                 (child.props.className) ? child.props.className : null,
                 (i === active) ? 'kui-tabs__item--active' : null
             ),
+            ref: i === active ? activeRef : null,
             onClick: (e) => {
                 if (onChange) onChange(i);
                 if (child.props.onClick) child.props.onClick(e);
             }
         });
     });
+
+    React.useEffect(() => {
+        activeRef.current.scrollIntoView({inline: 'center', behavior: 'smooth'});
+    }, [active]);
 
     return (
         <div

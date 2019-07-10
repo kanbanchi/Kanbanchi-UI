@@ -9,7 +9,7 @@
     padding: $google-spacing;
     font-size: $milli-size;
     border-radius: $base-radius;
-    border: 1px solid calc-color(fade, $color-base, 15);
+    border: 1px solid calc-color(fade, $color-base, 30);
     background: $color-white;
     @include transition;
 
