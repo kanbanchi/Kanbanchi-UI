@@ -455,7 +455,7 @@
         height: $google-spacing * 5;
         padding: 0 $google-spacing 0 $google-spacing * 2;
         color: $color-base;
-        border: 1px dashed calc-color(fade, $color-base, 15);
+        border: 1px dashed calc-color(fade, $color-base, 30);
         border-radius: $base-radius;
 
         .kui-button__icon {
@@ -465,7 +465,7 @@
 
         &:focus {
             color: $color-base;
-            border: 1px dashed calc-color(fade, $color-base, 15);
+            border: 1px dashed calc-color(fade, $color-base, 30);
 
             .kui-button__icon {
                 color: $color-base;

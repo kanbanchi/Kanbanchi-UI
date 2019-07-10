@@ -5,7 +5,7 @@
     
     .kui-input__item {
         color: $color-base;
-        border-color: calc-color(fade, $color-base, 15);
+        border-color: calc-color(fade, $color-base, 30);
         cursor: pointer;
     }
     .kui-input--filled {

@@ -24,7 +24,7 @@
         font-size: $milli-size;
         line-height: $base-line-height;
         border-radius: $base-radius;
-        border: 1px solid calc-color(fade, $color-base, 15);
+        border: 1px solid calc-color(fade, $color-base, 30);
         background: $color-white;
         cursor: pointer;
         @include transition;
