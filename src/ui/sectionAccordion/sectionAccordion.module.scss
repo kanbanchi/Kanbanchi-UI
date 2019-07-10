@@ -19,32 +19,20 @@
     }
 
     &-button {
-        opacity: 1;
-
-        &:active,
+        
+        &,
         &:focus {
-            opacity: 1;
+            opacity: .6;
         }
 
-        &__icon {
-            color: calc-color(fade, $color-base, 30);
-            @include transition;
+        &:hover {
+            opacity: 1;
         }
 
         &__title {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            color: calc-color(fade, $color-base, 60);
-            @include transition;
-        }
-
-        &:hover &__icon {
-            color: calc-color(fade, $color-base, 60);
-        }
-
-        &:hover &__title {
-            color: $color-base;
         }
     }
 
@@ -61,7 +49,15 @@
         padding-left: $google-spacing * 2;
 
         &__button {
-            opacity: .5;
+
+            &,
+            &:focus {
+                opacity: .6;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 
