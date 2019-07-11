@@ -1,6 +1,6 @@
 {
   "name": "kui",
-  "version": "0.7.22",
+  "version": "0.7.23",
   "private": true,
   "main": "index.js",
   "repository": {
@@ -15,7 +15,7 @@
     "react-dom": "^16.8.3"
   },
   "scripts": {
-    "start": "start-storybook -p 9001 -c .storybook -s ./public",
+    "start": "start-storybook -p 9002 -c .storybook -s ./public",
     "babel": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
     "postinstall": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
     "check-typescript": "tsc && tslint --project ./ --config ./tslint.json"
