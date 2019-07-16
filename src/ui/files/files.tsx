@@ -26,6 +26,7 @@ React.forwardRef((props, ref) => {
         disabled,
         files,
         FileView,
+        onClick,
         ...attributes
     } = props;
 
@@ -44,6 +45,7 @@ React.forwardRef((props, ref) => {
             <Button
                 disabled={disabled}
                 variant="add"
+                onClick={onClick}
             >
                 {children}
             </Button>
@@ -55,7 +57,8 @@ React.forwardRef((props, ref) => {
 Files.defaultProps = {
     disabled: false,
     files: [],
-    FileView: DefaultFileView
+    FileView: DefaultFileView,
+    onClick: () => {}
 };
 
 Files.displayName = 'Files';
