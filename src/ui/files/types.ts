@@ -4,6 +4,7 @@ export interface IFilesStateProps {
 }
 
 export interface IFilesDispatchProps {
+    onClick: () => void;
 }
 
 export interface IFilesOwnProps {
@@ -16,7 +17,10 @@ export interface IFilesProps extends
     IFilesOwnProps
 {}
 
-export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
+        'onClick'
+    >>;
 
 export interface IFilesInheritedProps extends
     IFilesProps,
