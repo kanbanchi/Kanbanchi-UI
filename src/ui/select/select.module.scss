@@ -4,7 +4,8 @@
     position: relative;
     
     .kui-input {
-        &__item {
+        &__item,
+        &__item[readonly] {
             color: $color-base;
             cursor: pointer;
         }
@@ -15,9 +16,10 @@
     }
 
     &:hover,
-    &--opened {
+    &.kui-select--opened {
         .kui-input {
-            &__item {
+            &__item,
+            &__item[readonly] {
                 color: $color-base;
                 box-shadow: $shadow-hover;
                 border-color: transparent;
@@ -29,38 +31,50 @@
         }
     }
 
-    &--opened {
+    &.kui-select--opened {
         .kui-input__icon--arrow {
             transform: scaleY(-1);
         }
     }
 
-    &--disabled {
+    &.kui-select--disabled {
         pointer-events: none;
     }
 
-    &--variant_header {
+    &.kui-select--variant_header {
         width: $google-spacing * 30;
 
-        .kui-input__item {
-            font-size: $base-font-size;
-            font-weight: bold;
-            border-color: transparent;
-            background: $color-white;
+        .kui-input {
+            &__item,
+            &__item[readonly] {
+                font-size: $base-font-size;
+                font-weight: bold;
+                border-color: transparent;
+                background: $color-white;
+            }
         }
 
         .kui-dropdown__item {
             width: $google-spacing * 30;
         }
+
+        &.kui-select--disabled {
+            .kui-input__icon--arrow {
+                display: none;
+            }
+        }
     }
 
     &--variant_priority { // todo надо перенести, это не селект
-        .kui-input__item {
-            width: $google-spacing * 13;
-            height: $google-spacing * 4;
-            font-weight: bold;
-            border: 1px dashed calc-color(fade, $color-base, 30);
-            border-radius: $google-spacing * 4;
+        .kui-input {
+            &__item,
+            &__item[readonly] {
+                width: $google-spacing * 13;
+                height: $google-spacing * 4;
+                font-weight: bold;
+                border: 1px dashed calc-color(fade, $color-base, 30);
+                border-radius: $google-spacing * 4;
+            }
         }
 
         .kui-dropdown__item {
