@@ -18,6 +18,7 @@ export interface IInputOwnProps {
     icon?: string;
     isClearable?: boolean;
     label?: string;
+    readOnly?: boolean;
     ref?: any;
     type?: string;
     variant?:

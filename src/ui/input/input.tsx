@@ -112,7 +112,6 @@ React.forwardRef((props, ref) => {
         (variant === 'datepicker') {
         autosize = false;
         icon = icon || 'calendar';
-        attributes.readOnly = true;
         const iconCalendar = <Icon
             xlink={icon}
             size={24}
