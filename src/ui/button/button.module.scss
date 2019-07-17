@@ -401,7 +401,7 @@
     &--variant_icon-text {
         min-width: 0;
         color: inherit;
-        opacity: .3;
+        opacity: .6;
 
         &:before {
             position: absolute;
@@ -419,11 +419,9 @@
             opacity: .4;
         }
 
-        &:hover,
-        &.kui-button--disabled,
-        &:disabled {
+        &:hover {
             color: inherit;
-            opacity: .9;
+            opacity: 1;
         }
 
         &:active {
@@ -433,7 +431,8 @@
 
         &.kui-button--disabled,
         &:disabled {
-            opacity: .1;
+            color: inherit;
+            opacity: .3;
         }
     }
 
