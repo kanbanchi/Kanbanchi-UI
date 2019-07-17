@@ -3,21 +3,28 @@
     display: inline-block;
     width: $google-spacing * 18;
     
-    .kui-input__item {
-        color: $color-base;
-        border-color: calc-color(fade, $color-base, 30);
-        cursor: pointer;
+    .kui-input {
+        &__item,
+        &__item[readonly] {
+            color: $color-base;
+            border-color: calc-color(fade, $color-base, 30);
+            cursor: pointer;
+        }
     }
     .kui-input--filled {
-        .kui-input__item {
-            border-color: $color-base;
-            background: $color-light-background;
+        .kui-input {
+            &__item,
+            &__item[readonly] {
+                border-color: $color-base;
+                background: $color-light-background;
+            }
         }
     }
     &:hover,
     .kui-input.react-datepicker-ignore-onclickoutside {
         .kui-input {
-            &__item {
+            &__item,
+            &__item[readonly] {
                 color: $color-base;
                 box-shadow: $shadow-hover;
                 border-color: transparent;
