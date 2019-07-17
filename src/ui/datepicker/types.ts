@@ -18,6 +18,8 @@ export interface IDatepickerOwnProps {
     minDate?: Date;
     popperPlacement?: string;
     selected: Date;
+    showMonthDropdown?: boolean;
+    showYearDropdown?: boolean;
 }
 
 export interface IDatepickerProps extends

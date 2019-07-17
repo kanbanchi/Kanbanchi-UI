@@ -64,6 +64,17 @@ const Story = () => {
                     </SelectList>
                 </Select>
 
+                <br/><br/>
+
+                <Select
+                    active={0}
+                    disabled={true}
+                    label="Disabled"
+                    value="Professional monthly"
+                    variant="header"
+                    onChange={()=>{}}
+                ></Select>
+
             </section>
 
             <section>

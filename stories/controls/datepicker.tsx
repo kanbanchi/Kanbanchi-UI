@@ -21,9 +21,13 @@ const Story = () => {
                 <Datepicker
                     isClearable={false}
                     label="From"
-                    minDate={new Date('2019-05-22')}
+                    minDate={new Date('2001-01-01')}
+                    maxDate={new Date('2049-12-31')}
                     popperPlacement="bottom-start"
+                    readOnly={false}
                     selected={date01}
+                    showMonthDropdown
+                    showYearDropdown
                     onChange={val=>setDate01(val)}
                 />
 
