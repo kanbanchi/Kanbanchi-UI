@@ -65,9 +65,12 @@
         }
     }
 
-    &--state_error {
-        .kui-input__item {
-            border-color: $color-red;
+    &.kui-input--state_error {
+        .kui-input {
+            &__item,
+            &__item[readonly] {
+                border-color: $color-red;
+            }
         }
 
         .kui-label__item {
@@ -75,13 +78,16 @@
         }
     }
 
-    &--state_success {
-        .kui-input__item {
-            border-color: $color-green;
+    &.kui-input--state_success {
+        .kui-input {
+            &__item,
+            &__item[readonly] {
+                border-color: $color-green;
+            }
         }
     }
 
-    &--disabled {
+    &.kui-input--disabled {
         .kui-label__item {
             color: calc-color(fade, $color-base, 30);
         }
@@ -113,9 +119,12 @@
         }
     }
 
-    &--variant_withicon {
-        .kui-input__item {
-            padding-right: $google-spacing * 5;
+    &.kui-input--variant_withicon {
+        .kui-input {
+            &__item,
+            &__item[readonly] {
+                padding-right: $google-spacing * 5;
+            }
         }
 
         .kui-input__item:focus + .kui-input__icon,
@@ -124,13 +133,13 @@
         }
     }
 
-    &--variant_arrow {
+    &.kui-input--variant_arrow {
         .kui-input__item {
             padding-right: $google-spacing * 5;
         }
     }
 
-    &--variant_search {
+    &.kui-input--variant_search {
         .kui-input__item {
             -webkit-appearance: textfield;
             padding-left: $google-spacing * 6;
@@ -145,8 +154,8 @@
         }
     }
 
-    &--color_grey:not(&--focus):not(&--filled),
-    &--color_grey.kui-input--variant_search {
+    &.kui-input--color_grey:not(&--focus):not(&--filled),
+    &.kui-input--color_grey.kui-input--variant_search {
         .kui-input__item {
             border-color: transparent;
             background: $color-white;
