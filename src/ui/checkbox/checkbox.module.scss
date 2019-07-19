@@ -1,4 +1,5 @@
 @import '../../assets/sass/index.scss';
+
 .kui-checkbox {
     &__input {
         display: none;      
@@ -6,6 +7,7 @@
     &__label {
         position: relative;
         display: block;
+        width: 100%;
         min-height: $google-spacing * 3;
         padding-right: $google-spacing * 6;
         font-size: $milli-size;
@@ -38,13 +40,42 @@
         transform: scale(1);
     }
     
-    &--color_black {
+    &.kui-checkbox--color_black {
         .kui-checkbox__input:checked + .kui-checkbox__label:before {
             background-color: $color-base;
         }
     }
 
-    &--disabled {
+    &.kui-checkbox--color_light {
+        .kui-checkbox {
+            &__label:before,
+            &__input:checked + &__label:before {
+                background-color: transparent;
+                border-color: transparent;
+            }
+
+            &__checkmark {
+                color: $color-purple;
+            }
+        }
+
+        &.kui-checkbox--disabled {
+            .kui-checkbox {
+                &__checkmark {
+                    opacity: .33;
+                }
+            }    
+        }
+
+        &:hover {
+            .kui-checkbox__input:not(:checked) + .kui-checkbox__label:before {
+                border-color: calc-color(fade, $color-base, 15);
+                @include transition;
+            }
+        }
+    }
+
+    &.kui-checkbox--disabled {
         pointer-events: none;
 
         .kui-checkbox__label {

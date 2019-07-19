@@ -7,7 +7,9 @@ export interface ICheckboxDispatchProps {
 }
 
 export interface ICheckboxOwnProps {
-    color?: 'black';
+    color?:
+        'black' |
+        'light';
 }
 
 export interface ICheckboxProps extends
