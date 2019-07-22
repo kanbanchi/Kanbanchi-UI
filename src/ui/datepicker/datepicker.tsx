@@ -16,9 +16,9 @@ React.forwardRef((props, ref) => {
     let {
         className,
         color,
+        editable,
         label,
         isClearable,
-        readOnly,
         selected,
         value,
         variant,
@@ -35,9 +35,9 @@ React.forwardRef((props, ref) => {
 
     const inputAttributes = {
         color,
+        editable,
         isClearable,
         label,
-        readOnly,
         ref,
         value,
         variant
@@ -67,9 +67,9 @@ React.forwardRef((props, ref) => {
 Datepicker.defaultProps = {
     color: null,
     dateFormat: 'd MMM yyyy',
+    editable: true,
     isClearable: true,
     label: null,
-    readOnly: true,
     selected: null,
     value: '',
     variant: 'datepicker',

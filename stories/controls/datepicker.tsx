@@ -19,6 +19,7 @@ const Story = () => {
                 <br/><br/>
 
                 <Datepicker
+                    editable={false}
                     isClearable={false}
                     label="From"
                     minDate={new Date('2001-01-01')}

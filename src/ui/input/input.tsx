@@ -12,6 +12,7 @@ React.forwardRef((props, ref) => {
         className,
         color,
         disabled,
+        editable,
         icon,
         isClearable,
         label,
@@ -111,6 +112,7 @@ React.forwardRef((props, ref) => {
         />;
     } else if
         (variant === 'datepicker') {
+        attributes.readOnly = !editable;
         autosize = false;
         icon = icon || 'calendar';
         const iconCalendar = <Icon
@@ -222,6 +224,7 @@ Input.defaultProps = {
     autosize: true,
     color: null,
     disabled: false,
+    editable: true,
     icon: null,
     isClearable: false,
     label: null,
