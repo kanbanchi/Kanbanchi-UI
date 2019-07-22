@@ -15,6 +15,7 @@ export interface IInputDispatchProps {
 export interface IInputOwnProps {
     autosize?: boolean;
     color?: 'grey';
+    editable?: boolean;
     icon?: string;
     isClearable?: boolean;
     label?: string;

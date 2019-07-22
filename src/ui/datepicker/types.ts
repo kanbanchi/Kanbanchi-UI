@@ -14,6 +14,7 @@ export interface IDatepickerDispatchProps {
 
 export interface IDatepickerOwnProps {
     dateFormat?: string;
+    editable?: boolean;
     maxDate?: Date;
     minDate?: Date;
     popperPlacement?: string;
