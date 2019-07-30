@@ -29,6 +29,7 @@ export interface ISelectDispatchProps {
     onChange: (event: ISelectActiveInheritedProps) => void;
     onEnter?: (event: React.KeyboardEvent<HTMLElement>) => void;
     onOpen?: () => void;
+    onClose?: () => void;
 }
 
 export interface ISelectOwnProps {

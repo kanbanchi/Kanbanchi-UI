@@ -26,6 +26,7 @@ React.forwardRef((props, ref) => {
         onFocus,
         onKeyUp,
         onOpen,
+        onClose,
         ...attributesOriginal
     } = props,
         attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
@@ -61,6 +62,15 @@ React.forwardRef((props, ref) => {
         setIsOpenedHook(true);
         calcDirection();
         if (onOpen) onOpen();
+    }
+
+    const closeDropdown = () => {
+        setIsOpenedHook(false);
+        if (valueHook !== initialValue) {
+            setActiveHook(active);
+            setValue(initialValue);
+        }
+        if (onClose) onClose();
     }
 
     const calcDirection = () => {
@@ -124,7 +134,7 @@ React.forwardRef((props, ref) => {
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         if (isFocusedHook) {
             setIsFocusedHook(false);
-            setIsOpenedHook(false);
+            closeDropdown();
         }
         if (onBlur) onBlur(e);
     }
@@ -202,45 +212,46 @@ React.forwardRef((props, ref) => {
         if (!e) return;
         if (onKeyUp) onKeyUp(e);
         e.persist();
-        findValue(e.target.value)
-            .then((found: ISelectActiveProps) => {
-                if (!isOpenedHook && e.which !== 13) { // open if closed
-                    openDropdown();
-                }
-                if (!isSearch) {
-                    if (e.which === 39 || e.which === 13) { // arrow right || enter
-                        setValue(found.text);
-                    }
-                    if (onChange) onChange(Object.assign({}, e, {item: found}));
-                }
-            })
-            .catch(() => {
-                setActiveHook(null);
-                if (!isOpenedHook && e.which !== 13) { // open if closed
-                    openDropdown();
-                }
-            })
-            .then(() => { // dont know why it works only in then
-                if (e.which === 27) { // esc
-                    setValueHook(initialValue + ' '); // doesnt reset to initialValue without it
-                    setIsOpenedHook(false);
-                    setActiveHook(active);
-                    setValue(initialValue);
-                }
-            });
-    }
-
-    const onEnterHandler = (e: React.KeyboardEvent<HTMLElement>) => {
-        if (!isSearch) {
-            setIsOpenedHook(false);
+        if (e.which === 27) { // esc
+            return closeDropdown();
+        } else if (
+            e.which === 38 || // arrow up
+            e.which === 40 // arrow down
+        ) {
+            let activeNew;
+            if (e.which === 38) {
+                activeNew = activeHook - 1;
+                if (activeNew < 0) activeNew = list.length - 1;
+            } else if (e.which === 40) {
+                activeNew = activeHook + 1;
+                if (activeNew >= list.length) activeNew = 0;
+            }
+            setActiveHook(activeNew);
+            setValue(list[activeNew].props.children);
+            return;
         }
-        if (onEnter) onEnter(e);
+        if (!isOpenedHook) return openDropdown();
+        if (isSearch) return;
+        if (e.which === 13) { // enter
+            if (onEnter) onEnter(e);
+            findValue(e.target.value)
+                .then((found: ISelectActiveProps) => {
+                    setActiveHook(found.index);
+                    onActiveChanged(found.index);
+                    if (onChange) onChange(Object.assign({}, e, {item: found}));
+                })
+                .catch(() => {
+                    setActiveHook(null);
+                });
+            closeDropdown();
+        }
     }
 
-    const onActiveChanged = () => {
-        if (active === null || !list.length || !list[active]) return;
-        setInitialValue(list[active].props.children);
-        setValue(list[active].props.children);
+    const onActiveChanged = (activeNew: number = null) => {
+        if (activeNew === null) activeNew = active;
+        if (activeNew === null || !list.length || !list[activeNew]) return;
+        setInitialValue(list[activeNew].props.children);
+        setValue(list[activeNew].props.children);
     }
 
     React.useEffect(() => {
@@ -265,7 +276,6 @@ React.forwardRef((props, ref) => {
                 ref={inputRef}
                 value={valueHook as any}
                 variant={variant}
-                onEnter={onEnterHandler}
                 {...attributes}
             />
             <Dropdown
@@ -292,7 +302,8 @@ Select.defaultProps = {
     options: null,
     onChange: (): void => undefined,
     onEnter: () => undefined,
-    onOpen: () => undefined
+    onOpen: () => undefined,
+    onClose: () => undefined
 };
 
 Select.displayName = 'Select';
