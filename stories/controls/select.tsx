@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { ButtonsGroup, Select, SelectList, SelectListItem } from '../../src/ui';
 import { ISelectActiveInheritedProps } from '../../src/ui/select/types';
 
-
 const Story = () => {
 
     const [val, setVal] = React.useState(0);
@@ -27,7 +26,10 @@ const Story = () => {
                         '2': 'Option 2'
                     }}
                     variant="arrow"
-                    onChange={(i: ISelectActiveInheritedProps)=>setVal04(i.item.index)}
+                    onChange={(i: ISelectActiveInheritedProps) => {
+                        console.log(i.item.text);
+                        setVal04(i.item.index);
+                    }}
                 >
                 </Select>
 
@@ -35,6 +37,7 @@ const Story = () => {
 
                 <Select
                     active={val05}
+                    editable={true}
                     label="Options Array"
                     options={[
                         {value: 0, text: 'Option 0'},
@@ -42,7 +45,10 @@ const Story = () => {
                         {value: '2', text: 'Option 2'},
                     ]}
                     variant="arrow"
-                    onChange={(i: ISelectActiveInheritedProps)=>setVal05(i.item.index)}
+                    onChange={(i: ISelectActiveInheritedProps) => {
+                        console.log(i.item.text);
+                        setVal05(i.item.index);
+                    }}
                 >
                 </Select>
 
