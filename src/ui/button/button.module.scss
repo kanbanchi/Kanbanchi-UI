@@ -401,7 +401,18 @@
     &--variant_icon-text {
         min-width: 0;
         color: inherit;
-        opacity: .6;
+
+        .kui-icon {
+            opacity: .3;
+            @include transition;
+        }
+
+        .kui-button__text {
+            margin-left: $google-spacing;
+            font-weight: normal;
+            opacity: .6;
+            @include transition;
+        }
 
         &:before {
             position: absolute;
@@ -416,12 +427,18 @@
 
         &:focus {
             color: inherit;
-            opacity: .4;
         }
 
         &:hover {
             color: inherit;
-            opacity: 1;
+            
+            .kui-icon {
+                opacity: .9;
+            }
+
+            .kui-button__text {
+                opacity: 1;
+            }
         }
 
         &:active {
@@ -432,7 +449,14 @@
         &.kui-button--disabled,
         &:disabled {
             color: inherit;
-            opacity: .3;
+
+            .kui-icon {
+                opacity: .15;
+            }
+            
+            .kui-button__text {
+                opacity: .3;
+            }
         }
     }
 
@@ -440,11 +464,6 @@
         justify-content: flex-start;
         &:before {
             left: $google-spacing * 1.5;
-        }
-
-        .kui-button__text {
-            margin-left: $google-spacing;
-            font-weight: normal;
         }
     }
 
