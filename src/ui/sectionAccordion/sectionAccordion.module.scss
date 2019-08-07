@@ -28,22 +28,10 @@
         }
     }
 
-    &-button {
-        
-        &,
-        &:focus {
-            opacity: .6;
-        }
-
-        &:hover {
-            opacity: 1;
-        }
-
-        &__title {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
+    &-button__title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     &__arrow {
@@ -57,18 +45,6 @@
         justify-content: flex-end;
         align-items: center;
         padding-left: $google-spacing * 2;
-
-        &__button {
-
-            &,
-            &:focus {
-                opacity: .6;
-            }
-
-            &:hover {
-                opacity: 1;
-            }
-        }
     }
 
     &-body {

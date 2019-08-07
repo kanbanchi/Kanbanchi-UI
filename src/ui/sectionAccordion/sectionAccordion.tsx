@@ -35,7 +35,11 @@ React.forwardRef((props, ref) => {
     );
 
     const onButtonClick = () => {
-        if (!isOpenedHook && onOpen) onOpen();
+        if (isOpenedHook) {
+            if (onClose) onClose();
+        } else {
+            if (onOpen) onOpen();
+        }
         setIsOpenedHook(!isOpenedHook);
         setIsClickedHook(true);
     }
