@@ -35,8 +35,9 @@ const Story = () => {
                     color="grey"
                     icon="share-specific"
                     title="Title 01"
-                    opened={opened === 0}
-                    onOpen={()=>setOpened(0)}
+                    opened={true}
+                    onClose={()=>console.log('onClose')}
+                    onOpen={()=>console.log('onOpen')}
                 >
                     <p>body</p>
                     <p>body</p>
