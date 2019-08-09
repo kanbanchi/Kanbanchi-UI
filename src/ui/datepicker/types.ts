@@ -1,10 +1,7 @@
 import { IInputPublicProps } from './../input/types';
+import { Placement, Modifiers } from 'popper.js';
 
 export interface IDatepickerStateProps {
-    dateFormat?: string;
-    maxDate?: Date;
-    minDate?: Date;
-    popperPlacement?: string;
     selected: Date;
 }
 
@@ -17,7 +14,8 @@ export interface IDatepickerOwnProps {
     editable?: boolean;
     maxDate?: Date;
     minDate?: Date;
-    popperPlacement?: string;
+    popperModifiers?: Modifiers;
+    popperPlacement?: Placement;
     selected: Date;
     showMonthDropdown?: boolean;
     showYearDropdown?: boolean;
