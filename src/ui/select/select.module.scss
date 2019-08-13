@@ -39,6 +39,22 @@
 
     &.kui-select--disabled {
         pointer-events: none;
+
+        .kui-label__item {
+            color: calc-color(fade, $color-base, 30);
+        }
+
+        .kui-input {
+            &__item,
+            &__item[readonly] {
+                color: calc-color(fade, $color-base, 30);
+                border-color: calc-color(fade, $color-base, 10);
+            }
+        }
+
+        .kui-input__icon--arrow {
+            color: calc-color(fade, $color-base, 10);
+        }
     }
 
     &.kui-select--variant_header {
