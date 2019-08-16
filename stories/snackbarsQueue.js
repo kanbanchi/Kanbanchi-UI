@@ -25,10 +25,10 @@ class SnackbarsQueue extends React.Component {
                     },
                     {
                         text: 'Ok',
-                        onClick: () => console.log('ok'),
-                        onTimer: true
+                        onClick: () => console.log('ok')
                     }
-                ]
+                ],
+                onBlur: () => console.log('onBlur')
             });
             /*
             state.queue.push({

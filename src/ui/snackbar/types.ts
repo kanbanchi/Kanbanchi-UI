@@ -32,7 +32,7 @@ export interface ISnackbarStateProps {
 }
 
 export interface ISnackbarDispatchProps {
-    onBlur?: () => void;
+    onBlur?: (event: React.FocusEvent<HTMLDivElement>) => void;
     onTimer?: () => void;
 }
 

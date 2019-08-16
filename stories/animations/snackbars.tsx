@@ -46,7 +46,7 @@ const Story = () => {
                 />
                 <br />
                 <Snackbar
-                    key="1"
+                    key="2"
                     variant="error"
                     text="The maximum number of seats is exceeded. <br>Click Manage subscription to buy more seats."
                     buttons={[
@@ -56,7 +56,7 @@ const Story = () => {
 
                 <h2>Timer</h2>
                 <Snackbar
-                    key="1"
+                    key="3"
                     variant="timer"
                     timer={55}
                     text={'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
@@ -74,7 +74,7 @@ const Story = () => {
                 />
                 <br />
                 <Snackbar
-                    key="1"
+                    key="4"
                     timer={5}
                     variant="error"
                     text="Error text shown 5 seconds"
@@ -84,7 +84,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Info</h2>
                 <Snackbar
-                    key="1"
+                    key="5"
                     title="We've updated the app!"
                     text="Click to refresh the page and receive updates"
                     buttons={[
@@ -99,7 +99,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Promt</h2>
                 <Snackbar
-                    key="1"
+                    key="6"
                     variant="promt"
                     text={'It may take some time'}
                     title={'We will move your board'}
@@ -118,7 +118,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Progress</h2>
                 <Snackbar
-                    key="1"
+                    key="7"
                     title="We are moving your board"
                     text="It may take some time"
                     buttons={[
@@ -133,7 +133,7 @@ const Story = () => {
             <section className="snackbars">
                 <h2>Success</h2>
                 <Snackbar
-                    key="1"
+                    key="8"
                     variant="success"
                     title="Data has been successfully exported"
                     text="We've sent you an email with the link"
