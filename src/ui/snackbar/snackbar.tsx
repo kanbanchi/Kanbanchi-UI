@@ -64,6 +64,8 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         );
     }
 
+    const refSnackbar = React.useRef(null);
+
     const [timerHook, setTimerHook] = React.useState(timer);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
     const [s] = React.useState<any>({});
@@ -71,6 +73,10 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
     s.timerHook = timerHook;
 
     React.useEffect(() => {
+        if (attributes.onBlur) {
+            refSnackbar.current.focus();
+        }
+
         let unmounted = false;
         if (timerHook === null) return;
         setTimeoutHook(setInterval(() => {
@@ -93,6 +99,8 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         <div className="kui-snackbar__container">
             <div
                 className={className}
+                ref={refSnackbar}
+                tabIndex={0}
                 {...attributes}
             >
                 <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
@@ -122,6 +130,7 @@ Snackbar.defaultProps = {
     timer: null,
     title: null,
     variant: 'info',
+    onBlur: null,
     onTimer: () => undefined,
 };
 

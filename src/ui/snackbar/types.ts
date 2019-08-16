@@ -32,6 +32,7 @@ export interface ISnackbarStateProps {
 }
 
 export interface ISnackbarDispatchProps {
+    onBlur?: () => void;
     onTimer?: () => void;
 }
 
@@ -41,6 +42,7 @@ export type SnackbarVariant =
     'promt' |
     'success' |
     'timer';
+
 export interface ISnackbarOwnProps {
     icon?: string;
     key: string;
@@ -54,7 +56,10 @@ export interface ISnackbarProps extends
     ISnackbarOwnProps
 {}
 
-export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
+        'onBlur'
+    >>;
 
 export interface ISnackbarInheritedProps extends
     IConflictFreeHTMLAttributes<HTMLElement>,

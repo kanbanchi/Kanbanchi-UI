@@ -18,6 +18,21 @@ const Story = () => {
                 <h2>Select</h2>
 
                 <Select
+                    active={1}
+                    disabled
+                    label="Disabled"
+                    options={{
+                        0: 'Option 0',
+                        1: 'Option 1'
+                    }}
+                    variant="arrow"
+                    onChange={null}
+                >
+                </Select>
+
+                <br/><br/>
+
+                <Select
                     active={val04}
                     label="Options Object"
                     options={{
