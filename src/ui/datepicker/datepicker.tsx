@@ -6,7 +6,6 @@ import { ClassNames } from '../utils';
 import { Input } from '../../ui';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
-import { isInnerInput } from './behavior/clickHelper';
 
 const ReactDatepickerElement = ReactDatepicker as any;
 
@@ -49,26 +48,9 @@ React.forwardRef((props, ref) => {
         if (onChange) onChange(date);
     }
 
-    const handleClick = (e: React.MouseEvent) => {
-        const clickTarget = e.target as HTMLElement;
-        const datepickerRef = pickerRef.current;
-
-        if (datepickerRef) {
-            const isCalendarOpen = datepickerRef.isCalendarOpen();
-            if (isCalendarOpen) {
-                const isInnerInputClicked = isInnerInput(clickTarget);
-
-                if (isInnerInputClicked) {
-                    datepickerRef.setOpen(false);
-                }
-            }
-        }
-    };
-
     return (
         <div
             className={className}
-            onClick={handleClick}
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
