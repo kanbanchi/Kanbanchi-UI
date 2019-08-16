@@ -10,6 +10,7 @@
     border-radius: $base-radius;
     background-color: $color-purple;
     box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-base, 10);
+    outline: none;
     :global {
         animation: snackbarShow .5s ease-in-out forwards;
     }
@@ -137,7 +138,7 @@
     0% {
         transform: translateY(100%);
     }
-    100% {     
+    100% {
         transform: none;
     }
 }
@@ -147,7 +148,7 @@
         opacity: .2;
         transform: scale(.2);
     }
-    20%, 
+    20%,
     80% {
         opacity: 1;
         transform: scale(1);
