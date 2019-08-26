@@ -135,3 +135,17 @@ section {
         @include wrap-scroll-inner;
     }
 }
+
+.kui-button-dropdown.stories-dropdown-100 {
+    display: block;
+
+    .kui-dropdown__item {
+        min-width: 100%;
+    }
+
+    .kui-checkbox__label {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
