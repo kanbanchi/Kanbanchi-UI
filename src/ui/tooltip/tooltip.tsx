@@ -186,7 +186,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 };
 
 Tooltip.defaultProps = {
-    direction: 'down',
+    direction: 'up',
     maxWidth: null,
     state: null,
     value: null
