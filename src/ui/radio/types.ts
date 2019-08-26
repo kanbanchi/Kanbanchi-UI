@@ -12,10 +12,13 @@ export interface IRadioDispatchProps {
 
 export interface IRadioProps extends
     IRadioStateProps,
-    IRadioActiveProps
+    IRadioDispatchProps
 {}
 
-export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
+export type IConflictFreeHTMLAttributes<E> =
+    Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
+        'onChange'
+    >>;
 
 export interface IRadioInheritedProps extends
     IRadioProps,

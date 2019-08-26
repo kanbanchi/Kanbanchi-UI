@@ -7,12 +7,14 @@ export const Loader: React.SFC<ILoaderInheritedProps> =
 (props) => {
     let {
         className,
+        color,
         size,
         ...attributes
     } = props;
 
     const classNames = ClassNames(
         'kui-loader',
+        (color) ? 'kui-loader--color_' + color : null,
         (size) ? 'kui-loader--size_' + size : null,
         className
     );
@@ -29,6 +31,7 @@ export const Loader: React.SFC<ILoaderInheritedProps> =
 };
 
 Loader.defaultProps = {
+    color: 'purple',
     size: null
 };
 
