@@ -62,7 +62,19 @@ $cubic: cubic-bezier(.4,.4,.15,1.4);
                 animation: animation_loader_01 2s .4s infinite;
             }
         }        
-    }    
+    }
+
+    &--color_white {
+        .kui-loader__item {
+            background: $color-white;
+        }
+    }
+
+    &--color_black {
+        .kui-loader__item {
+            background: $color-base;
+        }
+    }
 }
 
 @keyframes animation_loader_01 {

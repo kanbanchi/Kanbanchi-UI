@@ -8,7 +8,7 @@ const Story = () => {
              <section>
                 <h2>Loader</h2>
 
-                <p>Size="large"</p>
+                <h4>Size="large"</h4>
                 <p>For screen blockers or on loading data for dropdown</p>
 
                 <div style={{
@@ -20,6 +20,36 @@ const Story = () => {
                     background: '#ddd'
                 }}>
                     <Loader size="large"/>
+                </div>
+
+                <br />
+
+                <h4>Color="white"</h4>
+
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 200,
+                    height: 80,
+                    background: '#673ab7'
+                }}>
+                    <Loader color={'white'} size="large"/>
+                </div>
+
+                <br />
+
+                <h4>Color="black"</h4>
+
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 200,
+                    height: 80,
+                    background: '#ddd'
+                }}>
+                    <Loader color={'black'} size="large"/>
                 </div>
 
                 <br />
