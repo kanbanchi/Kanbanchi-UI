@@ -143,6 +143,7 @@
         .kui-input__item {
             -webkit-appearance: textfield;
             padding-left: $google-spacing * 6;
+            padding-right: $google-spacing * 4;
         }
 
         &:hover,

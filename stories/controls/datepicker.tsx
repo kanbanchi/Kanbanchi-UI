@@ -19,6 +19,7 @@ const Story = () => {
                 <br/><br/>
 
                 <Datepicker
+                    dateFormat={'dd.MM.yyyy'}
                     editable={false}
                     isClearable={false}
                     label="From"
