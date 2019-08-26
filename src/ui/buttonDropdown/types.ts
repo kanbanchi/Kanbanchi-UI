@@ -4,6 +4,7 @@ export interface IButtonDropdownProps extends
     IDropdownPublicProps
 {
     disabled?: boolean;
+    multiple?: boolean;
 }
 
 export type IConflictFreeHTMLAttributes<E> = React.ButtonHTMLAttributes<E>;
