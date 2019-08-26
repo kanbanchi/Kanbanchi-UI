@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem } from '../../src/ui';
+import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox } from '../../src/ui';
 
 const Story = () => {
     const onClickHandler = (e: any) => console.log(e.target.innerText);
+    const [val01, setVal01] = React.useState(false);
+    const [val02, setVal02] = React.useState(false);
 
     return (
         <div className="page">
@@ -53,6 +55,34 @@ const Story = () => {
                         </ButtonDropdown>
                     </ButtonsGroup>
                 </div>
+            </section>
+
+            <section className="section-form-min">
+                <h2>Checkboxes</h2>
+
+                <ButtonDropdown
+                    className="stories-dropdown-100"
+                    multiple={true}
+                    opened={true}
+                >
+                    <Button variant="add">
+                        Add smth
+                    </Button>
+                    <SelectList fixActive={false}>
+                        <Checkbox
+                            checked={val01}
+                            onChange={()=>setVal01(!val01)}
+                        >
+                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </Checkbox>
+                        <Checkbox
+                            checked={val02}
+                            onChange={()=>setVal02(!val02)}
+                        >
+                            Check 02
+                        </Checkbox>
+                    </SelectList>
+                </ButtonDropdown>
             </section>
         </div>
     );
