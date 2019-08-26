@@ -8,7 +8,7 @@ $selectList: '.kui-select-list';
     list-style: none;
     font-size: $milli-size;
     white-space: nowrap;
-    color: calc-color(fade, $color-base, 60);
+    color: calc-color(fade, $color-base, 90);
     background: $color-white;
 
     &__item {
