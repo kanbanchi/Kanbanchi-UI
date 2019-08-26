@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IButtonDropdownInheritedProps } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
-import { ClassNames, userAgentsInclude } from '../utils';
+import { ClassNames, userAgentsInclude, ClassesList } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
@@ -13,6 +13,8 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         directionVertical,
         directionHorizontal,
         disabled,
+        multiple,
+        opened,
         onBlur,
         onClick,
         ...attributesOriginal
@@ -22,7 +24,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         list = null;
 
     const [directionHook, setDirectionHook] = React.useState(directionVertical);
-    const [isOpenedHook, setIsOpenedHook] = React.useState(false);
+    const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
     const buttonRef = React.useRef(null);
     const dropdownRef = React.useRef(null);
@@ -59,7 +61,23 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         if (onClick) onClick(e);
     }
 
-    attributes.onBlur = (e) => {
+    attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        e.persist();
+        if (
+            multiple &&
+            e.relatedTarget
+        ) {
+            const classes = ClassesList(
+                e.relatedTarget as HTMLElement,
+                ['kui-dropdown', 'kui-button-dropdown']
+            );
+            if (classes.includes('kui-dropdown')) {
+                if (e.target) {
+                    e.target.focus();
+                }
+                return;
+            }
+        }
         setTimeoutHook(setTimeout(() => {
             setIsOpenedHook(false);
         }, 200)); // delay after onClick
@@ -99,6 +117,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
                 directionHorizontal={directionHorizontal}
                 opened={isOpenedHook}
                 ref={dropdownRef}
+                tabIndex={0}
                 onAnimationEnd={dropdownAnimationEnd}
             >
                 {list}
