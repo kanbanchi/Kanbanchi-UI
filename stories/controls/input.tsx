@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Input } from '../../src/ui';
+import { Input, Button } from '../../src/ui';
 
 const Story = () => {
     const [val, setVal] = React.useState('');
@@ -8,6 +8,9 @@ const Story = () => {
     const [tt, setTt] = React.useState(null);
     const [val2, setVal2] = React.useState('');
     const [val3, setVal3] = React.useState('');
+
+    const inputRef = React.useRef(null);
+
     return (
         <div className="page">
             <section className="section-form-min">
@@ -15,10 +18,23 @@ const Story = () => {
 
                 <Input
                     autosize={false}
+                    ref={inputRef}
                     variant="search"
                     value={val2}
                     onChange={(e: any) => setVal2(e.target.value)}
                 />
+
+                <br/>
+
+                <Button
+                    onClick={() => {
+                        setVal2('123');
+                        inputRef.current.setIsFilled('123');
+                        inputRef.current.setFocus();
+                    }}
+                >
+                    set value '123'
+                </Button>
             </section>
 
             <section className="section-grey section-form-min">
