@@ -179,7 +179,11 @@ React.forwardRef((props, ref) => {
         },
         getBoundingClientRect() {
             return textarea.current.getBoundingClientRect();
-        }
+        },
+        setFocus(e: React.FocusEvent<HTMLInputElement>) {
+            textarea.current.focus();
+            attributes.onFocus(e);
+        },
     }));
 
     React.useEffect(() => {
