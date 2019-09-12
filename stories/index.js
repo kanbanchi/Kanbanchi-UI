@@ -1,6 +1,7 @@
 import './stories.module.scss';
 
 import Loader from './animations/loader';
+import Modals from './animations/modals';
 import SectionAccordion from './animations/sectionAccordion';
 import Snackbars from './animations/snackbars';
 import Tooltip from './animations/tooltip';
