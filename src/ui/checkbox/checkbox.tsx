@@ -32,6 +32,10 @@ React.forwardRef((props, ref) => {
         if (onChange) onChange(e);
     };
 
+    React.useEffect(() => {
+        setIsChecked(checked);
+    }, [checked]);
+
     return (
         <Label
             className={className}
