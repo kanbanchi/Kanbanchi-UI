@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Checkbox } from '../../src/ui';
+import { Checkbox, Button } from '../../src/ui';
 
 const Story = () => {
     const [val, setVal] = React.useState(false);
@@ -16,6 +16,14 @@ const Story = () => {
         <div className="page">
             <section className="section-form-min">
                 <h2>Checkbox</h2>
+
+                <Button
+                    onClick={() => setVal(!val)}
+                >
+                    Toggle
+                </Button>
+
+                <br/><br/>
 
                 <Checkbox
                     checked={val}
