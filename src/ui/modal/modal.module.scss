@@ -1,0 +1,98 @@
+@import '../../assets/sass/index.scss';
+
+$modal-max-width: $google-spacing * 90; // 720px
+$modal-z-index: $z-modal;
+
+.kui-modal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    min-height: 100%;
+    overflow: hidden;
+    z-index: $modal-z-index;
+
+    .kui-modal__overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        min-height: 100%;
+        background: calc-color(fade, $color-white, 70);
+        z-index: $modal-z-index;
+        animation: animation_modal_overlay .5s ease-in-out forwards;
+    }
+
+    .kui-modal__item {
+        width: 100%;
+        max-width: $modal-max-width;
+        background: $color-white;
+        border-radius: $base-radius;
+        box-shadow: $shadow-modal;
+        z-index: $modal-z-index + 10;
+        animation: animation_modal_item .3s ease-in-out forwards;
+    }
+
+    .kui-modal__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-height: $google-spacing * 7;
+        padding: $google-spacing * 2 $google-spacing * 2 $google-spacing * 2 $google-spacing * 3;
+        border-bottom: 1px solid calc-color(fade, $color-base, 10);
+    }
+
+    .kui-modal__close {
+        flex: 0 0 $google-spacing * 3;
+    }
+
+    .kui-modal__header-title {
+        padding-right: $google-spacing * 2;
+        font-weight: bold;
+    }
+
+    .kui-modal__body {
+        padding: $google-spacing * 2 $google-spacing * 3;
+    }
+
+    .kui-modal__footer {
+        display: flex;
+        align-items: center;
+        min-height: $google-spacing * 7;
+        padding: $google-spacing * 2 $google-spacing * 3;
+        border-top: 1px solid calc-color(fade, $color-base, 10);
+
+        &.kui-modal__footer--buttons {
+            justify-content: flex-end;
+        }
+    }
+
+    &.kui-modal--variant_actions {
+        .kui-modal__header {
+            padding-right: $google-spacing * 3;
+        }
+
+        .kui-modal__header-title {
+            font-size: $google-spacing * 2.5;
+        }
+    }
+}
+
+@keyframes animation_modal_overlay {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes animation_modal_item {
+    0% { transform: translateY($google-spacing * 3); }
+    100% { transform: translateY(0); }
+}
+
+@media (max-width: $media-iPlus) {
+}

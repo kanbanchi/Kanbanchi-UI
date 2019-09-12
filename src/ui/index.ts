@@ -19,6 +19,8 @@ export {Label} from './label/label';
 export {Loader} from './loader/loader';
 export {LoaderBlock} from './loaderBlock/loaderBlock';
 
+export {Modal} from './modal/modal';
+
 export {Radio} from './radio/radio';
 
 export {Search} from './search/search';
