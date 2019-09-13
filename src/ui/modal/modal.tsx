@@ -12,11 +12,13 @@ export const Modal: React.SFC<IModalInheritedProps> =
         children,
         className,
         buttons,
+        release,
         title,
         variant,
         onClose,
         ...attributes
     } = props,
+        slides = null,
         footer = null;
 
     className = ClassNames(
@@ -67,6 +69,60 @@ export const Modal: React.SFC<IModalInheritedProps> =
         );
     }
 
+    if (variant === 'release' && release) {
+        footer = (
+            <div className="kui-modal__footer kui-modal__footer--release">
+                <div className="kui-modal__footer-stars">
+                    <Icon size={24} xlink="google-color"/>
+                    <div
+                        className="kui-modal__footer-stars-text"
+                        dangerouslySetInnerHTML={{ __html: release.footer.stars }}
+                    ></div>
+                </div>
+                <div className="kui-modal__footer-follow">
+                    <div className="kui-modal__footer-follow-text">
+                        {release.footer.follow.text}
+                    </div>
+                    <ButtonsGroup
+                        className="kui-modal__footer-follow-buttons"
+                        size="large"
+                    >
+                        {release.footer.follow.socials.map(social => (
+                            <Button
+                                href={social.link}
+                                key={social.name}
+                                target="_blank"
+                                tooltip={social.name}
+                                variant="icon-text"
+                            >
+                                <Icon
+                                    className="kui-modal__footer-follow-icon"
+                                    size={24}
+                                    xlink={social.icon}
+                                />
+                            </Button>
+                        ))}
+                    </ButtonsGroup>
+                </div>
+            </div>
+        );
+
+        slides = (<div className="kui-modal__slides">
+            {release.slides.map(slide => {
+                return (
+                    <div className="kui-modal__slide">
+                        <div className="kui-modal__slide-src">
+                        </div>
+                        <div
+                            className="kui-modal__slide-description"
+                            dangerouslySetInnerHTML={{ __html: slide.description }}
+                        ></div>
+                    </div>
+                );
+            })}
+        </div>);
+    }
+
     const closeButton = variant === 'actions' ? null :
         (<Button
             className="kui-modal__close"
@@ -115,6 +171,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
                 </div>
                 <div className="kui-modal__body">
                     {children}
+                    {slides}
                 </div>
                 {footer}
             </div>
@@ -124,6 +181,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
 
 Modal.defaultProps = {
     buttons: null,
+    release: null,
     title: '',
     variant: null,
     onClose: () => null

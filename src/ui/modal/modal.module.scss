@@ -18,61 +18,6 @@ $modal-z-index: $z-modal;
     overflow: hidden;
     z-index: $modal-z-index;
 
-    .kui-modal__overlay {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        min-height: 100%;
-        background: calc-color(fade, $color-white, 70);
-        z-index: $modal-z-index;
-        animation: animation_modal_overlay .5s ease-in-out forwards;
-    }
-
-    .kui-modal__item {
-        width: 100%;
-        max-width: $modal-max-width;
-        background: $color-white;
-        border-radius: $base-radius;
-        box-shadow: $shadow-modal;
-        z-index: $modal-z-index + 10;
-        animation: animation_modal_item .3s ease-in-out forwards;
-    }
-
-    .kui-modal__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        min-height: $google-spacing * 7;
-        padding: $google-spacing * 2 $google-spacing * 2 $google-spacing * 2 $google-spacing * 3;
-        border-bottom: 1px solid calc-color(fade, $color-base, 10);
-    }
-
-    .kui-modal__close {
-        flex: 0 0 $google-spacing * 3;
-    }
-
-    .kui-modal__header-title {
-        padding-right: $google-spacing * 2;
-        font-weight: bold;
-    }
-
-    .kui-modal__body {
-        padding: $google-spacing * 2 $google-spacing * 3;
-    }
-
-    .kui-modal__footer {
-        display: flex;
-        align-items: center;
-        min-height: $google-spacing * 7;
-        padding: $google-spacing * 2 $google-spacing * 3;
-        border-top: 1px solid calc-color(fade, $color-base, 10);
-
-        &.kui-modal__footer--buttons {
-            justify-content: flex-end;
-        }
-    }
-
     &.kui-modal--variant_actions {
         .kui-modal__header {
             padding-right: $google-spacing * 3;
@@ -81,6 +26,108 @@ $modal-z-index: $z-modal;
         .kui-modal__header-title {
             font-size: $google-spacing * 2.5;
         }
+    }
+
+    &.kui-modal--variant_release {
+        .kui-modal__body {
+            padding: 0;
+        }
+    }
+}
+
+.kui-modal__overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    background: calc-color(fade, $color-white, 70);
+    z-index: $modal-z-index;
+    animation: animation_modal_overlay .5s ease-in-out forwards;
+}
+
+.kui-modal__item {
+    width: 100%;
+    max-width: $modal-max-width;
+    background: $color-white;
+    border-radius: $base-radius;
+    box-shadow: $shadow-modal;
+    overflow: hidden;
+    z-index: $modal-z-index + 10;
+    animation: animation_modal_item .3s ease-in-out forwards;
+}
+
+.kui-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: $google-spacing * 7;
+    padding: $google-spacing * 2 $google-spacing * 2 $google-spacing * 2 $google-spacing * 3;
+    border-bottom: 1px solid calc-color(fade, $color-base, 10);
+}
+
+.kui-modal__close {
+    flex: 0 0 $google-spacing * 3;
+}
+
+.kui-modal__header-title {
+    padding-right: $google-spacing * 2;
+    font-weight: bold;
+}
+
+.kui-modal__body {
+    padding: $google-spacing * 2 $google-spacing * 3;
+}
+
+.kui-modal__footer {
+    display: flex;
+    align-items: center;
+    min-height: $google-spacing * 7;
+    padding: $google-spacing * 2 $google-spacing * 3;
+    border-top: 1px solid calc-color(fade, $color-base, 10);
+
+    &.kui-modal__footer--buttons {
+        justify-content: flex-end;
+    }
+
+    &.kui-modal__footer--release {
+        justify-content: space-between;
+        border: none;
+        background: calc-color(tint, $color-background, 50);
+    }
+}
+
+.kui-modal__footer-stars {
+    display: flex;
+    align-items: center;
+
+    .kui-modal__footer-stars-text {
+        padding-left: $google-spacing * 2;
+        font-size: $milli-size;
+        font-weight: bold;
+    }
+
+    a {
+        font-weight: normal;
+        color: $color-purple;
+    }
+}
+
+.kui-modal__footer-follow {
+    display: flex;
+    align-items: flex-end;
+
+    .kui-modal__footer-follow-text {
+        padding-right: $google-spacing * 4;
+        font-weight: bold;
+    }
+
+    .kui-modal__footer-follow-buttons {
+        color: $color-purple;
+    }
+
+    .kui-modal__footer-follow-icon {
+        opacity: 1;
     }
 }
 
