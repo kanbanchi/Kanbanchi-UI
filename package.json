@@ -12,7 +12,8 @@
     "moment": "^2.24.0",
     "react": "^16.8.3",
     "react-datepicker": "^2.5.0",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "react-multi-carousel": "^2.2.5"
   },
   "scripts": {
     "start": "start-storybook -p 9002 -c .storybook -s ./public",

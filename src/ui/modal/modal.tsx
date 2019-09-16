@@ -5,6 +5,8 @@ import { IModalInheritedProps } from './types';
 import { Button } from '../button/button';
 import { Icon } from '../icon/icon';
 import { ButtonsGroup } from '../buttonsGroup/buttonsGroup';
+import Carousel, { StateCallBack } from 'react-multi-carousel';
+import '../../../src/ui/modal/carousel.scss';
 
 export const Modal: React.SFC<IModalInheritedProps> =
 (props) => {
@@ -26,6 +28,8 @@ export const Modal: React.SFC<IModalInheritedProps> =
         (variant) ? 'kui-modal--variant_' + variant : null,
         className
     );
+
+    const [titleHook, setTitleHook] = React.useState(title);
 
     let buttonsGroup = [],
         onEnter: () => void = () => null;
@@ -50,6 +54,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
 
             return (
                 <Button
+                    className="kui-modal__footer-button"
                     key={key}
                     size="large"
                     variant={isPrimary ? 'primary' : 'secondary'}
@@ -62,7 +67,10 @@ export const Modal: React.SFC<IModalInheritedProps> =
         });
         footer = (
             <div className="kui-modal__footer kui-modal__footer--buttons">
-                <ButtonsGroup size="large">
+                <ButtonsGroup
+                    className="kui-modal__footer-buttons"
+                    size="large"
+                >
                     {buttonsGroup}
                 </ButtonsGroup>
             </div>
@@ -107,11 +115,100 @@ export const Modal: React.SFC<IModalInheritedProps> =
             </div>
         );
 
-        slides = (<div className="kui-modal__slides">
-            {release.slides.map(slide => {
+        const ArrowFix = (arrowProps: any) => {
+            const {carouselState, children, ...restArrowProps} = arrowProps;
+            return (
+                <Button variant="icon" {...restArrowProps}>
+                    {children}
+                </Button>
+            );
+        };
+
+        const arrowLeft = <ArrowFix
+            className="kui-modal__slides-arrow kui-modal__slides-arrow--left"
+        >
+            <Icon size={24} xlink="arrow-back"/>
+        </ArrowFix>;
+
+        const arrowRight = <ArrowFix
+            className="kui-modal__slides-arrow kui-modal__slides-arrow--right"
+        >
+            <Icon size={24} xlink="arrow-forward"/>
+        </ArrowFix>;
+
+        const afterChange = (
+            previousSlide: number,
+            state: StateCallBack
+        ) => {
+            const slidesCount = release.slides.length;
+            let newIndex = state.currentSlide - 2;
+            if (newIndex < 0) newIndex += slidesCount;
+            setTitleHook(release.slides[newIndex].title);
+        }
+
+        slides = (<Carousel
+            additionalTransfrom={0}
+            afterChange={afterChange}
+            arrows
+            centerMode={false}
+            containerClass="kui-modal__slides"
+            customLeftArrow={arrowLeft}
+            customRightArrow={arrowRight}
+            dotListClass="kui-modal__slides-dots"
+            draggable
+            focusOnSelect={false}
+            infinite
+            itemClass="kui-modal__slide"
+            keyBoardControl
+            minimumTouchDrag={80}
+            renderDotsOutside={false}
+            responsive={{
+                desktop: {
+                    breakpoint: {
+                        max: 3000,
+                        min: 1024
+                    },
+                    items: 1
+                },
+                mobile: {
+                    breakpoint: {
+                        max: 464,
+                        min: 0
+                    },
+                    items: 1
+                },
+                tablet: {
+                    breakpoint: {
+                        max: 1024,
+                        min: 464
+                    },
+                    items: 1
+                }
+            }}
+            showDots
+            sliderClass=""
+            slidesToSlide={1}
+            swipeable
+        >
+            {release.slides.map((slide, index) => {
+                let src = null;
+                if (slide.variant === 'img') {
+                    src = (<img
+                        className="kui-modal__slide-img"
+                        src={slide.src}
+                    />);
+                } else if (slide.variant === 'video') {
+                    src = (<iframe
+                        allowFullScreen={true}
+                        className="kui-modal__slide-video"
+                        frameBorder={0}
+                        src={slide.src}
+                    ></iframe>);
+                }
                 return (
-                    <div className="kui-modal__slide">
+                    <div key={index + slide.title}>
                         <div className="kui-modal__slide-src">
+                            {src}
                         </div>
                         <div
                             className="kui-modal__slide-description"
@@ -120,7 +217,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
                     </div>
                 );
             })}
-        </div>);
+        </Carousel>);
     }
 
     const closeButton = variant === 'actions' ? null :
@@ -165,7 +262,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
             <div className="kui-modal__item">
                 <div className="kui-modal__header">
                     <div className="kui-modal__header-title">
-                        {title}
+                        {titleHook}
                     </div>
                     {closeButton}
                 </div>
