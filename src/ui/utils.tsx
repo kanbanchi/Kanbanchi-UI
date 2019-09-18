@@ -38,7 +38,16 @@ export const userAgentsInclude = (agents: Array<string>) => {
     const ua = navigator.userAgent.toLowerCase();
     let includes = false;
     agents.forEach((agent: string) => {
-        if (ua.includes(agent)) includes = true;
+        if (ua.includes(agent)) {
+            if (
+                agent === 'safari' &&
+                ua.includes('chrome')
+            ) {
+                // we caught you, chrome
+            } else {
+                includes = true;
+            }
+        }
     });
     return includes;
 }
