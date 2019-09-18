@@ -14,6 +14,7 @@ export interface ISectionAccordionOwnProps {
     color?: 'grey';
     icon?: string;
     title?: string;
+    variant?: 'simple';
 }
 
 export interface ISectionAccordionProps extends
