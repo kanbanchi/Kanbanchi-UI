@@ -15,6 +15,7 @@ export interface ISelectActiveInheritedProps extends
 
 export type ISelectOptionsObject = {[key: string]: string}
 export type ISelectOptionsArray = Array<{
+    active?: boolean;
     value: number | string;
     text?: string;
 }>
@@ -34,6 +35,7 @@ export interface ISelectDispatchProps {
 
 export interface ISelectOwnProps {
     editable?: boolean;
+    multiple?: boolean;
     ref?: any;
 }
 

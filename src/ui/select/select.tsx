@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
-import { ClassNames, userAgentsInclude } from '../utils';
+import { ClassNames, userAgentsInclude, ClassesList } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
+import { Checkbox } from '../checkbox/checkbox';
+import { ISelectListInheritedProps } from '../selectList/types';
 
 export const Select: React.SFC<ISelectInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -16,6 +18,7 @@ React.forwardRef((props, ref) => {
         directionHorizontal,
         disabled,
         editable,
+        multiple,
         opened,
         options,
         variant,
@@ -66,7 +69,10 @@ React.forwardRef((props, ref) => {
 
     const closeDropdown = () => {
         setIsOpenedHook(false);
-        if (valueHook !== initialValue) {
+        if (
+            !multiple &&
+            valueHook !== initialValue
+        ) {
             setActiveHook(active);
             setValue(initialValue);
         }
@@ -108,16 +114,21 @@ React.forwardRef((props, ref) => {
 
     attributes.onChange = (e: any) => {
         if (e.item) { // list item clicked
-            setIsOpenedHook(false);
-            setActiveHook(e.item.index);
-            if (isSearch) { // dont update search input value
+            if (multiple) {
                 if (onChange) onChange(e);
-            } else if (e.item.text !== valueHook) {
-                setValue(e.item.text);
-                if (onChange) onChange(e);
+            } else {
+                setIsOpenedHook(false);
+                setActiveHook(e.item.index);
+                if (isSearch) { // dont update search input value
+                    if (onChange) onChange(e);
+                } else if (e.item.text !== valueHook) {
+                    setValue(e.item.text);
+                    if (onChange) onChange(e);
+                }
             }
         } else { // input changed
             setValue(e.target.value);
+            if (onChange) onChange(e);
         }
     }
 
@@ -132,7 +143,19 @@ React.forwardRef((props, ref) => {
     }
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        e.persist();
         if (isFocusedHook) {
+            if (
+                multiple &&
+                e.relatedTarget
+            ) {
+                if (e.target) e.target.focus();
+                const classes = ClassesList(
+                    e.relatedTarget as HTMLElement,
+                    ['kui-dropdown', 'kui-select']
+                );
+                if (classes.includes('kui-dropdown')) return;
+            }
             setIsFocusedHook(false);
             closeDropdown();
         }
@@ -150,11 +173,15 @@ React.forwardRef((props, ref) => {
         if (onClick) onClick(e);
     }
 
-    const attributesSelectList = {
+    const attributesSelectList: ISelectListInheritedProps = {
         active: activeHook,
         onChange: attributes.onChange,
         onSelectListInit
     };
+
+    if (multiple) {
+        attributesSelectList.fixActive = false;
+    }
 
     if (children) {
         let childrenArray: Array<{}> = // children could be string, we need array
@@ -167,11 +194,28 @@ React.forwardRef((props, ref) => {
         });
     } else if (options) {
         if (Array.isArray(options)) {
-            list = options.map(option => (
-                <li key={option.value} value={option.value}>
-                    {option.text || option.value}
-                </li>
-            ));
+            list = options.map(option => {
+                let li = null;
+                if (multiple) {
+                    li = (
+                        <Checkbox
+                            key={option.value}
+                            checked={option.active}
+                            value={option.value}
+                            onChange={() => null}
+                        >
+                            {option.text || option.value}
+                        </Checkbox>
+                    );
+                } else {
+                    li = (
+                        <li key={option.value} value={option.value}>
+                            {option.text || option.value}
+                        </li>
+                    );
+                }
+                return li;
+            });
         } else {
             const optionsObj = options as ISelectOptionsObject;
             list = Object.keys(optionsObj).map(value => (
@@ -206,6 +250,16 @@ React.forwardRef((props, ref) => {
             });
             reject();
         });
+    }
+
+    const getActives = (): string[] => {
+        if (!options || !Array.isArray(options)) return null;
+        return options.reduce((actives, option) => {
+            if (option.active) {
+                actives.push(option.text || option.value);
+            }
+            return actives;
+        }, []);
     }
 
     attributes.onKeyUp = (e: any) => {
@@ -263,8 +317,10 @@ React.forwardRef((props, ref) => {
     }, [activeHook]);
 
     React.useEffect(() => {
-        setActiveHook(active);
-        onActiveChanged();
+        if (!multiple) {
+            setActiveHook(active);
+            onActiveChanged();
+        }
     }, [active, options]);
 
     return (
@@ -283,6 +339,7 @@ React.forwardRef((props, ref) => {
                 directionHorizontal={directionHorizontal}
                 opened={isOpenedHook}
                 ref={dropdownRef}
+                tabIndex={0}
                 onAnimationEnd={dropdownAnimationEnd}
             >
                 {dropdownBody}
@@ -298,6 +355,7 @@ Select.defaultProps = {
     directionHorizontal: 'left',
     disabled: false,
     editable: false,
+    multiple: false,
     opened: false,
     options: null,
     onChange: (): void => undefined,
