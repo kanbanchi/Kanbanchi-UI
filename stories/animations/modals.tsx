@@ -65,18 +65,17 @@ const Story = () => {
                 },
                 slides: [
                     {
-                        description: `Bingo! With Shared Drives integration your team's workflow becomes even smoother. Create boards within your Shared Drives and easily work with them in a team. <a href="https://www.kanbanchi.com/faqwd/kanbanchi-boards-in-shared-drives" target="_blank">Learn more</a>
-                        Bingo! With Shared Drives integration your team's workflow becomes even smoother. Create boards within your Shared Drives and easily work with them in a team. <a href="https://www.kanbanchi.com/faqwd/kanbanchi-boards-in-shared-drives" target="_blank">Learn more</a>`,
+                        description: `Bingo! With Shared Drives integration your team's workflow becomes even smoother. Create boards within your Shared Drives and easily work with them in a team. <a href="https://www.kanbanchi.com/faqwd/kanbanchi-boards-in-shared-drives" target="_blank">Learn more</a>`,
                         src: 'http://kanban-chi.appspot.com/dist/img/releases/2-41/2-41@2.png',
                         title: 'Shared Drives integration',
                         variant: 'img'
-                    }/*,
+                    },
                     {
                         description: `You've been waiting for it desperately. Now you can buy and manage subscriptions for you and your team right within the app. More details in the video for you.`,
                         src: 'https://www.youtube.com/embed/64AQdSzGcVg?rel=0&showinfo=0',
                         title: 'Manage your Subscriptions',
                         variant: 'video'
-                    }*/
+                    }
                 ]
             }}
             variant="release"

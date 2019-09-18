@@ -7,6 +7,7 @@ import { Icon } from '../icon/icon';
 import { ButtonsGroup } from '../buttonsGroup/buttonsGroup';
 import Carousel, { StateCallBack } from 'react-multi-carousel';
 import '../../../src/ui/modal/carousel.scss';
+import { ModalSlide } from './modalSlide';
 
 export const Modal: React.SFC<IModalInheritedProps> =
 (props) => {
@@ -146,78 +147,66 @@ export const Modal: React.SFC<IModalInheritedProps> =
             setTitleHook(release.slides[newIndex].title);
         }
 
-        slides = (<Carousel
-            additionalTransfrom={0}
-            afterChange={afterChange}
-            arrows
-            centerMode={false}
-            containerClass="kui-modal__slides"
-            customLeftArrow={arrowLeft}
-            customRightArrow={arrowRight}
-            dotListClass="kui-modal__slides-dots"
-            draggable
-            focusOnSelect={false}
-            infinite
-            itemClass="kui-modal__slide"
-            keyBoardControl
-            minimumTouchDrag={80}
-            renderDotsOutside={false}
-            responsive={{
-                desktop: {
-                    breakpoint: {
-                        max: 3000,
-                        min: 1024
+        if (release.slides.length > 1) {
+            slides = (<Carousel
+                additionalTransfrom={0}
+                afterChange={afterChange}
+                arrows
+                centerMode={false}
+                containerClass="kui-modal__slides"
+                customLeftArrow={arrowLeft}
+                customRightArrow={arrowRight}
+                dotListClass="kui-modal__slides-dots"
+                draggable
+                focusOnSelect={false}
+                infinite
+                itemClass="kui-modal__slide"
+                keyBoardControl
+                minimumTouchDrag={80}
+                renderDotsOutside={false}
+                responsive={{
+                    desktop: {
+                        breakpoint: {
+                            max: 3000,
+                            min: 1024
+                        },
+                        items: 1
                     },
-                    items: 1
-                },
-                mobile: {
-                    breakpoint: {
-                        max: 464,
-                        min: 0
+                    mobile: {
+                        breakpoint: {
+                            max: 464,
+                            min: 0
+                        },
+                        items: 1
                     },
-                    items: 1
-                },
-                tablet: {
-                    breakpoint: {
-                        max: 1024,
-                        min: 464
-                    },
-                    items: 1
-                }
-            }}
-            showDots
-            sliderClass=""
-            slidesToSlide={1}
-            swipeable
-        >
-            {release.slides.map((slide, index) => {
-                let src = null;
-                if (slide.variant === 'img') {
-                    src = (<img
-                        className="kui-modal__slide-img"
-                        src={slide.src}
+                    tablet: {
+                        breakpoint: {
+                            max: 1024,
+                            min: 464
+                        },
+                        items: 1
+                    }
+                }}
+                showDots
+                sliderClass=""
+                slidesToSlide={1}
+                swipeable
+            >
+                {release.slides.map((slide, index) => {
+                    return (<ModalSlide
+                        {...slide}
+                        key={index + slide.title}
                     />);
-                } else if (slide.variant === 'video') {
-                    src = (<iframe
-                        allowFullScreen={true}
-                        className="kui-modal__slide-video"
-                        frameBorder={0}
-                        src={slide.src}
-                    ></iframe>);
-                }
-                return (
-                    <div key={index + slide.title}>
-                        <div className="kui-modal__slide-src">
-                            {src}
-                        </div>
-                        <div
-                            className="kui-modal__slide-description"
-                            dangerouslySetInnerHTML={{ __html: slide.description }}
-                        ></div>
-                    </div>
-                );
-            })}
-        </Carousel>);
+                })}
+            </Carousel>);
+        } else if (release.slides.length) {
+            slides = (<ModalSlide
+                {...release.slides[0]}
+            />);
+            if (titleHook !== release.slides[0].title) {
+                setTitleHook(release.slides[0].title);
+            }
+        }
     }
 
     const closeButton = variant === 'actions' ? null :
