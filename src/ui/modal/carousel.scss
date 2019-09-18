@@ -1,0 +1,95 @@
+@import '../../assets/sass/index.scss';
+.react-multi-carousel-list {
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	position: relative
+}
+
+.react-multi-carousel-track {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+	will-change: transform, transition
+}
+
+.react-multi-carousel-dot-list {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	left: 0;
+	right: 0;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	text-align: center
+}
+
+.react-multi-carousel-dot {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: $google-spacing * 2;
+	height: $google-spacing * 2;
+	margin: 0;
+
+	button {
+		position: relative;
+		display: block;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		opacity: 1;
+		box-shadow: none;
+		transition: background .5s;
+		border: none;
+		padding: 0;
+		margin: 0;
+		background: $color-purple-light;
+		outline: 0;
+		cursor: pointer;
+
+		&:before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: $google-spacing * 3;
+            height: $google-spacing * 3;
+            content: '';
+            border-radius: $google-spacing * 3;
+        }
+	}
+}
+
+.react-multi-carousel-dot:hover button {
+	background: $color-purple-hover;
+}
+
+.react-multi-carousel-dot--active button {
+	background: $color-purple;
+}
+
+.react-multi-carousel-item {
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+	margin: 0;
+}
+
+@media all and (-ms-high-contrast:none),
+(-ms-high-contrast:active) {
+	.react-multi-carousel-item {
+		flex-shrink: 0 !important
+	}
+	.react-multi-carousel-track {
+		overflow: visible !important
+	}
+}

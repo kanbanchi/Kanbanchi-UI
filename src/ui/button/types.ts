@@ -46,6 +46,11 @@ export type IConflictFreeHTMLAttributes<E> =
         'color'
         | 'type'
         | 'onClick'
+    >> &
+    Pick<React.AnchorHTMLAttributes<E>, Exclude<keyof React.AnchorHTMLAttributes<E>,
+        'color'
+        | 'type'
+        | 'onClick'
     >>;
 
 export interface IButtonInheritedProps extends

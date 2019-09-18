@@ -124,6 +124,25 @@ export {
     ILoaderBlockInheritedProps
 } from './src/ui/loaderBlock/types';
 
+import { IModalInheritedProps } from './src/ui/modal/types';
+export declare const Modal: React.SFC<IModalInheritedProps>;
+export {
+    IModalStateProps,
+    IModalDispatchProps,
+    IModalOwnProps,
+    IModalProps,
+    IModalInheritedProps,
+    IModalButtonStateProps,
+    IModalButtonDispatchProps,
+    IModalButtonOwnProps,
+    IModalButtonProps,
+    IModalReleaseSlideProps,
+    IModalReleaseFooterFollowProps,
+    IModalReleaseFooterFollowSocialProps,
+    IModalReleaseFooterProps,
+    IModalReleaseProps
+} from './src/ui/modal/types';
+
 import { IRadioInheritedProps } from './src/ui/radio/types';
 export declare const Radio: React.SFC<IRadioInheritedProps>;
 export {
