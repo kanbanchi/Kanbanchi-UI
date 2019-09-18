@@ -131,7 +131,16 @@ export {
     IModalDispatchProps,
     IModalOwnProps,
     IModalProps,
-    IModalInheritedProps
+    IModalInheritedProps,
+    IModalButtonStateProps,
+    IModalButtonDispatchProps,
+    IModalButtonOwnProps,
+    IModalButtonProps,
+    IModalReleaseSlideProps,
+    IModalReleaseFooterFollowProps,
+    IModalReleaseFooterFollowSocialProps,
+    IModalReleaseFooterProps,
+    IModalReleaseProps
 } from './src/ui/modal/types';
 
 import { IRadioInheritedProps } from './src/ui/radio/types';
