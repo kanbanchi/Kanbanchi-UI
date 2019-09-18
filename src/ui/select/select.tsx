@@ -252,16 +252,6 @@ React.forwardRef((props, ref) => {
         });
     }
 
-    const getActives = (): string[] => {
-        if (!options || !Array.isArray(options)) return null;
-        return options.reduce((actives, option) => {
-            if (option.active) {
-                actives.push(option.text || option.value);
-            }
-            return actives;
-        }, []);
-    }
-
     attributes.onKeyUp = (e: any) => {
         if (!e) return;
         if (onKeyUp) onKeyUp(e);
