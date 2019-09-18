@@ -30,7 +30,7 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
 
     const [activeHook, setActiveHook] = React.useState(active);
 
-    const itemsRefs = Array.from({ length: childrenArray.length }, () => React.useRef(null));
+    const itemsRefs = Array.from({ length: 1000 }, () => React.useRef(null)); // const length due to hooks order
 
     items = React.Children.map(childrenArray, (child: React.ReactElement, index) => {
         const classList = ClassList(child.props.className);
