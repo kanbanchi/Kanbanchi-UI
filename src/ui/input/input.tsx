@@ -101,6 +101,7 @@ React.forwardRef((props, ref) => {
         e.preventDefault();
         setIsFilled(false);
         textarea.current.value = '';
+        textarea.current.focus();
         if (onChange) onChange(e);
     };
 
