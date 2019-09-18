@@ -22,23 +22,20 @@ const Story = () => {
         {active: false, value: 12, text: 'Option 12'},
         {active: false, value: 13, text: 'Option 13'},
     ]);
-    const getActiveOptions = (options) => {
-        return options.reduce((actives, option) => {
-            if (option.active) {
-                actives.push(option.text || option.value);
-            }
-            return actives;
-        }, []).join(', ');
-    }
     const [searchFiltered, setSearchFiltered] = React.useState(searchOptions);
-    const [searchActive, setSearchActive] = React.useState(getActiveOptions(searchOptions));
+
     const filterSearchOptions = (i: ISelectActiveInheritedProps) => {
         if (i.item) {
             const index = searchOptions.findIndex(option => String(option.value) === String(i.item.value));
-            searchOptions[index].active = !searchOptions[index].active;
-            console.log(getActiveOptions(searchOptions));
-            setSearchActive(getActiveOptions(searchOptions));
-            setSearchOptions(searchOptions);
+            const option = searchOptions[index];
+            setSearchOptions([
+                ...searchOptions.slice(0, index),
+                {
+                    ...option,
+                    active: !option.active
+                },
+                ...searchOptions.slice(index + 1),
+            ]);
             searchFiltered[i.item.index].active = !searchFiltered[i.item.index].active;
             setSearchFiltered(searchFiltered);
         } else if (i.target) {
@@ -47,7 +44,7 @@ const Story = () => {
             const filteredOptions = value ?
                 searchOptions.filter(option => option.text.includes(value)) :
                 searchOptions;
-            setSearchFiltered(filteredOptions);
+            setSearchFiltered([...filteredOptions]);
         }
     }
 
@@ -65,9 +62,14 @@ const Story = () => {
                 >
                 </Search>
 
-                <br/>
-
-                {searchActive}
+                {
+                    searchOptions.reduce((actives, option) => {
+                        if (option.active) {
+                            actives.push(option.text || option.value);
+                        }
+                        return actives;
+                    }, []).join(', ')
+                }
 
                 <br/><br/>
 
