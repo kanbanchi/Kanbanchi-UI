@@ -156,7 +156,6 @@ export {
 import { ISearchInheritedProps } from './src/ui/search/types';
 export declare const Search: React.SFC<ISearchInheritedProps>;
 export {
-    ISearchProps,
     ISearchInheritedProps
 } from './src/ui/search/types';
 

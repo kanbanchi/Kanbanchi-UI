@@ -14,6 +14,7 @@ React.forwardRef((props, ref) => {
         icon,
         opened,
         title,
+        variant,
         onClose,
         onOpen,
         ...attributes
@@ -28,6 +29,7 @@ React.forwardRef((props, ref) => {
     className = ClassNames(
         'kui-section-accordion',
         (color) ? 'kui-section-accordion--color_' + color: null,
+        (variant) ? 'kui-section-accordion--variant_' + variant: null,
         (isClickedHook)
             ? 'kui-section-accordion--' + (isOpenedHook ? 'opened' : 'closed')
             : (isOpenedHook ? 'kui-section-accordion--opened-default' : null),
@@ -74,11 +76,13 @@ React.forwardRef((props, ref) => {
                     variant="icon-text"
                     onClick={onButtonClick}
                 >
-                    <Icon
-                        className="kui-section-accordion-button__icon"
-                        size={24}
-                        xlink={icon}
-                    />
+                    {icon &&
+                        <Icon
+                            className="kui-section-accordion-button__icon"
+                            size={24}
+                            xlink={icon}
+                        />
+                    }
                     <ButtonTitle
                         className="kui-section-accordion-button__title"
                     >
@@ -113,6 +117,7 @@ SectionAccordion.defaultProps = {
     icon: null,
     title: null,
     opened: false,
+    variant: null,
     onClose: () => undefined,
     onOpen: () => undefined
 };

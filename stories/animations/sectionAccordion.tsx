@@ -27,6 +27,20 @@ const Story = () => {
 
     return (
         <div className="page">
+            <section className="section-form-min">
+                <h2>Filter</h2>
+                <SectionAccordion
+                    opened={true}
+                    title="Saved filters"
+                    variant="simple"
+                >
+                    <br/>
+                    <p>Filter 1</p>
+                    <p>Filter 2</p>
+                    <p>Filter 3</p>
+                </SectionAccordion>
+            </section>
+
             <section className="section-grey">
                 <h2>SectionAccordion</h2>
                 <div className="stories-accordions">

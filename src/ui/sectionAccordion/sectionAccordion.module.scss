@@ -28,10 +28,16 @@
         }
     }
 
-    &-button__title {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+    &-button {
+        &__icon {
+            margin-right: $google-spacing;
+        }
+        & &__title {
+            margin-left: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 
     &__arrow {
@@ -86,6 +92,20 @@
 
             &:before {
                 background: $color-background;
+            }
+        }
+    }
+
+    &--variant_simple {
+        .kui-section-accordion-header {
+            border-bottom: none;
+        }
+
+        .kui-section-accordion-button {
+            &__title {
+                font-size: $base-font-size;
+                font-weight: bold;
+                opacity: 1;
             }
         }
     }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ButtonsGroup, Select, SelectList, SelectListItem } from '../../src/ui';
+import { ButtonsGroup, Select, SelectList, SelectListItem, Search } from '../../src/ui';
 import { ISelectActiveInheritedProps } from '../../src/ui/select/types';
 
 const Story = () => {
@@ -12,10 +12,66 @@ const Story = () => {
     const [val04, setVal04] = React.useState(null);
     const [val05, setVal05] = React.useState(0);
 
+    const [searchOptions, setSearchOptions] = React.useState([
+        {active: false, value: 0, text: 'Option 0'},
+        {active: false, value: 1, text: 'Option 1'},
+        {active: false, value: 2, text: 'Option 2'},
+        {active: false, value: 3, text: 'Option 3'},
+        {active: false, value: 10, text: 'Option 10'},
+        {active: false, value: 11, text: 'Option 11'},
+        {active: false, value: 12, text: 'Option 12'},
+        {active: false, value: 13, text: 'Option 13'},
+    ]);
+    const [searchFiltered, setSearchFiltered] = React.useState(searchOptions);
+
+    const filterSearchOptions = (i: ISelectActiveInheritedProps) => {
+        if (i.item) {
+            const index = searchOptions.findIndex(option => String(option.value) === String(i.item.value));
+            const option = searchOptions[index];
+            setSearchOptions([
+                ...searchOptions.slice(0, index),
+                {
+                    ...option,
+                    active: !option.active
+                },
+                ...searchOptions.slice(index + 1),
+            ]);
+            searchFiltered[i.item.index].active = !searchFiltered[i.item.index].active;
+            setSearchFiltered(searchFiltered);
+        } else if (i.target) {
+            const target: any = i.target;
+            const value = target.value;
+            const filteredOptions = value ?
+                searchOptions.filter(option => option.text.includes(value)) :
+                searchOptions;
+            setSearchFiltered([...filteredOptions]);
+        }
+    }
+
     return (
         <div className="page">
             <section className="section-form-min">
                 <h2>Select</h2>
+
+                <Search
+                    editable={true}
+                    label="Multiple"
+                    multiple={true}
+                    options={searchFiltered}
+                    onChange={filterSearchOptions}
+                >
+                </Search>
+
+                {
+                    searchOptions.reduce((actives, option) => {
+                        if (option.active) {
+                            actives.push(option.text || option.value);
+                        }
+                        return actives;
+                    }, []).join(', ')
+                }
+
+                <br/><br/>
 
                 <Select
                     active={1}
@@ -61,8 +117,10 @@ const Story = () => {
                     ]}
                     variant="arrow"
                     onChange={(i: ISelectActiveInheritedProps) => {
-                        console.log(i.item.text);
-                        setVal05(i.item.index);
+                        if (i.item) {
+                            console.log(i.item.text);
+                            setVal05(i.item.index);
+                        }
                     }}
                 >
                 </Select>
@@ -109,7 +167,11 @@ const Story = () => {
                                 style={{width: 100}}
                                 type="number"
                                 variant="arrow"
-                                onChange={(i: ISelectActiveInheritedProps)=>setVal01(i.item.index)}
+                                onChange={(i: ISelectActiveInheritedProps) => {
+                                    if (i.item) {
+                                        setVal01(i.item.index)
+                                    }
+                                }}
                             >
                                 <SelectList>
                                     <li className="divider">0</li>
@@ -133,7 +195,11 @@ const Story = () => {
                                 icon="deadline"
                                 variant="withicon"
                                 style={{width: 120}}
-                                onChange={(i: ISelectActiveInheritedProps)=>setVal02(i.item.index)}
+                                onChange={(i: ISelectActiveInheritedProps) => {
+                                    if (i.item) {
+                                        setVal02(i.item.index)
+                                    }
+                                }}
                             >
                                 <SelectList>
                                     <li>12:00 AM</li>
