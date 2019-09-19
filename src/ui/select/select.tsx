@@ -188,7 +188,11 @@ React.forwardRef((props, ref) => {
             (Array.isArray(children)) ? children : [children];
 
         dropdownBody = React.Children.map(childrenArray, (child: any) => {
-            if (child.type.displayName !== 'SelectList') return child;
+            if (
+                !child.type ||
+                !child.type.displayName ||
+                child.type.displayName !== 'SelectList'
+            ) return child;
             list = child.props.children;
             return React.cloneElement(child, attributesSelectList);
         });
