@@ -5,7 +5,11 @@ export {
     IButtonDispatchProps,
     IButtonOwnProps,
     IButtonProps,
-    IButtonInheritedProps
+    IButtonInheritedProps,
+    TButtonColor,
+    TButtonSize,
+    TButtonType,
+    TButtonVariant
 } from './src/ui/button/types';
 
 import { IButtonDropdownInheritedProps } from './src/ui/buttonDropdown/types';
