@@ -38,6 +38,7 @@ import Tabs from './controls/tabs';
 import Tags from './controls/tags';
 
 import Userpic from './stuff/userpic';
+import Done from './stuff/done';
 
 import TestComponent from './wip/testComponent';
 import TeamDrive from './wip/teamdrive';
