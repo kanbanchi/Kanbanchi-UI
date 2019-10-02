@@ -79,6 +79,13 @@ export {
     IDropdownInheritedProps
 } from './src/ui/dropdown/types';
 
+import { IDoneInheritedProps } from './src/ui/done/types';
+export declare const Done: React.SFC<IDoneInheritedProps>;
+export {
+    IDoneProps,
+    IDoneInheritedProps
+} from './src/ui/done/types';
+
 import { IFilesInheritedProps } from './src/ui/files/types';
 export declare const Files: React.SFC<IFilesInheritedProps>;
 export {
