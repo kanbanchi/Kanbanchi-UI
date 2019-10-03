@@ -25,7 +25,7 @@ React.forwardRef((props, ref) => {
         'done';
 
     let percentText = percent + '%';
-    if (!percent || percent >= 100) percentText = 'Done';
+    if (percent === null || percent >= 100) percentText = 'Done';
 
     return (
         <div

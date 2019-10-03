@@ -15,6 +15,12 @@ const Story = () => {
                 <br /><br />
 
                 <Done
+                    percent={0}
+                />
+
+                <br /><br />
+
+                <Done
                     percent={21}
                 />
 
