@@ -5,7 +5,11 @@ export {
     IButtonDispatchProps,
     IButtonOwnProps,
     IButtonProps,
-    IButtonInheritedProps
+    IButtonInheritedProps,
+    TButtonColor,
+    TButtonSize,
+    TButtonType,
+    TButtonVariant
 } from './src/ui/button/types';
 
 import { IButtonDropdownInheritedProps } from './src/ui/buttonDropdown/types';
@@ -74,6 +78,13 @@ export {
     IDropdownProps,
     IDropdownInheritedProps
 } from './src/ui/dropdown/types';
+
+import { IDoneInheritedProps } from './src/ui/done/types';
+export declare const Done: React.SFC<IDoneInheritedProps>;
+export {
+    IDoneProps,
+    IDoneInheritedProps
+} from './src/ui/done/types';
 
 import { IFilesInheritedProps } from './src/ui/files/types';
 export declare const Files: React.SFC<IFilesInheritedProps>;

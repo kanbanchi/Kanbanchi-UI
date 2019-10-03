@@ -8,6 +8,7 @@ export {Checkbox} from './checkbox/checkbox';
 
 export {Datepicker} from './datepicker/datepicker';
 export {Divider} from './divider/divider';
+export {Done} from './done/done';
 export {Dropdown} from './dropdown/dropdown';
 
 export {Files} from './files/files';

@@ -1,14 +1,26 @@
 import { ITooltipProps } from './../tooltip/types';
 import { IMediaScreens } from './../types';
 
-type ButtonVariant = 'action'
-        | 'add'
-        | 'fab'
-        | 'icon'
-        | 'icon-text'
-        | 'primary'
-        | 'secondary'
-        | 'text';
+export type TButtonVariant =
+    'action' |
+    'add' |
+    'fab' |
+    'icon' |
+    'icon-text' |
+    'primary' |
+    'secondary' |
+    'text';
+
+export type TButtonColor =
+    'black' |
+    'purple' |
+    'white';
+
+export type TButtonSize = 'large';
+
+export type TButtonType =
+    'button' |
+    'submit';
 
 export interface IButtonStateProps {
     disabled?: boolean;
@@ -19,20 +31,15 @@ export interface IButtonStateProps {
 }
 
 export interface IButtonDispatchProps {
-    onClick?: () => void;
+    onClick?: (e?: any) => void;
 }
 
 export interface IButtonOwnProps {
-    color?:
-        'black'
-        | 'purple'
-        | 'white';
+    color?: TButtonColor;
     maxWidth?: IMediaScreens;
-    size?: 'large';
-    type?:
-        'button'
-        | 'submit';
-    variant?: ButtonVariant;
+    size?: TButtonSize;
+    type?: TButtonType;
+    variant?: TButtonVariant;
 }
 
 export interface IButtonProps extends
