@@ -9,7 +9,8 @@
         align-items: center;
         
         &--icon {
-            flex: 0 0 $google-spacing * 3;
+            flex: 0 0 $google-spacing * 2;
+            margin-right: $google-spacing;
             color: calc-color(fade, $color-base, 30);
         }
         &--title {

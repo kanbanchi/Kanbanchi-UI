@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { SelectList } from '../../src/ui';
+import { SelectList, SelectListItem, Checkbox, Userpic } from '../../src/ui';
 
 const Story = () => {
+    const [val01, setVal01] = React.useState(false);
+    const [val02, setVal02] = React.useState(false);
+    const [val03, setVal03] = React.useState(false);
+
     return (
         <div className="page">
             <section className="section-form-min">
@@ -21,6 +25,88 @@ const Story = () => {
                     <li className="disabled">
                         Delete card
                     </li>
+                </SelectList>
+
+            </section>
+
+            <section className="section-form-min">
+                <h2>SelectListItem</h2>
+
+                <SelectList>
+                    <Checkbox
+                        checked={val01}
+                        color="light"
+                        onChange={()=>setVal01(!val01)}
+                    >
+                        <SelectListItem value="1" icon="tag">
+                            Tag01
+                        </SelectListItem>
+                    </Checkbox>
+                    <Checkbox
+                        checked={val02}
+                        color="light"
+                        onChange={()=>setVal02(!val02)}
+                    >
+                        <SelectListItem value="2" icon="tag">
+                            Tag02
+                        </SelectListItem>
+                    </Checkbox>
+                    <Checkbox
+                        checked={val03}
+                        color="light"
+                        onChange={()=>setVal03(!val03)}
+                    >
+                        <SelectListItem value="3" icon="tag">
+                            Tag03
+                        </SelectListItem>
+                    </Checkbox>
+                </SelectList>
+
+            </section>
+
+            <section className="section-form-min">
+                <h2>SelectListItem with Userpic</h2>
+
+                <SelectList>
+                    <Checkbox
+                        checked={val01}
+                        color="light"
+                        onChange={()=>setVal01(!val01)}
+                    >
+                        <SelectListItem value="1">
+                            <Userpic
+                                size={24}
+                                src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
+                            />
+                            User01
+                        </SelectListItem>
+                    </Checkbox>
+                    <Checkbox
+                        checked={val02}
+                        color="light"
+                        onChange={()=>setVal02(!val02)}
+                    >
+                        <SelectListItem value="2" icon="tag">
+                            <Userpic
+                                size={24}
+                                src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
+                            />
+                            User02
+                        </SelectListItem>
+                    </Checkbox>
+                    <Checkbox
+                        checked={val03}
+                        color="light"
+                        onChange={()=>setVal03(!val03)}
+                    >
+                        <SelectListItem value="3" icon="tag">
+                            <Userpic
+                                size={24}
+                                src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
+                            />
+                            User03
+                        </SelectListItem>
+                    </Checkbox>
                 </SelectList>
 
             </section>

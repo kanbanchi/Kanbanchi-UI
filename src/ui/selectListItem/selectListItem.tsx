@@ -13,6 +13,7 @@ React.forwardRef((props, ref) => {
         list,
         ...attributes
     } = props,
+        childrenEl = null,
         iconEl = null,
         listEl = null;
 
@@ -24,6 +25,25 @@ React.forwardRef((props, ref) => {
 
     if (icon) {
         iconEl = <Icon xlink={icon} className="kui-select-list-item__icon" />;
+    }
+
+    if (children) {
+        let childrenArray: Array<{}> = // children could be string, we need array
+            (Array.isArray(children)) ? children : [children];
+
+        childrenEl = React.Children.map(childrenArray, (child: any) => {
+            if (
+                !child.type ||
+                !child.type.displayName ||
+                child.type.displayName !== 'Userpic'
+            ) return child;
+            iconEl = React.cloneElement(child, {
+                className: ClassNames(
+                    'kui-select-list-item__icon',
+                    child.props.className
+                )
+            });
+        });
     }
 
     if (list) {
@@ -45,7 +65,7 @@ React.forwardRef((props, ref) => {
             </span>
             <span className="kui-select-list-item__col kui-select-list-item__col--title">
                 <span className="kui-select-list-item__title">
-                    {children}
+                    {childrenEl}
                 </span>
             </span>
             {listEl}
