@@ -109,7 +109,6 @@ React.forwardRef((props, ref) => {
 
     const setValue = (value: string) => {
         setValueHook(value);
-        inputRef.current.setIsFilled(value);
     }
 
     attributes.onChange = (e: any) => {
@@ -205,6 +204,7 @@ React.forwardRef((props, ref) => {
                         <Checkbox
                             key={option.value}
                             checked={option.active}
+                            color="light"
                             value={option.value}
                             onChange={() => null}
                         >

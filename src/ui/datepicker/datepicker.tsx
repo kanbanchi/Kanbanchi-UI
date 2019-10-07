@@ -44,7 +44,6 @@ React.forwardRef((props, ref) => {
     };
 
     const onChangeHandler = (date: Date) => {
-        pickerRef.current.input.setIsFilled(date);
         if (onChange) onChange(date);
     }
 

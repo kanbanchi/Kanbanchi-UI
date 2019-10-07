@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Input, Button } from '../../src/ui';
+import { Input, Button, ButtonsGroup } from '../../src/ui';
 
 const Story = () => {
     const [val, setVal] = React.useState('');
@@ -26,15 +26,24 @@ const Story = () => {
 
                 <br/>
 
-                <Button
-                    onClick={() => {
-                        setVal2('123');
-                        inputRef.current.setIsFilled('123');
-                        inputRef.current.setFocus();
-                    }}
-                >
-                    set value '123'
-                </Button>
+                <ButtonsGroup>
+                    <Button
+                        onClick={() => {
+                            setVal2('123');
+                            inputRef.current.setFocus();
+                        }}
+                    >
+                        set value '123'
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            setVal2('');
+                        }}
+                    >
+                        clear
+                    </Button>
+                </ButtonsGroup>
+
             </section>
 
             <section className="section-grey section-form-min">
