@@ -205,6 +205,7 @@ React.forwardRef((props, ref) => {
                         <Checkbox
                             key={option.value}
                             checked={option.active}
+                            color="light"
                             value={option.value}
                             onChange={() => null}
                         >
