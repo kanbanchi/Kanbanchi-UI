@@ -74,7 +74,6 @@ React.forwardRef((props, ref) => {
      */
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        e.persist();
         setTimeoutHook(setTimeout(() => {
             if (isFocusedHook) {
                 setIsFocusedHook(false);
@@ -101,7 +100,9 @@ React.forwardRef((props, ref) => {
         e.preventDefault();
         setIsFilled(false);
         textarea.current.value = '';
-        textarea.current.focus();
+        if (variant !== 'datepicker'){
+            textarea.current.focus();
+        }
         if (onChange) onChange(e);
     };
 
@@ -172,6 +173,7 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         textarea.current.value = value;
+        setIsFilled(!!value);
     }, [value]);
 
     React.useImperativeHandle(ref, () => ({

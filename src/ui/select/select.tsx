@@ -109,7 +109,6 @@ React.forwardRef((props, ref) => {
 
     const setValue = (value: string) => {
         setValueHook(value);
-        inputRef.current.setIsFilled(value);
     }
 
     attributes.onChange = (e: any) => {
