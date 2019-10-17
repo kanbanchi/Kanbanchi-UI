@@ -70,12 +70,40 @@ const Story = () => {
                     </Button>
                     <SelectList fixActive={false}>
                         <Checkbox
+                            color={'light'}
                             checked={val01}
                             onChange={()=>setVal01(!val01)}
                         >
                             Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </Checkbox>
                         <Checkbox
+                            color={'light'}
+                            checked={val02}
+                            onChange={()=>setVal02(!val02)}
+                        >
+                            Check 02
+                        </Checkbox><Checkbox
+                            color={'light'}
+                            checked={val01}
+                            onChange={()=>setVal01(!val01)}
+                        >
+                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </Checkbox>
+                        <Checkbox
+                            color={'light'}
+                            checked={val02}
+                            onChange={()=>setVal02(!val02)}
+                        >
+                            Check 02
+                        </Checkbox><Checkbox
+                            color={'light'}
+                            checked={val01}
+                            onChange={()=>setVal01(!val01)}
+                        >
+                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </Checkbox>
+                        <Checkbox
+                            color={'light'}
                             checked={val02}
                             onChange={()=>setVal02(!val02)}
                         >
@@ -83,6 +111,7 @@ const Story = () => {
                         </Checkbox>
                     </SelectList>
                 </ButtonDropdown>
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </section>
         </div>
     );
