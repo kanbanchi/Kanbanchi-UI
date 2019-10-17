@@ -73,7 +73,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
             );
             if (classes.includes('kui-dropdown')) {
                 if (e.target) {
-                    e.target.focus();
+                    e.target.focus({ preventScroll: true });
                 }
                 return;
             }

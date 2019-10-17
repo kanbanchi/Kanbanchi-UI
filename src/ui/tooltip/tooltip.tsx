@@ -192,6 +192,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const closeTooltip = () => {
         setTouchHook(null);
         setTimeoutHook(null);
+        clearTimeout(mouseHook);
         clearTimeout(touchHook);
         clearTimeout(timeoutHook);
         if (isShown) toggleTooltip();
@@ -235,6 +236,14 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     React.useEffect(() => {
         setClassHook(className);
     }, [value]);
+
+    React.useEffect(() => {
+        return () => {
+            clearTimeout(mouseHook);
+            clearTimeout(touchHook);
+            clearTimeout(timeoutHook);
+        }
+    }, []);
 
     return (
         <>
