@@ -148,7 +148,7 @@ React.forwardRef((props, ref) => {
                 multiple &&
                 e.relatedTarget
             ) {
-                if (e.target) e.target.focus();
+                if (e.target) e.target.focus({ preventScroll: true });
                 const classes = ClassesList(
                     e.relatedTarget as HTMLElement,
                     ['kui-dropdown', 'kui-select']
