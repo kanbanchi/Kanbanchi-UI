@@ -333,7 +333,7 @@
 
         &:focus {
             color: calc-color(fade, $color-base, 80);
-            background: calc-color(fade, $color-base, 5);
+            background: calc-color(fade, $color-base, 0);
             border: 1px solid calc-color(fade, $color-base, 30);
         }
         
@@ -347,7 +347,7 @@
         }
 
         &:active {
-            background: calc-color(fade, $color-base, 0);
+            background: calc-color(fade, $color-base, 5);
 
             .kui-button__icon {
                 color: calc-color(fade, $color-base, 80);
@@ -361,6 +361,35 @@
 
             .kui-button__icon {
                 color: calc-color(fade, $color-base, 15);
+            }
+        }
+
+        &.kui-button--color_white {
+            color: calc-color(fade, $color-white, 90);
+            background: calc-color(fade, $color-white, 30);
+            border: none;
+
+            .kui-button__icon {
+                color: calc-color(fade, $color-white, 50);
+            }
+
+            &:focus {
+                background: calc-color(fade, $color-white, 30);
+            }
+
+            &:hover {
+                background: calc-color(fade, $color-white, 50);
+                box-shadow: none;
+            }
+
+            &:active {
+                background: calc-color(fade, $color-white, 30);
+            }
+
+            &.kui-button--disabled,
+            &:disabled {
+                background: calc-color(fade, $color-white, 30);
+                opacity: .5;
             }
         }
     }
