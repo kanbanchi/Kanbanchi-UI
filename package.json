@@ -9,10 +9,12 @@
   },
   "author": "Magic Web Solutions LTD",
   "dependencies": {
+    "@types/uuid": "3.4.6",
     "react": "16.8.6",
     "react-datepicker": "2.5.0",
     "react-dom": "16.8.6",
-    "react-multi-carousel": "2.2.5"
+    "react-multi-carousel": "2.2.5",
+    "uuid": "3.3.3"
   },
   "scripts": {
     "start": "start-storybook -p 9002 -c .storybook -s ./public",

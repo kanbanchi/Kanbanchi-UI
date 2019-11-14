@@ -4,6 +4,7 @@ import { IDropdownDirectionVertical } from './../dropdown/types';
 import { ClassNames, userAgentsInclude, getParentsClasses } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 (props) => {
@@ -26,11 +27,13 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
     const [directionHook, setDirectionHook] = React.useState(directionVertical);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
+    const [uniqueClass, setUniqueClass] = React.useState('kui-button-dropdown--' + uuidv4());
     const buttonRef = React.useRef(null);
     const dropdownRef = React.useRef(null);
 
     className = ClassNames(
         'kui-button-dropdown',
+        uniqueClass,
         (disabled) ? 'kui-button-dropdown--disabled' : null,
         (isOpenedHook) ? 'kui-button-dropdown--opened' : null,
         className
@@ -65,13 +68,12 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         e.persist();
         const classes = getParentsClasses(
             e.relatedTarget as HTMLElement,
-            ['kui-dropdown', 'kui-button-dropdown']
+            [uniqueClass]
         );
-        if (classes.includes('kui-dropdown')) {
-            if (e.target) {
+        if (classes.includes(uniqueClass)) {
+            if (multiple && e.target) {
                 e.target.focus({ preventScroll: true });
             }
-            return;
         } else {
             setIsOpenedHook(false);
             if (onBlur) onBlur(e);
@@ -116,7 +118,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
                 directionHorizontal={directionHorizontal}
                 opened={isOpenedHook}
                 ref={dropdownRef}
-                tabIndex={0}
+                tabIndex={-1}
                 onAnimationEnd={dropdownAnimationEnd}
             >
                 {list}

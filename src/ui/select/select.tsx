@@ -6,6 +6,7 @@ import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
 import { ISelectListInheritedProps } from '../selectList/types';
+import { v4 as uuidv4 } from 'uuid';
 
 export const Select: React.SFC<ISelectInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -44,6 +45,7 @@ React.forwardRef((props, ref) => {
     const [isFocusedHook, setIsFocusedHook] = React.useState(opened);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [itemsRefsHook, setItemsRefsHook] = React.useState([]); // list items for auto scroll in dropdown
+    const [uniqueClass, setUniqueClass] = React.useState('kui-select--' + uuidv4());
 
     const dropdownRef = React.useRef(null);
     const inputRef = React.useRef(null);
@@ -51,6 +53,7 @@ React.forwardRef((props, ref) => {
 
     className = ClassNames(
         'kui-select',
+        uniqueClass,
         (disabled) ? 'kui-select--disabled' : null,
         (isOpenedHook) ? 'kui-select--opened' : null,
         (variant) ? 'kui-select--variant_' + variant : null,
@@ -146,13 +149,12 @@ React.forwardRef((props, ref) => {
         if (isFocusedHook) {
             const classes = getParentsClasses(
                 e.relatedTarget as HTMLElement,
-                ['kui-dropdown', 'kui-select']
+                [uniqueClass]
             );
-            if (classes.includes('kui-dropdown')) {
+            if (classes.includes(uniqueClass)) {
                 if (multiple && e.target) {
                     e.target.focus({ preventScroll: true });
                 }
-                return;
             } else {
                 setIsFocusedHook(false);
                 closeDropdown();
@@ -333,7 +335,7 @@ React.forwardRef((props, ref) => {
                 directionHorizontal={directionHorizontal}
                 opened={isOpenedHook}
                 ref={dropdownRef}
-                tabIndex={0}
+                tabIndex={-1}
                 onAnimationEnd={dropdownAnimationEnd}
             >
                 {dropdownBody}
