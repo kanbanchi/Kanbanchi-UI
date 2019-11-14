@@ -46,6 +46,7 @@
         }
 
         &:hover {
+            border-color: calc-color(fade, $color-base, 30);
             background: $color-white;
         }
 
