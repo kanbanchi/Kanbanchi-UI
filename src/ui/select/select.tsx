@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
-import { ClassNames, userAgentsInclude, ClassesList } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -149,7 +149,7 @@ React.forwardRef((props, ref) => {
                 e.relatedTarget
             ) {
                 if (e.target) e.target.focus({ preventScroll: true });
-                const classes = ClassesList(
+                const classes = getParentsClasses(
                     e.relatedTarget as HTMLElement,
                     ['kui-dropdown', 'kui-select']
                 );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IButtonDropdownInheritedProps } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
-import { ClassNames, userAgentsInclude, ClassesList } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 
@@ -63,25 +63,24 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         e.persist();
-        if (
-            multiple &&
-            e.relatedTarget
-        ) {
-            const classes = ClassesList(
-                e.relatedTarget as HTMLElement,
-                ['kui-dropdown', 'kui-button-dropdown']
-            );
-            if (classes.includes('kui-dropdown')) {
-                if (e.target) {
-                    e.target.focus({ preventScroll: true });
-                }
-                return;
+        const classes = getParentsClasses(
+            e.relatedTarget as HTMLElement,
+            ['kui-dropdown', 'kui-button-dropdown']
+        );
+        if (classes.includes('kui-dropdown')) {
+            if (e.target) {
+                e.target.focus({ preventScroll: true });
             }
-        }
-        setTimeoutHook(setTimeout(() => {
+            return;
+        } else {
             setIsOpenedHook(false);
-        }, 200)); // delay after onClick
-        if (onBlur) onBlur(e);
+            if (onBlur) onBlur(e);
+        }
+    }
+
+    const onChange = (e: any) => {
+        if (!multiple) setIsOpenedHook(false);
+        if (attributes.onChange) attributes.onChange(e);
     }
 
     let childrenArray: Array<{}> = // children could be string, we need array
@@ -98,7 +97,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         }
         if (child.type.displayName !== 'SelectList') return child;
         return React.cloneElement(child, {
-            onChange: attributes.onChange
+            onChange
         });
     });
 

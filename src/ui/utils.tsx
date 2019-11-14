@@ -7,21 +7,36 @@ export const ClassNames = (...props: any) =>
 export const ClassList = (name: string) =>
     (!name) ? [] : name.split(' ').filter(item => item.trim());
 
-export const ClassesList = (element: HTMLElement, names: string | Array<string> = null) => {
+export const getParentsClasses = (
+    element: HTMLElement,
+    names: string[] = null
+): string[] => {
     let target = element;
-    let classes: Array<string> = [];
-    while (target.parentNode) {
-        if (target.classList && target.classList.length) { // svg path doesnt have classList
+    let classes: string[] = [];
+    let found = false;
+    while (
+        !found &&
+        target &&
+        target.parentNode
+    ) {
+        if (
+            target.classList && // svg path doesnt have classList
+            target.classList.length
+        ) {
             classes = [
                 ...classes,
                 ...target.classList
             ];
             if (names) {
-                if (typeof names === 'string') {
-                    if (classes.includes(names)) break;
-                } else {
-                    if (names[0] && classes.includes(names[0])) break;
-                    if (names[1] && classes.includes(names[1])) break;
+                for (
+                    let i = 0;
+                    i < names.length;
+                    i++
+                ) {
+                    if (classes.includes(names[i])) {
+                        found = true;
+                        break;
+                    }
                 }
             }
         }
