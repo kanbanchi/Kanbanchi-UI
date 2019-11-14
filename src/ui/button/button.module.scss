@@ -533,7 +533,7 @@
         .kui-button-dropdown--opened &,
         &:active {
             background: calc-color(fade, $color-base, 5);
-            border: 2px dashed calc-color(fade, $color-base, 0);
+            border: 2px dashed calc-color(fade, $color-base, 30);
 
             .kui-button__icon {
                 color: $color-base;
