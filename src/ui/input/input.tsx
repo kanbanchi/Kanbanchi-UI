@@ -161,10 +161,6 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        if (autosize) autosizeLibray.default(textarea.current);
-    }, []);
-
-    React.useEffect(() => {
         return () => {
             clearTimeout(timeoutHook);
         };
@@ -174,6 +170,10 @@ React.forwardRef((props, ref) => {
         textarea.current.value = value;
         setIsFilled(!!value);
     }, [value]);
+
+    React.useEffect(() => {
+        if (autosize) autosizeLibray.default(textarea.current);
+    }, []);
 
     React.useImperativeHandle(ref, () => ({
         setIsFilled(value: string) {
