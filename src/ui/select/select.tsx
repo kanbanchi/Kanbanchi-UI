@@ -149,7 +149,7 @@ React.forwardRef((props, ref) => {
                 ['kui-dropdown', 'kui-select']
             );
             if (classes.includes('kui-dropdown')) {
-                if (e.target) {
+                if (multiple && e.target) {
                     e.target.focus({ preventScroll: true });
                 }
                 return;

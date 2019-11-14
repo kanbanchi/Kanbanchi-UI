@@ -22,12 +22,22 @@
             &__item[readonly] {
                 color: $color-base;
                 box-shadow: $shadow-hover;
-                border-color: transparent;
+                border-color: calc-color(fade, $color-base, 0);
             }
         }
 
         .kui-input__icon:not(.kui-input__icon--clear) {
             color: $color-base;
+        }
+    }
+
+    & .kui-input {
+        &__item,
+        &__item[readonly] {
+            &:focus {
+                box-shadow: $shadow-hover;
+                border-color: calc-color(fade, $color-base, 0);
+            }
         }
     }
 
@@ -88,7 +98,7 @@
                 width: $google-spacing * 13;
                 height: $google-spacing * 4;
                 font-weight: bold;
-                border: 1px dashed calc-color(fade, $color-base, 30);
+                border: 2px dashed calc-color(fade, $color-base, 20);
                 border-radius: $google-spacing * 4;
             }
         }
