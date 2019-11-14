@@ -26,7 +26,7 @@ const Story = () => {
 
                 32px <Userpic
                     size={32}
-                    src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
+                    src=""
                     tooltip="User Name"
                 />
 
@@ -34,7 +34,7 @@ const Story = () => {
 
                 40px <Userpic
                     size={40}
-                    src="https://cdn.pixabay.com/photo/2019/05/19/12/45/woman-4214001_960_720.jpg"
+                    src=""
                     tooltip="User Name"
                 />
 
@@ -58,7 +58,7 @@ const Story = () => {
                 <Userpic
                     background="#2196f3"
                     size={24}
-                    src="https://cdn.pixabay.com/photo/2019/05/19/12/45/woman-4214001_960_720.jpg"
+                    src=""
                     tooltip={{
                         direction: 'down-right',
                         value: 'User Name'
