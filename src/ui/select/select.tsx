@@ -144,21 +144,21 @@ React.forwardRef((props, ref) => {
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         e.persist();
         if (isFocusedHook) {
-            if (
-                multiple &&
-                e.relatedTarget
-            ) {
-                if (e.target) e.target.focus({ preventScroll: true });
-                const classes = getParentsClasses(
-                    e.relatedTarget as HTMLElement,
-                    ['kui-dropdown', 'kui-select']
-                );
-                if (classes.includes('kui-dropdown')) return;
+            const classes = getParentsClasses(
+                e.relatedTarget as HTMLElement,
+                ['kui-dropdown', 'kui-select']
+            );
+            if (classes.includes('kui-dropdown')) {
+                if (e.target) {
+                    e.target.focus({ preventScroll: true });
+                }
+                return;
+            } else {
+                setIsFocusedHook(false);
+                closeDropdown();
+                if (onBlur) onBlur(e);
             }
-            setIsFocusedHook(false);
-            closeDropdown();
         }
-        if (onBlur) onBlur(e);
     }
 
     attributes.onClick = (e: React.MouseEvent<HTMLInputElement>) => {
