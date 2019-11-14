@@ -159,7 +159,7 @@
             height: $google-spacing * 5;
             color: calc-color(fade, $color-base, 30);
             background: $color-white;
-            border: 1px solid calc-color(fade, $color-base, 30);
+            border: 2px solid calc-color(fade, $color-base, 20);
             border-radius: $big-radius;            
             box-shadow: none;
             @include transition;
@@ -190,12 +190,14 @@
 
             .kui-button__children {
                 color: calc-color(fade, $color-base, 90);
+                border-color: calc-color(fade, $color-base, 30);
             }
         }
 
         &:active {
             .kui-button__children {
                 color: $color-white;
+                border-color: calc-color(fade, $color-base, 0);
                 background: $color-purple;
                 box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-purple, 50);
             }
@@ -207,7 +209,7 @@
             .kui-button__children {
                 color: $color-white;
                 background: $color-purple;
-                border-color: transparent;
+                border-color: calc-color(fade, $color-base, 0);
             }
 
             &:focus {
@@ -323,7 +325,7 @@
         height: $google-spacing * 4;
         padding: 0 $google-spacing * 2 0 $google-spacing;
         color: calc-color(tint, $color-base, 50);
-        border: 1px solid calc-color(tint, $color-base, 30);
+        border: 2px solid calc-color(tint, $color-base, 20);
         border-radius: $base-radius;
 
         .kui-button__icon {
@@ -334,12 +336,12 @@
         &:focus {
             color: calc-color(fade, $color-base, 80);
             background: calc-color(fade, $color-base, 0);
-            border: 1px solid calc-color(fade, $color-base, 30);
+            border: 2px solid calc-color(tint, $color-base, 30);
         }
         
         &:hover {
             color: calc-color(fade, $color-base, 80);
-            border: 1px solid calc-color(fade, $color-base, 30);
+            border: 2px solid calc-color(tint, $color-base, 30);
 
             .kui-button__icon {
                 color: calc-color(fade, $color-base, 80);
@@ -502,7 +504,7 @@
         height: $google-spacing * 5;
         padding: 0 $google-spacing 0 $google-spacing * 2;
         color: $color-base;
-        border: 1px dashed calc-color(fade, $color-base, 30);
+        border: 2px dashed calc-color(fade, $color-base, 20);
         border-radius: $base-radius;
 
         .kui-button__icon {
@@ -512,7 +514,7 @@
 
         &:focus {
             color: $color-base;
-            border: 1px dashed calc-color(fade, $color-base, 30);
+            border: 2px dashed calc-color(fade, $color-base, 30);
 
             .kui-button__icon {
                 color: $color-base;
@@ -521,7 +523,7 @@
 
         &:hover {
             color: $color-base;
-            border: 1px solid $color-base;
+            border: 2px dashed calc-color(fade, $color-base, 30);
 
             .kui-button__icon {
                 color: $color-base;
@@ -531,7 +533,7 @@
         .kui-button-dropdown--opened &,
         &:active {
             background: calc-color(fade, $color-base, 5);
-            border: 1px solid $color-base;
+            border: 2px dashed calc-color(fade, $color-base, 30);
 
             .kui-button__icon {
                 color: $color-base;

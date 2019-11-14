@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITagInheritedProps } from './types';
-import { ClassNames, ClassesList } from '../utils';
+import { ClassNames, getParentsClasses } from '../utils';
 import '../../../src/ui/tags/tags.module.scss';
 import { Icon } from '../../ui';
 
@@ -26,7 +26,7 @@ React.forwardRef((props, ref) => {
 
     if (clickable) {
         attributes.onClick = (event: React.MouseEvent) => {
-            const classes = ClassesList(event.target as HTMLElement, ['kui-tag__clear', 'kui-tag']);
+            const classes = getParentsClasses(event.target as HTMLElement, ['kui-tag__clear', 'kui-tag']);
             if (classes.includes('kui-tag__clear')) {
                 if (clearable) onClear(event);
                 return;

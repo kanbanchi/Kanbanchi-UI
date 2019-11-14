@@ -7,15 +7,15 @@
         &__item,
         &__item[readonly] {
             color: $color-base;
-            border-color: calc-color(fade, $color-base, 30);
-            cursor: pointer;
+            border-color: calc-color(fade, $color-base, 20);
+            cursor: text;
         }
     }
     .kui-input--filled {
         .kui-input {
             &__item,
             &__item[readonly] {
-                border-color: $color-base;
+                border-color: calc-color(fade, $color-base, 30);
                 background: $color-light-background;
             }
         }
@@ -27,7 +27,7 @@
             &__item[readonly] {
                 color: $color-base;
                 box-shadow: $shadow-hover;
-                border-color: transparent;
+                border-color: calc-color(fade, $color-base, 0);
             }
         }
 
@@ -243,7 +243,7 @@
             padding: $google-spacing 0;
             top: $google-spacing * 5;
             font-weight: normal;
-            border: 1px solid calc-color(fade, $color-base, 30);
+            border: 2px solid calc-color(fade, $color-base, 20);
             background: $color-white;
             border-top-left-radius: 0;
             border-top-right-radius: 0;

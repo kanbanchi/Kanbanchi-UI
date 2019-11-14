@@ -3,6 +3,7 @@ import { IUserpicInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Tooltip } from '../../ui';
 import '../../../src/ui/userpic/userpic.module.scss';
+import { Icon } from '../icon/icon';
 
 export const Userpic: React.SFC<IUserpicInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -34,11 +35,16 @@ React.forwardRef((props, ref) => {
             ref={ref as any}
             {...attributes}
         >
-            {src &&
+            {src ?
                 <div
                     className={'kui-userpic__img'}
                     style={{backgroundImage: 'url(' + src + ')'}}
-                ></div>
+                /> :
+                <Icon
+                    className={'kui-userpic__ico'}
+                    size={24}
+                    xlink="user"
+                />
             }
         </div>
     );

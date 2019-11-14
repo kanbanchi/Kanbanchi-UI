@@ -19,6 +19,12 @@
         background-size: cover;
     }
 
+    &__ico {
+        width: 80%;
+        height: 80%;
+        opacity: .3;
+    }
+
     &--size_16 {
         width: $google-spacing * 2;
         min-width: $google-spacing * 2;

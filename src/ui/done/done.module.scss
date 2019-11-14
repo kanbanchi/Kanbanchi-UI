@@ -12,7 +12,7 @@
 
     &.kui-done--empty {
         background: calc-color(fade, $color-base, 0);
-        border: 1px dashed calc-color(fade, $color-base, 30);
+        border: 2px dashed calc-color(fade, $color-base, 20);
 
         .kui-done__bg {
             display: none;
@@ -31,7 +31,7 @@
 
     &.kui-done--done {
         background: calc-color(fade, $color-base, 0);
-        border: 1px solid calc-color(fade, $color-base, 30);
+        border: 2px solid calc-color(fade, $color-base, 20);
 
         .kui-done__bg {
             display: none;

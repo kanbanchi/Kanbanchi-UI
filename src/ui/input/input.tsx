@@ -32,7 +32,6 @@ React.forwardRef((props, ref) => {
         inputBefore = null,
         inputAfter = null;
 
-    const [cursorHook, setCursorHook] = React.useState(null);
     const [isFilled, setIsFilled] = React.useState(!!value);
     const [isFocusedHook, setIsFocusedHook] = React.useState(false);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
@@ -56,7 +55,6 @@ React.forwardRef((props, ref) => {
     }
 
     attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (textarea.current.selectionEnd) setCursorHook(textarea.current.selectionEnd);
         setIsFilled(!!e.target.value);
         if (onChange) onChange(e);
     };
@@ -163,10 +161,6 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        if (autosize) autosizeLibray.default(textarea.current);
-    }, []);
-
-    React.useEffect(() => {
         return () => {
             clearTimeout(timeoutHook);
         };
@@ -176,6 +170,10 @@ React.forwardRef((props, ref) => {
         textarea.current.value = value;
         setIsFilled(!!value);
     }, [value]);
+
+    React.useEffect(() => {
+        if (autosize) autosizeLibray.default(textarea.current);
+    }, []);
 
     React.useImperativeHandle(ref, () => ({
         setIsFilled(value: string) {
@@ -189,10 +187,6 @@ React.forwardRef((props, ref) => {
             attributes.onFocus(e);
         },
     }));
-
-    React.useEffect(() => {
-        if (textarea.current.selectionEnd) textarea.current.selectionEnd = cursorHook;
-    });
 
     let inputElement = (
         <Tag

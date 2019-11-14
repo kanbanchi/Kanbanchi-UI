@@ -25,9 +25,9 @@
         font-size: $milli-size;
         line-height: $base-line-height;
         border-radius: $base-radius;
-        border: 1px solid calc-color(fade, $color-base, 30);
+        border: 2px solid calc-color(fade, $color-base, 20);
         background: $color-white;
-        cursor: pointer;
+        cursor: text;
         @include transition;
 
         &::placeholder {
@@ -35,7 +35,7 @@
         }
 
         .kui-input--filled & {
-            border-color: $color-base;
+            border-color: calc-color(fade, $color-base, 30);
             background: $color-light-background;
         }
 
@@ -46,6 +46,7 @@
         }
 
         &:hover {
+            border-color: calc-color(fade, $color-base, 30);
             background: $color-white;
         }
 
@@ -84,6 +85,10 @@
             &__item[readonly] {
                 border-color: $color-green;
             }
+        }
+
+        .kui-label__item {
+            color: $color-green;
         }
     }
 

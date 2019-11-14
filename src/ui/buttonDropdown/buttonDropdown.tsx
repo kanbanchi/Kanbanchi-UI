@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { IButtonDropdownInheritedProps } from './types';
 import { IDropdownDirectionVertical } from './../dropdown/types';
-import { ClassNames, userAgentsInclude, ClassesList } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 (props) => {
@@ -26,11 +27,13 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
     const [directionHook, setDirectionHook] = React.useState(directionVertical);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
+    const [uniqueClass, setUniqueClass] = React.useState('kui-button-dropdown--' + uuidv4());
     const buttonRef = React.useRef(null);
     const dropdownRef = React.useRef(null);
 
     className = ClassNames(
         'kui-button-dropdown',
+        uniqueClass,
         (disabled) ? 'kui-button-dropdown--disabled' : null,
         (isOpenedHook) ? 'kui-button-dropdown--opened' : null,
         className
@@ -63,25 +66,23 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         e.persist();
-        if (
-            multiple &&
-            e.relatedTarget
-        ) {
-            const classes = ClassesList(
-                e.relatedTarget as HTMLElement,
-                ['kui-dropdown', 'kui-button-dropdown']
-            );
-            if (classes.includes('kui-dropdown')) {
-                if (e.target) {
-                    e.target.focus({ preventScroll: true });
-                }
-                return;
+        const classes = getParentsClasses(
+            e.relatedTarget as HTMLElement,
+            [uniqueClass]
+        );
+        if (classes.includes(uniqueClass)) {
+            if (multiple && e.target) {
+                e.target.focus({ preventScroll: true });
             }
-        }
-        setTimeoutHook(setTimeout(() => {
+        } else {
             setIsOpenedHook(false);
-        }, 200)); // delay after onClick
-        if (onBlur) onBlur(e);
+            if (onBlur) onBlur(e);
+        }
+    }
+
+    const onChange = (e: any) => {
+        if (!multiple) setIsOpenedHook(false);
+        if (attributes.onChange) attributes.onChange(e);
     }
 
     let childrenArray: Array<{}> = // children could be string, we need array
@@ -98,7 +99,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         }
         if (child.type.displayName !== 'SelectList') return child;
         return React.cloneElement(child, {
-            onChange: attributes.onChange
+            onChange
         });
     });
 
@@ -117,7 +118,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
                 directionHorizontal={directionHorizontal}
                 opened={isOpenedHook}
                 ref={dropdownRef}
-                tabIndex={0}
+                tabIndex={-1}
                 onAnimationEnd={dropdownAnimationEnd}
             >
                 {list}
