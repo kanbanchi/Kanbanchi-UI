@@ -27,7 +27,7 @@
         border-radius: $base-radius;
         border: 2px solid calc-color(fade, $color-base, 20);
         background: $color-white;
-        cursor: pointer;
+        cursor: text;
         @include transition;
 
         &::placeholder {

@@ -8,7 +8,7 @@
         &__item[readonly] {
             color: $color-base;
             border-color: calc-color(fade, $color-base, 20);
-            cursor: pointer;
+            cursor: text;
         }
     }
     .kui-input--filled {

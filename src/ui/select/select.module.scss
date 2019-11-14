@@ -7,6 +7,11 @@
         &__item,
         &__item[readonly] {
             color: $color-base;
+        }
+        &__item {
+            cursor: text;
+        }
+        &__item[readonly] {
             cursor: pointer;
         }
     }
