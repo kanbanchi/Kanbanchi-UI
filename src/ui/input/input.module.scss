@@ -58,6 +58,7 @@
 
         &:disabled {
             opacity: .5;
+            border-color: calc-color(fade, $color-base, 20);
             cursor: default;
         }
 

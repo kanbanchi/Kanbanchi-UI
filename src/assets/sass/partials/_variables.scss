@@ -51,11 +51,11 @@ $z-topbar:                  1030 !default;
 $z-modal:                   1040 !default;
 $z-modaltop:                1050 !default;
 $z-feedback:                1060 !default;
-$z-tooltip:                 1070 !default;
 $z-noty:                    1080 !default;
 $z-splash:                  2000 !default;
 $z-register:                2100 !default;
 $z-cookies:                 2110 !default;
+$z-tooltip:                 4000 !default;
 
 // iPad hacks
 $magic-delta-touch:         1px !default; // Магическое число для тачей по умолчанию для подгонки высоты
