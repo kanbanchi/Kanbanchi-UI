@@ -169,6 +169,7 @@ React.forwardRef((props, ref) => {
     React.useEffect(() => {
         textarea.current.value = value;
         setIsFilled(!!value);
+        autosizeLibray.default.update(textarea.current);
     }, [value]);
 
     React.useEffect(() => {
