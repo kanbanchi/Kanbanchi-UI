@@ -27,6 +27,10 @@ const Story = () => {
                     </li>
                 </SelectList>
 
+                <br/><br/>
+
+                Check empty SelectList: <SelectList></SelectList>
+
             </section>
 
             <section className="section-form-min">
