@@ -33,6 +33,7 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
     const itemsRefs = Array.from({ length: 1000 }, () => React.useRef(null)); // const length due to hooks order
 
     items = React.Children.map(childrenArray, (child: React.ReactElement, index) => {
+        if (!child || !child.props) return null;
         const classList = ClassList(child.props.className);
 
         let indexDivider = classList.indexOf('divider');

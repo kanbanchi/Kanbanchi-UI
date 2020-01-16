@@ -112,6 +112,8 @@ const Story = () => {
                     </SelectList>
                 </ButtonDropdown>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+                Check empty ButtonDropdown: <ButtonDropdown></ButtonDropdown>
             </section>
         </div>
     );

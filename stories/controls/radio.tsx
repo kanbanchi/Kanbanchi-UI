@@ -18,6 +18,10 @@ const Story = () => {
                     <div className="cusomClass"><b>Consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
                     <div className="disabled">Disabled</div>
                 </Radio>
+
+                <br/><br/>
+
+                Check empty Radio: <Radio onChange={()=>{}}></Radio>
             </section>
         </div>
     );

@@ -25,6 +25,10 @@ const Story = () => {
                     </Tag>
                 </Tags>
 
+                <br/>
+
+                Check empty Tags: <Tags></Tags>
+
             </section>
         </div>
     );

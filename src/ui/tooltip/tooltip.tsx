@@ -205,6 +205,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const itemRef = React.useRef(null);
 
     const targets = React.Children.map(childrenArray, (child: any, index) => {
+        if (!child) return null;
         return React.cloneElement(child, {
             ref: (node: any) => {
                 targetsRefs[index] = node;

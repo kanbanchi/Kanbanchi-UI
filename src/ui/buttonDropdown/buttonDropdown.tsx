@@ -89,6 +89,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         (Array.isArray(children)) ? children : [children];
 
     list = React.Children.map(childrenArray, (child: any) => {
+        if (!child || !child.props) return null;
         if (child.type.displayName === 'Button') {
             attributes.className = ClassNames(
                 'kui-button-dropdown__item',
