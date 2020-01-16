@@ -24,6 +24,7 @@ React.forwardRef((props, ref) => {
         (Array.isArray(children)) ? children : [children];
 
     const buttonHocs = React.Children.map(childrenArray, (child: any, i) => {
+        if (!child || !child.props) return null;
         return React.cloneElement(child, {
             className: ClassNames(
                 'kui-buttons_segmented__item',

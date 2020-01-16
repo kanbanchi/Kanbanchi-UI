@@ -33,6 +33,12 @@ const Story = () => {
                     <Button>Button 1</Button>
                 </ButtonsSegmented>
             </section>
+
+            Check empty ButtonsSegmented:
+            <ButtonsSegmented
+                active={0}
+                onChange={()=>{}}
+            ></ButtonsSegmented>
         </div>
     );
 };
