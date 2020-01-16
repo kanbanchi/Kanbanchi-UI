@@ -35,6 +35,14 @@ const Story = () => {
                     <Button>Tab 4</Button>
                 </Tabs>
 
+                <br/>
+
+                Check empty Tabs:
+                <Tabs
+                    active={0}
+                    onChange={()=>{}}
+                ></Tabs>
+
             </section>
         </div>
     );

@@ -26,6 +26,7 @@ React.forwardRef((props, ref) => {
         (Array.isArray(children)) ? children : [children];
 
     const buttonHocs = React.Children.map(childrenArray, (child: any, i) => {
+        if (!child) return null;
         return React.cloneElement(child, {
             className: ClassNames(
                 'kui-tabs__item',
@@ -41,7 +42,7 @@ React.forwardRef((props, ref) => {
     });
 
     React.useEffect(() => {
-        activeRef.current.scrollIntoView({inline: 'center', behavior: 'smooth'});
+        if (activeRef.current) activeRef.current.scrollIntoView({inline: 'center', behavior: 'smooth'});
     }, [active]);
 
     return (
