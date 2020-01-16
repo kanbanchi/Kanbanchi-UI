@@ -105,6 +105,10 @@ const Story = () => {
                     </div>
 
                 </div>
+
+                <br/>
+
+                Check empty Tooltip: <Tooltip value={'1'}></Tooltip>
             </section>
 
             <section>
