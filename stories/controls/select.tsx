@@ -289,6 +289,13 @@ const Story = () => {
                             </SelectListItem>
                         </SelectList>
                     </Select>
+
+                    <br/>
+
+                    Check empty Select:
+                    <Select
+                        onChange={()=>{}}
+                    ></Select>
                 </section>
 
         </div>

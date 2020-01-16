@@ -31,6 +31,10 @@ const Story = () => {
 
                 Check empty SelectList: <SelectList></SelectList>
 
+                <br/>
+
+                Check empty SelectListItem: <SelectListItem></SelectListItem>
+
             </section>
 
             <section className="section-form-min">
