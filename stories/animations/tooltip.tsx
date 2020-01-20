@@ -81,6 +81,16 @@ const Story = () => {
                                 <Icon xlink="project-favorite" size={24} />
                             </Button>
                         </Tooltip>
+
+                        <br/>
+
+                        <Tooltip value={`
+                            Lorem ipsum dolor sit amet, <br>
+                            consectetur adipiscing elit, <br>
+                            sed do eiusmod tempor incididunt <br>
+                            ut labore et dolore magna aliqua.`}>
+                            <span>Long Tooltip</span>
+                        </Tooltip>
                     </div>
                     <div className="stories-tooltips__center">
                         <Tooltip
@@ -90,6 +100,16 @@ const Story = () => {
                             <Button variant="icon">
                                 <Icon xlink="plus" size={24} />
                             </Button>
+                        </Tooltip>
+
+                        <br/>
+
+                        <Tooltip value={`
+                            Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua.`}>
+                            <span>Long Tooltip</span>
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__right">
@@ -102,31 +122,21 @@ const Story = () => {
                                 <Icon xlink="help" size={24} />
                             </Button>
                         </Tooltip>
+
+                        <br/>
+
+                        <Tooltip value={`
+                            Lorem ipsum dolor sit amet, <br>
+                            consectetur adipiscing elit, <br>
+                            sed do eiusmod tempor incididunt <br>
+                            ut labore et dolore magna aliqua.`}>
+                            <span>Long Tooltip</span>
+                        </Tooltip>
                     </div>
 
                 </div>
 
                 <br/>
-
-                <Tooltip value={`
-                    Lorem ipsum dolor sit amet, <br>
-                    consectetur adipiscing elit, <br>
-                    sed do eiusmod tempor incididunt <br>
-                    ut labore et dolore magna aliqua.`}>
-                    <span>Long Tooltip</span>
-                </Tooltip>
-
-                &nbsp;&nbsp;&nbsp;
-
-                <Tooltip value={`
-                    Lorem ipsum dolor sit amet, <br>
-                    consectetur adipiscing elit, <br>
-                    sed do eiusmod tempor incididunt <br>
-                    ut labore et dolore magna aliqua.`}>
-                    <span>Long Tooltip</span>
-                </Tooltip>
-
-                <br/><br/>
 
                 Check empty Tooltip: <Tooltip value={'1'}></Tooltip>
             </section>

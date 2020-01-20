@@ -106,9 +106,15 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
         }
         if (left !== undefined) {
-            if (left < itemObj.width / 2) left = itemObj.width / 2; // fix if translateX(-50%) goes out window
-            item.style.left = left + 'px';
+            if (left < itemObj.width / 2) { // fix if translateX(-50%) goes out window
+                left = itemObj.width / 2;
+            } else if (left + itemObj.width / 2 > window.innerWidth) {
+                left = undefined;
+                item.style.left = 'unset';
+                item.style.right = -itemObj.width / 2 + 'px';
+            }
         }
+        if (left !== undefined) item.style.left = left + 'px';
     };
 
     const toggleTooltip = (show: boolean = false) => {
