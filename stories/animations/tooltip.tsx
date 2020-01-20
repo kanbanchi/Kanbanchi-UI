@@ -108,6 +108,26 @@ const Story = () => {
 
                 <br/>
 
+                <Tooltip value={`
+                    Lorem ipsum dolor sit amet, <br>
+                    consectetur adipiscing elit, <br>
+                    sed do eiusmod tempor incididunt <br>
+                    ut labore et dolore magna aliqua.`}>
+                    <span>Long Tooltip</span>
+                </Tooltip>
+
+                &nbsp;&nbsp;&nbsp;
+
+                <Tooltip value={`
+                    Lorem ipsum dolor sit amet, <br>
+                    consectetur adipiscing elit, <br>
+                    sed do eiusmod tempor incididunt <br>
+                    ut labore et dolore magna aliqua.`}>
+                    <span>Long Tooltip</span>
+                </Tooltip>
+
+                <br/><br/>
+
                 Check empty Tooltip: <Tooltip value={'1'}></Tooltip>
             </section>
 
@@ -222,7 +242,7 @@ const Story = () => {
 <Tooltip
     value="Test"
 >
-    <Kui.Radio>
+    <Kui.Radio onChange={()=>{}}>
         <div>1</div>
         <div>2</div>
     </Kui.Radio>

@@ -76,31 +76,38 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             height: itemRect.height || itemRect.bottom - itemRect.top
         };
 
+        let top;
         if (direction.includes('down')) {
-            item.style.top = targetObj.bottom + 'px';
+            top = targetObj.bottom;
 
         } else if (direction.includes('up')) {
-            item.style.top = targetObj.y - itemObj.height + 'px';
+            top = targetObj.y - itemObj.height;
 
         } else if (direction === 'left' || direction === 'right') {
-            item.style.top = targetObj.y + targetObj.height / 2 + 'px';
+            top = targetObj.y + targetObj.height / 2;
         }
+        if (top !== undefined) item.style.top = top + 'px';
 
+        let left;
         if (direction === ('down') || direction === ('up')) {
-            item.style.left = targetObj.x + targetObj.width / 2 + 'px';
+            left = targetObj.x + targetObj.width / 2;
 
         } else if (direction.includes('-left')) {
-            item.style.left = targetObj.right - itemObj.width + 'px';
+            left = targetObj.right - itemObj.width;
 
         } else if (direction.includes('-right')) {
-            item.style.left = targetObj.x + 'px';
+            left = targetObj.x;
 
         } else if (direction === 'left') {
-            item.style.left = targetObj.x - itemObj.width + 'px';
+            left = targetObj.x - itemObj.width;
 
         } else if (direction === 'right') {
-            item.style.left = targetObj.right + 'px';
+            left = targetObj.right;
 
+        }
+        if (left !== undefined) {
+            if (left < itemObj.width / 2) left = itemObj.width / 2; // fix if translateX(-50%) goes out window
+            item.style.left = left + 'px';
         }
     };
 
@@ -253,11 +260,10 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 <Portal>
                     <div
                         className={classHook}
+                        dangerouslySetInnerHTML={{ __html: value }}
                         ref={itemRef}
                         onClick={closeTooltip}
-                    >
-                        {value}
-                    </div>
+                    />
                 </Portal>
             }
         </>
