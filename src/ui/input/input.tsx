@@ -82,6 +82,7 @@ React.forwardRef((props, ref) => {
     }
 
     attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+        e.persist();
         clearTimeout(timeoutHook);
         setTimeoutHook(setTimeout(() => {
             if (!isFocusedHook) {
