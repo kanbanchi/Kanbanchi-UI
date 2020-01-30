@@ -22,6 +22,9 @@ const Story = () => {
                     variant="search"
                     value={val2}
                     onChange={(e: any) => setVal2(e.target.value)}
+                    onFocus={(e: any) => {
+                        if (e) console.log(e.target.value)
+                    }}
                 />
 
                 <br/>
