@@ -1,6 +1,7 @@
 import { IMediaScreens } from './../types';
 
 export interface ITooltipProps {
+    delay?: number;
     direction?:
         'up'
         | 'up-left'

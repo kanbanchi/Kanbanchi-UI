@@ -9,13 +9,14 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     let {
         children,
         className,
+        delay,
         direction,
         maxWidth,
         state,
         value
     } = props;
 
-    const WAIT_BEFORE_SHOW = 300;
+    const WAIT_BEFORE_SHOW = delay || 300;
     const WAIT_ANIMATION = 200;
     const WAIT_BEFORE_HIDE = 100;
     const MOUSE_DEBOUNCE = 200;
