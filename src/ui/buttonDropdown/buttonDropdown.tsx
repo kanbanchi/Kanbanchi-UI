@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { IButtonDropdownInheritedProps } from './types';
-import { IDropdownDirectionVertical } from './../dropdown/types';
 import { ClassNames, userAgentsInclude, getParentsClasses } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
+import { Portal } from '../portal/portal';
 
 export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 (props) => {
@@ -14,8 +14,12 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         directionVertical,
         directionHorizontal,
         disabled,
+        dropdownClassName,
         multiple,
         opened,
+        portal,
+        portalId,
+        portalSelector,
         onBlur,
         onClick,
         ...attributesOriginal
@@ -24,26 +28,62 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         btn = null,
         list = null;
 
-    const [directionHook, setDirectionHook] = React.useState(directionVertical);
+    let [directionHook, setDirectionHook] = React.useState(directionVertical);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
-    const [timeoutHook, setTimeoutHook] = React.useState(null);
-    const [uniqueClass, setUniqueClass] = React.useState('kui-button-dropdown--' + uuidv4());
+    const uniqueClass = React.useRef('kui-button-dropdown--' + uuidv4());
     const buttonRef = React.useRef(null);
     const dropdownRef = React.useRef(null);
+    const dropdownContainerRef = React.useRef(null);
+    const dropdownUniqueClass = (dropdownClassName) ? dropdownClassName + '--' + uniqueClass.current : null;
 
     className = ClassNames(
         'kui-button-dropdown',
-        uniqueClass,
+        uniqueClass.current,
         (disabled) ? 'kui-button-dropdown--disabled' : null,
         (isOpenedHook) ? 'kui-button-dropdown--opened' : null,
+        (portal) ? 'kui-button-dropdown--portal' : null,
         className
     );
 
+    const classNameDropdown = ClassNames(
+        'kui-button-dropdown__dropdown',
+        (portal) ? 'kui-dropdown--portal' : null,
+        (dropdownClassName) ? dropdownClassName + ' ' + dropdownUniqueClass : null
+    );
+
     const calcDirection = () => {
-        if (directionVertical !== 'auto') return;
-        let el = buttonRef.current.getBoundingClientRect();
-        let dir: IDropdownDirectionVertical = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
-        setDirectionHook(dir);
+        const button = buttonRef.current.getBoundingClientRect();
+        if (portal) {
+            dropdownContainerRef.current.style.top = 'unset';
+            dropdownContainerRef.current.style.bottom = 'unset';
+            dropdownContainerRef.current.style.left = 'unset';
+            dropdownContainerRef.current.style.right = 'unset';
+            if (directionHorizontal === 'left') {
+                dropdownContainerRef.current.style.left = button.left + 'px';
+            } else {
+                dropdownContainerRef.current.style.right = (window.innerWidth - button.right) + 'px';
+            }
+        }
+        if (directionVertical !== 'auto') {
+            if (portal) {
+                if (directionVertical === 'up') {
+                    dropdownContainerRef.current.style.bottom = (window.innerHeight - button.top) + 'px';
+                } else {
+                    dropdownContainerRef.current.style.top = button.bottom + 'px';
+                }
+            }
+            return;
+        }
+
+        directionHook = (button.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+        setDirectionHook(directionHook);
+        if (portal) {
+            if (directionHook === 'up') {
+                dropdownContainerRef.current.style.bottom = (window.innerHeight - button.top) + 'px';
+            } else {
+                dropdownContainerRef.current.style.top = button.bottom + 'px';
+            }
+        }
     }
 
     const dropdownAnimationEnd = () => {
@@ -66,11 +106,18 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         e.persist();
+        const checkClasses = [uniqueClass.current];
+        if (dropdownUniqueClass) {
+            checkClasses.push(dropdownUniqueClass);
+        }
         const classes = getParentsClasses(
             e.relatedTarget as HTMLElement,
-            [uniqueClass]
+            checkClasses
         );
-        if (classes.includes(uniqueClass)) {
+        if (
+            classes.includes(uniqueClass.current) ||
+            dropdownUniqueClass && classes.includes(dropdownUniqueClass)
+        ) {
             if (multiple && e.target) {
                 e.target.focus({ preventScroll: true });
             }
@@ -105,25 +152,34 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
     });
 
     React.useEffect(() => {
-        return () => {
-            clearTimeout(timeoutHook);
-        };
-    }, [timeoutHook]);
+        dropdownContainerRef.current = dropdownRef.current.parentNode;
+    }, []);
+
+    const dropdownElement = (<Dropdown
+        className={classNameDropdown}
+        directionVertical={directionHook}
+        directionHorizontal={directionHorizontal}
+        opened={isOpenedHook}
+        ref={dropdownRef}
+        tabIndex={-1}
+        onAnimationEnd={dropdownAnimationEnd}
+    >
+        {list}
+    </Dropdown>);
+
+    const dropdownPortal = portal
+        ? <Portal
+            id={portalId}
+            selector={portalSelector}
+        >
+            {dropdownElement}
+        </Portal>
+        : dropdownElement;
 
     return (
         <div className={className} ref={buttonRef}>
             {btn}
-            <Dropdown
-                className="kui-button-dropdown__dropdown"
-                directionVertical={directionHook}
-                directionHorizontal={directionHorizontal}
-                opened={isOpenedHook}
-                ref={dropdownRef}
-                tabIndex={-1}
-                onAnimationEnd={dropdownAnimationEnd}
-            >
-                {list}
-            </Dropdown>
+            {dropdownPortal}
         </div>
     );
 };

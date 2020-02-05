@@ -39,6 +39,20 @@
     &--direction_right &__item {
         right: 0;
     }
+
+    &.kui-dropdown--portal {
+        position: absolute;
+        width: 100vh;
+        z-index: $z-tooltip;
+
+        &.kui-dropdown--direction_up .kui-dropdown__item {
+            bottom: 0;
+        }
+
+        &.kui-dropdown--direction_up.kui-dropdown--opened .kui-dropdown__item {
+            animation: animation_up_on 0.1s ease forwards;
+        }
+    }
 }
 
 @keyframes animation_down_on {
