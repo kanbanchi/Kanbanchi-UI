@@ -19,11 +19,18 @@ function createRootElement(id) {
  * Appends element as last child of body.
  * @param {HTMLElement} rootElem 
  */
-function addRootElement(rootElem) {
-  document.body.insertBefore(
-    rootElem,
-    document.body.lastElementChild.nextElementSibling,
-  );
+function addRootElement(rootElem, selector) {
+	let container;
+	if (selector) {
+		container = document.querySelector(selector);
+	}
+	if (!container) {
+		container = document.body;
+	}
+  	container.insertBefore(
+		rootElem,
+		container.lastElementChild.nextElementSibling,
+  	);
 }
 
 /**
@@ -37,7 +44,7 @@ function addRootElement(rootElem) {
  * @param {String} id The id of the target container, e.g 'modal' or 'spotlight'
  * @returns {HTMLElement} The DOM node to use as the Portal target.
  */
-function usePortal(id) {
+function usePortal(id, selector) {
   const rootElemRef = useRef(null);
 
   useEffect(function setupElement() {
@@ -48,7 +55,7 @@ function usePortal(id) {
 
     // If there is no existing DOM element, add a new one.
     if (!existingParent) {
-      addRootElement(parentElem);
+      addRootElement(parentElem, selector);
     }
 
     // Add the detached element to the parent
@@ -82,12 +89,16 @@ function usePortal(id) {
   return getRootElem();
 }
 
-export const Portal = ({ id, children }) => {
-  const target = usePortal(id);
-  return createPortal(
-    children,
-    target,
-  );
+export const Portal = ({
+	children,
+	id,
+	selector = null
+}) => {
+	const target = usePortal(id, selector);
+	return createPortal(
+		children,
+		target
+	);
 };
 
 export const KUI_PORTAL_ID = 'kui-portal';
