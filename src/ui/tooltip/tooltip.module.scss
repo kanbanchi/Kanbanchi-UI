@@ -7,11 +7,11 @@
     left: 0;
     z-index: $z-tooltip;
     min-height: $google-spacing * 4;
-    padding: $google-spacing / 2 $google-spacing * 2;
+    padding: $google-spacing;
     color: $color-white;
     font-size: $milli-size;
-    border-radius: $google-spacing * 2.5;
-    background: $color-base;
+    border-radius: $base-radius;
+    background: calc-color(fade, $color-base, 90);
     visibility: hidden;
 
     &--empty {

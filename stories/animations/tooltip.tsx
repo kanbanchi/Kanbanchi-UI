@@ -84,7 +84,9 @@ const Story = () => {
 
                         <br/>
 
-                        <Tooltip value={`
+                        <Tooltip
+                            delay={600}
+                            value={`
                             Lorem ipsum dolor sit amet, <br>
                             consectetur adipiscing elit, <br>
                             sed do eiusmod tempor incididunt <br>
