@@ -2,6 +2,7 @@ import { IMediaScreens } from './../types';
 
 export interface ITooltipProps {
     delay?: number;
+    delayClose?: number;
     direction?:
         'up'
         | 'up-left'
@@ -11,6 +12,8 @@ export interface ITooltipProps {
         | 'down'
         | 'down-left'
         | 'down-right';
+    footer?: any;
+    link?: any;
     maxWidth?: IMediaScreens;
     state?: 'error' | 'success';
     value: string;
