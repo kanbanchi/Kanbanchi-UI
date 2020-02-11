@@ -11,14 +11,17 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         className,
         delay,
         direction,
+        footer,
+        link,
         maxWidth,
         state,
-        value
+        value,
+        delayClose,
     } = props;
 
     const WAIT_BEFORE_SHOW = delay || 300;
     const WAIT_ANIMATION = 200;
-    const WAIT_BEFORE_HIDE = 100;
+    const WAIT_BEFORE_HIDE = delayClose || 100;
     const MOUSE_DEBOUNCE = 200;
 
     className = ClassNames(
@@ -27,6 +30,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         (maxWidth) ? 'kui-tooltip--maxwidth_' + maxWidth : null,
         (state) ? 'kui-tooltip--state_' + state : null,
         (!value) ? 'kui-tooltip--empty' : null,
+        (link) ? 'kui-tooltip--link' : null,
         className
     );
 
@@ -34,14 +38,27 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const [isMount, setIsMount] = React.useState(false);
     const [classHook, setClassHook] = React.useState(className);
     const [isTouchHook, setIsTouchHook] = React.useState(false);
-    const [s] = React.useState<any>({});
     let [timeoutHook, setTimeoutHook] = React.useState(null);
     let [touchHook, setTouchHook] = React.useState(null);
     let [mouseHook, setMouseHook] = React.useState(null);
+    let [isMouseOverTooltip, setMouseOverTooltip] = React.useState(false);
+
+    let html = [<div
+        className={'kui-tooltip__text'}
+        key={'text'}
+        dangerouslySetInnerHTML={{ __html: value }} />
+    ];
+    if (footer || link) {
+        html.push(<div
+            className={'kui-tooltip__footer'}
+            key={'footer'}
+        >{footer || link}</div>);
+    }
 
     const calcTooltip = (
         index: number = 0,
-        targetObj?: any
+        targetObj?: any,
+        count?: number
     ) => {
         if (!targetObj) {
             if (!targetsRefs[index]) return;
@@ -71,6 +88,20 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             height: itemRect.height || itemRect.bottom - itemRect.top
         };
 
+        setTimeout(() => { // long tooltip auto fit to window
+            let item = itemRef.current;
+            if (item) {
+                let itemRect = item.getBoundingClientRect();
+                let itemWidth = itemRect.width || itemRect.right - itemRect.left;
+                if (itemWidth !== itemObj.width) {
+                    if (!count) {
+                        item.style.width = itemWidth + 'px';
+                        calcTooltip(index, targetObj, 1);
+                    }
+                }
+            }
+        }, 100);
+
         let top;
         if (direction.includes('down')) {
             top = targetObj.bottom;
@@ -84,7 +115,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         if (top !== undefined) item.style.top = top + 'px';
 
         let left;
-        if (direction === ('down') || direction === ('up')) {
+        if (direction === 'down' || direction === 'up') {
             left = targetObj.x + targetObj.width / 2;
 
         } else if (direction.includes('-left')) {
@@ -100,21 +131,36 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             left = targetObj.right;
 
         }
+        let right;
         if (left !== undefined) {
-            if (left < itemObj.width / 2) { // fix if translateX(-50%) goes out window
-                left = itemObj.width / 2;
-            } else if (left + itemObj.width / 2 > window.innerWidth) {
-                left = undefined;
-                item.style.left = 'unset';
-                item.style.right = -itemObj.width / 2 + 'px';
+            if (direction === 'down' || direction === 'up') {
+                if (left < itemObj.width / 2) { // fix if translateX(-50%) goes out window
+                    left = itemObj.width / 2;
+                } else if (left + itemObj.width / 2 > window.innerWidth) {
+                    left = undefined;
+                    right = -itemObj.width / 2;
+                }
+            } else {
+                if (left < 0) {
+                    left = 8;
+                    item.style.width = (targetObj.x - left) + 'px';
+                } else if (left + itemObj.width > window.innerWidth) {
+                    item.style.width = (window.innerWidth - left) + 'px';
+                }
             }
         }
-        if (left !== undefined) item.style.left = left + 'px';
+        if (left !== undefined) {
+            item.style.left = left + 'px';
+        } else if (right !== undefined) {
+            item.style.left = 'unset';
+            item.style.right = right + 'px';
+        }
     };
 
     const toggleTooltip = (show: boolean = false) => {
         if (show && isShown) return;
         if (!show && !isShown) return;
+        if (isMouseOverTooltip) return;
         setIsShown(show);
         setClassHook(ClassNames(
             className,
@@ -125,6 +171,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 if (timeoutHook) {
                     setIsMount(false);
                     setClassHook(className);
+                    isMouseOverTooltip = false;
+                    setMouseOverTooltip(false);
                 }
             }, WAIT_ANIMATION);
             setTimeoutHook(timeoutHook);
@@ -219,6 +267,47 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         if (isShown) toggleTooltip();
     }
 
+    const onMouseEnterTooltip = () => {
+        isMouseOverTooltip = true;
+        setMouseOverTooltip(true);
+        clearTimeout(mouseHook);
+        clearTimeout(touchHook);
+        clearTimeout(timeoutHook);
+        touchHook = null;
+        timeoutHook = null;
+        setTouchHook(null);
+        setTimeoutHook(null);
+    };
+
+    const onMouseLeaveTooltip = () => {
+        isMouseOverTooltip = false;
+        setMouseOverTooltip(false);
+        closeTooltip();
+    };
+
+    const onClickTooltip = (event: React.MouseEvent) => {
+        const target = event.target as HTMLElement;
+        if (target.tagName.toLocaleLowerCase() !== 'a') {
+            clickLink();
+        }
+        onMouseLeaveTooltip();
+    };
+
+    const onClickTarget = () => {
+        if (isShown && link) clickLink();
+        closeTooltip();
+    };
+
+    const clickLink = () => {
+        const footer = itemRef.current.querySelector('.kui-tooltip__footer');
+        if (!footer) return;
+
+        const a = footer.querySelector('a');
+        if (!a) return;
+
+        if (a.click) a.click();
+    };
+
     const childrenArray: Array<React.ReactNode> = // children could be string, we need array
         (Array.isArray(children)) ? children : [children];
 
@@ -244,7 +333,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 if (child.props.onBlur) child.props.onBlur(e);
             },
             onClick: (e) => {
-                closeTooltip();
+                onClickTarget();
                 if (child.props.onClick) child.props.onClick(e);
             },
             onMouseEnter: (event: React.MouseEvent) => toggleMouse(event, index, true),
@@ -274,10 +363,13 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 <Portal>
                     <div
                         className={classHook}
-                        dangerouslySetInnerHTML={{ __html: value }}
                         ref={itemRef}
-                        onClick={closeTooltip}
-                    />
+                        onClick={onClickTooltip}
+                        onMouseEnter={onMouseEnterTooltip}
+                        onMouseLeave={onMouseLeaveTooltip}
+                    >
+                        {html}
+                    </div>
                 </Portal>
             }
         </>

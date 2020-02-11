@@ -6,6 +6,7 @@
     top: 0;
     left: 0;
     z-index: $z-tooltip;
+    max-width: 100vw;
     min-height: $google-spacing * 4;
     padding: $google-spacing;
     color: $color-white;
@@ -13,6 +14,14 @@
     border-radius: $base-radius;
     background: calc-color(fade, $color-base, 90);
     visibility: hidden;
+
+    a {
+        color: $color-white;
+    }
+
+    &.kui-tooltip--link {
+        cursor: pointer;
+    }
 
     &--empty {
         visibility: hidden !important;
@@ -73,6 +82,12 @@
     &--hide.kui-tooltip--direction_up-right {
         animation: tooltip_up_hide .2s ease forwards;
     }
+}
+
+.kui-tooltip__footer {
+    display: flex;
+    align-items: center;
+    margin-top: $google-spacing * 2;
 }
 
 @keyframes tooltip_down_center_show {

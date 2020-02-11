@@ -4,6 +4,17 @@ import { Button, Icon, Tooltip } from '../../src/ui';
 import * as Kui from '../../src/ui';
 
 const Story = () => {
+    const longTooltip = `
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    `;
+    // const longTooltip = `
+    //     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    //     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    // `;
     return (
         <div className="page">
              <section>
@@ -26,7 +37,8 @@ const Story = () => {
                     </div>
                     <div className="stories-tooltips__center">
                         <Tooltip
-                            value="Default tolltip"
+                            value="Direction down"
+                            direction="down"
                         >
                             <Button variant="icon" title="Button title">
                                 <Icon xlink="bell" size={24} />
@@ -82,36 +94,14 @@ const Story = () => {
                             </Button>
                         </Tooltip>
 
-                        <br/>
-
-                        <Tooltip
-                            delay={600}
-                            value={`
-                            Lorem ipsum dolor sit amet, <br>
-                            consectetur adipiscing elit, <br>
-                            sed do eiusmod tempor incididunt <br>
-                            ut labore et dolore magna aliqua.`}>
-                            <span>Long Tooltip</span>
-                        </Tooltip>
                     </div>
                     <div className="stories-tooltips__center">
                         <Tooltip
-                            value="Direction up"
-                            direction="up"
+                            value="Direction up (default)"
                         >
                             <Button variant="icon">
                                 <Icon xlink="plus" size={24} />
                             </Button>
-                        </Tooltip>
-
-                        <br/>
-
-                        <Tooltip value={`
-                            Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua.`}>
-                            <span>Long Tooltip</span>
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__right">
@@ -124,23 +114,206 @@ const Story = () => {
                                 <Icon xlink="help" size={24} />
                             </Button>
                         </Tooltip>
+                    </div>
 
-                        <br/>
+                    <div className="stories-tooltips__left">
+                        <Tooltip
+                            value="Lorem ipsum dolor sit amet"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="project-template" size={24} />
+                            </Button>
+                            <Button variant="icon">
+                                <Icon xlink="project-favorite" size={24} />
+                            </Button>
+                        </Tooltip>
 
-                        <Tooltip value={`
-                            Lorem ipsum dolor sit amet, <br>
-                            consectetur adipiscing elit, <br>
-                            sed do eiusmod tempor incididunt <br>
-                            ut labore et dolore magna aliqua.`}>
-                            <span>Long Tooltip</span>
+                    </div>
+                    <div className="stories-tooltips__center">
+                        <Tooltip
+                            value="Lorem ipsum dolor sit amet"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="plus" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="stories-tooltips__right">
+                        <Tooltip
+                            value="Error Lorem ipsum dolor sit amet"
+                            state="error"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="help" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
+
+            </section>
+
+            <section>
+                <h2>Long Tooltip</h2>
+
+                <div className="stories-tooltips">
+
+                    <div className="stories-tooltips__left">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="down-right"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="kanban" size={24} />
+                            </Button>
+                            <Button variant="icon">
+                                <Icon xlink="board" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="stories-tooltips__center">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="down"
+                        >
+                            <Button variant="icon" title="Button title">
+                                <Icon xlink="bell" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="stories-tooltips__right">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="down-left"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="bell" size={24} />
+                            </Button>
+                            <Button variant="icon">
+                                <Icon xlink="account" size={24} />
+                            </Button>
                         </Tooltip>
                     </div>
 
+                    <div className="stories-tooltips__left">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="right"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="tag" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="stories-tooltips__center"></div>
+                    <div className="stories-tooltips__right">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="left"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="trash" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
+
+                    <div className="stories-tooltips__left">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="up-right"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="project-template" size={24} />
+                            </Button>
+                            <Button variant="icon">
+                                <Icon xlink="project-favorite" size={24} />
+                            </Button>
+                        </Tooltip>
+
+                    </div>
+                    <div className="stories-tooltips__center">
+                        <Tooltip
+                            value={longTooltip}
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="plus" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="stories-tooltips__right">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="up-left"
+                            state="error"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="help" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
+
+                    <div className="stories-tooltips__left">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="up"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="project-template" size={24} />
+                            </Button>
+                            <Button variant="icon">
+                                <Icon xlink="project-favorite" size={24} />
+                            </Button>
+                        </Tooltip>
+
+                    </div>
+                    <div className="stories-tooltips__right">
+                        <Tooltip
+                            value={longTooltip}
+                            direction="up"
+                            state="error"
+                        >
+                            <Button variant="icon">
+                                <Icon xlink="help" size={24} />
+                            </Button>
+                        </Tooltip>
+                    </div>
                 </div>
 
                 <br/>
 
                 Check empty Tooltip: <Tooltip value={'1'}></Tooltip>
+            </section>
+
+            <section>
+                <h2>delayClose</h2>
+
+                <Tooltip
+                    direction={'right'}
+                    value="Connect related tasks <br/>to switch between them <br/>quickly."
+                    link={<a href="#1" onClick={()=>console.log('You learned more')}>Click to learn more</a>}
+                    // value={longTooltip}
+                    delayClose={5000}
+                >
+                    <Button
+                        variant={'icon'}
+                    >
+                        <Icon xlink="info" size={16} />
+                    </Button>
+                </Tooltip>
+
+                <Tooltip
+                    direction={'right'}
+                    value="Connect related tasks <br/>to switch between them <br/>quickly."
+                    footer={<Button color={'white'} onClick={()=>console.log('Ok')}>Ok</Button>}
+                    delayClose={5000}
+                >
+                    <Button
+                        variant={'icon-text'}
+                        text={'Buttons'}
+                        style={{marginLeft: 200}}
+                    >
+                        <Icon xlink="info" size={24} />
+                    </Button>
+                </Tooltip>
             </section>
 
             <section>
