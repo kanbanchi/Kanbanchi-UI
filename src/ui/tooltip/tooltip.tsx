@@ -35,15 +35,9 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const [classHook, setClassHook] = React.useState(className);
     const [isTouchHook, setIsTouchHook] = React.useState(false);
     const [s] = React.useState<any>({});
-    const [timeoutHook, setTimeoutHook] = React.useState(null);
-    const [getTimeoutHook] = React.useState(() => () => s.timeoutHook);
-    s.timeoutHook = timeoutHook;
-    const [touchHook, setTouchHook] = React.useState(null);
-    const [getTouchHook] = React.useState(() => () => s.touchHook);
-    s.touchHook = touchHook;
-    const [mouseHook, setMouseHook] = React.useState(null);
-    const [getMouseHook] = React.useState(() => () => s.mouseHook);
-    s.mouseHook = mouseHook;
+    let [timeoutHook, setTimeoutHook] = React.useState(null);
+    let [touchHook, setTouchHook] = React.useState(null);
+    let [mouseHook, setMouseHook] = React.useState(null);
 
     const calcTooltip = (
         index: number = 0,
@@ -127,12 +121,13 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             'kui-tooltip--' + (show ? 'show' : 'hide')
         ));
         if (!show) {
-            setTimeoutHook(setTimeout(() => {
-                if (getTimeoutHook()) {
+            timeoutHook = setTimeout(() => {
+                if (timeoutHook) {
                     setIsMount(false);
                     setClassHook(className);
                 }
-            }, WAIT_ANIMATION));
+            }, WAIT_ANIMATION);
+            setTimeoutHook(timeoutHook);
         }
     };
 
@@ -142,12 +137,14 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         if (!show) {
             clearTimeout(timeoutHook);
             const timeout = window.setTimeout(() => {
-                if (getTimeoutHook() === timeout) {
-                    setTimeoutHook(null);
+                if (timeoutHook === timeout) {
+                    timeoutHook = null;
+                    setTimeoutHook(timeoutHook);
                     toggleTooltip();
                 }
             }, WAIT_BEFORE_HIDE);
-            setTimeoutHook(timeout);
+            timeoutHook = timeout;
+            setTimeoutHook(timeoutHook);
             return;
         }
         setIsMount(true);
@@ -155,60 +152,70 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
         clearTimeout(timeoutHook);
         const timeout = window.setTimeout(() => {
-            if (getTimeoutHook() === timeout) {
+            if (timeoutHook === timeout) {
                 toggleTooltip(show);
             }
         }, WAIT_BEFORE_SHOW);
-        setTimeoutHook(timeout);
+        timeoutHook = timeout;
+        setTimeoutHook(timeoutHook);
 
         clearTimeout(mouseHook);
         const mouseTimeout = window.setTimeout(() => {
-            setMouseHook(null);
+            mouseHook = null;
+            setMouseHook(mouseHook);
         }, MOUSE_DEBOUNCE);
-        setMouseHook(mouseTimeout);
+        mouseHook = mouseTimeout;
+        setMouseHook(mouseHook);
     };
 
     const mouseMove = (event: React.MouseEvent) => {
         if (isShown) return;
-        if (!getMouseHook()) {
+        if (!mouseHook) {
             clearTimeout(timeoutHook);
             const timeout = window.setTimeout(() => {
-                if (getTimeoutHook() === timeout) {
+                if (timeoutHook === timeout) {
                     toggleTooltip(true);
                 }
             }, WAIT_BEFORE_SHOW);
-            setTimeoutHook(timeout);
+            timeoutHook = timeout;
+            setTimeoutHook(timeoutHook);
 
             clearTimeout(mouseHook);
             const mouseTimeout = window.setTimeout(() => {
-                setMouseHook(null);
+                mouseHook = null;
+                setMouseHook(mouseHook);
             }, MOUSE_DEBOUNCE);
-            setMouseHook(mouseTimeout);
+            mouseHook = mouseTimeout;
+            setMouseHook(mouseHook);
         }
     };
 
     const toggleTouch = (event: React.TouchEvent, index: number, show: boolean) => {
         if (!show) {
             clearTimeout(touchHook);
-            setTouchHook(null);
+            touchHook = null
+            setTouchHook(touchHook);
             return;
         }
         setIsTouchHook(true);
         setIsMount(true);
         calcTooltip(index);
-        setTouchHook(setTimeout(() => {
-            if (getTouchHook()) {
+        touchHook = setTimeout(() => {
+            if (touchHook) {
                 toggleTooltip(show);
             }
-        }, WAIT_BEFORE_SHOW));
+        }, WAIT_BEFORE_SHOW);
+        setTouchHook(touchHook);
     };
 
     const closeTooltip = () => {
-        setTouchHook(null);
-        setTimeoutHook(null);
         clearTimeout(mouseHook);
         clearTimeout(touchHook);
         clearTimeout(timeoutHook);
+        touchHook = null;
+        timeoutHook = null;
+        setTouchHook(null);
+        setTimeoutHook(null);
         if (isShown) toggleTooltip();
     }
 
