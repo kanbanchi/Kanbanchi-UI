@@ -22,6 +22,8 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         portalSelector,
         onBlur,
         onClick,
+        onOpen,
+        onClose,
         ...attributesOriginal
     } = props,
         attributes: React.ButtonHTMLAttributes<HTMLButtonElement> = attributesOriginal,
@@ -29,7 +31,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         list = null;
 
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
-    const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
+    let [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const uniqueClass = React.useRef('kui-button-dropdown--' + uuidv4());
     const buttonRef = React.useRef(null);
     const dropdownRef = React.useRef(null);
@@ -95,10 +97,19 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         }
     }
 
+    const setIsOpened = (isOpened: boolean) => {
+        isOpenedHook = isOpened;
+        setIsOpenedHook(isOpenedHook);
+        if (isOpened && onOpen) {
+            onOpen();
+        } else if (!isOpened && onClose) {
+            onClose();
+        }
+    }
+
     attributes.onClick = (e) => {
-        let isOpened = isOpenedHook;
-        setIsOpenedHook(!isOpenedHook);
-        if (!isOpened) {
+        setIsOpened(!isOpenedHook);
+        if (isOpenedHook) {
             calcDirection();
         }
         if (onClick) onClick(e);
@@ -122,13 +133,13 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
                 e.target.focus({ preventScroll: true });
             }
         } else {
-            setIsOpenedHook(false);
+            setIsOpened(false);
             if (onBlur) onBlur(e);
         }
     }
 
     const onChange = (e: any) => {
-        if (!multiple) setIsOpenedHook(false);
+        if (!multiple) setIsOpened(false);
         if (attributes.onChange) attributes.onChange(e);
     }
 

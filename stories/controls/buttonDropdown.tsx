@@ -67,6 +67,8 @@ const Story = () => {
                             portal
                             portalId={'section-portal'}
                             portalSelector={'.section-portal'}
+                            onOpen={()=>console.log('opened')}
+                            onClose={()=>console.log('closed')}
                         >
                             <Button variant="icon">
                                 <Icon size={24} xlink={'dots'} />

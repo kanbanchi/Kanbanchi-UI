@@ -1,8 +1,6 @@
 import { IDropdownPublicProps } from './../dropdown/types';
 
-export interface IButtonDropdownProps extends
-    IDropdownPublicProps
-{
+export interface IButtonDropdownStateProps {
     disabled?: boolean;
     dropdownClassName?: string;
     multiple?: boolean;
@@ -10,6 +8,17 @@ export interface IButtonDropdownProps extends
     portalId?: string;
     portalSelector?: string;
 }
+
+export interface IButtonDropdownDispatchProps {
+    onOpen?: () => void;
+    onClose?: () => void;
+}
+
+export interface IButtonDropdownProps extends
+    IDropdownPublicProps,
+    IButtonDropdownStateProps,
+    IButtonDropdownDispatchProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> = React.ButtonHTMLAttributes<E>;
 
