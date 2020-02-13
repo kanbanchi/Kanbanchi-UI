@@ -6,6 +6,30 @@ const Story = () => {
     const onClickHandler = (e: any) => console.log(e.target.innerText);
     const [val01, setVal01] = React.useState(false);
     const [val02, setVal02] = React.useState(false);
+    const [isActive, setActive] = React.useState(false);
+    const timer = React.useRef(null);
+
+    const onMouseEnterHandler = () => {
+        if (timer.current) {
+            clearTimeout(timer.current);
+        }
+        timer.current = setTimeout(() => {
+            console.log('on');
+            setActive(true);
+            timer.current = null;
+        }, 200);
+    };
+
+    const onMouseLeaveHandler = () => {
+        if (timer.current) {
+            clearTimeout(timer.current);
+        }
+        timer.current = setTimeout(() => {
+            console.log('off');
+            setActive(false);
+            timer.current = null;
+        }, 200);
+    };
 
     return (
         <div className="page">
@@ -123,12 +147,17 @@ const Story = () => {
                 <ButtonDropdown
                     className="stories-dropdown-100"
                     multiple={true}
-                    opened={true}
+                    opened={isActive}
+                    onMouseEnter={onMouseEnterHandler}
+                    onMouseLeave={onMouseLeaveHandler}
                 >
                     <Button variant="add">
                         Add smth
                     </Button>
-                    <SelectList fixActive={false}>
+                    <SelectList fixActive={false}
+                        onMouseEnter={onMouseEnterHandler}
+                        onMouseLeave={onMouseLeaveHandler}
+                    >
                         <Checkbox
                             color={'light'}
                             checked={val01}
