@@ -142,7 +142,7 @@ const Story = () => {
             </section>
 
             <section className="section-form-min">
-                <h2>Checkboxes</h2>
+                <h2>Checkboxes + hover</h2>
 
                 <ButtonDropdown
                     className="stories-dropdown-100"
