@@ -163,6 +163,10 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
     });
 
     React.useEffect(() => {
+        setIsOpened(opened);
+    }, [opened]);
+
+    React.useEffect(() => {
         dropdownContainerRef.current = dropdownRef.current.parentNode;
     }, []);
 
