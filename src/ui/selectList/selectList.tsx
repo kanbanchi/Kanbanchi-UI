@@ -34,8 +34,12 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
 
     items = React.Children.map(childrenArray, (child: React.ReactElement, index) => {
         if (!child || !child.props) return null;
-        const classList = ClassList(child.props.className);
+        const type = child.type as any;
+        if (type && type.displayName && type.displayName === 'Divider') {
+            return child;
+        }
 
+        const classList = ClassList(child.props.className);
         let indexDivider = classList.indexOf('divider');
         const divider = ~indexDivider ? <Divider /> : null;
         if (~indexDivider) classList.splice(indexDivider, 1);
