@@ -96,6 +96,13 @@ export {
     IFilesInheritedProps
 } from './src/ui/files/types';
 
+import { IHintInheritedProps } from './src/ui/hint/types';
+export declare const Hint: React.SFC<IHintInheritedProps>;
+export {
+    IHintStateProps,
+    IHintInheritedProps
+} from './src/ui/hint/types';
+
 import { IIconInheritedProps } from './src/ui/icon/types';
 export declare const Icon: React.SFC<IIconInheritedProps>;
 export {
