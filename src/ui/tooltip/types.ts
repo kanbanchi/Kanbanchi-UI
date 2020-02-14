@@ -1,6 +1,6 @@
 import { IMediaScreens } from './../types';
 
-export interface ITooltipProps {
+export interface ITooltipStateProps {
     delay?: number;
     delayClose?: number;
     direction?:
@@ -18,6 +18,15 @@ export interface ITooltipProps {
     state?: 'error' | 'success';
     value: string;
 }
+
+export interface ITooltipDispatchProps {
+    onShow?: () => void;
+}
+
+export interface ITooltipProps extends
+    ITooltipStateProps,
+    ITooltipDispatchProps
+{}
 
 export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
 

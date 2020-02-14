@@ -17,6 +17,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         state,
         value,
         delayClose,
+        onShow,
     } = props;
 
     const WAIT_BEFORE_SHOW = delay || 300;
@@ -166,7 +167,9 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             className,
             'kui-tooltip--' + (show ? 'show' : 'hide')
         ));
-        if (!show) {
+        if (show) {
+            if (onShow) onShow();
+        } else {
             timeoutHook = setTimeout(() => {
                 if (timeoutHook) {
                     setIsMount(false);

@@ -291,7 +291,8 @@ const Story = () => {
                     value="Connect related tasks <br/>to switch between them <br/>quickly."
                     link={<a href="#1" onClick={()=>console.log('You learned more')}>Click to learn more</a>}
                     // value={longTooltip}
-                    delayClose={5000}
+                    delayClose={500}
+                    onShow={()=>console.log('shown')}
                 >
                     <Button
                         variant={'icon'}
@@ -304,7 +305,7 @@ const Story = () => {
                     direction={'right'}
                     value="Connect related tasks <br/>to switch between them <br/>quickly."
                     footer={<Button color={'white'} onClick={()=>console.log('Ok')}>Ok</Button>}
-                    delayClose={5000}
+                    delayClose={500}
                 >
                     <Button
                         variant={'icon-text'}
