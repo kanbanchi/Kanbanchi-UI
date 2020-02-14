@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon } from '../../src/ui';
+import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon, Divider } from '../../src/ui';
 
 const Story = () => {
     const onClickHandler = (e: any) => console.log(e.target.innerText);
     const [val01, setVal01] = React.useState(false);
     const [val02, setVal02] = React.useState(false);
     const [isActive, setActive] = React.useState(false);
+    const [isDisabled, setDisabled] = React.useState(false);
     const timer = React.useRef(null);
 
     const onMouseEnterHandler = () => {
@@ -17,6 +18,11 @@ const Story = () => {
             console.log('on');
             setActive(true);
             timer.current = null;
+
+            setDisabled(true);
+            setTimeout(() => {
+                setDisabled(false);
+            }, 500);
         }, 200);
     };
 
@@ -49,6 +55,7 @@ const Story = () => {
                                 >
                                     Card Lorem ipsum dolor sit amet?
                                 </SelectListItem>
+                                <Divider />
                                 <SelectListItem
                                     icon="archive"
                                     list="List"
@@ -146,6 +153,7 @@ const Story = () => {
 
                 <ButtonDropdown
                     className="stories-dropdown-100"
+                    disabled={isDisabled}
                     multiple={true}
                     opened={isActive}
                     onMouseEnter={onMouseEnterHandler}
