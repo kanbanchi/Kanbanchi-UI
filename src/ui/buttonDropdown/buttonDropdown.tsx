@@ -108,9 +108,9 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
     }
 
     attributes.onClick = (e) => {
-        setIsOpened(!isOpenedHook);
-        if (isOpenedHook) {
-            calcDirection();
+        if (!(disabled && isOpenedHook)) {
+            setIsOpened(!isOpenedHook);
+            if (isOpenedHook) calcDirection();
         }
         if (onClick) onClick(e);
     }
