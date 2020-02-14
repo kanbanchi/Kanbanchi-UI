@@ -5,6 +5,7 @@ import Modals from './animations/modals';
 import SectionAccordion from './animations/sectionAccordion';
 import Snackbars from './animations/snackbars';
 import Tooltip from './animations/tooltip';
+import Hint from './animations/hint';
 
 import Action from './buttons/action';
 import Add from './buttons/add';
