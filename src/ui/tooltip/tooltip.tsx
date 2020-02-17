@@ -297,7 +297,11 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     };
 
     const onClickTarget = () => {
-        if (isShown && link) clickLink();
+        if (
+            isShown &&
+            link &&
+            !isTouchHook
+        ) clickLink();
         closeTooltip();
     };
 
