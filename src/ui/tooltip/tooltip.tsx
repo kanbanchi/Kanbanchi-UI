@@ -169,6 +169,10 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         ));
         if (show) {
             if (onShow) onShow();
+            timeoutHook = setTimeout(() => {
+                timeoutHook = null;
+                setTimeoutHook(timeoutHook);
+            }, WAIT_ANIMATION);
         } else {
             timeoutHook = setTimeout(() => {
                 if (timeoutHook) {
@@ -176,10 +180,12 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                     setClassHook(className);
                     isMouseOverTooltip = false;
                     setMouseOverTooltip(false);
+                    timeoutHook = null;
+                    setTimeoutHook(timeoutHook);
                 }
             }, WAIT_ANIMATION);
-            setTimeoutHook(timeoutHook);
         }
+        setTimeoutHook(timeoutHook);
     };
 
     const toggleMouse = (event: React.MouseEvent, index: number, show: boolean) => {
@@ -297,12 +303,28 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     };
 
     const onClickTarget = () => {
-        if (
-            isShown &&
-            link &&
-            !isTouchHook
-        ) clickLink();
-        closeTooltip();
+        if (link) { // toggle tooltip by click target
+            if (!timeoutHook) {
+                if (mouseHook) clearTimeout(mouseHook);
+                mouseHook = null;
+                if (isShown) {
+                    toggleTooltip();
+                } else {
+                    setIsMount(true);
+                    calcTooltip();
+                    clearTimeout(timeoutHook);
+                    const timeout = window.setTimeout(() => {
+                        if (timeoutHook === timeout) {
+                            toggleTooltip(true);
+                        }
+                    }, WAIT_ANIMATION);
+                    timeoutHook = timeout;
+                    setTimeoutHook(timeoutHook);
+                }
+            }
+        } else {
+            closeTooltip();
+        }
     };
 
     const clickLink = () => {

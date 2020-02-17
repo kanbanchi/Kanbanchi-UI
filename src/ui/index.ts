@@ -13,6 +13,8 @@ export {Dropdown} from './dropdown/dropdown';
 
 export {Files} from './files/files';
 
+export {Hint} from './hint/hint';
+
 export {Icon} from './icon/icon';
 export {Input} from './input/input';
 
