@@ -8,7 +8,7 @@ const Story = () => {
     React.useEffect(() => {
         let showHintTimer = setInterval(() => {
             showHint = !showHint
-            // setShowHint(showHint);
+            setShowHint(showHint);
         }, 2000);
 
         return () => {
@@ -145,6 +145,8 @@ const Story = () => {
                         translate={{left: -28}}
                         direction={'down-right'}
                         value="Tune your board here"
+                        onShow={()=>console.log('show')}
+                        onHide={()=>console.log('hide')}
                     >
                         <Button
                             variant={'icon'}

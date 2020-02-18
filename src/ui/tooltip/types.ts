@@ -41,6 +41,7 @@ export interface ITooltipStateProps {
 
 export interface ITooltipDispatchProps {
     onShow?: () => void;
+    onHide?: () => void;
 }
 
 export interface ITooltipProps extends

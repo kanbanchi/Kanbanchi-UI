@@ -19,12 +19,13 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         header,
         link,
         maxWidth,
-        onShow,
         show,
         state,
         translate,
         value,
         variant,
+        onShow,
+        onHide,
     } = props;
 
     const WAIT_BEFORE_SHOW = delay || 300;
@@ -221,6 +222,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                     timeoutHook = null;
                     setTimeoutHook(timeoutHook);
                 }
+                if (onHide) onHide();
             }, WAIT_ANIMATION);
         }
         setTimeoutHook(timeoutHook);
@@ -432,7 +434,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     }, [value]);
 
     React.useEffect(() => {
-        showTooltip(show);
+        toggleTooltip(show);
     }, [show]);
 
     React.useEffect(() => {
