@@ -1,6 +1,17 @@
 import { IMediaScreens } from './../types';
 
 export interface ITooltipStateProps {
+    arrow?:
+        'down' |
+        'left' |
+        'right' |
+        'up';
+    arrowTranslate?: {
+        top?: number,
+        right?: number,
+        bottom?: number,
+        left?: number,
+    };
     delay?: number;
     delayClose?: number;
     direction?:
@@ -13,10 +24,19 @@ export interface ITooltipStateProps {
         | 'down-left'
         | 'down-right';
     footer?: any;
+    header?: string;
     link?: any;
     maxWidth?: IMediaScreens;
+    show?: boolean;
     state?: 'error' | 'success';
+    translate?: {
+        top?: number,
+        right?: number,
+        bottom?: number,
+        left?: number,
+    };
     value: string;
+    variant?: 'hint';
 }
 
 export interface ITooltipDispatchProps {

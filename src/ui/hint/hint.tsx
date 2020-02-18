@@ -9,6 +9,8 @@ export function Hint (props: IHintInheritedProps) {
         children,
         className,
         arrow,
+        show,
+        variant,
         ...attributes
     } = props;
 
@@ -20,6 +22,9 @@ export function Hint (props: IHintInheritedProps) {
     return (
         <Tooltip
             className={className}
+            arrow={arrow}
+            show={show}
+            variant={variant}
             {...attributes}
         >
             {children}
@@ -28,7 +33,9 @@ export function Hint (props: IHintInheritedProps) {
 };
 
 Hint.defaultProps = {
-    arrow: 'down'
+    arrow: 'down',
+    show: true,
+    variant: 'hint'
 };
 
 Hint.displayName = 'Hint';
