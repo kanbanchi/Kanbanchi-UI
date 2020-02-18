@@ -82,12 +82,108 @@
     &--hide.kui-tooltip--direction_up-right {
         animation: tooltip_up_hide .2s ease forwards;
     }
+    
+    &.kui-tooltip--arrow-up {
+        margin-top: $google-spacing;
+    }
+    &.kui-tooltip--arrow-right {
+        margin-left: -$google-spacing;
+    }
+    &.kui-tooltip--arrow-down {
+        margin-top: -$google-spacing;
+    }
+    &.kui-tooltip--arrow-left {
+        margin-left: $google-spacing;
+    }
+}
+
+.kui-tooltip__header {
+    margin-bottom: $google-spacing;
+    font-size: $google-spacing * 2.5;
+    font-weight: bold;
 }
 
 .kui-tooltip__footer {
     display: flex;
     align-items: center;
     margin-top: $google-spacing * 2;
+}
+
+.kui-tooltip__arrow {
+    position: absolute;
+    color: calc-color(fade, $color-base, 90);
+
+    .kui-tooltip--arrow-up &,
+    .kui-tooltip--arrow-down & {
+        height: $google-spacing;
+    }
+
+    .kui-tooltip--arrow-up:not(.kui-tooltip--arrowTranslate) &,
+    .kui-tooltip--arrow-down:not(.kui-tooltip--arrowTranslate) & {
+        left: 50%;
+        width: 50%;
+    }
+
+    .kui-tooltip--arrow-up & {
+        bottom: 100%;
+    }
+
+    .kui-tooltip--arrow-down & {
+        top: 100%;
+    }
+
+    .kui-tooltip--arrow-left &,
+    .kui-tooltip--arrow-right & {
+        width: $google-spacing;
+    }
+
+    .kui-tooltip--arrow-left:not(.kui-tooltip--arrowTranslate) &,
+    .kui-tooltip--arrow-right:not(.kui-tooltip--arrowTranslate) & {
+        top: 50%;
+        height: 50%;
+    }
+
+    .kui-tooltip--arrow-left & {
+        right: 100%;
+    }
+
+    .kui-tooltip--arrow-right & {
+        left: 100%;
+    }
+}
+
+.kui-tooltip__arrow-icon {
+    position: absolute;
+
+    .kui-tooltip--arrow-up & {
+        bottom: 0;
+    }
+
+    .kui-tooltip--arrow-down & {
+        top: 0;
+    }
+
+    .kui-tooltip--arrow-left & {
+        right: 0;
+    }
+
+    .kui-tooltip--arrow-right & {
+        left: 0;
+    }
+}
+
+.kui-tooltip--arrow-up,
+.kui-tooltip--arrow-down {
+    &:not(.kui-tooltip--arrowTranslate) .kui-tooltip__arrow-icon {
+        transform: translateX(-50%);
+    }
+}
+
+.kui-tooltip--arrow-left,
+.kui-tooltip--arrow-right {
+    &:not(.kui-tooltip--arrowTranslate) .kui-tooltip__arrow-icon {
+        transform: translateY(-50%);
+    }
 }
 
 @keyframes tooltip_down_center_show {
