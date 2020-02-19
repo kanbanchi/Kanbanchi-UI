@@ -3,6 +3,7 @@
 .kui-tooltip.kui-hint {
     background: $color-purple;
     box-shadow: $shadow-modal;
+    z-index: $z-dropdown;
 
     .kui-tooltip__arrow {
         color: $color-purple;
