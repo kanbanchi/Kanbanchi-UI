@@ -377,9 +377,25 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         if (a.click) a.click();
     };
 
-    const showTooltip = (show: boolean = false) => {
+    const toggleShow = (show: boolean = false) => {
+        if (!show) {
+            clearTimeout(timeoutHook);
+            const timeout = window.setTimeout(() => {
+                if (timeoutHook === timeout) {
+                    timeoutHook = null;
+                    setTimeoutHook(timeoutHook);
+                    toggleTooltip();
+                }
+            }, WAIT_BEFORE_HIDE);
+            timeoutHook = timeout;
+            setTimeoutHook(timeoutHook);
+            return;
+        }
+        if (!isHint) return;
+
         setIsMount(true);
         calcTooltip();
+        clearTimeout(timeoutHook);
         const timeout = window.setTimeout(() => {
             if (timeoutHook === timeout) {
                 toggleTooltip(show);
@@ -434,13 +450,10 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     }, [value]);
 
     React.useEffect(() => {
-        toggleTooltip(show);
+        toggleShow(show);
     }, [show]);
 
     React.useEffect(() => {
-        if (isHint || show) {
-            showTooltip(show);
-        }
         return () => {
             clearTimeout(mouseHook);
             clearTimeout(touchHook);
