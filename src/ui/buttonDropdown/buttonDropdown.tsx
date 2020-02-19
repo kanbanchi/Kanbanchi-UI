@@ -129,7 +129,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
             classes.includes(uniqueClass.current) ||
             dropdownUniqueClass && classes.includes(dropdownUniqueClass)
         ) {
-            if (multiple && e.target) {
+            if (e.target) {
                 e.target.focus({ preventScroll: true });
             }
         } else {

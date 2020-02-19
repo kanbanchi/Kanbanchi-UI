@@ -155,7 +155,7 @@ React.forwardRef((props, ref) => {
                 [uniqueClass]
             );
             if (classes.includes(uniqueClass)) {
-                if (multiple && e.target) {
+                if (e.target) {
                     e.target.focus({ preventScroll: true });
                 }
             } else {
