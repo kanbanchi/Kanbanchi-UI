@@ -1,5 +1,15 @@
 import { IMediaScreens } from './../types';
 
+export type TTooltipDirection =
+    'up' |
+    'up-left' |
+    'up-right' |
+    'left' |
+    'right' |
+    'down' |
+    'down-left' |
+    'down-right';
+
 export interface ITooltipStateProps {
     arrow?:
         'down' |
@@ -14,15 +24,7 @@ export interface ITooltipStateProps {
     };
     delay?: number;
     delayClose?: number;
-    direction?:
-        'up'
-        | 'up-left'
-        | 'up-right'
-        | 'left'
-        | 'right'
-        | 'down'
-        | 'down-left'
-        | 'down-right';
+    direction?: TTooltipDirection;
     footer?: any;
     header?: string;
     link?: any;

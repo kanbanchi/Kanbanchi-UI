@@ -268,7 +268,10 @@ import { ITooltipInheritedProps } from './src/ui/tooltip/types';
 export declare const Tooltip: React.SFC<ITooltipInheritedProps>;
 export {
     ITooltipProps,
-    ITooltipInheritedProps
+    ITooltipInheritedProps,
+    TTooltipDirection,
+    ITooltipStateProps,
+    ITooltipDispatchProps
 } from './src/ui/tooltip/types';
 
 import { IUserpicInheritedProps } from './src/ui/userpic/types';
