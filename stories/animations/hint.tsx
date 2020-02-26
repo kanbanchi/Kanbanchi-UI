@@ -150,6 +150,7 @@ const Story = () => {
                     >
                         <Button
                             variant={'icon'}
+                            onClick={()=>console.log('click Dots')}
                         >
                             <Icon size={24} xlink={'dots'} />
                         </Button>
