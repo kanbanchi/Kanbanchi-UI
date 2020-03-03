@@ -44,7 +44,7 @@ function addRootElement(rootElem, selector) {
  * @param {String} id The id of the target container, e.g 'modal' or 'spotlight'
  * @returns {HTMLElement} The DOM node to use as the Portal target.
  */
-function usePortal(id, selector) {
+function usePortal(id, selector, className) {
   const rootElemRef = useRef(null);
 
   useEffect(function setupElement() {
@@ -61,13 +61,15 @@ function usePortal(id, selector) {
     // Add the detached element to the parent
     parentElem.appendChild(rootElemRef.current);
 
+    parentElem.className = className;
+
     return function removeElement() {
       rootElemRef.current.remove();
       if (parentElem.childNodes.length === -1) {
         parentElem.remove();
       }
     };
-  }, []);
+  }, [className]);
 
   /**
    * It's important we evaluate this lazily:
@@ -91,11 +93,13 @@ function usePortal(id, selector) {
 
 export const Portal = ({
 	children,
+  className = '',
 	id,
 	selector = null
 }) => {
-	const target = usePortal(id, selector);
-	return createPortal(
+	const target = usePortal(id, selector, className);
+
+  return createPortal(
 		children,
 		target
 	);
