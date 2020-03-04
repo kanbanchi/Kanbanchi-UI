@@ -473,7 +473,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const targets = React.Children.map(childrenArray, (child: any, index) => {
         if (!child) return null;
 
-        const childClassName = child.props.className + isPortal ? '' : ' tooltip-target ' + uniqueClass;
+        let childClassName = child.props.className;
+        if (!isPortal) childClassName += ' tooltip-target ' + uniqueClass;
 
         const targetOnMouse = isHint ? {} : {
             onMouseEnter: (event: React.MouseEvent) => toggleMouse(event, index, true),

@@ -35,7 +35,7 @@ const Story = () => {
                             value="Direction down-right"
                             direction="down-right"
                         >
-                            <Button variant="icon">
+                            <Button className={'test-button'} variant="icon">
                                 <Icon xlink="kanban" size={24} />
                             </Button>
                             <Button variant="icon">
