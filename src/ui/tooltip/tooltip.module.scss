@@ -2,18 +2,34 @@
 
 .kui-tooltip {
     position: absolute;
-    display: inline-block;
     top: 0;
     left: 0;
+    display: inline-block;
     z-index: $z-tooltip;
-    max-width: 100vw;
+    max-width: calc(100vw - #{$google-spacing * 4});
     min-height: $google-spacing * 4;
     padding: $google-spacing;
+    white-space: normal;
     color: $color-white;
     font-size: $milli-size;
+    text-align: left;
     border-radius: $base-radius;
     background: calc-color(fade, $color-base, 90);
     visibility: hidden;
+
+    &.kui-tooltip--direction_left,
+    &.kui-tooltip--direction_up-left,
+    &.kui-tooltip--direction_down-left {
+        left: unset;
+        right: 0;
+    }
+
+    &.kui-tooltip--direction_up,
+    &.kui-tooltip--direction_up-left,
+    &.kui-tooltip--direction_up-right {
+        top: unset;
+        bottom: 0;
+    }
 
     a {
         color: $color-white;
@@ -21,6 +37,10 @@
 
     &.kui-tooltip--link {
         cursor: pointer;
+    }
+
+    &.kui-tooltip--footer {
+        padding: $google-spacing * 2;
     }
 
     &--empty {
@@ -87,10 +107,10 @@
         margin-top: $google-spacing;
     }
     &.kui-tooltip--arrow-right {
-        margin-left: -$google-spacing;
+        margin-right: $google-spacing;
     }
     &.kui-tooltip--arrow-down {
-        margin-top: -$google-spacing;
+        margin-bottom: $google-spacing;
     }
     &.kui-tooltip--arrow-left {
         margin-left: $google-spacing;
@@ -105,6 +125,7 @@
 
 .kui-tooltip__footer {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-top: $google-spacing * 2;
 }
@@ -186,91 +207,105 @@
     }
 }
 
+.kui-portal--tooltip-hidden {
+    position: absolute;
+    overflow: hidden;
+}
+
+.kui-portal--tooltip-in-target {
+    position: absolute;
+    width: 100vw;
+}
+
+.kui-tooltip-target {
+    position: relative;
+}
+
 @keyframes tooltip_down_center_show {
     0% {
         z-index: $z-tooltip + 5;
-        transform: translateX(-50%) translateY($google-spacing * 2);
+        transform: translateY($google-spacing * 2);
     }
     100% {
-        transform: translateX(-50%) translateY($google-spacing);
+        transform: translateY($google-spacing);
     }
 }
 @keyframes tooltip_down_center_hide {
     0% {
         opacity: 1;
         visibility: visible;
-        transform: translateX(-50%) translateY($google-spacing);
+        transform: translateY($google-spacing);
     }
     100% {
         opacity: 0;
         visibility: hidden;
-        transform: translateX(-50%) translateY($google-spacing * 2);
+        transform: translateY($google-spacing * 2);
     }
 }
 
 @keyframes tooltip_up_center_show {
     0% {
         z-index: $z-tooltip + 5;
-        transform: translateX(-50%) translateY(-$google-spacing * 2);
+        transform: translateY(-$google-spacing * 2);
     }
     100% {
-        transform: translateX(-50%) translateY(-$google-spacing);
+        transform: translateY(-$google-spacing);
     }
 }
 @keyframes tooltip_up_center_hide {
     0% {
         opacity: 1;
         visibility: visible;
-        transform: translateX(-50%) translateY(-$google-spacing);
+        transform: translateY(-$google-spacing);
     }
     100% {
         opacity: 0;
         visibility: hidden;
-        transform: translateX(-50%) translateY(-$google-spacing * 2);
+        transform: translateY(-$google-spacing * 2);
     }
 }
 
 @keyframes tooltip_left_show {
     0% {
         z-index: $z-tooltip + 5;
-        transform: translateX(-$google-spacing * 2) translateY(-50%);
+        transform: translateX(-$google-spacing * 2);
     }
     100% {
-        transform: translateX(-$google-spacing) translateY(-50%);
+        transform: translateX(-$google-spacing);
     }
 }
 @keyframes tooltip_left_hide {
     0% {
         opacity: 1;
         visibility: visible;
-        transform: translateX(-$google-spacing) translateY(-50%);
+        transform: translateX(-$google-spacing);
     }
     100% {
         opacity: 0;
         visibility: hidden;
-        transform: translateX(-$google-spacing * 2) translateY(-50%);
+        transform: translateX(-$google-spacing * 2);
     }
 }
 
 @keyframes tooltip_right_show {
     0% {
         z-index: $z-tooltip + 5;
-        transform: translateX($google-spacing * 2) translateY(-50%);
+        transform: translateX($google-spacing * 2);
     }
     100% {
-        transform: translateX($google-spacing) translateY(-50%);
+        transform: translateX($google-spacing);
     }
 }
 @keyframes tooltip_right_hide {
     0% {
         opacity: 1;
         visibility: visible;
-        transform: translateX($google-spacing) translateY(-50%);
+        transform: translateX($google-spacing);
     }
     100% {
         opacity: 0;
         visibility: hidden;
-        transform: translateX($google-spacing * 2) translateY(-50%);
+        transform: translateX($google-spacing * 2);
     }
 }
 

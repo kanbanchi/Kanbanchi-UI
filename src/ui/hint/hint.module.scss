@@ -2,10 +2,57 @@
 
 .kui-tooltip.kui-hint {
     background: $color-purple;
-    box-shadow: $shadow-modal;
+    box-shadow: 0 $google-spacing $google-spacing * 3 rgba($color-purple, .4);
     z-index: $z-dropdown;
 
     .kui-tooltip__arrow {
         color: $color-purple;
+    }
+
+    .kui-tooltip__arrow-icon {
+        opacity: 1;
+    }
+
+    &.kui-tooltip--state_error {
+        background: $color-red;
+        box-shadow: 0 $google-spacing $google-spacing * 3 rgba($color-red, .4);
+
+        .kui-tooltip__arrow {
+            color: $color-red;
+        }
+    }
+
+    .kui-tooltip--state_success {
+        background: $color-green;
+        box-shadow: 0 $google-spacing $google-spacing * 3 rgba($color-green, .4);
+
+        .kui-tooltip__arrow {
+            color: $color-green;
+        }
+    }
+}
+
+.kui-hint__button-secondary {
+    background: calc-color(fade, $color-white, 0);
+
+    &:hover {
+        background: calc-color(fade, $color-white, 30);
+    }
+
+    &:active {
+        background: calc-color(fade, $color-white, 20);
+    }
+}
+
+.kui-hint__button-tertiary {
+    min-width: 0;
+    padding: 0;
+    background: calc-color(fade, $color-white, 0);
+    opacity: .5;
+
+    &:active,
+    &:hover {
+        background: calc-color(fade, $color-white, 0);
+        opacity: .9;
     }
 }
