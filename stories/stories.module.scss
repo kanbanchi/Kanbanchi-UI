@@ -106,6 +106,8 @@ section {
     align-items: space-between;
     flex-wrap: wrap;
     height: $google-spacing * 60;
+    max-width: 90%;
+    margin-left: 10%;
 
     & > * {
         flex: 1 1 33%;
@@ -122,6 +124,17 @@ section {
     &__right {
         text-align: right;
     }
+}
+
+.stories-hint-tutor {
+    width: 300px;
+}
+.card-for-tutorial-hint {
+    margin-bottom: $google-spacing;
+    width: 300px;
+    height: 100px;
+    text-align: center;
+    background: $color-background;
 }
 
 .w100px {

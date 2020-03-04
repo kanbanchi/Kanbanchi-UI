@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Icon, Tooltip } from '../../src/ui';
+import { Button, Icon, Tooltip, Switch } from '../../src/ui';
 import * as Kui from '../../src/ui';
 
 const Story = () => {
+    const [isPortal, setPortal] = React.useState(false);
+
     const longTooltip = `
         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -17,13 +19,19 @@ const Story = () => {
     // `;
     return (
         <div className="page">
+            <section style={{width: '160px'}}>
+                <Switch checked={isPortal} onChange={() => setPortal(!isPortal)}>
+                    Portal
+                </Switch>
+            </section>
+
              <section>
                 <h2>Tooltip</h2>
 
                 <div className="stories-tooltips">
 
                     <div className="stories-tooltips__left">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Direction down-right"
                             direction="down-right"
                         >
@@ -36,7 +44,7 @@ const Story = () => {
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__center">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Direction down"
                             direction="down"
                         >
@@ -46,7 +54,7 @@ const Story = () => {
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__right">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Direction down-left"
                             direction="down-left"
                         >
@@ -60,7 +68,7 @@ const Story = () => {
                     </div>
 
                     <div className="stories-tooltips__left">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Direction right"
                             direction="right"
                         >
@@ -71,7 +79,7 @@ const Story = () => {
                     </div>
                     <div className="stories-tooltips__center"></div>
                     <div className="stories-tooltips__right">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Direction left"
                             direction="left"
                         >
@@ -82,7 +90,7 @@ const Story = () => {
                     </div>
 
                     <div className="stories-tooltips__left">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Direction up-right"
                             direction="up-right"
                         >
@@ -96,7 +104,7 @@ const Story = () => {
 
                     </div>
                     <div className="stories-tooltips__center">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Direction up (default)"
                         >
                             <Button variant="icon">
@@ -105,7 +113,7 @@ const Story = () => {
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__right">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Error Direction up-left"
                             direction="up-left"
                             state="error"
@@ -117,7 +125,7 @@ const Story = () => {
                     </div>
 
                     <div className="stories-tooltips__left">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Lorem ipsum dolor sit amet"
                         >
                             <Button variant="icon">
@@ -130,7 +138,7 @@ const Story = () => {
 
                     </div>
                     <div className="stories-tooltips__center">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Lorem ipsum dolor sit amet"
                         >
                             <Button variant="icon">
@@ -139,9 +147,10 @@ const Story = () => {
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__right">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value="Error Lorem ipsum dolor sit amet"
                             state="error"
+                            delayClose={100000}
                         >
                             <Button variant="icon">
                                 <Icon xlink="help" size={24} />
@@ -158,7 +167,7 @@ const Story = () => {
                 <div className="stories-tooltips">
 
                     <div className="stories-tooltips__left">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="down-right"
                         >
@@ -171,7 +180,7 @@ const Story = () => {
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__center">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="down"
                         >
@@ -181,7 +190,7 @@ const Story = () => {
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__right">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="down-left"
                         >
@@ -195,7 +204,7 @@ const Story = () => {
                     </div>
 
                     <div className="stories-tooltips__left">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="right"
                         >
@@ -206,7 +215,7 @@ const Story = () => {
                     </div>
                     <div className="stories-tooltips__center"></div>
                     <div className="stories-tooltips__right">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="left"
                         >
@@ -217,7 +226,7 @@ const Story = () => {
                     </div>
 
                     <div className="stories-tooltips__left">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="up-right"
                         >
@@ -231,7 +240,7 @@ const Story = () => {
 
                     </div>
                     <div className="stories-tooltips__center">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                         >
                             <Button variant="icon">
@@ -240,7 +249,7 @@ const Story = () => {
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__right">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="up-left"
                             state="error"
@@ -252,9 +261,10 @@ const Story = () => {
                     </div>
 
                     <div className="stories-tooltips__left">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="up"
+                            delayClose={100000}
                         >
                             <Button variant="icon">
                                 <Icon xlink="project-template" size={24} />
@@ -266,10 +276,11 @@ const Story = () => {
 
                     </div>
                     <div className="stories-tooltips__right">
-                        <Tooltip
+                        <Tooltip isPortal={isPortal}
                             value={longTooltip}
                             direction="up"
                             state="error"
+                            delayClose={100000}
                         >
                             <Button variant="icon">
                                 <Icon xlink="help" size={24} />
@@ -280,13 +291,13 @@ const Story = () => {
 
                 <br/>
 
-                Check empty Tooltip: <Tooltip value={'1'}></Tooltip>
+                Check empty Tooltip: <Tooltip isPortal={isPortal} value={'1'}></Tooltip>
             </section>
 
             <section>
                 <h2>delayClose</h2>
 
-                <Tooltip
+                <Tooltip isPortal={isPortal}
                     direction={'right'}
                     value="Connect related tasks <br/>to switch between them <br/>quickly."
                     link={<a href="#1" onClick={()=>console.log('You learned more')}>Click to learn more</a>}
@@ -301,7 +312,7 @@ const Story = () => {
                     </Button>
                 </Tooltip>
 
-                <Tooltip
+                <Tooltip isPortal={isPortal}
                     direction={'right'}
                     value="Connect related tasks <br/>to switch between them <br/>quickly."
                     footer={<Button color={'white'} onClick={()=>console.log('Ok')}>Ok</Button>}
@@ -323,7 +334,7 @@ const Story = () => {
 
                 <h2>ButtonDropdown</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.ButtonDropdown>
@@ -340,7 +351,7 @@ const Story = () => {
             <section>
                 <h2>ButtonsGroup</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.ButtonsGroup>
@@ -353,7 +364,7 @@ const Story = () => {
             <section>
                 <h2>ButtonsSegmented</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.ButtonsSegmented
@@ -369,7 +380,7 @@ const Story = () => {
             <section>
                 <h2>Checkbox</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Checkbox onChange={()=>{}}>
@@ -381,7 +392,7 @@ const Story = () => {
             <section>
                 <h2>Datepicker</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Datepicker
@@ -393,7 +404,7 @@ const Story = () => {
             <section>
                 <h2>Icon</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Icon xlink="help" />
@@ -403,7 +414,7 @@ const Story = () => {
             <section>
                 <h2>Input</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Input />
@@ -413,7 +424,7 @@ const Story = () => {
             <section>
                 <h2>Label</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Label>
@@ -425,7 +436,7 @@ const Story = () => {
             <section>
                 <h2>Radio</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Radio onChange={()=>{}}>
@@ -438,7 +449,7 @@ const Story = () => {
             <section>
                 <h2>Search</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Search onChange={()=>{}}>
@@ -453,7 +464,7 @@ const Story = () => {
             <section>
                 <h2>Select</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Select onChange={()=>{}}>
@@ -468,7 +479,7 @@ const Story = () => {
             <section>
                 <h2>Switch</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Switch
@@ -482,7 +493,7 @@ const Story = () => {
             <section>
                 <h2>Tabs</h2>
 
-<Tooltip
+<Tooltip isPortal={isPortal}
     value="Test"
 >
     <Kui.Tabs
