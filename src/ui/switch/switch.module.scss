@@ -7,6 +7,7 @@
         position: relative;
         display: block;
         min-height: $google-spacing * 3;
+        padding-top: $google-spacing * .25;
         padding-right: $google-spacing * 6;
         font-size: $milli-size;
         user-select: none;

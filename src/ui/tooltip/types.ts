@@ -27,8 +27,12 @@ export interface ITooltipStateProps {
     direction?: TTooltipDirection;
     footer?: any;
     header?: string;
+    isPortal?: boolean;
     link?: any;
     maxWidth?: IMediaScreens;
+    portalId?: string;
+    portalSelector?: string;
+    selector?: string;
     show?: boolean;
     state?: 'error' | 'success';
     translate?: {

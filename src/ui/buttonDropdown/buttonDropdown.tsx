@@ -32,15 +32,15 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [isOpenedHook, setIsOpenedHook] = React.useState(opened);
-    const uniqueClass = React.useRef('kui-button-dropdown--' + uuidv4());
+    const [uniqueClass, setUniqueClass] = React.useState('kui-button-dropdown--' + uuidv4());
     const buttonRef = React.useRef(null);
     const dropdownRef = React.useRef(null);
     const dropdownContainerRef = React.useRef(null);
-    const dropdownUniqueClass = (dropdownClassName) ? dropdownClassName + '--' + uniqueClass.current : null;
+    const dropdownUniqueClass = (dropdownClassName) ? dropdownClassName + '--' + uniqueClass : null;
 
     className = ClassNames(
         'kui-button-dropdown',
-        uniqueClass.current,
+        uniqueClass,
         (disabled) ? 'kui-button-dropdown--disabled' : null,
         (isOpenedHook) ? 'kui-button-dropdown--opened' : null,
         (portal) ? 'kui-button-dropdown--portal' : null,
@@ -117,7 +117,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         e.persist();
-        const checkClasses = [uniqueClass.current];
+        const checkClasses = [uniqueClass];
         if (dropdownUniqueClass) {
             checkClasses.push(dropdownUniqueClass);
         }
@@ -126,7 +126,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
             checkClasses
         );
         if (
-            classes.includes(uniqueClass.current) ||
+            classes.includes(uniqueClass) ||
             dropdownUniqueClass && classes.includes(dropdownUniqueClass)
         ) {
             if (e.target) {

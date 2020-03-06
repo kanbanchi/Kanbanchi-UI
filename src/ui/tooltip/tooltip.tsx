@@ -4,6 +4,7 @@ import { ClassNames, getScrollClient } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal } from './../portal/portal';
 import { Icon } from '../icon/icon';
+import { v4 as uuidv4 } from 'uuid';
 
 export const Tooltip: React.SFC<ITooltipInheritedProps> =
 (props) => {
@@ -16,9 +17,13 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         delayClose,
         direction,
         footer,
+        isPortal,
         header,
         link,
         maxWidth,
+        portalId,
+        portalSelector,
+        selector,
         show,
         state,
         translate,
@@ -33,6 +38,12 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const WAIT_BEFORE_HIDE = delayClose || 100;
     const MOUSE_DEBOUNCE = 200;
     const SCREEN_PADDING = 8; // px
+    const SCROLL_CLIENT_NULL = {
+        scrollLeft: 0,
+        scrollTop: 0,
+        clientLeft: 0,
+        clientTop: 0
+    };
 
     className = ClassNames(
         'kui-tooltip',
@@ -41,6 +52,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         (state) ? 'kui-tooltip--state_' + state : null,
         (!value) ? 'kui-tooltip--empty' : null,
         (link) ? 'kui-tooltip--link' : null,
+        (footer) ? 'kui-tooltip--footer' : null,
         (arrow) ? 'kui-tooltip--arrow-' + arrow : null,
         (arrowTranslate) ? 'kui-tooltip--arrowTranslate' : null,
         className
@@ -54,6 +66,15 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     let [touchHook, setTouchHook] = React.useState(null);
     let [mouseHook, setMouseHook] = React.useState(null);
     let [isMouseOverTooltip, setMouseOverTooltip] = React.useState(false);
+    const [uniqueClass, setUniqueClass] = React.useState('kui-tooltip--' + uuidv4());
+    const portalRef = React.useRef(null);
+
+    const classNamePortal = isPortal ? '' : 'kui-portal--tooltip-in-target';
+
+    if (!isPortal) {
+        if (!portalId) portalId = 'kui-portal--' + uniqueClass;
+        if (!portalSelector) portalSelector = '.' + uniqueClass;
+    }
 
     const isHint = variant === 'hint';
     let html = [];
@@ -91,23 +112,39 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         targetObj?: any,
         count?: number
     ) => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
         if (!targetObj) {
             if (!targetsRefs[index]) return;
-            let target = targetsRefs[index].current || targetsRefs[index];
-            let targetRect = target.getBoundingClientRect();
-            const scrollClient = getScrollClient();
+            const target = targetsRefs[index].current || targetsRefs[index];
+            if (!target || !target.getBoundingClientRect) return;
+            const targetRect = target.getBoundingClientRect();
+            const scrollClient = isPortal ? getScrollClient() : SCROLL_CLIENT_NULL;
 
             targetObj = {
                 x: targetRect.left + scrollClient.scrollLeft - scrollClient.clientLeft,
                 y: targetRect.top + scrollClient.scrollTop - scrollClient.clientTop,
-                width: targetRect.width || targetRect.right - targetRect.left,
-                height: targetRect.height || targetRect.bottom - targetRect.top,
+                width: targetRect.right - targetRect.left,
+                height: targetRect.bottom - targetRect.top,
             };
-            targetObj.right = targetObj.x + targetObj.width;
-            targetObj.bottom = targetObj.y + targetObj.height;
+            if (isPortal) {
+                targetObj.xPortal = targetObj.x;
+                targetObj.yPortal = targetObj.y;
+                targetObj.right = targetObj.xPortal + targetObj.width; // from left side of window to right side of target
+                targetObj.bottom = targetObj.yPortal + targetObj.height;
+                targetObj.rightPortal = w - targetObj.right; // from right side of target to right side of window
+                targetObj.bottomPortal = h - targetObj.bottom;
+            } else {
+                targetObj.xPortal = 0;
+                targetObj.yPortal = 0;
+                targetObj.right = targetObj.width;
+                targetObj.bottom = targetObj.height;
+                targetObj.rightPortal = 0;
+                targetObj.bottomPortal = 0;
+            }
         }
 
-        let item = itemRef.current;
+        const item = itemRef.current;
         if (!item) {
             return setTimeout(() => { // tooltip didn't mount, wait
                 calcTooltip(index, targetObj);
@@ -126,75 +163,97 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 let itemWidth = itemRect.width || itemRect.right - itemRect.left;
                 if (itemWidth !== itemObj.width) {
                     if (!count) {
-                        item.style.width = itemWidth + 'px';
+                        item.style.maxWidth = itemWidth + 'px';
                         calcTooltip(index, targetObj, 1);
                     }
                 }
             }
         }, 100);
 
-        let top;
+        const portal = isPortal ? item : portalRef.current;
+
+        let top, bottom;
         if (direction.includes('down')) {
             top = targetObj.bottom;
 
         } else if (direction.includes('up')) {
-            top = targetObj.y - itemObj.height;
+            bottom = targetObj.bottomPortal + targetObj.height;
 
         } else if (direction === 'left' || direction === 'right') {
-            top = targetObj.y + targetObj.height / 2;
+            top = targetObj.yPortal + (targetObj.height - itemObj.height) / 2;
         }
+
         if (top !== undefined) {
             if (translate && translate.top) {
                 top += translate.top;
             }
-            item.style.top = top + 'px';
+            portal.style.top = top + 'px';
+        } else if (bottom !== undefined) {
+            if (translate && translate.bottom) {
+                bottom += translate.bottom;
+            }
+            portal.style.bottom = bottom + 'px';
         }
 
-        let left;
+        let left, right;
         if (direction === 'down' || direction === 'up') {
-            left = targetObj.x + targetObj.width / 2;
+            left = targetObj.xPortal + (targetObj.width - itemObj.width) / 2;
 
         } else if (direction.includes('-left')) {
-            left = targetObj.right - itemObj.width;
+            right = targetObj.rightPortal;
 
         } else if (direction.includes('-right')) {
-            left = targetObj.x;
+            left = targetObj.xPortal;
 
         } else if (direction === 'left') {
-            left = targetObj.x - itemObj.width;
+            right = targetObj.rightPortal + targetObj.width;
 
         } else if (direction === 'right') {
             left = targetObj.right;
 
         }
-        let right;
+
+        let maxWidth = 0;
         if (left !== undefined) {
             if (translate && translate.left) {
                 left += translate.left;
-                if (left < 0) left = SCREEN_PADDING;
             }
-            if (direction === 'down' || direction === 'up') {
-                if (left < itemObj.width / 2) { // fix if translateX(-50%) goes out window
-                    left = itemObj.width / 2;
-                } else if (left + itemObj.width / 2 > window.innerWidth) {
-                    left = undefined;
-                    right = -itemObj.width / 2;
+            if (targetObj.x - targetObj.xPortal + left < SCREEN_PADDING) {
+                left = SCREEN_PADDING - targetObj.x + targetObj.xPortal;
+            }
+            if (isHint && (direction === 'down' || direction === 'up')) {
+                if (isPortal) {
+                    maxWidth = (targetObj.x + targetObj.width / 2 - left) * 2;
+                    if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
+                        maxWidth = (w - SCREEN_PADDING * 4 - targetObj.x - targetObj.width / 2) * 2;
+                        left = (targetObj.x - maxWidth) / 2;
+                    }
+                } else {
+                    maxWidth = targetObj.width - left * 2;
+                    if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
+                        maxWidth = (w - SCREEN_PADDING * 4 - targetObj.x - targetObj.width / 2) * 2;
+                        left = (targetObj.width - maxWidth) / 2;
+                    }
                 }
             } else {
-                if (left < 0) {
-                    left = SCREEN_PADDING;
-                    item.style.width = (targetObj.x - left) + 'px';
-                } else if (left + itemObj.width > window.innerWidth) {
-                    item.style.width = (window.innerWidth - left) + 'px';
-                }
+                maxWidth = w - targetObj.x + targetObj.xPortal - left - SCREEN_PADDING * 4;
             }
-        }
-        if (left !== undefined) {
-            item.style.left = left + 'px';
+            portal.style.left = left + 'px';
         } else if (right !== undefined) {
-            item.style.left = 'unset';
-            item.style.right = right + 'px';
+            if (translate && translate.right) {
+                right += translate.right;
+            }
+            if (isPortal && right < SCREEN_PADDING) {
+                right = SCREEN_PADDING;
+            } else if (!isPortal && w - targetObj.x - targetObj.width - right < SCREEN_PADDING) {
+                right = w - targetObj.x - targetObj.width - SCREEN_PADDING;
+            }
+            portal.style.right = right + 'px';
+            maxWidth = targetObj.x + targetObj.width - right - SCREEN_PADDING * 4;
         }
+
+        item.style.maxWidth = maxWidth + 'px';
+        if (!isPortal) portal.style.maxWidth = maxWidth + 'px';
     };
 
     const toggleTooltip = (show: boolean = false) => {
@@ -414,11 +473,15 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const targets = React.Children.map(childrenArray, (child: any, index) => {
         if (!child) return null;
 
+        let childClassName = child.props.className;
+        if (!isPortal) childClassName += ' tooltip-target ' + uniqueClass;
+
         const targetOnMouse = isHint ? {} : {
             onMouseEnter: (event: React.MouseEvent) => toggleMouse(event, index, true),
             onMouseLeave: (event: React.MouseEvent) => toggleMouse(event, index, false),
             onMouseMove: (event: React.MouseEvent) => mouseMove(event),
         };
+
         return React.cloneElement(child, {
             ref: (node: any) => {
                 targetsRefs[index] = node;
@@ -429,6 +492,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                     ref.current = node;
                 }
             },
+            className: childClassName,
             title: null,
             tooltip: null,
             onBlur: (event: React.FocusEvent) => {
@@ -454,6 +518,14 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     }, [show]);
 
     React.useEffect(() => {
+        if (!children && selector) {
+            const target = targetsRefs[0].current = document.querySelector(selector);
+            if (target && !isPortal) {
+                target.classList.add('kui-tooltip-target');
+                target.classList.add(uniqueClass);
+            }
+        }
+
         return () => {
             clearTimeout(mouseHook);
             clearTimeout(touchHook);
@@ -470,14 +542,23 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         <>
             {targets}
             {isMount &&
-                <Portal>
+                <Portal
+                    className={!isPortal && !isShown ? 'kui-portal--tooltip-hidden' : ''}
+                    id={portalId}
+                    selector={portalSelector}
+                >
                     <div
-                        className={classHook}
-                        ref={itemRef}
-                        onClick={onClickTooltip}
-                        {...tooltipOnMouse}
+                        className={classNamePortal}
+                        ref={portalRef}
                     >
-                        {html}
+                        <div
+                            className={classHook}
+                            ref={itemRef}
+                            onClick={onClickTooltip}
+                            {...tooltipOnMouse}
+                        >
+                            {html}
+                        </div>
                     </div>
                 </Portal>
             }
@@ -487,6 +568,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
 Tooltip.defaultProps = {
     direction: 'up',
+    isPortal: true,
     maxWidth: null,
     state: null,
     value: null,
