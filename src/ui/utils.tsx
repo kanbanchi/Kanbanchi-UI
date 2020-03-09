@@ -45,6 +45,31 @@ export const getParentsClasses = (
     return classes;
 }
 
+export const getHasScroll = (
+    element: HTMLElement
+): {
+    x: boolean;
+    y: boolean;
+} => {
+    let target = element;
+    let x = false;
+    let y = false;
+    while (
+        !x && !y &&
+        target &&
+        target.parentNode
+    ) {
+        if (target.scrollWidth > target.clientWidth) {
+            x = true;
+        }
+        if (target.scrollHeight > target.clientHeight) {
+            y = true;
+        }
+        target = target.parentNode as HTMLElement;
+    }
+    return {x, y};
+}
+
 export const isMobileDevice = () =>
     (typeof window.orientation !== 'undefined')
     || (navigator.userAgent.indexOf('IEMobile') !== -1);
