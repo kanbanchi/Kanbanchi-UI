@@ -25,7 +25,7 @@ const Story = () => {
                 </Switch>
             </section>
 
-             <section>
+            <div>
                 <h2>Tooltip</h2>
 
                 <div className="stories-tooltips">
@@ -147,19 +147,26 @@ const Story = () => {
                         </Tooltip>
                     </div>
                     <div className="stories-tooltips__right">
-                        <Tooltip isPortal={isPortal}
-                            value="Error Lorem ipsum dolor sit amet"
-                            state="error"
+                        <Tooltip
+                            //isPortal={isPortal}
+                            value="Help"
                             delayClose={100000}
                         >
-                            <Button variant="icon">
+                            <Button
+                                style={{
+                                    width: '56px',
+                                    height: '56px',
+                                    background: 'blue'
+                                }}
+                                variant="icon"
+                            >
                                 <Icon xlink="help" size={24} />
                             </Button>
                         </Tooltip>
                     </div>
                 </div>
 
-            </section>
+            </div>
 
             <section>
                 <h2>Long Tooltip</h2>

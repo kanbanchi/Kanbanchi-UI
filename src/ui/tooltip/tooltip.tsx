@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
-import { ClassNames, getScrollClient } from '../utils';
+import { ClassNames, getScrollClient, getHasScroll } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal } from './../portal/portal';
 import { Icon } from '../icon/icon';
@@ -171,6 +171,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         }, 100);
 
         const portal = isPortal ? item : portalRef.current;
+        const hasScroll = getHasScroll(item);
+        const SCREEN_PADDING_WITH_SCROLLBAR = hasScroll.y ? SCREEN_PADDING * 4 : SCREEN_PADDING;
 
         let top, bottom;
         if (direction.includes('down')) {
@@ -225,18 +227,18 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 if (isPortal) {
                     maxWidth = (targetObj.x + targetObj.width / 2 - left) * 2;
                     if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
-                        maxWidth = (w - SCREEN_PADDING * 4 - targetObj.x - targetObj.width / 2) * 2;
+                        maxWidth = (w - SCREEN_PADDING_WITH_SCROLLBAR - targetObj.x - targetObj.width / 2) * 2;
                         left = (targetObj.x - maxWidth) / 2;
                     }
                 } else {
                     maxWidth = targetObj.width - left * 2;
                     if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
-                        maxWidth = (w - SCREEN_PADDING * 4 - targetObj.x - targetObj.width / 2) * 2;
+                        maxWidth = (w - SCREEN_PADDING_WITH_SCROLLBAR - targetObj.x - targetObj.width / 2) * 2;
                         left = (targetObj.width - maxWidth) / 2;
                     }
                 }
             } else {
-                maxWidth = w - targetObj.x + targetObj.xPortal - left - SCREEN_PADDING * 4;
+                maxWidth = w - targetObj.x + targetObj.xPortal - left - SCREEN_PADDING_WITH_SCROLLBAR;
             }
             portal.style.left = left + 'px';
         } else if (right !== undefined) {
@@ -249,7 +251,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 right = w - targetObj.x - targetObj.width - SCREEN_PADDING;
             }
             portal.style.right = right + 'px';
-            maxWidth = targetObj.x + targetObj.width - right - SCREEN_PADDING * 4;
+            maxWidth = targetObj.x + targetObj.width - right - SCREEN_PADDING_WITH_SCROLLBAR;
         }
 
         item.style.maxWidth = maxWidth + 'px';
