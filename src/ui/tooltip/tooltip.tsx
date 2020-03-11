@@ -439,6 +439,14 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     };
 
     const toggleShow = (show: boolean = false) => {
+        if (!targetsRefs[0].current && !children && selector) {
+            const target = targetsRefs[0].current = document.querySelector(selector);
+            if (target && !isPortal) {
+                target.classList.add('kui-tooltip-target');
+                target.classList.add(uniqueClass);
+            }
+        }
+
         if (!show) {
             clearTimeout(timeoutHook);
             const timeout = window.setTimeout(() => {
@@ -520,14 +528,6 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     }, [show]);
 
     React.useEffect(() => {
-        if (!children && selector) {
-            const target = targetsRefs[0].current = document.querySelector(selector);
-            if (target && !isPortal) {
-                target.classList.add('kui-tooltip-target');
-                target.classList.add(uniqueClass);
-            }
-        }
-
         return () => {
             clearTimeout(mouseHook);
             clearTimeout(touchHook);
