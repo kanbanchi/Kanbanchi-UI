@@ -97,6 +97,8 @@ React.forwardRef((props, ref) => {
     }
 
     const clearInput = (e: React.MouseEvent<HTMLElement>) => {
+        if (disabled) return;
+
         e.preventDefault();
         setIsFilled(false);
         textarea.current.value = '';
