@@ -40,6 +40,28 @@ const Story = () => {
                     onChange={val=>setDate01(val)}
                 />
 
+                <br/><br/>
+
+                <Datepicker
+                    disabled={true}
+                    editable={true}
+                    selected={null}
+                    label="Disabled"
+                    onChange={()=>{}}
+                />
+
+                <br/><br/>
+
+                <Datepicker
+                    disabled={true}
+                    editable={true}
+                    selected={date01}
+                    label="Disabled"
+                    onChange={()=>{}}
+                />
+
+                <br/><br/>
+
             </section>
         </div>
     );

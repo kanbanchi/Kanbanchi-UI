@@ -22,17 +22,17 @@
     }
     &:hover,
     .kui-input.react-datepicker-ignore-onclickoutside {
-        .kui-input {
+        .kui-input:not(.kui-input--disabled) {
             &__item,
             &__item[readonly] {
                 color: $color-base;
                 box-shadow: $shadow-hover;
                 border-color: calc-color(fade, $color-base, 0);
             }
-        }
 
-        .kui-input__icon:not(.kui-input__icon--clear) {
-            color: $color-base;
+            .kui-input__icon:not(.kui-input__icon--clear) {
+                color: $color-base;
+            }
         }
     }
 

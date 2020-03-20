@@ -119,9 +119,13 @@
                 opacity: 1;
             }
 
-            &:hover {
+            .kui-input:not(.kui-input--disabled) &:hover {
                 color: $color-base;
             }
+        }
+
+        .kui-input--disabled & {
+            cursor: default;
         }
     }
 
@@ -154,7 +158,7 @@
 
         &:hover,
         &.kui-input--focus {
-            .kui-input__item {
+            .kui-input__item:not(:disabled) {
                 box-shadow: $shadow-hover;
                 border-color: transparent;
             }

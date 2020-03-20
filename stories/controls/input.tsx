@@ -47,6 +47,15 @@ const Story = () => {
                     </Button>
                 </ButtonsGroup>
 
+                <br/>
+
+                <Input
+                    autosize={false}
+                    disabled={true}
+                    variant="search"
+                    value={'Disabled'}
+                />
+
             </section>
 
             <section className="section-grey section-form-min">
