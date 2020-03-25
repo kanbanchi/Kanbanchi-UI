@@ -17,6 +17,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         delayClose,
         direction,
         footer,
+        isHidable,
         isPortal,
         header,
         link,
@@ -33,6 +34,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         onHide,
     } = props;
 
+    if (isHidable === undefined) isHidable = true;
     const WAIT_BEFORE_SHOW = delay || 300;
     const WAIT_ANIMATION = 200;
     const WAIT_BEFORE_HIDE = delayClose || 100;
@@ -400,7 +402,9 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         if (target.tagName.toLocaleLowerCase() !== 'a') {
             clickLink();
         }
-        onMouseLeaveTooltip();
+        if (isHidable) {
+            onMouseLeaveTooltip();
+        }
     };
 
     const onClickTarget = () => {
@@ -423,7 +427,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                     setTimeoutHook(timeoutHook);
                 }
             }
-        } else {
+        } else if (isHidable) {
             closeTooltip();
         }
     };
@@ -506,7 +510,9 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             title: null,
             tooltip: null,
             onBlur: (event: React.FocusEvent) => {
-                closeTooltip();
+                if (isHidable) {
+                    closeTooltip();
+                }
                 if (child.props.onBlur) child.props.onBlur(event);
             },
             onClick: (event: React.MouseEvent) => {

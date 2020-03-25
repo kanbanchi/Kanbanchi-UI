@@ -27,6 +27,7 @@ export interface ITooltipStateProps {
     direction?: TTooltipDirection;
     footer?: any;
     header?: string;
+    isHidable?: boolean;
     isPortal?: boolean;
     link?: any;
     maxWidth?: IMediaScreens;
