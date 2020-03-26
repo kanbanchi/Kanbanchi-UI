@@ -4,6 +4,9 @@ import { Button, Icon, Hint, Switch } from '../../src/ui';
 
 const Story = () => {
     const [isPortal, setPortal] = React.useState(false);
+    const valueFlag = React.useRef(false);
+
+    const shortTooltip = `Lorem ipsum dolor sit amet.`;
 
     const longTooltip = `
         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -12,6 +15,27 @@ const Story = () => {
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     `;
+
+    const [value, setValue] = React.useState(shortTooltip);
+    const [show, setShow] = React.useState(true);
+
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            setShow(false);
+            setTimeout(() => {
+                if (valueFlag.current) {
+                    setValue(shortTooltip);
+                } else {
+                    setValue(longTooltip);
+                }
+                valueFlag.current = !valueFlag.current;
+                setShow(true);
+            }, 500);
+        }, 2000);
+        return () => {
+            clearInterval(interval);
+        }
+    }, []);
 
     return (
         <div className="page">
@@ -30,7 +54,7 @@ const Story = () => {
                         <Hint
                             arrow={'up'}
                             arrowTranslate={{left: 28}}
-                            value="Direction down-right"
+                            value={'down-right'}
                             direction="down-right"
                             isPortal={isPortal}
                         >
@@ -45,8 +69,8 @@ const Story = () => {
                     <div className="stories-tooltips__center">
                         <Hint
                             arrow={'up'}
-                            header="Header"
-                            value="Direction down"
+                            value={value}
+                            show={show}
                             direction="down"
                             isPortal={isPortal}
                         >

@@ -526,7 +526,9 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     });
 
     React.useEffect(() => {
-        setClassHook(className);
+        if (!value) {
+            setClassHook(className);
+        }
     }, [value]);
 
     React.useEffect(() => {
