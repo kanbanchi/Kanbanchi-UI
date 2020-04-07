@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Icon } from '../../ui';
 import '../../../src/ui/selectListItem/selectListItem.module.scss';
 
+export const SELECT_LIST_ITEM_CLASS = 'kui-select-list-item';
+
 export const SelectListItem: React.SFC<ISelectListItemInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
@@ -18,8 +20,8 @@ React.forwardRef((props, ref) => {
         listEl = null;
 
     className = ClassNames(
-        'kui-select-list-item',
-        (list) ? 'kui-select-list-item--with-list' : null,
+        SELECT_LIST_ITEM_CLASS,
+        (list) ? SELECT_LIST_ITEM_CLASS + '--with-list' : null,
         className
     );
 

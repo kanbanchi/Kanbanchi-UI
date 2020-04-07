@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ButtonsGroup, Select, SelectList, SelectListItem, Search } from '../../src/ui';
+import { ButtonsGroup, Select, SelectList, SelectListItem, Search, Checkbox, Userpic } from '../../src/ui';
 import { ISelectActiveInheritedProps } from '../../src/ui/select/types';
 
 const Story = () => {
@@ -11,6 +11,7 @@ const Story = () => {
     const [val03, setVal03] = React.useState(0);
     const [val04, setVal04] = React.useState(null);
     const [val05, setVal05] = React.useState(0);
+    const [val06, setVal06] = React.useState(false);
 
     const [searchOptions, setSearchOptions] = React.useState([
         {active: false, value: 0, text: 'Option 0'},
@@ -52,6 +53,33 @@ const Story = () => {
         <div className="page">
             <section className="section-form-min">
                 <h2>Select</h2>
+
+                <Search
+                    editable={true}
+                    label="Multiple if click on checkbox"
+                    multiple={true}
+                    single={true}
+                    onChange={i => console.log(i)}
+                >
+                    <SelectList>
+                        <Checkbox
+                            checked={val06}
+                            color="light"
+                            value="1"
+                            onChange={()=>setVal06(!val06)}
+                        >
+                            <SelectListItem>
+                                <Userpic
+                                    size={24}
+                                    src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
+                                />
+                                User01
+                            </SelectListItem>
+                        </Checkbox>
+                    </SelectList>
+                </Search>
+
+                <br/><br/><br/>
 
                 <Search
                     editable={true}

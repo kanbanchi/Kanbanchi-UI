@@ -4,6 +4,8 @@ import { ClassNames, ClassList } from '../utils';
 import { Divider } from '../../ui';
 import '../../../src/ui/selectList/selectList.module.scss';
 
+export const SELECT_LIST_CLASS = 'kui-select-list';
+
 export const SelectList: React.SFC<ISelectListInheritedProps> =
 (props) => {
     let {
@@ -19,9 +21,9 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
         items;
 
     className = ClassNames(
-        'kui-select-list',
-        (!fixActive) ? 'kui-select-list--noactive' : null,
-        (loading) ? 'kui-select-list--loading' : null,
+        SELECT_LIST_CLASS,
+        (!fixActive) ? SELECT_LIST_CLASS + '--noactive' : null,
+        (loading) ? SELECT_LIST_CLASS + '--loading' : null,
         className
     );
 

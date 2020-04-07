@@ -37,6 +37,7 @@ export interface ISelectOwnProps {
     editable?: boolean;
     multiple?: boolean;
     ref?: any;
+    single?: boolean; // for multiple click on option name closes select
 }
 
 export interface ISelectProps extends
