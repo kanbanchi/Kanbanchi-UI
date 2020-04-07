@@ -38,4 +38,13 @@
     &__list {
         color: calc-color(fade, $color-base, 60);
     }
+
+    .kui-select--single & {
+        display: inline-flex;
+        @include transition;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
 }

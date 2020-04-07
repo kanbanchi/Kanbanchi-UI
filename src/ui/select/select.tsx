@@ -7,6 +7,8 @@ import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
 import { ISelectListInheritedProps } from '../selectList/types';
 import { v4 as uuidv4 } from 'uuid';
+import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
+import { SELECT_LIST_CLASS } from '../selectList/selectList';
 
 export const Select: React.SFC<ISelectInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -22,6 +24,7 @@ React.forwardRef((props, ref) => {
         multiple,
         opened,
         options,
+        single,
         variant,
         onBlur,
         onChange,
@@ -57,6 +60,7 @@ React.forwardRef((props, ref) => {
         (disabled) ? 'kui-select--disabled' : null,
         (isOpenedHook) ? 'kui-select--opened' : null,
         (variant) ? 'kui-select--variant_' + variant : null,
+        (single) ? 'kui-select--single' : null,
         className
     );
 
@@ -307,8 +311,25 @@ React.forwardRef((props, ref) => {
         setValue(list[activeNew].props.children);
     }
 
+    const onDropdownClick = (e: React.SyntheticEvent) => {
+        const classes = getParentsClasses(
+            e.target as HTMLElement,
+            [SELECT_LIST_ITEM_CLASS, SELECT_LIST_CLASS]
+        );
+        if (classes.includes(SELECT_LIST_ITEM_CLASS)) {
+            closeDropdown();
+        }
+    }
+
     React.useEffect(() => {
         onActiveChanged();
+        if (multiple && single) {
+            dropdownRef.current.addEventListener('click', onDropdownClick);
+        }
+
+        return () => {
+            dropdownRef.current.removeEventListener('click', onDropdownClick);
+        }
     }, []);
 
     React.useEffect(() => {
@@ -357,6 +378,7 @@ Select.defaultProps = {
     multiple: false,
     opened: false,
     options: null,
+    single: false,
     onChange: (): void => undefined,
     onEnter: () => undefined,
     onOpen: () => undefined,
