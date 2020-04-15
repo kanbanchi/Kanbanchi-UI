@@ -119,7 +119,6 @@ React.forwardRef((props, ref) => {
                 dropdownContainerRef.current.style.bottom = (window.innerHeight - el.top) + 'px';
             } else {
                 dropdownContainerRef.current.style.top = portalScrollTop + el.bottom + 'px';
-                console.log(dropdownContainerRef.current.style.top);
                 dropdownRef.current.style.maxHeight = window.innerHeight - el.bottom - SCREEN_PADDING * 2 + 'px';
             }
         }
