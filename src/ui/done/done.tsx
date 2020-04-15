@@ -9,6 +9,8 @@ React.forwardRef((props, ref) => {
     let {
         className,
         percent,
+        titleDone,
+        titleNotDone,
         ...attributes
     } = props;
 
@@ -25,7 +27,11 @@ React.forwardRef((props, ref) => {
         'done';
 
     let percentText = percent + '%';
-    if (percent === null || percent >= 100) percentText = 'Done';
+    if (percent === null) {
+        percentText = titleNotDone;
+    } else if (percent >= 100){
+        percentText = titleDone;
+    }
 
     return (
         <div
@@ -59,6 +65,8 @@ React.forwardRef((props, ref) => {
 
 Done.defaultProps = {
     percent: null,
+    titleDone: 'Card is done',
+    titleNotDone: 'Mark as done'
 }
 
 Done.displayName = 'Done';
