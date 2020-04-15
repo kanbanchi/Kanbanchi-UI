@@ -1,3 +1,5 @@
+export const SCREEN_PADDING = 8; // px
+
 export const ClassNames = (...props: any) =>
     props
         .map((i: string | Array<string>) => (Array.isArray(i)) ? i.join(' ') : i)
@@ -102,4 +104,19 @@ export const getScrollClient = () => {
         clientLeft: docEl.clientLeft || body.clientLeft || 0,
         clientTop: docEl.clientTop || body.clientTop || 0
     }
+}
+
+export const getParentsScrollTop = (
+    element: HTMLElement
+): number => {
+    let target = element;
+    while (
+        target &&
+        target.parentNode
+    ) {
+        if (target.scrollTop) return target.scrollTop;
+
+        target = target.parentNode as HTMLElement;
+    }
+    return 0;
 }
