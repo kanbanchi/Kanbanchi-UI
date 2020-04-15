@@ -6,7 +6,11 @@ export type IDropdownDirectionVertical =
 export interface IDropdownPublicProps {
     directionVertical?: IDropdownDirectionVertical;
     directionHorizontal?: 'left' | 'right';
+    dropdownClassName?: string;
     opened?: boolean;
+    portal?: boolean;
+    portalId?: string;
+    portalSelector?: string;
 }
 
 export interface IDropdownOwnProps {

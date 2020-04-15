@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
-import { ClassNames, getScrollClient, getHasScroll } from '../utils';
+import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal } from './../portal/portal';
 import { Icon } from '../icon/icon';
@@ -39,7 +39,6 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const WAIT_ANIMATION = 200;
     const WAIT_BEFORE_HIDE = delayClose || 100;
     const MOUSE_DEBOUNCE = 200;
-    const SCREEN_PADDING = 8; // px
     const SCROLL_CLIENT_NULL = {
         scrollLeft: 0,
         scrollTop: 0,
