@@ -1,7 +1,7 @@
 @import '../../assets/sass/index.scss';
 .kui-done {
     position: relative;
-    width: $google-spacing * 11;
+    min-width: $google-spacing * 11;
     height: $google-spacing * 4;
     font-size: $milli-size;
     font-weight: bold;
@@ -9,6 +9,7 @@
     border-radius: $google-spacing * 4;
     overflow: hidden;
     cursor: pointer;
+    display: inline-flex;
 
     &.kui-done--empty {
         background: calc-color(fade, $color-base, 0);
@@ -62,6 +63,7 @@
     align-items: center;
     padding: 0 $google-spacing 0 $google-spacing / 2;
     height: 100%;
+    width: 100%;
 }
 
 .kui-done__icon {
@@ -72,4 +74,5 @@
 .kui-done__percent {
     flex: 1 1 100%;
     text-align: center;
+    padding: 0 $google-spacing;
 }
