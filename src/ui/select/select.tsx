@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
-import { IDropdownDirectionVertical } from './../dropdown/types';
-import { ClassNames, userAgentsInclude, getParentsClasses } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -9,6 +8,7 @@ import { ISelectListInheritedProps } from '../selectList/types';
 import { v4 as uuidv4 } from 'uuid';
 import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
+import { Portal } from '../portal/portal';
 
 export const Select: React.SFC<ISelectInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -20,10 +20,14 @@ React.forwardRef((props, ref) => {
         directionVertical,
         directionHorizontal,
         disabled,
+        dropdownClassName,
         editable,
         multiple,
         opened,
         options,
+        portal,
+        portalId,
+        portalSelector,
         single,
         variant,
         onBlur,
@@ -41,8 +45,9 @@ React.forwardRef((props, ref) => {
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
 
+    const WAIT_ANIMATION = 300;
     const [activeHook, setActiveHook] = React.useState(active);
-    const [directionHook, setDirectionHook] = React.useState(directionVertical);
+    let [directionHook, setDirectionHook] = React.useState(directionVertical);
     const [initialValue, setInitialValue] = React.useState('');
     const [valueHook, setValueHook] = React.useState('');
     const [isFocusedHook, setIsFocusedHook] = React.useState(opened);
@@ -51,6 +56,7 @@ React.forwardRef((props, ref) => {
     const [uniqueClass, setUniqueClass] = React.useState('kui-select--' + uuidv4());
 
     const dropdownRef = React.useRef(null);
+    const dropdownContainerRef = React.useRef(null);
     const inputRef = React.useRef(null);
     const selectRef = React.useRef(null);
 
@@ -87,10 +93,36 @@ React.forwardRef((props, ref) => {
     }
 
     const calcDirection = () => {
-        if (directionVertical !== 'auto') return;
         let el = selectRef.current.getBoundingClientRect();
-        let dir: IDropdownDirectionVertical = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
-        setDirectionHook(dir);
+        if (directionVertical === 'auto') {
+            directionHook = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+            setDirectionHook(directionHook);
+        }
+        if (portal) {
+            const portalEl = portalSelector
+                ? document.querySelector(portalSelector) as HTMLElement
+                : document.body;
+            const portalScrollTop = getParentsScrollTop(portalEl);
+
+            dropdownContainerRef.current.style.top = 'unset';
+            dropdownContainerRef.current.style.bottom = 'unset';
+            dropdownContainerRef.current.style.left = 'unset';
+            dropdownContainerRef.current.style.right = 'unset';
+
+            if (directionHorizontal === 'left') {
+                dropdownContainerRef.current.style.left = el.left + 'px';
+            } else {
+                dropdownContainerRef.current.style.right = (window.innerWidth - el.right) + 'px';
+            }
+
+            if (directionHook === 'up') {
+                dropdownContainerRef.current.style.bottom = (window.innerHeight - el.top) + 'px';
+            } else {
+                dropdownContainerRef.current.style.top = portalScrollTop + el.bottom + 'px';
+                console.log(dropdownContainerRef.current.style.top);
+                dropdownRef.current.style.maxHeight = window.innerHeight - el.bottom - SCREEN_PADDING * 2 + 'px';
+            }
+        }
     }
 
     const dropdownAnimationEnd = () => {
@@ -326,6 +358,12 @@ React.forwardRef((props, ref) => {
         if (multiple && single) {
             dropdownRef.current.addEventListener('click', onDropdownClick);
         }
+        dropdownContainerRef.current = dropdownRef.current.parentNode;
+        if (isOpenedHook) {
+            setTimeout(() => {
+                calcDirection();
+            }, WAIT_ANIMATION);
+        }
 
         return () => {
             dropdownRef.current.removeEventListener('click', onDropdownClick);
@@ -343,6 +381,35 @@ React.forwardRef((props, ref) => {
         }
     }, [active, options]);
 
+    const classNameDropdown = ClassNames(
+        'kui-select__dropdown',
+        dropdownClassName
+    );
+
+    const dropdownElement = (
+        <Dropdown
+            className={classNameDropdown}
+            directionVertical={directionHook}
+            directionHorizontal={directionHorizontal}
+            opened={isOpenedHook}
+            ref={dropdownRef}
+            tabIndex={-1}
+            portal={portal}
+            onAnimationEnd={dropdownAnimationEnd}
+        >
+            {dropdownBody}
+        </Dropdown>
+    );
+
+    const dropdownPortal = portal
+        ? <Portal
+            id={portalId}
+            selector={portalSelector}
+        >
+            {dropdownElement}
+        </Portal>
+        : dropdownElement;
+
     return (
         <div className={className} ref={selectRef}>
             <Input
@@ -354,16 +421,7 @@ React.forwardRef((props, ref) => {
                 variant={variant}
                 {...attributes}
             />
-            <Dropdown
-                directionVertical={directionHook}
-                directionHorizontal={directionHorizontal}
-                opened={isOpenedHook}
-                ref={dropdownRef}
-                tabIndex={-1}
-                onAnimationEnd={dropdownAnimationEnd}
-            >
-                {dropdownBody}
-            </Dropdown>
+            {dropdownPortal}
         </div>
     );
 });

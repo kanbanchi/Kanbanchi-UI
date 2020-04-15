@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IButtonDropdownInheritedProps } from './types';
-import { ClassNames, userAgentsInclude, getParentsClasses } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
@@ -36,7 +36,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
     const buttonRef = React.useRef(null);
     const dropdownRef = React.useRef(null);
     const dropdownContainerRef = React.useRef(null);
-    const dropdownUniqueClass = (dropdownClassName) ? dropdownClassName + '--' + uniqueClass : null;
+    const dropdownUniqueClass = 'kui-button-dropdown__dropdown--' + uniqueClass;
 
     className = ClassNames(
         'kui-button-dropdown',
@@ -49,41 +49,38 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 
     const classNameDropdown = ClassNames(
         'kui-button-dropdown__dropdown',
-        (portal) ? 'kui-dropdown--portal' : null,
-        (dropdownClassName) ? dropdownClassName + ' ' + dropdownUniqueClass : null
+        (dropdownClassName) ? dropdownClassName : null,
+        dropdownUniqueClass
     );
 
     const calcDirection = () => {
         const button = buttonRef.current.getBoundingClientRect();
+        if (directionVertical === 'auto') {
+            directionHook = (button.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+            setDirectionHook(directionHook);
+        }
         if (portal) {
+            const portalEl = portalSelector
+                ? document.querySelector(portalSelector) as HTMLElement
+                : document.body;
+            const portalScrollTop = getParentsScrollTop(portalEl);
+
             dropdownContainerRef.current.style.top = 'unset';
             dropdownContainerRef.current.style.bottom = 'unset';
             dropdownContainerRef.current.style.left = 'unset';
             dropdownContainerRef.current.style.right = 'unset';
+
             if (directionHorizontal === 'left') {
                 dropdownContainerRef.current.style.left = button.left + 'px';
             } else {
                 dropdownContainerRef.current.style.right = (window.innerWidth - button.right) + 'px';
             }
-        }
-        if (directionVertical !== 'auto') {
-            if (portal) {
-                if (directionVertical === 'up') {
-                    dropdownContainerRef.current.style.bottom = (window.innerHeight - button.top) + 'px';
-                } else {
-                    dropdownContainerRef.current.style.top = button.bottom + 'px';
-                }
-            }
-            return;
-        }
 
-        directionHook = (button.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
-        setDirectionHook(directionHook);
-        if (portal) {
             if (directionHook === 'up') {
                 dropdownContainerRef.current.style.bottom = (window.innerHeight - button.top) + 'px';
             } else {
-                dropdownContainerRef.current.style.top = button.bottom + 'px';
+                dropdownContainerRef.current.style.top = portalScrollTop + button.bottom + 'px';
+                dropdownRef.current.style.maxHeight = window.innerHeight - button.bottom - SCREEN_PADDING * 2 + 'px';
             }
         }
     }
@@ -117,17 +114,13 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         e.persist();
-        const checkClasses = [uniqueClass];
-        if (dropdownUniqueClass) {
-            checkClasses.push(dropdownUniqueClass);
-        }
         const classes = getParentsClasses(
             e.relatedTarget as HTMLElement,
-            checkClasses
+            [ uniqueClass,  dropdownUniqueClass ]
         );
         if (
             classes.includes(uniqueClass) ||
-            dropdownUniqueClass && classes.includes(dropdownUniqueClass)
+            classes.includes(dropdownUniqueClass)
         ) {
             if (e.target) {
                 e.target.focus({ preventScroll: true });
@@ -175,6 +168,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         directionVertical={directionHook}
         directionHorizontal={directionHorizontal}
         opened={isOpenedHook}
+        portal={portal}
         ref={dropdownRef}
         tabIndex={-1}
         onAnimationEnd={dropdownAnimationEnd}
