@@ -16,6 +16,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         disabled,
         dropdownClassName,
         multiple,
+        notBlurClasses,
         opened,
         portal,
         portalId,
@@ -112,23 +113,29 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         if (onClick) onClick(e);
     }
 
+    notBlurClasses = [
+        ...notBlurClasses,
+        uniqueClass,
+        dropdownUniqueClass,
+    ];
+
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         e.persist();
         const classes = getParentsClasses(
             e.relatedTarget as HTMLElement,
-            [ uniqueClass,  dropdownUniqueClass ]
+            notBlurClasses
         );
-        if (
-            classes.includes(uniqueClass) ||
-            classes.includes(dropdownUniqueClass)
-        ) {
-            if (e.target) {
-                e.target.focus({ preventScroll: true });
+        for (let i = 0; i<notBlurClasses.length; i++) {
+            if (classes.includes(notBlurClasses[i])) {
+                if (e.target) {
+                    e.target.focus({ preventScroll: true });
+                }
+                return;
             }
-        } else {
-            setIsOpened(false);
-            if (onBlur) onBlur(e);
         }
+
+        setIsOpened(false);
+        if (onBlur) onBlur(e);
     }
 
     const onChange = (e: any) => {
@@ -196,7 +203,8 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 ButtonDropdown.defaultProps = {
     directionVertical: 'auto',
     directionHorizontal: 'left',
-    disabled: false
+    disabled: false,
+    notBlurClasses: []
 };
 
 ButtonDropdown.displayName = 'ButtonDropdown';

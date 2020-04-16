@@ -7,6 +7,7 @@ export interface IDropdownPublicProps {
     directionVertical?: IDropdownDirectionVertical;
     directionHorizontal?: 'left' | 'right';
     dropdownClassName?: string;
+    notBlurClasses?: string[];
     opened?: boolean;
     portal?: boolean;
     portalId?: string;
