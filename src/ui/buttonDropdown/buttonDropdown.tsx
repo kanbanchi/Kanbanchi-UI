@@ -127,9 +127,6 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         );
         for (let i = 0; i<notBlurClasses.length; i++) {
             if (classes.includes(notBlurClasses[i])) {
-                if (e.target) {
-                    e.target.focus({ preventScroll: true });
-                }
                 return;
             }
         }
@@ -179,6 +176,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
         ref={dropdownRef}
         tabIndex={-1}
         onAnimationEnd={dropdownAnimationEnd}
+        onBlur={attributes.onBlur}
     >
         {list}
     </Dropdown>);
