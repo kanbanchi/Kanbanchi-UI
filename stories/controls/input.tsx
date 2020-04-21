@@ -21,7 +21,10 @@ const Story = () => {
                     ref={inputRef}
                     variant="search"
                     value={val2}
-                    onChange={(e: any) => setVal2(e.target.value)}
+                    onChange={(e: any) => {
+                        setVal2(e.target.value);
+                        console.log(inputRef.current.getInput());
+                    }}
                     onFocus={(e: any) => {
                         if (e) console.log(e.target.value)
                     }}
