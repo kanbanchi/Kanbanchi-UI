@@ -190,6 +190,9 @@ React.forwardRef((props, ref) => {
             textarea.current.focus();
             attributes.onFocus(e);
         },
+        getInput() {
+            return textarea.current;
+        },
     }));
 
     let inputElement = (

@@ -150,6 +150,64 @@ const Story = () => {
             </section>
 
             <section className="section-form-min">
+                <h2>Checkboxes</h2>
+
+                <ButtonDropdown
+                    className="stories-dropdown-100"
+                    disabled={isDisabled}
+                    multiple={true}
+                    opened={isActive}
+                >
+                    <Button variant="add">
+                        Add smth
+                    </Button>
+                    <SelectList fixActive={false}
+                    >
+                        <Checkbox
+                            color={'light'}
+                            checked={val01}
+                            onChange={()=>setVal01(!val01)}
+                        >
+                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </Checkbox>
+                        <Checkbox
+                            color={'light'}
+                            checked={val02}
+                            onChange={()=>setVal02(!val02)}
+                        >
+                            Check 02
+                        </Checkbox><Checkbox
+                            color={'light'}
+                            checked={val01}
+                            onChange={()=>setVal01(!val01)}
+                        >
+                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </Checkbox>
+                        <Checkbox
+                            color={'light'}
+                            checked={val02}
+                            onChange={()=>setVal02(!val02)}
+                        >
+                            Check 02
+                        </Checkbox><Checkbox
+                            color={'light'}
+                            checked={val01}
+                            onChange={()=>setVal01(!val01)}
+                        >
+                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </Checkbox>
+                        <Checkbox
+                            color={'light'}
+                            checked={val02}
+                            onChange={()=>setVal02(!val02)}
+                        >
+                            Check 02
+                        </Checkbox>
+                    </SelectList>
+                </ButtonDropdown>
+            </section>
+
+            <section className="section-form-min">
                 <h2>Checkboxes + hover</h2>
 
                 <ButtonDropdown
