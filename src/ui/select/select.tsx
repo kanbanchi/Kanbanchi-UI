@@ -59,6 +59,7 @@ React.forwardRef((props, ref) => {
     const dropdownContainerRef = React.useRef(null);
     const inputRef = React.useRef(null);
     const selectRef = React.useRef(null);
+    const timer = React.useRef(null);
 
     className = ClassNames(
         'kui-select',
@@ -151,6 +152,7 @@ React.forwardRef((props, ref) => {
 
     attributes.onChange = (e: any) => {
         if (e.item) { // list item clicked
+            inputRef.current.setFocus(); // return focus to input before dropdown hide
             if (multiple) {
                 if (onChange) onChange(e);
             } else {
@@ -315,7 +317,9 @@ React.forwardRef((props, ref) => {
                 if (activeNew >= list.length) activeNew = 0;
             }
             setActiveHook(activeNew);
-            setValue(list[activeNew].props.children);
+            if (!isSearch) {
+                setValue(list[activeNew].props.children);
+            }
             return;
         }
         if (!isOpenedHook) return openDropdown();
@@ -359,13 +363,14 @@ React.forwardRef((props, ref) => {
         }
         dropdownContainerRef.current = dropdownRef.current.parentNode;
         if (isOpenedHook) {
-            setTimeout(() => {
+            timer.current = setTimeout(() => {
                 calcDirection();
             }, WAIT_ANIMATION);
         }
 
         return () => {
             dropdownRef.current.removeEventListener('click', onDropdownClick);
+            if (timer.current) clearTimeout(timer.current);
         }
     }, []);
 
