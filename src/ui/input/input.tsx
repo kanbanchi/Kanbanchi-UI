@@ -34,8 +34,8 @@ React.forwardRef((props, ref) => {
 
     const [isFilled, setIsFilled] = React.useState(!!value);
     const [isFocusedHook, setIsFocusedHook] = React.useState(false);
-    const [timeoutHook, setTimeoutHook] = React.useState(null);
     const textarea = React.useRef(null);
+    const timer = React.useRef(null);
 
     className = ClassNames(
         'kui-input',
@@ -73,23 +73,23 @@ React.forwardRef((props, ref) => {
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         if (e) e.persist();
-        setTimeoutHook(setTimeout(() => {
+        timer.current = setTimeout(() => {
             if (isFocusedHook) {
                 setIsFocusedHook(false);
                 if (onBlur) onBlur(e);
             }
-        }, 200));
+        }, 200);
     }
 
     attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         if (e) e.persist();
-        clearTimeout(timeoutHook);
-        setTimeoutHook(setTimeout(() => {
+        if (timer.current) clearTimeout(timer.current);
+        timer.current = setTimeout(() => {
             if (!isFocusedHook) {
                 setIsFocusedHook(true);
                 if (onFocus) onFocus(e);
             }
-        }, 100));
+        }, 100);
     }
 
     if (label) {
@@ -164,12 +164,6 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        return () => {
-            clearTimeout(timeoutHook);
-        };
-    }, [timeoutHook]);
-
-    React.useEffect(() => {
         textarea.current.value = value;
         setIsFilled(!!value);
         autosizeLibray.default.update(textarea.current);
@@ -177,6 +171,10 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (autosize) autosizeLibray.default(textarea.current);
+
+        return () => {
+            if (timer.current) clearTimeout(timer.current);
+        };
     }, []);
 
     React.useImperativeHandle(ref, () => ({
