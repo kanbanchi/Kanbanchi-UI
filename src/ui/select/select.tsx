@@ -341,9 +341,18 @@ React.forwardRef((props, ref) => {
 
     const onActiveChanged = (activeNew: number = null) => {
         if (activeNew === null) activeNew = active;
-        if (activeNew === null || !list.length || !list[activeNew]) return;
-        setInitialValue(list[activeNew].props.children);
-        setValue(list[activeNew].props.children);
+        if (
+            activeNew === null ||
+            !list.length ||
+            !list[activeNew]
+        ) return;
+        if (
+            list[activeNew].props &&
+            list[activeNew].props.children
+        ) {
+            setInitialValue(list[activeNew].props.children);
+            setValue(list[activeNew].props.children);
+        }
     }
 
     const onDropdownClick = (e: React.SyntheticEvent) => {
