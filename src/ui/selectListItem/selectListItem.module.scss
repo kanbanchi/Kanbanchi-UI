@@ -15,7 +15,7 @@
         }
         &--title {
             flex: 1 1 100%;
-            max-width: calc(100% - #{$google-spacing * 3});
+            max-width: calc(100% - #{$google-spacing * 2.5});
             color: $color-base;
 
             .kui-select-list-item--with-list & {
@@ -41,6 +41,7 @@
 
     .kui-select--single & {
         display: inline-flex;
+        max-width: 100%;
         @include transition;
 
         &:hover {
