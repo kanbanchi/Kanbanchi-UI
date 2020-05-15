@@ -69,6 +69,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     let [isMouseOverTooltip, setMouseOverTooltip] = React.useState(false);
     const [uniqueClass, setUniqueClass] = React.useState('kui-tooltip--' + uuidv4());
     const portalRef = React.useRef(null);
+    const timer = React.useRef(null);
 
     const classNamePortal = isPortal ? '' : 'kui-portal--tooltip-in-target';
 
@@ -147,9 +148,10 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
         const item = itemRef.current;
         if (!item) {
-            return setTimeout(() => { // tooltip didn't mount, wait
+            timer.current = setTimeout(() => { // tooltip didn't mount, wait
                 calcTooltip(index, targetObj);
             }, WAIT_ANIMATION);
+            return;
         };
         let itemRect = item.getBoundingClientRect();
         let itemObj: any = {
@@ -157,7 +159,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             height: itemRect.height || itemRect.bottom - itemRect.top
         };
 
-        setTimeout(() => { // long tooltip auto fit to window
+        timer.current = setTimeout(() => { // long tooltip auto fit to window
             let item = itemRef.current;
             if (item) {
                 let itemRect = item.getBoundingClientRect();
@@ -539,6 +541,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             clearTimeout(mouseHook);
             clearTimeout(touchHook);
             clearTimeout(timeoutHook);
+            if (timer.current) clearTimeout(timer.current);
         }
     }, []);
 

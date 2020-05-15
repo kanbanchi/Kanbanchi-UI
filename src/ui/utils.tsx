@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 export const SCREEN_PADDING = 8; // px
 
 export const ClassNames = (...props: any) =>
@@ -119,4 +121,24 @@ export const getParentsScrollTop = (
         target = target.parentNode as HTMLElement;
     }
     return 0;
+}
+
+export const useCombinedRefs = (
+    ...refs: any[]
+): React.MutableRefObject<any> => {
+    const targetRef = React.useRef();
+
+    React.useEffect(() => {
+        refs.forEach(ref => {
+            if (!ref) return
+
+            if (typeof ref === 'function') {
+                ref(targetRef.current)
+            } else {
+                ref.current = targetRef.current
+            }
+        })
+    }, [refs]);
+
+    return targetRef;
 }
