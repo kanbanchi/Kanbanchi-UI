@@ -44,7 +44,10 @@ const Story = () => {
                     <h2>ButtonDropdown</h2>
 
                     <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
-                        <ButtonDropdown>
+                        <ButtonDropdown
+                            onClose={()=>console.log('onClose')}
+                            onOpen={()=>console.log('onOpen')}
+                        >
                             <Button variant="add">
                                 Add smth
                             </Button>

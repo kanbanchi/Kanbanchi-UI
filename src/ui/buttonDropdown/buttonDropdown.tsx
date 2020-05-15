@@ -101,7 +101,7 @@ React.forwardRef((props, ref) => {
         setIsOpenedHook(isOpenedHook);
         if (isOpened && onOpen) {
             onOpen();
-        } else if (!isOpened && onClose) {
+        } else if (isOpened === false && onClose) {
             onClose();
         }
     }
