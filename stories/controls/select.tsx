@@ -46,8 +46,11 @@ const Story = () => {
                 searchOptions.filter(option => option.text.includes(value)) :
                 searchOptions;
             setSearchFiltered([...filteredOptions]);
+            console.log(selectRef.current);
         }
     }
+
+    const selectRef = React.useRef(null);
 
     return (
         <div className="page">
@@ -87,6 +90,7 @@ const Story = () => {
                     multiple={true}
                     options={searchFiltered}
                     onChange={filterSearchOptions}
+                    ref={selectRef}
                 >
                 </Search>
 

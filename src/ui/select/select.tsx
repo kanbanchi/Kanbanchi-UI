@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
-import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -59,6 +59,7 @@ React.forwardRef((props, ref) => {
     const dropdownContainerRef = React.useRef(null);
     const inputRef = React.useRef(null);
     const selectRef = React.useRef(null);
+    const combinedRef =  useCombinedRefs(ref, selectRef);
     const timer = React.useRef(null);
 
     className = ClassNames(
@@ -94,7 +95,7 @@ React.forwardRef((props, ref) => {
     }
 
     const calcDirection = () => {
-        let el = selectRef.current.getBoundingClientRect();
+        let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
             directionHook = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
             setDirectionHook(directionHook);
@@ -424,7 +425,7 @@ React.forwardRef((props, ref) => {
         : dropdownElement;
 
     return (
-        <div className={className} ref={selectRef}>
+        <div className={className} ref={combinedRef}>
             <Input
                 autosize={false}
                 color={color as any}
