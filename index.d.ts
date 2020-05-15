@@ -83,7 +83,8 @@ import { IDoneInheritedProps } from './src/ui/done/types';
 export declare const Done: React.SFC<IDoneInheritedProps>;
 export {
     IDoneProps,
-    IDoneInheritedProps
+    IDoneInheritedProps,
+    TDoneSize,
 } from './src/ui/done/types';
 
 import { IFilesInheritedProps } from './src/ui/files/types';

@@ -9,6 +9,7 @@ React.forwardRef((props, ref) => {
     let {
         className,
         percent,
+        size,
         titleDone,
         titleNotDone,
         ...attributes
@@ -16,15 +17,15 @@ React.forwardRef((props, ref) => {
 
     className = ClassNames(
         'kui-done',
+        (size) ? 'kui-done--size_' + size : null,
         (percent === null) ? 'kui-done--empty' : null,
-        (percent && percent > 50) ? 'kui-done--inverse' : null,
         (percent && percent >= 100) ? 'kui-done--done' : null,
         className
     );
 
     const icon = (percent === null) ?
         'radio-button-off' :
-        'done';
+        'done-circle';
 
     let percentText = percent + '%';
     if (percent === null) {
@@ -65,6 +66,7 @@ React.forwardRef((props, ref) => {
 
 Done.defaultProps = {
     percent: null,
+    size: 'large',
     titleDone: 'Card is done',
     titleNotDone: 'Mark as done'
 }

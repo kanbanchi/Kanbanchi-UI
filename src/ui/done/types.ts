@@ -1,5 +1,8 @@
+export type TDoneSize = 'large' | 'small';
+
 export interface IDoneProps {
     percent: number;
+    size?: TDoneSize;
     titleDone?: string;
     titleNotDone?: string;
 }

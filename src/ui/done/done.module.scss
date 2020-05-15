@@ -5,33 +5,15 @@
     height: $google-spacing * 4;
     font-size: $milli-size;
     font-weight: bold;
-    background: calc-color(fade, $color-base, 20);
+    color: $color-green;
+    background: $color-white;
     border-radius: $google-spacing * 4;
+    border: 2px solid calc-color(fade, $color-green, 30);
     overflow: hidden;
     cursor: pointer;
     display: inline-flex;
 
     &.kui-done--empty {
-        background: calc-color(fade, $color-base, 0);
-        border: 2px dashed calc-color(fade, $color-base, 20);
-
-        .kui-done__bg {
-            display: none;
-        }
-
-        .kui-done__icon {
-            color: calc-color(fade, $color-base, 30);
-        }
-    }
-    
-    &.kui-done--inverse {
-        .kui-done__percent {
-            color: $color-white;
-        }
-    }
-
-    &.kui-done--done {
-        background: calc-color(fade, $color-base, 0);
         border: 2px solid calc-color(fade, $color-base, 20);
 
         .kui-done__bg {
@@ -39,11 +21,25 @@
         }
 
         .kui-done__icon {
-            color: $color-green;
+            color: calc-color(fade, $color-base, 30);
+            transform: scale(.9);
         }
 
         .kui-done__percent {
             color: $color-base;
+        }
+    }
+
+    &.kui-done--size_small {
+        min-width: $google-spacing * 9;
+        height: $google-spacing * 3;
+
+        .kui-done__items {
+            padding-left: 0;
+        }
+
+        .kui-done__percent {
+            padding: 0;
         }
     }
 }
@@ -53,7 +49,7 @@
     left: 0;
     top: 0;
     height: 100%;
-    background: calc-color(fade, $color-base, 30);
+    background: calc-color(fade, $color-green, 30);
 }
 
 .kui-done__items {
@@ -61,18 +57,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 $google-spacing 0 $google-spacing / 2;
+    padding: 0 $google-spacing * .25;
     height: 100%;
     width: 100%;
 }
 
 .kui-done__icon {
     flex: 0 0 $google-spacing * 3;
-    color: $color-white;
+    color: $color-green;
 }
 
 .kui-done__percent {
     flex: 1 1 100%;
-    text-align: center;
     padding: 0 $google-spacing;
+    text-align: center;
+    line-height: $google-spacing;
 }

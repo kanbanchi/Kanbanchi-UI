@@ -36,6 +36,38 @@ const Story = () => {
                     percent={100}
                 />
 
+                <br /><br />
+
+                <h2>Small</h2>
+
+                <Done
+                    percent={null}
+                    size={'small'}
+                    titleNotDone={'Done'}
+                />
+
+                <br /><br />
+
+                <Done
+                    percent={0}
+                    size={'small'}
+                />
+
+                <br /><br />
+
+                <Done
+                    percent={51}
+                    size={'small'}
+                />
+
+                <br /><br />
+
+                <Done
+                    percent={100}
+                    size={'small'}
+                    titleDone={'Done'}
+                />
+
             </section>
 
             <section className="section-grey">
@@ -60,6 +92,38 @@ const Story = () => {
 
                 <Done
                     percent={100}
+                />
+
+                <br /><br />
+
+                <h2>Small</h2>
+
+                <Done
+                    percent={null}
+                    size={'small'}
+                    titleNotDone={'Done'}
+                />
+
+                <br /><br />
+
+                <Done
+                    percent={0}
+                    size={'small'}
+                />
+
+                <br /><br />
+
+                <Done
+                    percent={51}
+                    size={'small'}
+                />
+
+                <br /><br />
+
+                <Done
+                    percent={100}
+                    size={'small'}
+                    titleDone={'Done'}
                 />
 
             </section>
