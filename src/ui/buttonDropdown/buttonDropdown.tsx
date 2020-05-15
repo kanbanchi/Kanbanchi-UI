@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { IButtonDropdownInheritedProps } from './types';
-import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import { Portal } from '../portal/portal';
 
 export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
-(props) => {
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -34,7 +34,8 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [uniqueClass, setUniqueClass] = React.useState('kui-button-dropdown--' + uuidv4());
-    const buttonRef = React.useRef(null);
+    const _buttonRef = React.useRef(null);
+    const buttonRef =  useCombinedRefs(ref, _buttonRef);
     const dropdownRef = React.useRef(null);
     const dropdownContainerRef = React.useRef(null);
     const dropdownUniqueClass = 'kui-button-dropdown__dropdown--' + uniqueClass;
@@ -196,7 +197,7 @@ export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
             {dropdownPortal}
         </div>
     );
-};
+});
 
 ButtonDropdown.defaultProps = {
     directionVertical: 'auto',
