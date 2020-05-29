@@ -8,13 +8,25 @@
     color: $color-green;
     background: $color-white;
     border-radius: $google-spacing * 4;
-    border: 2px solid calc-color(fade, $color-green, 30);
     overflow: hidden;
     cursor: pointer;
     display: inline-flex;
 
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: $google-spacing * 4;
+        border: 2px solid calc-color(tint, $color-green, 30);
+    }
+
     &.kui-done--empty {
-        border: 2px solid calc-color(fade, $color-base, 20);
+        &:after {
+            border-color: calc-color(fade, $color-base, 20);
+        }
 
         .kui-done__bg {
             display: none;
@@ -39,7 +51,7 @@
         }
 
         .kui-done__percent {
-            padding: 0;
+            padding: 0 $google-spacing * .5 0 0;
         }
     }
 }
@@ -69,7 +81,7 @@
 
 .kui-done__percent {
     flex: 1 1 100%;
-    padding: 0 $google-spacing;
+    margin-top: $google-spacing * .25;
+    padding: 0 $google-spacing 0 $google-spacing * .75;
     text-align: center;
-    line-height: $google-spacing;
 }
