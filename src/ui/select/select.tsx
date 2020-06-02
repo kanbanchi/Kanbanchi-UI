@@ -22,6 +22,7 @@ React.forwardRef((props, ref) => {
         disabled,
         dropdownClassName,
         editable,
+        isFitWindow,
         multiple,
         opened,
         options,
@@ -121,8 +122,13 @@ React.forwardRef((props, ref) => {
                 dropdownContainerRef.current.style.bottom = (window.innerHeight - el.top) + 'px';
             } else {
                 dropdownContainerRef.current.style.top = portalScrollTop + el.bottom + 'px';
-                dropdownRef.current.style.maxHeight = window.innerHeight - el.bottom - SCREEN_PADDING * 2 + 'px';
             }
+        }
+        if (portal || isFitWindow) {
+            const maxHeight = directionHook === 'up'
+                ? el.top
+                : window.innerHeight - el.bottom;
+            dropdownRef.current.style.maxHeight = maxHeight - SCREEN_PADDING * 2 + 'px';
         }
     }
 
