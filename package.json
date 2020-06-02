@@ -1,6 +1,6 @@
 {
   "name": "kui",
-  "version": "0.12.21",
+  "version": "0.12.22",
   "private": true,
   "main": "index.js",
   "repository": {
