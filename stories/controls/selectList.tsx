@@ -29,6 +29,8 @@ const Story = () => {
 
                 <br/><br/>
 
+                <h2>iconSize 24</h2>
+
                 <SelectList fixActive={false}>
                     <SelectListItem
                         icon={'copy'}
