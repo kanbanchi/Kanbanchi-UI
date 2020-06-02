@@ -48,4 +48,18 @@
             font-weight: bold;
         }
     }
+
+    &.kui-select-list-item--icon-size_24 {
+        .kui-select-list-item__col--icon {
+            flex: 0 0 $google-spacing * 3;
+        }
+
+        .kui-select-list-item__col--title {
+            max-width: calc(100% - #{$google-spacing * 3.5});
+
+            .kui-select-list-item--with-list & {
+                max-width: calc(60% - #{$google-spacing * 4});
+            }
+        }
+    }
 }

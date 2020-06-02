@@ -1,5 +1,6 @@
 export interface ISelectListItemProps {
     icon?: string;
+    iconSize?: 16 | 24;
     list?: string;
     value?: string;
 }
