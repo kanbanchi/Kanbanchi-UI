@@ -78,6 +78,49 @@ const Story = () => {
                 <h2>Input</h2>
 
                 <Input
+                    label={'Default'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Default'}
+                    value={'Default filled'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Readonly'}
+                    readOnly={true}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Readonly'}
+                    readOnly={true}
+                    value="Readonly filled"
+                />
+
+                <br/>
+
+                <Input
+                    label={'Disabled'}
+                    disabled={true}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Disabled'}
+                    disabled={true}
+                    value="Disabled filled"
+                />
+
+                <br/>
+
+                <Input
                     label="Error"
                     placeholder="Hover for tooltip"
                     state={tt ? 'error' : null}
@@ -128,10 +171,6 @@ const Story = () => {
 
                 <br/>
 
-                <Input value="Without label & readonly" readOnly={true} />
-
-                <br/>
-
                 <Input
                     label="No resize"
                     autosize={false}
@@ -140,8 +179,6 @@ const Story = () => {
                 />
 
                 <br/>
-
-                <Input label="Label" placeholder="Disabled" disabled />
 
             </section>
 

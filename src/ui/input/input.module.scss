@@ -57,14 +57,33 @@
         }
 
         &:disabled {
-            opacity: .5;
-            border-color: calc-color(fade, $color-base, 20);
+            color: calc-color(fade, $color-base, 60);
             cursor: default;
         }
 
         &:invalid {
             box-shadow: none;
         }
+    }
+
+    &__item[readonly],
+    &__item:disabled {
+        color: $color-base;
+        border-color: calc-color(fade, $color-base, 0);
+        background: $color-light-background;
+
+        .kui-input--filled &,
+        &:hover,
+        &:focus {
+            border-color: calc-color(fade, $color-base, 0);
+            background: $color-light-background;
+            box-shadow: none;
+        }
+    }
+    
+    &__item:disabled {
+        color: calc-color(fade, $color-base, 60);
+        cursor: default;
     }
 
     &.kui-input--state_error {
