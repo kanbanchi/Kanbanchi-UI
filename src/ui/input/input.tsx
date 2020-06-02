@@ -16,6 +16,7 @@ React.forwardRef((props, ref) => {
         icon,
         isClearable,
         label,
+        readOnly,
         searchPlaceholder,
         state,
         tooltip,
@@ -45,15 +46,13 @@ React.forwardRef((props, ref) => {
         (isFilled) ? 'kui-input--filled' : null,
         (isFocusedHook) ? 'kui-input--focus' : null,
         (!autosize) ? 'kui-input--noresize' : null,
+        (readOnly) ? 'kui-input--readonly' : null,
         (state) ? 'kui-input--state_' + state : null,
         (variant) ? 'kui-input--variant_' + variant : null,
         className
     );
 
     attributes.className = 'kui-input__item';
-    if (disabled) {
-        attributes.disabled = true;
-    }
 
     attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsFilled(!!e.target.value);
@@ -196,6 +195,8 @@ React.forwardRef((props, ref) => {
 
     let inputElement = (
         <Tag
+            disabled={disabled}
+            readOnly={readOnly}
             rows={1}
             ref={textarea}
             {...attributes}

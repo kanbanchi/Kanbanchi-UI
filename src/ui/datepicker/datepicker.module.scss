@@ -26,9 +26,10 @@
         }
     }
     
+    &:not(.kui-datepicker--readonly):not(.kui-datepicker--disabled):hover,
     .kui-input.react-datepicker-ignore-onclickoutside { // opened
         .kui-input__item {
-            border-color: calc-color(fade, $color-base, 0);
+            border-color: calc-color(fade, $color-base, 0) !important;
             background: $color-white;
             box-shadow: $shadow-hover;
         }

@@ -30,6 +30,7 @@ React.forwardRef((props, ref) => {
 
     className = ClassNames(
         'kui-datepicker',
+        (disabled) ? 'kui-datepicker--disabled' : null,
         (readOnly) ? 'kui-datepicker--readonly' : null,
         className
     );

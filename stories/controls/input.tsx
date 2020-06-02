@@ -92,6 +92,23 @@ const Story = () => {
                 <br/>
 
                 <Input
+                    label={'Default'}
+                    value={'Variant arrow'}
+                    variant={'arrow'}
+                />
+
+                <br/>
+
+                <Input
+                    icon="deadline"
+                    label={'Default'}
+                    value={'Variant withicon'}
+                    variant={'withicon'}
+                />
+
+                <br/>
+
+                <Input
                     label={'Readonly'}
                     readOnly={true}
                 />
@@ -107,6 +124,25 @@ const Story = () => {
                 <br/>
 
                 <Input
+                    label={'Readonly'}
+                    readOnly
+                    value={'Variant arrow'}
+                    variant={'arrow'}
+                />
+
+                <br/>
+
+                <Input
+                    icon="deadline"
+                    label={'Readonly'}
+                    readOnly
+                    value={'Variant withicon'}
+                    variant={'withicon'}
+                />
+
+                <br/>
+
+                <Input
                     label={'Disabled'}
                     disabled={true}
                 />
@@ -117,6 +153,25 @@ const Story = () => {
                     label={'Disabled'}
                     disabled={true}
                     value="Disabled filled"
+                />
+
+                <br/>
+
+                <Input
+                    label={'Disabled'}
+                    disabled
+                    value={'Variant arrow'}
+                    variant={'arrow'}
+                />
+
+                <br/>
+
+                <Input
+                    icon="deadline"
+                    label={'Disabled'}
+                    disabled
+                    value={'Variant withicon'}
+                    variant={'withicon'}
                 />
 
                 <br/>
