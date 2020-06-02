@@ -22,12 +22,14 @@ React.forwardRef((props, ref) => {
         disabled,
         dropdownClassName,
         editable,
+        isFitWindow,
         multiple,
         opened,
         options,
         portal,
         portalId,
         portalSelector,
+        readOnly,
         single,
         variant,
         onBlur,
@@ -69,6 +71,7 @@ React.forwardRef((props, ref) => {
         (isOpenedHook) ? 'kui-select--opened' : null,
         (variant) ? 'kui-select--variant_' + variant : null,
         (single) ? 'kui-select--single' : null,
+        (readOnly) ? 'kui-select--readonly' : null,
         className
     );
 
@@ -95,6 +98,8 @@ React.forwardRef((props, ref) => {
     }
 
     const calcDirection = () => {
+        if (!dropdownRef.current) return;
+
         let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
             directionHook = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
@@ -121,15 +126,21 @@ React.forwardRef((props, ref) => {
                 dropdownContainerRef.current.style.bottom = (window.innerHeight - el.top) + 'px';
             } else {
                 dropdownContainerRef.current.style.top = portalScrollTop + el.bottom + 'px';
-                dropdownRef.current.style.maxHeight = window.innerHeight - el.bottom - SCREEN_PADDING * 2 + 'px';
             }
+        }
+        if (portal || isFitWindow) {
+            const maxHeight = directionHook === 'up'
+                ? el.top
+                : window.innerHeight - el.bottom;
+            dropdownRef.current.style.maxHeight = maxHeight - SCREEN_PADDING * 2 + 'px';
         }
     }
 
     const dropdownAnimationEnd = () => {
         if (
-            isOpenedHook
-            && !userAgentsInclude(['edge', 'safari'])
+            dropdownRef.current &&
+            isOpenedHook &&
+            !userAgentsInclude(['edge', 'safari'])
         ) {
             scrollList();
             dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
@@ -137,9 +148,11 @@ React.forwardRef((props, ref) => {
     }
 
     const scrollList = () => {
-        if (isFocusedHook
-            && itemsRefsHook[activeHook]
-            && itemsRefsHook[activeHook].current)
+        if (
+            dropdownRef.current &&
+            isFocusedHook &&
+            itemsRefsHook[activeHook] &&
+            itemsRefsHook[activeHook].current)
         {
             let lines = Math.floor(dropdownRef.current.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
             let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
@@ -368,10 +381,12 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         onActiveChanged();
-        if (multiple && single) {
-            dropdownRef.current.addEventListener('click', onDropdownClick);
+        if (dropdownRef.current) {
+            if (multiple && single) {
+                dropdownRef.current.addEventListener('click', onDropdownClick);
+            }
+            dropdownContainerRef.current = dropdownRef.current.parentNode;
         }
-        dropdownContainerRef.current = dropdownRef.current.parentNode;
         if (isOpenedHook) {
             timer.current = setTimeout(() => {
                 calcDirection();
@@ -379,7 +394,7 @@ React.forwardRef((props, ref) => {
         }
 
         return () => {
-            dropdownRef.current.removeEventListener('click', onDropdownClick);
+            if (dropdownRef.current) dropdownRef.current.removeEventListener('click', onDropdownClick);
             if (timer.current) clearTimeout(timer.current);
         }
     }, []);
@@ -415,21 +430,24 @@ React.forwardRef((props, ref) => {
         </Dropdown>
     );
 
-    const dropdownPortal = portal
-        ? <Portal
-            id={portalId}
-            selector={portalSelector}
-        >
-            {dropdownElement}
-        </Portal>
-        : dropdownElement;
+    const dropdownPortal = readOnly || disabled
+        ? null
+        : portal
+            ? <Portal
+                id={portalId}
+                selector={portalSelector}
+            >
+                {dropdownElement}
+            </Portal>
+            : dropdownElement;
 
     return (
         <div className={className} ref={combinedRef}>
             <Input
                 autosize={false}
                 color={color as any}
-                readOnly={!editable}
+                disabled={disabled}
+                readOnly={readOnly || !editable}
                 ref={inputRef}
                 value={valueHook as any}
                 variant={variant}

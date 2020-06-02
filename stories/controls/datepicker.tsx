@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Datepicker } from '../../src/ui';
 
 const Story = () => {
-    const [date, setDate] = React.useState();
+    const [date, setDate] = React.useState(null);
     const [date01, setDate01] = React.useState(new Date());
 
     return (
@@ -22,7 +22,7 @@ const Story = () => {
                     dateFormat={'dd.MM.yyyy'}
                     editable={false}
                     isClearable={false}
-                    label="From"
+                    label="Not editable input"
                     minDate={new Date('2001-01-01')}
                     maxDate={new Date('2049-12-31')}
                     popperModifiers={{
@@ -38,6 +38,26 @@ const Story = () => {
                     showMonthDropdown
                     showYearDropdown
                     onChange={val=>setDate01(val)}
+                />
+
+                <br/><br/>
+
+                <Datepicker
+                    readOnly={true}
+                    editable={true}
+                    selected={null}
+                    label="Readonly"
+                    onChange={()=>{}}
+                />
+
+                <br/><br/>
+
+                <Datepicker
+                    readOnly={true}
+                    editable={true}
+                    selected={date01}
+                    label="Readonly"
+                    onChange={()=>{}}
                 />
 
                 <br/><br/>

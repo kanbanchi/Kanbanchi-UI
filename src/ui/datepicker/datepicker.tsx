@@ -16,9 +16,11 @@ React.forwardRef((props, ref) => {
     let {
         className,
         color,
+        disabled,
         editable,
         label,
         isClearable,
+        readOnly,
         selected,
         value,
         variant,
@@ -28,16 +30,22 @@ React.forwardRef((props, ref) => {
 
     className = ClassNames(
         'kui-datepicker',
+        (disabled) ? 'kui-datepicker--disabled' : null,
+        (readOnly) ? 'kui-datepicker--readonly' : null,
         className
     );
 
     const pickerRef = React.useRef(null);
+
+    isClearable = readOnly || disabled ? false : isClearable;
+    editable = readOnly || disabled ? false : editable;
 
     const inputAttributes = {
         color,
         editable,
         isClearable,
         label,
+        readOnly,
         ref,
         value,
         variant
@@ -53,7 +61,9 @@ React.forwardRef((props, ref) => {
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
+                disabled={disabled}
                 locale="en-GB"
+                readOnly={readOnly}
                 ref={pickerRef}
                 selected={selected}
                 onChange={onChangeHandler}

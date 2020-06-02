@@ -29,6 +29,39 @@ const Story = () => {
 
                 <br/><br/>
 
+                <h2>iconSize 24</h2>
+
+                <SelectList fixActive={false}>
+                    <SelectListItem
+                        icon={'copy'}
+                        iconSize={24}
+                    >
+                        Copy card
+                    </SelectListItem>
+                    <SelectListItem
+                        className="divider"
+                        icon={'print'}
+                        iconSize={24}
+                    >
+                        Print card
+                    </SelectListItem>
+                    <SelectListItem
+                        className="divider someClass"
+                        icon={'link'}
+                        iconSize={24}
+                    >
+                        Get link to card
+                    </SelectListItem>
+                    <SelectListItem
+                        icon={'trash'}
+                        iconSize={24}
+                    >
+                        Delete card
+                    </SelectListItem>
+                </SelectList>
+
+                <br/><br/>
+
                 Check empty SelectList: <SelectList></SelectList>
 
                 <br/>

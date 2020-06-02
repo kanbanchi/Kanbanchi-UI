@@ -15,6 +15,7 @@ React.forwardRef((props, ref) => {
         directionHorizontal,
         disabled,
         dropdownClassName,
+        isFitWindow,
         multiple,
         notBlurClasses,
         opened,
@@ -82,8 +83,13 @@ React.forwardRef((props, ref) => {
                 dropdownContainerRef.current.style.bottom = (window.innerHeight - button.top) + 'px';
             } else {
                 dropdownContainerRef.current.style.top = portalScrollTop + button.bottom + 'px';
-                dropdownRef.current.style.maxHeight = window.innerHeight - button.bottom - SCREEN_PADDING * 2 + 'px';
             }
+        }
+        if (portal || isFitWindow) {
+            const maxHeight = directionHook === 'up'
+                ? button.top
+                : window.innerHeight - button.bottom;
+            dropdownRef.current.style.maxHeight = maxHeight - SCREEN_PADDING * 2 + 'px';
         }
     }
 

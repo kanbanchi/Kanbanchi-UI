@@ -3,36 +3,39 @@
     display: inline-block;
     width: $google-spacing * 18;
     
-    .kui-input {
-        &__item,
-        &__item[readonly] {
-            color: $color-base;
-            border-color: calc-color(fade, $color-base, 20);
+    .kui-input__item {
+        color: $color-base;
+        border-color: calc-color(fade, $color-base, 20);
+        cursor: text;
+
+        &:focus {
+            border-color: calc-color(fade, $color-base, 0);
+        }
+    }
+
+    .kui-input__item[readonly] {
+        cursor: pointer;
+    }
+    
+    &.kui-datepicker--readonly {
+        .kui-input__item {
             cursor: text;
         }
-    }
-    .kui-input--filled {
-        .kui-input {
-            &__item,
-            &__item[readonly] {
-                border-color: calc-color(fade, $color-base, 30);
-                background: $color-light-background;
-            }
+        .kui-input__icon {
+            pointer-events: none;
         }
     }
-    &:hover,
-    .kui-input.react-datepicker-ignore-onclickoutside {
-        .kui-input:not(.kui-input--disabled) {
-            &__item,
-            &__item[readonly] {
-                color: $color-base;
-                box-shadow: $shadow-hover;
-                border-color: calc-color(fade, $color-base, 0);
-            }
+    
+    &:not(.kui-datepicker--readonly):not(.kui-datepicker--disabled):hover,
+    .kui-input.react-datepicker-ignore-onclickoutside { // opened
+        .kui-input__item {
+            border-color: calc-color(fade, $color-base, 0) !important;
+            background: $color-white;
+            box-shadow: $shadow-hover;
+        }
 
-            .kui-input__icon:not(.kui-input__icon--clear) {
-                color: $color-base;
-            }
+        .kui-input__icon:not(.kui-input__icon--clear) {
+            color: $color-base;
         }
     }
 

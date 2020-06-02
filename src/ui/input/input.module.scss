@@ -15,8 +15,7 @@
         -moz-appearance: textfield;
     }
 
-    &__item,
-    &__item[readonly] {
+    .kui-input__item {
         width: 100%;
         height: auto;
         min-height: $google-spacing * 5;
@@ -56,23 +55,36 @@
             box-shadow: none;
         }
 
-        &:disabled {
-            opacity: .5;
-            border-color: calc-color(fade, $color-base, 20);
-            cursor: default;
-        }
-
         &:invalid {
             box-shadow: none;
         }
     }
 
+    &.kui-input--readonly,
+    &.kui-input--disabled {
+        .kui-input__item {
+            color: $color-base;
+            border-color: calc-color(fade, $color-base, 0);
+            background: $color-light-background;
+        }
+        .kui-input__icon {
+            color: calc-color(fade, $color-base, 30);
+            pointer-events: none;
+        }
+    }
+    
+    &.kui-input--disabled {
+        .kui-input__item {
+            color: calc-color(fade, $color-base, 60);
+        }
+        .kui-input__icon {
+            color: calc-color(fade, $color-base, 10);
+        }
+    }
+
     &.kui-input--state_error {
-        .kui-input {
-            &__item,
-            &__item[readonly] {
-                border-color: $color-red;
-            }
+        .kui-input__item {
+            border-color: $color-red;
         }
 
         .kui-label__item {
@@ -81,11 +93,8 @@
     }
 
     &.kui-input--state_success {
-        .kui-input {
-            &__item,
-            &__item[readonly] {
-                border-color: $color-green;
-            }
+        .kui-input__item {
+            border-color: $color-green;
         }
 
         .kui-label__item {
@@ -94,6 +103,8 @@
     }
 
     &.kui-input--disabled {
+        pointer-events: none;
+
         .kui-label__item {
             color: calc-color(fade, $color-base, 30);
         }
@@ -119,33 +130,21 @@
                 opacity: 1;
             }
 
-            .kui-input:not(.kui-input--disabled) &:hover {
+            &:hover {
                 color: $color-base;
             }
         }
-
-        .kui-input--disabled & {
-            cursor: default;
-        }
     }
 
+    &.kui-input--variant_arrow,
     &.kui-input--variant_withicon {
-        .kui-input {
-            &__item,
-            &__item[readonly] {
-                padding-right: $google-spacing * 5;
-            }
-        }
-
-        .kui-input__item:focus + .kui-input__icon,
-        &:hover .kui-input__icon {
-            color: $color-base;
-        }
-    }
-
-    &.kui-input--variant_arrow {
         .kui-input__item {
             padding-right: $google-spacing * 5;
+        }
+
+        &:not(.kui-input--readonly) .kui-input__item:focus + .kui-input__icon,
+        &:not(.kui-input--readonly):hover .kui-input__icon {
+            color: $color-base;
         }
     }
 
@@ -158,7 +157,7 @@
 
         &:hover,
         &.kui-input--focus {
-            .kui-input__item:not(:disabled) {
+            .kui-input__item {
                 box-shadow: $shadow-hover;
                 border-color: transparent;
             }
@@ -180,6 +179,7 @@
     left: 50%;
     transform: translateX(-50%);
     color: calc-color(fade, $color-base, 30);
+    white-space: nowrap;
     cursor: pointer;
 
     &__placeholder {

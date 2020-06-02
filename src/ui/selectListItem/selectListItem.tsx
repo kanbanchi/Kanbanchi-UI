@@ -12,6 +12,7 @@ React.forwardRef((props, ref) => {
         children,
         className,
         icon,
+        iconSize,
         list,
         ...attributes
     } = props,
@@ -22,11 +23,16 @@ React.forwardRef((props, ref) => {
     className = ClassNames(
         SELECT_LIST_ITEM_CLASS,
         (list) ? SELECT_LIST_ITEM_CLASS + '--with-list' : null,
+        SELECT_LIST_ITEM_CLASS + '--icon-size_' + iconSize,
         className
     );
 
     if (icon) {
-        iconEl = <Icon xlink={icon} className="kui-select-list-item__icon" />;
+        iconEl = <Icon
+            className="kui-select-list-item__icon"
+            size={iconSize}
+            xlink={icon}
+        />;
     }
 
     if (children) {
@@ -77,6 +83,7 @@ React.forwardRef((props, ref) => {
 
 SelectListItem.defaultProps = {
     icon: null,
+    iconSize: 16,
     list: null
 };
 
