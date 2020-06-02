@@ -16,6 +16,7 @@ React.forwardRef((props, ref) => {
         icon,
         isClearable,
         label,
+        searchPlaceholder,
         state,
         tooltip,
         value,
@@ -144,7 +145,7 @@ React.forwardRef((props, ref) => {
                 className="kui-input-search__icon"
             />
             <span className="kui-input-search__placeholder">
-                Search
+                {searchPlaceholder}
             </span>
         </span>);
         inputAfter = <Icon
@@ -235,6 +236,7 @@ Input.defaultProps = {
     icon: null,
     isClearable: false,
     label: null,
+    searchPlaceholder: 'Search',
     state: null,
     tooltip: null,
     value: '',

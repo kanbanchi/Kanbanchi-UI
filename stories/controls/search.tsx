@@ -64,6 +64,7 @@ const Story = () => {
                 <div className="section-relative">
                     <h2>Search</h2>
                     <Search
+                        searchPlaceholder={'Custom placeholder'}
                         onChange={(i: any)=>console.log(i.item)}
                         onOpen={()=>loadList()}
                     >

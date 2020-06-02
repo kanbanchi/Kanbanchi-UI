@@ -199,6 +199,7 @@
     left: 50%;
     transform: translateX(-50%);
     color: calc-color(fade, $color-base, 30);
+    white-space: nowrap;
     cursor: pointer;
 
     &__placeholder {

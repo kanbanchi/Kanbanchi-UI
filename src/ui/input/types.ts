@@ -21,6 +21,7 @@ export interface IInputOwnProps {
     label?: string;
     readOnly?: boolean;
     ref?: any;
+    searchPlaceholder?: string;
     type?: string;
     variant?:
         'arrow'

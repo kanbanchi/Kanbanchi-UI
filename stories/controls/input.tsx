@@ -19,6 +19,7 @@ const Story = () => {
                 <Input
                     autosize={false}
                     ref={inputRef}
+                    searchPlaceholder={'Custom placeholder'}
                     variant="search"
                     value={val2}
                     onChange={(e: any) => {
