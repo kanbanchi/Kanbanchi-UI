@@ -89,7 +89,7 @@ React.forwardRef((props, ref) => {
             const maxHeight = directionHook === 'up'
                 ? button.top
                 : window.innerHeight - button.bottom;
-            dropdownRef.current.style.maxHeight = maxHeight - SCREEN_PADDING * 2 + 'px';
+            dropdownRef.current.style.maxHeight = maxHeight - SCREEN_PADDING * 2 + 'px !important';
         }
     }
 
