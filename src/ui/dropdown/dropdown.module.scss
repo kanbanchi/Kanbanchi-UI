@@ -40,6 +40,19 @@
         right: 0;
     }
 
+    &.kui-dropdown--portal,
+    &.kui-dropdown--fit {
+        &.kui-dropdown--direction_up.kui-dropdown--opened .kui-dropdown__item {
+            max-height: 80vh;
+            animation: animation_portal_up_on 0.1s ease forwards;
+        }
+
+        &.kui-dropdown--direction_down.kui-dropdown--opened .kui-dropdown__item {
+            max-height: 80vh;
+            animation: animation_portal_down_on .3s ease forwards;
+        }
+    }
+
     &.kui-dropdown--portal {
         position: absolute;
         width: 100vw;
@@ -47,15 +60,6 @@
 
         &.kui-dropdown--direction_up .kui-dropdown__item {
             bottom: 0;
-        }
-
-        &.kui-dropdown--direction_up.kui-dropdown--opened .kui-dropdown__item {
-            animation: animation_up_on 0.1s ease forwards;
-        }
-
-        &.kui-dropdown--direction_down.kui-dropdown--opened .kui-dropdown__item {
-            max-height: 80vh;
-            animation: animation_portal_down_on .3s ease forwards;
         }
     }
 }
@@ -118,6 +122,16 @@
     100% {
         z-index: $z-modal + 5;
         transform: translateY($google-spacing) scaleY(1);
+    }
+}
+@keyframes animation_portal_up_on {
+    0% {
+        z-index: $z-modal + 5;
+        transform: translateY(-$google-spacing * 4) scaleY(.95);
+    }
+    100% {
+        z-index: $z-modal + 5;
+        transform: translateY(-$google-spacing) scaleY(1);
     }
 }
 
