@@ -19,6 +19,7 @@ React.forwardRef((props, ref) => {
         disabled,
         editable,
         label,
+        icon,
         isClearable,
         readOnly,
         selected,
@@ -43,6 +44,7 @@ React.forwardRef((props, ref) => {
     const inputAttributes = {
         color,
         editable,
+        icon,
         isClearable,
         label,
         readOnly,

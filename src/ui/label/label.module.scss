@@ -5,7 +5,6 @@
 
     &__item {
         display: block;
-        padding: 0 0 $google-spacing / 4;
         font-size: $nano-size;
         font-weight: bold;
         color: calc-color(fade, $color-base, 50);
