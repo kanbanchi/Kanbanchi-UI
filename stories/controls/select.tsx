@@ -223,8 +223,9 @@ const Story = () => {
                             <Select
                                 active={val02}
                                 editable={true}
-                                label="Time"
+                                label="Time isFitWindow"
                                 icon="deadline"
+                                isFitWindow={true}
                                 variant="withicon"
                                 style={{width: 120}}
                                 onChange={(i: ISelectActiveInheritedProps) => {
