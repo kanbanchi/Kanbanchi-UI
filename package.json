@@ -20,7 +20,7 @@
     "babel": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
     "postinstall": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
     "check-typescript": "tsc && tslint --project ./ --config ./tslint.json",
-    "build-storybook": "build-storybook -c .storybook -o ./static"
+    "build-storybook": "build-storybook -c .storybook -s ./public -o ./static"
   },
   "browserslist": [
     ">0.2%",

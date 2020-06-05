@@ -89,9 +89,7 @@ React.forwardRef((props, ref) => {
             const maxHeight = directionHook === 'up'
                 ? button.top
                 : window.innerHeight - button.bottom;
-            dropdownRef.current.setAttribute('style', `
-                max-height: ${Math.round(maxHeight - SCREEN_PADDING * 2)}px !important;
-            `);
+            dropdownRef.current.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
         }
     }
 
@@ -180,6 +178,7 @@ React.forwardRef((props, ref) => {
         className={classNameDropdown}
         directionVertical={directionHook}
         directionHorizontal={directionHorizontal}
+        isFitWindow={isFitWindow}
         opened={isOpenedHook}
         portal={portal}
         ref={dropdownRef}

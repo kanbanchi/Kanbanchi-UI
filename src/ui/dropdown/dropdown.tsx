@@ -10,6 +10,7 @@ React.forwardRef((props, ref) => {
         className,
         directionVertical,
         directionHorizontal,
+        isFitWindow,
         opened,
         portal,
         ...attributes
@@ -21,6 +22,7 @@ React.forwardRef((props, ref) => {
         (directionHorizontal) ? 'kui-dropdown--direction_' + directionHorizontal : null,
         (opened) ? 'kui-dropdown--opened' : null,
         (portal) ? 'kui-dropdown--portal' : null,
+        (isFitWindow) ? 'kui-dropdown--fit' : null,
         className
     );
 
