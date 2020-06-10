@@ -79,7 +79,8 @@ const Story = () => {
                 <h2>Input</h2>
 
                 <Input
-                    label={'Default'}
+                    isClearable={true}
+                    label={'Default isClearable'}
                 />
 
                 <br/>

@@ -108,6 +108,15 @@ React.forwardRef((props, ref) => {
         if (onChange) onChange(e);
     };
 
+    if (isClearable) {
+        inputAfter = <Icon
+            xlink="clear"
+            size={24}
+            className="kui-input__icon kui-input__icon--clear"
+            onClick={clearInput}
+        />;
+    }
+
     if (variant === 'arrow' || variant === 'header') {
         inputAfter = <Icon
             xlink="arrow-down"
