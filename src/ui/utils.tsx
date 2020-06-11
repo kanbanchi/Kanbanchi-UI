@@ -9,7 +9,11 @@ export const ClassNames = (...props: any) =>
         .join(' ');
 
 export const ClassList = (name: string) =>
-    (!name) ? [] : name.split(' ').map(item => item.trim()).map(item => item);
+    (!name)
+        ? []
+        : name.split(' ')
+            .map(item => item.trim())
+            .filter(item => item);
 
 export const getParentsClasses = (
     element: HTMLElement,
