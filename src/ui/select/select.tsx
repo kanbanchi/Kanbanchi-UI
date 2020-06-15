@@ -400,16 +400,7 @@ React.forwardRef((props, ref) => {
         if (!isOpenedHook) return openDropdown();
         if (e.which === 13) { // enter
             if (onEnter) onEnter(e);
-            if (
-                activeHook !== null &&
-                activeHook !== active
-            ) {
-                if (
-                    onChange &&
-                    list[activeHook].props
-                ) onChange(Object.assign({}, e, {item: list[activeHook].props}));
-                onActiveChanged(activeHook);
-            } else {
+            if (activeHook === null) {
                 findValue(e.target.value)
                     .then((found: ISelectActiveProps) => {
                         setActiveHook(found.index);
@@ -419,6 +410,14 @@ React.forwardRef((props, ref) => {
                     .catch(() => {
                         setActiveHook(null);
                     });
+            } else {
+                if (
+                    onChange &&
+                    list[activeHook].props
+                ) {
+                    onChange(Object.assign({}, e, {item: list[activeHook].props}));
+                }
+                onActiveChanged(activeHook);
             }
             if (!multiple) {
                 closeDropdown();
