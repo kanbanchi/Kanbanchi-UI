@@ -22,6 +22,7 @@ React.forwardRef((props, ref) => {
         portal,
         portalId,
         portalSelector,
+        beforeOpen,
         onBlur,
         onClick,
         onOpen,
@@ -102,9 +103,10 @@ React.forwardRef((props, ref) => {
         }
     }
 
-    const setIsOpened = (isOpened: boolean) => {
+    const afterOpened = (isOpened: boolean) => {
         isOpenedHook = isOpened;
         setIsOpenedHook(isOpenedHook);
+        calcDirection();
         if (isOpened && onOpen) {
             onOpen();
         } else if (isOpened === false && onClose) {
@@ -112,10 +114,19 @@ React.forwardRef((props, ref) => {
         }
     }
 
+    const setIsOpened = (isOpened: boolean) => {
+        if (isOpened === isOpenedHook) return;
+
+        if (isOpened && beforeOpen) {
+            beforeOpen().then(() => afterOpened(isOpened));
+        } else {
+            afterOpened(isOpened)
+        }
+    }
+
     attributes.onClick = (e) => {
         if (!(disabled && isOpenedHook)) {
             setIsOpened(!isOpenedHook);
-            if (isOpenedHook) calcDirection();
         }
         if (onClick) onClick(e);
     }

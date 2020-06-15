@@ -13,6 +13,7 @@ export interface IDropdownPublicProps {
     portal?: boolean;
     portalId?: string;
     portalSelector?: string;
+    beforeOpen?: () => Promise<any>;
 }
 
 export interface IDropdownOwnProps {
