@@ -32,6 +32,7 @@ React.forwardRef((props, ref) => {
         readOnly,
         single,
         variant,
+        onActiveChange,
         onBlur,
         onChange,
         onClick,
@@ -474,6 +475,7 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         scrollList();
+        if (onActiveChange) onActiveChange(activeHook);
     }, [activeHook]);
 
     React.useEffect(() => {
