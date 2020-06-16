@@ -30,14 +30,15 @@ React.forwardRef((props, ref) => {
         ...attributesOriginal
     } = props,
         attributes: React.ButtonHTMLAttributes<HTMLButtonElement> = attributesOriginal,
-        btn = null,
-        list = null;
+        btn: JSX.Element = null,
+        list: JSX.Element[] = null;
 
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [uniqueClass, setUniqueClass] = React.useState('kui-button-dropdown--' + uuidv4());
     const _buttonRef = React.useRef(null);
     const buttonRef =  useCombinedRefs(ref, _buttonRef);
+    const buttonButtonRef =  React.useRef(null);
     const dropdownRef = React.useRef(null);
     const dropdownContainerRef = React.useRef(null);
     const dropdownUniqueClass = 'kui-button-dropdown__dropdown--' + uniqueClass;
@@ -137,24 +138,10 @@ React.forwardRef((props, ref) => {
         dropdownUniqueClass,
     ];
 
-    attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        e.persist();
-        const classes = getParentsClasses(
-            e.relatedTarget as HTMLElement,
-            notBlurClasses
-        );
-        for (let i = 0; i<notBlurClasses.length; i++) {
-            if (classes.includes(notBlurClasses[i])) {
-                return;
-            }
-        }
-
-        setIsOpened(false);
-        if (onBlur) onBlur(e);
-    }
-
     const onChange = (e: any) => {
-        if (!multiple) setIsOpened(false);
+        if (!multiple) {
+            setIsOpened(false);
+        }
         if (attributes.onChange) attributes.onChange(e);
     }
 
@@ -168,7 +155,10 @@ React.forwardRef((props, ref) => {
                 'kui-button-dropdown__item',
                 child.props.className
             ),
-            btn = React.cloneElement(child, attributes);
+            btn = React.cloneElement(child, {
+                ...attributes,
+                ref: buttonButtonRef
+            });
             return null;
         }
         if (child.type.displayName !== 'SelectList') return child;
@@ -176,6 +166,32 @@ React.forwardRef((props, ref) => {
             onChange
         });
     });
+
+    React.useEffect(() => {
+        function onBlurHandler (e: any) {
+            const classes = getParentsClasses(
+                e.relatedTarget as HTMLElement,
+                notBlurClasses
+            );
+            for (let i = 0; i<notBlurClasses.length; i++) {
+                if (classes.includes(notBlurClasses[i])) return;
+            }
+
+            setIsOpened(false);
+            if (onBlur) onBlur(e);
+        };
+        if (buttonButtonRef.current) buttonButtonRef.current.removeEventListener('blur', onBlurHandler);
+        if (dropdownRef.current) dropdownRef.current.removeEventListener('blur', onBlurHandler);
+        if (isOpenedHook) { // если дропдаун открыт
+            if (buttonButtonRef.current) buttonButtonRef.current.addEventListener('blur', onBlurHandler);
+            if (dropdownRef.current) dropdownRef.current.addEventListener('blur', onBlurHandler);
+        }
+
+        return () => {
+            if (buttonButtonRef.current)  buttonButtonRef.current.removeEventListener('blur', onBlurHandler);
+            if (dropdownRef.current) dropdownRef.current.removeEventListener('blur', onBlurHandler);
+        }
+    }, [isOpenedHook]);
 
     React.useEffect(() => {
         setIsOpened(opened);
@@ -195,7 +211,6 @@ React.forwardRef((props, ref) => {
         ref={dropdownRef}
         tabIndex={-1}
         onAnimationEnd={dropdownAnimationEnd}
-        onBlur={attributes.onBlur}
     >
         {list}
     </Dropdown>);
