@@ -37,6 +37,7 @@ export interface IButtonDispatchProps {
 export interface IButtonOwnProps {
     color?: TButtonColor;
     maxWidth?: IMediaScreens;
+    ref?: any;
     size?: TButtonSize;
     type?: TButtonType;
     variant?: TButtonVariant;
