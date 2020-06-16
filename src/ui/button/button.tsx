@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IButtonInheritedProps } from './types';
-import { ClassNames } from '../utils';
+import { ClassNames, useCombinedRefs } from '../utils';
 import { ButtonTitle, Icon, Tooltip } from '../../ui';
 import '../../../src/ui/button/button.module.scss';
 
@@ -21,6 +21,9 @@ React.forwardRef((props, ref) => {
         iconBefore = null,
         iconAfter = null,
         childrenDiv = null;
+
+    const _buttonRef = React.useRef(null);
+    const buttonRef =  useCombinedRefs(ref, _buttonRef);
 
     let {
         disabled,
@@ -75,7 +78,7 @@ React.forwardRef((props, ref) => {
     const buttonElement = (
         <Tag
             className={className}
-            ref={ref}
+            ref={buttonRef}
             {...attributes}
         >
             {iconBefore}

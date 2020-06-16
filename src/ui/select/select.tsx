@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
-import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs, ClassList } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -32,6 +32,7 @@ React.forwardRef((props, ref) => {
         readOnly,
         single,
         variant,
+        onActiveChange,
         onBlur,
         onChange,
         onClick,
@@ -48,9 +49,9 @@ React.forwardRef((props, ref) => {
         isSearch = variant === 'search';
 
     const WAIT_ANIMATION = 300;
-    const [activeHook, setActiveHook] = React.useState(active);
+    let [activeHook, _setActiveHook] = React.useState(active);
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
-    const [initialValue, setInitialValue] = React.useState('');
+    let [initialValue, _setInitialValue] = React.useState('');
     const [valueHook, setValueHook] = React.useState('');
     const [isFocusedHook, setIsFocusedHook] = React.useState(opened);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
@@ -74,6 +75,16 @@ React.forwardRef((props, ref) => {
         (readOnly) ? 'kui-select--readonly' : null,
         className
     );
+
+    const setActiveHook = (activeIndex: number) => {
+        activeHook = activeIndex;
+        _setActiveHook(activeIndex);
+    }
+
+    const setInitialValue = (value: string) => {
+        initialValue = value;
+        _setInitialValue(value);
+    }
 
     const onSelectListInit = (refs: Array<{}>) => {
         setItemsRefsHook(refs);
@@ -248,7 +259,15 @@ React.forwardRef((props, ref) => {
                 !child.type.displayName ||
                 child.type.displayName !== 'SelectList'
             ) return child;
-            list = child.props.children;
+            list = React.Children.map(child.props.children, (child: React.ReactElement) => {
+                if (!child || !child.props) return null;
+                const classList = ClassList(child.props.className);
+                const disabled = classList.includes('disabled');
+                return React.cloneElement(child, {
+                    disabled
+                });
+            });
+
             return React.cloneElement(child, attributesSelectList);
         });
     } else if (options) {
@@ -312,6 +331,46 @@ React.forwardRef((props, ref) => {
         });
     }
 
+    const highlightOptionIndex = (
+        direction: number
+    ): number => {
+        let activeNew;
+        activeHook = activeHook === null ? -1 : activeHook;
+        activeNew = activeHook + direction;
+        if (
+            direction < 0 &&
+            activeNew < 0
+        ) {
+            activeNew = list.length - 1;
+        } else if (
+            direction > 0 &&
+            activeNew >= list.length
+        ) {
+            activeNew = 0;
+        }
+
+        while (
+            list[activeNew].props.disabled &&
+            list.filter(option => !option.props.disabled).length &&
+            activeNew !== activeHook
+        ) {
+            activeNew += direction;
+            if (
+                direction < 0 &&
+                activeNew < 0
+            ) {
+                activeNew = list.length - 1;
+            } else if (
+                direction > 0 &&
+                activeNew >= list.length
+            ) {
+                activeNew = 0;
+            }
+        }
+
+        return activeNew;
+    }
+
     attributes.onKeyUp = (e: any) => {
         if (!e) return;
         if (onKeyUp) onKeyUp(e);
@@ -324,32 +383,45 @@ React.forwardRef((props, ref) => {
         ) {
             let activeNew;
             if (e.which === 38) {
-                activeNew = activeHook - 1;
-                if (activeNew < 0) activeNew = list.length - 1;
+                activeNew = highlightOptionIndex(-1);
             } else if (e.which === 40) {
-                activeNew = activeHook + 1;
-                if (activeNew >= list.length) activeNew = 0;
+                activeNew = highlightOptionIndex(1);
             }
             setActiveHook(activeNew);
-            if (!isSearch) {
+            if (
+                !isSearch &&
+                list[activeNew].props &&
+                list[activeNew].props.children
+            ) {
                 setValue(list[activeNew].props.children);
             }
             return;
         }
         if (!isOpenedHook) return openDropdown();
-        if (isSearch) return;
         if (e.which === 13) { // enter
             if (onEnter) onEnter(e);
-            findValue(e.target.value)
-                .then((found: ISelectActiveProps) => {
-                    setActiveHook(found.index);
-                    onActiveChanged(found.index);
-                    if (onChange) onChange(Object.assign({}, e, {item: found}));
-                })
-                .catch(() => {
-                    setActiveHook(null);
-                });
-            closeDropdown();
+            if (activeHook === null) {
+                findValue(e.target.value)
+                    .then((found: ISelectActiveProps) => {
+                        setActiveHook(found.index);
+                        onActiveChanged(found.index);
+                        if (onChange) onChange(Object.assign({}, e, {item: found}));
+                    })
+                    .catch(() => {
+                        setActiveHook(null);
+                    });
+            } else {
+                if (
+                    onChange &&
+                    list[activeHook].props
+                ) {
+                    onChange(Object.assign({}, e, {item: list[activeHook].props}));
+                }
+                onActiveChanged(activeHook);
+            }
+            if (!multiple) {
+                closeDropdown();
+            }
         }
     }
 
@@ -360,6 +432,7 @@ React.forwardRef((props, ref) => {
             !list.length ||
             !list[activeNew]
         ) return;
+
         if (
             list[activeNew].props &&
             list[activeNew].props.children
@@ -401,11 +474,12 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         scrollList();
+        if (onActiveChange) onActiveChange(activeHook);
     }, [activeHook]);
 
     React.useEffect(() => {
+        setActiveHook(active);
         if (!multiple) {
-            setActiveHook(active);
             onActiveChanged();
         }
     }, [active, options]);
