@@ -38,7 +38,7 @@ React.forwardRef((props, ref) => {
         onClick,
         onEnter,
         onFocus,
-        onKeyUp,
+        onKeyDown,
         onOpen,
         onClose,
         ...attributesOriginal
@@ -371,9 +371,9 @@ React.forwardRef((props, ref) => {
         return activeNew;
     }
 
-    attributes.onKeyUp = (e: any) => {
+    attributes.onKeyDown = (e: any) => {
         if (!e) return;
-        if (onKeyUp) onKeyUp(e);
+        if (onKeyDown) onKeyDown(e);
         e.persist();
         if (e.which === 27) { // esc
             return closeDropdown();
@@ -442,17 +442,17 @@ React.forwardRef((props, ref) => {
         }
     }
 
-    const onDropdownClick = (e: React.SyntheticEvent) => {
-        const classes = getParentsClasses(
-            e.target as HTMLElement,
-            [SELECT_LIST_ITEM_CLASS, SELECT_LIST_CLASS]
-        );
-        if (classes.includes(SELECT_LIST_ITEM_CLASS)) {
-            closeDropdown();
-        }
-    }
-
     React.useEffect(() => {
+        function onDropdownClick (e: React.SyntheticEvent) {
+            const classes = getParentsClasses(
+                e.target as HTMLElement,
+                [SELECT_LIST_ITEM_CLASS, SELECT_LIST_CLASS]
+            );
+            if (classes.includes(SELECT_LIST_ITEM_CLASS)) {
+                timer.current = setTimeout(closeDropdown, 100); // close after onChange
+            }
+        }
+
         onActiveChanged();
         if (dropdownRef.current) {
             if (multiple && single) {
