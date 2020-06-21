@@ -3,7 +3,7 @@
 .kui-tooltip.kui-hint {
     background: $color-purple;
     box-shadow: 0 $google-spacing $google-spacing * 3 rgba($color-purple, .4);
-    z-index: $z-dropdown;
+    z-index: $z-tooltip;
 
     .kui-tooltip__arrow {
         color: $color-purple;
