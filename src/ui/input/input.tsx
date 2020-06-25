@@ -15,6 +15,7 @@ React.forwardRef((props, ref) => {
         editable,
         icon,
         isClearable,
+        clearIconTooltip,
         label,
         readOnly,
         searchPlaceholder,
@@ -108,13 +109,16 @@ React.forwardRef((props, ref) => {
         if (onChange) onChange(e);
     };
 
-    if (isClearable) {
-        inputAfter = <Icon
+    const iconClear = <Icon
             xlink="clear"
             size={24}
             className="kui-input__icon kui-input__icon--clear"
+            tooltip={'tooltip'}
             onClick={clearInput}
         />;
+
+    if (isClearable) {
+        inputAfter = iconClear;
     }
 
     if (variant === 'arrow' || variant === 'header') {
@@ -134,12 +138,6 @@ React.forwardRef((props, ref) => {
             className="kui-input__icon"
         />;
         if (isClearable) {
-            const iconClear = <Icon
-                xlink="clear"
-                size={24}
-                className="kui-input__icon kui-input__icon--clear"
-                onClick={clearInput}
-            />;
             inputAfter = (isFilled) ? iconClear : iconCalendar;
         } else {
             inputAfter = iconCalendar;
@@ -156,11 +154,7 @@ React.forwardRef((props, ref) => {
                 {searchPlaceholder}
             </span>
         </span>);
-        inputAfter = <Icon
-            xlink="clear"
-            size={24}
-            className="kui-input__icon kui-input__icon--clear"
-            onClick={clearInput} />;
+        inputAfter = iconClear;
     } else if
         (icon && variant === 'withicon') {
         inputAfter = <Icon
@@ -245,6 +239,7 @@ Input.defaultProps = {
     editable: true,
     icon: null,
     isClearable: false,
+    clearIconTooltip: null,
     label: null,
     searchPlaceholder: 'Search',
     state: null,

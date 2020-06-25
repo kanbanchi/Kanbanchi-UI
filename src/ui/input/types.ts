@@ -18,6 +18,7 @@ export interface IInputOwnProps {
     editable?: boolean;
     icon?: string;
     isClearable?: boolean;
+    clearIconTooltip?: string | ITooltipProps;
     label?: string;
     readOnly?: boolean;
     ref?: any;

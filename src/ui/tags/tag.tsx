@@ -9,6 +9,7 @@ React.forwardRef((props, ref) => {
     let {
         children,
         className,
+        clearIconTooltip,
         onClear,
         onClick,
         ...attributesOriginal
@@ -48,6 +49,7 @@ React.forwardRef((props, ref) => {
                 <Icon
                     xlink="clear"
                     size={24}
+                    tooltip={clearIconTooltip}
                     className="kui-tag__clear"
                 />
             }

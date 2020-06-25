@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IIconInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/icon/icon.module.scss';
+import { Tooltip } from '..';
 
 export const Icon: React.SFC<IIconInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -9,6 +10,7 @@ React.forwardRef((props, ref) => {
         className,
         size,
         xlink,
+        tooltip,
         ...attributes
     } = props;
 
@@ -31,15 +33,26 @@ React.forwardRef((props, ref) => {
         className
     );
 
-    return (
-        <span
+    const iconElement = <span
             className={classNames}
             ref={ref as any}
             {...attributes}
         >
             <Svg className="kui-icon__svg"/>
-        </span>
-    );
+        </span>;
+
+    if (tooltip) {
+        const tooltipProps = (typeof tooltip === 'string')
+            ? { value: tooltip }
+            : tooltip;
+        return (
+            <Tooltip {...tooltipProps}>
+                {iconElement}
+            </Tooltip>
+        )
+    }
+
+    return iconElement;
 });
 
 Icon.defaultProps = {
