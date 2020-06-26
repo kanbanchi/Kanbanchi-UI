@@ -10,7 +10,6 @@ React.forwardRef((props, ref) => {
         className,
         size,
         xlink,
-        tooltip,
         ...attributes
     } = props;
 
@@ -33,26 +32,13 @@ React.forwardRef((props, ref) => {
         className
     );
 
-    const iconElement = <span
-            className={classNames}
-            ref={ref as any}
-            {...attributes}
-        >
+    return <span
+                className={classNames}
+                ref={ref as any}
+                {...attributes}
+            >
             <Svg className="kui-icon__svg"/>
         </span>;
-
-    if (tooltip) {
-        const tooltipProps = (typeof tooltip === 'string')
-            ? { value: tooltip }
-            : tooltip;
-        return (
-            <Tooltip {...tooltipProps}>
-                {iconElement}
-            </Tooltip>
-        )
-    }
-
-    return iconElement;
 });
 
 Icon.defaultProps = {
