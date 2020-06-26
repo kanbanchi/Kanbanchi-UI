@@ -1,6 +1,8 @@
 /**
  * Tags
  */
+import { ITooltipProps } from '../tooltip/types';
+
 export interface ITagsProps {}
 
 export type ITagsConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
@@ -13,7 +15,9 @@ export interface ITagsInheritedProps extends
 /**
  * Tag
  */
-export interface ITagStateProps {}
+export interface ITagStateProps {
+    iconTooltip?: string | ITooltipProps;
+}
 
 export interface ITagDispatchProps {
     onClear?: (event: React.MouseEvent) => void;
