@@ -2,14 +2,14 @@ import * as React from 'react';
 import { ITagInheritedProps } from './types';
 import { ClassNames, getParentsClasses } from '../utils';
 import '../../../src/ui/tags/tags.module.scss';
-import { Icon } from '../../ui';
+import { Icon, Tooltip } from '../../ui';
 
 export const Tag: React.SFC<ITagInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,
         className,
-        clearIconTooltip,
+        iconTooltip,
         onClear,
         onClick,
         ...attributesOriginal
@@ -36,6 +36,26 @@ React.forwardRef((props, ref) => {
         }
     }
 
+    const iconElement = <Icon
+        xlink="clear"
+        size={24}
+        className="kui-tag__clear"
+    />;
+
+    const getIconOrTooltip = () => {
+        if (iconTooltip) {
+            const tooltipProps = (typeof iconTooltip === 'string')
+                ? { value: iconTooltip }
+                : iconTooltip;
+            return (
+                <Tooltip {...tooltipProps}>
+                    {iconElement}
+                </Tooltip>
+            )
+        }
+        return iconElement
+    };
+
     return (
         <div
             className={className}
@@ -46,12 +66,7 @@ React.forwardRef((props, ref) => {
                 {children}
             </span>
             {clearable &&
-                <Icon
-                    xlink="clear"
-                    size={24}
-                    tooltip={clearIconTooltip}
-                    className="kui-tag__clear"
-                />
+                getIconOrTooltip()
             }
         </div>
     );

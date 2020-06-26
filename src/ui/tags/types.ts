@@ -16,7 +16,7 @@ export interface ITagsInheritedProps extends
  * Tag
  */
 export interface ITagStateProps {
-    clearIconTooltip?: string | ITooltipProps;
+    iconTooltip?: string | ITooltipProps;
 }
 
 export interface ITagDispatchProps {
