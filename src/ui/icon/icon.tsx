@@ -32,13 +32,15 @@ React.forwardRef((props, ref) => {
         className
     );
 
-    return <span
-                className={classNames}
-                ref={ref as any}
-                {...attributes}
-            >
+    return (
+        <span
+            className={classNames}
+            ref={ref as any}
+            {...attributes}
+        >
             <Svg className="kui-icon__svg"/>
-        </span>;
+        </span>
+    );
 });
 
 Icon.defaultProps = {
