@@ -36,7 +36,7 @@ React.forwardRef((props, ref) => {
         }
     }
 
-    const iconElement = <Icon
+    const iconClear = <Icon
         xlink="clear"
         size={24}
         className="kui-tag__clear"
@@ -49,11 +49,11 @@ React.forwardRef((props, ref) => {
                 : iconTooltip;
             return (
                 <Tooltip {...tooltipProps}>
-                    {iconElement}
+                    {iconClear}
                 </Tooltip>
             )
         }
-        return iconElement
+        return iconClear
     };
 
     return (
@@ -74,7 +74,8 @@ React.forwardRef((props, ref) => {
 
 Tag.defaultProps = {
     onClear: null,
-    onClick: null
+    onClick: null,
+    iconTooltip: null
 }
 
 Tag.displayName = 'Tag';
