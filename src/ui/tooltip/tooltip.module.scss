@@ -16,6 +16,7 @@
     border-radius: $base-radius;
     background: calc-color(fade, $color-base, 90);
     visibility: hidden;
+    will-change: transform;
 
     &.kui-tooltip--direction_left,
     &.kui-tooltip--direction_up-left,
