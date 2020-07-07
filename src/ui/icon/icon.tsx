@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IIconInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/icon/icon.module.scss';
+import { Tooltip } from '..';
 
 export const Icon: React.SFC<IIconInheritedProps> =
 React.forwardRef((props, ref) => {

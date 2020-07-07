@@ -15,6 +15,7 @@ React.forwardRef((props, ref) => {
         editable,
         icon,
         isClearable,
+        iconTooltip,
         label,
         readOnly,
         searchPlaceholder,
@@ -108,13 +109,29 @@ React.forwardRef((props, ref) => {
         if (onChange) onChange(e);
     };
 
-    if (isClearable) {
-        inputAfter = <Icon
+    const iconClear = <Icon
             xlink="clear"
             size={24}
             className="kui-input__icon kui-input__icon--clear"
             onClick={clearInput}
         />;
+
+    const getIconOrTooltip = () => {
+        if (iconTooltip) {
+            const tooltipProps = (typeof iconTooltip === 'string')
+                ? { value: iconTooltip }
+                : iconTooltip;
+            return (
+                <Tooltip {...tooltipProps}>
+                    {iconClear}
+                </Tooltip>
+            )
+        }
+        return iconClear
+    };
+
+    if (isClearable) {
+        inputAfter = getIconOrTooltip();
     }
 
     if (variant === 'arrow' || variant === 'header') {
@@ -134,13 +151,7 @@ React.forwardRef((props, ref) => {
             className="kui-input__icon"
         />;
         if (isClearable) {
-            const iconClear = <Icon
-                xlink="clear"
-                size={24}
-                className="kui-input__icon kui-input__icon--clear"
-                onClick={clearInput}
-            />;
-            inputAfter = (isFilled) ? iconClear : iconCalendar;
+            inputAfter = (isFilled) ? getIconOrTooltip() : iconCalendar;
         } else {
             inputAfter = iconCalendar;
         }
@@ -156,11 +167,7 @@ React.forwardRef((props, ref) => {
                 {searchPlaceholder}
             </span>
         </span>);
-        inputAfter = <Icon
-            xlink="clear"
-            size={24}
-            className="kui-input__icon kui-input__icon--clear"
-            onClick={clearInput} />;
+        inputAfter = getIconOrTooltip();
     } else if
         (icon && variant === 'withicon') {
         inputAfter = <Icon
@@ -245,6 +252,7 @@ Input.defaultProps = {
     editable: true,
     icon: null,
     isClearable: false,
+    iconTooltip: null,
     label: null,
     searchPlaceholder: 'Search',
     state: null,
