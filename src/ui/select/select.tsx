@@ -22,6 +22,7 @@ React.forwardRef((props, ref) => {
         disabled,
         dropdownClassName,
         editable,
+        isCloseOnEnter,
         isFitWindow,
         multiple,
         opened,
@@ -419,7 +420,7 @@ React.forwardRef((props, ref) => {
                 }
                 onActiveChanged(activeHook);
             }
-            if (!multiple) {
+            if (!multiple && isCloseOnEnter) {
                 closeDropdown();
             }
         }
@@ -540,6 +541,7 @@ Select.defaultProps = {
     directionHorizontal: 'left',
     disabled: false,
     editable: false,
+    isCloseOnEnter: true,
     multiple: false,
     opened: false,
     options: null,
