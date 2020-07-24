@@ -36,6 +36,7 @@ export interface ISelectDispatchProps {
 
 export interface ISelectOwnProps {
     editable?: boolean;
+    isCloseOnEnter?: boolean;
     multiple?: boolean;
     ref?: any;
     single?: boolean; // for multiple click on option name closes select

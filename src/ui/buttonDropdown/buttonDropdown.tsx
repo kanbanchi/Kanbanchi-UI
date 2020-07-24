@@ -139,6 +139,8 @@ React.forwardRef((props, ref) => {
     ];
 
     attributes.onBlur = (e: any) => {
+        if (!document.hasFocus()) return;
+
         e.persist();
         const classes = getParentsClasses(
             e.relatedTarget as HTMLElement,

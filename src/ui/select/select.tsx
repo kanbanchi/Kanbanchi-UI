@@ -22,6 +22,7 @@ React.forwardRef((props, ref) => {
         disabled,
         dropdownClassName,
         editable,
+        isCloseOnEnter,
         isFitWindow,
         multiple,
         opened,
@@ -210,6 +211,8 @@ React.forwardRef((props, ref) => {
     }
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (!document.hasFocus()) return;
+
         e.persist();
         if (isFocusedHook) {
             const classes = getParentsClasses(
@@ -419,7 +422,7 @@ React.forwardRef((props, ref) => {
                 }
                 onActiveChanged(activeHook);
             }
-            if (!multiple) {
+            if (!multiple && isCloseOnEnter) {
                 closeDropdown();
             }
         }
@@ -540,6 +543,7 @@ Select.defaultProps = {
     directionHorizontal: 'left',
     disabled: false,
     editable: false,
+    isCloseOnEnter: true,
     multiple: false,
     opened: false,
     options: null,

@@ -1,6 +1,5 @@
 @import '../../assets/sass/index.scss';
 .kui-icon {
-    position: relative;
     display: inline-flex;
     vertical-align: middle;
     width: $google-spacing * 2;
@@ -17,7 +16,6 @@
         height: 100%;
         background: inherit;
         fill: currentColor;
-        transform: translateX(0);
     }    
 
     &--24 {
