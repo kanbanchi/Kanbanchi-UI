@@ -211,6 +211,8 @@ React.forwardRef((props, ref) => {
     }
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (!document.hasFocus()) return;
+
         e.persist();
         if (isFocusedHook) {
             const classes = getParentsClasses(

@@ -73,6 +73,8 @@ React.forwardRef((props, ref) => {
      */
 
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (!document.hasFocus()) return;
+
         if (e) e.persist();
         timer.current = setTimeout(() => {
             if (isFocusedHook) {
