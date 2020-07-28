@@ -15,6 +15,8 @@ export interface IDropdownPublicProps {
     portalId?: string;
     portalSelector?: string;
     beforeOpen?: () => Promise<any>;
+    onDidMount?: () => void;
+    onDidUnmount?: () => void;
 }
 
 export interface IDropdownOwnProps {
