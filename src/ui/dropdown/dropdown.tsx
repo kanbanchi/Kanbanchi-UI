@@ -14,10 +14,14 @@ React.forwardRef((props, ref) => {
         isMountClosed,
         opened,
         portal,
+        onDidMount,
+        onDidUnmount,
         ...attributes
     } = props;
 
     if (!opened && !isMountClosed) return null;
+
+    let [isShow, setIsShow] = React.useState(isMountClosed);
 
     className = ClassNames(
         'kui-dropdown',
@@ -29,10 +33,22 @@ React.forwardRef((props, ref) => {
         className
     );
 
+    React.useEffect(() => {
+        if (onDidMount) onDidMount();
+        setIsShow(true);
+
+        return () => {
+            if (onDidUnmount) onDidUnmount();
+        }
+    }, []);
+
     return (
         <div
             className={className}
             {...attributes}
+            style={{
+                opacity: Number(isShow)
+            }}
         >
             <div
                 className="kui-dropdown__item"
