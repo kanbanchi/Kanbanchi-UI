@@ -11,10 +11,13 @@ React.forwardRef((props, ref) => {
         directionVertical,
         directionHorizontal,
         isFitWindow,
+        isMountClosed,
         opened,
         portal,
         ...attributes
     } = props;
+
+    if (!opened && !isMountClosed) return null;
 
     className = ClassNames(
         'kui-dropdown',
@@ -44,6 +47,7 @@ React.forwardRef((props, ref) => {
 Dropdown.defaultProps = {
     directionVertical: 'auto',
     directionHorizontal: 'left',
+    isMountClosed: true,
     opened: false
 };
 

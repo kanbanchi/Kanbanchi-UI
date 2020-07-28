@@ -8,6 +8,7 @@ export interface IDropdownPublicProps {
     directionHorizontal?: 'left' | 'right';
     dropdownClassName?: string;
     isFitWindow?: boolean;
+    isMountClosed?: boolean;
     notBlurClasses?: string[];
     opened?: boolean;
     portal?: boolean;
