@@ -61,7 +61,7 @@ function usePortal(id, selector, className) {
     // Add the detached element to the parent
     parentElem.appendChild(rootElemRef.current);
 
-    if (className) {
+    if (className !== undefined) {
       parentElem.className = className;
     }
 
