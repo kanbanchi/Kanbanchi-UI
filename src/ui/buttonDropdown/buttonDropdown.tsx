@@ -76,12 +76,14 @@ React.forwardRef((props, ref) => {
         }
         if (portal) {
             const portalEl = document.getElementById(portalId) as HTMLElement;
-            const portalStyle = window.getComputedStyle(portalEl);
-            if (
-                !isNaN(parseInt(portalStyle.top)) ||
-                !isNaN(parseInt(portalStyle.left))
-            ) {
-                portalRect = portalEl.getBoundingClientRect();
+            if (portalEl) {
+                const portalStyle = window.getComputedStyle(portalEl);
+                if (
+                    !isNaN(parseInt(portalStyle.top)) ||
+                    !isNaN(parseInt(portalStyle.left))
+                ) {
+                    portalRect = portalEl.getBoundingClientRect();
+                }
             }
 
             dropdownContainerRef.current.style.top = 'unset';
