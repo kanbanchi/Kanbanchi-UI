@@ -95,7 +95,7 @@ function usePortal(id, selector, className) {
 
 export const Portal = ({
 	children,
-  className = '',
+  className,
 	id,
 	selector = null
 }) => {
