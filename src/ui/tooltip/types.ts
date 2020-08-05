@@ -28,6 +28,8 @@ export interface ITooltipStateProps {
     footer?: any;
     header?: string;
     isHidable?: boolean;
+    isNoEvents?: boolean;
+    isNoWrap?: boolean;
     isPortal?: boolean;
     link?: any;
     maxWidth?: IMediaScreens;

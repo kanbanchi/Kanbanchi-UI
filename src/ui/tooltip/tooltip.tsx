@@ -18,6 +18,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         direction,
         footer,
         isHidable,
+        isNoEvents,
+        isNoWrap,
         isPortal,
         header,
         link,
@@ -56,6 +58,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         (footer) ? 'kui-tooltip--footer' : null,
         (arrow) ? 'kui-tooltip--arrow-' + arrow : null,
         (arrowTranslate) ? 'kui-tooltip--arrowTranslate' : null,
+        (isNoEvents) ? 'kui-tooltip--noevents' : null,
+        (isNoWrap) ? 'kui-tooltip--nowrap' : null,
         className
     );
 
@@ -443,7 +447,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         if (a.click) a.click();
     };
 
-    const toggleShow = (show: boolean = false) => {
+    const toggleShow = (show: boolean) => {
         if (!targetsRefs[0].current && !children && selector) {
             const target = targetsRefs[0].current = document.querySelector(selector);
             if (target && !isPortal) {
@@ -451,6 +455,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 target.classList.add(uniqueClass);
             }
         }
+
+        if (show === undefined) return;
 
         if (!show) {
             clearTimeout(timeoutHook);

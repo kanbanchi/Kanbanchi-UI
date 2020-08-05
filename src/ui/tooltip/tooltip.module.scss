@@ -116,6 +116,14 @@
     &.kui-tooltip--arrow-left {
         margin-left: $google-spacing;
     }
+
+    &.kui-tooltip--nowrap {
+        pointer-events: none;
+    }
+
+    &.kui-tooltip--nowrap {
+        white-space: nowrap;
+    }
 }
 
 .kui-tooltip__header {
