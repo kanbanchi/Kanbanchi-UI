@@ -258,6 +258,7 @@ React.forwardRef((props, ref) => {
 
         dropdownBody = React.Children.map(childrenArray, (child: any) => {
             if (
+                !child ||
                 !child.type ||
                 !child.type.displayName ||
                 child.type.displayName !== 'SelectList'
@@ -492,8 +493,8 @@ React.forwardRef((props, ref) => {
         dropdownClassName
     );
 
-    const dropdownElement = (
-        <Dropdown
+    const dropdownElement = dropdownBody
+        ? <Dropdown
             className={classNameDropdown}
             directionVertical={directionHook}
             directionHorizontal={directionHorizontal}
@@ -506,7 +507,7 @@ React.forwardRef((props, ref) => {
         >
             {dropdownBody}
         </Dropdown>
-    );
+        : null;
 
     const dropdownPortal = readOnly || disabled
         ? null
