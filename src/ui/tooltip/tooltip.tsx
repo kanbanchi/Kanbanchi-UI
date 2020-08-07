@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
 import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
-import { Portal } from './../portal/portal';
+import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -63,22 +63,27 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         className
     );
 
-    const [isShown, setIsShown] = React.useState(false); // for css animation
+    let [isShown, _setIsShown] = React.useState(false); // for css animation
+    let [isCanShow, _setIsCanShow] = React.useState(false);
+    const [s] = React.useState<any>({});
+    s.isCanShow = isCanShow;
     const [isMount, setIsMount] = React.useState(false);
     const [classHook, setClassHook] = React.useState(className);
     const [isTouchHook, setIsTouchHook] = React.useState(false);
-    let [timeoutHook, setTimeoutHook] = React.useState(null);
-    let [touchHook, setTouchHook] = React.useState(null);
-    let [mouseHook, setMouseHook] = React.useState(null);
-    let [isMouseOverTooltip, setMouseOverTooltip] = React.useState(false);
-    const [uniqueClass, setUniqueClass] = React.useState('kui-tooltip--' + uuidv4());
+    const [uniqueClass] = React.useState('kui-tooltip--' + uuidv4());
+    let [targetsRefs] = React.useState(Array.from({ length: 10 }, () => React.useRef(null)));
+
+    const itemRef = React.useRef(null);
     const portalRef = React.useRef(null);
     const timer = React.useRef(null);
+    const timeout = React.useRef(null);
+    const timerTouch = React.useRef(null);
+    const timerMouse = React.useRef(null);
 
     const classNamePortal = isPortal ? '' : 'kui-portal--tooltip-in-target';
 
     if (!isPortal) {
-        if (!portalId) portalId = 'kui-portal--' + uniqueClass;
+        if (portalId === KUI_PORTAL_ID) portalId = 'kui-portal--' + uniqueClass;
         if (!portalSelector) portalSelector = '.' + uniqueClass;
     }
 
@@ -115,290 +120,265 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
     const calcTooltip = (
         index: number = 0,
-        targetObj?: any,
         count?: number
-    ) => {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        if (!targetObj) {
-            if (!targetsRefs[index]) return;
-            const target = targetsRefs[index].current || targetsRefs[index];
-            if (!target || !target.getBoundingClientRect) return;
-            const targetRect = target.getBoundingClientRect();
-            const scrollClient = isPortal ? getScrollClient() : SCROLL_CLIENT_NULL;
-
-            targetObj = {
-                x: targetRect.left + scrollClient.scrollLeft - scrollClient.clientLeft,
-                y: targetRect.top + scrollClient.scrollTop - scrollClient.clientTop,
-                width: targetRect.right - targetRect.left,
-                height: targetRect.bottom - targetRect.top,
-            };
-            if (isPortal) {
-                targetObj.xPortal = targetObj.x;
-                targetObj.yPortal = targetObj.y;
-                targetObj.right = targetObj.xPortal + targetObj.width; // from left side of window to right side of target
-                targetObj.bottom = targetObj.yPortal + targetObj.height;
-                targetObj.rightPortal = w - targetObj.right; // from right side of target to right side of window
-                targetObj.bottomPortal = h - targetObj.bottom;
-            } else {
-                targetObj.xPortal = 0;
-                targetObj.yPortal = 0;
-                targetObj.right = targetObj.width;
-                targetObj.bottom = targetObj.height;
-                targetObj.rightPortal = 0;
-                targetObj.bottomPortal = 0;
-            }
-        }
-
+    ): Promise<any> => {
+        const portalEl = document.getElementById(portalId) as HTMLElement;
         const item = itemRef.current;
-        if (!item) {
-            timer.current = setTimeout(() => { // tooltip didn't mount, wait
-                calcTooltip(index, targetObj);
-            }, WAIT_ANIMATION);
-            return;
-        };
-        let itemRect = item.getBoundingClientRect();
-        let itemObj: any = {
-            width: itemRect.width || itemRect.right - itemRect.left,
-            height: itemRect.height || itemRect.bottom - itemRect.top
-        };
 
-        timer.current = setTimeout(() => { // long tooltip auto fit to window
-            let item = itemRef.current;
-            if (item) {
-                let itemRect = item.getBoundingClientRect();
-                let itemWidth = itemRect.width || itemRect.right - itemRect.left;
-                if (itemWidth !== itemObj.width) {
-                    if (!count) {
-                        item.style.maxWidth = itemWidth + 'px';
-                        calcTooltip(index, targetObj, 1);
-                    }
-                }
-            }
-        }, 100);
+        return new Promise((res, rej) => {
+            if (!targetsRefs[index]) rej('targetsRefs');
+            const target = targetsRefs[index].current || targetsRefs[index];
+            if (!target || !target.getBoundingClientRect) rej('target');
 
-        const portal = isPortal ? item : portalRef.current;
-        const hasScroll = getHasScroll(item);
-        const SCREEN_PADDING_WITH_SCROLLBAR = hasScroll.y ? SCREEN_PADDING * 4 : SCREEN_PADDING;
-
-        let top, bottom;
-        if (direction.includes('down')) {
-            top = targetObj.bottom;
-
-        } else if (direction.includes('up')) {
-            bottom = targetObj.bottomPortal + targetObj.height;
-
-        } else if (direction === 'left' || direction === 'right') {
-            top = targetObj.yPortal + (targetObj.height - itemObj.height) / 2;
-        }
-
-        if (top !== undefined) {
-            if (translate && translate.top) {
-                top += translate.top;
-            }
-            portal.style.top = top + 'px';
-        } else if (bottom !== undefined) {
-            if (translate && translate.bottom) {
-                bottom += translate.bottom;
-            }
-            portal.style.bottom = bottom + 'px';
-        }
-
-        let left, right;
-        if (direction === 'down' || direction === 'up') {
-            left = targetObj.xPortal + (targetObj.width - itemObj.width) / 2;
-
-        } else if (direction.includes('-left')) {
-            right = targetObj.rightPortal;
-
-        } else if (direction.includes('-right')) {
-            left = targetObj.xPortal;
-
-        } else if (direction === 'left') {
-            right = targetObj.rightPortal + targetObj.width;
-
-        } else if (direction === 'right') {
-            left = targetObj.right;
-
-        }
-
-        let maxWidth = 0;
-        if (left !== undefined) {
-            if (translate && translate.left) {
-                left += translate.left;
-            }
-            if (targetObj.x - targetObj.xPortal + left < SCREEN_PADDING) {
-                left = SCREEN_PADDING - targetObj.x + targetObj.xPortal;
-            }
-            if (isHint && (direction === 'down' || direction === 'up')) {
-                if (isPortal) {
-                    maxWidth = (targetObj.x + targetObj.width / 2 - left) * 2;
-                    if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
-                        maxWidth = (w - SCREEN_PADDING_WITH_SCROLLBAR - targetObj.x - targetObj.width / 2) * 2;
-                        left = (targetObj.x - maxWidth) / 2;
-                    }
-                } else {
-                    maxWidth = targetObj.width - left * 2;
-                    if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
-                        maxWidth = (w - SCREEN_PADDING_WITH_SCROLLBAR - targetObj.x - targetObj.width / 2) * 2;
-                        left = (targetObj.width - maxWidth) / 2;
-                    }
-                }
+            if (!portalEl || !item) {
+                setIsMount(false);
+                timer.current = setTimeout(() => { // tooltip didn't mount, wait
+                    setIsMount(true);
+                    console.error(uniqueClass, 'didnt mount');
+                    res(calcTooltip(index));
+                }, 100);
             } else {
-                maxWidth = w - targetObj.x + targetObj.xPortal - left - SCREEN_PADDING_WITH_SCROLLBAR;
-            }
-            portal.style.left = left + 'px';
-        } else if (right !== undefined) {
-            if (translate && translate.right) {
-                right += translate.right;
-            }
-            if (isPortal && right < SCREEN_PADDING) {
-                right = SCREEN_PADDING;
-            } else if (!isPortal && w - targetObj.x - targetObj.width - right < SCREEN_PADDING) {
-                right = w - targetObj.x - targetObj.width - SCREEN_PADDING;
-            }
-            portal.style.right = right + 'px';
-            maxWidth = targetObj.x + targetObj.width - right - SCREEN_PADDING_WITH_SCROLLBAR;
-        }
+                let itemRect = item.getBoundingClientRect();
+                let itemObj: any = {
+                    width: itemRect.right - itemRect.left,
+                    height: itemRect.bottom - itemRect.top,
+                };
 
-        item.style.maxWidth = maxWidth + 'px';
-        if (!isPortal) portal.style.maxWidth = maxWidth + 'px';
+                timer.current = setTimeout(() => { // long tooltip auto fits to window
+                    let item = itemRef.current;
+                    if (!item) rej('item');
+
+                    let itemRect = item.getBoundingClientRect();
+                    let itemWidth = itemRect.width || itemRect.right - itemRect.left;
+                    if (
+                        itemWidth !== itemObj.width && // fit once
+                        !count
+                    ) {
+                        item.style.maxWidth = itemWidth + 'px';
+                        res(calcTooltip(index, 1));
+                    } else {
+                        const w = window.innerWidth;
+                        const h = window.innerHeight;
+
+                        const targetRect = target.getBoundingClientRect();
+                        const portalStyle = window.getComputedStyle(portalEl);
+                        const portalRect = portalEl.getBoundingClientRect();
+                        const scrollClient = isPortal && portalStyle.position !== 'fixed' ? getScrollClient() : SCROLL_CLIENT_NULL;
+
+                        const targetObj: any = {
+                            x: targetRect.left + scrollClient.scrollLeft - scrollClient.clientLeft,
+                            y: targetRect.top + scrollClient.scrollTop - scrollClient.clientTop,
+                            width: targetRect.right - targetRect.left,
+                            height: targetRect.bottom - targetRect.top,
+                        };
+                        if (isPortal) {
+                            targetObj.xPortal = targetRect.left - portalRect.left;
+                            targetObj.yPortal = targetRect.top - portalRect.top;
+                            targetObj.right = targetObj.xPortal + targetObj.width; // from left side of window to right side of target
+                            targetObj.bottom = targetObj.yPortal + targetObj.height;
+                            targetObj.rightPortal = portalRect.right - portalRect.left - targetObj.right; // from right side of target to right side of portal
+                            targetObj.bottomPortal = portalRect.bottom - portalRect.top - targetObj.bottom;
+                        } else {
+                            targetObj.xPortal = 0;
+                            targetObj.yPortal = 0;
+                            targetObj.right = targetObj.width;
+                            targetObj.bottom = targetObj.height;
+                            targetObj.rightPortal = 0;
+                            targetObj.bottomPortal = 0;
+                        }
+
+                        const portal = isPortal ? item : portalRef.current;
+                        const hasScroll = getHasScroll(item);
+                        const SCREEN_PADDING_WITH_SCROLLBAR = hasScroll.y ? SCREEN_PADDING * 4 : SCREEN_PADDING;
+
+                        let top, bottom;
+                        if (direction.includes('down')) {
+                            top = targetObj.bottom;
+
+                        } else if (direction.includes('up')) {
+                            bottom = targetObj.bottomPortal + targetObj.height;
+
+                        } else if (direction === 'left' || direction === 'right') {
+                            top = targetObj.yPortal + (targetObj.height - itemObj.height) / 2;
+                        }
+
+                        if (top !== undefined) {
+                            if (translate && translate.top) {
+                                top += translate.top;
+                            }
+                            portal.style.top = top + 'px';
+                        } else if (bottom !== undefined) {
+                            if (translate && translate.bottom) {
+                                bottom += translate.bottom;
+                            }
+                            portal.style.bottom = bottom + 'px';
+                        }
+
+                        let left, right;
+                        if (direction === 'down' || direction === 'up') {
+                            left = targetObj.xPortal + (targetObj.width - itemObj.width) / 2;
+
+                        } else if (direction.includes('-left')) {
+                            right = targetObj.rightPortal;
+
+                        } else if (direction.includes('-right')) {
+                            left = targetObj.xPortal;
+
+                        } else if (direction === 'left') {
+                            right = targetObj.rightPortal + targetObj.width;
+
+                        } else if (direction === 'right') {
+                            left = targetObj.right;
+
+                        }
+
+                        let maxWidth = 0;
+                        if (left !== undefined) {
+                            if (translate && translate.left) {
+                                left += translate.left;
+                            }
+                            if (portalRect.left + left < SCREEN_PADDING) { // левее окна
+                                left = SCREEN_PADDING - portalRect.left;
+                            }
+                            if (portalRect.left + left + itemWidth > w - SCREEN_PADDING) { // левее окна
+                                left = w - SCREEN_PADDING - portalRect.left - itemWidth;
+                            }
+                            if (targetObj.x - targetObj.xPortal + left < SCREEN_PADDING) { // это когда?
+                                left = SCREEN_PADDING - targetObj.x + targetObj.xPortal;
+                            }
+                            if (isHint && (direction === 'down' || direction === 'up')) {
+                                if (isPortal) {
+                                    maxWidth = (targetObj.x + targetObj.width / 2 - left) * 2;
+                                    if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
+                                        maxWidth = (w - SCREEN_PADDING_WITH_SCROLLBAR - targetObj.x - targetObj.width / 2) * 2;
+                                        left = (targetObj.x - maxWidth) / 2;
+                                    }
+                                } else {
+                                    maxWidth = targetObj.width - left * 2;
+                                    if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
+                                        maxWidth = (w - SCREEN_PADDING_WITH_SCROLLBAR - targetObj.x - targetObj.width / 2) * 2;
+                                        left = (targetObj.width - maxWidth) / 2;
+                                    }
+                                }
+                            } else {
+                                maxWidth = w - portalRect.left - left - SCREEN_PADDING_WITH_SCROLLBAR;
+                            }
+                            portal.style.left = left + 'px';
+                        } else if (right !== undefined) {
+                            if (translate && translate.right) {
+                                right += translate.right;
+                            }
+                            if (isPortal && right < SCREEN_PADDING) {
+                                right = SCREEN_PADDING;
+                            } else if (!isPortal && w - targetObj.x - targetObj.width - right < SCREEN_PADDING) {
+                                right = w - targetObj.x - targetObj.width - SCREEN_PADDING;
+                            }
+                            portal.style.right = right + 'px';
+                            maxWidth = targetObj.x + targetObj.width - right - SCREEN_PADDING_WITH_SCROLLBAR;
+                        }
+
+                        item.style.maxWidth = maxWidth + 'px';
+                        if (!isPortal) portal.style.maxWidth = maxWidth + 'px';
+                        res();
+                    }
+                }, 100);
+            }
+        }).catch(error => console.error(error));
+    };
+
+    const setIsShown = (isShownNew: boolean) => {
+        isShown = isShownNew;
+        _setIsShown(isShownNew);
+    };
+
+    const setIsCanShow = (isCanShowNew: boolean) => {
+        isCanShow = isCanShowNew;
+        _setIsCanShow(isCanShowNew);
     };
 
     const toggleTooltip = (show: boolean = false) => {
         if (show && isShown) return;
         if (!show && !isShown) return;
-        if (isMouseOverTooltip) return;
         setIsShown(show);
         setClassHook(ClassNames(
             className,
             'kui-tooltip--' + (show ? 'show' : 'hide')
         ));
+        if (timeout.current) clearTimeout(timeout.current);
         if (show) {
             if (onShow) onShow();
-            timeoutHook = setTimeout(() => {
-                timeoutHook = null;
-                setTimeoutHook(timeoutHook);
-            }, WAIT_ANIMATION);
         } else {
-            timeoutHook = setTimeout(() => {
-                if (timeoutHook) {
-                    setIsMount(false);
-                    setClassHook(className);
-                    isMouseOverTooltip = false;
-                    setMouseOverTooltip(false);
-                    timeoutHook = null;
-                    setTimeoutHook(timeoutHook);
-                }
+            timeout.current = setTimeout(() => {
+                setIsMount(false);
+                setClassHook(className);
                 if (onHide) onHide();
             }, WAIT_ANIMATION);
         }
-        setTimeoutHook(timeoutHook);
+    };
+
+    const showIfCan = () => {
+        if (s.isCanShow) toggleTooltip(true);
     };
 
     const toggleMouse = (event: React.MouseEvent, index: number, show: boolean) => {
-        event.persist();
         if (isTouchHook) return;
+
+        if (timeout.current) clearTimeout(timeout.current);
+        setIsCanShow(show);
         if (!show) {
-            clearTimeout(timeoutHook);
-            const timeout = window.setTimeout(() => {
-                if (timeoutHook === timeout) {
-                    timeoutHook = null;
-                    setTimeoutHook(timeoutHook);
-                    toggleTooltip();
-                }
+            timeout.current = setTimeout(() => {
+                toggleTooltip();
             }, WAIT_BEFORE_HIDE);
-            timeoutHook = timeout;
-            setTimeoutHook(timeoutHook);
             return;
         }
-        setIsMount(true);
-        calcTooltip(index);
-
-        clearTimeout(timeoutHook);
-        const timeout = window.setTimeout(() => {
-            if (timeoutHook === timeout) {
-                toggleTooltip(show);
-            }
-        }, WAIT_BEFORE_SHOW);
-        timeoutHook = timeout;
-        setTimeoutHook(timeoutHook);
-
-        clearTimeout(mouseHook);
-        const mouseTimeout = window.setTimeout(() => {
-            mouseHook = null;
-            setMouseHook(mouseHook);
-        }, MOUSE_DEBOUNCE);
-        mouseHook = mouseTimeout;
-        setMouseHook(mouseHook);
+        mouseMove(event, index);
     };
 
-    const mouseMove = (event: React.MouseEvent) => {
-        if (isShown) return;
-        if (!mouseHook) {
-            clearTimeout(timeoutHook);
-            const timeout = window.setTimeout(() => {
-                if (timeoutHook === timeout) {
-                    toggleTooltip(true);
-                }
+    const mouseMove = (event: React.MouseEvent, index: number) => {
+        setIsMount(true);
+        if (!timerMouse.current) {
+            if (timeout.current) clearTimeout(timeout.current);
+            timeout.current = setTimeout(() => {
+                calcTooltip().then(showIfCan);
             }, WAIT_BEFORE_SHOW);
-            timeoutHook = timeout;
-            setTimeoutHook(timeoutHook);
 
-            clearTimeout(mouseHook);
-            const mouseTimeout = window.setTimeout(() => {
-                mouseHook = null;
-                setMouseHook(mouseHook);
+            if (timerMouse.current) clearTimeout(timerMouse.current);
+            timerMouse.current = setTimeout(() => {
+                timerMouse.current = null;
             }, MOUSE_DEBOUNCE);
-            mouseHook = mouseTimeout;
-            setMouseHook(mouseHook);
         }
     };
 
     const toggleTouch = (event: React.TouchEvent, index: number, show: boolean) => {
-        if (!show) {
-            clearTimeout(touchHook);
-            touchHook = null
-            setTouchHook(touchHook);
-            return;
-        }
+        if (timerTouch.current) clearTimeout(timerTouch.current);
+        if (!show) return;
+
         setIsTouchHook(true);
         setIsMount(true);
-        calcTooltip(index);
-        touchHook = setTimeout(() => {
-            if (touchHook) {
-                toggleTooltip(show);
-            }
+        timerTouch.current = setTimeout(() => {
+            calcTooltip(index).then(showIfCan);
         }, WAIT_BEFORE_SHOW);
-        setTouchHook(touchHook);
     };
 
+    const clearShowTimers = () => {
+        if (timerMouse.current) clearTimeout(timerMouse.current);
+        if (timerTouch.current) clearTimeout(timerTouch.current);
+        if (timeout.current) clearTimeout(timeout.current);
+        timerMouse.current = null;
+        timerTouch.current = null;
+        timeout.current = null;
+    }
+
     const closeTooltip = () => {
-        clearTimeout(mouseHook);
-        clearTimeout(touchHook);
-        clearTimeout(timeoutHook);
-        touchHook = null;
-        timeoutHook = null;
-        setTouchHook(null);
-        setTimeoutHook(null);
+        clearShowTimers();
         if (isShown) toggleTooltip();
     }
 
     const onMouseEnterTooltip = () => {
-        isMouseOverTooltip = true;
-        setMouseOverTooltip(true);
-        clearTimeout(mouseHook);
-        clearTimeout(touchHook);
-        clearTimeout(timeoutHook);
-        touchHook = null;
-        timeoutHook = null;
-        setTouchHook(null);
-        setTimeoutHook(null);
+        clearShowTimers();
     };
 
     const onMouseLeaveTooltip = () => {
-        isMouseOverTooltip = false;
-        setMouseOverTooltip(false);
         closeTooltip();
     };
 
@@ -414,23 +394,15 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
     const onClickTarget = () => {
         if (link) { // toggle tooltip by click target
-            if (!timeoutHook) {
-                if (mouseHook) clearTimeout(mouseHook);
-                mouseHook = null;
-                if (isShown) {
-                    toggleTooltip();
-                } else {
-                    setIsMount(true);
-                    calcTooltip();
-                    clearTimeout(timeoutHook);
-                    const timeout = window.setTimeout(() => {
-                        if (timeoutHook === timeout) {
-                            toggleTooltip(true);
-                        }
-                    }, WAIT_ANIMATION);
-                    timeoutHook = timeout;
-                    setTimeoutHook(timeoutHook);
-                }
+            if (timerMouse.current) clearTimeout(timerMouse.current);
+            if (timeout.current) clearTimeout(timeout.current);
+            if (isShown) {
+                toggleTooltip();
+            } else {
+                setIsMount(true);
+                timeout.current = setTimeout(() => {
+                    calcTooltip().then(showIfCan);
+                }, WAIT_ANIMATION);
             }
         } else if (isHidable) {
             closeTooltip();
@@ -458,38 +430,23 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
         if (show === undefined) return;
 
+        if (timeout.current) clearTimeout(timeout.current);
         if (!show) {
-            clearTimeout(timeoutHook);
-            const timeout = window.setTimeout(() => {
-                if (timeoutHook === timeout) {
-                    timeoutHook = null;
-                    setTimeoutHook(timeoutHook);
-                    toggleTooltip();
-                }
+            timeout.current = setTimeout(() => {
+                toggleTooltip();
             }, WAIT_BEFORE_HIDE);
-            timeoutHook = timeout;
-            setTimeoutHook(timeoutHook);
             return;
         }
         if (!isHint) return;
 
         setIsMount(true);
-        calcTooltip();
-        clearTimeout(timeoutHook);
-        const timeout = window.setTimeout(() => {
-            if (timeoutHook === timeout) {
-                toggleTooltip(show);
-            }
+        timeout.current = setTimeout(() => {
+            calcTooltip().then(showIfCan);
         }, WAIT_BEFORE_SHOW);
-        timeoutHook = timeout;
-        setTimeoutHook(timeoutHook);
     };
 
     const childrenArray: Array<React.ReactNode> = // children could be string, we need array
         (Array.isArray(children)) ? children : [children];
-
-    const targetsRefs = Array.from({ length: 10 }, () => React.useRef(null));
-    const itemRef = React.useRef(null);
 
     const targets = React.Children.map(childrenArray, (child: any, index) => {
         if (!child) return null;
@@ -500,7 +457,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         const targetOnMouse = isHint ? {} : {
             onMouseEnter: (event: React.MouseEvent) => toggleMouse(event, index, true),
             onMouseLeave: (event: React.MouseEvent) => toggleMouse(event, index, false),
-            onMouseMove: (event: React.MouseEvent) => mouseMove(event),
+            onMouseMove: (event: React.MouseEvent) => mouseMove(event, index),
         };
 
         return React.cloneElement(child, {
@@ -544,9 +501,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
 
     React.useEffect(() => {
         return () => {
-            clearTimeout(mouseHook);
-            clearTimeout(touchHook);
-            clearTimeout(timeoutHook);
+            clearShowTimers();
             if (timer.current) clearTimeout(timer.current);
         }
     }, []);
@@ -588,6 +543,7 @@ Tooltip.defaultProps = {
     direction: 'up',
     isPortal: true,
     maxWidth: null,
+    portalId: KUI_PORTAL_ID,
     state: null,
     value: null,
     variant: null,
