@@ -134,7 +134,6 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                 setIsMount(false);
                 timer.current = setTimeout(() => { // tooltip didn't mount, wait
                     setIsMount(true);
-                    console.error(uniqueClass, 'didnt mount');
                     res(calcTooltip(index));
                 }, 100);
             } else {
@@ -439,10 +438,9 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         }
         if (!isHint) return;
 
+        setIsCanShow(true);
         setIsMount(true);
-        timeout.current = setTimeout(() => {
-            calcTooltip().then(showIfCan);
-        }, WAIT_BEFORE_SHOW);
+        calcTooltip().then(showIfCan);
     };
 
     const childrenArray: Array<React.ReactNode> = // children could be string, we need array
