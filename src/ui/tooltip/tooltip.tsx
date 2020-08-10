@@ -274,7 +274,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                                 right = w - targetObj.x - targetObj.width - SCREEN_PADDING;
                             }
                             portal.style.right = right + 'px';
-                            maxWidth = targetObj.x + targetObj.width - right - SCREEN_PADDING_WITH_SCROLLBAR;
+                            maxWidth = targetObj.x - SCREEN_PADDING_WITH_SCROLLBAR;
                         }
 
                         item.style.maxWidth = maxWidth + 'px';
