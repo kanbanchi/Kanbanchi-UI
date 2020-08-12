@@ -4,7 +4,7 @@ import { IconsList } from './utils';
 
 const Story = () => {
     const icons = require.context(
-        '!svg-react-loader!./../../src/assets/icons/',
+        '!svg-react-loader!./../../src/assets/icons/24/',
         false,
         /\.svg$/
     ).keys().map(file => file.replace(/(\.\/|\.svg$)/g, ''));
