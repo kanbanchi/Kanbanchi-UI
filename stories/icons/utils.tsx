@@ -3,12 +3,12 @@ import { Icon } from '../../src/ui';
 import { EIconSize } from '../../src/ui/icon/types';
 
 export const IconItem = (options: any) => {
-    let { xlink, size = EIconSize.SIZE_24, title = '', key } = options;
+    let { xlink, size = EIconSize, title = '', key } = options;
     title = (!title) ? xlink : title;
     return (
         <div className="icons-grid__item" key={key}>
             <div className="icons-grid__icon">
-                <Icon xlink={xlink} size={size} title={title} />
+                <Icon xlink={xlink} size={size} title={title}/>
             </div>
             <div className="icons-grid__text">
                 {title}
@@ -18,7 +18,7 @@ export const IconItem = (options: any) => {
 };
 
 export const IconsList = (options: any) => {
-    let { arr, size = EIconSize.SIZE_24 } = options,
+    let { arr, size = EIconSize } = options,
         letter = '';
     return arr.sort().map((i: any, key: any) => {
         let ret = [];

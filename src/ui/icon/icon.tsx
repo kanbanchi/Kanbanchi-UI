@@ -18,6 +18,7 @@ React.forwardRef((props, ref) => {
             Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
         } else {
             Svg = require(`!svg-react-loader!../../../src/assets/icons/${ EIconSize.SIZE_24 }/` + xlink + '.svg');
+            size = EIconSize.SIZE_24;
         }
     } catch (e) {
         Svg = 'svg';
