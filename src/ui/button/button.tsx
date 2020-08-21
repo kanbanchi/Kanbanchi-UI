@@ -66,11 +66,11 @@ React.forwardRef((props, ref) => {
             iconAfter = <Icon {...iconProps} />;
             break;
         case 'action':
-            iconProps.xlink = 'dots';
+            iconProps.xlink = 'more';
             iconBefore = <Icon {...iconProps} />;
             break;
         case 'text':
-            iconProps.xlink = 'arrow-long-right';
+            iconProps.xlink = 'arrow-button';
             iconAfter = <Icon {...iconProps} />;
             break;
     }
