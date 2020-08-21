@@ -81,7 +81,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const isHint = variant === 'hint';
     let html = [];
     if (arrow) {
-        // const icon = 'hint-arrow-' + arrow;
+        // const icon = 'hint-arrow-' + arrow; //TODO no such icon in the new set
         html.push(<div
             className={'kui-tooltip__arrow'}
             key={'arrow'}
