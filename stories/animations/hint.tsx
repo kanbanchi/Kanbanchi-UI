@@ -118,7 +118,7 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="trash" size={24} />
+                                <Icon xlink="clear" size={24} />
                             </Button>
                         </Hint>
                     </div>
@@ -131,10 +131,10 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="project-template" size={24} />
+                                <Icon xlink="board-template" size={24} />
                             </Button>
                             <Button variant="icon">
-                                <Icon xlink="project-favorite" size={24} />
+                                <Icon xlink="board-favorite" size={24} />
                             </Button>
                         </Hint>
 
@@ -239,7 +239,7 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="trash" size={24} />
+                                <Icon xlink="clear" size={24} />
                             </Button>
                         </Hint>
                     </div>
@@ -252,10 +252,10 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="project-template" size={24} />
+                                <Icon xlink="board-template" size={24} />
                             </Button>
                             <Button variant="icon">
-                                <Icon xlink="project-favorite" size={24} />
+                                <Icon xlink="board-favorite" size={24} />
                             </Button>
                         </Hint>
 
@@ -309,7 +309,7 @@ const Story = () => {
                             variant={'icon'}
                             onClick={()=>console.log('click Dots')}
                         >
-                            <Icon size={24} xlink={'dots'} />
+                            <Icon size={24} xlink={'more'} />
                         </Button>
                     </Hint>
                 </h2>
