@@ -22,7 +22,7 @@ const Story = () => {
                 <ButtonsGroup style={{ flexWrap: 'nowrap' }}>
                     <Button variant="icon"><Icon xlink="pin" size={24} /></Button>
                     <Button variant="icon"><Icon xlink="cloud-download" size={24} /></Button>
-                    <Button variant="icon"><Icon xlink="trash" size={24} /></Button>
+                    <Button variant="icon"><Icon xlink="clear" size={24} /></Button>
                 </ButtonsGroup>
             </span>
         </div>

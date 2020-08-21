@@ -53,7 +53,7 @@ const Story = () => {
                         Get link to card
                     </SelectListItem>
                     <SelectListItem
-                        icon={'trash'}
+                        icon={'clear'}
                         iconSize={24}
                     >
                         Delete card
