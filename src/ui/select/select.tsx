@@ -186,13 +186,10 @@ React.forwardRef((props, ref) => {
                 if (!isSearch) { // dont update search input value
                     setValue(e.item.text);
                 }
-                if (
-                    e.item.text !== valueHook ||
-                    e.item.index !== activeHook
-                ) {
+                if (e.item.index !== activeHook) {
                     setActiveHook(e.item.index);
-                    if (onChange) onChange(e);
                 }
+                if (onChange) onChange(e);
             }
         } else { // input changed
             setValue(e.target.value);
