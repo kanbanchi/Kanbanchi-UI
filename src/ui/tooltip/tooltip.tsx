@@ -67,7 +67,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     let [isCanShow, _setIsCanShow] = React.useState(false);
     const [s] = React.useState<any>({});
     s.isCanShow = isCanShow;
-    const [isMount, setIsMount] = React.useState(!!show);
+    const [isMount, setIsMount] = React.useState(false);
     const [classHook, setClassHook] = React.useState(className);
     const [isTouchHook, setIsTouchHook] = React.useState(false);
     const [uniqueClass] = React.useState('kui-tooltip--' + uuidv4());
@@ -438,9 +438,9 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         }
         if (!isHint) return;
 
-        timeout.current = setTimeout(() => {
-            calcTooltip().then(() => toggleTooltip(true));
-        }, WAIT_BEFORE_SHOW);
+        setIsCanShow(true);
+        setIsMount(true);
+        calcTooltip().then(showIfCan);
     };
 
     const childrenArray: Array<React.ReactNode> = // children could be string, we need array
