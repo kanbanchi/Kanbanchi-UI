@@ -118,7 +118,7 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="clear" size={24} />
+                                <Icon xlink="delete" size={24} />
                             </Button>
                         </Hint>
                     </div>
@@ -131,10 +131,10 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="board-template" size={24} />
+                                <Icon xlink="project-template" size={24} />
                             </Button>
                             <Button variant="icon">
-                                <Icon xlink="board-favorite" size={24} />
+                                <Icon xlink="project-favorite" size={24} />
                             </Button>
                         </Hint>
 
@@ -239,7 +239,7 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="clear" size={24} />
+                                <Icon xlink="delete" size={24} />
                             </Button>
                         </Hint>
                     </div>
@@ -252,10 +252,10 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="board-template" size={24} />
+                                <Icon xlink="project-template" size={24} />
                             </Button>
                             <Button variant="icon">
-                                <Icon xlink="board-favorite" size={24} />
+                                <Icon xlink="project-favorite" size={24} />
                             </Button>
                         </Hint>
 
