@@ -129,6 +129,13 @@
     &.kui-tooltip--nowrap {
         white-space: nowrap;
     }
+
+    &:not(.kui-tooltip--show) {
+        height: 0;
+        min-height: 0;
+        padding: 0;
+        overflow: hidden;
+    }
 }
 
 .kui-tooltip__header {
