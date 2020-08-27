@@ -14,19 +14,13 @@ React.forwardRef((props, ref) => {
 
     let Svg;
     try {
-        if (
-            size &&
-            size === EIconSize.SIZE_16
-        ) {
-            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
-        } else if (
-            size &&
-            size === EIconSize.SIZE_96
-        ) {
-            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
-        } else {
-            size = EIconSize.SIZE_24;
-            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
+        if (size && (size === EIconSize.SIZE_16 || size === EIconSize.SIZE_96)) {
+            try {
+                Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
+            } catch (e) {
+                size = EIconSize.SIZE_24;
+                Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
+            }
         }
     } catch (e) {
         Svg = 'svg';
