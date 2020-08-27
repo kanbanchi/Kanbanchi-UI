@@ -11,20 +11,26 @@ React.forwardRef((props, ref) => {
         xlink,
         ...attributes
     } = props;
-
     let Svg;
-    try {
-        if (size && (size === EIconSize.SIZE_16 || size === EIconSize.SIZE_96)) {
-            try {
-                Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
-            } catch (e) {
-                size = EIconSize.SIZE_24;
-                Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
-            }
+
+    const require24pxIcons = () => {
+        try {
+            size = EIconSize.SIZE_24;
+            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
+        } catch (e) {
+            Svg = 'svg';
+            console.error(`svg with xlink ${ xlink }, size ${ size } not found`)
         }
-    } catch (e) {
-        Svg = 'svg';
-        console.error(`svg with xlink ${ xlink }, size ${ size } not found`)
+    }
+
+    if (size && (size === EIconSize.SIZE_16 || size === EIconSize.SIZE_96)) {
+        try {
+            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
+        } catch (e) {
+            require24pxIcons();
+        }
+    } else {
+        require24pxIcons();
     }
 
     if (size === 16) size = null;
