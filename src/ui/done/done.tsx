@@ -24,7 +24,7 @@ React.forwardRef((props, ref) => {
     );
 
     const icon = (percent === null) ?
-        'radio-button-off' :
+        'empty-circle' :
         'done-circle';
 
     let percentText = percent + '%';

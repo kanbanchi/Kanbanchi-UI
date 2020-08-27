@@ -101,7 +101,7 @@ const Story = () => {
                 <br/>
 
                 <Input
-                    icon="deadline"
+                    icon="overdue"
                     label={'Default'}
                     value={'Variant withicon'}
                     variant={'withicon'}
@@ -134,7 +134,7 @@ const Story = () => {
                 <br/>
 
                 <Input
-                    icon="deadline"
+                    icon="overdue"
                     label={'Readonly'}
                     readOnly
                     value={'Variant withicon'}
@@ -168,7 +168,7 @@ const Story = () => {
                 <br/>
 
                 <Input
-                    icon="deadline"
+                    icon="overdue"
                     label={'Disabled'}
                     disabled
                     value={'Variant withicon'}
