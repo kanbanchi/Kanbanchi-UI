@@ -106,7 +106,7 @@ const Story = () => {
                             onClose={()=>console.log('closed')}
                         >
                             <Button variant="icon">
-                                <Icon size={24} xlink={'dots'} />
+                                <Icon size={24} xlink={'more'} />
                             </Button>
                             <SelectList fixActive={false}>
                                 <SelectListItem
@@ -131,7 +131,7 @@ const Story = () => {
                             portal
                         >
                             <Button variant="icon">
-                                <Icon size={24} xlink={'dots'} />
+                                <Icon size={24} xlink={'more'} />
                             </Button>
                             <SelectList fixActive={false}>
                                 <SelectListItem

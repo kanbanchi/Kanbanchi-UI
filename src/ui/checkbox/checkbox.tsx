@@ -44,7 +44,7 @@ React.forwardRef((props, ref) => {
             <input checked={isChecked} {...attributes}/>
             <span className="kui-checkbox__label">
                 {children}
-                <Icon className="kui-checkbox__checkmark" xlink="checkbox-ok"/>
+                <Icon className="kui-checkbox__checkmark" xlink="done"/>
             </span>
         </Label>
     );

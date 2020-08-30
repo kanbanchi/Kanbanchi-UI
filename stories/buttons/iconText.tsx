@@ -15,7 +15,7 @@ const Story = () => {
                         text="Button text"
                         variant="icon-text"
                     >
-                        <Icon xlink="archive" size={24} />
+                        <Icon xlink="knowlege" size={24} />
                     </Button>
 
                     <Button

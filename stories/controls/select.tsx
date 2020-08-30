@@ -223,7 +223,7 @@ const Story = () => {
                                 active={val02}
                                 editable={true}
                                 label="Time isFitWindow"
-                                icon="deadline"
+                                icon="overdue"
                                 isFitWindow={true}
                                 variant="withicon"
                                 style={{width: 120}}
@@ -309,7 +309,7 @@ const Story = () => {
                                 active={0}
                                 editable={true}
                                 label="Readonly"
-                                icon="deadline"
+                                icon="overdue"
                                 variant="withicon"
                                 readOnly
                                 style={{width: 120}}
@@ -349,7 +349,7 @@ const Story = () => {
                                 active={0}
                                 editable={true}
                                 label="Disabled"
-                                icon="deadline"
+                                icon="overdue"
                                 variant="withicon"
                                 disabled
                                 style={{width: 120}}

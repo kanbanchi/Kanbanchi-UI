@@ -91,7 +91,7 @@ React.forwardRef((props, ref) => {
                     <Icon
                         className="kui-section-accordion-button__icon kui-section-accordion__arrow"
                         size={24}
-                        xlink="arrow-drop"
+                        xlink="arrow-down"
                     />
                 </Button>
                 {Action &&

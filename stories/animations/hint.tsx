@@ -118,7 +118,7 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="trash" size={24} />
+                                <Icon xlink="delete" size={24} />
                             </Button>
                         </Hint>
                     </div>
@@ -239,7 +239,7 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="trash" size={24} />
+                                <Icon xlink="delete" size={24} />
                             </Button>
                         </Hint>
                     </div>
@@ -309,7 +309,7 @@ const Story = () => {
                             variant={'icon'}
                             onClick={()=>console.log('click Dots')}
                         >
-                            <Icon size={24} xlink={'dots'} />
+                            <Icon size={24} xlink={'more'} />
                         </Button>
                     </Hint>
                 </h2>
