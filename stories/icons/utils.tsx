@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Icon } from '../../src/ui';
-import { EIconSize } from '../../src/ui/icon/types';
 
 export const IconItem = (options: any) => {
-    let { xlink, size = EIconSize, title = '', key } = options;
+    let { xlink, size, title = '', key } = options;
     title = (!title) ? xlink : title;
     return (
         <div className="icons-grid__item" key={key}>
@@ -18,7 +17,7 @@ export const IconItem = (options: any) => {
 };
 
 export const IconsList = (options: any) => {
-    let { arr, size = EIconSize } = options,
+    let { arr, size } = options,
         letter = '';
     return arr.sort().map((i: any, key: any) => {
         let ret = [];
