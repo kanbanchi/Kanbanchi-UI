@@ -31,6 +31,7 @@ export interface ITooltipStateProps {
     isNoEvents?: boolean;
     isNoWrap?: boolean;
     isPortal?: boolean;
+    isScrollFit?: boolean; // нужно ли проверять скролл у контейнера при позиционировании
     link?: any;
     maxWidth?: IMediaScreens;
     portalId?: string;

@@ -21,6 +21,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         isNoEvents,
         isNoWrap,
         isPortal,
+        isScrollFit,
         header,
         link,
         maxWidth,
@@ -187,8 +188,11 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                         }
 
                         const portal = isPortal ? item : portalRef.current;
-                        const hasScroll = getHasScroll(item);
-                        const SCREEN_PADDING_WITH_SCROLLBAR = hasScroll.y ? SCREEN_PADDING * 4 : SCREEN_PADDING;
+                        let padding = SCREEN_PADDING;
+                        if (isScrollFit) {
+                            const hasScroll = getHasScroll(item);
+                            if (hasScroll.y) padding = SCREEN_PADDING * 4;
+                        }
 
                         let top, bottom;
                         if (direction.includes('down')) {
@@ -236,44 +240,44 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
                             if (translate && translate.left) {
                                 left += translate.left;
                             }
-                            if (portalRect.left + left < SCREEN_PADDING) { // левее окна
-                                left = SCREEN_PADDING - portalRect.left;
+                            if (portalRect.left + left < padding) { // левее окна
+                                left = padding - portalRect.left;
                             }
-                            if (portalRect.left + left + itemWidth > w - SCREEN_PADDING) { // левее окна
-                                left = w - SCREEN_PADDING - portalRect.left - itemWidth;
+                            if (portalRect.left + left + itemWidth > w - padding) { // левее окна
+                                left = w - padding - portalRect.left - itemWidth;
                             }
-                            if (targetObj.x - targetObj.xPortal + left < SCREEN_PADDING) { // это когда?
-                                left = SCREEN_PADDING - targetObj.x + targetObj.xPortal;
+                            if (targetObj.x - targetObj.xPortal + left < padding) { // это когда?
+                                left = padding - targetObj.x + targetObj.xPortal;
                             }
                             if (isHint && (direction === 'down' || direction === 'up')) {
                                 if (isPortal) {
                                     maxWidth = (targetObj.x + targetObj.width / 2 - left) * 2;
-                                    if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
-                                        maxWidth = (w - SCREEN_PADDING_WITH_SCROLLBAR - targetObj.x - targetObj.width / 2) * 2;
+                                    if (targetObj.x + maxWidth / 2 > w - padding) {
+                                        maxWidth = (w - padding - targetObj.x - targetObj.width / 2) * 2;
                                         left = (targetObj.x - maxWidth) / 2;
                                     }
                                 } else {
                                     maxWidth = targetObj.width - left * 2;
-                                    if (targetObj.x + maxWidth / 2 > w - SCREEN_PADDING) {
-                                        maxWidth = (w - SCREEN_PADDING_WITH_SCROLLBAR - targetObj.x - targetObj.width / 2) * 2;
+                                    if (targetObj.x + maxWidth / 2 > w - padding) {
+                                        maxWidth = (w - padding - targetObj.x - targetObj.width / 2) * 2;
                                         left = (targetObj.width - maxWidth) / 2;
                                     }
                                 }
                             } else {
-                                maxWidth = w - portalRect.left - left - SCREEN_PADDING_WITH_SCROLLBAR;
+                                maxWidth = w - portalRect.left - left - padding;
                             }
                             portal.style.left = left + 'px';
                         } else if (right !== undefined) {
                             if (translate && translate.right) {
                                 right += translate.right;
                             }
-                            if (isPortal && right < SCREEN_PADDING) {
-                                right = SCREEN_PADDING;
-                            } else if (!isPortal && w - targetObj.x - targetObj.width - right < SCREEN_PADDING) {
-                                right = w - targetObj.x - targetObj.width - SCREEN_PADDING;
+                            if (isPortal && right < padding) {
+                                right = padding;
+                            } else if (!isPortal && w - targetObj.x - targetObj.width - right < padding) {
+                                right = w - targetObj.x - targetObj.width - padding;
                             }
                             portal.style.right = right + 'px';
-                            maxWidth = targetObj.x - SCREEN_PADDING_WITH_SCROLLBAR;
+                            maxWidth = targetObj.x - padding;
                         }
 
                         item.style.maxWidth = maxWidth + 'px';
