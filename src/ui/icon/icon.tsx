@@ -14,12 +14,12 @@ React.forwardRef((props, ref) => {
     let Svg;
 
     const require24pxIcons = () => {
+        const trySize = EIconSize.SIZE_24;
         try {
-            size = EIconSize.SIZE_24;
-            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
+            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ trySize }/` + xlink + '.svg');
         } catch (e) {
             Svg = 'svg';
-            console.error(`svg with xlink ${ xlink }, size ${ size } not found`)
+            console.error(`svg with xlink ${ xlink }, size ${ trySize } not found`)
         }
     }
 
