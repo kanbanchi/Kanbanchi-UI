@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { IIconInheritedProps } from './types';
+import { EIconSize, IIconInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/icon/icon.module.scss';
-import { Tooltip } from '..';
 
-export const Icon: React.SFC<IIconInheritedProps> =
+export const Icon: React.FC<IIconInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         className,
@@ -12,16 +11,26 @@ React.forwardRef((props, ref) => {
         xlink,
         ...attributes
     } = props;
-
     let Svg;
-    try {
-        Svg = require('!svg-react-loader!../../../src/assets/icons/' + xlink + '.svg'); // small
-    } catch (e) {
+
+    const require24pxIcons = () => {
         try {
-            Svg = require('!svg-react-loader!../../../src/assets/icons/big/' + xlink + '.svg'); // big 96px
+            size = EIconSize.SIZE_24;
+            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
         } catch (e) {
             Svg = 'svg';
+            console.error(`svg with xlink ${ xlink }, size ${ size } not found`)
         }
+    }
+
+    if (size && (size === EIconSize.SIZE_16 || size === EIconSize.SIZE_96)) {
+        try {
+            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
+        } catch (e) {
+            require24pxIcons();
+        }
+    } else {
+        require24pxIcons();
     }
 
     if (size === 16) size = null;
@@ -45,7 +54,7 @@ React.forwardRef((props, ref) => {
 
 Icon.defaultProps = {
     xlink: '',
-    size: 16
+    size: EIconSize.SIZE_16
 }
 
 Icon.displayName = 'Icon';

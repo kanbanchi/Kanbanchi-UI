@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { IButtonDropdownInheritedProps } from './types';
-import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs } from '../utils';
+import { ClassNames, userAgentsInclude, getParentsClasses, SCREEN_PADDING, useCombinedRefs } from '../utils';
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
-import { Portal } from '../portal/portal';
+import { Portal, KUI_PORTAL_ID } from '../portal/portal';
 
 export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -16,6 +16,7 @@ React.forwardRef((props, ref) => {
         disabled,
         dropdownClassName,
         isFitWindow,
+        isMountClosed,
         multiple,
         notBlurClasses,
         opened,
@@ -59,16 +60,31 @@ React.forwardRef((props, ref) => {
     );
 
     const calcDirection = () => {
+        if (!dropdownRef.current) return;
+
+        dropdownContainerRef.current = dropdownRef.current.parentNode;
         const button = buttonRef.current.getBoundingClientRect();
+        let portalRect: any = {
+            bottom: window.innerHeight,
+            left: 0,
+            right: window.innerWidth,
+            top: 0,
+        };
         if (directionVertical === 'auto') {
             directionHook = (button.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
             setDirectionHook(directionHook);
         }
         if (portal) {
-            const portalEl = portalSelector
-                ? document.querySelector(portalSelector) as HTMLElement
-                : document.body;
-            const portalScrollTop = getParentsScrollTop(portalEl);
+            const portalEl = document.getElementById(portalId) as HTMLElement;
+            if (portalEl) {
+                const portalStyle = window.getComputedStyle(portalEl);
+                if (
+                    !isNaN(parseInt(portalStyle.top)) ||
+                    !isNaN(parseInt(portalStyle.left))
+                ) {
+                    portalRect = portalEl.getBoundingClientRect();
+                }
+            }
 
             dropdownContainerRef.current.style.top = 'unset';
             dropdownContainerRef.current.style.bottom = 'unset';
@@ -76,15 +92,15 @@ React.forwardRef((props, ref) => {
             dropdownContainerRef.current.style.right = 'unset';
 
             if (directionHorizontal === 'left') {
-                dropdownContainerRef.current.style.left = button.left + 'px';
+                dropdownContainerRef.current.style.left = button.left - portalRect.left + 'px';
             } else {
-                dropdownContainerRef.current.style.right = (window.innerWidth - button.right) + 'px';
+                dropdownContainerRef.current.style.right = portalRect.right - button.right + 'px';
             }
 
             if (directionHook === 'up') {
-                dropdownContainerRef.current.style.bottom = (window.innerHeight - button.top) + 'px';
+                dropdownContainerRef.current.style.bottom = portalRect.bottom - button.top + 'px';
             } else {
-                dropdownContainerRef.current.style.top = portalScrollTop + button.bottom + 'px';
+                dropdownContainerRef.current.style.top = button.bottom - portalRect.top + 'px';
             }
         }
         if (portal || isFitWindow) {
@@ -189,21 +205,19 @@ React.forwardRef((props, ref) => {
         setIsOpened(opened);
     }, [opened]);
 
-    React.useEffect(() => {
-        dropdownContainerRef.current = dropdownRef.current.parentNode;
-    }, []);
-
     const dropdownElement = (<Dropdown
         className={classNameDropdown}
         directionVertical={directionHook}
         directionHorizontal={directionHorizontal}
         isFitWindow={isFitWindow}
+        isMountClosed={isMountClosed}
         opened={isOpenedHook}
         portal={portal}
         ref={dropdownRef}
         tabIndex={-1}
         onAnimationEnd={dropdownAnimationEnd}
         onBlur={attributes.onBlur}
+        onDidMount={calcDirection}
     >
         {list}
     </Dropdown>);
@@ -229,7 +243,8 @@ ButtonDropdown.defaultProps = {
     directionVertical: 'auto',
     directionHorizontal: 'left',
     disabled: false,
-    notBlurClasses: []
+    notBlurClasses: [],
+    portalId: KUI_PORTAL_ID,
 };
 
 ButtonDropdown.displayName = 'ButtonDropdown';

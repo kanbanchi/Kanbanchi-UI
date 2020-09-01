@@ -10,7 +10,7 @@ const Story = () => {
 
                 <Button variant="secondary">
                     <ButtonTitle>Title</ButtonTitle>
-                    <Icon xlink="deadline" style={{marginLeft: '4px'}}/>
+                    <Icon xlink="overdue" style={{marginLeft: '4px'}}/>
                 </Button>
 
             </section>

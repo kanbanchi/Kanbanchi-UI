@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Button, Icon, Hint, Switch } from '../../src/ui';
 
 const Story = () => {
-    const [isPortal, setPortal] = React.useState(false);
+    const [isPortal, setPortal] = React.useState(true);
     const valueFlag = React.useRef(false);
 
     const shortTooltip = `Lorem ipsum dolor sit amet.`;
@@ -38,7 +38,10 @@ const Story = () => {
     }, []);
 
     return (
-        <div className="page">
+        <div
+            className="page section-portal section-relative"
+            key={`hints--portal_${isPortal}`}
+        >
             <section style={{width: '160px'}}>
                 <Switch checked={isPortal} onChange={() => setPortal(!isPortal)}>
                     Portal
@@ -118,7 +121,7 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="trash" size={24} />
+                                <Icon xlink="delete" size={24} />
                             </Button>
                         </Hint>
                     </div>
@@ -239,7 +242,7 @@ const Story = () => {
                             isPortal={isPortal}
                         >
                             <Button variant="icon">
-                                <Icon xlink="trash" size={24} />
+                                <Icon xlink="delete" size={24} />
                             </Button>
                         </Hint>
                     </div>
@@ -309,7 +312,7 @@ const Story = () => {
                             variant={'icon'}
                             onClick={()=>console.log('click Dots')}
                         >
-                            <Icon size={24} xlink={'dots'} />
+                            <Icon size={24} xlink={'more'} />
                         </Button>
                     </Hint>
                 </h2>
