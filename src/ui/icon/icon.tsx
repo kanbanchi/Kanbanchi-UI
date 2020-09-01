@@ -19,7 +19,7 @@ React.forwardRef((props, ref) => {
             Svg = require(`!svg-react-loader!../../../src/assets/icons/${ trySize }/` + xlink + '.svg');
         } catch (e) {
             Svg = 'svg';
-            console.error(`svg with xlink ${ xlink }, size ${ trySize } not found`)
+            alert(`svg with xlink ${ xlink }, size ${ trySize } not found`)
         }
     }
 
