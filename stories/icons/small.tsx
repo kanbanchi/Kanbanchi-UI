@@ -27,7 +27,7 @@ const Story = () => {
             <section>
                 <h2>24px</h2>
                 <div className="icons-grid">
-                    {IconsList({ arr: icons24 })}
+                    {IconsList({ arr: icons24, size: EIconSize.SIZE_24 })}
                 </div>
             </section>
         </div>
