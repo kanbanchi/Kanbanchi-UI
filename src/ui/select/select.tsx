@@ -186,13 +186,10 @@ React.forwardRef((props, ref) => {
                 if (!isSearch) { // dont update search input value
                     setValue(e.item.text);
                 }
-                if (
-                    e.item.text !== valueHook ||
-                    e.item.index !== activeHook
-                ) {
+                if (e.item.index !== activeHook) {
                     setActiveHook(e.item.index);
-                    if (onChange) onChange(e);
                 }
+                if (onChange) onChange(e);
             }
         } else { // input changed
             setValue(e.target.value);
@@ -258,6 +255,7 @@ React.forwardRef((props, ref) => {
 
         dropdownBody = React.Children.map(childrenArray, (child: any) => {
             if (
+                !child ||
                 !child.type ||
                 !child.type.displayName ||
                 child.type.displayName !== 'SelectList'
@@ -492,8 +490,8 @@ React.forwardRef((props, ref) => {
         dropdownClassName
     );
 
-    const dropdownElement = (
-        <Dropdown
+    const dropdownElement = dropdownBody
+        ? <Dropdown
             className={classNameDropdown}
             directionVertical={directionHook}
             directionHorizontal={directionHorizontal}
@@ -506,7 +504,7 @@ React.forwardRef((props, ref) => {
         >
             {dropdownBody}
         </Dropdown>
-    );
+        : null;
 
     const dropdownPortal = readOnly || disabled
         ? null

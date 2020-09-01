@@ -92,64 +92,65 @@ const Story = () => {
                 </div>
             </section>
 
-            <section className="section-portal">
-                <div className="section-relative">
-                    <h2>Dropdown in Portal</h2>
+            <section className="section-relative section-grey section-portal">
+                <h2>Dropdown in Portal</h2>
 
-                    <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
-                        <ButtonDropdown
-                            dropdownClassName={'section-portal-dropdown'}
-                            portal
-                            portalId={'section-portal'}
-                            portalSelector={'.section-portal'}
-                            onOpen={()=>console.log('opened')}
-                            onClose={()=>console.log('closed')}
-                        >
-                            <Button variant="icon">
-                                <Icon size={24} xlink={'more'} />
-                            </Button>
-                            <SelectList fixActive={false}>
-                                <SelectListItem
-                                    icon="card"
-                                    list="List Ut enim ad minim veniam!"
-                                    onClick={()=>console.log('Card 01')}
-                                >
-                                    Card 01 Lorem ipsum dolor sit amet?
-                                </SelectListItem>
-                                <SelectListItem
-                                    icon="archive"
-                                    list="List"
-                                    onClick={()=>console.log('Card 02')}
-                                >
-                                    Card 02
-                                </SelectListItem>
-                            </SelectList>
-                        </ButtonDropdown>
+                <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
+                    <ButtonDropdown
+                        dropdownClassName={'section-portal-dropdown'}
+                        isMountClosed={false}
+                        portal
+                        portalId={'stories-portal'}
+                        portalSelector={'.section-portal'}
+                        onOpen={()=>console.log('opened')}
+                        onClose={()=>console.log('closed')}
+                    >
+                        <Button variant="icon">
+                            <Icon size={24} xlink={'more'} />
+                        </Button>
+                        <SelectList fixActive={false}>
+                            <SelectListItem
+                                icon="card"
+                                list="List Ut enim ad minim veniam!"
+                                onClick={()=>console.log('Card 01')}
+                            >
+                                Card 01 Lorem ipsum dolor sit amet?
+                            </SelectListItem>
+                            <SelectListItem
+                                icon="archive"
+                                list="List"
+                                onClick={()=>console.log('Card 02')}
+                            >
+                                Card 02
+                            </SelectListItem>
+                        </SelectList>
+                    </ButtonDropdown>
 
-                        <ButtonDropdown
-                            directionHorizontal={'right'}
-                            portal
-                        >
-                            <Button variant="icon">
-                                <Icon size={24} xlink={'more'} />
-                            </Button>
-                            <SelectList fixActive={false}>
-                                <SelectListItem
-                                    icon="card"
-                                    list="List Ut enim ad minim veniam!"
-                                >
-                                    Card Lorem ipsum dolor sit amet?
-                                </SelectListItem>
-                                <SelectListItem
-                                    icon="archive"
-                                    list="List"
-                                >
-                                    Card name
-                                </SelectListItem>
-                            </SelectList>
-                        </ButtonDropdown>
-                    </ButtonsGroup>
-                </div>
+                    <ButtonDropdown
+                        directionHorizontal={'right'}
+                        directionVertical={'up'}
+                        isMountClosed={false}
+                        portal
+                    >
+                        <Button variant="icon">
+                            <Icon size={24} xlink={'more'} />
+                        </Button>
+                        <SelectList fixActive={false}>
+                            <SelectListItem
+                                icon="card"
+                                list="List Ut enim ad minim veniam!"
+                            >
+                                Card Lorem ipsum dolor sit amet?
+                            </SelectListItem>
+                            <SelectListItem
+                                icon="archive"
+                                list="List"
+                            >
+                                Card name
+                            </SelectListItem>
+                        </SelectList>
+                    </ButtonDropdown>
+                </ButtonsGroup>
             </section>
 
             <section className="section-form-min">
@@ -159,7 +160,6 @@ const Story = () => {
                     className="stories-dropdown-100"
                     disabled={isDisabled}
                     multiple={true}
-                    opened={isActive}
                 >
                     <Button variant="add">
                         Add smth

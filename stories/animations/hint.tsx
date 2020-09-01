@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Button, Icon, Hint, Switch } from '../../src/ui';
 
 const Story = () => {
-    const [isPortal, setPortal] = React.useState(false);
+    const [isPortal, setPortal] = React.useState(true);
     const valueFlag = React.useRef(false);
 
     const shortTooltip = `Lorem ipsum dolor sit amet.`;
@@ -38,7 +38,10 @@ const Story = () => {
     }, []);
 
     return (
-        <div className="page">
+        <div
+            className="page section-portal section-relative"
+            key={`hints--portal_${isPortal}`}
+        >
             <section style={{width: '160px'}}>
                 <Switch checked={isPortal} onChange={() => setPortal(!isPortal)}>
                     Portal

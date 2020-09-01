@@ -1,5 +1,11 @@
 @import '../../assets/sass/index.scss';
 
+#kui-portal {
+    position: absolute;
+    top: 0; // иначе min-height у тултипа добавлял вертикальную прокрутку
+    width: 100vw;
+}
+
 .kui-tooltip {
     position: absolute;
     top: 0;
@@ -115,6 +121,14 @@
     }
     &.kui-tooltip--arrow-left {
         margin-left: $google-spacing;
+    }
+
+    &.kui-tooltip--noevents {
+        pointer-events: none;
+    }
+
+    &.kui-tooltip--nowrap {
+        white-space: nowrap;
     }
 }
 
