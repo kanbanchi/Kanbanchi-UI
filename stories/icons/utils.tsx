@@ -26,6 +26,12 @@ export const IconsList = (options: any) => {
             ret.push(<div className="icons-grid__letter" key={key + '-letter'}>{letter}</div>);
         }
         ret.push(IconItem({ xlink: i, key, size }));
+        for (let j = 0; j < i.length; j++) {
+            if (
+                i.charCodeAt(j) < 65 || // A
+                i.charCodeAt(j) > 122 // z
+            ) console.log(i[j]);
+        }
         return ret;
     });
 };
