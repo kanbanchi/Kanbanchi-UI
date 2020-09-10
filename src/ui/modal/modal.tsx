@@ -33,18 +33,19 @@ export const Modal: React.SFC<IModalInheritedProps> =
     const [titleHook, setTitleHook] = React.useState(title);
 
     let buttonsGroup = [],
-        onEnter: () => void = () => null;
+        onEnter: () => void = null;
 
     if (buttons) {
         buttonsGroup = buttons.map((item, key) => {
             let {
+                isAcivateOnEnter,
                 isPrimary,
                 text,
                 onClick,
                 ...attributes
             } = item;
 
-            if (isPrimary && onClick) {
+            if (isAcivateOnEnter && onClick) {
                 onEnter = onClick;
             }
 
@@ -218,13 +219,12 @@ export const Modal: React.SFC<IModalInheritedProps> =
             <Icon size={24} xlink="close"/>
         </Button>);
 
-    const onKeyUp = (e: React.KeyboardEvent) => {
+    const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
-        e.persist();
         if (e.which === 27) { // esc
             return onClose();
         }
-        if (e.which === 13) { // enter
+        if (onEnter && e.which === 13) { // enter // если есть кнопка с isAcivateOnEnter
             onEnter();
             return onClose();
         }
@@ -241,7 +241,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
             className={className}
             ref={modalRef}
             tabIndex={0}
-            onKeyUp={onKeyUp}
+            onKeyDown={onKeyDown}
             {...attributes}
         >
             <div

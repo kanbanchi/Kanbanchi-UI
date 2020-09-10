@@ -22,6 +22,7 @@ const Story = () => {
                 },
                 {
                     text: 'Ok',
+                    isAcivateOnEnter: true,
                     isPrimary: true,
                     onClick: () => console.log('ok')
                 }
