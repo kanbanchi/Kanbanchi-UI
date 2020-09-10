@@ -1,5 +1,6 @@
 export interface IModalButtonStateProps {
     text: string;
+    isAcivateOnEnter?: boolean;
 }
 
 export interface IModalButtonDispatchProps {
