@@ -4,7 +4,7 @@ import { ClassNames, userAgentsInclude } from '../utils';
 import '../../../src/ui/sectionAccordion/sectionAccordion.module.scss';
 import { Button, ButtonTitle, Icon } from '../../ui';
 
-export const SectionAccordion: React.SFC<ISectionAccordionInheritedProps> =
+export const SectionAccordion: React.FC<ISectionAccordionInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         Action,
@@ -91,7 +91,7 @@ React.forwardRef((props, ref) => {
                     <Icon
                         className="kui-section-accordion-button__icon kui-section-accordion__arrow"
                         size={24}
-                        xlink="arrow-down"
+                        xlink={'arrow-s-drop-open'}
                     />
                 </Button>
                 {Action &&
