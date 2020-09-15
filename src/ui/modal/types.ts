@@ -1,21 +1,12 @@
-export interface IModalButtonStateProps {
-    text: string;
-    isAcivateOnEnter?: boolean;
-}
-
-export interface IModalButtonDispatchProps {
-    onClick?: () => void;
-}
-
-export interface IModalButtonOwnProps {
-    isPrimary?: boolean;
-}
+import { IButtonInheritedProps } from '../button/types';
 
 export interface IModalButtonProps extends
-    IModalButtonStateProps,
-    IModalButtonDispatchProps,
-    IModalButtonOwnProps
-{}
+    IButtonInheritedProps
+{
+    text: string;
+    isAcivateOnEnter?: boolean;
+    isPrimary?: boolean;
+}
 
 export interface IModalReleaseFooterFollowSocialProps {
     icon: string;
