@@ -210,14 +210,15 @@ export const Modal: React.SFC<IModalInheritedProps> =
         }
     }
 
-    const closeButton = variant === 'actions' ? null :
-        (<Button
+    const closeButton = (
+        <Button
             className="kui-modal__close"
             variant="icon"
             onClick={onClose}
         >
             <Icon size={24} xlink="close"/>
-        </Button>);
+        </Button>
+    );
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
