@@ -28,6 +28,7 @@ export interface ITooltipStateProps {
     footer?: any;
     header?: string;
     isHidable?: boolean;
+    isNeedCalc?: number;
     isNoEvents?: boolean;
     isNoWrap?: boolean;
     isPortal?: boolean;
@@ -36,6 +37,7 @@ export interface ITooltipStateProps {
     maxWidth?: IMediaScreens;
     portalId?: string;
     portalSelector?: string;
+    ref?: any;
     selector?: string;
     show?: boolean;
     state?: 'error' | 'success';
@@ -50,6 +52,7 @@ export interface ITooltipStateProps {
 }
 
 export interface ITooltipDispatchProps {
+    onCalc?: () => void;
     onShow?: () => void;
     onHide?: () => void;
 }

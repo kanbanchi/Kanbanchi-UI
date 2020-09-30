@@ -4,7 +4,8 @@ import { ClassNames } from '../utils';
 import '../../../src/ui/hint/hint.module.scss';
 import { Tooltip } from '../tooltip/tooltip';
 
-export function Hint (props: IHintInheritedProps) {
+export const Hint: React.FC<IHintInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -23,6 +24,7 @@ export function Hint (props: IHintInheritedProps) {
         <Tooltip
             className={className}
             arrow={arrow}
+            ref={ref as any}
             show={show}
             variant={variant}
             {...attributes}
@@ -30,7 +32,7 @@ export function Hint (props: IHintInheritedProps) {
             {children}
         </Tooltip>
     );
-};
+});
 
 Hint.defaultProps = {
     arrow: 'down',
