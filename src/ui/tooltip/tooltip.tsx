@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
-import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING } from '../utils';
+import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
 import { v4 as uuidv4 } from 'uuid';
 
-export const Tooltip: React.SFC<ITooltipInheritedProps> =
-(props) => {
+export const Tooltip: React.FC<ITooltipInheritedProps> =
+React.forwardRef((props, ref) => {
     let {
         children,
         className,
@@ -18,6 +18,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         direction,
         footer,
         isHidable,
+        isNeedCalc,
         isNoEvents,
         isNoWrap,
         isPortal,
@@ -33,6 +34,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
         translate,
         value,
         variant,
+        onCalc,
         onShow,
         onHide,
     } = props;
@@ -74,7 +76,8 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     const [uniqueClass] = React.useState('kui-tooltip--' + uuidv4());
     let [targetsRefs] = React.useState(Array.from({ length: 10 }, () => React.useRef(null)));
 
-    const itemRef = React.useRef(null);
+    const _itemRef = React.useRef(null);
+    const itemRef =  useCombinedRefs(ref, _itemRef);
     const portalRef = React.useRef(null);
     const timer = React.useRef(null);
     const timeout = React.useRef(null);
@@ -502,6 +505,18 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
     }, [show]);
 
     React.useEffect(() => {
+        if (!isNeedCalc) return;
+
+        const needCalc = isNeedCalc;
+        calcTooltip().then(() => {
+            if (
+                needCalc === isNeedCalc &&
+                onCalc
+            ) onCalc();
+        });
+    }, [isNeedCalc]);
+
+    React.useEffect(() => {
         return () => {
             clearShowTimers();
             if (timer.current) clearTimeout(timer.current);
@@ -539,7 +554,7 @@ export const Tooltip: React.SFC<ITooltipInheritedProps> =
             }
         </>
     );
-};
+});
 
 Tooltip.defaultProps = {
     direction: 'up',
