@@ -4,7 +4,7 @@ import { ClassNames } from '../utils';
 import { Label } from '../../ui';
 import '../../../src/ui/switch/switch.module.scss';
 
-export const Switch: React.SFC<ISwitchInheritedProps> =
+export const Switch: React.FC<ISwitchInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,
@@ -16,12 +16,10 @@ React.forwardRef((props, ref) => {
 
     className = ClassNames(
         'kui-switch',
-        (!attributes.disabled && color) ? 'kui-switch--color_' + color : null,
+        (color) ? 'kui-switch--color_' + color : null,
         (attributes.disabled) ? 'kui-switch--disabled' : null,
         className
     );
-
-    if (attributes.disabled) attributes.checked = false;
 
     return (
         <Label className={className} ref={ref as any}>
