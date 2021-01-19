@@ -19,6 +19,16 @@ const Story = () => {
                     <Button>Tab 1</Button>
                     <Button>Tab 2</Button>
                 </Tabs>
+
+                <div hidden={val!==0} tabIndex={0}>
+                    Tab 0
+                </div>
+                <div hidden={val!==1} tabIndex={0}>
+                    Tab 1
+                </div>
+                <div hidden={val!==2} tabIndex={0}>
+                    Tab 2
+                </div>
             </section>
 
             <section>
