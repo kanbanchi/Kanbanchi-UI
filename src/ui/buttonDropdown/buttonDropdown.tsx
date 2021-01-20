@@ -190,6 +190,8 @@ React.forwardRef((props, ref) => {
                 child.props.className
             ),
             btn = React.cloneElement(child, {
+                ['aria-haspopup']: true,
+                ['aria-expanded']: isOpenedHook,
                 ...attributes,
                 ref: buttonButtonRef
             });
