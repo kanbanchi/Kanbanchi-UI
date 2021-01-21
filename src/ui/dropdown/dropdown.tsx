@@ -3,6 +3,8 @@ import { IDropdownInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/dropdown/dropdown.module.scss';
 
+// accessibility todo наверно aria-live
+
 export const Dropdown: React.SFC<IDropdownInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

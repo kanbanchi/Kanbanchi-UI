@@ -3,6 +3,8 @@ import { ITabsInheritedProps } from './types';
 import { ClassNames, useCombinedRefs } from '../utils';
 import '../../../src/ui/tabs/tabs.module.scss';
 
+// accessibility ok
+
 export const Tabs: React.SFC<ITabsInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

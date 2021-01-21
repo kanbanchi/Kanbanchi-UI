@@ -5,6 +5,8 @@ import * as autosizeLibray from './autosize';
 import { Icon, Label, Tooltip } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 
+// accessibility ok
+
 export const Input: React.SFC<IInputInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

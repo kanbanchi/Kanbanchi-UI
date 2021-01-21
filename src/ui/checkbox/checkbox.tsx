@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/checkbox/checkbox.module.scss';
 
+// accessibility todo клавиши space, enter, tab, стрелки
+
 export const Checkbox: React.SFC<ICheckboxInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Label } from '../../ui';
 import '../../../src/ui/switch/switch.module.scss';
 
+// accessibility todo
+
 export const Switch: React.FC<ISwitchInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

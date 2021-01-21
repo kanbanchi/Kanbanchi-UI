@@ -6,6 +6,8 @@ import '../../../src/ui/selectList/selectList.module.scss';
 
 export const SELECT_LIST_CLASS = 'kui-select-list';
 
+// accessibility todo выбор опций стрелками
+
 export const SelectList: React.SFC<ISelectListInheritedProps> =
 (props) => {
     let {

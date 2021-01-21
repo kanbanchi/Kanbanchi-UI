@@ -4,6 +4,8 @@ import { ClassNames, ClassList } from '../utils';
 import {Label} from '../../ui';
 import '../../../src/ui/radio/radio.module.scss';
 
+// accessibility todo клавиши space, enter, tab, стрелки
+
 export const Radio: React.SFC<IRadioInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

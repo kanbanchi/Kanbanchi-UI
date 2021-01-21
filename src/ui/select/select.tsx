@@ -10,6 +10,8 @@ import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
 import { Portal } from '../portal/portal';
 
+// accessibility todo выбор опций стрелками
+
 export const Select: React.SFC<ISelectInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

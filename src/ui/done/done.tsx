@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import '../../../src/ui/done/done.module.scss';
 import { Icon } from '../icon/icon';
 
+// accessibility ok
+
 export const Done: React.SFC<IDoneInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

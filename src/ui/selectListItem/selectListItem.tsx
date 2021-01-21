@@ -6,6 +6,8 @@ import '../../../src/ui/selectListItem/selectListItem.module.scss';
 
 export const SELECT_LIST_ITEM_CLASS = 'kui-select-list-item';
 
+// accessibility
+
 export const SelectListItem: React.SFC<ISelectListItemInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

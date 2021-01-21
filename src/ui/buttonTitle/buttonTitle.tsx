@@ -3,6 +3,8 @@ import { IButtonTitleInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/buttonTitle/buttonTitle.module.scss';
 
+// accessibility ok
+
 export const ButtonTitle: React.SFC<IButtonTitleInheritedProps> =
 (props) => {
     let {

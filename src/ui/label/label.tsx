@@ -3,6 +3,8 @@ import { ILabelInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/label/label.module.scss';
 
+// accessibility ok
+
 export const Label: React.SFC<ILabelInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

@@ -4,6 +4,8 @@ import { ClassNames, userAgentsInclude } from '../utils';
 import '../../../src/ui/sectionAccordion/sectionAccordion.module.scss';
 import { Button, ButtonTitle, Icon } from '../../ui';
 
+// accessibility todo expanded
+
 export const SectionAccordion: React.FC<ISectionAccordionInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import '../../../src/ui/hint/hint.module.scss';
 import { Tooltip } from '../tooltip/tooltip';
 
+// accessibility aria-live
+
 export const Hint: React.FC<IHintInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

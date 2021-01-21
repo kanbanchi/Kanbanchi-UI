@@ -3,6 +3,8 @@ import { IButtonsSegmentedInheritedProps } from './types';
 import { ClassNames, useCombinedRefs } from '../utils';
 import '../../../src/ui/buttonsSegmented/buttonsSegmented.module.scss';
 
+// accessibility ok
+
 export const ButtonsSegmented: React.SFC<IButtonsSegmentedInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

@@ -6,6 +6,8 @@ import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import { Portal, KUI_PORTAL_ID } from '../portal/portal';
 
+// accessibility todo выбор опции стрелками вверх вниз
+
 export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

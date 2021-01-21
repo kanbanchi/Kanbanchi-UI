@@ -9,6 +9,8 @@ import Carousel, { StateCallBack } from 'react-multi-carousel';
 import '../../../src/ui/modal/carousel.scss';
 import { ModalSlide } from './modalSlide';
 
+// accessibility todo
+
 export const Modal: React.SFC<IModalInheritedProps> =
 (props) => {
     let {

@@ -6,6 +6,8 @@ import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
 import { v4 as uuidv4 } from 'uuid';
 
+// accessibility todo aria-live
+
 export const Tooltip: React.FC<ITooltipInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
@@ -285,7 +287,7 @@ React.forwardRef((props, ref) => {
 
                         item.style.maxWidth = maxWidth + 'px';
                         if (!isPortal) portal.style.maxWidth = maxWidth + 'px';
-                        res();
+                        res(true);
                     }
                 }, 100);
             }

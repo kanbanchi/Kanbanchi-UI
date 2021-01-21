@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
 
+// accessibility ok
+
 export const Snackbar: React.SFC<ISnackbarInheritedProps> =
 (props) => {
 

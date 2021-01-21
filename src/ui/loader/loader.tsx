@@ -3,6 +3,8 @@ import { ILoaderInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/loader/loader.module.scss';
 
+// accessibility ok
+
 export const Loader: React.SFC<ILoaderInheritedProps> =
 (props) => {
     let {

@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Button } from '..';
 import '../../../src/ui/files/files.module.scss';
 
+// accessibility
+
 const DefaultFileView: React.SFC<any> = (props: any) => (
     <div className={'kui-files-item'}>
         <span className="kui-files-item__col kui-files-item__col--icon">

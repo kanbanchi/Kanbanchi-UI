@@ -11,6 +11,8 @@ const ReactDatepickerElement = ReactDatepicker as any;
 
 registerLocale('en-GB', enGB); // Weeks start on Monday
 
+// accessibility
+
 export const Datepicker: React.SFC<IDatePickerInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
