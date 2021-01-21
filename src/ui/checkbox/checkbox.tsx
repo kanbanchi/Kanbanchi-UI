@@ -4,7 +4,7 @@ import { ClassNames } from '../utils';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/checkbox/checkbox.module.scss';
 
-// accessibility todo клавиши space, enter, tab, стрелки
+// accessibility ok
 
 export const Checkbox: React.SFC<ICheckboxInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -34,6 +34,14 @@ React.forwardRef((props, ref) => {
         if (onChange) onChange(e);
     };
 
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (!e || attributes.disabled) return;
+        if (e.keyCode === 32) {
+            e.preventDefault();
+            attributes.onChange(e as any);
+        }
+    }
+
     React.useEffect(() => {
         setIsChecked(checked);
     }, [checked]);
@@ -42,6 +50,11 @@ React.forwardRef((props, ref) => {
         <Label
             className={className}
             ref={ref as any}
+            tabIndex={0}
+            role={'checkbox'}
+            aria-checked={isChecked}
+            aria-disabled={attributes.disabled}
+            onKeyDown={onKeyDown}
         >
             <input checked={isChecked} {...attributes}/>
             <span className="kui-checkbox__label">
