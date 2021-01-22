@@ -48,6 +48,7 @@ React.forwardRef((props, ref) => {
         <div
             className={className}
             aria-live={'assertive'}
+            aria-hidden={!isShow}
             {...attributes}
             style={{
                 opacity: Number(isShow)

@@ -6,7 +6,7 @@ import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
 import { v4 as uuidv4 } from 'uuid';
 
-// accessibility todo aria-live
+// accessibility ok
 
 export const Tooltip: React.FC<ITooltipInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -542,6 +542,9 @@ React.forwardRef((props, ref) => {
                     <div
                         className={classNamePortal}
                         ref={portalRef}
+                        role={'tooltip'}
+                        aria-live={'assertive'}
+                        aria-hidden={!isShown}
                     >
                         <div
                             className={classHook}
