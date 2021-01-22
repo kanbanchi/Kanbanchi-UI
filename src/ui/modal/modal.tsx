@@ -224,7 +224,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
-        if (e.key === 'Esc') {
+        if (e.key === 'Escape') {
             return onClose();
         }
         if (onEnter && e.key === 'Enter') { // если есть кнопка с isAcivateOnEnter

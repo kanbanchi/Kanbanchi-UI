@@ -378,7 +378,7 @@ React.forwardRef((props, ref) => {
         if (!e) return;
         if (onKeyDown) onKeyDown(e);
         e.persist();
-        if (e.key === 'Esc') {
+        if (e.key === 'Escape') {
             return closeDropdown();
         } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
             e.preventDefault();
