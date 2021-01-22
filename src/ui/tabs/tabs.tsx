@@ -77,6 +77,7 @@ React.forwardRef((props, ref) => {
         <div
             className={className}
             ref={tabsRef}
+            role={'tablist'}
             onKeyDown={onKeyDown}
             {...attributes}
         >
