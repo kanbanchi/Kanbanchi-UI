@@ -3,7 +3,7 @@ import { IDropdownInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/dropdown/dropdown.module.scss';
 
-// accessibility todo наверно aria-live
+// accessibility ok
 
 export const Dropdown: React.SFC<IDropdownInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -47,6 +47,7 @@ React.forwardRef((props, ref) => {
     return (
         <div
             className={className}
+            aria-live={'assertive'}
             {...attributes}
             style={{
                 opacity: Number(isShow)
