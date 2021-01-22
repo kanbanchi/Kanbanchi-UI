@@ -3,7 +3,7 @@ import { ITagsInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/tags/tags.module.scss';
 
-// accessibility todo удаление клавиатурой
+// accessibility ok
 
 export const Tags: React.SFC<ITagsInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -22,6 +22,7 @@ React.forwardRef((props, ref) => {
         <div
             className={className}
             ref={ref as any}
+            tabIndex={0}
             {...attributes}
         >
             <div className={'kui-tags__inner'}>

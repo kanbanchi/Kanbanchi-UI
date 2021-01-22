@@ -29,12 +29,6 @@
 
     &__clear {
         margin-left: $google-spacing / 2;
-        color: calc-color(fade, $color-base, 30);
-        @include transition;
-
-        &:hover {
-            color: calc-color(fade, $color-base, 90);
-        }
     }
 
     &--clickable {
