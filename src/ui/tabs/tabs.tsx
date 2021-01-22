@@ -42,6 +42,8 @@ React.forwardRef((props, ref) => {
             role: child.props.role || 'tab',
             ['aria-selected']: i === active,
             tabIndex: child.props.tabIndex || (i === active ? 0 : -1),
+            ['aria-setsize']: childrenArray.length,
+            ['aria-posinset']: i + 1,
             onClick: (e) => {
                 if (onChange) onChange(i);
                 if (child.props.onClick) child.props.onClick(e);
