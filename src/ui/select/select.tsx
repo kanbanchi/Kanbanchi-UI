@@ -378,16 +378,14 @@ React.forwardRef((props, ref) => {
         if (!e) return;
         if (onKeyDown) onKeyDown(e);
         e.persist();
-        if (e.which === 27) { // esc
+        if (e.key === 'Esc') {
             return closeDropdown();
-        } else if (
-            e.which === 38 || // arrow up
-            e.which === 40 // arrow down
-        ) {
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
             let activeNew;
-            if (e.which === 38) {
+            if (e.key === 'ArrowUp') {
                 activeNew = highlightOptionIndex(-1);
-            } else if (e.which === 40) {
+            } else if (e.key === 'ArrowDown') {
                 activeNew = highlightOptionIndex(1);
             }
             setActiveHook(activeNew);
@@ -401,7 +399,7 @@ React.forwardRef((props, ref) => {
             return;
         }
         if (!isOpenedHook) return openDropdown();
-        if (e.which === 13) { // enter
+        if (e.key === 'Enter') {
             if (onEnter) onEnter(e);
             if (activeHook === null) {
                 findValue(e.target.value)

@@ -36,7 +36,7 @@ React.forwardRef((props, ref) => {
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e || attributes.disabled) return;
-        if (e.keyCode === 32) {
+        if (e.key === ' ') {
             e.preventDefault();
             attributes.onChange(e as any);
         }

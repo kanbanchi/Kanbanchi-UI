@@ -63,7 +63,7 @@ React.forwardRef((props, ref) => {
     };
 
     attributes.onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e && e.which === 13) {
+        if (e && e.key === 'Enter') {
             if (!autosize) e.preventDefault();
             if (onEnter) onEnter(e);
         }

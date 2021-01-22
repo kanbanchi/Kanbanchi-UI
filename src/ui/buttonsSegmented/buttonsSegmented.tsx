@@ -49,13 +49,13 @@ React.forwardRef((props, ref) => {
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
-        if (e.keyCode === 39 || e.keyCode === 37) {
-            if (e.keyCode === 39) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            if (e.key === 'ArrowRight') {
                 focusIndex++;
                 if (focusIndex >= buttonHocs.length) {
                     focusIndex = 0;
                 }
-            } else if (e.keyCode === 37) {
+            } else if (e.key === 'ArrowLeft') {
                 focusIndex--;
                 if (focusIndex < 0) {
                     focusIndex = buttonHocs.length - 1;
