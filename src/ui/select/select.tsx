@@ -524,6 +524,8 @@ React.forwardRef((props, ref) => {
                 ref={inputRef}
                 value={valueHook as any}
                 variant={variant}
+                aria-haspopup={true}
+                aria-expanded={isOpenedHook}
                 {...attributes}
             />
             {dropdownPortal}
