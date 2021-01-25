@@ -6,7 +6,7 @@ import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import { Portal, KUI_PORTAL_ID } from '../portal/portal';
 
-// accessibility todo выбор опции стрелками вверх вниз
+// accessibility ok
 
 export const ButtonDropdown: React.SFC<IButtonDropdownInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -126,10 +126,15 @@ React.forwardRef((props, ref) => {
         isOpenedHook = isOpened;
         setIsOpenedHook(isOpenedHook);
         calcDirection();
-        if (isOpened && onOpen) {
-            onOpen();
-        } else if (isOpened === false && onClose) {
-            onClose();
+        if (isOpened) {
+            if (onOpen) onOpen();
+            requestAnimationFrame(() => {
+                const ariaSelected = dropdownRef.current.querySelector('[aria-selected=true]');
+                if (ariaSelected) ariaSelected.focus();
+            });
+        } else if (isOpened === false) {
+            if (onClose) onClose();
+            if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
         }
     }
 
@@ -205,6 +210,13 @@ React.forwardRef((props, ref) => {
         });
     });
 
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (!e) return;
+        if (e.key === 'Escape') {
+            return setIsOpened(false);
+        }
+    }
+
     React.useEffect(() => {
         setIsOpened(opened);
     }, [opened]);
@@ -222,6 +234,7 @@ React.forwardRef((props, ref) => {
         onAnimationEnd={dropdownAnimationEnd}
         onBlur={attributes.onBlur}
         onDidMount={calcDirection}
+        onKeyDown={onKeyDown}
     >
         {list}
     </Dropdown>);
