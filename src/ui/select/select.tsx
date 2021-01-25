@@ -10,7 +10,7 @@ import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
 import { Portal } from '../portal/portal';
 
-// accessibility todo выбор опций стрелками
+// accessibility ok
 
 export const Select: React.SFC<ISelectInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -218,11 +218,7 @@ React.forwardRef((props, ref) => {
                 e.relatedTarget as HTMLElement,
                 [uniqueClass]
             );
-            if (classes.includes(uniqueClass)) {
-                if (e.target) {
-                    e.target.focus({ preventScroll: true });
-                }
-            } else {
+            if (!classes.includes(uniqueClass)) {
                 setIsFocusedHook(false);
                 closeDropdown();
                 if (onBlur) onBlur(e);
@@ -501,6 +497,7 @@ React.forwardRef((props, ref) => {
             tabIndex={-1}
             portal={portal}
             onAnimationEnd={dropdownAnimationEnd}
+            onBlur={attributes.onBlur}
         >
             {dropdownBody}
         </Dropdown>
