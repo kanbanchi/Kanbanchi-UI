@@ -52,7 +52,6 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
                     focusHook = itemsRefs.length - 1;
                 }
             }
-            console.log(focusHook, itemsRefs);
             setFocusHook(focusHook);
             if (itemsRefs[focusHook].current) itemsRefs[focusHook].current.focus();
         }
