@@ -68,7 +68,6 @@ React.forwardRef((props, ref) => {
         <li
             className={className}
             ref={ref as any}
-            tabIndex={0} // наверно понадобится, чтобы вешать фокус стрелками вверх вниз
             {...attributes}
         >
             <span className="kui-select-list-item__col kui-select-list-item__col--icon">
