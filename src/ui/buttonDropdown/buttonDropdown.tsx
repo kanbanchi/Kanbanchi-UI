@@ -129,7 +129,7 @@ React.forwardRef((props, ref) => {
         if (isOpened) {
             if (onOpen) onOpen();
             requestAnimationFrame(() => {
-                const ariaSelected = dropdownRef.current.querySelector('[aria-selected=true]');
+                const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[aria-selected=true]');
                 if (ariaSelected) ariaSelected.focus();
             });
         } else if (isOpened === false) {
