@@ -13,6 +13,9 @@ React.forwardRef((props, ref) => {
         className,
         checked,
         color,
+        tabIndex = 0,
+        ['aria-selected']: ariaSelected,
+        ['data-index']: dataIndex,
         onChange,
         ...attributesOriginal
     } = props,
@@ -50,10 +53,12 @@ React.forwardRef((props, ref) => {
         <Label
             className={className}
             ref={ref as any}
-            tabIndex={0}
+            tabIndex={tabIndex}
             role={'checkbox'}
             aria-checked={isChecked}
             aria-disabled={attributes.disabled}
+            aria-selected={ariaSelected}
+            data-index={dataIndex}
             onKeyDown={onKeyDown}
         >
             <input checked={isChecked} {...attributes}/>

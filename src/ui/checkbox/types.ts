@@ -10,6 +10,7 @@ export interface ICheckboxOwnProps {
     color?:
         'black' |
         'light';
+    ['data-index']?: number;
 }
 
 export interface ICheckboxProps extends
