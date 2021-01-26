@@ -5,6 +5,8 @@ import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import { Portal, KUI_PORTAL_ID } from '../portal/portal';
+import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
+import { SELECT_LIST_CLASS } from '../selectList/selectList';
 
 // accessibility ok
 
@@ -25,6 +27,7 @@ React.forwardRef((props, ref) => {
         portal,
         portalId,
         portalSelector,
+        single,
         beforeOpen,
         onBlur,
         onClick,
@@ -45,6 +48,7 @@ React.forwardRef((props, ref) => {
     const dropdownRef = React.useRef(null);
     const dropdownContainerRef = React.useRef(null);
     const dropdownUniqueClass = 'kui-button-dropdown__dropdown--' + uniqueClass;
+    const timer = React.useRef(null);
 
     className = ClassNames(
         'kui-button-dropdown',
@@ -52,6 +56,7 @@ React.forwardRef((props, ref) => {
         (disabled) ? 'kui-button-dropdown--disabled' : null,
         (isOpenedHook) ? 'kui-button-dropdown--opened' : null,
         (portal) ? 'kui-button-dropdown--portal' : null,
+        (multiple && single) ? 'kui-button-dropdown--single' : null,
         className
     );
 
@@ -129,12 +134,17 @@ React.forwardRef((props, ref) => {
         if (isOpened) {
             if (onOpen) onOpen();
             requestAnimationFrame(() => {
-                const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[aria-selected=true]');
+                const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
                 if (ariaSelected) ariaSelected.focus();
             });
+            if (dropdownRef.current && multiple && single) {
+                dropdownRef.current.removeEventListener('click', onDropdownClick);
+                dropdownRef.current.addEventListener('click', onDropdownClick);
+            }
         } else if (isOpened === false) {
             if (onClose) onClose();
             if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
+            setUniqueClass(uuidv4());
         }
     }
 
@@ -212,7 +222,10 @@ React.forwardRef((props, ref) => {
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
-        if (e.key === 'Escape') {
+        if (
+            e.key === 'Escape' ||
+            multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
+        ) {
             return setIsOpened(false);
         }
     }
@@ -221,12 +234,30 @@ React.forwardRef((props, ref) => {
         setIsOpened(opened);
     }, [opened]);
 
+    function onDropdownClick (e: React.SyntheticEvent) {
+        const classes = getParentsClasses(
+            e.target as HTMLElement,
+            [SELECT_LIST_ITEM_CLASS, SELECT_LIST_CLASS]
+        );
+        if (classes.includes(SELECT_LIST_ITEM_CLASS)) {
+            timer.current = setTimeout(() => setIsOpened(false), 100); // close after onChange
+        }
+    }
+
+    React.useEffect(() => {
+        return () => {
+            if (dropdownRef.current) dropdownRef.current.removeEventListener('click', onDropdownClick);
+            if (timer.current) clearTimeout(timer.current);
+        }
+    }, []);
+
     const dropdownElement = (<Dropdown
         className={classNameDropdown}
         directionVertical={directionHook}
         directionHorizontal={directionHorizontal}
         isFitWindow={isFitWindow}
         isMountClosed={isMountClosed}
+        key={uniqueClass}
         opened={isOpenedHook}
         portal={portal}
         ref={dropdownRef}
@@ -262,6 +293,7 @@ ButtonDropdown.defaultProps = {
     disabled: false,
     notBlurClasses: [],
     portalId: KUI_PORTAL_ID,
+    single: true,
 };
 
 ButtonDropdown.displayName = 'ButtonDropdown';

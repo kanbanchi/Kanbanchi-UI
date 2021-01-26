@@ -7,6 +7,7 @@ export interface IButtonDropdownStateProps {
     portal?: boolean;
     portalId?: string;
     portalSelector?: string;
+    single?: boolean; // for multiple: click on option name closes select
 }
 
 export interface IButtonDropdownDispatchProps {

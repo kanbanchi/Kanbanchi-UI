@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon, Divider } from '../../src/ui';
+import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon, Divider, Userpic } from '../../src/ui';
 
 const Story = () => {
     const onClickHandler = (e: any) => console.log(e.target.innerText);
@@ -58,7 +58,7 @@ const Story = () => {
                                 >
                                     Card Lorem ipsum dolor sit amet?
                                 </SelectListItem>
-                                <div>123</div>
+                                <SelectListItem>123</SelectListItem>
                                 <Divider />
                                 <SelectListItem
                                     icon="archive"
@@ -164,47 +164,34 @@ const Story = () => {
                     <Button variant="add">
                         Add smth
                     </Button>
-                    <SelectList fixActive={false}
-                    >
+                    <SelectList fixActive={false}>
                         <Checkbox
-                            color={'light'}
                             checked={val01}
+                            color="light"
+                            value="1"
                             onChange={()=>setVal01(!val01)}
                         >
-                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <SelectListItem>
+                                <Userpic
+                                    size={24}
+                                    src="https://i.pravatar.cc/48?u=1"
+                                />
+                                User01
+                            </SelectListItem>
                         </Checkbox>
                         <Checkbox
-                            color={'light'}
                             checked={val02}
+                            color="light"
+                            value="2"
                             onChange={()=>setVal02(!val02)}
                         >
-                            Check 02
-                        </Checkbox><Checkbox
-                            color={'light'}
-                            checked={val01}
-                            onChange={()=>setVal01(!val01)}
-                        >
-                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </Checkbox>
-                        <Checkbox
-                            color={'light'}
-                            checked={val02}
-                            onChange={()=>setVal02(!val02)}
-                        >
-                            Check 02
-                        </Checkbox><Checkbox
-                            color={'light'}
-                            checked={val01}
-                            onChange={()=>setVal01(!val01)}
-                        >
-                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </Checkbox>
-                        <Checkbox
-                            color={'light'}
-                            checked={val02}
-                            onChange={()=>setVal02(!val02)}
-                        >
-                            Check 02
+                            <SelectListItem>
+                                <Userpic
+                                    size={24}
+                                    src="https://i.pravatar.cc/48?u=2"
+                                />
+                                User 02 Lorem ipsum dolor <b>sit amet</b>
+                            </SelectListItem>
                         </Checkbox>
                     </SelectList>
                 </ButtonDropdown>

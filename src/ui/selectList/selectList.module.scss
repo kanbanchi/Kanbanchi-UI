@@ -30,8 +30,9 @@ $selectList: '.kui-select-list';
             background: $color-background;
         }
 
-        &:focus:not(&--disabled) {
+        &:focus {
             background: $color-light-background;
+            outline: 0;
         }
 
         &--active,
@@ -50,6 +51,10 @@ $selectList: '.kui-select-list';
 
         &.kui-loader-block {
             visibility: hidden;
+        }
+
+        &.kui-checkbox {
+            display: list-item;
         }
     }
 

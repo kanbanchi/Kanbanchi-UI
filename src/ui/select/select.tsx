@@ -74,7 +74,7 @@ React.forwardRef((props, ref) => {
         (disabled) ? 'kui-select--disabled' : null,
         (isOpenedHook) ? 'kui-select--opened' : null,
         (variant) ? 'kui-select--variant_' + variant : null,
-        (single) ? 'kui-select--single' : null,
+        (multiple && single) ? 'kui-select--single' : null,
         (readOnly) ? 'kui-select--readonly' : null,
         className
     );
@@ -93,10 +93,17 @@ React.forwardRef((props, ref) => {
         setItemsRefsHook(refs);
     }
 
-    const openDropdown = () => {
+    const openDropdown = (isFocus = false) => {
         setIsOpenedHook(true);
         calcDirection();
         if (onOpen) onOpen();
+        if (!editable || isFocus) {
+            requestAnimationFrame(focusSelectedItem);
+        }
+        if (dropdownRef.current && multiple && single) {
+            dropdownRef.current.removeEventListener('click', onDropdownClick);
+            dropdownRef.current.addEventListener('click', onDropdownClick);
+        }
     }
 
     const closeDropdown = () => {
@@ -109,6 +116,7 @@ React.forwardRef((props, ref) => {
             setValue(initialValue);
         }
         if (onClose) onClose();
+        setUniqueClass(uuidv4());
     }
 
     const calcDirection = () => {
@@ -150,6 +158,11 @@ React.forwardRef((props, ref) => {
         }
     }
 
+    const focusSelectedItem = () => {
+        const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
+        if (ariaSelected) ariaSelected.focus();
+    }
+
     const dropdownAnimationEnd = () => {
         if (
             dropdownRef.current &&
@@ -180,10 +193,10 @@ React.forwardRef((props, ref) => {
 
     attributes.onChange = (e: any) => {
         if (e.item) { // list item clicked
-            inputRef.current.setFocus(); // return focus to input before dropdown hide
             if (multiple) {
                 if (onChange) onChange(e);
             } else {
+                inputRef.current.setFocus(); // return focus to input before dropdown hide
                 setIsOpenedHook(false);
                 if (!isSearch) { // dont update search input value
                     setValue(e.item.text);
@@ -272,9 +285,8 @@ React.forwardRef((props, ref) => {
     } else if (options) {
         if (Array.isArray(options)) {
             list = options.map(option => {
-                let li = null;
-                if (multiple) {
-                    li = (
+                const li = multiple
+                    ? (
                         <Checkbox
                             key={option.value}
                             checked={option.active}
@@ -284,14 +296,12 @@ React.forwardRef((props, ref) => {
                         >
                             {option.text || option.value}
                         </Checkbox>
-                    );
-                } else {
-                    li = (
+                    )
+                    : (
                         <li key={option.value} value={option.value}>
                             {option.text || option.value}
                         </li>
                     );
-                }
                 return li;
             });
         } else {
@@ -330,92 +340,49 @@ React.forwardRef((props, ref) => {
         });
     }
 
-    const highlightOptionIndex = (
-        direction: number
-    ): number => {
-        let activeNew;
-        activeHook = activeHook === null ? -1 : activeHook;
-        activeNew = activeHook + direction;
-        if (
-            direction < 0 &&
-            activeNew < 0
-        ) {
-            activeNew = list.length - 1;
-        } else if (
-            direction > 0 &&
-            activeNew >= list.length
-        ) {
-            activeNew = 0;
-        }
-
-        while (
-            list[activeNew].props.disabled &&
-            list.filter(option => !option.props.disabled).length &&
-            activeNew !== activeHook
-        ) {
-            activeNew += direction;
-            if (
-                direction < 0 &&
-                activeNew < 0
-            ) {
-                activeNew = list.length - 1;
-            } else if (
-                direction > 0 &&
-                activeNew >= list.length
-            ) {
-                activeNew = 0;
-            }
-        }
-
-        return activeNew;
-    }
-
     attributes.onKeyDown = (e: any) => {
         if (!e) return;
         if (onKeyDown) onKeyDown(e);
-        e.persist();
         if (e.key === 'Escape') {
             return closeDropdown();
-        } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
             e.preventDefault();
-            let activeNew;
-            if (e.key === 'ArrowUp') {
-                activeNew = highlightOptionIndex(-1);
-            } else if (e.key === 'ArrowDown') {
-                activeNew = highlightOptionIndex(1);
-            }
-            setActiveHook(activeNew);
-            if (
-                !isSearch &&
-                list[activeNew].props &&
-                list[activeNew].props.children
-            ) {
-                setValue(list[activeNew].props.children);
+            if (!isOpenedHook) {
+                openDropdown(true);
+            } else {
+                focusSelectedItem();
             }
             return;
         }
-        if (!isOpenedHook) return openDropdown();
         if (e.key === 'Enter') {
-            if (onEnter) onEnter(e);
-            if (activeHook === null) {
-                findValue(e.target.value)
-                    .then((found: ISelectActiveProps) => {
-                        setActiveHook(found.index);
-                        onActiveChanged(found.index);
-                        if (onChange) onChange(Object.assign({}, e, {item: found}));
-                    })
-                    .catch(() => {
-                        setActiveHook(null);
-                    });
-            } else {
-                if (
-                    onChange &&
-                    list[activeHook].props
-                ) {
-                    onChange(Object.assign({}, e, {item: list[activeHook].props}));
-                }
-                onActiveChanged(activeHook);
+            if (!isOpenedHook) {
+                return openDropdown(true);
             }
+            if (onEnter) onEnter(e);
+            /**
+             * сначала была задумка: пишешь в инпуте - в дропдауне подсвечивается подходящий айтем. похожим образом ведут себя системные селекты
+             * но потом в канбане появился searchSelect, он больше похож на material
+             */
+            // if (activeHook === null) {
+            //     findValue(e.target.value)
+            //         .then((found: ISelectActiveProps) => {
+            //             setActiveHook(found.index);
+            //             onActiveChanged(found.index);
+            //             if (onChange) onChange(Object.assign({}, e, {item: found}));
+            //         })
+            //         .catch(() => {
+            //             setActiveHook(null);
+            //         });
+            // } else if (list[activeHook]) {
+            //     if (
+            //         onChange &&
+            //         list[activeHook].props
+            //     ) {
+            //         onChange(Object.assign({}, e, {item: list[activeHook].props}));
+            //     }
+            //     onActiveChanged(activeHook);
+            // }
             if (!multiple && isCloseOnEnter) {
                 closeDropdown();
             }
@@ -439,22 +406,30 @@ React.forwardRef((props, ref) => {
         }
     }
 
-    React.useEffect(() => {
-        function onDropdownClick (e: React.SyntheticEvent) {
-            const classes = getParentsClasses(
-                e.target as HTMLElement,
-                [SELECT_LIST_ITEM_CLASS, SELECT_LIST_CLASS]
-            );
-            if (classes.includes(SELECT_LIST_ITEM_CLASS)) {
-                timer.current = setTimeout(closeDropdown, 100); // close after onChange
-            }
+    const onDropdownKeyDown = (e: React.KeyboardEvent) => {
+        if (!e) return;
+        if (
+            e.key === 'Escape' ||
+            multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
+        ) {
+            inputRef.current.setFocus(); // return focus to input before dropdown hide
+            closeDropdown();
         }
+    }
 
+    function onDropdownClick (e: React.SyntheticEvent) {
+        const classes = getParentsClasses(
+            e.target as HTMLElement,
+            [SELECT_LIST_ITEM_CLASS, SELECT_LIST_CLASS]
+        );
+        if (classes.includes(SELECT_LIST_ITEM_CLASS)) {
+            timer.current = setTimeout(closeDropdown, 100); // close after onChange
+        }
+    }
+
+    React.useEffect(() => {
         onActiveChanged();
         if (dropdownRef.current) {
-            if (multiple && single) {
-                dropdownRef.current.addEventListener('click', onDropdownClick);
-            }
             dropdownContainerRef.current = dropdownRef.current.parentNode;
         }
         if (isOpenedHook) {
@@ -492,12 +467,14 @@ React.forwardRef((props, ref) => {
             directionVertical={directionHook}
             directionHorizontal={directionHorizontal}
             isFitWindow={isFitWindow}
+            key={uniqueClass}
             opened={isOpenedHook}
             ref={dropdownRef}
             tabIndex={-1}
             portal={portal}
             onAnimationEnd={dropdownAnimationEnd}
             onBlur={attributes.onBlur}
+            onKeyDown={onDropdownKeyDown}
         >
             {dropdownBody}
         </Dropdown>
@@ -544,7 +521,7 @@ Select.defaultProps = {
     multiple: false,
     opened: false,
     options: null,
-    single: false,
+    single: true,
     onChange: (): void => undefined,
     onEnter: () => undefined,
     onOpen: () => undefined,
