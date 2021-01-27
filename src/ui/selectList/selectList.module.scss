@@ -55,6 +55,10 @@ $selectList: '.kui-select-list';
 
         &.kui-checkbox {
             display: list-item;
+
+            &:before {
+                display: none;
+            }
         }
     }
 
