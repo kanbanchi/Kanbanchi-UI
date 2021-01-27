@@ -13,7 +13,9 @@
     background: $color-white;
     @include transition;
 
+    &:focus,
     &:hover {
+        outline: 0;
         box-shadow: $shadow-hover;
         border-color: transparent;
     }
