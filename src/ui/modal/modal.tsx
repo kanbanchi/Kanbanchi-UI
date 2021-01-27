@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ClassNames } from '../utils';
+import { ClassNames, getParentsClasses } from '../utils';
 import '../../../src/ui/modal/modal.module.scss';
 import { IModalInheritedProps } from './types';
 import { Button } from '../button/button';
@@ -8,14 +8,16 @@ import { ButtonsGroup } from '../buttonsGroup/buttonsGroup';
 import Carousel, { StateCallBack } from 'react-multi-carousel';
 import '../../../src/ui/modal/carousel.scss';
 import { ModalSlide } from './modalSlide';
+import { v4 as uuidv4 } from 'uuid';
 
-// accessibility todo
+// accessibility ok
 
 export const Modal: React.SFC<IModalInheritedProps> =
 (props) => {
     let {
         children,
         className,
+        blockSelector,
         buttons,
         release,
         title,
@@ -26,30 +28,30 @@ export const Modal: React.SFC<IModalInheritedProps> =
         slides = null,
         footer = null;
 
+    const [uniqueClass, setUniqueClass] = React.useState('kui-modal--' + uuidv4());
+    const [titleHook, setTitleHook] = React.useState(title);
+    const modalRef = React.useRef(null);
+    const closeRef = React.useRef(null);
+
     className = ClassNames(
         'kui-modal',
+        uniqueClass,
         (variant) ? 'kui-modal--variant_' + variant : null,
         className
     );
 
-    const [titleHook, setTitleHook] = React.useState(title);
-
-    let buttonsGroup = [],
-        onEnter: () => void = null;
+    let buttonsGroup = [];
+    let autoFocus = false;
 
     if (buttons) {
         buttonsGroup = buttons.map((item, key) => {
             let {
-                isAcivateOnEnter,
                 isPrimary,
                 text,
                 onClick,
                 ...attributes
             } = item;
-
-            if (isAcivateOnEnter && onClick) {
-                onEnter = onClick;
-            }
+            if (attributes.autoFocus) autoFocus = true;
 
             const onClickButton = () => {
                 if (onClick) onClick();
@@ -216,59 +218,86 @@ export const Modal: React.SFC<IModalInheritedProps> =
         <Button
             className="kui-modal__close"
             variant="icon"
+            aria-label={'Close'}
+            ref={closeRef}
             onClick={onClose}
         >
             <Icon size={24} xlink="close"/>
         </Button>
     );
 
+    const onBlur = (e: React.FocusEvent<HTMLElement>) => {
+        if (!e) return;
+        const classes = getParentsClasses(
+            e.relatedTarget as HTMLElement,
+            [uniqueClass]
+        );
+        if (!classes.includes(uniqueClass)) {
+            modalRef.current.focus();
+        }
+    }
+
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
         if (e.key === 'Escape') {
             return onClose();
         }
-        if (onEnter && e.key === 'Enter') { // если есть кнопка с isAcivateOnEnter
-            onEnter();
-            return onClose();
-        }
     }
 
-    const modalRef = React.useRef(null);
-
     React.useEffect(() => {
-        modalRef.current.focus();
+        if (!autoFocus) closeRef.current.focus();
+        const block = document.querySelector(blockSelector) as HTMLElement;
+        if (block) block.setAttribute('aria-hidden', 'true'); // должно запретить фокус, но не работает, поэтому дополнительно сделал onBlur
+
+        return () => {
+            if (block) block.setAttribute('aria-hidden', 'false');
+        }
     }, []);
 
     return (
         <div
             className={className}
-            ref={modalRef}
-            tabIndex={0}
+            aria-hidden={'false'}
             onKeyDown={onKeyDown}
             {...attributes}
         >
             <div
                 className="kui-modal__overlay"
                 onClick={onClose}
-            ></div>
-            <div className="kui-modal__item">
+            />
+            <form
+                className="kui-modal__item"
+                tabIndex={0}
+                ref={modalRef}
+                role={'dialog'}
+                aria-labelledby={uniqueClass + '__header-title'}
+                aria-describedby={uniqueClass + '__body'}
+                onBlur={onBlur}
+            >
                 <div className="kui-modal__header">
-                    <div className="kui-modal__header-title">
+                    <div
+                        className="kui-modal__header-title"
+                        id={uniqueClass + '__header-title'}
+                    >
                         {titleHook}
                     </div>
                     {closeButton}
                 </div>
-                <div className="kui-modal__body">
+                <div
+                    className="kui-modal__body"
+                    id={uniqueClass + '__body'}
+                >
                     {children}
                     {slides}
                 </div>
                 {footer}
-            </div>
+            </form>
         </div>
     );
 };
 
 Modal.defaultProps = {
+    blockSelector: '.content', // основной контент в Kanbanchi
     buttons: null,
     release: null,
     title: '',

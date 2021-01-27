@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Modal, ButtonsGroup, Button } from '../../src/ui';
+import { Portal } from '../../src/ui/portal/portal';
 
 const Story = () => {
     const [val, setVal] = React.useState(null);
 
     const modalDefault = (<Modal
+            blockSelector={'.page'}
             title={'Default modal'}
             onClose={() => setVal(null)}
         >
@@ -14,6 +16,7 @@ const Story = () => {
         </Modal>);
 
     const modalActions = (<Modal
+            blockSelector={'.kui-buttons_group'}
             title={'Actions modal'}
             buttons={[
                 {
@@ -21,8 +24,8 @@ const Story = () => {
                     onClick: () => console.log('cancel')
                 },
                 {
+                    autoFocus: true,
                     text: 'Ok',
-                    isAcivateOnEnter: true,
                     isPrimary: true,
                     onClick: () => console.log('ok')
                 }
@@ -34,6 +37,7 @@ const Story = () => {
         </Modal>);
 
     const modalRelease = (<Modal
+            blockSelector={'.page'}
             title={'Release modal'}
             release={{
                 footer: {
@@ -88,7 +92,7 @@ const Story = () => {
              <section className="section-form-min">
                 <h2>Modals</h2>
 
-                {val}
+                <Portal selector={'#root'}>{val}</Portal>
 
                 <ButtonsGroup>
                     <Button
