@@ -4,7 +4,7 @@ import { ClassNames } from '../utils';
 import '../../../src/ui/hint/hint.module.scss';
 import { Tooltip } from '../tooltip/tooltip';
 
-// accessibility aria-live
+// accessibility ok
 
 export const Hint: React.FC<IHintInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -29,6 +29,7 @@ React.forwardRef((props, ref) => {
             ref={ref as any}
             show={show}
             variant={variant}
+            role={'alert'}
             {...attributes}
         >
             {children}
