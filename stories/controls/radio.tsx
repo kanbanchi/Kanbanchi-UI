@@ -11,12 +11,15 @@ const Story = () => {
                 <h2>Radio</h2>
                 <Radio
                     active={val}
-                    onChange={(i: any)=>setVal(i.index)}
+                    onChange={(i: any)=>{
+                        setVal(i.index);
+                        console.log(i.index);
+                    }}
                 >
-                    <div>Lorem ipsum</div>
-                    <div>Dolor sit amet</div>
-                    <div className="cusomClass"><b>Consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-                    <div className="disabled">Disabled</div>
+                    <div onClick={()=>console.log(0)}>Lorem ipsum</div>
+                    <div onClick={()=>console.log(1)}>Dolor sit amet</div>
+                    <div onClick={()=>console.log(2)} className="cusomClass"><b>Consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                    <div onClick={()=>console.log(3)} className="disabled">Disabled</div>
                 </Radio>
 
                 <br/><br/>

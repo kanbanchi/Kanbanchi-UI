@@ -2,9 +2,9 @@ export interface ILabelProps {
     ref?: any;
 }
 
-export type IConflictFreeHTMLAttributes<E> = React.LabelHTMLAttributes<E>;
+export type IConflictFreeHTMLAttributes<E> = React.InputHTMLAttributes<E>;
 
 export interface ILabelInheritedProps extends
     ILabelProps,
-    IConflictFreeHTMLAttributes<HTMLLabelElement>
+    IConflictFreeHTMLAttributes<HTMLInputElement>
 {}
