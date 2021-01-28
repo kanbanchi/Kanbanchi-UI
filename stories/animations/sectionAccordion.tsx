@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Icon, SectionAccordion } from '../../src/ui';
+import { Button, Icon, Radio, SectionAccordion } from '../../src/ui';
 import { IButtonInheritedProps } from '../../src/ui/button/types';
 
 const Story = () => {
     const [opened, setOpened] = React.useState(null);
     const [opened01, setOpened01] = React.useState(true);
     const [opened02, setOpened02] = React.useState(true);
+    const [val, setVal] = React.useState();
 
     const actionButton = (props: IButtonInheritedProps) => (
         <Button
@@ -35,9 +36,17 @@ const Story = () => {
                     variant="simple"
                 >
                     <br/>
-                    <p>Filter 1</p>
-                    <p>Filter 2</p>
-                    <p>Filter 3</p>
+                    <Radio
+                        active={val}
+                        onChange={(i: any)=>{
+                            setVal(i.index);
+                            console.log(i.index);
+                        }}
+                    >
+                        <div>Filter 1</div>
+                        <div>Filter 2</div>
+                        <div>Filter 3</div>
+                    </Radio>
                 </SectionAccordion>
             </section>
 
@@ -53,10 +62,18 @@ const Story = () => {
                     onClose={()=>console.log('onClose')}
                     onOpen={()=>console.log('onOpen')}
                 >
-                    <p>body</p>
-                    <p>body</p>
-                    <p>body</p>
-                    <p>body</p>
+                    <br/>
+                    <Radio
+                        active={val}
+                        onChange={(i: any)=>{
+                            setVal(i.index);
+                            console.log(i.index);
+                        }}
+                    >
+                        <div>Filter 1</div>
+                        <div>Filter 2</div>
+                        <div>Filter 3</div>
+                    </Radio>
                 </SectionAccordion>
                 <SectionAccordion
                     Action={actionButton}

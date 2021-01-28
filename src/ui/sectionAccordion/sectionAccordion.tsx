@@ -23,6 +23,7 @@ React.forwardRef((props, ref) => {
     } = props;
 
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
+    const [isMountChildren, setIsMountChildren] = React.useState(opened);
     const [isClickedHook, setIsClickedHook] = React.useState(false);
 
     const bodyRef = React.useRef(null);
@@ -38,29 +39,33 @@ React.forwardRef((props, ref) => {
         className
     );
 
+    const setIsOpened = (newIsOpened: boolean) => {
+        if (newIsOpened) setIsMountChildren(true);
+        setIsOpenedHook(newIsOpened);
+    }
+
     const onButtonClick = () => {
         if (isOpenedHook) {
             if (onClose) onClose();
         } else {
             if (onOpen) onOpen();
         }
-        setIsOpenedHook(!isOpenedHook);
+        setIsOpened(!isOpenedHook);
         setIsClickedHook(true);
     }
 
     const bodyAnimationEnd = () => {
-        if (
-            isOpenedHook
-            && !userAgentsInclude(['edge', 'safari'])
-        ) {
-            setTimeout(() => {
+        if (isOpenedHook) {
+            if (!userAgentsInclude(['edge', 'safari'])) setTimeout(() => {
                 headerRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
             }, 100);
+        } else {
+            setIsMountChildren(false);
         }
     }
 
     React.useEffect(() => {
-        setIsOpenedHook(opened);
+        setIsOpened(opened);
     }, [opened]);
 
     return (
@@ -107,10 +112,9 @@ React.forwardRef((props, ref) => {
                 className="kui-section-accordion-body"
                 aria-hidden={!isOpenedHook}
                 ref={bodyRef}
-                tabIndex={isOpenedHook ? 0 : -1}
                 onAnimationEnd={bodyAnimationEnd}
             >
-                {children}
+                {isMountChildren && children}
             </div>
         </div>
     );
