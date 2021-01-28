@@ -23,6 +23,11 @@
     background: $color-background;
     border-radius: $base-radius;
 
+    &:focus {
+        outline: 0;
+        background: calc-color(shade, $color-background, 5);
+    }
+
     &__text {
         @extend %text-ellipsis;
     }

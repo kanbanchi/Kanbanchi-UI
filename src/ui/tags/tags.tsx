@@ -22,7 +22,6 @@ React.forwardRef((props, ref) => {
         <div
             className={className}
             ref={ref as any}
-            tabIndex={0}
             {...attributes}
         >
             <div className={'kui-tags__inner'}>
