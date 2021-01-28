@@ -111,10 +111,11 @@ React.forwardRef((props, ref) => {
             <div
                 className="kui-section-accordion-body"
                 aria-hidden={!isOpenedHook}
+                hidden={!isMountChildren}
                 ref={bodyRef}
                 onAnimationEnd={bodyAnimationEnd}
             >
-                {isMountChildren && children}
+                {children}
             </div>
         </div>
     );
