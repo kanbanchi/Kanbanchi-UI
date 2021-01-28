@@ -115,7 +115,7 @@ React.forwardRef((props, ref) => {
                 ref={bodyRef}
                 onAnimationEnd={bodyAnimationEnd}
             >
-                {children}
+                {isMountChildren && children}
             </div>
         </div>
     );
