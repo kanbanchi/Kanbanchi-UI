@@ -30,12 +30,24 @@
         background: transparent;
         border-radius: 0;
 
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            right: 0;
+            background: transparent;
+            z-index: -1;
+            @include transition;
+        }
+
         &:after {
             content: '';
             position: absolute;
             left: 0;
             bottom: 0;
-            width: 100%;
+            right: 0;
             height: 1px;
             background: transparent;
             transform: scaleX(.5);
@@ -48,6 +60,10 @@
             color: $color-base;
             background: transparent;
             box-shadow: none;
+        }
+
+        &:focus:before {
+            background: calc-color(fade, $color-base, 2.5);
         }
 
         &--active {
