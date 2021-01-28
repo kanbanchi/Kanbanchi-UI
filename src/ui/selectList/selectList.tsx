@@ -35,7 +35,8 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
     const [activeHook, setActiveHook] = React.useState(active);
     let [focusHook, setFocusHook] = React.useState(active || 0);
 
-    const itemsRefs: any[] = [];
+    const itemsRefs = Array.from({ length: 1000 }, () => React.useRef(null)); // все useRef нужно выполнить сразу (hooks order)
+    let refIndex = 0;
     let itemsLength = 0;
     let isCheckboxes = false;
 
@@ -72,9 +73,6 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
             if (child.props.onClick) child.props.onClick(e);
         }
 
-        itemsRefs.push(React.useRef(null));
-        const refIndex = itemsRefs.length - 1;
-
         const item = [React.cloneElement(child, {
             className: ClassNames(
                 'kui-select-list__item',
@@ -90,12 +88,15 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
             ['aria-selected']: refIndex === focusHook,
             onClick,
         })];
+        refIndex++;
         if (divider) {
             item.push(divider);
         }
         itemsLength += item.length;
         return item;
     });
+
+    itemsRefs.length = refIndex;
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
