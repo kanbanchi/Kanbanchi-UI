@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
-import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs } from '../utils';
+import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs, stripHtml } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
@@ -94,7 +94,9 @@ React.forwardRef((props, ref) => {
     }
 
     const isHint = variant === 'hint';
-    let html = [];
+    let html: JSX.Element[] = [];
+    let ariaLabel = value || '';
+
     if (arrow) {
         const icon = 'hint-arrow-' + arrow;
         html.push(<div
@@ -111,6 +113,7 @@ React.forwardRef((props, ref) => {
             key={'header'}
             dangerouslySetInnerHTML={{ __html: header }}
         />);
+        ariaLabel = header;
     }
     html.push(<div
         className={'kui-tooltip__text'}
@@ -480,6 +483,7 @@ React.forwardRef((props, ref) => {
             className: childClassName,
             title: null,
             tooltip: null,
+            ['aria-label']: child.props['aria-label'] || stripHtml(ariaLabel),
             onBlur: (event: React.FocusEvent) => {
                 if (isHidable) {
                     closeTooltip();
