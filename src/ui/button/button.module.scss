@@ -456,10 +456,7 @@
             border-radius: $google-spacing * 5;
         }
 
-        &:focus {
-            color: inherit;
-        }
-
+        &:focus,
         &:hover {
             color: inherit;
             
