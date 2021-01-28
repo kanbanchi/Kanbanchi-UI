@@ -11,7 +11,8 @@ const ReactDatepickerElement = ReactDatepicker as any;
 
 registerLocale('en-GB', enGB); // Weeks start on Monday
 
-// accessibility ok
+// accessibility ok+-
+// можно обновить до 3.4.1, там со скринридером всё хорошо, не нужны эти костыли, но проблемы с зависимостями
 
 export const Datepicker: React.SFC<IDatePickerInheritedProps> =
 React.forwardRef((props, ref) => {
