@@ -24,7 +24,7 @@ React.forwardRef((props, ref) => {
 
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [isMountChildren, setIsMountChildren] = React.useState(opened);
-    const [isClickedHook, setIsClickedHook] = React.useState(false);
+    const [isChangedHook, setIsChangedHook] = React.useState(false); // default без анимации, changed с анимацией
 
     const bodyRef = React.useRef(null);
     const headerRef = React.useRef(null);
@@ -33,7 +33,7 @@ React.forwardRef((props, ref) => {
         'kui-section-accordion',
         (color) ? 'kui-section-accordion--color_' + color: null,
         (variant) ? 'kui-section-accordion--variant_' + variant: null,
-        (isClickedHook)
+        (isChangedHook)
             ? 'kui-section-accordion--' + (isOpenedHook ? 'opened' : 'closed')
             : (isOpenedHook ? 'kui-section-accordion--opened-default' : null),
         className
@@ -42,6 +42,7 @@ React.forwardRef((props, ref) => {
     const setIsOpened = (newIsOpened: boolean) => {
         if (newIsOpened) setIsMountChildren(true);
         setIsOpenedHook(newIsOpened);
+        setIsChangedHook(true);
     }
 
     const onButtonClick = () => {
@@ -51,7 +52,6 @@ React.forwardRef((props, ref) => {
             if (onOpen) onOpen();
         }
         setIsOpened(!isOpenedHook);
-        setIsClickedHook(true);
     }
 
     const bodyAnimationEnd = () => {
@@ -65,6 +65,7 @@ React.forwardRef((props, ref) => {
     }
 
     React.useEffect(() => {
+        if (opened === isOpenedHook) return;
         setIsOpened(opened);
     }, [opened]);
 

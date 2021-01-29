@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Icon, Radio, SectionAccordion } from '../../src/ui';
+import { Button, Icon, Radio, SectionAccordion, Switch } from '../../src/ui';
 import { IButtonInheritedProps } from '../../src/ui/button/types';
 
 const Story = () => {
-    const [opened, setOpened] = React.useState(null);
+    const [opened, setOpened] = React.useState(true);
     const [opened01, setOpened01] = React.useState(true);
     const [opened02, setOpened02] = React.useState(true);
     const [val, setVal] = React.useState();
@@ -30,10 +30,18 @@ const Story = () => {
         <div className="page">
             <section className="section-form-min">
                 <h2>Filter</h2>
+                <Switch
+                    checked={opened}
+                    onChange={() => setOpened(!opened)}
+                >
+                    Toggle
+                </Switch>
                 <SectionAccordion
-                    opened={true}
+                    opened={opened}
                     title="Saved filters"
                     variant="simple"
+                    onOpen={() => setOpened(true)}
+                    onClose={() => setOpened(false)}
                 >
                     <br/>
                     <Radio
@@ -80,8 +88,8 @@ const Story = () => {
                     color="grey"
                     icon="share-specific"
                     title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                    opened={opened === 1}
-                    onOpen={()=>setOpened(1)}
+                    opened={opened}
+                    onOpen={()=>setOpened(true)}
                 >
                     <p>body</p>
                     <p>body</p>
