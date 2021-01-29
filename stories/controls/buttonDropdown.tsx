@@ -98,7 +98,6 @@ const Story = () => {
                 <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
                     <ButtonDropdown
                         dropdownClassName={'section-portal-dropdown'}
-                        isMountClosed={false}
                         portal
                         portalId={'stories-portal'}
                         portalSelector={'.section-portal'}
@@ -129,7 +128,6 @@ const Story = () => {
                     <ButtonDropdown
                         directionHorizontal={'right'}
                         directionVertical={'up'}
-                        isMountClosed={false}
                         portal
                     >
                         <Button variant="icon">
@@ -257,7 +255,7 @@ const Story = () => {
                         </Checkbox>
                     </SelectList>
                 </ButtonDropdown>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                {/* <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> */}
 
                 Check empty ButtonDropdown: <ButtonDropdown></ButtonDropdown>
             </section>
