@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
-import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs, ClassList } from '../utils';
+import { ISelectInheritedProps, ISelectOptionsObject } from './types';
+import { ClassNames, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs, ClassList } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -12,8 +12,10 @@ import { Portal } from '../portal/portal';
 
 // accessibility ok
 
-export const Select: React.SFC<ISelectInheritedProps> =
-React.forwardRef((props, ref) => {
+export const Select = React.forwardRef((
+    props: ISelectInheritedProps,
+    ref
+) => {
     let {
         active,
         children,
@@ -27,6 +29,7 @@ React.forwardRef((props, ref) => {
         isCloseOnEnter,
         isFitWindow,
         multiple,
+        notBlurClasses,
         opened,
         options,
         portal,
@@ -51,7 +54,6 @@ React.forwardRef((props, ref) => {
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
 
-    const WAIT_ANIMATION = 300;
     let [activeHook, _setActiveHook] = React.useState(active);
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [initialValue, _setInitialValue] = React.useState('');
@@ -59,10 +61,10 @@ React.forwardRef((props, ref) => {
     const [isFocusedHook, setIsFocusedHook] = React.useState(opened);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [itemsRefsHook, setItemsRefsHook] = React.useState([]); // list items for auto scroll in dropdown
-    const [uniqueClass, setUniqueClass] = React.useState('kui-select--' + uuidv4());
+    const [uniqueClass] = React.useState('kui-select--' + uuidv4());
+    const dropdownUniqueClass = 'kui-select__dropdown--' + uniqueClass;
 
     const dropdownRef = React.useRef(null);
-    const dropdownContainerRef = React.useRef(null);
     const inputRef = React.useRef(null);
     const selectRef = React.useRef(null);
     const combinedRef =  useCombinedRefs(ref, selectRef);
@@ -95,14 +97,9 @@ React.forwardRef((props, ref) => {
 
     const openDropdown = (isFocus = false) => {
         setIsOpenedHook(true);
-        calcDirection();
         if (onOpen) onOpen();
         if (!editable || isFocus) {
             requestAnimationFrame(focusSelectedItem);
-        }
-        if (dropdownRef.current && multiple && single) {
-            dropdownRef.current.removeEventListener('click', onDropdownClick);
-            dropdownRef.current.addEventListener('click', onDropdownClick);
         }
     }
 
@@ -116,12 +113,9 @@ React.forwardRef((props, ref) => {
             setValue(initialValue);
         }
         if (onClose) onClose();
-        setUniqueClass(uuidv4());
     }
 
     const calcDirection = () => {
-        if (!dropdownRef.current) return;
-
         let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
             directionHook = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
@@ -133,45 +127,45 @@ React.forwardRef((props, ref) => {
                 : document.body;
             const portalScrollTop = getParentsScrollTop(portalEl);
 
-            dropdownContainerRef.current.style.top = 'unset';
-            dropdownContainerRef.current.style.bottom = 'unset';
-            dropdownContainerRef.current.style.left = 'unset';
-            dropdownContainerRef.current.style.right = 'unset';
+            dropdownRef.current.style.top = 'unset';
+            dropdownRef.current.style.bottom = 'unset';
+            dropdownRef.current.style.left = 'unset';
+            dropdownRef.current.style.right = 'unset';
 
             if (directionHorizontal === 'left') {
-                dropdownContainerRef.current.style.left = el.left + 'px';
+                dropdownRef.current.style.left = el.left + 'px';
             } else {
-                dropdownContainerRef.current.style.right = (window.innerWidth - el.right) + 'px';
+                dropdownRef.current.style.right = (window.innerWidth - el.right) + 'px';
             }
 
             if (directionHook === 'up') {
-                dropdownContainerRef.current.style.bottom = (window.innerHeight - el.top) + 'px';
+                dropdownRef.current.style.bottom = (window.innerHeight - el.top) + 'px';
             } else {
-                dropdownContainerRef.current.style.top = portalScrollTop + el.bottom + 'px';
+                dropdownRef.current.style.top = portalScrollTop + el.bottom + 'px';
             }
         }
-        if (portal || isFitWindow) {
+        if (portal || isFitWindow) requestAnimationFrame(() => { // wait dropdownItem
             const maxHeight = directionHook === 'up'
                 ? el.top
                 : window.innerHeight - el.bottom;
-            dropdownRef.current.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
+            const dropdownItem = dropdownRef.current.children[0];
+            if (dropdownItem) dropdownItem.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
+        })
+    }
+
+    const onDropdownMount = () => {
+        if (!dropdownRef.current) return;
+
+        calcDirection();
+        if (multiple && single) {
+            dropdownRef.current.removeEventListener('click', onDropdownClick);
+            dropdownRef.current.addEventListener('click', onDropdownClick);
         }
     }
 
     const focusSelectedItem = () => {
         const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
         if (ariaSelected) ariaSelected.focus();
-    }
-
-    const dropdownAnimationEnd = () => {
-        if (
-            dropdownRef.current &&
-            isOpenedHook &&
-            !userAgentsInclude(['edge', 'safari'])
-        ) {
-            scrollList();
-            dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-        }
     }
 
     const scrollList = () => {
@@ -181,9 +175,12 @@ React.forwardRef((props, ref) => {
             itemsRefsHook[activeHook] &&
             itemsRefsHook[activeHook].current)
         {
-            let lines = Math.floor(dropdownRef.current.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
+            const dropdownItem = dropdownRef.current.children[0];
+            if (!dropdownItem) return;
+
+            let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
             let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
-            dropdownRef.current.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
+            dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
         }
     }
 
@@ -222,21 +219,28 @@ React.forwardRef((props, ref) => {
         if (onFocus) onFocus(e);
     }
 
-    attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    notBlurClasses = [
+        ...notBlurClasses,
+        uniqueClass,
+        dropdownUniqueClass,
+    ];
+
+    attributes.onBlur = (e: any) => {
         if (!document.hasFocus()) return;
 
-        e.persist();
-        if (isFocusedHook) {
-            const classes = getParentsClasses(
-                e.relatedTarget as HTMLElement,
-                [uniqueClass]
-            );
-            if (!classes.includes(uniqueClass)) {
-                setIsFocusedHook(false);
-                closeDropdown();
-                if (onBlur) onBlur(e);
+        const classes = getParentsClasses(
+            e.relatedTarget as HTMLElement,
+            notBlurClasses
+        );
+        for (let i = 0; i<notBlurClasses.length; i++) {
+            if (classes.includes(notBlurClasses[i])) {
+                return;
             }
         }
+
+        setIsFocusedHook(false);
+        closeDropdown();
+        if (onBlur) onBlur(e);
     }
 
     attributes.onClick = (e: React.MouseEvent<HTMLInputElement>) => {
@@ -429,14 +433,6 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         onActiveChanged();
-        if (dropdownRef.current) {
-            dropdownContainerRef.current = dropdownRef.current.parentNode;
-        }
-        if (isOpenedHook) {
-            timer.current = setTimeout(() => {
-                calcDirection();
-            }, WAIT_ANIMATION);
-        }
 
         return () => {
             if (dropdownRef.current) dropdownRef.current.removeEventListener('click', onDropdownClick);
@@ -458,7 +454,8 @@ React.forwardRef((props, ref) => {
 
     const classNameDropdown = ClassNames(
         'kui-select__dropdown',
-        dropdownClassName
+        dropdownUniqueClass,
+        dropdownClassName,
     );
 
     const dropdownElement = dropdownBody
@@ -467,13 +464,13 @@ React.forwardRef((props, ref) => {
             directionVertical={directionHook}
             directionHorizontal={directionHorizontal}
             isFitWindow={isFitWindow}
-            key={uniqueClass}
             opened={isOpenedHook}
             ref={dropdownRef}
             tabIndex={-1}
             portal={portal}
-            onAnimationEnd={dropdownAnimationEnd}
+            onAnimationEnd={scrollList}
             onBlur={attributes.onBlur}
+            onDidMount={onDropdownMount}
             onKeyDown={onDropdownKeyDown}
         >
             {dropdownBody}
@@ -519,6 +516,7 @@ Select.defaultProps = {
     editable: false,
     isCloseOnEnter: true,
     multiple: false,
+    notBlurClasses: [],
     opened: false,
     options: null,
     single: true,

@@ -241,6 +241,9 @@ const Story = () => {
                                 icon="overdue"
                                 isFitWindow={true}
                                 variant="withicon"
+                                // portal
+                                // portalId={'stories-portal'}
+                                // portalSelector={'.page'}
                                 style={{width: 120}}
                                 onChange={(i: ISelectActiveInheritedProps) => {
                                     // @ts-ignore
