@@ -109,18 +109,20 @@ const Story = () => {
                         </Button>
                         <SelectList fixActive={false}>
                             <SelectListItem
-                                icon="card"
-                                list="List Ut enim ad minim veniam!"
-                                onClick={()=>console.log('Card 01')}
-                            >
-                                Card 01 Lorem ipsum dolor sit amet?
-                            </SelectListItem>
-                            <SelectListItem
                                 icon="archive"
-                                list="List"
+                                list="Todo"
+                                listLabel={'List: Todo'}
                                 onClick={()=>console.log('Card 02')}
                             >
                                 Card 02
+                            </SelectListItem>
+                            <SelectListItem
+                                icon="card"
+                                list="List Ut enim ad minim veniam!"
+                                listLabel={'List: List Ut enim ad minim veniam!'}
+                                onClick={()=>console.log('Card 01')}
+                            >
+                                Card 01 Lorem ipsum dolor sit amet?
                             </SelectListItem>
                         </SelectList>
                     </ButtonDropdown>
