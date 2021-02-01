@@ -483,7 +483,7 @@ React.forwardRef((props, ref) => {
             className: childClassName,
             title: null,
             tooltip: null,
-            ['aria-label']: child.props['aria-label'] || stripHtml(ariaLabel),
+            ['aria-label']: child.props['aria-label'] === undefined ? stripHtml(ariaLabel) : child.props['aria-label'],
             onBlur: (event: React.FocusEvent) => {
                 if (isHidable) {
                     closeTooltip();
