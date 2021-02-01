@@ -104,6 +104,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                 ref={refSnackbar}
                 tabIndex={0}
                 aria-live={timer === timerHook ? 'assertive' : 'off'} // при смене таймера скрин ридеру нужен только таймер
+                role={'alert'}
                 {...attributes}
             >
                 <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />

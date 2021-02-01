@@ -62,6 +62,7 @@ export const Dropdown = React.forwardRef((
         <div
             className={className}
             aria-live={'assertive'}
+            role={'alert'}
             onAnimationEnd={onAnimationEndHadler}
             ref={ref}
             {...attributes}
