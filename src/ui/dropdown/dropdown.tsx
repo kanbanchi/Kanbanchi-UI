@@ -61,8 +61,6 @@ export const Dropdown = React.forwardRef((
     return (
         <div
             className={className}
-            aria-live={'assertive'}
-            role={'alert'}
             onAnimationEnd={onAnimationEndHadler}
             ref={ref}
             {...attributes}
@@ -71,6 +69,8 @@ export const Dropdown = React.forwardRef((
                 <div
                     className="kui-dropdown__item"
                     ref={itemRef}
+                    aria-live={'assertive'}
+                    role={'alert'}
                 >
                     {children}
                 </div>
