@@ -5,6 +5,7 @@ import { Portal } from '../../src/ui/portal/portal';
 
 const Story = () => {
     const [val, setVal] = React.useState(null);
+    const [val1, setVal1] = React.useState(null);
 
     const modalDefault = (<Modal
             blockSelector={'.page'}
@@ -13,7 +14,21 @@ const Story = () => {
         >
             <h3>Content header</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <Button
+                onClick={() => setVal1(modalDefault1)}
+            >
+                Default1
+            </Button>
         </Modal>);
+
+    const modalDefault1 = (<Modal
+        blockSelector={'.page'}
+        title={'Default modal1'}
+        onClose={() => setVal1(null)}
+    >
+        <h3>Content header</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </Modal>);
 
     const modalActions = (<Modal
             blockSelector={'.kui-buttons_group'}
@@ -93,6 +108,7 @@ const Story = () => {
                 <h2>Modals</h2>
 
                 <Portal selector={'#root'}>{val}</Portal>
+                <Portal selector={'#root'}>{val1}</Portal>
 
                 <ButtonsGroup>
                     <Button

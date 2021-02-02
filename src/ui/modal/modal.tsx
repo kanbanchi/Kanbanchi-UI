@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ClassNames, getParentsClasses } from '../utils';
+import { ClassNames } from '../utils';
 import '../../../src/ui/modal/modal.module.scss';
 import { IModalInheritedProps } from './types';
 import { Button } from '../button/button';
@@ -9,6 +9,7 @@ import Carousel, { StateCallBack } from 'react-multi-carousel';
 import '../../../src/ui/modal/carousel.scss';
 import { ModalSlide } from './modalSlide';
 import { v4 as uuidv4 } from 'uuid';
+import FocusLock from 'react-focus-lock';
 
 // accessibility ok
 
@@ -28,10 +29,8 @@ export const Modal: React.SFC<IModalInheritedProps> =
         slides = null,
         footer = null;
 
-    const [uniqueClass, setUniqueClass] = React.useState('kui-modal--' + uuidv4());
+    const [uniqueClass] = React.useState('kui-modal--' + uuidv4());
     const [titleHook, setTitleHook] = React.useState(title);
-    const modalRef = React.useRef(null);
-    const closeRef = React.useRef(null);
 
     className = ClassNames(
         'kui-modal',
@@ -41,7 +40,6 @@ export const Modal: React.SFC<IModalInheritedProps> =
     );
 
     let buttonsGroup = [];
-    let autoFocus = false;
 
     if (buttons) {
         buttonsGroup = buttons.map((item, key) => {
@@ -51,7 +49,6 @@ export const Modal: React.SFC<IModalInheritedProps> =
                 onClick,
                 ...attributes
             } = item;
-            if (attributes.autoFocus) autoFocus = true;
 
             const onClickButton = () => {
                 if (onClick) onClick();
@@ -219,23 +216,11 @@ export const Modal: React.SFC<IModalInheritedProps> =
             className="kui-modal__close"
             variant="icon"
             aria-label={'Close'}
-            ref={closeRef}
             onClick={onClose}
         >
             <Icon size={24} xlink="close"/>
         </Button>
     );
-
-    const onBlur = (e: React.FocusEvent<HTMLElement>) => {
-        if (!e) return;
-        const classes = getParentsClasses(
-            e.relatedTarget as HTMLElement,
-            [uniqueClass]
-        );
-        if (!classes.includes(uniqueClass)) {
-            modalRef.current.focus();
-        }
-    }
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
@@ -245,9 +230,8 @@ export const Modal: React.SFC<IModalInheritedProps> =
     }
 
     React.useEffect(() => {
-        if (!autoFocus) closeRef.current.focus();
         const block = document.querySelector(blockSelector) as HTMLElement;
-        if (block) block.setAttribute('aria-hidden', 'true'); // должно запретить фокус, но не работает, поэтому дополнительно сделал onBlur
+        if (block) block.setAttribute('aria-hidden', 'true'); // скрыть контент под модалкой от скринридера
 
         return () => {
             if (block) block.setAttribute('aria-hidden', 'false');
@@ -265,33 +249,33 @@ export const Modal: React.SFC<IModalInheritedProps> =
                 className="kui-modal__overlay"
                 onClick={onClose}
             />
-            <form
-                className="kui-modal__item"
-                tabIndex={0}
-                ref={modalRef}
-                role={'dialog'}
-                aria-labelledby={uniqueClass + '__header-title'}
-                aria-describedby={uniqueClass + '__body'}
-                onBlur={onBlur}
-            >
-                <div className="kui-modal__header">
-                    <div
-                        className="kui-modal__header-title"
-                        id={uniqueClass + '__header-title'}
-                    >
-                        {titleHook}
-                    </div>
-                    {closeButton}
-                </div>
-                <div
-                    className="kui-modal__body"
-                    id={uniqueClass + '__body'}
+            <FocusLock returnFocus>
+                <form
+                    className="kui-modal__item"
+                    role={'dialog'}
+                    aria-modal={true}
+                    aria-labelledby={uniqueClass + '__header-title'}
+                    aria-describedby={uniqueClass + '__body'}
                 >
-                    {children}
-                    {slides}
-                </div>
-                {footer}
-            </form>
+                    <div className="kui-modal__header">
+                        <div
+                            className="kui-modal__header-title"
+                            id={uniqueClass + '__header-title'}
+                        >
+                            {titleHook}
+                        </div>
+                        {closeButton}
+                    </div>
+                    <div
+                        className="kui-modal__body"
+                        id={uniqueClass + '__body'}
+                    >
+                        {children}
+                        {slides}
+                    </div>
+                    {footer}
+                </form>
+            </FocusLock>
         </div>
     );
 };
