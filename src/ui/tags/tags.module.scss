@@ -33,6 +33,7 @@
     }
 
     &__clear {
+        min-width: $google-spacing * 3;
         margin-left: $google-spacing / 2;
     }
 
