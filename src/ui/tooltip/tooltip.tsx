@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
-import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs } from '../utils';
+import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs, stripHtml } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
 import { v4 as uuidv4 } from 'uuid';
+
+// accessibility ok
 
 export const Tooltip: React.FC<ITooltipInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -92,7 +94,9 @@ React.forwardRef((props, ref) => {
     }
 
     const isHint = variant === 'hint';
-    let html = [];
+    let html: JSX.Element[] = [];
+    let ariaLabel = value || '';
+
     if (arrow) {
         const icon = 'hint-arrow-' + arrow;
         html.push(<div
@@ -109,6 +113,7 @@ React.forwardRef((props, ref) => {
             key={'header'}
             dangerouslySetInnerHTML={{ __html: header }}
         />);
+        ariaLabel = header;
     }
     html.push(<div
         className={'kui-tooltip__text'}
@@ -285,7 +290,7 @@ React.forwardRef((props, ref) => {
 
                         item.style.maxWidth = maxWidth + 'px';
                         if (!isPortal) portal.style.maxWidth = maxWidth + 'px';
-                        res();
+                        res(true);
                     }
                 }, 100);
             }
@@ -478,6 +483,7 @@ React.forwardRef((props, ref) => {
             className: childClassName,
             title: null,
             tooltip: null,
+            ['aria-label']: child.props['aria-label'] === undefined ? stripHtml(ariaLabel) : child.props['aria-label'],
             onBlur: (event: React.FocusEvent) => {
                 if (isHidable) {
                     closeTooltip();
@@ -540,6 +546,9 @@ React.forwardRef((props, ref) => {
                     <div
                         className={classNamePortal}
                         ref={portalRef}
+                        role={'tooltip'}
+                        aria-live={'assertive'}
+                        aria-hidden={!isShown}
                     >
                         <div
                             className={classHook}

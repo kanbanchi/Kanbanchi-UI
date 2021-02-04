@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ITagInheritedProps } from './types';
 import { ClassNames, getParentsClasses } from '../utils';
 import '../../../src/ui/tags/tags.module.scss';
-import { Icon, Tooltip } from '../../ui';
+import { Button, Icon } from '../../ui';
 
 export const Tag: React.SFC<ITagInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -36,37 +36,38 @@ React.forwardRef((props, ref) => {
         }
     }
 
-    const iconClear = <Icon
-        xlink="clear"
-        size={24}
-        className="kui-tag__clear"
-    />;
+    const getButtonClear = () => {
+        const tooltip = typeof iconTooltip === 'string'
+            ? { value: iconTooltip }
+            : iconTooltip;
 
-    const getIconOrTooltip = () => {
-        if (iconTooltip) {
-            const tooltipProps = (typeof iconTooltip === 'string')
-                ? { value: iconTooltip }
-                : iconTooltip;
-            return (
-                <Tooltip {...tooltipProps}>
-                    {iconClear}
-                </Tooltip>
-            )
-        }
-        return iconClear
+        return (
+            <Button
+                className={'kui-tag__clear'}
+                variant={'icon'}
+                tooltip={tooltip}
+                aria-label={tooltip.value}
+            >
+                <Icon
+                    xlink={'clear'}
+                    size={24}
+                />
+            </Button>
+        );
     };
 
     return (
         <div
             className={className}
             ref={ref as any}
+            tabIndex={0}
             {...attributes}
         >
             <span className={'kui-tag__text'}>
                 {children}
             </span>
             {clearable &&
-                getIconOrTooltip()
+                getButtonClear()
             }
         </div>
     );
@@ -75,7 +76,7 @@ React.forwardRef((props, ref) => {
 Tag.defaultProps = {
     onClear: null,
     onClick: null,
-    iconTooltip: null
+    iconTooltip: 'Remove'
 }
 
 Tag.displayName = 'Tag';

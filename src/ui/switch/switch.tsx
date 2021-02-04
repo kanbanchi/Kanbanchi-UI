@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Label } from '../../ui';
 import '../../../src/ui/switch/switch.module.scss';
 
+// accessibility ok
+
 export const Switch: React.FC<ISwitchInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
@@ -21,8 +23,24 @@ React.forwardRef((props, ref) => {
         className
     );
 
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (!e || attributes.disabled) return;
+        if (e.key === ' ') {
+            e.preventDefault();
+            attributes.onChange(e as any);
+        }
+    }
+
     return (
-        <Label className={className} ref={ref as any}>
+        <Label
+            className={className}
+            tabIndex={0}
+            role={'switch'}
+            aria-checked={attributes.checked}
+            aria-disabled={attributes.disabled}
+            onKeyDown={onKeyDown}
+            ref={ref as any}
+        >
             <input
                 className="kui-switch__input"
                 type="checkbox"

@@ -4,7 +4,6 @@ export interface IModalButtonProps extends
     IButtonInheritedProps
 {
     text: string;
-    isAcivateOnEnter?: boolean;
     isPrimary?: boolean;
 }
 
@@ -37,6 +36,7 @@ export interface IModalReleaseProps {
 }
 
 export interface IModalStateProps {
+    blockSelector?: string; // селктор основного контента, который заблокировать (запретить tab) при показе модалки
     title: string;
 }
 

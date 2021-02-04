@@ -146,3 +146,11 @@ export const useCombinedRefs = (
 
     return targetRef;
 }
+
+export const stripHtml = (
+    html: string
+): string => {
+    if (!html) return html;
+    const htmlFree = html.replace(/<[^>]*>/g, ' ');
+    return htmlFree;
+};

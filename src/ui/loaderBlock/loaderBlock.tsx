@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Loader } from '../../ui';
 import '../../../src/ui/loaderBlock/loaderBlock.module.scss';
 
+// accessibility ok
+
 export const LoaderBlock: React.SFC<ILoaderBlockInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

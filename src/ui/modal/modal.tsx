@@ -8,12 +8,17 @@ import { ButtonsGroup } from '../buttonsGroup/buttonsGroup';
 import Carousel, { StateCallBack } from 'react-multi-carousel';
 import '../../../src/ui/modal/carousel.scss';
 import { ModalSlide } from './modalSlide';
+import { v4 as uuidv4 } from 'uuid';
+import FocusLock from 'react-focus-lock';
+
+// accessibility ok
 
 export const Modal: React.SFC<IModalInheritedProps> =
 (props) => {
     let {
         children,
         className,
+        blockSelector,
         buttons,
         release,
         title,
@@ -24,30 +29,26 @@ export const Modal: React.SFC<IModalInheritedProps> =
         slides = null,
         footer = null;
 
+    const [uniqueClass] = React.useState('kui-modal--' + uuidv4());
+    const [titleHook, setTitleHook] = React.useState(title);
+
     className = ClassNames(
         'kui-modal',
+        uniqueClass,
         (variant) ? 'kui-modal--variant_' + variant : null,
         className
     );
 
-    const [titleHook, setTitleHook] = React.useState(title);
-
-    let buttonsGroup = [],
-        onEnter: () => void = null;
+    let buttonsGroup = [];
 
     if (buttons) {
         buttonsGroup = buttons.map((item, key) => {
             let {
-                isAcivateOnEnter,
                 isPrimary,
                 text,
                 onClick,
                 ...attributes
             } = item;
-
-            if (isAcivateOnEnter && onClick) {
-                onEnter = onClick;
-            }
 
             const onClickButton = () => {
                 if (onClick) onClick();
@@ -214,6 +215,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
         <Button
             className="kui-modal__close"
             variant="icon"
+            aria-label={'Close'}
             onClick={onClose}
         >
             <Icon size={24} xlink="close"/>
@@ -222,51 +224,64 @@ export const Modal: React.SFC<IModalInheritedProps> =
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
-        if (e.which === 27) { // esc
-            return onClose();
-        }
-        if (onEnter && e.which === 13) { // enter // если есть кнопка с isAcivateOnEnter
-            onEnter();
+        if (e.key === 'Escape') {
             return onClose();
         }
     }
 
-    const modalRef = React.useRef(null);
-
     React.useEffect(() => {
-        modalRef.current.focus();
+        const block = document.querySelector(blockSelector) as HTMLElement;
+        if (block) block.setAttribute('aria-hidden', 'true'); // скрыть контент под модалкой от скринридера
+
+        return () => {
+            if (block) block.setAttribute('aria-hidden', 'false');
+        }
     }, []);
 
     return (
         <div
             className={className}
-            ref={modalRef}
-            tabIndex={0}
+            aria-hidden={'false'}
             onKeyDown={onKeyDown}
             {...attributes}
         >
             <div
                 className="kui-modal__overlay"
                 onClick={onClose}
-            ></div>
-            <div className="kui-modal__item">
-                <div className="kui-modal__header">
-                    <div className="kui-modal__header-title">
-                        {titleHook}
+            />
+            <FocusLock returnFocus>
+                <form
+                    className="kui-modal__item"
+                    role={'dialog'}
+                    aria-modal={true}
+                    aria-labelledby={uniqueClass + '__header-title'}
+                    aria-describedby={uniqueClass + '__body'}
+                >
+                    <div className="kui-modal__header">
+                        <div
+                            className="kui-modal__header-title"
+                            id={uniqueClass + '__header-title'}
+                        >
+                            {titleHook}
+                        </div>
+                        {closeButton}
                     </div>
-                    {closeButton}
-                </div>
-                <div className="kui-modal__body">
-                    {children}
-                    {slides}
-                </div>
-                {footer}
-            </div>
+                    <div
+                        className="kui-modal__body"
+                        id={uniqueClass + '__body'}
+                    >
+                        {children}
+                        {slides}
+                    </div>
+                    {footer}
+                </form>
+            </FocusLock>
         </div>
     );
 };
 
 Modal.defaultProps = {
+    blockSelector: '.content', // основной контент в Kanbanchi
     buttons: null,
     release: null,
     title: '',

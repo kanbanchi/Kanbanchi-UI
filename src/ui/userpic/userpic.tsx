@@ -5,6 +5,8 @@ import { Tooltip } from '../../ui';
 import '../../../src/ui/userpic/userpic.module.scss';
 import { Icon } from '../icon/icon';
 
+// accessibility ok
+
 export const Userpic: React.SFC<IUserpicInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

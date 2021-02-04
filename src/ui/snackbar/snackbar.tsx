@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
 
+// accessibility ok
+
 export const Snackbar: React.SFC<ISnackbarInheritedProps> =
 (props) => {
 
@@ -101,6 +103,8 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                 className={className}
                 ref={refSnackbar}
                 tabIndex={0}
+                aria-live={timer === timerHook ? 'assertive' : 'off'} // при смене таймера скрин ридеру нужен только таймер
+                role={'alert'}
                 {...attributes}
             >
                 <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
@@ -113,7 +117,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                     }
                 </div>
                 {variant === 'timer' &&
-                    <div className="kui-snackbar__timer">
+                    <div className="kui-snackbar__timer" aria-live={'assertive'}>
                         <span className="kui-snackbar__timer_num">{timerHook}</span> sec
                     </div>
                 }

@@ -3,8 +3,11 @@ import { ISelectListItemInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Icon } from '../../ui';
 import '../../../src/ui/selectListItem/selectListItem.module.scss';
+import { Tooltip } from '../tooltip/tooltip';
 
 export const SELECT_LIST_ITEM_CLASS = 'kui-select-list-item';
+
+// accessibility ok
 
 export const SelectListItem: React.SFC<ISelectListItemInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -14,6 +17,7 @@ React.forwardRef((props, ref) => {
         icon,
         iconSize,
         list,
+        listLabel,
         ...attributes
     } = props,
         childrenEl = null,
@@ -56,9 +60,20 @@ React.forwardRef((props, ref) => {
 
     if (list) {
         listEl = (<span className="kui-select-list-item__col kui-select-list-item__col--list">
-            <span className="kui-select-list-item__list">
-                {list}
-            </span>
+            <Tooltip
+                direction={'left'}
+                value={listLabel}
+            >
+                <span
+                    className="kui-select-list-item__list"
+                    aria-hidden={true} // лишняя инфа для скринридера
+                >
+                    {list}
+                </span>
+            </Tooltip>
+            <span
+                aria-label={listLabel} // если есть listLabel, отдать его скринридеру
+            />
         </span>);
     }
 
@@ -84,7 +99,8 @@ React.forwardRef((props, ref) => {
 SelectListItem.defaultProps = {
     icon: null,
     iconSize: 16,
-    list: null
+    list: null,
+    listLabel: null,
 };
 
 SelectListItem.displayName = 'SelectListItem';

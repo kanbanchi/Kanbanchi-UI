@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Select } from '../../ui';
 import '../../../src/ui/search/search.module.scss';
 
+// accessibility ok
+
 export const Search: React.SFC<ISearchInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

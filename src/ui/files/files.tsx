@@ -4,19 +4,22 @@ import { ClassNames } from '../utils';
 import { Button } from '..';
 import '../../../src/ui/files/files.module.scss';
 
-const DefaultFileView: React.SFC<any> = (props: any) => (
-    <div className={'kui-files-item'}>
+// accessibility ok
+
+const DefaultFileView: React.SFC<any> = (props: any) => {
+    const { iconUrl, title, ...attr } = props;
+    return <div className={'kui-files-item'} tabIndex={0}>
         <span className="kui-files-item__col kui-files-item__col--icon">
-            <img src={props.iconUrl} />
+            <img src={iconUrl} />
         </span>
         <span className="kui-files-item__col kui-files-item__col--title">
             <span className="kui-files-item__title">
-                {props.title}
+                {title}
             </span>
         </span>
         <span className="kui-files-item__col kui-files-item__col--actions" />
     </div>
-);
+};
 
 export const Files: React.SFC<IFilesInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -33,7 +36,10 @@ React.forwardRef((props, ref) => {
     className = ClassNames('kui-files', className);
 
     const fileList = files.map((file, index) => (
-        <FileView {...file} key={index} />
+        <FileView
+            key={index}
+            {...file}
+        />
     ));
 
     return (

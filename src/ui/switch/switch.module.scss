@@ -59,4 +59,24 @@
             }
         }
     }
+
+    &:focus {
+        outline: 0;
+    }
+
+    &:before {
+        @include transition;
+        content: '';
+        position: absolute;
+        left: -$google-spacing;
+        right: -$google-spacing;
+        top: -$google-spacing * .5;
+        bottom: -$google-spacing * .5;
+        border-radius: $base-radius;
+    }
+    
+    &:focus:before,
+    &:hover:before {
+        background: $color-light-background;
+    }
 }

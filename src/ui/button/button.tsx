@@ -4,6 +4,8 @@ import { ClassNames, useCombinedRefs } from '../utils';
 import { ButtonTitle, Icon, Tooltip } from '../../ui';
 import '../../../src/ui/button/button.module.scss';
 
+// accessibility ok (todo не у всех кнопок есть :focus)
+
 export const Button: React.SFC<IButtonInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

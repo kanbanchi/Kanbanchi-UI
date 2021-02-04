@@ -4,6 +4,8 @@ import { ClassNames, userAgentsInclude } from '../utils';
 import '../../../src/ui/sectionAccordion/sectionAccordion.module.scss';
 import { Button, ButtonTitle, Icon } from '../../ui';
 
+// accessibility ok
+
 export const SectionAccordion: React.FC<ISectionAccordionInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
@@ -21,7 +23,8 @@ React.forwardRef((props, ref) => {
     } = props;
 
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
-    const [isClickedHook, setIsClickedHook] = React.useState(false);
+    const [isMountChildren, setIsMountChildren] = React.useState(opened);
+    const [isChangedHook, setIsChangedHook] = React.useState(false); // default без анимации, changed с анимацией
 
     const bodyRef = React.useRef(null);
     const headerRef = React.useRef(null);
@@ -30,11 +33,17 @@ React.forwardRef((props, ref) => {
         'kui-section-accordion',
         (color) ? 'kui-section-accordion--color_' + color: null,
         (variant) ? 'kui-section-accordion--variant_' + variant: null,
-        (isClickedHook)
+        (isChangedHook)
             ? 'kui-section-accordion--' + (isOpenedHook ? 'opened' : 'closed')
             : (isOpenedHook ? 'kui-section-accordion--opened-default' : null),
         className
     );
+
+    const setIsOpened = (newIsOpened: boolean) => {
+        if (newIsOpened) setIsMountChildren(true);
+        setIsOpenedHook(newIsOpened);
+        setIsChangedHook(true);
+    }
 
     const onButtonClick = () => {
         if (isOpenedHook) {
@@ -42,23 +51,22 @@ React.forwardRef((props, ref) => {
         } else {
             if (onOpen) onOpen();
         }
-        setIsOpenedHook(!isOpenedHook);
-        setIsClickedHook(true);
+        setIsOpened(!isOpenedHook);
     }
 
     const bodyAnimationEnd = () => {
-        if (
-            isOpenedHook
-            && !userAgentsInclude(['edge', 'safari'])
-        ) {
-            setTimeout(() => {
+        if (isOpenedHook) {
+            if (!userAgentsInclude(['edge', 'safari'])) setTimeout(() => {
                 headerRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
             }, 100);
+        } else {
+            setIsMountChildren(false);
         }
     }
 
     React.useEffect(() => {
-        setIsOpenedHook(opened);
+        if (opened === isOpenedHook) return;
+        setIsOpened(opened);
     }, [opened]);
 
     return (
@@ -74,6 +82,7 @@ React.forwardRef((props, ref) => {
                 <Button
                     className="kui-section-accordion-button"
                     variant="icon-text"
+                    aria-expanded={isOpenedHook}
                     onClick={onButtonClick}
                 >
                     {icon &&
@@ -102,10 +111,12 @@ React.forwardRef((props, ref) => {
             </div>
             <div
                 className="kui-section-accordion-body"
+                aria-hidden={!isOpenedHook}
+                hidden={!isMountChildren}
                 ref={bodyRef}
                 onAnimationEnd={bodyAnimationEnd}
             >
-                {children}
+                {isMountChildren && children}
             </div>
         </div>
     );

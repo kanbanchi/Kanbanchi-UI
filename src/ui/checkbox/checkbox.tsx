@@ -4,6 +4,8 @@ import { ClassNames } from '../utils';
 import { Icon, Label } from '../../ui';
 import '../../../src/ui/checkbox/checkbox.module.scss';
 
+// accessibility ok
+
 export const Checkbox: React.SFC<ICheckboxInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
@@ -11,6 +13,9 @@ React.forwardRef((props, ref) => {
         className,
         checked,
         color,
+        tabIndex = 0,
+        ['aria-selected']: ariaSelected,
+        ['data-index']: dataIndex,
         onChange,
         ...attributesOriginal
     } = props,
@@ -32,6 +37,14 @@ React.forwardRef((props, ref) => {
         if (onChange) onChange(e);
     };
 
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (!e || attributes.disabled) return;
+        if (e.key === ' ') {
+            e.preventDefault();
+            attributes.onChange(e as any);
+        }
+    }
+
     React.useEffect(() => {
         setIsChecked(checked);
     }, [checked]);
@@ -40,6 +53,13 @@ React.forwardRef((props, ref) => {
         <Label
             className={className}
             ref={ref as any}
+            tabIndex={tabIndex}
+            role={'checkbox'}
+            aria-checked={isChecked}
+            aria-disabled={attributes.disabled}
+            aria-selected={ariaSelected}
+            data-index={dataIndex}
+            onKeyDown={onKeyDown}
         >
             <input checked={isChecked} {...attributes}/>
             <span className="kui-checkbox__label">

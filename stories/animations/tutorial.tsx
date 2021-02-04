@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Icon, Hint, Switch, ButtonsGroup } from '../../src/ui';
+import { Button, Hint, ButtonsGroup } from '../../src/ui';
 
 const Story = () => {
     let [showHint, setShowHint] = React.useState(false);
 
     React.useEffect(() => {
-        let showHintTimer = setInterval(() => {
+        let showHintTimer = setTimeout(() => {
             showHint = true;
             setShowHint(showHint);
         }, 1000);
 
         return () => {
-            clearInterval(showHintTimer);
+            clearTimeout(showHintTimer);
         };
     }, []);
 
@@ -24,6 +24,10 @@ const Story = () => {
                 <div
                     id={'card-for-tutorial-hint'}
                     className={'card-for-tutorial-hint'}
+                    onMouseEnter={() => {
+                        showHint = true;
+                        setShowHint(true);
+                    }}
                 >
                     <span>Card1</span>
                 </div>

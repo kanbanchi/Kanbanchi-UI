@@ -39,6 +39,7 @@
         color: calc-color(fade, $color-base, 60);
     }
 
+    .kui-button-dropdown--single &,
     .kui-select--single & {
         display: inline-flex;
         max-width: 100%;

@@ -29,6 +29,9 @@ const Story = () => {
                     onFocus={(e: any) => {
                         if (e) console.log(e.target.value)
                     }}
+                    onEnter={(e: any) => {
+                        if (e) console.log('onEnter', e.target.value)
+                    }}
                 />
 
                 <br/>

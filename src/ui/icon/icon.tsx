@@ -3,6 +3,8 @@ import { EIconSize, IIconInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/icon/icon.module.scss';
 
+// accessibility ok
+
 export const Icon: React.FC<IIconInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

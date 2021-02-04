@@ -11,6 +11,9 @@ const ReactDatepickerElement = ReactDatepicker as any;
 
 registerLocale('en-GB', enGB); // Weeks start on Monday
 
+// accessibility ok+-
+// можно обновить до 3.4.1, там со скринридером всё хорошо, не нужны эти костыли, но проблемы с зависимостями
+
 export const Datepicker: React.SFC<IDatePickerInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
@@ -27,6 +30,7 @@ React.forwardRef((props, ref) => {
         value,
         variant,
         onChange,
+        onKeyDown,
         ...attributes
     } = props;
 
@@ -37,6 +41,8 @@ React.forwardRef((props, ref) => {
         className
     );
 
+    const [ariaLabel, setAriaLabel] = React.useState(selected ? selected.toDateString() : '');
+    const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
 
     isClearable = readOnly || disabled ? false : isClearable;
@@ -52,16 +58,43 @@ React.forwardRef((props, ref) => {
         readOnly,
         ref,
         value,
-        variant
+        variant,
+        onEnter: () => {
+            if (!pickerRef.current.isCalendarOpen()) {
+                pickerRef.current.onInputClick(); // open dropdown
+            }
+        }
     };
 
     const onChangeHandler = (date: Date) => {
         if (onChange) onChange(date);
     }
 
+    /**
+     * react-datepicker частично поддерживает accessibility, но не дружит со скринридером
+     * при выборе дат стрелками инфа дублируется в aria-live
+     */
+    const _setAriaLabel = () => {
+        const month = datepickerRef.current.querySelector('.react-datepicker__current-month') as HTMLElement;
+        const selected = datepickerRef.current.querySelector('.react-datepicker__day--keyboard-selected') as HTMLElement;
+        let label = (selected ? selected.innerHTML : '') + ' ' + (month ? month.innerHTML : '');
+        setAriaLabel(label);
+    }
+    const onKeyDownHandler = (e: any) => {
+        if (onKeyDown) onKeyDown(e);
+        if (
+            e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || // переключение дней
+            e.key === 'PageDown' || e.key === 'PageUp' || // переключение месяцев
+            e.key === 'Home' || e.key === 'End' // переключение лет (не соответствует accessibility)
+        ) {
+            requestAnimationFrame(_setAriaLabel);
+        }
+    }
+
     return (
         <div
             className={className}
+            ref={datepickerRef}
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
@@ -71,8 +104,15 @@ React.forwardRef((props, ref) => {
                 ref={pickerRef}
                 selected={selected}
                 onChange={onChangeHandler}
+                onKeyDown={onKeyDownHandler}
                 {...attributes}
             />
+            <div // невидимый блок для скринридера
+                className={'kui-datepicker__aria-label'}
+                aria-live={'assertive'}
+            >
+                {ariaLabel}
+            </div>
         </div>
     );
 });
