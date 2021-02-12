@@ -8,7 +8,7 @@
             color: calc-color(tint, $color-base, 30);
         }
 
-        .kui-button-dropdown--opened & {
+        .kui-button-dropdown--opened > & {
             color: $color-base;
             background: calc-color(fade, $color-background, 50);
             

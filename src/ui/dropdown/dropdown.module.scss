@@ -18,7 +18,7 @@
         animation: animation_down_off .1s ease forwards;
     }
 
-    &--opened &__item {
+    &--opened > &__item {
         animation: animation_down_on .3s ease forwards;
     }
 
@@ -29,7 +29,7 @@
         animation: animation_up_off .1s ease forwards;
     }
     
-    &--direction_up.kui-dropdown--opened &__item {
+    &--direction_up.kui-dropdown--opened > &__item {
         animation: animation_up_on .3s ease forwards;
     }
 
