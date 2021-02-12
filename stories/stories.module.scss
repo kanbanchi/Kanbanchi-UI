@@ -179,3 +179,7 @@ section {
     top: 0;
     left: 0;
 }
+
+.stories-dropdown-visible .kui-dropdown__item {
+    overflow: visible;
+}

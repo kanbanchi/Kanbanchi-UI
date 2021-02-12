@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon, Divider, Userpic } from '../../src/ui';
+import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon, Divider, Userpic, Select } from '../../src/ui';
 
 const Story = () => {
     const onClickHandler = (e: any) => console.log(e.target.innerText);
@@ -89,6 +89,21 @@ const Story = () => {
                             </SelectList>
                         </ButtonDropdown>
                     </ButtonsGroup>
+
+                    <br/>
+
+                    <ButtonDropdown
+                        dropdownClassName={'stories-dropdown-visible'}
+                    >
+                        <Button>
+                            Dropdown with select
+                        </Button>
+                        <Select
+                            options={Array.from({ length: 10 }, (val, i) => ({ value: i + 1}))}
+                            variant={'arrow'}
+                            onChange={()=>{}}
+                        />
+                    </ButtonDropdown>
                 </div>
             </section>
 
