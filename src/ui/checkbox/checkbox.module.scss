@@ -52,6 +52,7 @@
             &__input:checked + &__label:before {
                 background-color: transparent;
                 border-color: transparent;
+                @include transition;
             }
 
             &__checkmark {
@@ -67,11 +68,8 @@
             }    
         }
 
-        &:hover {
-            .kui-checkbox__input:not(:checked) + .kui-checkbox__label:before {
-                border-color: calc-color(fade, $color-base, 15);
-                @include transition;
-            }
+        .kui-checkbox__input:not(:checked) + .kui-checkbox__label:before {
+            border-color: calc-color(fade, $color-base, 15);
         }
     }
 
