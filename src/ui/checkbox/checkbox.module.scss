@@ -9,6 +9,7 @@
         display: block;
         width: 100%;
         min-height: $google-spacing * 3;
+        padding-top: $google-spacing * .25;
         padding-right: $google-spacing * 6;
         font-size: $milli-size;
         user-select: none;
@@ -38,6 +39,19 @@
     }
     &__input:checked + &__label &__checkmark {
         transform: scale(1);
+    }
+
+    &.kui-checkbox--direction_left {
+        .kui-checkbox__label {
+            padding-right: 0;
+            padding-left: $google-spacing * 3.5;
+    
+            &:before,
+            .kui-checkbox__checkmark {
+                right: unset;
+                left: 0;
+            }
+        }
     }
     
     &.kui-checkbox--color_black {

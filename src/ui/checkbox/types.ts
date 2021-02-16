@@ -10,6 +10,9 @@ export interface ICheckboxOwnProps {
     color?:
         'black' |
         'light';
+    direction?:
+        'left' |
+        'right';
     ['data-index']?: number;
 }
 
