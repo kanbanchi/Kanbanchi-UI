@@ -1,5 +1,8 @@
 export interface IRadioStateProps {
     active?: number;
+    direction?:
+        'left' |
+        'right';
 }
 
 export interface IRadioActiveProps {

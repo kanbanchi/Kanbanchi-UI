@@ -64,6 +64,7 @@
         position: relative;
         display: list-item;
         min-height: $google-spacing * 3;
+        padding-top: $google-spacing * .25;
         padding-right: $google-spacing * 4;
         font-size: $milli-size;
         user-select: none;
@@ -108,5 +109,17 @@
 
     &__item + &__item {
         margin-top: $google-spacing * 2;
+    }
+
+    &.kui-radio--direction_left {
+        .kui-radio__input {
+            right: unset;
+            left: 0;
+        }
+
+        .kui-radio__item {
+            padding-right: 0;
+            padding-left: $google-spacing * 4;
+        }
     }
 }
