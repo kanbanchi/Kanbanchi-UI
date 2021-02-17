@@ -60,6 +60,63 @@ const Story = () => {
                 </Switch>
 
             </section>
+
+            <section className="section-form-min">
+                <h2>Left</h2>
+
+                <Switch
+                    checked={val}
+                    direction={'left'}
+                    onChange={()=>setVal(!val)}
+                >
+                    01. Label
+                </Switch>
+
+                <br/>
+
+                <Switch
+                    checked={val01}
+                    direction={'left'}
+                    onChange={()=>setVal01(!val01)}
+                >
+                    02. Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Switch>
+
+                <br/>
+
+                <Switch
+                    checked={val02}
+                    direction={'left'}
+                    onChange={()=>setVal02(!val02)}
+                    color="black"
+                >
+                    03. Black
+                </Switch>
+
+                <br/>
+
+                <Switch
+                    checked={val02}
+                    direction={'left'}
+                    onChange={()=>setVal02(!val02)}
+                    disabled
+                >
+                    04. Disabled
+                </Switch>
+
+                <br/>
+
+                <Switch
+                    checked={val02}
+                    direction={'left'}
+                    onChange={()=>setVal02(!val02)}
+                    color="black"
+                    disabled
+                >
+                    05. Disabled black
+                </Switch>
+
+            </section>
         </div>
     );
 };
