@@ -12,6 +12,7 @@ React.forwardRef((props, ref) => {
         children,
         className,
         color,
+        direction,
         ...attributesOriginal
     } = props,
         attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
@@ -19,6 +20,7 @@ React.forwardRef((props, ref) => {
     className = ClassNames(
         'kui-switch',
         (color) ? 'kui-switch--color_' + color : null,
+        (direction) ? 'kui-switch--direction_' + direction : null,
         (attributes.disabled) ? 'kui-switch--disabled' : null,
         className
     );
@@ -56,7 +58,8 @@ React.forwardRef((props, ref) => {
 Switch.defaultProps = {
     checked: false,
     onChange: (): void => undefined,
-    color: null
+    color: null,
+    direction: 'right',
 }
 
 Switch.displayName = 'Switch';
