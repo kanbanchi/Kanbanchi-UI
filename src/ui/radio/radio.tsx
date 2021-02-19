@@ -10,6 +10,7 @@ export const Radio: React.SFC<IRadioInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         active,
+        direction,
         onChange,
         children,
         className,
@@ -19,6 +20,7 @@ React.forwardRef((props, ref) => {
 
     className = ClassNames(
         'kui-radio',
+        (direction) ? 'kui-radio--direction_' + direction : null,
         className
     );
 
@@ -122,6 +124,7 @@ React.forwardRef((props, ref) => {
 
 Radio.defaultProps = {
     active: null,
+    direction: 'right',
     onChange: (): void => undefined,
 };
 

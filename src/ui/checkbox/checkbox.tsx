@@ -13,6 +13,7 @@ React.forwardRef((props, ref) => {
         className,
         checked,
         color,
+        direction,
         tabIndex = 0,
         ['aria-selected']: ariaSelected,
         ['data-index']: dataIndex,
@@ -26,6 +27,7 @@ React.forwardRef((props, ref) => {
     className = ClassNames(
         'kui-checkbox',
         (color) ? 'kui-checkbox--color_' + color : null,
+        (direction) ? 'kui-checkbox--direction_' + direction : null,
         (props.disabled) ? 'kui-checkbox--disabled' : null,
         className
     );
@@ -73,7 +75,8 @@ React.forwardRef((props, ref) => {
 Checkbox.defaultProps = {
     checked: false,
     onChange: (): void => undefined,
-    color: null
+    color: null,
+    direction: 'right',
 }
 
 Checkbox.displayName = 'Checkbox';

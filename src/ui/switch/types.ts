@@ -8,6 +8,9 @@ export interface ISwitchDispatchProps {
 
 export interface ISwitchOwnProps {
     color?: 'black';
+    direction?:
+        'left' |
+        'right';
 }
 
 export interface ISwitchProps extends
