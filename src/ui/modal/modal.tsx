@@ -30,7 +30,11 @@ export const Modal: React.SFC<IModalInheritedProps> =
         footer = null;
 
     const [uniqueClass] = React.useState('kui-modal--' + uuidv4());
-    const [titleHook, setTitleHook] = React.useState(title);
+    const [titleHook, setTitleHook] = React.useState(
+        variant === 'release' && release && release.slides && release.slides[0] && release.slides[0].title
+        ? release.slides[0].title
+        : title
+    );
 
     className = ClassNames(
         'kui-modal',
@@ -130,13 +134,13 @@ export const Modal: React.SFC<IModalInheritedProps> =
         const arrowLeft = <ArrowFix
             className="kui-modal__slides-arrow kui-modal__slides-arrow--left"
         >
-            <Icon size={24} xlink="arrow-back"/>
+            <Icon size={24} xlink="arrow-left"/>
         </ArrowFix>;
 
         const arrowRight = <ArrowFix
             className="kui-modal__slides-arrow kui-modal__slides-arrow--right"
         >
-            <Icon size={24} xlink="arrow-forward"/>
+            <Icon size={24} xlink="arrow-right"/>
         </ArrowFix>;
 
         const afterChange = (
@@ -150,12 +154,31 @@ export const Modal: React.SFC<IModalInheritedProps> =
         }
 
         if (release.slides.length > 1) {
+            const CustomDot = ({
+                active,
+                onClick,
+            }: any) => {
+                const className = 'kui-modal__slides-dot';
+                return (
+                    <Button
+                        className={`
+                            ${className}
+                            ${active ? className + '--active' : ''}
+                        `}
+                        variant={'icon'}
+                        onClick={onClick}
+                    >
+                        <Icon size={16} xlink={'dot'} />
+                    </Button>
+                );
+            };
             slides = (<Carousel
                 additionalTransfrom={0}
                 afterChange={afterChange}
                 arrows
                 centerMode={false}
                 containerClass="kui-modal__slides"
+                customDot={<CustomDot />}
                 customLeftArrow={arrowLeft}
                 customRightArrow={arrowRight}
                 dotListClass="kui-modal__slides-dots"
@@ -194,20 +217,17 @@ export const Modal: React.SFC<IModalInheritedProps> =
                 slidesToSlide={1}
                 swipeable
             >
-                {release.slides.map((slide, index) => {
-                    return (<ModalSlide
+                {release.slides.map((slide, index) => (
+                    <ModalSlide
                         {...slide}
                         key={index + slide.title}
-                    />);
-                })}
+                    />
+                ))}
             </Carousel>);
         } else if (release.slides.length) {
             slides = (<ModalSlide
                 {...release.slides[0]}
             />);
-            if (titleHook !== release.slides[0].title) {
-                setTitleHook(release.slides[0].title);
-            }
         }
     }
 
