@@ -43,6 +43,7 @@ $modal-z-index: $z-modal;
         display: flex;
         justify-content: center;
         width: 100%;
+        max-width: $modal-max-width;
         max-height: 100%;
         z-index: $modal-z-index + 10;
     }
@@ -130,6 +131,30 @@ $modal-z-index: $z-modal;
 .kui-modal__slides-dots.react-multi-carousel-dot-list {
     height: $google-spacing * 3;
     bottom: $google-spacing;
+}
+
+.kui-modal__slides-dot {
+    width: $google-spacing * 2;
+	height: $google-spacing * 2;
+    color: $color-purple-light;
+
+    .kui-icon {
+        opacity: 1;
+    }
+
+    &:before {
+        width: $google-spacing * 2;
+        height: $google-spacing * 3;
+        border-radius: $google-spacing * 3;
+    }
+
+    &:hover {
+        color: $color-purple-hover;
+    }
+    
+    &.kui-modal__slides-dot--active {
+        color: $color-purple;
+    }
 }
 
 .kui-modal__footer {

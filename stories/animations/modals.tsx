@@ -81,7 +81,7 @@ const Story = () => {
                         ],
                         text: 'Follow us!'
                     },
-                    stars: `Give us 5 stars in <a href="https://gsuite.google.com/marketplace/app/kanbanchi/631025100586" target="_blank">GSuite marketplace</a>`,
+                    stars: `Give us 5 stars in <a href="https://gsuite.google.com/marketplace/app/kanbanchi/631025100586" target="_blank">Marketplace</a>`,
                 },
                 slides: [
                     {
