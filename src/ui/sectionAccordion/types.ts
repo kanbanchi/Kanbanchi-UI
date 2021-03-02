@@ -1,4 +1,5 @@
 import { IButtonInheritedProps } from './../button/types';
+import { ReactChild } from 'react';
 
 export interface ISectionAccordionStateProps {
     opened?: boolean;
@@ -13,7 +14,7 @@ export interface ISectionAccordionOwnProps {
     Action?: React.SFC<IButtonInheritedProps>;
     color?: 'grey';
     icon?: string;
-    title?: string;
+    title?: ReactChild;
     variant?: 'simple';
 }
 
@@ -26,6 +27,7 @@ export interface ISectionAccordionProps extends
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
         'color'
+        | 'title'
     >>;
 
 export interface ISectionAccordionInheritedProps extends

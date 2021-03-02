@@ -38,7 +38,7 @@ const Story = () => {
                 </Switch>
                 <SectionAccordion
                     opened={opened}
-                    title="Saved filters"
+                    title={<>Saved filters <span>(1 of 3)</span></>}
                     variant="simple"
                     onOpen={() => setOpened(true)}
                     onClose={() => setOpened(false)}

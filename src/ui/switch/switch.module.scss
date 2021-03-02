@@ -91,11 +91,11 @@
                 left: 0
             }
             &:after {
-                transform: translateX($google-spacing * 2.7);
+                transform: translateX($google-spacing * 0.25);
             }
         }
         .kui-switch__input:checked + .kui-switch__label:after {
-            transform: translateX($google-spacing / 4);
+            transform: translateX($google-spacing * 2.7);
         }
     }
 }
