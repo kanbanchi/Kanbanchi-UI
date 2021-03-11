@@ -118,6 +118,10 @@
         cursor: pointer;
         @include transition;
 
+        &:focus {
+            outline: 0;
+        }
+
         &--clear {
             height: 0;
             opacity: 0;
@@ -198,6 +202,10 @@
         &__icon {
             color: $color-base;
             animation: animation_imput_search .3s ease forwards;
+
+            &:focus {
+                outline: 0;
+            }
         }
 
         &__placeholder {
