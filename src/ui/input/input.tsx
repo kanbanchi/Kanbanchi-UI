@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { IInputInheritedProps } from './types';
-import { ClassNames } from '../utils';
+import { ClassNames, getParentsClasses } from '../utils';
 import * as autosizeLibray from './autosize';
 import { Icon, Label, Tooltip } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 // accessibility ok
 
@@ -40,14 +41,14 @@ React.forwardRef((props, ref) => {
     const [isFilled, setIsFilled] = React.useState(!!value);
     const [isFocusedHook, setIsFocusedHook] = React.useState(false);
     const textarea = React.useRef(null);
-    const timer = React.useRef(null);
+    const [uniqueClass] = React.useState('kui-input--' + uuidv4());
 
     className = ClassNames(
         'kui-input',
+        uniqueClass,
         (color) ? 'kui-input--color_' + color: null,
         (disabled) ? 'kui-input--disabled' : null,
         (isFilled) ? 'kui-input--filled' : null,
-        (isFocusedHook) ? 'kui-input--focus' : null,
         (!autosize) ? 'kui-input--noresize' : null,
         (readOnly) ? 'kui-input--readonly' : null,
         (state) ? 'kui-input--state_' + state : null,
@@ -77,24 +78,23 @@ React.forwardRef((props, ref) => {
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         if (!document.hasFocus()) return;
 
-        if (e) e.persist();
-        timer.current = setTimeout(() => {
-            if (isFocusedHook) {
+        if (isFocusedHook) {
+            const classes = getParentsClasses(
+                e.relatedTarget as HTMLElement,
+                [uniqueClass]
+            );
+            if (!classes.includes(uniqueClass)) {
                 setIsFocusedHook(false);
                 if (onBlur) onBlur(e);
             }
-        }, 200);
+        }
     }
 
     attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        if (e) e.persist();
-        if (timer.current) clearTimeout(timer.current);
-        timer.current = setTimeout(() => {
-            if (!isFocusedHook) {
-                setIsFocusedHook(true);
-                if (onFocus) onFocus(e);
-            }
-        }, 100);
+        if (!isFocusedHook) {
+            setIsFocusedHook(true);
+            if (onFocus) onFocus(e);
+        }
     }
 
     if (label) {
@@ -116,6 +116,7 @@ React.forwardRef((props, ref) => {
     const iconClear = <Icon
             xlink="clear"
             size={24}
+            tabIndex={-1} // for onBlur relatedTarget
             className="kui-input__icon kui-input__icon--clear"
             onClick={clearInput}
         />;
@@ -142,6 +143,7 @@ React.forwardRef((props, ref) => {
         inputAfter = <Icon
             xlink="arrow-down"
             size={24}
+            tabIndex={-1} // for onBlur relatedTarget
             className="kui-input__icon kui-input__icon--arrow"
         />;
     } else if
@@ -152,6 +154,7 @@ React.forwardRef((props, ref) => {
         const iconCalendar = <Icon
             xlink={icon}
             size={24}
+            tabIndex={-1} // for onBlur relatedTarget
             className="kui-input__icon"
         />;
         if (isClearable) {
@@ -165,6 +168,7 @@ React.forwardRef((props, ref) => {
             <Icon
                 xlink="search"
                 size={24}
+                tabIndex={-1} // for onBlur relatedTarget
                 className="kui-input-search__icon"
             />
             <span className="kui-input-search__placeholder">
@@ -177,6 +181,7 @@ React.forwardRef((props, ref) => {
         inputAfter = <Icon
             xlink={icon}
             size={24}
+            tabIndex={-1} // for onBlur relatedTarget
             className="kui-input__icon"
         />;
     }
@@ -191,10 +196,6 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (autosize) autosizeLibray.default(textarea.current);
-
-        return () => {
-            if (timer.current) clearTimeout(timer.current);
-        };
     }, []);
 
     React.useImperativeHandle(ref, () => ({
