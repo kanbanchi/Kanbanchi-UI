@@ -160,7 +160,7 @@
         }
 
         &:hover,
-        &.kui-input--focus {
+        &.kui-input:focus-within {
             .kui-input__item {
                 box-shadow: $shadow-hover;
                 border-color: transparent;
@@ -168,7 +168,7 @@
         }
     }
 
-    &.kui-input--color_grey:not(&--focus):not(&--filled),
+    &.kui-input--color_grey:not(&:focus-within):not(&--filled),
     &.kui-input--color_grey.kui-input--variant_search {
         .kui-input__item {
             border-color: transparent;
@@ -193,7 +193,7 @@
     }
 }
 
-.kui-input--focus,
+.kui-input:focus-within,
 .kui-input--filled {
     .kui-input-search {
         left: $google-spacing * 2;
@@ -214,7 +214,7 @@
     }
 }
 
-.kui-input:not(.kui-input--filled):not(.kui-input--focus) {
+.kui-input:not(.kui-input--filled):not(.kui-input:focus-within) {
     .kui-input-search {
         animation: animation_imput_search .6s ease forwards;
     }
