@@ -42,6 +42,7 @@ React.forwardRef((props, ref) => {
     const [isFocusedHook, setIsFocusedHook] = React.useState(false);
     const textarea = React.useRef(null);
     const [uniqueClass] = React.useState('kui-input--' + uuidv4());
+    const timer = React.useRef(null);
 
     className = ClassNames(
         'kui-input',
@@ -78,23 +79,30 @@ React.forwardRef((props, ref) => {
     attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         if (!document.hasFocus()) return;
 
-        if (isFocusedHook) {
-            const classes = getParentsClasses(
-                e.relatedTarget as HTMLElement,
-                [uniqueClass]
-            );
-            if (!classes.includes(uniqueClass)) {
-                setIsFocusedHook(false);
-                if (onBlur) onBlur(e);
+        if (e) e.persist();
+        timer.current = setTimeout(() => {
+            if (isFocusedHook) {
+                const classes = getParentsClasses(
+                    e.relatedTarget as HTMLElement,
+                    [uniqueClass]
+                );
+                if (!classes.includes(uniqueClass)) {
+                    setIsFocusedHook(false);
+                    if (onBlur) onBlur(e);
+                }
             }
-        }
+        }, 200);
     }
 
     attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        if (!isFocusedHook) {
-            setIsFocusedHook(true);
-            if (onFocus) onFocus(e);
-        }
+        if (e) e.persist();
+        if (timer.current) clearTimeout(timer.current);
+        timer.current = setTimeout(() => {
+            if (!isFocusedHook) {
+                setIsFocusedHook(true);
+                if (onFocus) onFocus(e);
+            }
+        }, 100);
     }
 
     if (label) {
@@ -196,6 +204,10 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (autosize) autosizeLibray.default(textarea.current);
+
+        return () => {
+            if (timer.current) clearTimeout(timer.current);
+        };
     }, []);
 
     React.useImperativeHandle(ref, () => ({
