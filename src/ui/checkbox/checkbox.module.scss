@@ -31,7 +31,7 @@
         border-radius: $small-radius;
     }
     &__checkmark {
-        transform: scale(.1);
+        transform: scale(0);
     }
     &__input:checked + &__label:before {
         background-color: $color-purple;

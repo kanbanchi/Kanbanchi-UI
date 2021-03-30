@@ -46,7 +46,7 @@
             border-radius: 50%;
             pointer-events: none;
             transform-origin: 50% 50%;
-            transform: scale(.1);
+            transform: scale(0);
             @include transition;
         }
 
