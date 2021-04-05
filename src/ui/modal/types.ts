@@ -4,6 +4,7 @@ export interface IModalButtonProps extends
     IButtonInheritedProps
 {
     text: string;
+    isOpenedAfterClick?: boolean;
     isPrimary?: boolean;
 }
 
