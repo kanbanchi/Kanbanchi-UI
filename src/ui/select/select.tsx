@@ -248,7 +248,8 @@ export const Select = React.forwardRef((
             if (!isOpenedHook) {
                 openDropdown();
             } else {
-                setIsOpenedHook(!isOpenedHook);
+                setIsOpenedHook(false);
+                if (onClose) onClose();
             }
         }
         if (onClick) onClick(e);
