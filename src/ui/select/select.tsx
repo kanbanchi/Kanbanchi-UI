@@ -247,7 +247,7 @@ export const Select = React.forwardRef((
         if (isFocusedHook) {
             if (!isOpenedHook) {
                 openDropdown();
-            } else {
+            } else if (valueHook === initialValue) {
                 setIsOpenedHook(false);
                 if (onClose) onClose();
             }
