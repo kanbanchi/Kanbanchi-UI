@@ -26,6 +26,7 @@ export const Select = React.forwardRef((
         disabled,
         dropdownClassName,
         editable,
+        isCloseOnCLick,
         isCloseOnEnter,
         isFitWindow,
         multiple,
@@ -247,7 +248,7 @@ export const Select = React.forwardRef((
         if (isFocusedHook) {
             if (!isOpenedHook) {
                 openDropdown();
-            } else if (valueHook === initialValue) {
+            } else if (isCloseOnCLick && valueHook === initialValue) {
                 setIsOpenedHook(false);
                 if (onClose) onClose();
             }
@@ -515,6 +516,7 @@ Select.defaultProps = {
     directionHorizontal: 'left',
     disabled: false,
     editable: false,
+    isCloseOnCLick: true,
     isCloseOnEnter: true,
     multiple: false,
     notBlurClasses: [],
