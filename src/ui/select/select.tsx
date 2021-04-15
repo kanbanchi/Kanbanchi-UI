@@ -100,7 +100,17 @@ export const Select = React.forwardRef((
         setIsOpenedHook(true);
         if (onOpen) onOpen();
         if (!editable || isFocus) {
-            requestAnimationFrame(focusSelectedItem);
+            requestAnimationFrame(() => {
+                const activeElement = document.activeElement as HTMLElement;
+                if (activeElement) {
+                    const parents = getParentsClasses(
+                        activeElement,
+                        [uniqueClass]
+                    );
+                    if (parents && parents.includes(uniqueClass)) return; // если фокус уже в селекте
+                }
+                focusSelectedItem();
+            });
         }
     }
 

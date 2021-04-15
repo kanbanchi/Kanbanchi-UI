@@ -121,6 +121,14 @@ export const ButtonDropdown = React.forwardRef((
 
         calcDirection();
         requestAnimationFrame(() => {
+            const activeElement = document.activeElement as HTMLElement;
+            if (activeElement) {
+                const parents = getParentsClasses(
+                    activeElement,
+                    [dropdownUniqueClass]
+                );
+                if (parents && parents.includes(dropdownUniqueClass)) return; // если фокус уже в дропдауне
+            }
             const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
             if (ariaSelected) ariaSelected.focus();
         });

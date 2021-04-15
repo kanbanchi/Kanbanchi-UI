@@ -12,6 +12,7 @@ const Story = () => {
                 <h2>Datepicker</h2>
 
                 <Datepicker
+                    placeholderText={'placeholder'}
                     selected={date}
                     onChange={val=>setDate(val)}
                 />
