@@ -39,7 +39,7 @@ React.forwardRef((props, ref) => {
         inputAfter = null;
 
     const [isFilled, setIsFilled] = React.useState(!!value);
-    const [isFocusedHook, setIsFocusedHook] = React.useState(false);
+    const isFocusedHook = React.useRef(false);
     const textarea = React.useRef(null);
     const [uniqueClass] = React.useState('kui-input--' + uuidv4());
     const timer = React.useRef(null);
@@ -81,13 +81,13 @@ React.forwardRef((props, ref) => {
 
         if (e) e.persist();
         timer.current = setTimeout(() => {
-            if (isFocusedHook) {
+            if (isFocusedHook.current) {
                 const classes = getParentsClasses(
                     e.relatedTarget as HTMLElement,
                     [uniqueClass]
                 );
                 if (!classes.includes(uniqueClass)) {
-                    setIsFocusedHook(false);
+                    isFocusedHook.current = false;
                     if (onBlur) onBlur(e);
                 }
             }
@@ -98,8 +98,8 @@ React.forwardRef((props, ref) => {
         if (e) e.persist();
         if (timer.current) clearTimeout(timer.current);
         timer.current = setTimeout(() => {
-            if (!isFocusedHook) {
-                setIsFocusedHook(true);
+            if (!isFocusedHook.current) {
+                isFocusedHook.current = true;
                 if (onFocus) onFocus(e);
             }
         }, 100);
