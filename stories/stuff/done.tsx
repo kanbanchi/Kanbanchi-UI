@@ -65,7 +65,6 @@ const Story = () => {
                 <Done
                     percent={100}
                     size={'small'}
-                    titleDone={'Done'}
                 />
 
             </section>
