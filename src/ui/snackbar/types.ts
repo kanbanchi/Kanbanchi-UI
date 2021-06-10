@@ -43,11 +43,16 @@ export type SnackbarVariant =
     'success' |
     'timer';
 
+export type SnackbarPosition =
+    'center' |
+    'right';
+
 export interface ISnackbarOwnProps {
     icon?: string;
     key: string;
     timer?: number;
     variant?: SnackbarVariant;
+    position?: SnackbarPosition;
 }
 
 export interface ISnackbarProps extends

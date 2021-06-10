@@ -53,25 +53,6 @@ const Story = () => {
                         { text: 'Close' }
                     ]}
                 />
-
-                <h2>Timer</h2>
-                <Snackbar
-                    key="3"
-                    variant="timer"
-                    timer={10}
-                    text={'Card is deleted'}
-                    buttons={[
-                        {
-                            text: 'Undo',
-                            onClick: () => console.log('Undo')
-                        },
-                        {
-                            text: 'Close',
-                            onClick: () => console.log('Close'),
-                            icon: 'close'
-                        }
-                    ]}
-                />
                 <br />
                 <Snackbar
                     key="4"
@@ -145,6 +126,25 @@ const Story = () => {
                     ]}
                 />
             </section>
+
+            <Snackbar
+                key="3"
+                variant="timer"
+                timer={1000}
+                text={'Card is deleted'}
+                position={'right'}
+                buttons={[
+                    {
+                        text: 'Undo',
+                        onClick: () => console.log('Undo')
+                    },
+                    {
+                        text: 'Close',
+                        onClick: () => console.log('Close'),
+                        icon: 'close'
+                    }
+                ]}
+            />
 
             <SnackbarsQueue ref={queueRef} />
         </div>

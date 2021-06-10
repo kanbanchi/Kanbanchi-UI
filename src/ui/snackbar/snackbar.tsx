@@ -19,6 +19,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         title,
         variant,
         onTimer,
+        position,
         ...attributes
     } = props;
 
@@ -109,8 +110,13 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         className
     );
 
+    const  classContainer = ClassNames(
+        'kui-snackbar__container',
+        position === 'right' ? 'kui-snackbar__container--right' : null
+    )
+
     return (
-        <div className="kui-snackbar__container">
+        <div className={classContainer}>
             <div
                 className={className}
                 ref={refSnackbar}
@@ -143,6 +149,7 @@ Snackbar.defaultProps = {
     timer: null,
     title: null,
     variant: 'info',
+    position: 'center',
     onBlur: null,
     onTimer: () => undefined,
 };
