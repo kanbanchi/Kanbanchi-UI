@@ -23,9 +23,9 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         ...attributes
     } = props;
 
-    let xlink = (icon === null && variant !== 'timer') ? ISnackbarDefaultIcons[variant] : icon;
+    let xlink = (icon === null && variant !== 'undo') ? ISnackbarDefaultIcons[variant] : icon;
 
-    if (variant === 'timer' && timer === null) timer = 10;
+    if (['timer', 'undo'].includes(variant) && timer === null) timer = 10;
 
     let buttonsGroup = [],
         buttonsGroupDiv = null;
@@ -105,8 +105,8 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         'kui-snackbar',
         'kui-snackbar--variant_' + variant,
         (!title) ? 'kui-snackbar--notitle' : null,
-        (variant === 'timer' && timerHook < 3) ? 'kui-snackbar--fadeout' : null,
-        (variant === 'timer' && timerHook <= 0) ? 'hidden' : null,
+        (variant === 'undo' && timerHook < 3) ? 'kui-snackbar--fadeout' : null,
+        (variant === 'undo' && timerHook <= 0) ? 'hidden' : null,
         className
     );
 
@@ -136,6 +136,11 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                         <div className="kui-snackbar__text" dangerouslySetInnerHTML={{ __html: text }}></div>
                     }
                 </div>
+                {variant === 'timer' &&
+                    <div className="kui-snackbar__timer" aria-live={'assertive'}>
+                        <span className="kui-snackbar__timer_num">{timerHook}</span> sec
+                    </div>
+                }
                 {buttonsGroupDiv}
             </div>
         </div>

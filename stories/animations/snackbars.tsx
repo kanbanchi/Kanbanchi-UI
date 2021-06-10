@@ -53,6 +53,25 @@ const Story = () => {
                         { text: 'Close' }
                     ]}
                 />
+
+                <h2>Timer</h2>
+                <Snackbar
+                    key="3"
+                    variant="timer"
+                    timer={55}
+                    text={'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                    buttons={[
+                        {
+                            text: 'Ok',
+                            isPrimary: true,
+                            onClick: () => console.log('ok')
+                        },
+                        {
+                            text: 'Cancel',
+                            onClick: () => console.log('cancel')
+                        }
+                    ]}
+                />
                 <br />
                 <Snackbar
                     key="4"
@@ -129,8 +148,8 @@ const Story = () => {
 
             <Snackbar
                 key="3"
-                variant="timer"
-                timer={1000}
+                variant="undo"
+                timer={10}
                 text={'Card is deleted'}
                 position={'right'}
                 buttons={[

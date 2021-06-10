@@ -23,6 +23,7 @@ export enum ISnackbarDefaultIcons {
     info = 'info',
     promt = 'help',
     success = 'done',
+    timer = 'error'
 }
 
 export interface ISnackbarStateProps {
@@ -41,7 +42,8 @@ export type SnackbarVariant =
     'info' |
     'promt' |
     'success' |
-    'timer';
+    'timer' |
+    'undo';
 
 export type SnackbarPosition =
     'center' |
