@@ -27,6 +27,12 @@
         align-items: center;
     }
 
+    &__container--right {
+        left: unset;
+        right: $google-spacing * 8;
+        transform: unset;
+    }
+
     &__icon {
         flex: 0 0 $google-spacing * 3;
         opacity: .5;
@@ -79,7 +85,8 @@
         background-color: $color-green;
     }
 
-    &--variant_timer {
+    &--variant_timer,
+    &--variant_undo {
         background-color: $color-base;
 
         .kui-snackbar {
@@ -100,6 +107,19 @@
         &:focus,
         &:hover {
             background: calc-color(fade, $color-white, 60);
+        }
+    }
+
+    .kui-button--variant_primary + .kui-button--variant_icon {
+        margin-left: $google-spacing * 2;
+    }
+
+    &.kui-snackbar--fadeout {
+        opacity: 0;
+        transition: opacity 2s;
+
+        &:hover {
+            opacity: 1;
         }
     }
 

@@ -9,6 +9,7 @@ export interface ISnackbarButtonDispatchProps {
 
 export interface ISnackbarButtonOwnProps {
     isPrimary?: boolean;
+    icon?: string;
 }
 
 export interface ISnackbarButtonProps extends
@@ -41,13 +42,19 @@ export type SnackbarVariant =
     'info' |
     'promt' |
     'success' |
-    'timer';
+    'timer' |
+    'undo';
+
+export type SnackbarPosition =
+    'center' |
+    'right';
 
 export interface ISnackbarOwnProps {
     icon?: string;
     key: string;
     timer?: number;
     variant?: SnackbarVariant;
+    position?: SnackbarPosition;
 }
 
 export interface ISnackbarProps extends

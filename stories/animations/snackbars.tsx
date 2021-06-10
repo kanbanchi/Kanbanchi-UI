@@ -146,6 +146,25 @@ const Story = () => {
                 />
             </section>
 
+            <Snackbar
+                key="3"
+                variant="undo"
+                timer={10}
+                text={'Card is deleted'}
+                position={'right'}
+                buttons={[
+                    {
+                        text: 'Undo',
+                        onClick: () => console.log('Undo')
+                    },
+                    {
+                        text: 'Close',
+                        onClick: () => console.log('Close'),
+                        icon: 'close'
+                    }
+                ]}
+            />
+
             <SnackbarsQueue ref={queueRef} />
         </div>
     );
