@@ -43,16 +43,17 @@ export type SnackbarVariant =
     'success' |
     'timer';
 
-export type SnackbarPosition =
-    'center' |
-    'right';
+export enum ESnackbarPosition {
+    center = 'center',
+    right = 'right'
+}
 
 export interface ISnackbarOwnProps {
     icon?: string;
     key: string;
     timer?: number;
     variant?: SnackbarVariant;
-    position?: SnackbarPosition;
+    position?: ESnackbarPosition;
 }
 
 export interface ISnackbarProps extends

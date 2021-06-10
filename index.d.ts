@@ -227,7 +227,8 @@ export {
     ISnackbarButtonStateProps,
     ISnackbarButtonDispatchProps,
     ISnackbarButtonOwnProps,
-    ISnackbarButtonProps
+    ISnackbarButtonProps,
+    ESnackbarPosition
 } from './src/ui/snackbar/types';
 
 import { ISwitchInheritedProps } from './src/ui/switch/types';
