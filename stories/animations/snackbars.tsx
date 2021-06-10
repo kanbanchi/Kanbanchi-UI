@@ -58,17 +58,17 @@ const Story = () => {
                 <Snackbar
                     key="3"
                     variant="timer"
-                    timer={55}
-                    text={'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                    timer={10}
+                    text={'Card is deleted'}
                     buttons={[
                         {
-                            text: 'Ok',
-                            isPrimary: true,
-                            onClick: () => console.log('ok')
+                            text: 'Undo',
+                            onClick: () => console.log('Undo')
                         },
                         {
-                            text: 'Cancel',
-                            onClick: () => console.log('cancel')
+                            text: 'Close',
+                            onClick: () => console.log('Close'),
+                            icon: 'close'
                         }
                     ]}
                 />

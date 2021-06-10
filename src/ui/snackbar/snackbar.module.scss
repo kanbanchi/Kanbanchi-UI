@@ -46,22 +46,6 @@
         font-size: $milli-size;
     }
 
-    &__timer {
-        margin: 0 0 0 $google-spacing * 2;
-        min-width: $google-spacing * 8;
-        font-weight: bold;
-        font-size: $h4-size;
-        text-align: right;
-        white-space: nowrap;
-    }
-
-    &__timer_num {
-        display: inline-block;
-        :global {
-            animation: snackbarTimer 1s ease-in-out infinite;
-        }
-    }
-
     &__buttons {
         flex-wrap: nowrap;
         margin-left: $google-spacing * 3;
@@ -100,6 +84,19 @@
         &:focus,
         &:hover {
             background: calc-color(fade, $color-white, 60);
+        }
+    }
+
+    .kui-button--variant_primary + .kui-button--variant_icon {
+        margin-left: $google-spacing * 2;
+    }
+
+    &.kui-snackbar--fadeout {
+        opacity: 0;
+        transition: opacity 2s;
+
+        &:hover {
+            opacity: 1;
         }
     }
 

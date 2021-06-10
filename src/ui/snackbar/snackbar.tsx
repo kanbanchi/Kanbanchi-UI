@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { ISnackbarInheritedProps, ISnackbarDefaultIcons } from './types';
+import { ISnackbarDefaultIcons, ISnackbarInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
+import { TButtonVariant } from '../button/types';
 
 // accessibility ok
 
@@ -21,14 +22,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         ...attributes
     } = props;
 
-    className = ClassNames(
-        'kui-snackbar',
-        'kui-snackbar--variant_' + variant,
-        (!title) ? 'kui-snackbar--notitle' : null,
-        className
-    );
-
-    let xlink = (icon === null) ? ISnackbarDefaultIcons[variant] : icon;
+    let xlink = (icon === null && variant !== 'timer') ? ISnackbarDefaultIcons[variant] : icon;
 
     if (variant === 'timer' && timer === null) timer = 10;
 
@@ -40,6 +34,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
             let {
                 isPrimary,
                 text,
+                icon,
                 ...attributes
             } = item;
 
@@ -48,14 +43,22 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                 (isPrimary) ? 'kui-snackbar__button--primary' : null
             );
 
+            const variant: TButtonVariant = icon ? 'icon' : 'primary';
+            const children = icon
+                ? <Icon
+                    size={16}
+                    xlink={icon}
+                />
+                : text
             return (
                 <Button
                     className={buttonClassName}
-                    color="white"
+                    color={!icon ? 'white' : null}
                     key={key}
+                    variant={variant}
                     {...attributes}
                 >
-                    {text}
+                    {children}
                 </Button>
             );
         });
@@ -97,6 +100,15 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         }
     }, []);
 
+    className = ClassNames(
+        'kui-snackbar',
+        'kui-snackbar--variant_' + variant,
+        (!title) ? 'kui-snackbar--notitle' : null,
+        (variant === 'timer' && timerHook < 3) ? 'kui-snackbar--fadeout' : null,
+        (variant === 'timer' && timerHook <= 0) ? 'hidden' : null,
+        className
+    );
+
     return (
         <div className="kui-snackbar__container">
             <div
@@ -107,7 +119,9 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                 role={'alert'}
                 {...attributes}
             >
-                <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
+                {xlink &&
+                    <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
+                }
                 <div className="kui-snackbar__body">
                     {title &&
                         <div className="kui-snackbar__title" dangerouslySetInnerHTML={{ __html: title }}></div>
@@ -116,11 +130,6 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                         <div className="kui-snackbar__text" dangerouslySetInnerHTML={{ __html: text }}></div>
                     }
                 </div>
-                {variant === 'timer' &&
-                    <div className="kui-snackbar__timer" aria-live={'assertive'}>
-                        <span className="kui-snackbar__timer_num">{timerHook}</span> sec
-                    </div>
-                }
                 {buttonsGroupDiv}
             </div>
         </div>

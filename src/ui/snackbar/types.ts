@@ -9,6 +9,7 @@ export interface ISnackbarButtonDispatchProps {
 
 export interface ISnackbarButtonOwnProps {
     isPrimary?: boolean;
+    icon?: string;
 }
 
 export interface ISnackbarButtonProps extends
@@ -22,7 +23,6 @@ export enum ISnackbarDefaultIcons {
     info = 'info',
     promt = 'help',
     success = 'done',
-    timer = 'error'
 }
 
 export interface ISnackbarStateProps {
