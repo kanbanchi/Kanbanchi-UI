@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ESnackbarPosition, ISnackbarDefaultIcons, ISnackbarInheritedProps } from './types';
+import { ISnackbarDefaultIcons, ISnackbarInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
@@ -112,7 +112,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
 
     const  classContainer = ClassNames(
         'kui-snackbar__container',
-        position === ESnackbarPosition.right ? 'kui-snackbar__container--right' : null
+        position === 'right' ? 'kui-snackbar__container--right' : null
     )
 
     return (
@@ -149,7 +149,7 @@ Snackbar.defaultProps = {
     timer: null,
     title: null,
     variant: 'info',
-    position: ESnackbarPosition.center,
+    position: 'center',
     onBlur: null,
     onTimer: () => undefined,
 };
