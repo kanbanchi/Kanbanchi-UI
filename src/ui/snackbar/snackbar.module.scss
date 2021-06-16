@@ -145,6 +145,13 @@
             }
         }
 
+        &--variant_undo {
+            .kui-snackbar__text {
+                margin-right: $google-spacing;
+                white-space: unset;
+            }
+        }
+
         &__body {
             order: -1;
             margin: 0 0 $google-spacing * 2 0;
