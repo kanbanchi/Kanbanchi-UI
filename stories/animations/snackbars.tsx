@@ -150,8 +150,8 @@ const Story = () => {
                 key="3"
                 variant="undo"
                 timer={10}
-                text={'Card is deleted'}
-                position={'right'}
+                text={'Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted '}
+                position={'left'}
                 buttons={[
                     {
                         text: 'Undo',

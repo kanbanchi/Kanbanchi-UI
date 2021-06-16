@@ -27,9 +27,8 @@
         align-items: center;
     }
 
-    &__container--right {
-        left: unset;
-        right: $google-spacing * 8;
+    &__container--left {
+        left: $google-spacing * 8;
         transform: unset;
     }
 
@@ -131,6 +130,19 @@
         &__container {
             bottom: $google-spacing;
             width: 100%;
+        }
+
+        &__container--left {
+            left: 50%;
+            transform: translateX(-50%);
+
+            .kui-snackbar {
+                flex-wrap: nowrap;
+            }
+            .kui-snackbar__body {
+                width: auto;
+                margin: 0;
+            }
         }
 
         &__body {

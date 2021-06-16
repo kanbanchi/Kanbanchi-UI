@@ -47,7 +47,7 @@ export type SnackbarVariant =
 
 export type SnackbarPosition =
     'center' |
-    'right';
+    'left';
 
 export interface ISnackbarOwnProps {
     icon?: string;
