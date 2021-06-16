@@ -27,6 +27,11 @@
         align-items: center;
     }
 
+    &__container--left {
+        left: $google-spacing * 8;
+        transform: unset;
+    }
+
     &__icon {
         flex: 0 0 $google-spacing * 3;
         opacity: .5;
@@ -117,13 +122,6 @@
         }
     }
 
-    @media (min-width: $media-iPad) {
-        &__container--left {
-            left: $google-spacing * 8;
-            transform: unset;
-        }
-    }
-
     @media (max-width: $media-iPad) {
         width: 100%;
         flex-wrap: wrap;
@@ -135,6 +133,9 @@
         }
 
         &__container--left {
+            left: 50%;
+            transform: translateX(-50%);
+
             .kui-snackbar {
                 flex-wrap: nowrap;
             }
