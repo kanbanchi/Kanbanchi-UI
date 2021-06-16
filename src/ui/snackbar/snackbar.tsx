@@ -112,7 +112,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
 
     const  classContainer = ClassNames(
         'kui-snackbar__container',
-        position === 'right' ? 'kui-snackbar__container--right' : null
+        position === 'left' ? 'kui-snackbar__container--left' : null
     )
 
     return (

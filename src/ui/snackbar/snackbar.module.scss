@@ -27,12 +27,6 @@
         align-items: center;
     }
 
-    &__container--right {
-        left: unset;
-        right: $google-spacing * 8;
-        transform: unset;
-    }
-
     &__icon {
         flex: 0 0 $google-spacing * 3;
         opacity: .5;
@@ -123,6 +117,13 @@
         }
     }
 
+    @media (min-width: $media-iPad) {
+        &__container--left {
+            left: $google-spacing * 8;
+            transform: unset;
+        }
+    }
+
     @media (max-width: $media-iPad) {
         width: 100%;
         flex-wrap: wrap;
@@ -131,6 +132,16 @@
         &__container {
             bottom: $google-spacing;
             width: 100%;
+        }
+
+        &__container--left {
+            .kui-snackbar {
+                flex-wrap: nowrap;
+            }
+            .kui-snackbar__body {
+                width: auto;
+                margin: 0;
+            }
         }
 
         &__body {

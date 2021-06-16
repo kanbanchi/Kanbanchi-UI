@@ -149,9 +149,9 @@ const Story = () => {
             <Snackbar
                 key="3"
                 variant="undo"
-                timer={10}
-                text={'Card is deleted'}
-                position={'right'}
+                timer={100}
+                text={'Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted '}
+                position={'left'}
                 buttons={[
                     {
                         text: 'Undo',
