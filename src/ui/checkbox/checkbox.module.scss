@@ -107,6 +107,42 @@
         background: $color-light-background;
     }
 
+    &.kui-checkbox--indeterminate {
+        .kui-checkbox__label:before {
+            background-color: $color-purple;
+            border-color: transparent;
+        }
+
+        &.kui-checkbox--color_black {
+            .kui-checkbox__label:before {
+                background-color: $color-base;
+            }
+        }
+
+        .kui-checkbox__label:after {
+            content: '';
+            position: absolute;
+            right: 3px;
+            top: 50%;
+            transform: translateY(-2px);
+            width: 12px;
+            height: 2px;
+            background: $color-white;
+            border-radius: 2px;
+        }
+
+        &.kui-checkbox--direction_left {
+            .kui-checkbox__label:after {
+                right: unset;
+                left: 3px;
+            }
+        }
+
+        .kui-checkbox__checkmark {
+            transform: scale(0) !important;
+        }
+    }
+
     &.kui-checkbox--disabled {
         pointer-events: none;
 
