@@ -59,9 +59,10 @@ const Story = () => {
                 <Checkbox
                     checked={val}
                     direction={'left'}
+                    isIndeterminate
                     onChange={()=>setVal(!val)}
                 >
-                    Label
+                    Indeterminate
                 </Checkbox>
 
                 <br/>
@@ -117,7 +118,7 @@ const Story = () => {
                     color="light"
                     onChange={()=>setVal05(!val05)}
                 >
-                    Black checkbox
+                    Light checkbox
                 </Checkbox>
 
                 <br/>
