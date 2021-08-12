@@ -1,5 +1,6 @@
 export interface ICheckboxStateProps {
     checked?: boolean;
+    isIndeterminate?: boolean;
 }
 
 export interface ICheckboxDispatchProps {
