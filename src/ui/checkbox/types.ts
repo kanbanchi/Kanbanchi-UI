@@ -1,6 +1,7 @@
 export interface ICheckboxStateProps {
     checked?: boolean;
     isIndeterminate?: boolean;
+    isStateless?: boolean; // don't use useState if can be indeterminate
 }
 
 export interface ICheckboxDispatchProps {

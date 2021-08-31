@@ -15,6 +15,7 @@ React.forwardRef((props, ref) => {
         color,
         direction,
         isIndeterminate,
+        isStateless,
         tabIndex = 0,
         ['aria-selected']: ariaSelected,
         ['data-index']: dataIndex,
@@ -37,7 +38,7 @@ React.forwardRef((props, ref) => {
     attributes.type = 'checkbox';
     attributes.className = 'kui-checkbox__input';
     attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!isIndeterminate) setIsChecked(!isChecked);
+        if (!isStateless) setIsChecked(!isChecked);
         if (onChange) onChange(e);
     };
 
