@@ -37,7 +37,7 @@ React.forwardRef((props, ref) => {
     attributes.type = 'checkbox';
     attributes.className = 'kui-checkbox__input';
     attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setIsChecked(!isChecked);
+        if (!isIndeterminate) setIsChecked(!isChecked);
         if (onChange) onChange(e);
     };
 
