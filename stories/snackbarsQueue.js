@@ -78,11 +78,12 @@ class SnackbarsQueue extends React.Component {
             snackbar.buttons = buttonsWithNext;      
         }
 
-        return (
-            <Snackbar
-                {...snackbar}
-            />
-        )
+        return null;
+        // return (
+        //     <Snackbar
+        //         {...snackbar}
+        //     />
+        // )
     }
 };
 
