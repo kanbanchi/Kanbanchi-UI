@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, Snackbar } from './../../src/ui';
-import SnackbarsQueue from './../snackbarsQueue';
+// import SnackbarsQueue from './../snackbarsQueue';
 
 const Story = () => {
     const queueRef = React.useRef(null);
@@ -165,7 +165,7 @@ const Story = () => {
                 ]}
             />
 
-            <SnackbarsQueue ref={queueRef} />
+            {/* <SnackbarsQueue ref={queueRef} /> */}
         </div>
     );
 };
