@@ -3,25 +3,28 @@ import { IDropdownInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/dropdown/dropdown.module.scss';
 
-export const Dropdown: React.SFC<IDropdownInheritedProps> =
-React.forwardRef((props, ref) => {
+// accessibility ok
+
+export const Dropdown = React.forwardRef((
+    props: IDropdownInheritedProps,
+    ref
+) => {
     let {
         children,
         className,
         directionVertical,
         directionHorizontal,
         isFitWindow,
-        isMountClosed,
         opened,
         portal,
+        onAnimationEnd,
         onDidMount,
         onDidUnmount,
         ...attributes
     } = props;
 
-    if (!opened && !isMountClosed) return null;
-
-    let [isShow, setIsShow] = React.useState(isMountClosed);
+    const [isMount, setIsMount] = React.useState(opened);
+    const itemRef = React.useRef(null);
 
     className = ClassNames(
         'kui-dropdown',
@@ -33,10 +36,23 @@ React.forwardRef((props, ref) => {
         className
     );
 
-    React.useEffect(() => {
-        if (onDidMount) onDidMount();
-        setIsShow(true);
+    const onAnimationEndHadler = (e: any) => {
+        if (!opened) {
+            setIsMount(false);
+        } else {
+            itemRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+        }
+        if (onAnimationEnd) onAnimationEnd(e);
+    }
 
+    React.useEffect(() => {
+        if (opened) {
+            setIsMount(true);
+            if (onDidMount) onDidMount();
+        }
+    }, [opened]);
+
+    React.useEffect(() => {
         return () => {
             if (onDidUnmount) onDidUnmount();
         }
@@ -45,17 +61,20 @@ React.forwardRef((props, ref) => {
     return (
         <div
             className={className}
+            onAnimationEnd={onAnimationEndHadler}
+            ref={ref}
             {...attributes}
-            style={{
-                opacity: Number(isShow)
-            }}
         >
-            <div
-                className="kui-dropdown__item"
-                ref={ref as any}
-            >
-                {children}
-            </div>
+            {isMount &&
+                <div
+                    className="kui-dropdown__item"
+                    ref={itemRef}
+                    aria-live={'assertive'}
+                    role={'alert'}
+                >
+                    {children}
+                </div>
+            }
         </div>
     );
 });
@@ -63,7 +82,6 @@ React.forwardRef((props, ref) => {
 Dropdown.defaultProps = {
     directionVertical: 'auto',
     directionHorizontal: 'left',
-    isMountClosed: true,
     opened: false
 };
 

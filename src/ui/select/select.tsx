@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ISelectInheritedProps, ISelectActiveProps, ISelectOptionsObject } from './types';
-import { ClassNames, userAgentsInclude, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs, ClassList } from '../utils';
+import { ISelectInheritedProps, ISelectOptionsObject } from './types';
+import { ClassNames, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs, ClassList } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -10,8 +10,12 @@ import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
 import { Portal } from '../portal/portal';
 
-export const Select: React.SFC<ISelectInheritedProps> =
-React.forwardRef((props, ref) => {
+// accessibility ok
+
+export const Select = React.forwardRef((
+    props: ISelectInheritedProps,
+    ref
+) => {
     let {
         active,
         children,
@@ -22,9 +26,11 @@ React.forwardRef((props, ref) => {
         disabled,
         dropdownClassName,
         editable,
+        isCloseOnClick,
         isCloseOnEnter,
         isFitWindow,
         multiple,
+        notBlurClasses,
         opened,
         options,
         portal,
@@ -49,7 +55,6 @@ React.forwardRef((props, ref) => {
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
 
-    const WAIT_ANIMATION = 300;
     let [activeHook, _setActiveHook] = React.useState(active);
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [initialValue, _setInitialValue] = React.useState('');
@@ -57,10 +62,10 @@ React.forwardRef((props, ref) => {
     const [isFocusedHook, setIsFocusedHook] = React.useState(opened);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [itemsRefsHook, setItemsRefsHook] = React.useState([]); // list items for auto scroll in dropdown
-    const [uniqueClass, setUniqueClass] = React.useState('kui-select--' + uuidv4());
+    const [uniqueClass] = React.useState('kui-select--' + uuidv4());
+    const dropdownUniqueClass = 'kui-select__dropdown--' + uniqueClass;
 
     const dropdownRef = React.useRef(null);
-    const dropdownContainerRef = React.useRef(null);
     const inputRef = React.useRef(null);
     const selectRef = React.useRef(null);
     const combinedRef =  useCombinedRefs(ref, selectRef);
@@ -72,7 +77,7 @@ React.forwardRef((props, ref) => {
         (disabled) ? 'kui-select--disabled' : null,
         (isOpenedHook) ? 'kui-select--opened' : null,
         (variant) ? 'kui-select--variant_' + variant : null,
-        (single) ? 'kui-select--single' : null,
+        (multiple && single) ? 'kui-select--single' : null,
         (readOnly) ? 'kui-select--readonly' : null,
         className
     );
@@ -91,10 +96,22 @@ React.forwardRef((props, ref) => {
         setItemsRefsHook(refs);
     }
 
-    const openDropdown = () => {
+    const openDropdown = (isFocus = false) => {
         setIsOpenedHook(true);
-        calcDirection();
         if (onOpen) onOpen();
+        if (!editable || isFocus) {
+            requestAnimationFrame(() => {
+                const activeElement = document.activeElement as HTMLElement;
+                if (activeElement) {
+                    const parents = getParentsClasses(
+                        activeElement,
+                        [uniqueClass]
+                    );
+                    if (parents && parents.includes(uniqueClass)) return; // если фокус уже в селекте
+                }
+                focusSelectedItem();
+            });
+        }
     }
 
     const closeDropdown = () => {
@@ -110,8 +127,6 @@ React.forwardRef((props, ref) => {
     }
 
     const calcDirection = () => {
-        if (!dropdownRef.current) return;
-
         let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
             directionHook = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
@@ -123,40 +138,45 @@ React.forwardRef((props, ref) => {
                 : document.body;
             const portalScrollTop = getParentsScrollTop(portalEl);
 
-            dropdownContainerRef.current.style.top = 'unset';
-            dropdownContainerRef.current.style.bottom = 'unset';
-            dropdownContainerRef.current.style.left = 'unset';
-            dropdownContainerRef.current.style.right = 'unset';
+            dropdownRef.current.style.top = 'unset';
+            dropdownRef.current.style.bottom = 'unset';
+            dropdownRef.current.style.left = 'unset';
+            dropdownRef.current.style.right = 'unset';
 
             if (directionHorizontal === 'left') {
-                dropdownContainerRef.current.style.left = el.left + 'px';
+                dropdownRef.current.style.left = el.left + 'px';
             } else {
-                dropdownContainerRef.current.style.right = (window.innerWidth - el.right) + 'px';
+                dropdownRef.current.style.right = (window.innerWidth - el.right) + 'px';
             }
 
             if (directionHook === 'up') {
-                dropdownContainerRef.current.style.bottom = (window.innerHeight - el.top) + 'px';
+                dropdownRef.current.style.bottom = (window.innerHeight - el.top) + 'px';
             } else {
-                dropdownContainerRef.current.style.top = portalScrollTop + el.bottom + 'px';
+                dropdownRef.current.style.top = portalScrollTop + el.bottom + 'px';
             }
         }
-        if (portal || isFitWindow) {
+        if (portal || isFitWindow) requestAnimationFrame(() => { // wait dropdownItem
             const maxHeight = directionHook === 'up'
                 ? el.top
                 : window.innerHeight - el.bottom;
-            dropdownRef.current.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
+            const dropdownItem = dropdownRef.current.children[0];
+            if (dropdownItem) dropdownItem.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
+        })
+    }
+
+    const onDropdownMount = () => {
+        if (!dropdownRef.current) return;
+
+        calcDirection();
+        if (multiple && single) {
+            dropdownRef.current.removeEventListener('click', onDropdownClick);
+            dropdownRef.current.addEventListener('click', onDropdownClick);
         }
     }
 
-    const dropdownAnimationEnd = () => {
-        if (
-            dropdownRef.current &&
-            isOpenedHook &&
-            !userAgentsInclude(['edge', 'safari'])
-        ) {
-            scrollList();
-            dropdownRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
-        }
+    const focusSelectedItem = () => {
+        const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
+        if (ariaSelected) ariaSelected.focus();
     }
 
     const scrollList = () => {
@@ -166,9 +186,12 @@ React.forwardRef((props, ref) => {
             itemsRefsHook[activeHook] &&
             itemsRefsHook[activeHook].current)
         {
-            let lines = Math.floor(dropdownRef.current.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
+            const dropdownItem = dropdownRef.current.children[0];
+            if (!dropdownItem) return;
+
+            let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
             let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
-            dropdownRef.current.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
+            dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
         }
     }
 
@@ -178,10 +201,10 @@ React.forwardRef((props, ref) => {
 
     attributes.onChange = (e: any) => {
         if (e.item) { // list item clicked
-            inputRef.current.setFocus(); // return focus to input before dropdown hide
             if (multiple) {
                 if (onChange) onChange(e);
             } else {
+                inputRef.current.setFocus(); // return focus to input before dropdown hide
                 setIsOpenedHook(false);
                 if (!isSearch) { // dont update search input value
                     setValue(e.item.text);
@@ -207,33 +230,37 @@ React.forwardRef((props, ref) => {
         if (onFocus) onFocus(e);
     }
 
-    attributes.onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    notBlurClasses = [
+        ...notBlurClasses,
+        uniqueClass,
+        dropdownUniqueClass,
+    ];
+
+    attributes.onBlur = (e: any) => {
         if (!document.hasFocus()) return;
 
-        e.persist();
-        if (isFocusedHook) {
-            const classes = getParentsClasses(
-                e.relatedTarget as HTMLElement,
-                [uniqueClass]
-            );
-            if (classes.includes(uniqueClass)) {
-                if (e.target) {
-                    e.target.focus({ preventScroll: true });
-                }
-            } else {
-                setIsFocusedHook(false);
-                closeDropdown();
-                if (onBlur) onBlur(e);
+        const classes = getParentsClasses(
+            e.relatedTarget as HTMLElement,
+            notBlurClasses
+        );
+        for (let i = 0; i<notBlurClasses.length; i++) {
+            if (classes.includes(notBlurClasses[i])) {
+                return;
             }
         }
+
+        setIsFocusedHook(false);
+        closeDropdown();
+        if (onBlur) onBlur(e);
     }
 
     attributes.onClick = (e: React.MouseEvent<HTMLInputElement>) => {
         if (isFocusedHook) {
             if (!isOpenedHook) {
                 openDropdown();
-            } else {
-                setIsOpenedHook(!isOpenedHook);
+            } else if (isCloseOnClick && valueHook === initialValue) {
+                setIsOpenedHook(false);
+                if (onClose) onClose();
             }
         }
         if (onClick) onClick(e);
@@ -274,9 +301,8 @@ React.forwardRef((props, ref) => {
     } else if (options) {
         if (Array.isArray(options)) {
             list = options.map(option => {
-                let li = null;
-                if (multiple) {
-                    li = (
+                const li = multiple
+                    ? (
                         <Checkbox
                             key={option.value}
                             checked={option.active}
@@ -286,14 +312,12 @@ React.forwardRef((props, ref) => {
                         >
                             {option.text || option.value}
                         </Checkbox>
-                    );
-                } else {
-                    li = (
+                    )
+                    : (
                         <li key={option.value} value={option.value}>
                             {option.text || option.value}
                         </li>
                     );
-                }
                 return li;
             });
         } else {
@@ -332,94 +356,49 @@ React.forwardRef((props, ref) => {
         });
     }
 
-    const highlightOptionIndex = (
-        direction: number
-    ): number => {
-        let activeNew;
-        activeHook = activeHook === null ? -1 : activeHook;
-        activeNew = activeHook + direction;
-        if (
-            direction < 0 &&
-            activeNew < 0
-        ) {
-            activeNew = list.length - 1;
-        } else if (
-            direction > 0 &&
-            activeNew >= list.length
-        ) {
-            activeNew = 0;
-        }
-
-        while (
-            list[activeNew].props.disabled &&
-            list.filter(option => !option.props.disabled).length &&
-            activeNew !== activeHook
-        ) {
-            activeNew += direction;
-            if (
-                direction < 0 &&
-                activeNew < 0
-            ) {
-                activeNew = list.length - 1;
-            } else if (
-                direction > 0 &&
-                activeNew >= list.length
-            ) {
-                activeNew = 0;
-            }
-        }
-
-        return activeNew;
-    }
-
     attributes.onKeyDown = (e: any) => {
         if (!e) return;
         if (onKeyDown) onKeyDown(e);
-        e.persist();
-        if (e.which === 27) { // esc
+        if (e.key === 'Escape') {
             return closeDropdown();
-        } else if (
-            e.which === 38 || // arrow up
-            e.which === 40 // arrow down
-        ) {
-            let activeNew;
-            if (e.which === 38) {
-                activeNew = highlightOptionIndex(-1);
-            } else if (e.which === 40) {
-                activeNew = highlightOptionIndex(1);
-            }
-            setActiveHook(activeNew);
-            if (
-                !isSearch &&
-                list[activeNew].props &&
-                list[activeNew].props.children
-            ) {
-                setValue(list[activeNew].props.children);
+        }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (!isOpenedHook) {
+                openDropdown(true);
+            } else {
+                focusSelectedItem();
             }
             return;
         }
-        if (!isOpenedHook) return openDropdown();
-        if (e.which === 13) { // enter
-            if (onEnter) onEnter(e);
-            if (activeHook === null) {
-                findValue(e.target.value)
-                    .then((found: ISelectActiveProps) => {
-                        setActiveHook(found.index);
-                        onActiveChanged(found.index);
-                        if (onChange) onChange(Object.assign({}, e, {item: found}));
-                    })
-                    .catch(() => {
-                        setActiveHook(null);
-                    });
-            } else {
-                if (
-                    onChange &&
-                    list[activeHook].props
-                ) {
-                    onChange(Object.assign({}, e, {item: list[activeHook].props}));
-                }
-                onActiveChanged(activeHook);
+        if (e.key === 'Enter') {
+            if (!isOpenedHook) {
+                return openDropdown(true);
             }
+            if (onEnter) onEnter(e);
+            /**
+             * сначала была задумка: пишешь в инпуте - в дропдауне подсвечивается подходящий айтем. похожим образом ведут себя системные селекты
+             * но потом в канбане появился searchSelect, он больше похож на material
+             */
+            // if (activeHook === null) {
+            //     findValue(e.target.value)
+            //         .then((found: ISelectActiveProps) => {
+            //             setActiveHook(found.index);
+            //             onActiveChanged(found.index);
+            //             if (onChange) onChange(Object.assign({}, e, {item: found}));
+            //         })
+            //         .catch(() => {
+            //             setActiveHook(null);
+            //         });
+            // } else if (list[activeHook]) {
+            //     if (
+            //         onChange &&
+            //         list[activeHook].props
+            //     ) {
+            //         onChange(Object.assign({}, e, {item: list[activeHook].props}));
+            //     }
+            //     onActiveChanged(activeHook);
+            // }
             if (!multiple && isCloseOnEnter) {
                 closeDropdown();
             }
@@ -443,29 +422,29 @@ React.forwardRef((props, ref) => {
         }
     }
 
-    React.useEffect(() => {
-        function onDropdownClick (e: React.SyntheticEvent) {
-            const classes = getParentsClasses(
-                e.target as HTMLElement,
-                [SELECT_LIST_ITEM_CLASS, SELECT_LIST_CLASS]
-            );
-            if (classes.includes(SELECT_LIST_ITEM_CLASS)) {
-                timer.current = setTimeout(closeDropdown, 100); // close after onChange
-            }
+    const onDropdownKeyDown = (e: React.KeyboardEvent) => {
+        if (!e) return;
+        if (
+            e.key === 'Escape' ||
+            multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
+        ) {
+            inputRef.current.setFocus(); // return focus to input before dropdown hide
+            closeDropdown();
         }
+    }
 
+    function onDropdownClick (e: React.SyntheticEvent) {
+        const classes = getParentsClasses(
+            e.target as HTMLElement,
+            [SELECT_LIST_ITEM_CLASS, SELECT_LIST_CLASS]
+        );
+        if (classes.includes(SELECT_LIST_ITEM_CLASS)) {
+            timer.current = setTimeout(closeDropdown, 100); // close after onChange
+        }
+    }
+
+    React.useEffect(() => {
         onActiveChanged();
-        if (dropdownRef.current) {
-            if (multiple && single) {
-                dropdownRef.current.addEventListener('click', onDropdownClick);
-            }
-            dropdownContainerRef.current = dropdownRef.current.parentNode;
-        }
-        if (isOpenedHook) {
-            timer.current = setTimeout(() => {
-                calcDirection();
-            }, WAIT_ANIMATION);
-        }
 
         return () => {
             if (dropdownRef.current) dropdownRef.current.removeEventListener('click', onDropdownClick);
@@ -487,7 +466,8 @@ React.forwardRef((props, ref) => {
 
     const classNameDropdown = ClassNames(
         'kui-select__dropdown',
-        dropdownClassName
+        dropdownUniqueClass,
+        dropdownClassName,
     );
 
     const dropdownElement = dropdownBody
@@ -500,7 +480,10 @@ React.forwardRef((props, ref) => {
             ref={dropdownRef}
             tabIndex={-1}
             portal={portal}
-            onAnimationEnd={dropdownAnimationEnd}
+            onAnimationEnd={scrollList}
+            onBlur={attributes.onBlur}
+            onDidMount={onDropdownMount}
+            onKeyDown={onDropdownKeyDown}
         >
             {dropdownBody}
         </Dropdown>
@@ -527,6 +510,8 @@ React.forwardRef((props, ref) => {
                 ref={inputRef}
                 value={valueHook as any}
                 variant={variant}
+                aria-haspopup={true}
+                aria-expanded={isOpenedHook}
                 {...attributes}
             />
             {dropdownPortal}
@@ -541,11 +526,13 @@ Select.defaultProps = {
     directionHorizontal: 'left',
     disabled: false,
     editable: false,
+    isCloseOnClick: true,
     isCloseOnEnter: true,
     multiple: false,
+    notBlurClasses: [],
     opened: false,
     options: null,
-    single: false,
+    single: true,
     onChange: (): void => undefined,
     onEnter: () => undefined,
     onOpen: () => undefined,

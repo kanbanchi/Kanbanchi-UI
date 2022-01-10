@@ -1,19 +1,37 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Modal, ButtonsGroup, Button } from '../../src/ui';
+import { Portal } from '../../src/ui/portal/portal';
 
 const Story = () => {
     const [val, setVal] = React.useState(null);
+    const [val1, setVal1] = React.useState(null);
 
     const modalDefault = (<Modal
+            blockSelector={'.page'}
             title={'Default modal'}
             onClose={() => setVal(null)}
         >
             <h3>Content header</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <Button
+                onClick={() => setVal1(modalDefault1)}
+            >
+                Default1
+            </Button>
         </Modal>);
 
+    const modalDefault1 = (<Modal
+        blockSelector={'.page'}
+        title={'Default modal1'}
+        onClose={() => setVal1(null)}
+    >
+        <h3>Content header</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </Modal>);
+
     const modalActions = (<Modal
+            blockSelector={'.kui-buttons_group'}
             title={'Actions modal'}
             buttons={[
                 {
@@ -21,6 +39,7 @@ const Story = () => {
                     onClick: () => console.log('cancel')
                 },
                 {
+                    autoFocus: true,
                     text: 'Ok',
                     isPrimary: true,
                     onClick: () => console.log('ok')
@@ -33,6 +52,7 @@ const Story = () => {
         </Modal>);
 
     const modalRelease = (<Modal
+            blockSelector={'.page'}
             title={'Release modal'}
             release={{
                 footer: {
@@ -61,7 +81,7 @@ const Story = () => {
                         ],
                         text: 'Follow us!'
                     },
-                    stars: `Give us 5 stars in <a href="https://gsuite.google.com/marketplace/app/kanbanchi/631025100586" target="_blank">GSuite marketplace</a>`,
+                    stars: `Give us 5 stars in <a href="https://gsuite.google.com/marketplace/app/kanbanchi/631025100586" target="_blank">Marketplace</a>`,
                 },
                 slides: [
                     {
@@ -87,7 +107,8 @@ const Story = () => {
              <section className="section-form-min">
                 <h2>Modals</h2>
 
-                {val}
+                <Portal selector={'#root'}>{val}</Portal>
+                <Portal selector={'#root'}>{val1}</Portal>
 
                 <ButtonsGroup>
                     <Button

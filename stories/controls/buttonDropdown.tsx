@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon, Divider } from '../../src/ui';
+import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon, Divider, Userpic, Select } from '../../src/ui';
 
 const Story = () => {
     const onClickHandler = (e: any) => console.log(e.target.innerText);
@@ -58,7 +58,7 @@ const Story = () => {
                                 >
                                     Card Lorem ipsum dolor sit amet?
                                 </SelectListItem>
-                                <div>123</div>
+                                <SelectListItem>123</SelectListItem>
                                 <Divider />
                                 <SelectListItem
                                     icon="archive"
@@ -89,6 +89,21 @@ const Story = () => {
                             </SelectList>
                         </ButtonDropdown>
                     </ButtonsGroup>
+
+                    <br/>
+
+                    <ButtonDropdown
+                        dropdownClassName={'stories-dropdown-visible'}
+                    >
+                        <Button>
+                            Dropdown with select
+                        </Button>
+                        <Select
+                            options={Array.from({ length: 10 }, (val, i) => ({ value: i + 1}))}
+                            variant={'arrow'}
+                            onChange={()=>{}}
+                        />
+                    </ButtonDropdown>
                 </div>
             </section>
 
@@ -98,7 +113,6 @@ const Story = () => {
                 <ButtonsGroup size="large" className="section-form-min" style={{justifyContent: 'space-between'}}>
                     <ButtonDropdown
                         dropdownClassName={'section-portal-dropdown'}
-                        isMountClosed={false}
                         portal
                         portalId={'stories-portal'}
                         portalSelector={'.section-portal'}
@@ -110,18 +124,20 @@ const Story = () => {
                         </Button>
                         <SelectList fixActive={false}>
                             <SelectListItem
-                                icon="card"
-                                list="List Ut enim ad minim veniam!"
-                                onClick={()=>console.log('Card 01')}
-                            >
-                                Card 01 Lorem ipsum dolor sit amet?
-                            </SelectListItem>
-                            <SelectListItem
                                 icon="archive"
-                                list="List"
+                                list="Todo"
+                                listLabel={'List: Todo'}
                                 onClick={()=>console.log('Card 02')}
                             >
                                 Card 02
+                            </SelectListItem>
+                            <SelectListItem
+                                icon="card"
+                                list="List Ut enim ad minim veniam!"
+                                listLabel={'List: List Ut enim ad minim veniam!'}
+                                onClick={()=>console.log('Card 01')}
+                            >
+                                Card 01 Lorem ipsum dolor sit amet?
                             </SelectListItem>
                         </SelectList>
                     </ButtonDropdown>
@@ -129,7 +145,6 @@ const Story = () => {
                     <ButtonDropdown
                         directionHorizontal={'right'}
                         directionVertical={'up'}
-                        isMountClosed={false}
                         portal
                     >
                         <Button variant="icon">
@@ -164,47 +179,34 @@ const Story = () => {
                     <Button variant="add">
                         Add smth
                     </Button>
-                    <SelectList fixActive={false}
-                    >
+                    <SelectList fixActive={false}>
                         <Checkbox
-                            color={'light'}
                             checked={val01}
+                            color="light"
+                            value="1"
                             onChange={()=>setVal01(!val01)}
                         >
-                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <SelectListItem>
+                                <Userpic
+                                    size={24}
+                                    src="https://i.pravatar.cc/48?u=1"
+                                />
+                                User01
+                            </SelectListItem>
                         </Checkbox>
                         <Checkbox
-                            color={'light'}
                             checked={val02}
+                            color="light"
+                            value="2"
                             onChange={()=>setVal02(!val02)}
                         >
-                            Check 02
-                        </Checkbox><Checkbox
-                            color={'light'}
-                            checked={val01}
-                            onChange={()=>setVal01(!val01)}
-                        >
-                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </Checkbox>
-                        <Checkbox
-                            color={'light'}
-                            checked={val02}
-                            onChange={()=>setVal02(!val02)}
-                        >
-                            Check 02
-                        </Checkbox><Checkbox
-                            color={'light'}
-                            checked={val01}
-                            onChange={()=>setVal01(!val01)}
-                        >
-                            Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </Checkbox>
-                        <Checkbox
-                            color={'light'}
-                            checked={val02}
-                            onChange={()=>setVal02(!val02)}
-                        >
-                            Check 02
+                            <SelectListItem>
+                                <Userpic
+                                    size={24}
+                                    src="https://i.pravatar.cc/48?u=2"
+                                />
+                                User 02 Lorem ipsum dolor <b>sit amet</b>
+                            </SelectListItem>
                         </Checkbox>
                     </SelectList>
                 </ButtonDropdown>
@@ -270,7 +272,7 @@ const Story = () => {
                         </Checkbox>
                     </SelectList>
                 </ButtonDropdown>
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                {/* <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> */}
 
                 Check empty ButtonDropdown: <ButtonDropdown></ButtonDropdown>
             </section>

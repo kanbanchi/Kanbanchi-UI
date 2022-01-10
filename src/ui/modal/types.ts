@@ -1,20 +1,12 @@
-export interface IModalButtonStateProps {
-    text: string;
-}
-
-export interface IModalButtonDispatchProps {
-    onClick?: () => void;
-}
-
-export interface IModalButtonOwnProps {
-    isPrimary?: boolean;
-}
+import { IButtonInheritedProps } from '../button/types';
 
 export interface IModalButtonProps extends
-    IModalButtonStateProps,
-    IModalButtonDispatchProps,
-    IModalButtonOwnProps
-{}
+    IButtonInheritedProps
+{
+    text: string;
+    isOpenedAfterClick?: boolean;
+    isPrimary?: boolean;
+}
 
 export interface IModalReleaseFooterFollowSocialProps {
     icon: string;
@@ -45,6 +37,7 @@ export interface IModalReleaseProps {
 }
 
 export interface IModalStateProps {
+    blockSelector?: string; // селктор основного контента, который заблокировать (запретить tab) при показе модалки
     title: string;
 }
 

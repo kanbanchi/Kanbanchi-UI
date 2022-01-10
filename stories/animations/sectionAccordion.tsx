@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Button, Icon, SectionAccordion } from '../../src/ui';
+import { Button, Icon, Radio, SectionAccordion, Switch } from '../../src/ui';
 import { IButtonInheritedProps } from '../../src/ui/button/types';
 
 const Story = () => {
-    const [opened, setOpened] = React.useState(null);
+    const [opened, setOpened] = React.useState(true);
     const [opened01, setOpened01] = React.useState(true);
     const [opened02, setOpened02] = React.useState(true);
+    const [val, setVal] = React.useState();
 
     const actionButton = (props: IButtonInheritedProps) => (
         <Button
@@ -29,15 +30,31 @@ const Story = () => {
         <div className="page">
             <section className="section-form-min">
                 <h2>Filter</h2>
+                <Switch
+                    checked={opened}
+                    onChange={() => setOpened(!opened)}
+                >
+                    Toggle
+                </Switch>
                 <SectionAccordion
-                    opened={true}
-                    title="Saved filters"
+                    opened={opened}
+                    title={<>Saved filters <span>(1 of 3)</span></>}
                     variant="simple"
+                    onOpen={() => setOpened(true)}
+                    onClose={() => setOpened(false)}
                 >
                     <br/>
-                    <p>Filter 1</p>
-                    <p>Filter 2</p>
-                    <p>Filter 3</p>
+                    <Radio
+                        active={val}
+                        onChange={(i: any)=>{
+                            setVal(i.index);
+                            console.log(i.index);
+                        }}
+                    >
+                        <div>Filter 1</div>
+                        <div>Filter 2</div>
+                        <div>Filter 3</div>
+                    </Radio>
                 </SectionAccordion>
             </section>
 
@@ -53,18 +70,26 @@ const Story = () => {
                     onClose={()=>console.log('onClose')}
                     onOpen={()=>console.log('onOpen')}
                 >
-                    <p>body</p>
-                    <p>body</p>
-                    <p>body</p>
-                    <p>body</p>
+                    <br/>
+                    <Radio
+                        active={val}
+                        onChange={(i: any)=>{
+                            setVal(i.index);
+                            console.log(i.index);
+                        }}
+                    >
+                        <div>Filter 1</div>
+                        <div>Filter 2</div>
+                        <div>Filter 3</div>
+                    </Radio>
                 </SectionAccordion>
                 <SectionAccordion
                     Action={actionButton}
                     color="grey"
                     icon="share-specific"
                     title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                    opened={opened === 1}
-                    onOpen={()=>setOpened(1)}
+                    opened={opened}
+                    onOpen={()=>setOpened(true)}
                 >
                     <p>body</p>
                     <p>body</p>

@@ -85,7 +85,7 @@
         background: calc-color(fade, $color-white, 30);
 
         &:focus {
-            background: calc-color(fade, $color-white, 30);
+            background: calc-color(fade, $color-white, 50);
         }
 
         &:hover {
@@ -456,10 +456,7 @@
             border-radius: $google-spacing * 5;
         }
 
-        &:focus {
-            color: inherit;
-        }
-
+        &:focus,
         &:hover {
             color: inherit;
             
@@ -530,7 +527,7 @@
             }
         }
 
-        .kui-button-dropdown--opened &,
+        .kui-button-dropdown--opened > &,
         &:active {
             background: calc-color(fade, $color-base, 5);
             border: 2px dashed calc-color(fade, $color-base, 30);

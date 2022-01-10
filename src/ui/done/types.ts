@@ -5,6 +5,7 @@ export interface IDoneProps {
     size?: TDoneSize;
     titleDone?: string;
     titleNotDone?: string;
+    titlePercent?: string;
 }
 
 export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;

@@ -4,27 +4,45 @@ import { ClassNames } from '../utils';
 import { Label } from '../../ui';
 import '../../../src/ui/switch/switch.module.scss';
 
-export const Switch: React.SFC<ISwitchInheritedProps> =
+// accessibility ok
+
+export const Switch: React.FC<ISwitchInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,
         className,
         color,
+        direction,
         ...attributesOriginal
     } = props,
         attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
 
     className = ClassNames(
         'kui-switch',
-        (!attributes.disabled && color) ? 'kui-switch--color_' + color : null,
+        (color) ? 'kui-switch--color_' + color : null,
+        (direction) ? 'kui-switch--direction_' + direction : null,
         (attributes.disabled) ? 'kui-switch--disabled' : null,
         className
     );
 
-    if (attributes.disabled) attributes.checked = false;
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (!e || attributes.disabled) return;
+        if (e.key === ' ') {
+            e.preventDefault();
+            attributes.onChange(e as any);
+        }
+    }
 
     return (
-        <Label className={className} ref={ref as any}>
+        <Label
+            className={className}
+            tabIndex={0}
+            role={'switch'}
+            aria-checked={attributes.checked}
+            aria-disabled={attributes.disabled}
+            onKeyDown={onKeyDown}
+            ref={ref as any}
+        >
             <input
                 className="kui-switch__input"
                 type="checkbox"
@@ -40,7 +58,8 @@ React.forwardRef((props, ref) => {
 Switch.defaultProps = {
     checked: false,
     onChange: (): void => undefined,
-    color: null
+    color: null,
+    direction: 'right',
 }
 
 Switch.displayName = 'Switch';

@@ -3,6 +3,8 @@ import { IDividerInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/divider/divider.module.scss';
 
+// accessibility ok
+
 export const Divider: React.SFC<IDividerInheritedProps> =
 (props) => {
     let {

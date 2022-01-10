@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { Button, ButtonsSegmented } from '../../src/ui';
 
 const Story = () => {
-    const [val, setVal] = React.useState(false);
-    const [val01, setVal01] = React.useState(true);
+    const [val, setVal] = React.useState(0);
+    const [val01, setVal01] = React.useState(1);
 
     return (
         <div className="page">
@@ -18,6 +18,15 @@ const Story = () => {
                     <Button>Button 1</Button>
                     <Button onClick={() => alert(2)}>Button 2</Button>
                 </ButtonsSegmented>
+                <div hidden={val!==0} tabIndex={0}>
+                    Tab 0
+                </div>
+                <div hidden={val!==1} tabIndex={0}>
+                    Tab 1
+                </div>
+                <div hidden={val!==2} tabIndex={0}>
+                    Tab 2
+                </div>
 
             </section>
 

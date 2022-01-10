@@ -1,8 +1,11 @@
 import * as React from 'react';
-import { ISnackbarInheritedProps, ISnackbarDefaultIcons } from './types';
+import { ISnackbarDefaultIcons, ISnackbarInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
+import { TButtonVariant } from '../button/types';
+
+// accessibility ok
 
 export const Snackbar: React.SFC<ISnackbarInheritedProps> =
 (props) => {
@@ -16,19 +19,13 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         title,
         variant,
         onTimer,
+        position,
         ...attributes
     } = props;
 
-    className = ClassNames(
-        'kui-snackbar',
-        'kui-snackbar--variant_' + variant,
-        (!title) ? 'kui-snackbar--notitle' : null,
-        className
-    );
+    let xlink = (icon === null && variant !== 'undo') ? ISnackbarDefaultIcons[variant] : icon;
 
-    let xlink = (icon === null) ? ISnackbarDefaultIcons[variant] : icon;
-
-    if (variant === 'timer' && timer === null) timer = 10;
+    if (['timer', 'undo'].includes(variant) && timer === null) timer = 10;
 
     let buttonsGroup = [],
         buttonsGroupDiv = null;
@@ -38,6 +35,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
             let {
                 isPrimary,
                 text,
+                icon,
                 ...attributes
             } = item;
 
@@ -46,14 +44,22 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                 (isPrimary) ? 'kui-snackbar__button--primary' : null
             );
 
+            const variant: TButtonVariant = icon ? 'icon' : 'primary';
+            const children = icon
+                ? <Icon
+                    size={16}
+                    xlink={icon}
+                />
+                : text
             return (
                 <Button
                     className={buttonClassName}
-                    color="white"
+                    color={!icon ? 'white' : null}
                     key={key}
+                    variant={variant}
                     {...attributes}
                 >
-                    {text}
+                    {children}
                 </Button>
             );
         });
@@ -95,15 +101,33 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
         }
     }, []);
 
+    className = ClassNames(
+        'kui-snackbar',
+        'kui-snackbar--variant_' + variant,
+        (!title) ? 'kui-snackbar--notitle' : null,
+        (variant === 'undo' && timerHook < 3) ? 'kui-snackbar--fadeout' : null,
+        (variant === 'undo' && timerHook <= 0) ? 'hidden' : null,
+        className
+    );
+
+    const  classContainer = ClassNames(
+        'kui-snackbar__container',
+        position === 'left' ? 'kui-snackbar__container--left' : null
+    )
+
     return (
-        <div className="kui-snackbar__container">
+        <div className={classContainer}>
             <div
                 className={className}
                 ref={refSnackbar}
                 tabIndex={0}
+                aria-live={timer === timerHook ? 'assertive' : 'off'} // при смене таймера скрин ридеру нужен только таймер
+                role={'alert'}
                 {...attributes}
             >
-                <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
+                {xlink &&
+                    <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
+                }
                 <div className="kui-snackbar__body">
                     {title &&
                         <div className="kui-snackbar__title" dangerouslySetInnerHTML={{ __html: title }}></div>
@@ -113,7 +137,7 @@ export const Snackbar: React.SFC<ISnackbarInheritedProps> =
                     }
                 </div>
                 {variant === 'timer' &&
-                    <div className="kui-snackbar__timer">
+                    <div className="kui-snackbar__timer" aria-live={'assertive'}>
                         <span className="kui-snackbar__timer_num">{timerHook}</span> sec
                     </div>
                 }
@@ -130,6 +154,7 @@ Snackbar.defaultProps = {
     timer: null,
     title: null,
     variant: 'info',
+    position: 'center',
     onBlur: null,
     onTimer: () => undefined,
 };

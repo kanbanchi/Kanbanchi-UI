@@ -1,5 +1,10 @@
 @import '../../assets/sass/index.scss';
 .kui-radio {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
     &__input {
         -webkit-appearance: none;
         position: absolute;
@@ -41,7 +46,7 @@
             border-radius: 50%;
             pointer-events: none;
             transform-origin: 50% 50%;
-            transform: scale(.1);
+            transform: scale(0);
             @include transition;
         }
 
@@ -50,10 +55,16 @@
             transform: scale(1);
         }
     }
+
+    &__label {
+        position: relative;
+    }
+
     &__item {
         position: relative;
-        display: block;
+        display: list-item;
         min-height: $google-spacing * 3;
+        padding-top: $google-spacing * .25;
         padding-right: $google-spacing * 4;
         font-size: $milli-size;
         user-select: none;
@@ -74,9 +85,41 @@
                 background-color: calc-color(fade, $color-base, 30);
             }
         }
+
+        &:focus {
+            outline: 0;
+        }
+    
+        &:before {
+            @include transition;
+            content: '';
+            position: absolute;
+            left: -$google-spacing;
+            right: -$google-spacing;
+            top: -$google-spacing * .5;
+            bottom: -$google-spacing * .5;
+            border-radius: $base-radius;
+        }
+        
+        &:focus:before,
+        &:hover:before {
+            background: $color-light-background;
+        }
     }
 
     &__item + &__item {
         margin-top: $google-spacing * 2;
+    }
+
+    &.kui-radio--direction_left {
+        .kui-radio__input {
+            right: unset;
+            left: 0;
+        }
+
+        .kui-radio__item {
+            padding-right: 0;
+            padding-left: $google-spacing * 4;
+        }
     }
 }

@@ -9,6 +9,7 @@
         display: block;
         width: 100%;
         min-height: $google-spacing * 3;
+        padding-top: $google-spacing * .25;
         padding-right: $google-spacing * 6;
         font-size: $milli-size;
         user-select: none;
@@ -30,7 +31,7 @@
         border-radius: $small-radius;
     }
     &__checkmark {
-        transform: scale(.1);
+        transform: scale(0);
     }
     &__input:checked + &__label:before {
         background-color: $color-purple;
@@ -38,6 +39,19 @@
     }
     &__input:checked + &__label &__checkmark {
         transform: scale(1);
+    }
+
+    &.kui-checkbox--direction_left {
+        .kui-checkbox__label {
+            padding-right: 0;
+            padding-left: $google-spacing * 3.5;
+    
+            &:before,
+            .kui-checkbox__checkmark {
+                right: unset;
+                left: 0;
+            }
+        }
     }
     
     &.kui-checkbox--color_black {
@@ -52,6 +66,7 @@
             &__input:checked + &__label:before {
                 background-color: transparent;
                 border-color: transparent;
+                @include transition;
             }
 
             &__checkmark {
@@ -67,11 +82,64 @@
             }    
         }
 
-        &:hover {
-            .kui-checkbox__input:not(:checked) + .kui-checkbox__label:before {
-                border-color: calc-color(fade, $color-base, 15);
-                @include transition;
+        .kui-checkbox__input:not(:checked) + .kui-checkbox__label:before {
+            border-color: calc-color(fade, $color-base, 15);
+        }
+    }
+
+    &:focus {
+        outline: 0;
+    }
+
+    &:before {
+        @include transition;
+        content: '';
+        position: absolute;
+        left: -$google-spacing;
+        right: -$google-spacing;
+        top: -$google-spacing * .5;
+        bottom: -$google-spacing * .5;
+        border-radius: $base-radius;
+    }
+    
+    &:focus:before,
+    &:hover:before {
+        background: $color-light-background;
+    }
+
+    &.kui-checkbox--indeterminate {
+        .kui-checkbox__label:before {
+            background-color: $color-purple;
+            border-color: transparent;
+        }
+
+        &.kui-checkbox--color_black {
+            .kui-checkbox__label:before {
+                background-color: $color-base;
             }
+        }
+
+        .kui-checkbox__label:after {
+            content: '';
+            position: absolute;
+            right: 3px;
+            top: 50%;
+            transform: translateY(-2px);
+            width: 12px;
+            height: 2px;
+            background: $color-white;
+            border-radius: 2px;
+        }
+
+        &.kui-checkbox--direction_left {
+            .kui-checkbox__label:after {
+                right: unset;
+                left: 3px;
+            }
+        }
+
+        .kui-checkbox__checkmark {
+            transform: scale(0) !important;
         }
     }
 

@@ -3,6 +3,8 @@ import { IButtonsGroupInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/buttonsGroup/buttonsGroup.module.scss';
 
+// accessibility ok
+
 export const ButtonsGroup: React.SFC<IButtonsGroupInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { IInputInheritedProps } from './types';
-import { ClassNames } from '../utils';
+import { ClassNames, getParentsClasses } from '../utils';
 import * as autosizeLibray from './autosize';
 import { Icon, Label, Tooltip } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
+import { v4 as uuidv4 } from 'uuid';
+
+// accessibility ok
 
 export const Input: React.SFC<IInputInheritedProps> =
 React.forwardRef((props, ref) => {
@@ -36,16 +39,17 @@ React.forwardRef((props, ref) => {
         inputAfter = null;
 
     const [isFilled, setIsFilled] = React.useState(!!value);
-    const [isFocusedHook, setIsFocusedHook] = React.useState(false);
+    const isFocusedHook = React.useRef(false);
     const textarea = React.useRef(null);
+    const [uniqueClass] = React.useState('kui-input--' + uuidv4());
     const timer = React.useRef(null);
 
     className = ClassNames(
         'kui-input',
+        uniqueClass,
         (color) ? 'kui-input--color_' + color: null,
         (disabled) ? 'kui-input--disabled' : null,
         (isFilled) ? 'kui-input--filled' : null,
-        (isFocusedHook) ? 'kui-input--focus' : null,
         (!autosize) ? 'kui-input--noresize' : null,
         (readOnly) ? 'kui-input--readonly' : null,
         (state) ? 'kui-input--state_' + state : null,
@@ -61,7 +65,7 @@ React.forwardRef((props, ref) => {
     };
 
     attributes.onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e && e.which === 13) {
+        if (e && e.key === 'Enter') {
             if (!autosize) e.preventDefault();
             if (onEnter) onEnter(e);
         }
@@ -77,9 +81,15 @@ React.forwardRef((props, ref) => {
 
         if (e) e.persist();
         timer.current = setTimeout(() => {
-            if (isFocusedHook) {
-                setIsFocusedHook(false);
-                if (onBlur) onBlur(e);
+            if (isFocusedHook.current) {
+                const classes = getParentsClasses(
+                    e.relatedTarget as HTMLElement,
+                    [uniqueClass]
+                );
+                if (!classes.includes(uniqueClass)) {
+                    isFocusedHook.current = false;
+                    if (onBlur) onBlur(e);
+                }
             }
         }, 200);
     }
@@ -88,8 +98,8 @@ React.forwardRef((props, ref) => {
         if (e) e.persist();
         if (timer.current) clearTimeout(timer.current);
         timer.current = setTimeout(() => {
-            if (!isFocusedHook) {
-                setIsFocusedHook(true);
+            if (!isFocusedHook.current) {
+                isFocusedHook.current = true;
                 if (onFocus) onFocus(e);
             }
         }, 100);
@@ -114,6 +124,7 @@ React.forwardRef((props, ref) => {
     const iconClear = <Icon
             xlink="clear"
             size={24}
+            tabIndex={-1} // for onBlur relatedTarget
             className="kui-input__icon kui-input__icon--clear"
             onClick={clearInput}
         />;
@@ -140,6 +151,7 @@ React.forwardRef((props, ref) => {
         inputAfter = <Icon
             xlink="arrow-down"
             size={24}
+            tabIndex={-1} // for onBlur relatedTarget
             className="kui-input__icon kui-input__icon--arrow"
         />;
     } else if
@@ -150,6 +162,7 @@ React.forwardRef((props, ref) => {
         const iconCalendar = <Icon
             xlink={icon}
             size={24}
+            tabIndex={-1} // for onBlur relatedTarget
             className="kui-input__icon"
         />;
         if (isClearable) {
@@ -163,6 +176,7 @@ React.forwardRef((props, ref) => {
             <Icon
                 xlink="search"
                 size={24}
+                tabIndex={-1} // for onBlur relatedTarget
                 className="kui-input-search__icon"
             />
             <span className="kui-input-search__placeholder">
@@ -175,6 +189,7 @@ React.forwardRef((props, ref) => {
         inputAfter = <Icon
             xlink={icon}
             size={24}
+            tabIndex={-1} // for onBlur relatedTarget
             className="kui-input__icon"
         />;
     }

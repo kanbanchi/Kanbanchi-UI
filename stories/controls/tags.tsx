@@ -18,6 +18,7 @@ const Story = () => {
                     <Tag>Lorem ipsum</Tag>
                     <Tag>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Tag>
                     <Tag
+                        iconTooltip={'Clear'}
                         onClick={() => console.log('Click')}
                         onClear={() => console.log('Clear')}
                     >

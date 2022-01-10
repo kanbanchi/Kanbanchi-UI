@@ -39,15 +39,16 @@ const Story = () => {
             ]);
             searchFiltered[i.item.index].active = !searchFiltered[i.item.index].active;
             setSearchFiltered(searchFiltered);
-        } else if (i.target) {
-            const target: any = i.target;
-            const value = target.value;
-            const filteredOptions = value ?
-                searchOptions.filter(option => option.text.includes(value)) :
-                searchOptions;
-            setSearchFiltered([...filteredOptions]);
-            console.log(selectRef.current);
         }
+        //  else if (i.target) {
+        //     const target: any = i.target;
+        //     const value = target.value;
+        //     const filteredOptions = value ?
+        //         searchOptions.filter(option => option.text.includes(value)) :
+        //         searchOptions;
+        //     setSearchFiltered([...filteredOptions]);
+        //     // console.log(selectRef.current);
+        // }
     }
 
     const selectRef = React.useRef(null);
@@ -61,22 +62,37 @@ const Story = () => {
                     editable={true}
                     label="Multiple if click on checkbox"
                     multiple={true}
-                    single={true}
                     onChange={i => console.log(i)}
+                    onOpen={()=>console.log('open')}
+                    onClose={()=>console.log('close')}
                 >
-                    <SelectList>
+                    <SelectList fixActive={false}>
+                        <Checkbox
+                            checked={val01}
+                            color="light"
+                            value="1"
+                            onChange={()=>setVal01(!val01)}
+                        >
+                            <SelectListItem>
+                                <Userpic
+                                    size={24}
+                                    src="https://i.pravatar.cc/48?u=1"
+                                />
+                                User01
+                            </SelectListItem>
+                        </Checkbox>
                         <Checkbox
                             checked={val06}
                             color="light"
-                            value="1"
+                            value="6"
                             onChange={()=>setVal06(!val06)}
                         >
                             <SelectListItem>
                                 <Userpic
                                     size={24}
-                                    src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
+                                    src="https://i.pravatar.cc/48?u=2"
                                 />
-                                User01
+                                User 02 Lorem ipsum dolor <b>sit amet</b>
                             </SelectListItem>
                         </Checkbox>
                     </SelectList>
@@ -90,6 +106,7 @@ const Story = () => {
                     multiple={true}
                     options={searchFiltered}
                     onChange={filterSearchOptions}
+                    // onChange={(e) => console.log(e)}
                     ref={selectRef}
                 >
                 </Search>
@@ -226,11 +243,19 @@ const Story = () => {
                                 icon="overdue"
                                 isFitWindow={true}
                                 variant="withicon"
+                                // portal
+                                // portalId={'stories-portal'}
+                                // portalSelector={'.page'}
                                 style={{width: 120}}
                                 onChange={(i: ISelectActiveInheritedProps) => {
+                                    // @ts-ignore
+                                    console.log(i.target.value);
                                     if (i.item) {
                                         setVal02(i.item.index)
                                     }
+                                }}
+                                onEnter={(e: any) => {
+                                    console.log(e.target.value);
                                 }}
                             >
                                 <SelectList>

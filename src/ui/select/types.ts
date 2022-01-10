@@ -39,7 +39,8 @@ export interface ISelectOwnProps {
     isCloseOnEnter?: boolean;
     multiple?: boolean;
     ref?: any;
-    single?: boolean; // for multiple click on option name closes select
+    single?: boolean; // for multiple: click on option name closes select
+    isCloseOnClick?: boolean;
 }
 
 export interface ISelectProps extends

@@ -1,5 +1,7 @@
 export interface ICheckboxStateProps {
     checked?: boolean;
+    isIndeterminate?: boolean;
+    isStateless?: boolean; // don't use useState if can be indeterminate
 }
 
 export interface ICheckboxDispatchProps {
@@ -10,6 +12,10 @@ export interface ICheckboxOwnProps {
     color?:
         'black' |
         'light';
+    direction?:
+        'left' |
+        'right';
+    ['data-index']?: number;
 }
 
 export interface ICheckboxProps extends

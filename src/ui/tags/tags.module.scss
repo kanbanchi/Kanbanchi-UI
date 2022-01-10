@@ -23,18 +23,18 @@
     background: $color-background;
     border-radius: $base-radius;
 
+    &:focus {
+        outline: 0;
+        background: calc-color(shade, $color-background, 5);
+    }
+
     &__text {
         @extend %text-ellipsis;
     }
 
     &__clear {
+        min-width: $google-spacing * 3;
         margin-left: $google-spacing / 2;
-        color: calc-color(fade, $color-base, 30);
-        @include transition;
-
-        &:hover {
-            color: calc-color(fade, $color-base, 90);
-        }
     }
 
     &--clickable {

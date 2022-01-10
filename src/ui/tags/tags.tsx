@@ -3,6 +3,8 @@ import { ITagsInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import '../../../src/ui/tags/tags.module.scss';
 
+// accessibility ok
+
 export const Tags: React.SFC<ITagsInheritedProps> =
 React.forwardRef((props, ref) => {
     let {

@@ -59,4 +59,43 @@
             }
         }
     }
+
+    &:focus {
+        outline: 0;
+    }
+
+    &:before {
+        @include transition;
+        content: '';
+        position: absolute;
+        left: -$google-spacing;
+        right: -$google-spacing;
+        top: -$google-spacing * .5;
+        bottom: -$google-spacing * .5;
+        border-radius: $base-radius;
+    }
+    
+    &:focus:before,
+    &:hover:before {
+        background: $color-light-background;
+    }
+
+    &.kui-switch--direction_left {
+        .kui-switch__label {
+            padding-right: 0;
+            padding-left: $google-spacing * 6;
+    
+            &:after,
+            &:before {
+                right: unset;
+                left: 0
+            }
+            &:after {
+                transform: translateX($google-spacing * 0.25);
+            }
+        }
+        .kui-switch__input:checked + .kui-switch__label:after {
+            transform: translateX($google-spacing * 2.7);
+        }
+    }
 }

@@ -1,7 +1,6 @@
 @import '../../assets/sass/index.scss';
 .kui-dropdown {
     position: relative;
-    display: none;
     outline: none;
     
     &__item {
@@ -15,24 +14,22 @@
         box-shadow: $shadow-hover;
         background: $color-white;
         transform: translateY($google-spacing);
-        animation: animation_down_off .3s ease forwards;
+        transform-origin: 0 0;
+        animation: animation_down_off .1s ease forwards;
     }
 
-    &--opened {
-        display: block;
-    }
-
-    &--opened &__item {
+    &--opened > &__item {
         animation: animation_down_on .3s ease forwards;
     }
 
     &--direction_up &__item {
         bottom: $google-spacing * 5;
         transform: translateY(-$google-spacing);
-        animation: animation_up_off .3s ease forwards;
+        transform-origin: 0 100%;
+        animation: animation_up_off .1s ease forwards;
     }
     
-    &--direction_up.kui-dropdown--opened &__item {
+    &--direction_up.kui-dropdown--opened > &__item {
         animation: animation_up_on .3s ease forwards;
     }
 
@@ -42,14 +39,8 @@
 
     &.kui-dropdown--portal,
     &.kui-dropdown--fit {
-        &.kui-dropdown--direction_up.kui-dropdown--opened .kui-dropdown__item {
+        .kui-dropdown__item {
             max-height: 80vh;
-            animation: animation_portal_up_on 0.1s ease forwards;
-        }
-
-        &.kui-dropdown--direction_down.kui-dropdown--opened .kui-dropdown__item {
-            max-height: 80vh;
-            animation: animation_portal_down_on .3s ease forwards;
         }
     }
 
@@ -69,23 +60,17 @@
         z-index: $z-modal + 5;
         transform: translateY($google-spacing * 4) scaleY(.95);
     }
-    99% {
+    100% {
         z-index: $z-modal + 5;
         transform: translateY($google-spacing) scaleY(1);
-    }
-    100% {
-        max-height: 80vh;
     }
 }
 @keyframes animation_down_off {
     0% {
-        transform: translateY($google-spacing);
-    }
-    99% {
-        transform: translateY($google-spacing * 4);
+        transform: translateY($google-spacing) scaleY(1);
     }
     100% {
-        max-height: 0;
+        transform: translateY($google-spacing * 4) scaleY(.95);
     }
 }
 
@@ -94,44 +79,17 @@
         z-index: $z-modal + 5;
         transform: translateY(-$google-spacing * 4) scaleY(.95);
     }
-    99% {
+    100% {
         z-index: $z-modal + 5;
         transform: translateY(-$google-spacing) scaleY(1);
-    }
-    100% {
-        max-height: 80vh;
     }
 }
 @keyframes animation_up_off {
     0% {
         transform: translateY(-$google-spacing);
     }
-    99% {
+    100% {
         transform: translateY(-$google-spacing * 4);
-    }
-    100% {
-        max-height: 0;
-    }
-}
-
-@keyframes animation_portal_down_on {
-    0% {
-        z-index: $z-modal + 5;
-        transform: translateY($google-spacing * 4) scaleY(.95);
-    }
-    100% {
-        z-index: $z-modal + 5;
-        transform: translateY($google-spacing) scaleY(1);
-    }
-}
-@keyframes animation_portal_up_on {
-    0% {
-        z-index: $z-modal + 5;
-        transform: translateY(-$google-spacing * 4) scaleY(.95);
-    }
-    100% {
-        z-index: $z-modal + 5;
-        transform: translateY(-$google-spacing) scaleY(1);
     }
 }
 

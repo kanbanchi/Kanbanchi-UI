@@ -115,10 +115,12 @@
     0% {
         height: auto;
         max-height: 0;
+        overflow: hidden;
     }
 
-    90% {
+    99% {
         max-height: 100vh;
+        overflow: hidden;
     }
 
     100% {
