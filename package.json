@@ -60,6 +60,7 @@
     "typescript": "3.4.5"
   },
   "resolutions": {
-    "glob-parent": "^5.1.2"
+    "glob-parent": "^5.1.2",
+    "immer": "^9.0.6"
   }
 }
