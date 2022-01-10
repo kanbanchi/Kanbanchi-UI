@@ -15,6 +15,7 @@ export interface IDatepickerOwnProps {
     inline?: boolean;
     maxDate?: Date;
     minDate?: Date;
+    placeholderText?: string;
     popperModifiers?: Modifiers;
     popperPlacement?: Placement;
     selected: Date;

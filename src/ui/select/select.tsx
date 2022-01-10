@@ -26,6 +26,7 @@ export const Select = React.forwardRef((
         disabled,
         dropdownClassName,
         editable,
+        isCloseOnClick,
         isCloseOnEnter,
         isFitWindow,
         multiple,
@@ -99,7 +100,17 @@ export const Select = React.forwardRef((
         setIsOpenedHook(true);
         if (onOpen) onOpen();
         if (!editable || isFocus) {
-            requestAnimationFrame(focusSelectedItem);
+            requestAnimationFrame(() => {
+                const activeElement = document.activeElement as HTMLElement;
+                if (activeElement) {
+                    const parents = getParentsClasses(
+                        activeElement,
+                        [uniqueClass]
+                    );
+                    if (parents && parents.includes(uniqueClass)) return; // если фокус уже в селекте
+                }
+                focusSelectedItem();
+            });
         }
     }
 
@@ -247,8 +258,9 @@ export const Select = React.forwardRef((
         if (isFocusedHook) {
             if (!isOpenedHook) {
                 openDropdown();
-            } else {
-                setIsOpenedHook(!isOpenedHook);
+            } else if (isCloseOnClick && valueHook === initialValue) {
+                setIsOpenedHook(false);
+                if (onClose) onClose();
             }
         }
         if (onClick) onClick(e);
@@ -514,6 +526,7 @@ Select.defaultProps = {
     directionHorizontal: 'left',
     disabled: false,
     editable: false,
+    isCloseOnClick: true,
     isCloseOnEnter: true,
     multiple: false,
     notBlurClasses: [],

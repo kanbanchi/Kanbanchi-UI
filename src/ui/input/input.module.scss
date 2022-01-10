@@ -194,12 +194,13 @@
 }
 
 .kui-input:focus-within,
-.kui-input--filled {
+.kui-input--filled,
+.kui-select--opened {
     .kui-input-search {
         left: $google-spacing * 2;
         transform: translateX(0);
 
-        &__icon {
+        .kui-input-search__icon {
             color: $color-base;
             animation: animation_imput_search .3s ease forwards;
 
@@ -208,7 +209,7 @@
             }
         }
 
-        &__placeholder {
+        .kui-input-search__placeholder {
             display: none;
         }
     }
@@ -217,6 +218,16 @@
 .kui-input:not(.kui-input--filled):not(.kui-input:focus-within) {
     .kui-input-search {
         animation: animation_imput_search .6s ease forwards;
+    }
+}
+
+.kui-select--opened .kui-input {
+    .kui-input-search {
+        animation: none !important;
+
+        .kui-input-search__icon {
+            animation: none !important;
+        }
     }
 }
 

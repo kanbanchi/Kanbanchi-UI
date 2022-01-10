@@ -14,25 +14,28 @@ React.forwardRef((props, ref) => {
         size,
         titleDone,
         titleNotDone,
+        titlePercent,
         ...attributes
     } = props;
+
+    const isDone = percent && percent >= 100;
 
     className = ClassNames(
         'kui-done',
         (size) ? 'kui-done--size_' + size : null,
         (percent === null) ? 'kui-done--empty' : null,
-        (percent && percent >= 100) ? 'kui-done--done' : null,
+        (isDone) ? 'kui-done--done' : null,
         className
     );
 
     const icon = (percent === null) ?
         'empty-circle' :
-        'done-circle';
+        null;
 
-    let percentText = percent + '%';
+    let percentText = percent + '%' + (titlePercent && !isDone ? ' ' + titlePercent : '');
     if (percent === null) {
         percentText = titleNotDone;
-    } else if (percent >= 100){
+    } else if (isDone && titleDone){
         percentText = titleDone;
     }
 
@@ -51,11 +54,14 @@ React.forwardRef((props, ref) => {
             <div
                 className={'kui-done__items'}
             >
-                <Icon
-                    className={'kui-done__icon'}
-                    size={24}
-                    xlink={icon}
-                />
+                {
+                    !!icon &&
+                    <Icon
+                      className={'kui-done__icon'}
+                      size={24}
+                      xlink={icon}
+                    />
+                }
                 <div
                     className={'kui-done__percent'}
                 >
@@ -69,8 +75,9 @@ React.forwardRef((props, ref) => {
 Done.defaultProps = {
     percent: null,
     size: 'large',
-    titleDone: 'Card is done',
-    titleNotDone: 'Mark as done'
+    titleDone: '',
+    titleNotDone: 'Mark as done',
+    titlePercent: 'done'
 }
 
 Done.displayName = 'Done';

@@ -63,6 +63,8 @@ const Story = () => {
                     label="Multiple if click on checkbox"
                     multiple={true}
                     onChange={i => console.log(i)}
+                    onOpen={()=>console.log('open')}
+                    onClose={()=>console.log('close')}
                 >
                     <SelectList fixActive={false}>
                         <Checkbox

@@ -131,8 +131,8 @@ export const SelectList: React.SFC<ISelectListInheritedProps> =
 
     React.useEffect(() => {
         setActiveHook(active);
-        setFocusHook(active || 0)
-    }, [active]);
+        setFocusHook(active && active > 0 ? active : 0)
+    }, [active, children]);
 
     React.useEffect(() => {
         if (onSelectListInit) onSelectListInit(itemsRefs);

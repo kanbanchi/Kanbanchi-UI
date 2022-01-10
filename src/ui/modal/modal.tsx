@@ -48,6 +48,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
     if (buttons) {
         buttonsGroup = buttons.map((item, key) => {
             let {
+                isOpenedAfterClick,
                 isPrimary,
                 text,
                 onClick,
@@ -56,7 +57,7 @@ export const Modal: React.SFC<IModalInheritedProps> =
 
             const onClickButton = () => {
                 if (onClick) onClick();
-                onClose();
+                if (!isOpenedAfterClick) onClose();
             }
 
             return (
