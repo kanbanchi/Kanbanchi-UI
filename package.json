@@ -16,10 +16,13 @@
     "react-multi-carousel": "2.2.5",
     "uuid": "3.3.3"
   },
+  "@comment scripts": {
+    "preinstall": "If need to change package-lock, rename _preinstall to preinstall, to save resolutions"
+  },
   "scripts": {
     "start": "start-storybook -p 9002 -c .storybook -s ./public",
     "babel": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
-    "preinstall": "npx npm-force-resolutions",
+    "_preinstall": "npx npm-force-resolutions",
     "postinstall": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
     "check-typescript": "tsc && tslint --project ./ --config ./tslint.json",
     "build-storybook": "build-storybook -c .storybook -s ./public -o ./static"
