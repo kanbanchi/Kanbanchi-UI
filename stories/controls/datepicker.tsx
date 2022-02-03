@@ -41,6 +41,15 @@ const Story = () => {
                     onChange={val=>setDate01(val)}
                 />
 
+<br/><br/>
+
+<Datepicker
+    label="Error"
+    selected={date01}
+    state={'error'}
+    onChange={val=>setDate01(val)}
+/>
+
                 <br/><br/>
 
                 <Datepicker

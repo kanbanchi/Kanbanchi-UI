@@ -27,6 +27,7 @@ React.forwardRef((props, ref) => {
         iconTooltip,
         readOnly,
         selected,
+        state,
         value,
         variant,
         onChange,
@@ -57,6 +58,7 @@ React.forwardRef((props, ref) => {
         label,
         readOnly,
         ref,
+        state,
         value,
         variant,
         onEnter: () => {
