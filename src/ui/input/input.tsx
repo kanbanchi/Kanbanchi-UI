@@ -49,7 +49,7 @@ React.forwardRef((props, ref) => {
         uniqueClass,
         (color) ? 'kui-input--color_' + color: null,
         (disabled) ? 'kui-input--disabled' : null,
-        (isFilled) ? 'kui-input--filled' : null,
+        (isFilled || !!value) ? 'kui-input--filled' : null,
         (!autosize) ? 'kui-input--noresize' : null,
         (readOnly) ? 'kui-input--readonly' : null,
         (state) ? 'kui-input--state_' + state : null,
@@ -197,7 +197,7 @@ React.forwardRef((props, ref) => {
                 {searchPlaceholder}
             </span>
         </span>);
-        if (isClearable && isFilled) {
+        if (isClearable && !!value) {
             inputAfter = getIconOrTooltip();
         } else {
             inputAfter = <Icon
