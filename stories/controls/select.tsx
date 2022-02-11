@@ -88,6 +88,7 @@ const Story = () => {
 
                 <Search
                     editable={true}
+                    isClearable
                     label="Multiple if click on checkbox"
                     multiple={true}
                     onChange={i => console.log(i)}
