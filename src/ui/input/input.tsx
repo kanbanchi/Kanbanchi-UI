@@ -197,7 +197,7 @@ React.forwardRef((props, ref) => {
                 {searchPlaceholder}
             </span>
         </span>);
-        if (isClearable && !!value) {
+        if (isClearable && (isFilled || !!value)) {
             inputAfter = getIconOrTooltip();
         } else {
             inputAfter = <Icon
