@@ -4,10 +4,11 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 
 module.exports = {
+    context: path.resolve(__dirname, '../'), // to automatically find tsconfig.json
     plugins: [
         new ForkTsCheckerWebpackPlugin({
-            tsconfig: path.resolve(process.cwd(), './tsconfig.json'),
-            tslint:path.resolve(process.cwd(), './tslint.json'),
+            // tsconfig: path.resolve(process.cwd(), './tsconfig.json'),
+            // tslint:path.resolve(process.cwd(), './tslint.json'),
             async: true,
         }),
         // system notifier for typescript checking
@@ -68,7 +69,7 @@ module.exports = {
             {
                 test: /\.(js|tsx)?$/,
                 include: path.resolve(__dirname, '../stories/'),
-                loaders: [require.resolve('@storybook/addon-storysource/loader')],
+                loaders: [require.resolve('@storybook/source-loader')],
                 enforce: 'pre',
             }
         ]

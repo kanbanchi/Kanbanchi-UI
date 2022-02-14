@@ -245,8 +245,9 @@ export const ButtonDropdown = React.forwardRef((
     }
 
     React.useEffect(() => {
+        const dropdownRefCurrent = dropdownRef.current;
         return () => {
-            if (dropdownRef.current) dropdownRef.current.removeEventListener('click', onDropdownClick);
+            if (dropdownRefCurrent) dropdownRefCurrent.removeEventListener('click', onDropdownClick);
             if (timer.current) clearTimeout(timer.current);
         }
     }, []);

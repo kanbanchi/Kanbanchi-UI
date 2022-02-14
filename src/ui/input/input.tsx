@@ -118,7 +118,10 @@ React.forwardRef((props, ref) => {
         if (variant !== 'datepicker'){
             textarea.current.focus();
         }
-        if (onChange) onChange(e);
+        if (onChange) onChange({
+            ...e,
+            target: textarea.current // fix target to input for Datepicker
+        });
     };
 
     const iconClear = <Icon
