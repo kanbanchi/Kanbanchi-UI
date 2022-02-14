@@ -20,7 +20,7 @@
         height: auto;
         min-height: $google-spacing * 5;
         resize: none;
-        padding: $google-spacing $google-spacing * 2;
+        padding: $google-spacing $google-spacing * 2 $google-spacing * .75;
         font-size: $milli-size;
         line-height: $base-line-height;
         border-radius: $base-radius;

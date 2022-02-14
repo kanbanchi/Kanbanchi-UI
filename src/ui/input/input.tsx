@@ -49,7 +49,7 @@ React.forwardRef((props, ref) => {
         uniqueClass,
         (color) ? 'kui-input--color_' + color: null,
         (disabled) ? 'kui-input--disabled' : null,
-        (isFilled) ? 'kui-input--filled' : null,
+        (isFilled || !!value) ? 'kui-input--filled' : null,
         (!autosize) ? 'kui-input--noresize' : null,
         (readOnly) ? 'kui-input--readonly' : null,
         (state) ? 'kui-input--state_' + state : null,
@@ -151,6 +151,20 @@ React.forwardRef((props, ref) => {
     }
 
     if (variant === 'arrow' || variant === 'header') {
+        if (variant === 'arrow' && icon) {
+            className = ClassNames(
+                className,
+                'kui-input--variant_search',
+            );
+            inputBefore = (<span className="kui-input-search">
+                <Icon
+                    xlink={icon}
+                    size={24}
+                    tabIndex={-1}
+                    className="kui-input-search__icon"
+                />
+            </span>);
+        }
         inputAfter = <Icon
             xlink="arrow-down"
             size={24}
@@ -177,7 +191,7 @@ React.forwardRef((props, ref) => {
         (variant === 'search') {
         inputBefore = (<span className="kui-input-search">
             <Icon
-                xlink="search"
+                xlink={icon || 'search'}
                 size={24}
                 tabIndex={-1} // for onBlur relatedTarget
                 className="kui-input-search__icon"
@@ -186,7 +200,16 @@ React.forwardRef((props, ref) => {
                 {searchPlaceholder}
             </span>
         </span>);
-        inputAfter = getIconOrTooltip();
+        if (isClearable && (isFilled || !!value)) {
+            inputAfter = getIconOrTooltip();
+        } else {
+            inputAfter = <Icon
+                xlink="arrow-down"
+                size={24}
+                tabIndex={-1}
+                className="kui-input__icon kui-input__icon--arrow"
+            />;
+        }
     } else if
         (icon && variant === 'withicon') {
         inputAfter = <Icon

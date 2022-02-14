@@ -58,8 +58,37 @@ const Story = () => {
             <section className="section-form-min">
                 <h2>Select</h2>
 
+                
+
                 <Search
                     editable={true}
+                    icon="card"
+                    isClearable
+                    label="Search with left icon"
+                    multiple={true}
+                    options={searchFiltered}
+                    onChange={filterSearchOptions}
+                >
+                </Search>
+
+                <br/><br/><br/>
+
+                <Select
+                    editable={true}
+                    icon="done-circle"
+                    isClearable
+                    label="Select with left icon"
+                    options={searchFiltered}
+                    variant={'arrow'}
+                    onChange={filterSearchOptions}
+                >
+                </Select>
+
+                <br/><br/><br/>
+
+                <Search
+                    editable={true}
+                    isClearable
                     label="Multiple if click on checkbox"
                     multiple={true}
                     onChange={i => console.log(i)}
