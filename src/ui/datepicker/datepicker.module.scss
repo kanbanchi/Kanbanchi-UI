@@ -48,18 +48,22 @@
 
         &[data-placement^="bottom"] {
             margin-top: $google-spacing;
+            padding-top: 0;
         }
 
         &[data-placement^="top"] {
             margin-bottom: $google-spacing;
+            padding-bottom: 0;
         }
 
         &[data-placement^="right"] {
             margin-left: $google-spacing;
+            padding-left: 0;
         }
 
         &[data-placement^="left"] {
             margin-right: $google-spacing;
+            padding-right: 0;
         }
     }
 
@@ -200,6 +204,10 @@
         }
     }
 
+    .react-datepicker__navigation-icon {
+        display: none;
+    }
+
     .react-datepicker__current-month--hasYearDropdown + .react-datepicker__header__dropdown {
         position: absolute;
         display: flex;
@@ -219,6 +227,7 @@
         }
 
         &-read-view {
+            padding-right: 20px;
             visibility: visible !important;
         }
 
@@ -227,7 +236,7 @@
             top: unset;
             bottom: unset;
             left: unset;
-            right: unset;
+            right: 0;
             border: 0 none;
             @extend .react-datepicker-arrow;
             transform: rotate(-90deg) scale(.7);
@@ -274,10 +283,4 @@
             z-index: -1;
         }
     }
-}
-
-.kui-datepicker__aria-label {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
 }

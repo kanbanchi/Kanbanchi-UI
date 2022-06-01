@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Datepicker } from '../../src/ui';
 
 const Story = () => {
-    const [date, setDate] = React.useState(null);
+    const [date, setDate] = React.useState<Date>(null);
     const [date01, setDate01] = React.useState(new Date());
 
     return (
@@ -15,7 +15,7 @@ const Story = () => {
                     placeholderText={'placeholder'}
                     selected={date}
                     onChange={val=>setDate(val)}
-                />
+                /> {date ? date.toString() : 'null'}
 
                 <br/><br/>
 
@@ -39,7 +39,7 @@ const Story = () => {
                     showMonthDropdown
                     showYearDropdown
                     onChange={val=>setDate01(val)}
-                />
+                    /> {date01 ? date01.toString() : 'null'}
 
 <br/><br/>
 
