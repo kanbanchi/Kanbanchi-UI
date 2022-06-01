@@ -43,6 +43,7 @@ React.forwardRef((props, ref) => {
     const textarea = React.useRef(null);
     const [uniqueClass] = React.useState('kui-input--' + uuidv4());
     const timer = React.useRef(null);
+    const [cursor, setCursor] = React.useState(null);
 
     className = ClassNames(
         'kui-input',
@@ -62,6 +63,7 @@ React.forwardRef((props, ref) => {
     attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsFilled(!!e.target.value);
         if (onChange) onChange(e);
+        setCursor(e.target.selectionStart);
     };
 
     attributes.onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -224,6 +226,11 @@ React.forwardRef((props, ref) => {
         setIsFilled(!!value);
         autosizeLibray.default.update(textarea.current);
     }, [value]);
+
+    // fix safari cursor jump: https://stackoverflow.com/questions/46000544/react-controlled-input-cursor-jumps
+    React.useEffect(() => {
+        if (textarea.current) textarea.current.setSelectionRange(cursor, cursor);
+    }, [ref, cursor, value]);
 
     React.useEffect(() => {
         if (autosize) autosizeLibray.default(textarea.current);
