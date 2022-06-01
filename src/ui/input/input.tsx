@@ -229,7 +229,9 @@ React.forwardRef((props, ref) => {
 
     // fix safari cursor jump: https://stackoverflow.com/questions/46000544/react-controlled-input-cursor-jumps
     React.useEffect(() => {
-        if (textarea.current) textarea.current.setSelectionRange(cursor, cursor);
+        try { // many input types do not support selection
+            textarea.current.setSelectionRange(cursor, cursor);
+        } catch (e) { /* noop */ }
     }, [ref, cursor, value]);
 
     React.useEffect(() => {
