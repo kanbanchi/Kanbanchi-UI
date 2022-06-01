@@ -282,9 +282,8 @@ export const Modal: React.SFC<IModalInheritedProps> =
                         <div
                             className="kui-modal__header-title"
                             id={uniqueClass + '__header-title'}
-                        >
-                            {titleHook}
-                        </div>
+                            dangerouslySetInnerHTML={{__html: titleHook}}
+                        ></div>
                         {closeButton}
                     </div>
                     <div
