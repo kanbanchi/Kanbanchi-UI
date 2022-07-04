@@ -1,0 +1,74 @@
+{
+  "name": "kui",
+  "version": "1.0.4",
+  "private": true,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladimirmagic/Kanbanchi-UI.git"
+  },
+  "author": "Magic Web Solutions LTD",
+  "dependencies": {
+    "date-fns": "2.0.0-beta.5",
+    "react": "17.0.2",
+    "react-datepicker": "^4.3.0",
+    "react-dom": "17.0.2",
+    "react-focus-lock": "^2.7.1",
+    "react-multi-carousel": "^2.6.5",
+    "uuid": "^8.3.2"
+  },
+  "@comment scripts": {
+    "preinstall": "If need to change package-lock, rename _preinstall to preinstall, to save resolutions"
+  },
+  "scripts": {
+    "start": "start-storybook -p 9002 -c .storybook -s ./public",
+    "babel": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
+    "_preinstall": "npx npm-force-resolutions",
+    "postinstall": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
+    "check-typescript": "tsc && tslint --project ./ --config ./tslint.json",
+    "build-storybook": "build-storybook -c .storybook -s ./public -o ./static"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@babel/cli": "7.16.0",
+    "@babel/core": "7.16.0",
+    "@babel/plugin-proposal-class-properties": "7.16.0",
+    "@babel/plugin-proposal-decorators": "7.16.0",
+    "@babel/plugin-proposal-object-rest-spread": "7.16.0",
+    "@babel/plugin-transform-modules-commonjs": "7.16.0",
+    "@babel/preset-env": "7.4.5",
+    "@babel/preset-react": "7.0.0",
+    "@babel/preset-typescript": "7.3.3",
+    "@storybook/addon-storysource": "^6.4.10",
+    "@storybook/addons": "^6.4.10",
+    "@storybook/react": "^6.4.10",
+    "@types/react": "17.0.33",
+    "@types/react-datepicker": "2.3.0",
+    "@types/storybook__react": "4.0.1",
+    "@types/uuid": "3.4.6",
+    "babel-loader": "8.0.6",
+    "css-loader": "1.0.1",
+    "fork-ts-checker-notifier-webpack-plugin": "^4.0.0",
+    "fork-ts-checker-webpack-plugin": "^6.4.0",
+    "node-sass": "4.13.1",
+    "postcss-loader": "3.0.0",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.1",
+    "svg-react-loader": "0.4.6",
+    "ts-loader": "6.0.1",
+    "tslint": "5.16.0",
+    "typescript": "3.4.5"
+  },
+  "resolutions": {
+    "glob-parent": "^5.1.2",
+    "immer": "^9.0.6",
+    "kind-of": "^6.0.3",
+    "tar": "^4.4.18",
+    "trim": "^0.0.3",
+    "trim-newlines": "^3.0.1"
+  }
+}
