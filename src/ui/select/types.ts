@@ -54,6 +54,7 @@ export interface ISelectProps extends
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,
         'color' |
+        'type' |
         'value' |
         'onChange'
     >>;

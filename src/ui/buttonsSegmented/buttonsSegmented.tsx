@@ -5,7 +5,7 @@ import '../../../src/ui/buttonsSegmented/buttonsSegmented.module.scss';
 
 // accessibility ok
 
-export const ButtonsSegmented: React.SFC<IButtonsSegmentedInheritedProps> =
+export const ButtonsSegmented: React.FC<IButtonsSegmentedInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         active,

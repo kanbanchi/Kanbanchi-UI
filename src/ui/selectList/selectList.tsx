@@ -8,7 +8,7 @@ export const SELECT_LIST_CLASS = 'kui-select-list';
 
 // accessibility ok
 
-export const SelectList: React.SFC<ISelectListInheritedProps> =
+export const SelectList: React.FC<ISelectListInheritedProps> =
 (props) => {
     let {
         active,

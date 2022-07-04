@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // accessibility ok
 
-export const Input: React.SFC<IInputInheritedProps> =
+export const Input: React.FC<IInputInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         autosize,

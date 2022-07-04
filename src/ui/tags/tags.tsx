@@ -5,7 +5,7 @@ import '../../../src/ui/tags/tags.module.scss';
 
 // accessibility ok
 
-export const Tags: React.SFC<ITagsInheritedProps> =
+export const Tags: React.FC<ITagsInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,

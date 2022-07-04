@@ -62,7 +62,10 @@ export interface ITooltipProps extends
     ITooltipDispatchProps
 {}
 
-export type IConflictFreeHTMLAttributes<E> = React.HTMLAttributes<E>;
+export type IConflictFreeHTMLAttributes<E> =
+Pick<React.HTMLAttributes<E>, Exclude<keyof React.HTMLAttributes<E>,
+    'translate'
+>>;
 
 export interface ITooltipInheritedProps extends
     ITooltipProps,

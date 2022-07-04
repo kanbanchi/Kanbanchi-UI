@@ -5,7 +5,7 @@ import '../../../src/ui/divider/divider.module.scss';
 
 // accessibility ok
 
-export const Divider: React.SFC<IDividerInheritedProps> =
+export const Divider: React.FC<IDividerInheritedProps> =
 (props) => {
     let {
         className,

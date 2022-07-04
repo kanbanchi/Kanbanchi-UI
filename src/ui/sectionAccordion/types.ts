@@ -11,7 +11,7 @@ export interface ISectionAccordionDispatchProps {
 }
 
 export interface ISectionAccordionOwnProps {
-    Action?: React.SFC<IButtonInheritedProps>;
+    Action?: React.FC<IButtonInheritedProps>;
     color?: 'grey';
     icon?: string;
     title?: ReactChild;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IDatePickerInheritedProps } from './types';
 import ReactDatepicker, { registerLocale } from 'react-datepicker';
-import * as enGB from 'date-fns/locale/en-GB';
+import enGB from 'date-fns/locale/en-GB';
 import { ClassNames } from '../utils';
 import { Input } from '../../ui';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -15,7 +15,7 @@ registerLocale('en-GB', enGB); // Weeks start on Monday
 // можно обновить до 3.4.1, там со скринридером всё хорошо, не нужны эти костыли, но проблемы с зависимостями
 // upd 4.3.0
 
-export const Datepicker: React.SFC<IDatePickerInheritedProps> =
+export const Datepicker: React.FC<IDatePickerInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         className,

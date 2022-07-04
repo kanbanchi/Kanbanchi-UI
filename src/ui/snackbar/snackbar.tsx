@@ -7,7 +7,7 @@ import { TButtonVariant } from '../button/types';
 
 // accessibility ok
 
-export const Snackbar: React.SFC<ISnackbarInheritedProps> =
+export const Snackbar: React.FC<ISnackbarInheritedProps> =
 (props) => {
 
     let {

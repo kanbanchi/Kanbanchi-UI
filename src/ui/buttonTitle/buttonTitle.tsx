@@ -5,7 +5,7 @@ import '../../../src/ui/buttonTitle/buttonTitle.module.scss';
 
 // accessibility ok
 
-export const ButtonTitle: React.SFC<IButtonTitleInheritedProps> =
+export const ButtonTitle: React.FC<IButtonTitleInheritedProps> =
 (props) => {
     let {
         children,

@@ -6,7 +6,7 @@ import '../../../src/ui/checkbox/checkbox.module.scss';
 
 // accessibility ok
 
-export const Checkbox: React.SFC<ICheckboxInheritedProps> =
+export const Checkbox: React.FC<ICheckboxInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,

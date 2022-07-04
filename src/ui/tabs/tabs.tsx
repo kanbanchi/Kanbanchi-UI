@@ -5,7 +5,7 @@ import '../../../src/ui/tabs/tabs.module.scss';
 
 // accessibility ok
 
-export const Tabs: React.SFC<ITabsInheritedProps> =
+export const Tabs: React.FC<ITabsInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         active,

@@ -6,7 +6,7 @@ import '../../../src/ui/button/button.module.scss';
 
 // accessibility ok (todo не у всех кнопок есть :focus)
 
-export const Button: React.SFC<IButtonInheritedProps> =
+export const Button: React.FC<IButtonInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IModalReleaseSlideProps } from './types';
 
-export const ModalSlide: React.SFC<IModalReleaseSlideProps> =
+export const ModalSlide: React.FC<IModalReleaseSlideProps> =
 (props) => {
     let {
         description,

@@ -13,7 +13,7 @@ import FocusLock from 'react-focus-lock';
 
 // accessibility ok
 
-export const Modal: React.SFC<IModalInheritedProps> =
+export const Modal: React.FC<IModalInheritedProps> =
 (props) => {
     let {
         children,
