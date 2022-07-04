@@ -25,10 +25,10 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
                             sourceMap: true,
-                            localIdentName: '[local]',
-                            minimize: true
+                            modules: {
+                                localIdentName: '[local]',
+                            },
                         }
                     },
                     {
@@ -69,7 +69,9 @@ module.exports = {
             {
                 test: /\.(js|tsx)?$/,
                 include: path.resolve(__dirname, '../stories/'),
-                loaders: [require.resolve('@storybook/source-loader')],
+                use: [
+                    { loader: '@storybook/source-loader' },
+                ],
                 enforce: 'pre',
             }
         ]
