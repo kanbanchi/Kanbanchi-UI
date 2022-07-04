@@ -23,8 +23,8 @@
   "dependencies": {
     "date-fns": "^2.28.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-datepicker": "^4.8.0",
+    "react-dom": "^18.2.0",
     "react-focus-lock": "^2.9.1",
     "react-multi-carousel": "^2.8.2",
     "uuid": "^8.3.2"
@@ -41,6 +41,10 @@
     "@storybook/manager-webpack5": "^6.5.9",
     "@storybook/react": "^6.5.9",
     "@storybook/testing-library": "^0.0.13",
+    "@types/react": "^18.0.14",
+    "@types/react-datepicker": "^4.4.2",
+    "@types/storybook__react": "^5.2.1",
+    "@types/uuid": "^8.3.4",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "node-sass": "^7.0.1",
