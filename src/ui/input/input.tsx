@@ -227,7 +227,7 @@ React.forwardRef((props, ref) => {
     React.useEffect(() => {
         textarea.current.value = value;
         setIsFilled(!!value);
-        autosizeLibray.default.update(textarea.current);
+        requestAnimationFrame(()=>autosizeLibray.default.update(textarea.current)); // подождать autosizeLibray.default. был баг высоты email в boardDetails
     }, [value]);
 
     // fix safari cursor jump: https://stackoverflow.com/questions/46000544/react-controlled-input-cursor-jumps
