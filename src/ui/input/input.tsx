@@ -112,7 +112,7 @@ React.forwardRef((props, ref) => {
      * solution from https://github.com/cliener/input-fixer
      */
     const lastEventTime = React.useRef(0);
-    const throttleDuration = 100; // ms
+    const throttleDuration = 1000; // ms
     const throttleEvent = (event: React.FocusEvent<HTMLInputElement>) => {
         const timeStamp = event.timeStamp;
 
