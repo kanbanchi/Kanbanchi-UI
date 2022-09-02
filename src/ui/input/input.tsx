@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // accessibility ok
 
-export const Input: React.SFC<IInputInheritedProps> =
+export const Input: React.FC<IInputInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         autosize,
@@ -43,6 +43,7 @@ React.forwardRef((props, ref) => {
     const textarea = React.useRef(null);
     const [uniqueClass] = React.useState('kui-input--' + uuidv4());
     const timer = React.useRef(null);
+    const [cursor, setCursor] = React.useState(null);
 
     className = ClassNames(
         'kui-input',
@@ -62,6 +63,7 @@ React.forwardRef((props, ref) => {
     attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIsFilled(!!e.target.value);
         if (onChange) onChange(e);
+        setCursor(e.target.selectionStart);
     };
 
     attributes.onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -225,8 +227,15 @@ React.forwardRef((props, ref) => {
     React.useEffect(() => {
         textarea.current.value = value;
         setIsFilled(!!value);
-        autosizeLibray.default.update(textarea.current);
+        requestAnimationFrame(()=>autosizeLibray.default.update(textarea.current)); // подождать autosizeLibray.default. был баг высоты email в boardDetails
     }, [value]);
+
+    // fix safari cursor jump: https://stackoverflow.com/questions/46000544/react-controlled-input-cursor-jumps
+    React.useEffect(() => {
+        try { // many input types do not support selection
+            textarea.current.setSelectionRange(cursor, cursor);
+        } catch (e) { /* noop */ }
+    }, [ref, cursor, value]);
 
     React.useEffect(() => {
         if (autosize) autosizeLibray.default(textarea.current);

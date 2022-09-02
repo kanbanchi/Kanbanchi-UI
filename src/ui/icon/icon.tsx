@@ -18,7 +18,7 @@ React.forwardRef((props, ref) => {
     const require24pxIcons = () => {
         const trySize = EIconSize.SIZE_24;
         try {
-            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ trySize }/` + xlink + '.svg');
+            Svg = require(`!!@svgr/webpack!../../../src/assets/icons/${ trySize }/` + xlink + '.svg').default;
         } catch (e) {
             Svg = 'svg';
             console.error(`svg with xlink ${ xlink }, size ${ trySize } not found`)
@@ -27,7 +27,7 @@ React.forwardRef((props, ref) => {
 
     if (size && (size === EIconSize.SIZE_16 || size === EIconSize.SIZE_96)) {
         try {
-            Svg = require(`!svg-react-loader!../../../src/assets/icons/${ size }/` + xlink + '.svg');
+            Svg = require(`!!@svgr/webpack!../../../src/assets/icons/${ size }/` + xlink + '.svg').default;
         } catch (e) {
             require24pxIcons();
         }

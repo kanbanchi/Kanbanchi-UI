@@ -5,7 +5,7 @@ import '../../../src/ui/loader/loader.module.scss';
 
 // accessibility ok
 
-export const Loader: React.SFC<ILoaderInheritedProps> =
+export const Loader: React.FC<ILoaderInheritedProps> =
 (props) => {
     let {
         className,

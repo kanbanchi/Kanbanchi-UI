@@ -7,7 +7,7 @@ import { Icon } from '../icon/icon';
 
 // accessibility ok
 
-export const Userpic: React.SFC<IUserpicInheritedProps> =
+export const Userpic: React.FC<IUserpicInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         background,

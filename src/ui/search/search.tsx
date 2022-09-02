@@ -6,7 +6,7 @@ import '../../../src/ui/search/search.module.scss';
 
 // accessibility ok
 
-export const Search: React.SFC<ISearchInheritedProps> =
+export const Search: React.FC<ISearchInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,

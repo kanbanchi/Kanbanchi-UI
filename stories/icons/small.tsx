@@ -6,13 +6,13 @@ import { Icon } from '../../src/ui';
 
 const Story = () => {
     const icons24 = require.context(
-        '!svg-react-loader!./../../src/assets/icons/24/',
+        '!!@svgr/webpack!./../../src/assets/icons/24/',
         false,
         /\.svg$/
     ).keys().map(file => file.replace(/(\.\/|\.svg$)/g, ''));
 
     const icons16 = require.context(
-        '!svg-react-loader!./../../src/assets/icons/16/',
+        '!!@svgr/webpack!./../../src/assets/icons/16/',
         false,
         /\.svg$/
     ).keys().map(file => file.replace(/(\.\/|\.svg$)/g, ''));
@@ -23,6 +23,8 @@ const Story = () => {
                 <Icon size={16} xlink={'account'} /> 16 account (not exists)
                 <br/>
                 <Icon size={24} xlink={'account'} /> 24 account
+                <br/>
+                <Icon size={16} xlink={'account1'} /> not exists at all
                 <br/>
                 <Icon size={16} xlink={'archive'} /> 16 archive
                 <br/>

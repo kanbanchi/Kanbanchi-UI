@@ -4,7 +4,7 @@ import { ClassNames, getParentsClasses } from '../utils';
 import '../../../src/ui/tags/tags.module.scss';
 import { Button, Icon } from '../../ui';
 
-export const Tag: React.SFC<ITagInheritedProps> =
+export const Tag: React.FC<ITagInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,

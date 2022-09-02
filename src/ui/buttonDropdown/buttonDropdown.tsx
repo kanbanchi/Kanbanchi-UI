@@ -120,7 +120,11 @@ export const ButtonDropdown = React.forwardRef((
         if (!dropdownRef.current) return;
 
         calcDirection();
-        requestAnimationFrame(() => {
+        /**
+         * подождать afterOpened другого дропдауна
+         * был баг: когда открывается 2й дропдаун, фокус остается на 1ом
+         */
+        setTimeout(() => {
             const activeElement = document.activeElement as HTMLElement;
             if (activeElement) {
                 const parents = getParentsClasses(
@@ -131,7 +135,7 @@ export const ButtonDropdown = React.forwardRef((
             }
             const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
             if (ariaSelected) ariaSelected.focus();
-        });
+        }, 100);
         if (multiple && single) {
             dropdownRef.current.removeEventListener('click', onDropdownClick);
             dropdownRef.current.addEventListener('click', onDropdownClick);

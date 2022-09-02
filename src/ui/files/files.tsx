@@ -6,7 +6,7 @@ import '../../../src/ui/files/files.module.scss';
 
 // accessibility ok
 
-const DefaultFileView: React.SFC<any> = (props: any) => {
+const DefaultFileView: React.FC<any> = (props: any) => {
     const { iconUrl, title, ...attr } = props;
     return <div className={'kui-files-item'} tabIndex={0}>
         <span className="kui-files-item__col kui-files-item__col--icon">
@@ -21,7 +21,7 @@ const DefaultFileView: React.SFC<any> = (props: any) => {
     </div>
 };
 
-export const Files: React.SFC<IFilesInheritedProps> =
+export const Files: React.FC<IFilesInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         children,

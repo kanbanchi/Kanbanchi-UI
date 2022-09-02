@@ -6,7 +6,7 @@ import '../../../src/ui/radio/radio.module.scss';
 
 // accessibility ok
 
-export const Radio: React.SFC<IRadioInheritedProps> =
+export const Radio: React.FC<IRadioInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         active,

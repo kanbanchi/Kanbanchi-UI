@@ -143,7 +143,9 @@ React.forwardRef((props, ref) => {
                 setIsMount(false);
                 timer.current = setTimeout(() => { // tooltip didn't mount, wait
                     setIsMount(true);
-                    res(calcTooltip(index));
+                    timer.current = setTimeout(() => {
+                        res(calcTooltip(index));
+                    }, 100);
                 }, 100);
             } else {
                 let itemRect = item.getBoundingClientRect();

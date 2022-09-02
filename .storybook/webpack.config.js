@@ -1,18 +1,18 @@
 const path = require('path');
 
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, '../'), // to automatically find tsconfig.json
     plugins: [
-        new ForkTsCheckerWebpackPlugin({
-            // tsconfig: path.resolve(process.cwd(), './tsconfig.json'),
-            // tslint:path.resolve(process.cwd(), './tslint.json'),
-            async: true,
-        }),
-        // system notifier for typescript checking
-        new ForkTsCheckerNotifierWebpackPlugin()
+        // new ForkTsCheckerWebpackPlugin({
+        //     // tsconfig: path.resolve(process.cwd(), './tsconfig.json'),
+        //     // tslint:path.resolve(process.cwd(), './tslint.json'),
+        //     async: true,
+        // }),
+        // // system notifier for typescript checking
+        // new ForkTsCheckerNotifierWebpackPlugin()
     ],
     module: {
         rules: [
@@ -25,10 +25,10 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
                             sourceMap: true,
-                            localIdentName: '[local]',
-                            minimize: true
+                            modules: {
+                                localIdentName: '[local]',
+                            },
                         }
                     },
                     {
@@ -69,7 +69,9 @@ module.exports = {
             {
                 test: /\.(js|tsx)?$/,
                 include: path.resolve(__dirname, '../stories/'),
-                loaders: [require.resolve('@storybook/source-loader')],
+                use: [
+                    { loader: '@storybook/source-loader' },
+                ],
                 enforce: 'pre',
             }
         ]

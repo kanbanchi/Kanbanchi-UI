@@ -5,7 +5,7 @@ import { EIconSize } from '../../src/ui/icon/types';
 
 const Story = () => {
     const icons = require.context(
-        '!svg-react-loader!./../../src/assets/icons/96/',
+        '!!@svgr/webpack!./../../src/assets/icons/96/',
         false,
         /\.svg$/
     ).keys().map(file => file.replace(/(\.\/|\.svg$)/g, ''));

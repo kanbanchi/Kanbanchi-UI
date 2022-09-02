@@ -1,27 +1,26 @@
 import { IInputPublicProps } from './../input/types';
-import { Placement, Modifiers } from 'popper.js';
+import type { ReactDatePickerProps } from 'react-datepicker';
 
 export interface IDatepickerStateProps {
-    selected: Date;
+    editable?: boolean;
+    selected?: Date | null;
 }
 
 export interface IDatepickerDispatchProps {
     onChange: (date: Date) => void;
 }
 
-export interface IDatepickerOwnProps {
-    dateFormat?: string;
-    editable?: boolean;
-    inline?: boolean;
-    maxDate?: Date;
-    minDate?: Date;
-    placeholderText?: string;
-    popperModifiers?: Modifiers;
-    popperPlacement?: Placement;
-    selected: Date;
-    showMonthDropdown?: boolean;
-    showYearDropdown?: boolean;
-}
+export type IDatepickerOwnProps = Pick<ReactDatePickerProps,
+    'dateFormat' |
+    'inline' |
+    'maxDate' |
+    'minDate' |
+    'placeholderText' |
+    'popperModifiers' |
+    'popperPlacement' |
+    'showMonthDropdown' |
+    'showYearDropdown'
+>;
 
 export interface IDatepickerProps extends
     IDatepickerStateProps,
