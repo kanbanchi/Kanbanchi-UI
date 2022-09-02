@@ -23,7 +23,7 @@ const Story = () => {
                     dateFormat={'dd.MM.yyyy'}
                     editable={false}
                     isClearable={false}
-                    label="Not editable input test"
+                    label="Not editable input"
                     minDate={new Date('2001-01-01')}
                     maxDate={new Date('2049-12-31')}
                     popperModifiers={[
