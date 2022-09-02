@@ -107,6 +107,27 @@ React.forwardRef((props, ref) => {
         }, 100);
     }
 
+    /**
+     * KNB-2481 bug with input blur/focus on ios/macos https://codepen.io/cliener/pen/ooGpwW
+     * solution from https://github.com/cliener/input-fixer
+     */
+    const lastEventTime = React.useRef(0);
+    const throttleDuration = 100; // ms
+    const throttleEvent = (event: React.FocusEvent<HTMLInputElement>) => {
+        const timeStamp = event.timeStamp;
+
+        if (timeStamp < (lastEventTime.current + throttleDuration)) {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log('stop');
+            return false;
+        }
+
+        lastEventTime.current = timeStamp; // Only set the new time stamp if the event is valid
+    }
+    attributes.onFocusCapture = throttleEvent;
+    attributes.onBlurCapture = throttleEvent;
+
     if (label) {
         labelItem = (<div className="kui-label__item">{label}</div>);
     }
