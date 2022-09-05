@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IDatePickerInheritedProps } from './types';
 import ReactDatepicker, { registerLocale } from 'react-datepicker';
 import enGB from 'date-fns/locale/en-GB';
-import { ClassNames } from '../utils';
+import { ClassNames, useCombinedRefs } from '../utils';
 import { Input } from '../../ui';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
@@ -56,6 +56,7 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
+    const inputRef = React.useRef(null);
 
     isClearable = readOnly || disabled ? false : isClearable;
     editable = readOnly || disabled ? false : editable;
@@ -69,7 +70,7 @@ React.forwardRef((props, ref) => {
         iconTooltip,
         label,
         readOnly,
-        ref,
+        ref: useCombinedRefs(ref, inputRef),
         state,
         value,
         variant,
@@ -91,7 +92,7 @@ React.forwardRef((props, ref) => {
         }
         pickerRef.current.setOpen(false);
         setTimeout(()=>{
-            datepickerRef.current.getInput().blur();
+            inputRef.current.getInput().blur();
             console.log('onBlurHandler', document.activeElement);
         }, 300);
     }
@@ -118,7 +119,7 @@ React.forwardRef((props, ref) => {
     React.useEffect(() => {
         setTimeout(()=>{
             pickerRef.current.setOpen(false);
-            datepickerRef.current.getInput().blur();
+            inputRef.current.getInput().blur();
             console.log('useEffect', document.activeElement);
         }, 300);
     }, []);
