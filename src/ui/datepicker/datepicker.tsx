@@ -91,7 +91,7 @@ React.forwardRef((props, ref) => {
         }
         pickerRef.current.setOpen(false);
         setTimeout(()=>{
-            pickerRef.current.setFocus(false);
+            datepickerRef.current.getInput().blur();
             console.log('onBlurHandler', document.activeElement);
         }, 300);
     }
