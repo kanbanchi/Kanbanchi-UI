@@ -19,6 +19,8 @@ export const Datepicker: React.FC<IDatePickerInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         className,
+        // @ts-ignore
+        autoFocus = false,
         color,
         disabled,
         editable,
@@ -49,6 +51,7 @@ React.forwardRef((props, ref) => {
     editable = readOnly || disabled ? false : editable;
 
     const inputAttributes = {
+        autoFocus,
         color,
         editable,
         icon,
