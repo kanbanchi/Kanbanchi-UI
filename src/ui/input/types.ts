@@ -1,6 +1,4 @@
-import { IDatePickerInheritedProps } from '../datepicker/types';
 import { ITooltipProps } from './../tooltip/types';
-import type { ReactDatePickerProps } from 'react-datepicker';
 
 export interface IInputStateProps {
     disabled?: boolean;
@@ -17,7 +15,6 @@ export interface IInputDispatchProps {
 export interface IInputOwnProps {
     autosize?: boolean;
     color?: 'grey';
-    datepicker?: ReactDatePickerProps;
     editable?: boolean;
     icon?: string;
     isClearable?: boolean;
