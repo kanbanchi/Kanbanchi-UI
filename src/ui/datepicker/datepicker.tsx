@@ -115,7 +115,7 @@ React.forwardRef((props, ref) => {
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
-                disabled={disabled}
+                disabled={disabled || isSafari}
                 locale="en-GB"
                 readOnly={readOnly}
                 ref={pickerRef}
