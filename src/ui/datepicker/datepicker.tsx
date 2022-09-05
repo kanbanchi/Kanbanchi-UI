@@ -84,16 +84,16 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (isSafari) {
+            /**
+            * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
+            */
             const input = datepickerRef.current.querySelector('input') as HTMLElement;
             if (input) input.setAttribute('readonly', 'readonly');
+            pickerRef.current.setOpen(false); // в сафари все календари открываются сами
         }
     }, [isSafari]);
 
     React.useEffect(() => {
-        /**
-        * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
-        * в сафари все календари открываются сами
-        */
         if (navigator.userAgent.includes('Mac')) {
             setSafari(true);
         }
