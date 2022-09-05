@@ -70,8 +70,12 @@ React.forwardRef((props, ref) => {
 
     const onChangeHandler = (date: Date) => {
         if (onChange) onChange(date);
-        const input = datepickerRef.current.querySelector('input') as HTMLElement;
-        if (input) input.focus(); // вернуть фокус инпуту
+        setTimeout(()=>{
+            if (document.activeElement === document.body) { // фокус отвалился, вернуть фокус инпуту
+                const input = datepickerRef.current.querySelector('input') as HTMLElement;
+                if (input) input.focus();
+            }
+        }, 100);
     }
 
     const onBlurHandler = (e: React.FocusEvent) => {
