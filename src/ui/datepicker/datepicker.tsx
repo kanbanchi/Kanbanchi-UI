@@ -44,7 +44,6 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
-    const [isInputReadOnly, setInputReadOnly] = React.useState(readOnly);
 
     isClearable = readOnly || disabled ? false : isClearable;
     editable = readOnly || disabled ? false : editable;
@@ -56,7 +55,7 @@ React.forwardRef((props, ref) => {
         isClearable,
         iconTooltip,
         label,
-        readOnly: isInputReadOnly,
+        readOnly,
         ref,
         state,
         value,
@@ -77,7 +76,7 @@ React.forwardRef((props, ref) => {
             const closest = e.relatedTarget.closest('.kui-datepicker');
             if (closest && closest === datepickerRef.current) return;
         }
-        pickerRef.current.setOpen(false);
+        pickerRef.current.setOpen(false); // был баг: если убрать фокус табом, календарь не закрывается
     }
 
     /**
@@ -92,8 +91,8 @@ React.forwardRef((props, ref) => {
         if (timeStamp < (lastEventTime.current + throttleDuration)) {
             event.preventDefault();
             event.stopPropagation();
-            console.log('stop');
-            setInputReadOnly(true); // fix for safari
+            const input = datepickerRef.current.querySelector('input') as HTMLElement;
+            if (input) input.setAttribute('readonly', 'readonly'); // fix for safari
             return false;
         }
 
