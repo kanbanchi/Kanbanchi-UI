@@ -82,12 +82,33 @@ React.forwardRef((props, ref) => {
         pickerRef.current.setOpen(false);
     }
 
+    /**
+     * KNB-2481 bug with input blur/focus on ios/macos https://codepen.io/cliener/pen/ooGpwW
+     * solution from https://github.com/cliener/input-fixer
+     */
+    const lastEventTime = React.useRef(0);
+    const throttleDuration = 300; // ms
+    const throttleEvent = (event: React.FocusEvent) => {
+        const timeStamp = event.timeStamp;
+
+        if (timeStamp < (lastEventTime.current + throttleDuration)) {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log('stop');
+            return false;
+        }
+
+        lastEventTime.current = timeStamp; // Only set the new time stamp if the event is valid
+    }
+
     return (
         <div
             className={className}
             ref={datepickerRef}
             tabIndex={-1}
             onBlur={onBlurHandler}
+            onFocusCapture={throttleEvent}
+            onBlurCapture={throttleEvent}
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
