@@ -44,6 +44,7 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
+    const [isSafari, setSafari] = React.useState(false);
 
     isClearable = readOnly || disabled ? false : isClearable;
     editable = readOnly || disabled ? false : editable;
@@ -69,6 +70,8 @@ React.forwardRef((props, ref) => {
 
     const onChangeHandler = (date: Date) => {
         if (onChange) onChange(date);
+        const input = datepickerRef.current.querySelector('input') as HTMLElement;
+        if (input) input.focus(); // вернуть фокус инпуту
     }
 
     const onBlurHandler = (e: React.FocusEvent) => {
@@ -79,41 +82,30 @@ React.forwardRef((props, ref) => {
         pickerRef.current.setOpen(false); // был баг: если убрать фокус табом, календарь не закрывается
     }
 
-    /**
-     * KNB-2481 bug with input blur/focus on ios/macos https://codepen.io/cliener/pen/ooGpwW
-     * solution from https://github.com/cliener/input-fixer
-     */
-    const lastEventTime = React.useRef(0);
-    const throttleDuration = 300; // ms
-    const throttleEvent = (event: React.FocusEvent) => {
-        const timeStamp = event.timeStamp;
-
-        if (timeStamp < (lastEventTime.current + throttleDuration)) {
-            event.preventDefault();
-            event.stopPropagation();
-            /**
-             * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
-             */
+    React.useEffect(() => {
+        if (isSafari) {
             const input = datepickerRef.current.querySelector('input') as HTMLElement;
             if (input) input.setAttribute('readonly', 'readonly');
-            /**
-             * в сафари все календари открываются сами
-             */
-            pickerRef.current.setOpen(false);
-            return false;
         }
+    }, [isSafari]);
 
-        lastEventTime.current = timeStamp; // Only set the new time stamp if the event is valid
-    }
+    React.useEffect(() => {
+        /**
+        * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
+        * в сафари все календари открываются сами
+        */
+        if (navigator.userAgent.includes('Mac')) {
+            setSafari(true);
+        }
+    }, []);
 
     return (
         <div
             className={className}
+            key={'isSafari-' + isSafari}
             ref={datepickerRef}
             tabIndex={-1}
             onBlur={onBlurHandler}
-            onFocusCapture={throttleEvent}
-            onBlurCapture={throttleEvent}
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
