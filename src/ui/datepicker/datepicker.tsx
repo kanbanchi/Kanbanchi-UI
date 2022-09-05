@@ -80,6 +80,7 @@ React.forwardRef((props, ref) => {
             if (closest && closest === datepickerRef.current) return;
         }
         pickerRef.current.setOpen(false);
+        pickerRef.current.setFocus(false);
     }
 
     /**
