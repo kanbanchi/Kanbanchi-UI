@@ -97,7 +97,7 @@ React.forwardRef((props, ref) => {
             console.log('stop');
             return false;
         }
-
+        console.log(event.target, event.relatedTarget);
         lastEventTime.current = timeStamp; // Only set the new time stamp if the event is valid
     }
 
