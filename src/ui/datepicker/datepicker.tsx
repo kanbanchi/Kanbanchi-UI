@@ -7,6 +7,16 @@ import { Input } from '../../ui';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
 
+// @ts-ignore
+window.intv = setInterval(() => {
+    // @ts-ignore
+    if (window.curEl !== document.activeElement) {
+      // @ts-ignore
+        window.curEl = document.activeElement;
+      console.log(document.activeElement);
+    }
+  }, 100);
+
 const ReactDatepickerElement = ReactDatepicker as any;
 
 registerLocale('en-GB', enGB); // Weeks start on Monday
@@ -80,7 +90,8 @@ React.forwardRef((props, ref) => {
             if (closest && closest === datepickerRef.current) return;
         }
         pickerRef.current.setOpen(false);
-        pickerRef.current.setFocus(false);
+        setTimeout(()=>pickerRef.current.setFocus(false), 100);
+        console.log(document.activeElement);
     }
 
     /**
