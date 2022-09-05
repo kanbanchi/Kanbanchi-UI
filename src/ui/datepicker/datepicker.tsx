@@ -6,6 +6,7 @@ import { ClassNames } from '../utils';
 import { Input } from '../../ui';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 // @ts-ignore
 window.intv = setInterval(() => {
@@ -46,6 +47,8 @@ React.forwardRef((props, ref) => {
         onChange,
         ...attributes
     } = props;
+
+    const [key, setKey] = React.useState(uuidv4());
 
     className = ClassNames(
         'kui-datepicker',
@@ -89,10 +92,11 @@ React.forwardRef((props, ref) => {
             const closest = e.relatedTarget.closest('.kui-datepicker');
             if (closest && closest === datepickerRef.current) return;
         }
-        pickerRef.current.setOpen(false);
+        setKey(uuidv4());
+        // pickerRef.current.setOpen(false);
         setTimeout(()=>{
-            const input = datepickerRef.current.querySelector('textarea');
-            if (input) input.blur();
+            // const input = datepickerRef.current.querySelector('textarea');
+            // if (input) input.blur();
             console.log('onBlurHandler', document.activeElement);
         }, 300);
     }
@@ -128,6 +132,7 @@ React.forwardRef((props, ref) => {
     return (
         <div
             className={className}
+            key={key}
             ref={datepickerRef}
             tabIndex={-1}
             onBlur={onBlurHandler}
