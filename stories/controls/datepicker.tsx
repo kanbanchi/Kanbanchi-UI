@@ -4,7 +4,8 @@ import { Datepicker } from '../../src/ui';
 
 const Story = () => {
     const [date, setDate] = React.useState<Date | null>(null);
-    const [date01, setDate01] = React.useState(new Date());
+    const [date01, setDate01] = React.useState<Date | null>(new Date());
+    const [date02, setDate02] = React.useState<Date | null>(new Date());
 
     return (
         <div className="page">
@@ -12,46 +13,52 @@ const Story = () => {
                 <h2>Datepicker</h2>
 
                 <Datepicker
-                    placeholderText={'placeholder'}
-                    selected={date}
-                    onChange={val=>setDate(val)}
+                    datepicker={{
+                        placeholderText: 'placeholder',
+                        selected: date,
+                        onChange: val=>setDate(val)
+                    }}
                 /> {date ? date.toString() : 'null'}
 
                 <br/><br/>
 
                 <Datepicker
-                    dateFormat={'dd.MM.yyyy'}
+                    datepicker={{
+                        dateFormat: 'dd.MM.yyyy',    
+                        minDate: new Date('2001-01-01'),
+                        maxDate: new Date('2049-12-31'),
+                        popperModifiers: [
+                            {
+                                name: 'preventOverflow',
+                                enabled: true,
+                                options: {
+                                    mainAxis: false,
+                                    altAxis: true,
+                                    altBoundary: true,
+                                }
+                            }
+                        ],
+                        popperPlacement: "bottom-start",
+                        selected: date01,
+                        showMonthDropdown: true,
+                        showYearDropdown: true,
+                        onChange: val=>setDate01(val)
+                    }}
                     editable={false}
                     isClearable={false}
                     label="Not editable input"
-                    minDate={new Date('2001-01-01')}
-                    maxDate={new Date('2049-12-31')}
-                    popperModifiers={[
-                        {
-                            name: 'preventOverflow',
-                            enabled: true,
-                            options: {
-                                mainAxis: false,
-                                altAxis: true,
-                                altBoundary: true,
-                            }
-                        }
-                    ]}
-                    popperPlacement="bottom-start"
                     readOnly={false}
-                    selected={date01}
-                    showMonthDropdown
-                    showYearDropdown
-                    onChange={val=>setDate01(val)}
                     /> {date01 ? date01.toString() : 'null'}
 
 <br/><br/>
 
 <Datepicker
+    datepicker={{
+        selected: date02,
+        onChange: val=>setDate02(val)
+    }}
     label="Error"
-    selected={date01}
     state={'error'}
-    onChange={val=>setDate01(val)}
 />
 
                 <br/><br/>
@@ -68,7 +75,10 @@ const Story = () => {
                 <Datepicker
                     readOnly={true}
                     editable={true}
-                    selected={date01}
+                    datepicker={{
+                        selected: date02,
+                        onChange: ()=>{}
+                    }}
                     label="Readonly"
                     onChange={()=>{}}
                 />
@@ -87,7 +97,10 @@ const Story = () => {
                 <Datepicker
                     disabled={true}
                     editable={true}
-                    selected={date01}
+                    datepicker={{
+                        selected: date02,
+                        onChange: ()=>{}
+                    }}
                     label="Disabled"
                     onChange={()=>{}}
                 />

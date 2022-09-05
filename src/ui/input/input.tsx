@@ -6,6 +6,10 @@ import { Icon, Label, Tooltip } from '../../ui';
 import '../../../src/ui/input/input.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 
+import ReactDatepicker, { registerLocale } from 'react-datepicker';
+import enGB from 'date-fns/locale/en-GB';
+registerLocale('en-GB', enGB); // Weeks start on Monday
+
 // accessibility ok
 
 export const Input: React.FC<IInputInheritedProps> =
@@ -14,6 +18,7 @@ React.forwardRef((props, ref) => {
         autosize,
         className,
         color,
+        datepicker,
         disabled,
         editable,
         icon,
@@ -136,7 +141,7 @@ React.forwardRef((props, ref) => {
 
         e.preventDefault();
         setIsFilled(false);
-        textarea.current.value = '';
+        if (textarea.current) textarea.current.value = '';
         if (variant !== 'datepicker'){
             textarea.current.focus();
         }
@@ -245,7 +250,7 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        textarea.current.value = value;
+        if (textarea.current) textarea.current.value = value;
         setIsFilled(!!value);
         requestAnimationFrame(()=>autosizeLibray.default.update(textarea.current)); // подождать autosizeLibray.default. был баг высоты email в boardDetails
     }, [value]);
@@ -311,7 +316,13 @@ React.forwardRef((props, ref) => {
         >
             {labelItem}
             {inputBefore}
-            {inputElement}
+            {datepicker
+                ? <ReactDatepicker
+                    customInput={inputElement}
+                    locale="en-GB"
+                    {...datepicker}
+                />
+                : inputElement}
             {inputAfter}
         </Label>
     );
