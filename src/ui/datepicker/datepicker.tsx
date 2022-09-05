@@ -90,8 +90,10 @@ React.forwardRef((props, ref) => {
             if (closest && closest === datepickerRef.current) return;
         }
         pickerRef.current.setOpen(false);
-        setTimeout(()=>pickerRef.current.setFocus(false), 100);
-        console.log(document.activeElement);
+        setTimeout(()=>{
+            pickerRef.current.setFocus(false);
+            console.log(document.activeElement);
+        }, 300);
     }
 
     /**
@@ -112,6 +114,13 @@ React.forwardRef((props, ref) => {
         console.log(timeStamp-lastEventTime.current, event, event.target, event.relatedTarget);
         lastEventTime.current = timeStamp; // Only set the new time stamp if the event is valid
     }
+
+    React.useEffect(() => {
+        setTimeout(()=>{
+            pickerRef.current.setFocus(false);
+            console.log(document.activeElement);
+        }, 300);
+    }, []);
 
     return (
         <div
