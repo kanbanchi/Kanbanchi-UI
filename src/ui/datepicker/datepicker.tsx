@@ -6,17 +6,6 @@ import { ClassNames } from '../utils';
 import { Input } from '../../ui';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
-import { v4 as uuidv4 } from 'uuid';
-
-// @ts-ignore
-window.intv = setInterval(() => {
-    // @ts-ignore
-    if (window.curEl !== document.activeElement) {
-      // @ts-ignore
-        window.curEl = document.activeElement;
-      console.log('interval', document.activeElement);
-    }
-  }, 100);
 
 const ReactDatepickerElement = ReactDatepicker as any;
 
@@ -30,8 +19,6 @@ export const Datepicker: React.FC<IDatePickerInheritedProps> =
 React.forwardRef((props, ref) => {
     let {
         className,
-        // @ts-ignore
-        autoFocus = false,
         color,
         disabled,
         editable,
@@ -48,8 +35,6 @@ React.forwardRef((props, ref) => {
         ...attributes
     } = props;
 
-    const [key, setKey] = React.useState(uuidv4());
-
     className = ClassNames(
         'kui-datepicker',
         (disabled) ? 'kui-datepicker--disabled' : null,
@@ -59,19 +44,19 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
+    const [isInputReadOnly, setInputReadOnly] = React.useState(readOnly);
 
     isClearable = readOnly || disabled ? false : isClearable;
     editable = readOnly || disabled ? false : editable;
 
     const inputAttributes = {
-        autoFocus,
         color,
         editable,
         icon,
         isClearable,
         iconTooltip,
         label,
-        readOnly,
+        readOnly: isInputReadOnly,
         ref,
         state,
         value,
@@ -92,13 +77,7 @@ React.forwardRef((props, ref) => {
             const closest = e.relatedTarget.closest('.kui-datepicker');
             if (closest && closest === datepickerRef.current) return;
         }
-        setKey(uuidv4());
-        // pickerRef.current.setOpen(false);
-        setTimeout(()=>{
-            // const input = datepickerRef.current.querySelector('textarea');
-            // if (input) input.blur();
-            console.log('onBlurHandler', document.activeElement);
-        }, 300);
+        pickerRef.current.setOpen(false);
     }
 
     /**
@@ -114,25 +93,16 @@ React.forwardRef((props, ref) => {
             event.preventDefault();
             event.stopPropagation();
             console.log('stop');
+            setInputReadOnly(true); // fix for safari
             return false;
         }
-        console.log(timeStamp-lastEventTime.current, event, event.target, event.relatedTarget);
+
         lastEventTime.current = timeStamp; // Only set the new time stamp if the event is valid
     }
-
-    React.useEffect(() => {
-        setTimeout(()=>{
-            pickerRef.current.setOpen(false);
-            const input = datepickerRef.current.querySelector('textarea');
-            if (input) input.blur();
-            console.log('useEffect', document.activeElement);
-        }, 300);
-    }, []);
 
     return (
         <div
             className={className}
-            key={key}
             ref={datepickerRef}
             tabIndex={-1}
             onBlur={onBlurHandler}
