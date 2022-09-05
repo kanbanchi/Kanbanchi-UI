@@ -13,7 +13,7 @@ window.intv = setInterval(() => {
     if (window.curEl !== document.activeElement) {
       // @ts-ignore
         window.curEl = document.activeElement;
-      console.log(document.activeElement);
+      console.log('interval', document.activeElement);
     }
   }, 100);
 
@@ -92,7 +92,7 @@ React.forwardRef((props, ref) => {
         pickerRef.current.setOpen(false);
         setTimeout(()=>{
             pickerRef.current.setFocus(false);
-            console.log(document.activeElement);
+            console.log('onBlurHandler', document.activeElement);
         }, 300);
     }
 
@@ -117,8 +117,9 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         setTimeout(()=>{
-            pickerRef.current.setFocus(false);
-            console.log(document.activeElement);
+            pickerRef.current.setOpen(false);
+            datepickerRef.current.getInput().blur();
+            console.log('useEffect', document.activeElement);
         }, 300);
     }, []);
 
