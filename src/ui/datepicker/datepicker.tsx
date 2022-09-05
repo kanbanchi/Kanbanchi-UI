@@ -74,10 +74,20 @@ React.forwardRef((props, ref) => {
         if (onChange) onChange(date);
     }
 
+    const onBlurHandler = (e: React.FocusEvent) => {
+        if (e && e.relatedTarget) {
+            const closest = e.relatedTarget.closest('.kui-datepicker');
+            if (closest && closest === datepickerRef.current) return;
+        }
+        pickerRef.current.setOpen(false);
+    }
+
     return (
         <div
             className={className}
             ref={datepickerRef}
+            tabIndex={-1}
+            onBlur={onBlurHandler}
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
