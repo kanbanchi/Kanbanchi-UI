@@ -94,7 +94,7 @@ React.forwardRef((props, ref) => {
             const input = datepickerRef.current.querySelector('input') as HTMLElement;
             if (input) input.setAttribute('readonly', 'readonly');
             // в сафари все календари открываются сами
-            setSafari(false);
+            setTimeout(()=>setSafari(false), 500);
         }
     }, [isSafari]);
 
