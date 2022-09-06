@@ -8,8 +8,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
 
 const ReactDatepickerElement = ReactDatepicker as any;
-let isSafariTmp = false;
-
 registerLocale('en-GB', enGB); // Weeks start on Monday
 
 // accessibility ok+-
@@ -45,11 +43,7 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
-    const [isSafari, _setSafari] = React.useState(false);
-    const setSafari = (isSafari: boolean) => {
-        isSafariTmp = isSafari;
-        _setSafari(isSafari)
-    }
+    const [isSafari, setSafari] = React.useState(false);
 
     isClearable = readOnly || disabled ? false : isClearable;
     editable =  isSafari || readOnly || disabled ? false : editable;
@@ -83,15 +77,6 @@ React.forwardRef((props, ref) => {
         }, 100);
     }
 
-    const onFocusHandler = (e: React.FocusEvent) => {
-        console.log(isSafariTmp);
-        if (isSafariTmp) {
-            console.log(e, document.activeElement);
-            const activeElement = document.activeElement as HTMLElement;
-            activeElement.blur();
-        }
-    }
-
     const onBlurHandler = (e: React.FocusEvent) => {
         if (e && e.relatedTarget) {
             const closest = e.relatedTarget.closest('.kui-datepicker');
@@ -100,22 +85,22 @@ React.forwardRef((props, ref) => {
         pickerRef.current.setOpen(false); // был баг: если убрать фокус табом, календарь не закрывается
     }
 
-    React.useEffect(() => {
-        if (isSafari) {
-            /**
-            * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
-            */
-            const input = datepickerRef.current.querySelector('input') as HTMLElement;
-            if (input) input.setAttribute('readonly', 'readonly');
-            // в сафари все календари открываются сами
-            setTimeout(() => {
-                setSafari(false);
-            }, 5000);
-        }
-    }, [isSafari]);
+    // React.useEffect(() => {
+    //     if (isSafari) {
+    //         /**
+    //         * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
+    //         */
+    //         const input = datepickerRef.current.querySelector('input') as HTMLElement;
+    //         if (input) input.setAttribute('readonly', 'readonly');
+    //         // в сафари все календари открываются сами
+    //         setTimeout(() => {
+    //             setSafari(false);
+    //         }, 5000);
+    //     }
+    // }, [isSafari]);
 
     React.useEffect(() => {
-        if (navigator.userAgent.includes('Mac')) {
+        if (navigator.userAgent.includes('Safari')) {
             setSafari(true);
         }
     }, []);
@@ -125,7 +110,6 @@ React.forwardRef((props, ref) => {
             className={className}
             ref={datepickerRef}
             tabIndex={-1}
-            onFocus={onFocusHandler}
             onBlur={onBlurHandler}
         >
             <ReactDatepickerElement
