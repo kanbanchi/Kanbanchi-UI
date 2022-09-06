@@ -85,7 +85,7 @@ React.forwardRef((props, ref) => {
     }
 
     const onFocusHandler = (e: React.FocusEvent) => {
-        console.log(isSafari);
+        console.log(data.current.isSafari);
         if (data.current.isSafari) {
             console.log(e, document.activeElement);
             const activeElement = document.activeElement as HTMLElement;
@@ -102,7 +102,7 @@ React.forwardRef((props, ref) => {
     }
 
     React.useEffect(() => {
-        if (data.current.isSafari) {
+        if (isSafari) {
             /**
             * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
             */
