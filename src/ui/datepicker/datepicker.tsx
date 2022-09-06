@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
 
 const ReactDatepickerElement = ReactDatepicker as any;
+let isSafariTmp = false;
 
 registerLocale('en-GB', enGB); // Weeks start on Monday
 
@@ -45,10 +46,8 @@ React.forwardRef((props, ref) => {
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
     const [isSafari, _setSafari] = React.useState(false);
-    const data = React.useRef({ isSafari });
-    data.current = { isSafari };
     const setSafari = (isSafari: boolean) => {
-        data.current = { isSafari };
+        isSafariTmp = isSafari;
         _setSafari(isSafari)
     }
 
@@ -85,8 +84,8 @@ React.forwardRef((props, ref) => {
     }
 
     const onFocusHandler = (e: React.FocusEvent) => {
-        console.log(data.current.isSafari);
-        if (data.current.isSafari) {
+        console.log(isSafariTmp);
+        if (isSafariTmp) {
             console.log(e, document.activeElement);
             const activeElement = document.activeElement as HTMLElement;
             activeElement.blur();
@@ -116,7 +115,7 @@ React.forwardRef((props, ref) => {
     }, [isSafari]);
 
     React.useEffect(() => {
-        if (navigator.userAgent.includes('Mac')) {
+        if (navigator.userAgent.includes('Safari')) {
             setSafari(true);
         }
     }, []);
