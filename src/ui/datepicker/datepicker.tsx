@@ -43,7 +43,12 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
-    const [isSafari, setSafari] = React.useState(false);
+    /**
+    * в сафари фокус постоянно скачет
+    * и editable инпуты сами открываются
+    * пока единственное решение - сделать инпуты не editable
+    */
+    const [isSafari, setSafari] = React.useState(true);
 
     isClearable = readOnly || disabled ? false : isClearable;
     editable =  isSafari || readOnly || disabled ? false : editable;
@@ -85,23 +90,9 @@ React.forwardRef((props, ref) => {
         pickerRef.current.setOpen(false); // был баг: если убрать фокус табом, календарь не закрывается
     }
 
-    // React.useEffect(() => {
-    //     if (isSafari) {
-    //         /**
-    //         * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
-    //         */
-    //         const input = datepickerRef.current.querySelector('input') as HTMLElement;
-    //         if (input) input.setAttribute('readonly', 'readonly');
-    //         // в сафари все календари открываются сами
-    //         setTimeout(() => {
-    //             setSafari(false);
-    //         }, 5000);
-    //     }
-    // }, [isSafari]);
-
     React.useEffect(() => {
-        if (navigator.userAgent.includes('Safari')) {
-            setSafari(true);
+        if (!navigator.userAgent.includes('Mac')) {
+            setSafari(false);
         }
     }, []);
 
