@@ -120,7 +120,6 @@ React.forwardRef((props, ref) => {
     return (
         <div
             className={className}
-            key={'isSafari-' + isSafari}
             ref={datepickerRef}
             tabIndex={-1}
             onFocus={onFocusHandler}
