@@ -106,7 +106,7 @@ React.forwardRef((props, ref) => {
             setTimeout(() => {
                 isSafari = false;
                 setSafari(false);
-            }, 500);
+            }, 5000);
         }
     }, [isSafari]);
 
