@@ -52,7 +52,7 @@ React.forwardRef((props, ref) => {
     }
 
     isClearable = readOnly || disabled ? false : isClearable;
-    editable = readOnly || disabled ? false : editable;
+    editable =  isSafari || readOnly || disabled ? false : editable;
 
     const inputAttributes = {
         color,
@@ -115,7 +115,7 @@ React.forwardRef((props, ref) => {
     }, [isSafari]);
 
     React.useEffect(() => {
-        if (navigator.userAgent.includes('Safari')) {
+        if (navigator.userAgent.includes('Mac')) {
             setSafari(true);
         }
     }, []);
@@ -130,7 +130,7 @@ React.forwardRef((props, ref) => {
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}
-                disabled={disabled || isSafari}
+                disabled={disabled}
                 locale="en-GB"
                 readOnly={readOnly}
                 ref={pickerRef}
