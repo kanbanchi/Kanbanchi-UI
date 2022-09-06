@@ -82,6 +82,8 @@ React.forwardRef((props, ref) => {
         console.log(isSafari);
         if (isSafari) {
             console.log(e, document.activeElement);
+            const activeElement = document.activeElement as HTMLElement;
+            activeElement.blur();
         }
     }
 
