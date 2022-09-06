@@ -44,7 +44,7 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
-    const [isSafari, setSafari] = React.useState(false);
+    let [isSafari, setSafari] = React.useState(false);
 
     isClearable = readOnly || disabled ? false : isClearable;
     editable = readOnly || disabled ? false : editable;
@@ -78,6 +78,13 @@ React.forwardRef((props, ref) => {
         }, 100);
     }
 
+    const onFocusHandler = (e: React.FocusEvent) => {
+        console.log(isSafari);
+        if (isSafari) {
+            console.log(e, document.activeElement);
+        }
+    }
+
     const onBlurHandler = (e: React.FocusEvent) => {
         if (e && e.relatedTarget) {
             const closest = e.relatedTarget.closest('.kui-datepicker');
@@ -94,14 +101,16 @@ React.forwardRef((props, ref) => {
             const input = datepickerRef.current.querySelector('input') as HTMLElement;
             if (input) input.setAttribute('readonly', 'readonly');
             // в сафари все календари открываются сами
-            const popper = datepickerRef.current.querySelector('.react-datepicker__tab-loop') as HTMLElement;
-            if (popper) popper.remove();
-            setSafari(false);
+            setTimeout(() => {
+                isSafari = false;
+                setSafari(false);
+            }, 500);
         }
     }, [isSafari]);
 
     React.useEffect(() => {
-        if (navigator.userAgent.includes('Mac')) {
+        if (navigator.userAgent.includes('Safari')) {
+            isSafari = true;
             setSafari(true);
         }
     }, []);
@@ -112,6 +121,7 @@ React.forwardRef((props, ref) => {
             key={'isSafari-' + isSafari}
             ref={datepickerRef}
             tabIndex={-1}
+            onFocus={onFocusHandler}
             onBlur={onBlurHandler}
         >
             <ReactDatepickerElement
