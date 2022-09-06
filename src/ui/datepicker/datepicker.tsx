@@ -8,7 +8,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../../../src/ui/datepicker/datepicker.module.scss';
 
 const ReactDatepickerElement = ReactDatepicker as any;
-
 registerLocale('en-GB', enGB); // Weeks start on Monday
 
 // accessibility ok+-
@@ -44,9 +43,15 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
+    /**
+    * в сафари фокус постоянно скачет
+    * и editable инпуты сами открываются
+    * пока единственное решение - сделать инпуты не editable
+    */
+    const [isSafari, setSafari] = React.useState(true);
 
     isClearable = readOnly || disabled ? false : isClearable;
-    editable = readOnly || disabled ? false : editable;
+    editable =  isSafari || readOnly || disabled ? false : editable;
 
     const inputAttributes = {
         color,
@@ -69,12 +74,34 @@ React.forwardRef((props, ref) => {
 
     const onChangeHandler = (date: Date) => {
         if (onChange) onChange(date);
+        setTimeout(()=>{
+            if (document.activeElement === document.body) { // фокус отвалился, вернуть фокус инпуту
+                const input = datepickerRef.current.querySelector('input') as HTMLElement;
+                if (input) input.focus();
+            }
+        }, 100);
     }
+
+    const onBlurHandler = (e: React.FocusEvent) => {
+        if (e && e.relatedTarget) {
+            const closest = e.relatedTarget.closest('.kui-datepicker');
+            if (closest && closest === datepickerRef.current) return;
+        }
+        pickerRef.current.setOpen(false); // был баг: если убрать фокус табом, календарь не закрывается
+    }
+
+    React.useEffect(() => {
+        if (!navigator.userAgent.includes('Mac')) {
+            setSafari(false);
+        }
+    }, []);
 
     return (
         <div
             className={className}
             ref={datepickerRef}
+            tabIndex={-1}
+            onBlur={onBlurHandler}
         >
             <ReactDatepickerElement
                 customInput={<Input {...inputAttributes}/>}

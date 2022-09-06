@@ -2,6 +2,10 @@
 .kui-datepicker {
     display: inline-block;
     width: $google-spacing * 18;
+
+    &:focus {
+        outline: 0;
+    }
     
     .kui-input__item {
         color: $color-base;
