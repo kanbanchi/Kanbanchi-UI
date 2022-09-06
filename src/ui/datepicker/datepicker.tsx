@@ -123,7 +123,7 @@ React.forwardRef((props, ref) => {
             key={'isSafari-' + isSafari}
             ref={datepickerRef}
             tabIndex={-1}
-            onFocus={onFocusHandler}
+            onFocusCapture={onFocusHandler}
             onBlur={onBlurHandler}
         >
             <ReactDatepickerElement
