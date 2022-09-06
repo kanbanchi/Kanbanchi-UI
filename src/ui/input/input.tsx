@@ -112,14 +112,13 @@ React.forwardRef((props, ref) => {
      * solution from https://github.com/cliener/input-fixer
      */
     const lastEventTime = React.useRef(0);
-    const throttleDuration = 100; // ms
+    const throttleDuration = 300; // ms
     const throttleEvent = (event: React.FocusEvent<HTMLInputElement>) => {
         const timeStamp = event.timeStamp;
 
         if (timeStamp < (lastEventTime.current + throttleDuration)) {
             event.preventDefault();
             event.stopPropagation();
-            console.log('stop');
             return false;
         }
 
@@ -253,10 +252,11 @@ React.forwardRef((props, ref) => {
 
     // fix safari cursor jump: https://stackoverflow.com/questions/46000544/react-controlled-input-cursor-jumps
     React.useEffect(() => {
+        if (!cursor) return;
         try { // many input types do not support selection
             textarea.current.setSelectionRange(cursor, cursor);
         } catch (e) { /* noop */ }
-    }, [ref, cursor, value]);
+    }, [cursor]);
 
     React.useEffect(() => {
         if (autosize) autosizeLibray.default(textarea.current);

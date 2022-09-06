@@ -4,7 +4,8 @@ import { Datepicker } from '../../src/ui';
 
 const Story = () => {
     const [date, setDate] = React.useState<Date | null>(null);
-    const [date01, setDate01] = React.useState(new Date());
+    const [date01, setDate01] = React.useState<Date | null>(new Date());
+    const [date02, setDate02] = React.useState<Date | null>(new Date());
 
     return (
         <div className="page">
@@ -49,9 +50,9 @@ const Story = () => {
 
 <Datepicker
     label="Error"
-    selected={date01}
+    selected={date02}
     state={'error'}
-    onChange={val=>setDate01(val)}
+    onChange={val=>setDate02(val)}
 />
 
                 <br/><br/>
