@@ -44,7 +44,13 @@ React.forwardRef((props, ref) => {
 
     const datepickerRef = React.useRef(null);
     const pickerRef = React.useRef(null);
-    let [isSafari, setSafari] = React.useState(false);
+    const [isSafari, _setSafari] = React.useState(false);
+    const data = React.useRef({ isSafari });
+    data.current = { isSafari };
+    const setSafari = (isSafari: boolean) => {
+        data.current = { isSafari };
+        _setSafari(isSafari)
+    }
 
     isClearable = readOnly || disabled ? false : isClearable;
     editable = readOnly || disabled ? false : editable;
@@ -80,7 +86,7 @@ React.forwardRef((props, ref) => {
 
     const onFocusHandler = (e: React.FocusEvent) => {
         console.log(isSafari);
-        if (isSafari) {
+        if (data.current.isSafari) {
             console.log(e, document.activeElement);
             const activeElement = document.activeElement as HTMLElement;
             activeElement.blur();
@@ -96,7 +102,7 @@ React.forwardRef((props, ref) => {
     }
 
     React.useEffect(() => {
-        if (isSafari) {
+        if (data.current.isSafari) {
             /**
             * в сафари фокус постоянно скачет, пока единственное решение - сделать инпуты readonly
             */
@@ -104,7 +110,6 @@ React.forwardRef((props, ref) => {
             if (input) input.setAttribute('readonly', 'readonly');
             // в сафари все календари открываются сами
             setTimeout(() => {
-                isSafari = false;
                 setSafari(false);
             }, 5000);
         }
@@ -112,7 +117,6 @@ React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
         if (navigator.userAgent.includes('Mac')) {
-            isSafari = true;
             setSafari(true);
         }
     }, []);
