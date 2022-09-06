@@ -111,7 +111,7 @@ React.forwardRef((props, ref) => {
     }, [isSafari]);
 
     React.useEffect(() => {
-        if (navigator.userAgent.includes('Safari')) {
+        if (navigator.userAgent.includes('Mac')) {
             isSafari = true;
             setSafari(true);
         }
@@ -123,7 +123,7 @@ React.forwardRef((props, ref) => {
             key={'isSafari-' + isSafari}
             ref={datepickerRef}
             tabIndex={-1}
-            onFocusCapture={onFocusHandler}
+            onFocus={onFocusHandler}
             onBlur={onBlurHandler}
         >
             <ReactDatepickerElement
