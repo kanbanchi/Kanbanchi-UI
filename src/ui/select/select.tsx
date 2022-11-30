@@ -70,6 +70,7 @@ export const Select = React.forwardRef((
     const selectRef = React.useRef(null);
     const combinedRef =  useCombinedRefs(ref, selectRef);
     const timer = React.useRef(null);
+    const isOpened = React.useRef(null);
 
     className = ClassNames(
         'kui-select',
@@ -116,6 +117,7 @@ export const Select = React.forwardRef((
 
     const closeDropdown = () => {
         setIsOpenedHook(false);
+        isOpened.current = false;
         if (
             !multiple &&
             valueHook !== initialValue
@@ -181,6 +183,7 @@ export const Select = React.forwardRef((
 
     const scrollList = () => {
         if (
+            !isOpened.current && // onAnimationEnd срабатывал после каждого скрола, а надо только 1 раз при открытии
             dropdownRef.current &&
             isFocusedHook &&
             itemsRefsHook[activeHook] &&
@@ -192,6 +195,7 @@ export const Select = React.forwardRef((
             let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
             let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
             dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
+            isOpened.current = true;
         }
     }
 
@@ -206,6 +210,7 @@ export const Select = React.forwardRef((
             } else {
                 inputRef.current.setFocus(); // return focus to input before dropdown hide
                 setIsOpenedHook(false);
+                isOpened.current = false;
                 if (!isSearch) { // dont update search input value
                     setValue(e.item.text);
                 }
@@ -260,6 +265,7 @@ export const Select = React.forwardRef((
                 openDropdown();
             } else if (isCloseOnClick && valueHook === initialValue) {
                 setIsOpenedHook(false);
+                isOpened.current = false;
                 if (onClose) onClose();
             }
         }
