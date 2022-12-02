@@ -35,14 +35,42 @@ $color-sky:                 #00C2E0 !default;
 $color-lime:                #51E898 !default;
 $color-trelloBlack:         #4d4d4d !default;
 
+// New Colors 2022-12-01
+$color-label-purple:           #8a5cff; // fix purple label
+
+$color-label-pastel-red:       #ffa9ae;
+$color-label-pastel-orange:    #ffdcad;
+$color-label-pastel-yellow:    #fde791;
+$color-label-pastel-green:     #c8e5c2;
+$color-label-pastel-blue:      #bfd9fd;
+$color-label-pastel-purple:    #dbd3fd;
+$color-label-pastel-pink:      #f9d2e8;
+$color-label-pastel-brown:     #dfd4cd;
+$color-label-pastel-light-grey:#dfe2e7;
+$color-label-pastel-grey:      #cacfd8;
+$color-label-vivid-red:        #fe4f5a;
+$color-label-vivid-orange:     #ffb047;
+$color-label-vivid-yellow:     #fbd22d;
+$color-label-vivid-green:      #67b757;
+$color-label-vivid-blue:       #5c9efa;
+$color-label-vivid-purple:     #8b72f9;
+$color-label-vivid-pink:       #e74ba3;
+$color-label-vivid-brown:      #b79f8f;
+$color-label-vivid-light-grey: #a5adbb;
+$color-label-vivid-grey:       #718098;
+
+// color label text
+$color-label-text-base: rgba($color-base, .6);
+$color-label-text-white: rgba($color-white, .9);
+
 $colors: (
         'red':              (color: $color-red), // Old Colors
         'green':            (color: $color-green),
         'blue':             (color: $color-blue),
-        'yellow':           (color: $color-yellow, text: $color-base),
+        'yellow':           (color: $color-yellow, text: $color-label-text-base),
         'orange':           (color: $color-orange),
         'pink':             (color: $color-pink),
-        'purple':           (color: $color-purple),
+        'purple':           (color: $color-label-purple, text: $color-label-text-white),
         'cyan':             (color: $color-cyan),
         'sky':              (color: $color-sky), // Trello Colors
         'lime':             (color: $color-lime),
@@ -51,11 +79,11 @@ $colors: (
         'swiss-coffee':     (color: $color-swiss-coffee),
         'persimmon':        (color: $color-persimmon),
         'paris-daisy':      (color: $color-paris-daisy),
-        'lawn-green':       (color: $color-lawn-green, text: $color-base),
-        'spring-green':     (color: $color-spring-green, text: $color-base),
+        'lawn-green':       (color: $color-lawn-green, text: $color-label-text-base),
+        'spring-green':     (color: $color-spring-green, text: $color-label-text-base),
         'manz':             (color: $color-manz),
         'lucky':            (color: $color-lucky),
-        'aqua':             (color: $color-aqua, text: $color-base),
+        'aqua':             (color: $color-aqua, text: $color-label-text-base),
         'aquamarine':       (color: $color-aquamarine),
         'light-sky-blue':   (color: $color-light-sky-blue),
         'neon-blue':        (color: $color-neon-blue),
@@ -89,4 +117,24 @@ $colors: (
         'E190F8':           (color: #E190F8),
         'F691B2':           (color: #F691B2),
         'D1BFC2':           (color: #D1BFC2),
+        'pastel-red':       (color: $color-label-pastel-red), // New Colors 2022-12-01
+        'pastel-orange':    (color: $color-label-pastel-orange),
+        'pastel-yellow':    (color: $color-label-pastel-yellow),
+        'pastel-green':     (color: $color-label-pastel-green),
+        'pastel-blue':      (color: $color-label-pastel-blue),
+        'pastel-purple':    (color: $color-label-pastel-purple),
+        'pastel-pink':      (color: $color-label-pastel-pink),
+        'pastel-brown':     (color: $color-label-pastel-brown),
+        'pastel-light-grey':(color: $color-label-pastel-light-grey),
+        'pastel-grey':      (color: $color-label-pastel-grey),
+        'vivid-red':        (color: $color-label-vivid-red, text: $color-label-text-white),
+        'vivid-orange':     (color: $color-label-vivid-orange, text: $color-label-text-white),
+        'vivid-yellow':     (color: $color-label-vivid-yellow, text: $color-label-text-base),
+        'vivid-green':      (color: $color-label-vivid-green),
+        'vivid-blue':       (color: $color-label-vivid-blue, text: $color-label-text-white),
+        'vivid-purple':     (color: $color-label-vivid-purple, text: $color-label-text-white),
+        'vivid-pink':       (color: $color-label-vivid-pink),
+        'vivid-brown':      (color: $color-label-vivid-brown, text: $color-label-text-white),
+        'vivid-light-grey': (color: $color-label-vivid-light-grey, text: $color-label-text-white),
+        'vivid-grey':       (color: $color-label-vivid-grey),
 );
