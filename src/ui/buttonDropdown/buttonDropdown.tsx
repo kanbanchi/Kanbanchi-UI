@@ -149,7 +149,17 @@ export const ButtonDropdown = React.forwardRef((
             if (onOpen) onOpen();
         } else if (isOpened === false) {
             if (onClose) onClose();
-            if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
+            setTimeout(() => {
+                const activeElement = document.activeElement;
+                if (
+                    activeElement.tagName === 'INPUT' ||
+                    activeElement.tagName === 'BUTTON' ||
+                    activeElement.tagName === 'TEXTAREA' ||
+                    [...activeElement.attributes].find(attr => attr.name.startsWith('aria-'))
+                ) {
+                    // dont move focus, if it catched by another control
+                } else if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
+            });
         }
     }
 

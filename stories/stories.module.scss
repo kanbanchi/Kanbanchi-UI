@@ -183,3 +183,24 @@ section {
 .stories-dropdown-visible .kui-dropdown__item {
     overflow: visible;
 }
+
+.stories-colors__item {
+    display: inline-flex;
+    align-items: center;
+    width: 45%;
+    height: $google-spacing * 4;
+    margin: 0 $google-spacing $google-spacing 0;
+    padding: 0 $google-spacing;
+    font-size: $milli-size;
+    border-radius: $base-radius;
+
+    @each $name, $item in $colors {
+        $color: map-get($item, 'color');
+        $text: get-text-color($item);
+
+        &--#{$name} {
+            color: $text;
+            background: $color;
+        }
+    }
+}

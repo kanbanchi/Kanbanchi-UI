@@ -48,9 +48,9 @@
 
 @function calc-text-color($color) {
     @if (lightness($color) > 60) {
-        @return $color-base // Lighter backgorund, return dark color
+        @return calc-color(fade, $color-base, 60) // Lighter backgorund, return dark color
     } @else {
-        @return $color-white; // Darker background, return light color
+        @return calc-color(fade, $color-white, 90); // Darker background, return light color
     }
 }
 
@@ -61,7 +61,7 @@
     @if map-has-key($item, 'color') {
         @return calc-text-color(map-get($item, 'color'));
     }
-    @return $color-base;
+    @return calc-color(fade, $color-base, 60);
 }
 
 //  Hide elements
