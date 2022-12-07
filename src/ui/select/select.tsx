@@ -366,6 +366,7 @@ export const Select = React.forwardRef((
         if (!e) return;
         if (onKeyDown) onKeyDown(e);
         if (e.key === 'Escape') {
+            e.stopPropagation();
             return closeDropdown();
         }
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {

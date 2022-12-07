@@ -246,6 +246,7 @@ export const Modal: React.FC<IModalInheritedProps> =
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
         if (e.key === 'Escape') {
+            e.stopPropagation();
             return onClose();
         }
     }

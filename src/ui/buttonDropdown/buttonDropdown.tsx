@@ -240,6 +240,7 @@ export const ButtonDropdown = React.forwardRef((
             e.key === 'Escape' ||
             multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
         ) {
+            e.stopPropagation();
             return setIsOpened(false);
         }
     }
