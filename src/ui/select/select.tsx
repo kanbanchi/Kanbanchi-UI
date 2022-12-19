@@ -365,7 +365,7 @@ export const Select = React.forwardRef((
     attributes.onKeyDown = (e: any) => {
         if (!e) return;
         if (onKeyDown) onKeyDown(e);
-        if (e.key === 'Escape') {
+        if (isOpenedHook && e.key === 'Escape') {
             e.stopPropagation();
             return closeDropdown();
         }
