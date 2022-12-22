@@ -59,18 +59,14 @@ $color-label-vivid-brown:      #b79f8f;
 $color-label-vivid-light-grey: #a5adbb;
 $color-label-vivid-grey:       #718098;
 
-// color label text
-$color-label-text-base: rgba($color-base, .6);
-$color-label-text-white: rgba($color-white, .9);
-
 $colors: (
         'red':              (color: $color-red), // Old Colors
         'green':            (color: $color-green),
         'blue':             (color: $color-blue),
-        'yellow':           (color: $color-yellow, text: $color-label-text-base),
+        'yellow':           (color: $color-yellow, text: $color-base),
         'orange':           (color: $color-orange),
         'pink':             (color: $color-pink),
-        'purple':           (color: $color-label-purple, text: $color-label-text-white),
+        'purple':           (color: $color-label-purple, text: $color-white),
         'cyan':             (color: $color-cyan),
         'sky':              (color: $color-sky), // Trello Colors
         'lime':             (color: $color-lime),
@@ -79,11 +75,11 @@ $colors: (
         'swiss-coffee':     (color: $color-swiss-coffee),
         'persimmon':        (color: $color-persimmon),
         'paris-daisy':      (color: $color-paris-daisy),
-        'lawn-green':       (color: $color-lawn-green, text: $color-label-text-base),
-        'spring-green':     (color: $color-spring-green, text: $color-label-text-base),
+        'lawn-green':       (color: $color-lawn-green, text: $color-base),
+        'spring-green':     (color: $color-spring-green, text: $color-base),
         'manz':             (color: $color-manz),
         'lucky':            (color: $color-lucky),
-        'aqua':             (color: $color-aqua, text: $color-label-text-base),
+        'aqua':             (color: $color-aqua, text: $color-base),
         'aquamarine':       (color: $color-aquamarine),
         'light-sky-blue':   (color: $color-light-sky-blue),
         'neon-blue':        (color: $color-neon-blue),
@@ -127,14 +123,14 @@ $colors: (
         'pastel-brown':     (color: $color-label-pastel-brown),
         'pastel-light-grey':(color: $color-label-pastel-light-grey),
         'pastel-grey':      (color: $color-label-pastel-grey),
-        'vivid-red':        (color: $color-label-vivid-red, text: $color-label-text-white),
-        'vivid-orange':     (color: $color-label-vivid-orange, text: $color-label-text-white),
-        'vivid-yellow':     (color: $color-label-vivid-yellow, text: $color-label-text-base),
+        'vivid-red':        (color: $color-label-vivid-red, text: $color-white),
+        'vivid-orange':     (color: $color-label-vivid-orange, text: $color-white),
+        'vivid-yellow':     (color: $color-label-vivid-yellow, text: $color-base),
         'vivid-green':      (color: $color-label-vivid-green),
-        'vivid-blue':       (color: $color-label-vivid-blue, text: $color-label-text-white),
-        'vivid-purple':     (color: $color-label-vivid-purple, text: $color-label-text-white),
+        'vivid-blue':       (color: $color-label-vivid-blue, text: $color-white),
+        'vivid-purple':     (color: $color-label-vivid-purple, text: $color-white),
         'vivid-pink':       (color: $color-label-vivid-pink),
-        'vivid-brown':      (color: $color-label-vivid-brown, text: $color-label-text-white),
-        'vivid-light-grey': (color: $color-label-vivid-light-grey, text: $color-label-text-white),
+        'vivid-brown':      (color: $color-label-vivid-brown, text: $color-white),
+        'vivid-light-grey': (color: $color-label-vivid-light-grey, text: $color-white),
         'vivid-grey':       (color: $color-label-vivid-grey),
 );

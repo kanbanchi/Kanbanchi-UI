@@ -2,6 +2,57 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 const Story = () => {
+    const CARD_BACKGROUND_COLORS: ReadonlyArray<string> = Object.freeze([
+        'ad1457',
+        'FFAB80',
+        '304ffe',
+        '90caf9',
+        '4caf50',
+        '98DE6F',
+        '5E1172',
+        'AD82EA',
+        'ff9800',
+        'FAD165',
+
+        'F08577',
+        'FEB3B3',
+        '2196f3',
+        'C6DEFB',
+        '51E898',
+        '00e676',
+        'aa00ff',
+        '9A9CFF',
+        'F5BE7A',
+        'fdd835',
+
+        'F691B2',
+        'FF9280',
+        '00bcd4',
+        '9FE1E7',
+        '76ff03',
+        '69D1A2',
+        '90B3EB',
+        'B99AFF',
+        'FBE983',
+        'd7ccc8',
+
+        'D09E8D',
+        '00e5ff',
+        'A4EEED',
+        'C8F59A',
+        '91E6C0',
+        'E190F8',
+        'D1BFC2',
+        'eeff41',
+
+        '64ffda',
+        '546e7a',
+        '9e9d24',
+        'd4e157',
+        'C0C6CF',
+        'BFC1B0',
+    ]);
+
     return (
         <div className="page">
             <section className="section-form-min">
@@ -154,6 +205,22 @@ const Story = () => {
                 <div className="stories-colors__item stories-colors__item--indigo">
                 indigo
                 </div>
+            </section>
+
+            <section className="section-form-min">
+                <h2>Card colors</h2>
+
+                {CARD_BACKGROUND_COLORS.map(color => {
+                    return (
+                        <div
+                            className={`stories-colors__card stories-colors__card-bgcolor-${color}`}
+                            style={{backgroundColor: `${color}`}}
+                            key={color}
+                        >
+                            {color}
+                        </div>
+                    );
+                })}
             </section>
         </div>
     );
