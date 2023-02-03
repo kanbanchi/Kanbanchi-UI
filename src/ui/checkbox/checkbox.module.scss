@@ -28,7 +28,7 @@
     &__label:before {
         content: '';
         border: 2px solid calc-color(fade, $color-base, 30);
-        border-radius: $small-radius;
+        border-radius: $base-radius;
     }
     &__checkmark {
         transform: scale(0);
@@ -99,7 +99,7 @@
         right: -$google-spacing;
         top: -$google-spacing * .5;
         bottom: -$google-spacing * .5;
-        border-radius: $base-radius;
+        border-radius: $big-radius;
     }
     
     &:focus:before,
@@ -128,7 +128,7 @@
             width: 12px;
             height: 2px;
             background: $color-white;
-            border-radius: 2px;
+            border-radius: $small-radius;
         }
 
         &.kui-checkbox--direction_left {

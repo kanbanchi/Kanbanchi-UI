@@ -326,7 +326,7 @@
         padding: 0 $google-spacing * 2 0 $google-spacing;
         color: calc-color(tint, $color-base, 50);
         border: 2px solid calc-color(tint, $color-base, 20);
-        border-radius: $base-radius;
+        border-radius: $big-radius;
 
         .kui-button__icon {
             margin-right: $google-spacing / 2;
@@ -502,7 +502,7 @@
         padding: 0 $google-spacing 0 $google-spacing * 2;
         color: $color-base;
         border: 2px dashed calc-color(fade, $color-base, 20);
-        border-radius: $base-radius;
+        border-radius: $big-radius;
 
         .kui-button__icon {
             margin-left: $google-spacing;
