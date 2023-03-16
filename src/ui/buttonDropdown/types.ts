@@ -2,6 +2,7 @@ import { IDropdownPublicProps } from './../dropdown/types';
 
 export interface IButtonDropdownStateProps {
     disabled?: boolean;
+    dontChangeFocus?: boolean;
     dropdownClassName?: string;
     multiple?: boolean;
     portal?: boolean;

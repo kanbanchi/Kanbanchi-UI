@@ -20,6 +20,7 @@ export const ButtonDropdown = React.forwardRef((
         directionVertical,
         directionHorizontal,
         disabled,
+        dontChangeFocus,
         dropdownClassName,
         isFitWindow,
         multiple,
@@ -124,18 +125,20 @@ export const ButtonDropdown = React.forwardRef((
          * подождать afterOpened другого дропдауна
          * был баг: когда открывается 2й дропдаун, фокус остается на 1ом
          */
-        setTimeout(() => {
-            const activeElement = document.activeElement as HTMLElement;
-            if (activeElement) {
-                const parents = getParentsClasses(
-                    activeElement,
-                    [dropdownUniqueClass]
-                );
-                if (parents && parents.includes(dropdownUniqueClass)) return; // если фокус уже в дропдауне
-            }
-            const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
-            if (ariaSelected) ariaSelected.focus();
-        }, 100);
+        if (!dontChangeFocus) {
+            setTimeout(() => {
+                const activeElement = document.activeElement as HTMLElement;
+                if (activeElement) {
+                    const parents = getParentsClasses(
+                        activeElement,
+                        [dropdownUniqueClass]
+                    );
+                    if (parents && parents.includes(dropdownUniqueClass)) return; // если фокус уже в дропдауне
+                }
+                const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
+                if (ariaSelected) ariaSelected.focus();
+            }, 100);
+        }
         if (multiple && single) {
             dropdownRef.current.removeEventListener('click', onDropdownClick);
             dropdownRef.current.addEventListener('click', onDropdownClick);
