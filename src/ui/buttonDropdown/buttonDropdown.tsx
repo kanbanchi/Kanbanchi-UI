@@ -20,6 +20,7 @@ export const ButtonDropdown = React.forwardRef((
         directionVertical,
         directionHorizontal,
         disabled,
+        dontChangeFocus,
         dropdownClassName,
         isFitWindow,
         multiple,
@@ -75,7 +76,7 @@ export const ButtonDropdown = React.forwardRef((
             top: 0,
         };
         if (directionVertical === 'auto') {
-            directionHook = (button.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+            directionHook = (button.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
             setDirectionHook(directionHook);
         }
         if (portal) {
@@ -124,18 +125,20 @@ export const ButtonDropdown = React.forwardRef((
          * подождать afterOpened другого дропдауна
          * был баг: когда открывается 2й дропдаун, фокус остается на 1ом
          */
-        setTimeout(() => {
-            const activeElement = document.activeElement as HTMLElement;
-            if (activeElement) {
-                const parents = getParentsClasses(
-                    activeElement,
-                    [dropdownUniqueClass]
-                );
-                if (parents && parents.includes(dropdownUniqueClass)) return; // если фокус уже в дропдауне
-            }
-            const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
-            if (ariaSelected) ariaSelected.focus();
-        }, 100);
+        if (!dontChangeFocus) {
+            setTimeout(() => {
+                const activeElement = document.activeElement as HTMLElement;
+                if (activeElement) {
+                    const parents = getParentsClasses(
+                        activeElement,
+                        [dropdownUniqueClass]
+                    );
+                    if (parents && parents.includes(dropdownUniqueClass)) return; // если фокус уже в дропдауне
+                }
+                const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
+                if (ariaSelected) ariaSelected.focus();
+            }, 100);
+        }
         if (multiple && single) {
             dropdownRef.current.removeEventListener('click', onDropdownClick);
             dropdownRef.current.addEventListener('click', onDropdownClick);
@@ -240,6 +243,7 @@ export const ButtonDropdown = React.forwardRef((
             e.key === 'Escape' ||
             multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
         ) {
+            e.stopPropagation();
             return setIsOpened(false);
         }
     }

@@ -84,6 +84,12 @@ React.forwardRef((props, ref) => {
         pickerRef.current.setOpen(false); // был баг: если убрать фокус табом, календарь не закрывается
     }
 
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (e && e.key === 'Escape') {
+            e.stopPropagation();
+        }
+    }
+
     return (
         <div
             className={className}
@@ -99,6 +105,7 @@ React.forwardRef((props, ref) => {
                 ref={pickerRef}
                 selected={selected}
                 onChange={onChangeHandler}
+                onKeyDown={onKeyDown}
                 {...attributes}
             />
         </div>

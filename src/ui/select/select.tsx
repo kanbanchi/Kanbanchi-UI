@@ -131,7 +131,7 @@ export const Select = React.forwardRef((
     const calcDirection = () => {
         let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
-            directionHook = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+            directionHook = (el.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
             setDirectionHook(directionHook);
         }
         if (portal) {
@@ -365,7 +365,8 @@ export const Select = React.forwardRef((
     attributes.onKeyDown = (e: any) => {
         if (!e) return;
         if (onKeyDown) onKeyDown(e);
-        if (e.key === 'Escape') {
+        if (isOpenedHook && e.key === 'Escape') {
+            e.stopPropagation();
             return closeDropdown();
         }
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
