@@ -59,6 +59,29 @@ $color-label-vivid-brown:      #b79f8f;
 $color-label-vivid-light-grey: #a5adbb;
 $color-label-vivid-grey:       #718098;
 
+// New Colors 2022-02-05
+$color-card-red:               #FFE4E6;
+$color-card-orange:            #FFEDD5;
+$color-card-yellow:            #FEF3C7;
+$color-card-green:             #E1F1DE;
+$color-card-cyan:              #CBEAF1;
+$color-card-blue:              #DBEAFE;
+$color-card-purple:            #EDE9FE;
+$color-card-pink:              #FCE7F3;
+$color-card-brown:             #ECE5E1;
+$color-card-gray:              #E6E9ED;
+
+$color-card-picker-red:        #FFB3B8;
+$color-card-picker-orange:     #FFD8A3;
+$color-card-picker-yellow:     #FDE896;
+$color-card-picker-green:      #C1E2BB;
+$color-card-picker-cyan:       #A2DAE6;
+$color-card-picker-blue:       #ABCEFD;
+$color-card-picker-purple:     #C3B6FC;
+$color-card-picker-pink:       #F6BBDD;
+$color-card-picker-brown:      #D7C9C1;
+$color-card-picker-gray:       #B9BFCB;
+
 $colors: (
         'red':              (color: $color-red), // Old Colors
         'green':            (color: $color-green),
@@ -133,4 +156,24 @@ $colors: (
         'vivid-brown':      (color: $color-label-vivid-brown, text: $color-white),
         'vivid-light-grey': (color: $color-label-vivid-light-grey, text: $color-white),
         'vivid-grey':       (color: $color-label-vivid-grey),
+        'card-red':         (color: $color-card-red),
+        'card-orange':      (color: $color-card-orange),
+        'card-yellow':      (color: $color-card-yellow),
+        'card-green':       (color: $color-card-cyan),
+        'card-cyan':        (color: $color-card-green),
+        'card-blue':        (color: $color-card-blue),
+        'card-purple':      (color: $color-card-purple),
+        'card-pink':        (color: $color-card-pink),
+        'card-brown':       (color: $color-card-brown),
+        'card-gray':        (color: $color-card-gray),
+        'card-picker-red':  (color: $color-card-picker-red),
+        'card-picker-orange':(color: $color-card-picker-orange),
+        'card-picker-yellow':(color: $color-card-picker-yellow),
+        'card-picker-green':(color: $color-card-picker-cyan),
+        'card-picker-cyan': (color: $color-card-picker-green),
+        'card-picker-blue': (color: $color-card-picker-blue),
+        'card-picker-purple':(color: $color-card-picker-purple),
+        'card-picker-pink': (color: $color-card-picker-pink),
+        'card-picker-brown':(color: $color-card-picker-brown),
+        'card-picker-gray': (color: $color-card-picker-gray),
 );
