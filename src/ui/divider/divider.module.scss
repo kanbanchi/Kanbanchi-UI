@@ -2,15 +2,18 @@
 $divider: '.kui-divider';
 
 #{$divider} {
-    height: $google-spacing;
+    height: $google-spacing * 2;
     margin: 0;
-    padding-top: $google-spacing / 2;
+    padding-top: $google-spacing - 1;
     box-sizing: border-box;
     box-shadow: none;
+    overflow: visible;
     &:before {
         content: '';
         display: block;
-        height: 1px;
-        background: calc-color(fade, $color-base, 30);
+        height: $google-spacing * 0.25;
+        width: calc(100% + #{$google-spacing * 2}); // paddings in select list
+        margin-left: $google-spacing * -1; // padding left in select list
+        background: calc-color(fade, $color-background, 50);
     }
 }
