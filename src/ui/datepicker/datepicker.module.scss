@@ -160,11 +160,14 @@
                 }
 
                 &--selected,
-                &--selected:hover,
+                &--selected:hover {
+                    background-color: $color-purple;
+                }
+
                 &--keyboard-selected,
                 &--keyboard-selected:hover {
-                    color: $color-white;
-                    background-color: $color-purple;
+                    color: $color-base;
+                    background-color: transparent;
                 }
 
                 &--disabled,

@@ -252,10 +252,11 @@ React.forwardRef((props, ref) => {
 
     // fix safari cursor jump: https://stackoverflow.com/questions/46000544/react-controlled-input-cursor-jumps
     React.useEffect(() => {
+        if (!cursor) return;
         try { // many input types do not support selection
             textarea.current.setSelectionRange(cursor, cursor);
         } catch (e) { /* noop */ }
-    }, [ref, cursor, value]);
+    }, [cursor]);
 
     React.useEffect(() => {
         if (autosize) autosizeLibray.default(textarea.current);
