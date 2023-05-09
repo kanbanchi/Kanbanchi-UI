@@ -131,7 +131,7 @@ export const Select = React.forwardRef((
     const calcDirection = () => {
         let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
-            directionHook = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+            directionHook = (el.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
             setDirectionHook(directionHook);
         }
         if (portal) {

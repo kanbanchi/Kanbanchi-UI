@@ -76,7 +76,7 @@ export const ButtonDropdown = React.forwardRef((
             top: 0,
         };
         if (directionVertical === 'auto') {
-            directionHook = (button.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+            directionHook = (button.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
             setDirectionHook(directionHook);
         }
         if (portal) {
