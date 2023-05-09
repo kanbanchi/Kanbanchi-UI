@@ -50,7 +50,6 @@
         color: $color-white;
         background: $color-purple;
         border-radius: $big-radius;
-        box-shadow: none;
 
         &:focus {
             color: $color-white;
@@ -65,14 +64,12 @@
         &:active {
             color: $color-white;
             background: $color-purple;
-            box-shadow: none;
         }
 
         &.kui-button--disabled,
         &:disabled {
             color: $color-white;
             background: $color-purple-light;
-            box-shadow: none;
         }
     }
 
@@ -85,7 +82,6 @@
 
         &:hover {
             background: calc-color(fade, $color-white, 50);
-            box-shadow: none;
         }
 
         &:active {
@@ -105,8 +101,14 @@
         border: 2px solid $color-purple-light;
         border-radius: $big-radius;
 
-        &:focus, &:hover, &:active  {
+        &:focus,
+        &:hover  {
             background: calc-color(fade, $color-purple, 10);
+            border: 2px solid $color-purple-light;
+        }
+
+        &:active {
+            background: none;
             border: 2px solid $color-purple-light;
         }
 
@@ -143,8 +145,7 @@
             color: calc-color(fade, $color-base, 30);
             background: $color-white;
             border: 2px solid calc-color(fade, $color-base, 20);
-            border-radius: $big-radius;            
-            box-shadow: none;
+            border-radius: $big-radius;
             @include transition;
         }
 
@@ -155,7 +156,6 @@
             .kui-button__children {
                 color: calc-color(fade, $color-base, 10);
                 border-color: calc-color(fade, $color-base, 15);
-                box-shadow: none;
             }
         }
 
@@ -182,7 +182,6 @@
                 color: $color-white;
                 border-color: calc-color(fade, $color-base, 0);
                 background: $color-purple;
-                box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-purple, 50);
             }
         }
 
@@ -207,7 +206,6 @@
                 .kui-button__children {
                     color: $color-white;
                     background: $color-purple-hover;
-                    box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-purple, 50);
                 }
             }
 
@@ -215,7 +213,6 @@
                 .kui-button__children {
                     color: $color-white;
                     background: $color-purple;
-                    box-shadow: none;
                 }
             }
 
@@ -226,7 +223,6 @@
                 .kui-button__children {
                     color: calc-color(fade, $color-white, 50);
                     background: calc-color(fade, $color-purple, 30);
-                    box-shadow: none;
                 }
             }
         }
@@ -238,7 +234,6 @@
                 color: $color-white;
                 background: $color-base;
                 border-color: transparent;
-                box-shadow: none;
             }
 
             &.kui-button--hover,
@@ -277,7 +272,6 @@
                 color: $color-white;
                 background: calc-color(fade, $color-white, 30);
                 border-color: transparent;
-                box-shadow: none;
             }
 
             &.kui-button--hover,
@@ -364,7 +358,6 @@
 
             &:hover {
                 background: calc-color(fade, $color-white, 50);
-                box-shadow: none;
             }
 
             &:active {
