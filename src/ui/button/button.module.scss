@@ -60,11 +60,6 @@
         &:hover {
             color: $color-white;
             background: $color-purple-hover;
-            box-shadow: 0 $google-spacing / 2 10px calc-color(fade, $color-purple, 30);
-        }
-
-        &.kui-button--size_large:hover {
-            box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-purple, 50);
         }
 
         &:active {
@@ -110,21 +105,9 @@
         border: 2px solid $color-purple-light;
         border-radius: $big-radius;
 
-        &:focus {
-            background: calc-color(fade, $color-purple, 5);
+        &:focus, &:hover, &:active  {
+            background: calc-color(fade, $color-purple, 10);
             border: 2px solid $color-purple-light;
-        }
-        
-        &:hover {
-            color: $color-white;
-            background: $color-purple;
-            border: 2px solid calc-color(fade, $color-purple, 0);
-
-        }
-
-        &:active {
-            background: $color-purple-hover;
-            border: 2px solid calc-color(fade, $color-purple, 0);
         }
 
         &.kui-button--disabled,
