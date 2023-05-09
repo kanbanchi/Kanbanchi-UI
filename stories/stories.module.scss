@@ -192,7 +192,7 @@ section {
     margin: 0 $google-spacing $google-spacing 0;
     padding: 0 $google-spacing;
     font-size: $milli-size;
-    border-radius: $base-radius;
+    border-radius: $big-radius;
 
     @each $name, $item in $colors {
         $color: map-get($item, 'color');
@@ -213,7 +213,7 @@ section {
     margin: 0 $google-spacing $google-spacing 0;
     padding: 0 $google-spacing;
     font-size: $milli-size;
-    border-radius: $base-radius;
+    border-radius: $big-radius;
 
     @each $name, $item in $colors {
         $color: map-get($item, 'color');
