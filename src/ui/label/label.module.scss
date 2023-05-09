@@ -5,8 +5,8 @@
 
     &__item {
         display: block;
+        margin-bottom: $google-spacing * 0.5;
         font-size: $nano-size;
-        font-weight: bold;
         color: calc-color(fade, $color-base, 50);
     }
 }
