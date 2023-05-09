@@ -21,7 +21,7 @@ $color-border-hover: #E0E3EB;
         height: auto;
         min-height: $google-spacing * 5;
         resize: none;
-        padding: $google-spacing $google-spacing * 2 $google-spacing * .75;
+        padding: $google-spacing $google-spacing * 2 $google-spacing * .75 $google-spacing * 1.5;
         font-size: $milli-size;
         line-height: $base-line-height;
         border-radius: $big-radius;
@@ -57,9 +57,16 @@ $color-border-hover: #E0E3EB;
     }
 
 
-    &.kui-input--small {
+    &.kui-input--size_small {
         .kui-input__item {
+            min-height: $google-spacing * 4;
+            padding-left: $google-spacing * 1.25;
+            font-size: $nano-size;
             border-radius: $base-radius;
+        }
+
+        .kui-input__icon {
+            bottom: $google-spacing * .75;
         }
     }
 
@@ -97,19 +104,11 @@ $color-border-hover: #E0E3EB;
         .kui-input__item {
             border-color: $color-red;
         }
-
-        .kui-label__item {
-            color: $color-red;
-        }
     }
 
     &.kui-input--state_success {
         .kui-input__item {
             border-color: $color-green;
-        }
-
-        .kui-label__item {
-            color: $color-green;
         }
     }
 
