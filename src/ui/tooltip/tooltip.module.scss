@@ -19,7 +19,7 @@
     color: $color-white;
     font-size: $milli-size;
     text-align: left;
-    border-radius: $base-radius;
+    border-radius: $big-radius;
     background: calc-color(fade, $color-base, 90);
     visibility: hidden;
     will-change: transform;

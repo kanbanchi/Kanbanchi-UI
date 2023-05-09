@@ -72,7 +72,7 @@ const Story = () => {
 
                 <Userpic
                     background="#64ffda"
-                    size={32}
+                    size={40}
                     src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
                     tooltip={{
                         direction: 'down-right',
