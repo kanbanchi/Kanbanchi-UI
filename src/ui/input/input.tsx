@@ -22,6 +22,7 @@ React.forwardRef((props, ref) => {
         label,
         readOnly,
         searchPlaceholder,
+        size,
         state,
         tooltip,
         value,
@@ -44,7 +45,6 @@ React.forwardRef((props, ref) => {
     const [uniqueClass] = React.useState('kui-input--' + uuidv4());
     const timer = React.useRef(null);
     const [cursor, setCursor] = React.useState(null);
-    const [isSmall, setSmall] = React.useState(null);
 
     className = ClassNames(
         'kui-input',
@@ -56,14 +56,13 @@ React.forwardRef((props, ref) => {
         (readOnly) ? 'kui-input--readonly' : null,
         (state) ? 'kui-input--state_' + state : null,
         (variant) ? 'kui-input--variant_' + variant : null,
-        (isSmall) ? 'kui-input--small' : null,
+        (size) ? 'kui-input--size_' + size : null,
         className
     );
 
     attributes.className = 'kui-input__item';
 
     attributes.onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSmall(textarea.current.offsetHeight < 40);
         setIsFilled(!!e.target.value);
         if (onChange) onChange(e);
         setCursor(e.target.selectionStart);
@@ -248,11 +247,10 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        const { value, offsetHeight } = textarea.current as HTMLInputElement;
+        textarea.current.value = value;
         setIsFilled(!!value);
         requestAnimationFrame(()=> { // подождать autosizeLibray.default. был баг высоты email в boardDetails
             autosizeLibray.default.update(textarea.current);
-            setSmall(offsetHeight < 40);
         });
     }, [value]);
 
@@ -334,6 +332,7 @@ Input.defaultProps = {
     iconTooltip: null,
     label: null,
     searchPlaceholder: 'Search',
+    size: null,
     state: null,
     tooltip: null,
     value: '',
