@@ -242,6 +242,186 @@ const Story = () => {
 
             </section>
 
+            <section className="section-form-min">
+                <h2>Size='small'</h2>
+
+                <Input
+                    isClearable={true}
+                    label={'Default isClearable'}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Default'}
+                    value={'Default filled'}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Default'}
+                    value={'Variant arrow'}
+                    variant={'arrow'}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    icon="overdue"
+                    label={'Default'}
+                    variant={'withicon'}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Readonly'}
+                    readOnly={true}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Readonly'}
+                    readOnly={true}
+                    value="Readonly filled"
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Readonly'}
+                    readOnly
+                    value={'Variant arrow'}
+                    variant={'arrow'}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    icon="overdue"
+                    label={'Readonly'}
+                    readOnly
+                    value={'Variant withicon'}
+                    variant={'withicon'}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Disabled'}
+                    disabled={true}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Disabled'}
+                    disabled={true}
+                    value="Disabled filled"
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label={'Disabled'}
+                    disabled
+                    value={'Variant arrow'}
+                    variant={'arrow'}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    icon="overdue"
+                    label={'Disabled'}
+                    disabled
+                    value={'Variant withicon'}
+                    variant={'withicon'}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label="Error"
+                    placeholder="Hover for tooltip"
+                    state={tt ? 'error' : null}
+                    tooltip={{
+                        direction: 'right',
+                        value: tt
+                    }}
+                    value={val1}
+                    onChange={(e: any)=>{
+                            setTt((e.target.value === '5') ? 'error' : null);
+                            setVal1(e.target.value)
+                        }
+                    }
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label="Error"
+                    placeholder="Hover for tooltip"
+                    state="error"
+                    tooltip={{
+                        direction: 'right',
+                        value: 'Error Tooltip'
+                    }}
+                    value={val}
+                    onChange={(e: any)=>setVal(e.target.value)}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label="Success"
+                    placeholder="Hover for tooltip"
+                    state="success"
+                    tooltip={{
+                        direction: 'down-right',
+                        value: 'Success Tooltip'
+                    }}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input label="Label"
+                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    onBlur={(e: any)=>console.log('onBlur', e.target.value)}
+                    size={'small'}
+                />
+
+                <br/>
+
+                <Input
+                    label="No resize"
+                    autosize={false}
+                    onChange={(e: any)=>console.log('onChange', e.target.value)}
+                    onEnter={(e: any)=>console.log('onEnter', e.target.value)}
+                    size={'small'}
+                />
+
+                <br/>
+
+            </section>
+
             <section className="section-grey section-form-min">
                 <h2>Color="grey"</h2>
 

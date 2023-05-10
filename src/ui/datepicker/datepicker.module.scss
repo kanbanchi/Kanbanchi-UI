@@ -45,7 +45,7 @@
 
     .react-datepicker-popper {
         z-index: $z-modal;
-        border-radius: $base-radius;
+        border-radius: $big-radius;
         box-shadow: $shadow-hover;
         background: $color-white;
         user-select: none;
@@ -77,7 +77,7 @@
         background-color: $color-white;
         color: $color-base;
         border: 0 none;
-        border-radius: $base-radius;
+        border-radius: $big-radius;
     }
 
     .react-datepicker__triangle {
@@ -145,13 +145,13 @@
                 &:hover {
                     color: $color-base;
                     background-color: $color-background;
-                    border-radius: $base-radius;
+                    border-radius: $big-radius;
                 }
 
                 &--selected,
                 &--keyboard-selected,
                 &--highlighted {
-                    border-radius: $base-radius;
+                    border-radius: $big-radius;
                 }
 
                 &--highlighted {
@@ -160,11 +160,14 @@
                 }
 
                 &--selected,
-                &--selected:hover,
+                &--selected:hover {
+                    background-color: $color-purple;
+                }
+
                 &--keyboard-selected,
                 &--keyboard-selected:hover {
-                    color: $color-white;
-                    background-color: $color-purple;
+                    color: $color-base;
+                    background-color: transparent;
                 }
 
                 &--disabled,

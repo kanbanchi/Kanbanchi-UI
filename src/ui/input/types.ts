@@ -23,6 +23,7 @@ export interface IInputOwnProps {
     readOnly?: boolean;
     ref?: any;
     searchPlaceholder?: string;
+    size?: 'small';
     type?: string;
     variant?:
         'arrow'
