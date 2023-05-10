@@ -1,5 +1,6 @@
 @import '../../assets/sass/index.scss';
 $selectList: '.kui-select-list';
+$selectListItemHoverColor: #F0F1F5;
 
 #{$selectList} {
     display: block;
@@ -13,16 +14,35 @@ $selectList: '.kui-select-list';
 
     &__item {
         width: 100%;
-        height: $google-spacing * 5;
+        height: $google-spacing * 4;
         margin: 0;
-        padding: $google-spacing $google-spacing * 2;
+        padding: $google-spacing * 0.5 + 1 $google-spacing;
         cursor: pointer;
         user-select: none;
+        border-radius: $big-radius;
         @include transition;
+
+        &.kui-label {
+            padding: 0 $google-spacing;
+        }
+
+        .kui-checkbox__label {
+            padding: $google-spacing * 0.75 $google-spacing * 6 $google-spacing * 0.75 0;
+            height: $google-spacing * 4;
+
+            .kui-userpic {
+                margin-top: $google-spacing * -0.25;
+            }
+
+            &:before,
+            .kui-checkbox__checkmark {
+                top: $google-spacing * 0.75 + 1; // возможно не на маках съедет
+            }
+        }
 
         &:hover {
             color: $color-base;
-            background: calc-color(fade, $color-background, 50);
+            background: $selectListItemHoverColor;
         }
 
         #{$selectList}--noactive
@@ -31,7 +51,7 @@ $selectList: '.kui-select-list';
         }
 
         &:focus {
-            background: $color-light-background;
+            background: $selectListItemHoverColor;
             outline: 0;
         }
 
@@ -39,7 +59,7 @@ $selectList: '.kui-select-list';
         &--active:hover,
         &--active:focus {
             color: $color-base;
-            background: $color-background;
+            background: calc-color(fade, $color-background, 50);
         }
 
         &--disabled,

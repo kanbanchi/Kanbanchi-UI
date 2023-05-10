@@ -7,10 +7,13 @@ $divider: '.kui-divider';
     padding-top: $google-spacing - 1;
     box-sizing: border-box;
     box-shadow: none;
+    overflow: visible;
     &:before {
         content: '';
         display: block;
-        height: 2px;
-        background: $color-background;
+        height: $google-spacing * 0.25;
+        width: calc(100% + #{$google-spacing * 2}); // paddings in select list
+        margin-left: $google-spacing * -1; // padding left in select list
+        background: calc-color(fade, $color-background, 50);
     }
 }

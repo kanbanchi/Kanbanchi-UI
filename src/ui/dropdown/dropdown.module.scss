@@ -9,9 +9,9 @@
         overflow: auto;
         scroll-behavior: smooth;
         max-width: 100%;
-        padding: $google-spacing 0;
-        border-radius: $big-radius;
-        box-shadow: $shadow-hover;
+        padding: $google-spacing;
+        border-radius: $large-radius;
+        box-shadow: $shadow-default;
         background: $color-white;
         transform: translateY($google-spacing);
         transform-origin: 0 0;
