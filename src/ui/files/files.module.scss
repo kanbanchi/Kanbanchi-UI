@@ -8,7 +8,7 @@
     margin-top: $google-spacing;
     padding: $google-spacing;
     font-size: $milli-size;
-    border-radius: $base-radius;
+    border-radius: $big-radius;
     border: 2px solid calc-color(fade, $color-base, 20);
     background: $color-white;
     @include transition;

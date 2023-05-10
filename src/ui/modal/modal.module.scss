@@ -65,7 +65,7 @@ $modal-z-index: $z-modal;
     max-width: $modal-max-width;
     max-height: 100%;
     background: $color-white;
-    border-radius: $base-radius;
+    border-radius: $large-radius;
     box-shadow: $shadow-modal;
     overflow: auto;
     z-index: $modal-z-index + 10;

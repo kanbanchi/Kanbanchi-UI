@@ -22,6 +22,7 @@ React.forwardRef((props, ref) => {
         label,
         readOnly,
         searchPlaceholder,
+        size,
         state,
         tooltip,
         value,
@@ -55,6 +56,7 @@ React.forwardRef((props, ref) => {
         (readOnly) ? 'kui-input--readonly' : null,
         (state) ? 'kui-input--state_' + state : null,
         (variant) ? 'kui-input--variant_' + variant : null,
+        (size) ? 'kui-input--size_' + size : null,
         className
     );
 
@@ -247,7 +249,9 @@ React.forwardRef((props, ref) => {
     React.useEffect(() => {
         textarea.current.value = value;
         setIsFilled(!!value);
-        requestAnimationFrame(()=>autosizeLibray.default.update(textarea.current)); // подождать autosizeLibray.default. был баг высоты email в boardDetails
+        requestAnimationFrame(()=> { // подождать autosizeLibray.default. был баг высоты email в boardDetails
+            autosizeLibray.default.update(textarea.current);
+        });
     }, [value]);
 
     // fix safari cursor jump: https://stackoverflow.com/questions/46000544/react-controlled-input-cursor-jumps
@@ -328,6 +332,7 @@ Input.defaultProps = {
     iconTooltip: null,
     label: null,
     searchPlaceholder: 'Search',
+    size: null,
     state: null,
     tooltip: null,
     value: '',
