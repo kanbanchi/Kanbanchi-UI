@@ -9,11 +9,11 @@
     
     .kui-input__item {
         color: $color-base;
-        border-color: calc-color(fade, $color-base, 20);
+        border-color: $color-background;
         cursor: text;
 
         &:focus {
-            border-color: calc-color(fade, $color-base, 0);
+            border-color: $border-color-hover;
         }
     }
 
@@ -33,9 +33,8 @@
     &:not(.kui-datepicker--readonly):not(.kui-datepicker--disabled):hover,
     .kui-input.react-datepicker-ignore-onclickoutside { // opened
         .kui-input__item {
-            border-color: calc-color(fade, $color-base, 0) !important;
+            border-color: $border-color-hover !important;
             background: $color-white;
-            box-shadow: $shadow-hover;
         }
 
         .kui-input__icon:not(.kui-input__icon--clear) {
