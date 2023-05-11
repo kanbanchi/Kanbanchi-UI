@@ -24,7 +24,7 @@
         font-size: $milli-size;
         line-height: $base-line-height;
         border-radius: $base-radius;
-        border: 2px solid calc-color(fade, $color-base, 20);
+        border: 2px solid $color-background;
         background: $color-white;
         cursor: text;
         @include transition;
@@ -45,18 +45,13 @@
         }
 
         &:hover {
-            border-color: calc-color(fade, $color-base, 30);
+            border-color: $border-color-hover;
             background: $color-white;
         }
 
         &:focus {
             border-color: $color-purple;
             background: $color-white;
-            box-shadow: none;
-        }
-
-        &:invalid {
-            box-shadow: none;
         }
     }
 
@@ -64,7 +59,7 @@
     &.kui-input--disabled {
         .kui-input__item {
             color: $color-base;
-            border-color: calc-color(fade, $color-base, 0);
+            border-color: calc-color(fade, $color-background, 0);
             background: $color-light-background;
         }
         .kui-input__icon {
@@ -162,8 +157,7 @@
         &:hover,
         &.kui-input:focus-within {
             .kui-input__item {
-                box-shadow: $shadow-hover;
-                border-color: transparent;
+                border-color: $border-color-hover;
             }
         }
     }
