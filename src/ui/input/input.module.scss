@@ -1,5 +1,4 @@
 @import '../../assets/sass/index.scss';
-$color-border-hover: #E0E3EB;
 .kui-input {
     position: relative;
 
@@ -41,7 +40,7 @@ $color-border-hover: #E0E3EB;
         }
 
         &:hover {
-            border-color: $color-border-hover;
+            border-color: $border-color-hover;
             background: $color-white;
         }
 
@@ -172,7 +171,7 @@ $color-border-hover: #E0E3EB;
         &:hover,
         &.kui-input:focus-within {
             .kui-input__item {
-                border-color: transparent;
+                border-color: $border-color-hover;
             }
         }
     }
