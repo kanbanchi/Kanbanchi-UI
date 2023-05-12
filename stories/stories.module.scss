@@ -206,6 +206,7 @@ section {
 }
 
 .stories-colors__card {
+    position: relative;
     display: inline-flex;
     align-items: center;
     width: 45%;
@@ -215,14 +216,30 @@ section {
     font-size: $milli-size;
     border-radius: $base-radius;
 
+    &:after {
+        content: 'progress';
+        position: absolute;
+        right: $google-spacing;
+        line-height: $google-spacing * 4;
+        color: $color-green;
+        font-weight: bold;
+    }
+
     @each $name, $item in $colors {
         $color: map-get($item, 'color');
         $text: get-text-color($item);
-        @warn $color;
+        $green: $text;
+        @if $text == $color-base {
+            $green: $color-green;
+        }
 
         &-bgcolor-#{str-slice(#{$color}, 2)} {
             color: $text;
             background: $color;
+
+            &:after {
+                color: $green;
+            }
         }
     }
 }
