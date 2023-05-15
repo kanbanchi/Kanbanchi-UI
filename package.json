@@ -14,7 +14,7 @@
     "postinstall": "babel src/ -d dist/ --extensions \".js,.jsx,.ts,.tsx\"",
     "check-typescript": "tsc && tslint --project ./ --config ./tslint.json",
     "build-storybook": "build-storybook -c .storybook -s ./public -o ./static",
-    "preinstall": "npx npm-force-resolutions"
+    "_preinstall": "npx npm-force-resolutions"
   },
   "browserslist": [
     ">0.2%",
