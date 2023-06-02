@@ -26,13 +26,13 @@ export interface IModalReleaseFooterProps {
 
 export interface IModalReleaseSlideProps {
     description: string;
-    src: string;
+    src?: string;
     title: string;
-    variant: 'img' | 'video';
+    variant?: 'img' | 'video';
 }
 
 export interface IModalReleaseProps {
-    footer: IModalReleaseFooterProps;
+    footer?: IModalReleaseFooterProps;
     slides: IModalReleaseSlideProps[];
 }
 

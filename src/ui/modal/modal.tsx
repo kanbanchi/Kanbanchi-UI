@@ -86,7 +86,7 @@ export const Modal: React.FC<IModalInheritedProps> =
     }
 
     if (variant === 'release' && release) {
-        footer = (
+        footer = release.footer && (
             <div className="kui-modal__footer kui-modal__footer--release">
                 <div className="kui-modal__footer-stars">
                     <Icon size={24} xlink="google-color"/>
@@ -150,7 +150,11 @@ export const Modal: React.FC<IModalInheritedProps> =
         ) => {
             const slidesCount = release.slides.length;
             let newIndex = state.currentSlide - 2;
-            if (newIndex < 0) newIndex += slidesCount;
+            if (newIndex < 0) {
+                newIndex += slidesCount;
+            } else if (newIndex >= slidesCount) {
+                newIndex -= slidesCount;
+            }
             setTitleHook(release.slides[newIndex].title);
         }
 
@@ -168,9 +172,7 @@ export const Modal: React.FC<IModalInheritedProps> =
                         `}
                         variant={'icon'}
                         onClick={onClick}
-                    >
-                        <Icon size={16} xlink={'dot'} />
-                    </Button>
+                    />
                 );
             };
             slides = (<Carousel

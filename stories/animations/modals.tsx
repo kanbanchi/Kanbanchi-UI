@@ -102,6 +102,25 @@ const Story = () => {
             onClose={() => setVal(null)}
         ></Modal>);
 
+        const modalReleaseMini = (<Modal
+            blockSelector={'.page'}
+            title={'Release modal Mini'}
+            release={{
+                slides: [
+                    {
+                        description: `Bingo! With Shared Drives integration your team's workflow becomes even smoother. Create boards within your Shared Drives and easily work with them in a team. <a href="https://www.kanbanchi.com/faqwd/kanbanchi-boards-in-shared-drives" target="_blank">Learn more</a>`,
+                        title: 'Shared Drives integration',
+                    },
+                    {
+                        description: `You've been waiting for it desperately.`,
+                        title: 'Manage your Subscriptions',
+                    }
+                ]
+            }}
+            variant="release"
+            onClose={() => setVal(null)}
+        ></Modal>);
+
     return (
         <div className="page">
              <section className="section-form-min">
@@ -125,6 +144,12 @@ const Story = () => {
                         onClick={() => setVal(modalRelease)}
                     >
                         Release
+                    </Button>
+
+                    <Button
+                        onClick={() => setVal(modalReleaseMini)}
+                    >
+                        Release Mini
                     </Button>
                 </ButtonsGroup>
 
