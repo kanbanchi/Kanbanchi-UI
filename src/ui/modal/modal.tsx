@@ -20,6 +20,7 @@ export const Modal: React.FC<IModalInheritedProps> =
         className,
         blockSelector,
         buttons,
+        isNotFocusLock,
         release,
         title,
         variant,
@@ -262,6 +263,33 @@ export const Modal: React.FC<IModalInheritedProps> =
         }
     }, []);
 
+    const item = (
+        <form
+            className="kui-modal__item"
+            role={'dialog'}
+            aria-modal={true}
+            aria-labelledby={uniqueClass + '__header-title'}
+            aria-describedby={uniqueClass + '__body'}
+        >
+            <div className="kui-modal__header">
+                <div
+                    className="kui-modal__header-title"
+                    id={uniqueClass + '__header-title'}
+                    dangerouslySetInnerHTML={{__html: titleHook}}
+                ></div>
+                {closeButton}
+            </div>
+            <div
+                className="kui-modal__body"
+                id={uniqueClass + '__body'}
+            >
+                {children}
+                {slides}
+            </div>
+            {footer}
+        </form>
+    );
+
     return (
         <div
             className={className}
@@ -273,32 +301,12 @@ export const Modal: React.FC<IModalInheritedProps> =
                 className="kui-modal__overlay"
                 onClick={onClose}
             />
-            <FocusLock returnFocus>
-                <form
-                    className="kui-modal__item"
-                    role={'dialog'}
-                    aria-modal={true}
-                    aria-labelledby={uniqueClass + '__header-title'}
-                    aria-describedby={uniqueClass + '__body'}
-                >
-                    <div className="kui-modal__header">
-                        <div
-                            className="kui-modal__header-title"
-                            id={uniqueClass + '__header-title'}
-                            dangerouslySetInnerHTML={{__html: titleHook}}
-                        ></div>
-                        {closeButton}
-                    </div>
-                    <div
-                        className="kui-modal__body"
-                        id={uniqueClass + '__body'}
-                    >
-                        {children}
-                        {slides}
-                    </div>
-                    {footer}
-                </form>
-            </FocusLock>
+            {isNotFocusLock
+                ? item
+                : <FocusLock returnFocus>
+                    {item}
+                </FocusLock>
+            }
         </div>
     );
 };

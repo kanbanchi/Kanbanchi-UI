@@ -47,6 +47,7 @@ export interface IModalDispatchProps {
 
 export interface IModalOwnProps {
     buttons?: IModalButtonProps[];
+    isNotFocusLock?: boolean;
     release?: IModalReleaseProps;
     variant?:
         'actions' |
