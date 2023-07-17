@@ -220,6 +220,7 @@ export const Select = React.forwardRef((
                 if (onChange) onChange(e);
             }
         } else { // input changed
+            if (e.target.value) setIsOpenedHook(true);
             setValue(e.target.value);
             if (onChange) onChange(e);
         }
