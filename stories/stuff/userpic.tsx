@@ -12,6 +12,10 @@ const Story = () => {
                     size={16}
                     src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
                     tooltip="User Name"
+                /> <Userpic
+                    size={16}
+                    initials={'UN'}
+                    tooltip="User Name"
                 />
 
                 <br /><br />
@@ -19,6 +23,10 @@ const Story = () => {
                 24px <Userpic
                     size={24}
                     src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
+                    tooltip="User Name"
+                /> <Userpic
+                    size={24}
+                    initials={'UN'}
                     tooltip="User Name"
                 />
 
@@ -28,6 +36,10 @@ const Story = () => {
                     size={32}
                     src=""
                     tooltip="User Name"
+                /> <Userpic
+                    size={32}
+                    initials={'UN'}
+                    tooltip="User Name"
                 />
 
                 <br /><br />
@@ -35,6 +47,10 @@ const Story = () => {
                 40px <Userpic
                     size={40}
                     src=""
+                    tooltip="User Name"
+                /> <Userpic
+                    size={40}
+                    initials={'UN'}
                     tooltip="User Name"
                 />
 
@@ -63,6 +79,15 @@ const Story = () => {
                         direction: 'down-right',
                         value: 'User Name'
                     }}
+                /> 
+
+                &nbsp;
+
+                <Userpic
+                    background="#fa0"
+                    size={24}
+                    initials={'UN'}
+                    tooltip="User Name"
                 />
 
             </section>
@@ -85,11 +110,19 @@ const Story = () => {
                 <Userpic
                     background="#2196f3"
                     size={32}
-                    src="https://cdn.pixabay.com/photo/2019/05/19/12/45/woman-4214001_960_720.jpg"
                     tooltip={{
                         direction: 'down-right',
                         value: 'User Name'
                     }}
+                /> 
+
+                &nbsp;
+
+                <Userpic
+                    background="#fa0"
+                    size={32}
+                    initials={'UN'}
+                    tooltip="User Name"
                 />
 
             </section>

@@ -4,6 +4,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    vertical-align: top;
     width: $google-spacing * 2;
     min-width: $google-spacing * 2;
     height: $google-spacing * 2;
@@ -29,12 +30,20 @@
         width: $google-spacing * 2;
         min-width: $google-spacing * 2;
         height: $google-spacing * 2;
+
+        .kui-userpic__initials {
+            font-size: 8px;
+        }
     }
 
     &--size_24 {
         width: $google-spacing * 3;
         min-width: $google-spacing * 3;
         height: $google-spacing * 3;
+
+        .kui-userpic__initials {
+            font-size: 10px;
+        }
     }
 
     &--size_32 {
@@ -42,6 +51,10 @@
         min-width: $google-spacing * 4;
         height: $google-spacing * 4;
         border-radius: $big-radius;
+
+        .kui-userpic__initials {
+            font-size: 12px;
+        }
     }
 
     &--size_40 {
@@ -89,4 +102,8 @@
             }
         }
     }
+}
+
+.kui-userpic__initials {
+    opacity: .6;
 }
