@@ -177,7 +177,7 @@ export const Select = React.forwardRef((
     }
 
     const focusSelectedItem = () => {
-        const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
+        const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"]:not([disabled])');
         if (ariaSelected) ariaSelected.focus();
     }
 
@@ -220,6 +220,7 @@ export const Select = React.forwardRef((
                 if (onChange) onChange(e);
             }
         } else { // input changed
+            if (e.target.value) setIsOpenedHook(true);
             setValue(e.target.value);
             if (onChange) onChange(e);
         }

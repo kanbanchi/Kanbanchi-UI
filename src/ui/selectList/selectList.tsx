@@ -113,8 +113,13 @@ export const SelectList: React.FC<ISelectListInheritedProps> =
                     focusHook = itemsRefs.length - 1;
                 }
             }
-            setFocusHook(focusHook);
-            if (itemsRefs[focusHook].current) itemsRefs[focusHook].current.focus();
+            const item = itemsRefs[focusHook].current as HTMLElement;
+            if (item && item.className.includes('kui-select-list__item--disabled')) {
+                onKeyDown(e);
+            } else {
+                setFocusHook(focusHook);
+                if (item) item.focus();
+            }
         }
         if (
             e.key === 'Enter' ||
