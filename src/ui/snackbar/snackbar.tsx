@@ -23,6 +23,7 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
     } = props;
 
     const refSnackbar = React.useRef(null);
+    let isProgressive = buttons && buttons.length && buttons.find(button => button.isTimer || button.progress);
 
     const [timerHook, setTimerHook] = React.useState(timer);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
@@ -57,8 +58,8 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
     className = ClassNames(
         'kui-snackbar',
         !title ? 'kui-snackbar--notitle' : null,
-        !isHovered && timerHook !== null && timerHook < 3 ? 'kui-snackbar--fadeout' : null,
-        !isHovered && timerHook !== null && timerHook <= 0 ? 'hidden' : null,
+        !isProgressive && !isHovered && timerHook !== null && timerHook < 3 ? 'kui-snackbar--fadeout' : null,
+        (isProgressive || !isHovered) && timerHook !== null && timerHook <= 0 ? 'hidden' : null,
         className
     );
 
@@ -74,6 +75,7 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
             let {
                 isPrimary,
                 isTimer,
+                progress,
                 text,
                 icon,
                 ...attributes
@@ -91,14 +93,14 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
                     size={16}
                     xlink={icon}
                 />
-                : text
+                : text;
             return (
                 <Button
                     className={buttonClassName}
                     color={!icon ? 'white' : null}
                     key={key}
                     variant={variant}
-                    progress={isTimer && timer ? 100 - timerHook / timer * 100 : null}
+                    progress={progress ? progress : isTimer && timer ? 100 - timerHook / timer * 100 : null}
                     {...attributes}
                 >
                     {children}

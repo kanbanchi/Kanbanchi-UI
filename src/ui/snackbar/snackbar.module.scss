@@ -6,6 +6,7 @@
     align-items: flex-start;
     gap: $google-spacing * 2;
     max-width: $google-spacing * 47.5;
+    min-width: $google-spacing * 38;
     min-height: $google-spacing * 7;
     padding: $google-spacing * 2;
     color: $color-white;
@@ -96,6 +97,8 @@
         }
 
         &.kui-snackbar__button--timer {
+            pointer-events: all;
+
             .kui-button__progress {
                 background: calc-color(fade, $color-white, 20);
             }
