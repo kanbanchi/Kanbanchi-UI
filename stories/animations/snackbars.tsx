@@ -41,11 +41,13 @@ const Story = () => {
                 <h2>Error</h2>
                 <Snackbar
                     key="1"
+                    variant="error"
                     text="The <b>email</b> address is not valid. Please, use name@domain.com format."
                 />
                 <br />
                 <Snackbar
                     key="2"
+                    variant="error"
                     text="The maximum number of seats is exceeded. <br>Click Manage subscription to buy more seats."
                     buttons={[
                         { text: 'Close' }
@@ -55,6 +57,7 @@ const Story = () => {
                 <h2>Timer</h2>
                 <Snackbar
                     key="3"
+                    variant="timer"
                     timer={55}
                     text={'Removing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
                     buttons={[
@@ -73,6 +76,7 @@ const Story = () => {
                 <Snackbar
                     key="4"
                     timer={5}
+                    variant="error"
                     text="Error text shown 5 seconds"
                 />
             </section>
@@ -96,6 +100,7 @@ const Story = () => {
                 <h2>Promt</h2>
                 <Snackbar
                     key="6"
+                    variant="promt"
                     text={'It may take some time'}
                     title={'We will move your board'}
                     buttons={[
@@ -129,6 +134,7 @@ const Story = () => {
                 <h2>Success</h2>
                 <Snackbar
                     key="8"
+                    variant="success"
                     title="Data has been successfully exported"
                     text="We've sent you an email with the link"
                     buttons={[
@@ -142,12 +148,19 @@ const Story = () => {
 
             <Snackbar
                 key="3"
+                variant="undo"
                 timer={10}
                 text={'Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted Card is deleted '}
+                position={'left'}
                 buttons={[
                     {
                         text: 'Undo',
                         onClick: () => console.log('Undo')
+                    },
+                    {
+                        text: 'Close',
+                        onClick: () => console.log('Close'),
+                        icon: 'close'
                     }
                 ]}
             />

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ISnackbarInheritedProps } from './types';
+import { ISnackbarDefaultIcons, ISnackbarInheritedProps } from './types';
 import { ClassNames } from '../utils';
-import { Button, Icon } from '../../ui';
+import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
 import { TButtonVariant } from '../button/types';
 
@@ -13,20 +13,67 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
     let {
         className,
         buttons,
+        icon,
         text,
-        textIcon,
         timer,
         title,
-        titleIcon,
+        variant,
         onTimer,
+        position,
         ...attributes
     } = props;
+
+    let xlink = (icon === null && variant !== 'undo') ? ISnackbarDefaultIcons[variant] : icon;
+
+    if (['timer', 'undo'].includes(variant) && timer === null) timer = 10;
+
+    let buttonsGroup = [],
+        buttonsGroupDiv = null;
+
+    if (buttons) {
+        buttonsGroup = buttons.map((item, key) => {
+            let {
+                isPrimary,
+                text,
+                icon,
+                ...attributes
+            } = item;
+
+            const buttonClassName = ClassNames(
+                'kui-snackbar__button',
+                (isPrimary) ? 'kui-snackbar__button--primary' : null
+            );
+
+            const variant: TButtonVariant = icon ? 'icon' : 'primary';
+            const children = icon
+                ? <Icon
+                    size={16}
+                    xlink={icon}
+                />
+                : text
+            return (
+                <Button
+                    className={buttonClassName}
+                    color={!icon ? 'white' : null}
+                    key={key}
+                    variant={variant}
+                    {...attributes}
+                >
+                    {children}
+                </Button>
+            );
+        });
+        buttonsGroupDiv = (
+            <ButtonsGroup className="kui-snackbar__buttons">
+                {buttonsGroup}
+            </ButtonsGroup>
+        );
+    }
 
     const refSnackbar = React.useRef(null);
 
     const [timerHook, setTimerHook] = React.useState(timer);
     const [timeoutHook, setTimeoutHook] = React.useState(null);
-    const [isHovered, setHovered] = React.useState(null);
     const [s] = React.useState<any>({});
     const [getTimerHook] = React.useState(() => () => s.timerHook);
     s.timerHook = timerHook;
@@ -56,61 +103,17 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
 
     className = ClassNames(
         'kui-snackbar',
-        !title ? 'kui-snackbar--notitle' : null,
-        !isHovered && timerHook !== null && timerHook < 3 ? 'kui-snackbar--fadeout' : null,
-        !isHovered && timerHook !== null && timerHook <= 0 ? 'hidden' : null,
+        'kui-snackbar--variant_' + variant,
+        (!title) ? 'kui-snackbar--notitle' : null,
+        (variant === 'undo' && timerHook < 3) ? 'kui-snackbar--fadeout' : null,
+        (variant === 'undo' && timerHook <= 0) ? 'hidden' : null,
         className
     );
 
     const  classContainer = ClassNames(
         'kui-snackbar__container',
+        position === 'left' ? 'kui-snackbar__container--left' : null
     )
-
-    let buttonsGroup = [],
-        buttonsGroupDiv = null;
-
-    if (buttons) {
-        buttonsGroup = buttons.map((item, key) => {
-            let {
-                isPrimary,
-                isTimer,
-                text,
-                icon,
-                ...attributes
-            } = item;
-
-            const buttonClassName = ClassNames(
-                'kui-snackbar__button',
-                isPrimary ? 'kui-snackbar__button--primary' : null,
-                isTimer ? 'kui-snackbar__button--timer' : null
-            );
-
-            const variant: TButtonVariant = icon ? 'icon' : 'primary';
-            const children = icon
-                ? <Icon
-                    size={16}
-                    xlink={icon}
-                />
-                : text
-            return (
-                <Button
-                    className={buttonClassName}
-                    color={!icon ? 'white' : null}
-                    key={key}
-                    variant={variant}
-                    progress={isTimer && timer ? 100 - timerHook / timer * 100 : null}
-                    {...attributes}
-                >
-                    {children}
-                </Button>
-            );
-        });
-        buttonsGroupDiv = (
-            <div className="kui-snackbar__buttons">
-                {buttonsGroup}
-            </div>
-        );
-    }
 
     return (
         <div className={classContainer}>
@@ -120,24 +123,24 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
                 tabIndex={0}
                 aria-live={timer === timerHook ? 'assertive' : 'off'} // при смене таймера скрин ридеру нужен только таймер
                 role={'alert'}
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
                 {...attributes}
             >
+                {xlink &&
+                    <Icon xlink={xlink} size={24} className="kui-snackbar__icon" />
+                }
                 <div className="kui-snackbar__body">
                     {title &&
-                        <div className="kui-snackbar__title">
-                            {titleIcon && <Icon xlink={titleIcon} size={24} className="kui-snackbar__icon" />}
-                            <div className="kui-snackbar__title-text" dangerouslySetInnerHTML={{ __html: title }}></div>
-                        </div>
+                        <div className="kui-snackbar__title" dangerouslySetInnerHTML={{ __html: title }}></div>
                     }
                     {text &&
-                        <div className="kui-snackbar__text">
-                            {textIcon && <Icon xlink={textIcon} size={24} className="kui-snackbar__icon" />}
-                            <div className="kui-snackbar__text-text" dangerouslySetInnerHTML={{ __html: text }}></div>
-                        </div>
+                        <div className="kui-snackbar__text" dangerouslySetInnerHTML={{ __html: text }}></div>
                     }
                 </div>
+                {variant === 'timer' &&
+                    <div className="kui-snackbar__timer" aria-live={'assertive'}>
+                        <span className="kui-snackbar__timer_num">{timerHook}</span> sec
+                    </div>
+                }
                 {buttonsGroupDiv}
             </div>
         </div>
@@ -146,11 +149,12 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
 
 Snackbar.defaultProps = {
     buttons: null,
+    icon: null,
     text: null,
-    textIcon: null,
     timer: null,
     title: null,
-    titleIcon: null,
+    variant: 'info',
+    position: 'center',
     onBlur: null,
     onTimer: () => undefined,
 };
