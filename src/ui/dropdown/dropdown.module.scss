@@ -2,7 +2,7 @@
 .kui-dropdown {
     position: relative;
     outline: none;
-    
+
     &__item {
         position: absolute;
         z-index: $z-modal;
@@ -18,34 +18,47 @@
         animation: animation_down_off .12s ease forwards;
     }
 
+    &--scale > &__item {
+        animation: animation_scale_down_off .12s ease forwards;
+    }
+
     &--opened > &__item {
         animation: animation_down_on .25s ease forwards;
+    }
+
+    &--scale.kui-dropdown--opened > &__item {
+        animation: animation_scale_down_on .25s ease forwards;
     }
 
     &--direction_up > &__item {
         bottom: $google-spacing * 5;
         transform: translateY(-$google-spacing);
         transform-origin: 0 100%;
-        animation: animation_up_off .1s ease forwards;
+        animation: animation_up_off .12s ease forwards;
     }
-    
+
+    &--scale.kui-dropdown--direction_up > &__item {
+        animation: animation_scale_up_off .12s ease forwards;
+    }
+
     &--direction_up.kui-dropdown--opened > &__item {
         animation: animation_up_on .25s ease forwards;
     }
 
-    &--direction_right {
+    &--scale.kui-dropdown--direction_up.kui-dropdown--opened > &__item {
+        animation: animation_scale_up_on .25s ease forwards;
+    }
 
-        & > .kui-dropdown__item {
-            right: 0;
-        }
+    &--direction_right > &__item {
+        right: 0;
+    }
 
-        &.kui-dropdown--direction_up > .kui-dropdown__item {
-            transform-origin: 100% 100%;
-        }
+    &--direction_right.kui-dropdown--direction_up > &__item {
+        transform-origin: 100% 100%;
+    }
 
-        &.kui-dropdown--direction_down > .kui-dropdown__item {
-            transform-origin: 100% 0;
-        }
+    &--direction_right.kui-dropdown--direction_down > &__item {
+        transform-origin: 100% 0;
     }
 
     &.kui-dropdown--portal,
@@ -69,7 +82,19 @@
 @keyframes animation_down_on {
     0% {
         z-index: $z-modal + 5;
-        opacity: 0;
+        opacity: 0.3;
+        transform: translateY($google-spacing * 3) scaleY(.95);
+    }
+    100% {
+        z-index: $z-modal + 5;
+        opacity: 1;
+        transform: translateY($google-spacing) scaleY(1);
+    }
+}
+@keyframes animation_scale_down_on {
+    0% {
+        z-index: $z-modal + 5;
+        opacity: 0.3;
         transform: translateY($google-spacing) scale(90%);
     }
     100% {
@@ -81,6 +106,16 @@
 @keyframes animation_down_off {
     0% {
         opacity: 1;
+        transform: translateY($google-spacing) scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY($google-spacing * 3) scaleY(.95);
+    }
+}
+@keyframes animation_scale_down_off {
+    0% {
+        opacity: 1;
         transform:  translateY($google-spacing)scale(100%);
     }
     100% {
@@ -88,11 +123,22 @@
         transform: translateY($google-spacing) scale(90%);
     }
 }
-
 @keyframes animation_up_on {
     0% {
         z-index: $z-modal + 5;
-        opacity: 0;
+        opacity: 0.3;
+        transform: translateY(-$google-spacing * 3) scaleY(.95);
+    }
+    100% {
+        z-index: $z-modal + 5;
+        opacity: 1;
+        transform: translateY(-$google-spacing) scaleY(1);
+    }
+}
+@keyframes animation_scale_up_on {
+    0% {
+        z-index: $z-modal + 5;
+        opacity: 0.3;
         transform: translateY(-$google-spacing) scale(90%);
     }
     100% {
@@ -102,6 +148,16 @@
     }
 }
 @keyframes animation_up_off {
+    0% {
+        opacity: 1;
+        transform: translateY(-$google-spacing);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-$google-spacing * 3);
+    }
+}
+@keyframes animation_scale_up_off {
     0% {
         opacity: 1;
         transform: translateY(-$google-spacing) scale(100%);
