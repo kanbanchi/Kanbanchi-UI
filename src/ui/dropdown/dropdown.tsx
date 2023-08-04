@@ -15,6 +15,7 @@ export const Dropdown = React.forwardRef((
         directionVertical,
         directionHorizontal,
         isFitWindow,
+        isScaleAnimation,
         opened,
         portal,
         onAnimationEnd,
@@ -33,6 +34,7 @@ export const Dropdown = React.forwardRef((
         (opened) ? 'kui-dropdown--opened' : null,
         (portal) ? 'kui-dropdown--portal' : null,
         (isFitWindow) ? 'kui-dropdown--fit' : null,
+        (isScaleAnimation) ? 'kui-dropdown--scale' : null,
         className
     );
 
