@@ -135,8 +135,15 @@ export const SelectList: React.FC<ISelectListInheritedProps> =
     }
 
     React.useEffect(() => {
-        setActiveHook(active);
-        setFocusHook(active && active > 0 ? active : 0)
+        if (!active) {
+            active = 0;
+            const item = itemsRefs[0].current as HTMLElement;
+            if (item && item.className.includes('kui-select-list__item--disabled')) {
+                active++;
+            }
+        }
+        if (fixActive) setActiveHook(active);
+        setFocusHook(active)
     }, [active, children]);
 
     React.useEffect(() => {

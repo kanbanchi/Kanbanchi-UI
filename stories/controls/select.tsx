@@ -96,6 +96,9 @@ const Story = () => {
                     onClose={()=>console.log('close')}
                 >
                     <SelectList fixActive={false}>
+                        <SelectListItem className={'disabled'}>
+                            Title01
+                        </SelectListItem>
                         <Checkbox
                             checked={val01}
                             color="light"
@@ -110,6 +113,9 @@ const Story = () => {
                                 User01
                             </SelectListItem>
                         </Checkbox>
+                        <SelectListItem className={'disabled'}>
+                            Title02
+                        </SelectListItem>
                         <Checkbox
                             checked={val06}
                             color="light"

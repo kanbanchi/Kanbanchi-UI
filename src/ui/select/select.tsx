@@ -177,7 +177,7 @@ export const Select = React.forwardRef((
     }
 
     const focusSelectedItem = () => {
-        const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"]:not([disabled])');
+        const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"]') as HTMLElement;
         if (ariaSelected) ariaSelected.focus();
     }
 
