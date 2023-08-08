@@ -23,6 +23,7 @@ export const ButtonDropdown = React.forwardRef((
         dontChangeFocus,
         dropdownClassName,
         isFitWindow,
+        isScaleAnimation,
         multiple,
         notBlurClasses,
         opened,
@@ -275,6 +276,7 @@ export const ButtonDropdown = React.forwardRef((
         directionVertical={directionHook}
         directionHorizontal={directionHorizontal}
         isFitWindow={isFitWindow}
+        isScaleAnimation={isScaleAnimation}
         opened={isOpenedHook}
         portal={portal}
         ref={dropdownRef}
