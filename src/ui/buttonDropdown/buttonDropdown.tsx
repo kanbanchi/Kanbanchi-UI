@@ -122,24 +122,7 @@ export const ButtonDropdown = React.forwardRef((
         if (!dropdownRef.current) return;
 
         calcDirection();
-        /**
-         * подождать afterOpened другого дропдауна
-         * был баг: когда открывается 2й дропдаун, фокус остается на 1ом
-         */
-        if (!dontChangeFocus) {
-            setTimeout(() => {
-                const activeElement = document.activeElement as HTMLElement;
-                if (activeElement) {
-                    const parents = getParentsClasses(
-                        activeElement,
-                        [dropdownUniqueClass]
-                    );
-                    if (parents && parents.includes(dropdownUniqueClass)) return; // если фокус уже в дропдауне
-                }
-                const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
-                if (ariaSelected) ariaSelected.focus();
-            }, 100);
-        }
+
         if (multiple && single) {
             dropdownRef.current.removeEventListener('click', onDropdownClick);
             dropdownRef.current.addEventListener('click', onDropdownClick);
@@ -205,6 +188,15 @@ export const ButtonDropdown = React.forwardRef((
 
         setIsOpened(false);
         if (onBlur) onBlur(e);
+    }
+
+    attributes.onKeyDown = (e: React.KeyboardEvent) => {
+        if (!e) return;
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
+            if (ariaSelected) ariaSelected.focus();
+        }
     }
 
     const onChange = (e: any) => {
