@@ -279,7 +279,7 @@ export const Select = React.forwardRef((
         onSelectListInit
     };
 
-    if (multiple) {
+    if (multiple || active === null) {
         attributesSelectList.fixActive = false;
     }
 
@@ -374,9 +374,8 @@ export const Select = React.forwardRef((
             e.preventDefault();
             if (!isOpenedHook) {
                 openDropdown(true);
-            } else {
-                focusSelectedItem();
             }
+            focusSelectedItem();
             return;
         }
         if (e.key === 'Enter') {
