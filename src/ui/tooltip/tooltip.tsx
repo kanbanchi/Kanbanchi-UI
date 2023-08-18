@@ -42,7 +42,7 @@ React.forwardRef((props, ref) => {
     } = props;
 
     if (isHidable === undefined) isHidable = true;
-    const WAIT_BEFORE_SHOW = delay || 300;
+    const WAIT_BEFORE_SHOW = delay || 1000;
     const WAIT_ANIMATION = 200;
     const WAIT_BEFORE_HIDE = delayClose || 100;
     const MOUSE_DEBOUNCE = 200;
