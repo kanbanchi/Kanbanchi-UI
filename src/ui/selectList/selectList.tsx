@@ -137,7 +137,7 @@ export const SelectList: React.FC<ISelectListInheritedProps> =
     React.useEffect(() => {
         if (!active) {
             active = 0;
-            const item = itemsRefs[0].current as HTMLElement;
+            const item = itemsRefs && itemsRefs.length && itemsRefs[0].current as HTMLElement;
             if (item && item.className.includes('kui-select-list__item--disabled')) {
                 active++;
             }
