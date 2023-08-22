@@ -16,6 +16,7 @@ React.forwardRef((props, ref) => {
         icon,
         opened,
         title,
+        titleStyle = {},
         variant,
         onClose,
         onOpen,
@@ -94,6 +95,7 @@ React.forwardRef((props, ref) => {
                     }
                     <ButtonTitle
                         className="kui-section-accordion-button__title"
+                        style={titleStyle}
                     >
                         {title}
                     </ButtonTitle>
