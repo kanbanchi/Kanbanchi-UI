@@ -1,6 +1,9 @@
+import { CSSProperties } from 'react';
+
 export interface ISelectListItemProps {
     icon?: string;
     iconSize?: 16 | 24;
+    iconStyle?: CSSProperties;
     list?: string;
     listLabel?: string;
     value?: string;

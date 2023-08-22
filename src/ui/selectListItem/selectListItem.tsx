@@ -16,6 +16,7 @@ React.forwardRef((props, ref) => {
         className,
         icon,
         iconSize,
+        iconStyle = {},
         list,
         listLabel,
         ...attributes
@@ -36,6 +37,7 @@ React.forwardRef((props, ref) => {
             className="kui-select-list-item__icon"
             size={iconSize}
             xlink={icon}
+            style={iconStyle}
         />;
     }
 
