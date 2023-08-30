@@ -9,7 +9,7 @@
     min-width: $google-spacing * 2;
     height: $google-spacing * 2;
     background: $color-background;
-    border-radius: $base-radius;
+    border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
 
@@ -50,7 +50,6 @@
         width: $google-spacing * 4;
         min-width: $google-spacing * 4;
         height: $google-spacing * 4;
-        border-radius: $big-radius;
 
         .kui-userpic__initials {
             font-size: 12px;
@@ -61,7 +60,6 @@
         width: $google-spacing * 5;
         min-width: $google-spacing * 5;
         height: $google-spacing * 5;
-        border-radius: $big-radius;
     }
 
     &--background {
@@ -69,7 +67,7 @@
         border: $google-spacing / 4 solid $color-background;
 
         .kui-userpic__img {
-            border-radius: $small-radius;
+            border-radius: 50%;
         }
 
         &.kui-userpic--size_16 {
@@ -90,7 +88,6 @@
             .kui-userpic__img {
                 width: $google-spacing * 3;
                 height: $google-spacing * 3;
-                border-radius: $base-radius;
             }
         }
 
@@ -98,7 +95,6 @@
             .kui-userpic__img {
                 width: $google-spacing * 4;
                 height: $google-spacing * 4;
-                border-radius: $base-radius;
             }
         }
     }
