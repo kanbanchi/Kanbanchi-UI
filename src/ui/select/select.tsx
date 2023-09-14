@@ -232,7 +232,7 @@ export const Select = React.forwardRef((
                 setIsFocusedHook(true);
                 openDropdown();
             }
-        }, 100); // delay after onClick
+        }, 200); // delay after onClick
         if (onFocus) onFocus(e);
     }
 
