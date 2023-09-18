@@ -16,7 +16,7 @@ export interface IDropdownPublicProps {
     portalSelector?: string;
     style?: React.CSSProperties;
     beforeOpen?: () => Promise<any>;
-    onDidMount?: () => void;
+    onDidMount?: (didntFit?: number) => void; // сколько px не поместилось, если isFitWindow и есть скролл
     onDidUnmount?: () => void;
 }
 

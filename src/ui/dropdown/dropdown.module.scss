@@ -68,6 +68,16 @@
         }
     }
 
+    &.kui-dropdown--try > &__item {
+        animation: none;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &--direction_up.kui-dropdown--try > &__item {
+        transform: translateY(-$google-spacing);
+    }
+
     &.kui-dropdown--portal {
         position: absolute;
         width: 100vw;

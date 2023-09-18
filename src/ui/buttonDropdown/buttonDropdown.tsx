@@ -23,6 +23,7 @@ export const ButtonDropdown = React.forwardRef((
         dontChangeFocus,
         dropdownClassName,
         isFitWindow,
+        isMoveToFit,
         isScaleAnimation,
         multiple,
         notBlurClasses,
@@ -69,7 +70,7 @@ export const ButtonDropdown = React.forwardRef((
         dropdownUniqueClass
     );
 
-    const calcDirection = () => {
+    const calcDirection = (didntFit?: number) => {
         const button = buttonRef.current.getBoundingClientRect();
         let portalRect: any = {
             bottom: window.innerHeight,
@@ -81,6 +82,8 @@ export const ButtonDropdown = React.forwardRef((
             directionHook = (button.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
             setDirectionHook(directionHook);
         }
+        let bottom = 0;
+        let top = 0;
         if (portal) {
             const portalEl = document.getElementById(portalId) as HTMLElement;
             if (portalEl) {
@@ -105,27 +108,54 @@ export const ButtonDropdown = React.forwardRef((
             }
 
             if (directionHook === 'up') {
-                dropdownRef.current.style.bottom = portalRect.bottom - button.top + 'px';
+                bottom = portalRect.bottom - button.top;
             } else {
-                dropdownRef.current.style.top = button.bottom - portalRect.top + 'px';
+                top = button.bottom - portalRect.top;
             }
         }
         if (portal || isFitWindow) {
             let padding = SCREEN_PADDING * 2;
-            const maxHeight = directionHook === 'up'
+            let reserve = 0; // на сколько можно сдвинуть, чтобы избавиться от скролла в дропдауне
+            if (didntFit) {
+                if (directionHook === 'up') {
+                    reserve = window.innerHeight - button.top - (portalRect.bottom || padding);
+                } else {
+                    reserve = button.bottom - (portalRect.bottom || padding);
+                }
+                console.log('didntFit', didntFit, reserve);
+                if (reserve < didntFit) didntFit = reserve;
+                if (didntFit) {
+                    console.log(bottom, top);
+                    if (bottom) bottom -= didntFit;
+                    if (top) top -= didntFit;
+                }
+            }
+            
+            let maxHeight = directionHook === 'up'
                 ? button.top - (portalRect.top || padding)
                 : window.innerHeight - button.bottom - (portalRect.bottom || padding);
+
+            if (didntFit) {
+                console.log('maxHeight', maxHeight);
+                maxHeight += didntFit;
+            }
+
             setDropdownStyle({
                 ...dropdownStyle,
                 maxHeight: Math.ceil(maxHeight) + 'px',
             });
         }
+        if (directionHook === 'up') {
+            if (bottom) dropdownRef.current.style.bottom = bottom + 'px';
+        } else {
+            if (top) dropdownRef.current.style.top = top + 'px';
+        }
     }
 
-    const onDropdownMount = () => {
+    const onDropdownMount = (didntFit?: number) => {
         if (!dropdownRef.current) return;
 
-        calcDirection();
+        calcDirection(isFitWindow && isMoveToFit && portal && didntFit);
 
         if (multiple && single) {
             dropdownRef.current.removeEventListener('click', onDropdownClick);
@@ -162,6 +192,8 @@ export const ButtonDropdown = React.forwardRef((
         } else {
             afterOpened(isOpened)
         }
+
+        if (isOpened) calcDirection();
     }
 
     attributes.onClick = (e) => {
