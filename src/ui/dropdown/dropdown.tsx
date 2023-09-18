@@ -18,6 +18,7 @@ export const Dropdown = React.forwardRef((
         isScaleAnimation,
         opened,
         portal,
+        style,
         onAnimationEnd,
         onDidMount,
         onDidUnmount,
@@ -73,6 +74,7 @@ export const Dropdown = React.forwardRef((
                     ref={itemRef}
                     aria-live={'assertive'}
                     role={'alert'}
+                    style={style}
                 >
                     {children}
                 </div>
