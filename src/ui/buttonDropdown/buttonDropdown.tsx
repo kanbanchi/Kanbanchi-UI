@@ -44,6 +44,7 @@ export const ButtonDropdown = React.forwardRef((
 
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [isOpenedHook, setIsOpenedHook] = React.useState(opened);
+    let [dropdownStyle, setDropdownStyle] = React.useState({});
     const [uniqueClass] = React.useState('kui-button-dropdown--' + uuidv4());
     const _buttonRef = React.useRef(null);
     const buttonRef =  useCombinedRefs(ref, _buttonRef);
@@ -109,13 +110,16 @@ export const ButtonDropdown = React.forwardRef((
                 dropdownRef.current.style.top = button.bottom - portalRect.top + 'px';
             }
         }
-        if (portal || isFitWindow) requestAnimationFrame(() => { // wait dropdownItem
+        if (portal || isFitWindow) {
+            let padding = SCREEN_PADDING * 2;
             const maxHeight = directionHook === 'up'
-                ? button.top
-                : window.innerHeight - button.bottom;
-            const dropdownItem = dropdownRef.current.children[0];
-            if (dropdownItem) dropdownItem.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
-        })
+                ? button.top - (portalRect.top || padding)
+                : window.innerHeight - button.bottom - (portalRect.bottom || padding);
+            setDropdownStyle({
+                ...dropdownStyle,
+                maxHeight: Math.ceil(maxHeight) + 'px',
+            });
+        }
     }
 
     const onDropdownMount = () => {
@@ -272,6 +276,7 @@ export const ButtonDropdown = React.forwardRef((
         opened={isOpenedHook}
         portal={portal}
         ref={dropdownRef}
+        style={dropdownStyle}
         tabIndex={-1}
         onBlur={attributes.onBlur}
         onDidMount={onDropdownMount}

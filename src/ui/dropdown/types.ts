@@ -14,6 +14,7 @@ export interface IDropdownPublicProps {
     portal?: boolean;
     portalId?: string;
     portalSelector?: string;
+    style?: React.CSSProperties;
     beforeOpen?: () => Promise<any>;
     onDidMount?: () => void;
     onDidUnmount?: () => void;
