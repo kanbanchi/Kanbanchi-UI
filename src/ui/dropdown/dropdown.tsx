@@ -52,7 +52,6 @@ export const Dropdown = React.forwardRef((
                 if (itemRef.current && itemRef.current.scrollHeight && itemRef.current.offsetHeight) {
                     scroll = itemRef.current.scrollHeight - itemRef.current.offsetHeight;
                     setScroll(scroll > 0);
-                    console.log(itemRef.current.scrollHeight, itemRef.current.offsetHeight)
                 }
                 setTry(false);
                 setOpen(true);

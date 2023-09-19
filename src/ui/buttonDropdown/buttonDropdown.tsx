@@ -122,10 +122,8 @@ export const ButtonDropdown = React.forwardRef((
                 } else {
                     reserve = button.bottom - (portalRect.bottom || padding);
                 }
-                console.log('didntFit', didntFit, reserve);
                 if (reserve < didntFit) didntFit = reserve;
                 if (didntFit) {
-                    console.log(bottom, top);
                     if (bottom) bottom -= didntFit;
                     if (top) top -= didntFit;
                 }
@@ -136,7 +134,6 @@ export const ButtonDropdown = React.forwardRef((
                 : window.innerHeight - button.bottom - (portalRect.bottom || padding);
 
             if (didntFit) {
-                console.log('maxHeight', maxHeight);
                 maxHeight += didntFit;
             }
 
