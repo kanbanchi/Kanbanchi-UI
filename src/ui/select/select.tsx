@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
 import { Portal } from '../portal/portal';
+import { IInputInheritedProps } from '../input/types';
 
 // accessibility ok
 
@@ -50,7 +51,7 @@ export const Select = React.forwardRef((
         onClose,
         ...attributesOriginal
     } = props,
-        attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
+        attributes: IInputInheritedProps = attributesOriginal,
         dropdownBody = null,
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
