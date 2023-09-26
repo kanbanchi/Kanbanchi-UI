@@ -60,7 +60,6 @@ export const Select = React.forwardRef((
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [initialValue, _setInitialValue] = React.useState('');
     const [valueHook, setValueHook] = React.useState('');
-    const [isFocusedHook, setIsFocusedHook] = React.useState(opened);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [itemsRefsHook, setItemsRefsHook] = React.useState([]); // list items for auto scroll in dropdown
     const [uniqueClass] = React.useState('kui-select--' + uuidv4());
@@ -186,7 +185,6 @@ export const Select = React.forwardRef((
         if (
             !isOpened.current && // onAnimationEnd срабатывал после каждого скрола, а надо только 1 раз при открытии
             dropdownRef.current &&
-            isFocusedHook &&
             itemsRefsHook[activeHook] &&
             itemsRefsHook[activeHook].current)
         {
@@ -228,12 +226,6 @@ export const Select = React.forwardRef((
     }
 
     attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        timer.current = setTimeout(() => {
-            if (!isFocusedHook) {
-                setIsFocusedHook(true);
-                openDropdown();
-            }
-        }, 100); // delay after onClick
         if (onFocus) onFocus(e);
     }
 
@@ -256,20 +248,17 @@ export const Select = React.forwardRef((
             }
         }
 
-        setIsFocusedHook(false);
         closeDropdown();
         if (onBlur) onBlur(e);
     }
 
     attributes.onClick = (e: React.MouseEvent<HTMLInputElement>) => {
-        if (isFocusedHook) {
-            if (!isOpenedHook) {
-                openDropdown();
-            } else if (isCloseOnClick && valueHook === initialValue) {
-                setIsOpenedHook(false);
-                isOpened.current = false;
-                if (onClose) onClose();
-            }
+        if (!isOpenedHook) {
+            openDropdown();
+        } else if (isCloseOnClick && valueHook === initialValue) {
+            setIsOpenedHook(false);
+            isOpened.current = false;
+            if (onClose) onClose();
         }
         if (onClick) onClick(e);
     }
