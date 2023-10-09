@@ -9,11 +9,11 @@
     
     .kui-input__item {
         color: $color-base;
-        border-color: calc-color(fade, $color-base, 20);
+        border-color: $color-background;
         cursor: text;
 
         &:focus {
-            border-color: calc-color(fade, $color-base, 0);
+            border-color: $border-color-hover;
         }
     }
 
@@ -33,9 +33,8 @@
     &:not(.kui-datepicker--readonly):not(.kui-datepicker--disabled):hover,
     .kui-input.react-datepicker-ignore-onclickoutside { // opened
         .kui-input__item {
-            border-color: calc-color(fade, $color-base, 0) !important;
+            border-color: $border-color-hover !important;
             background: $color-white;
-            box-shadow: $shadow-hover;
         }
 
         .kui-input__icon:not(.kui-input__icon--clear) {
@@ -45,7 +44,7 @@
 
     .react-datepicker-popper {
         z-index: $z-modal;
-        border-radius: $base-radius;
+        border-radius: $big-radius;
         box-shadow: $shadow-hover;
         background: $color-white;
         user-select: none;
@@ -77,7 +76,7 @@
         background-color: $color-white;
         color: $color-base;
         border: 0 none;
-        border-radius: $base-radius;
+        border-radius: $big-radius;
     }
 
     .react-datepicker__triangle {
@@ -145,13 +144,13 @@
                 &:hover {
                     color: $color-base;
                     background-color: $color-background;
-                    border-radius: $base-radius;
+                    border-radius: $big-radius;
                 }
 
                 &--selected,
                 &--keyboard-selected,
                 &--highlighted {
-                    border-radius: $base-radius;
+                    border-radius: $big-radius;
                 }
 
                 &--highlighted {
@@ -160,11 +159,14 @@
                 }
 
                 &--selected,
-                &--selected:hover,
+                &--selected:hover {
+                    background-color: $color-purple;
+                }
+
                 &--keyboard-selected,
                 &--keyboard-selected:hover {
-                    color: $color-white;
-                    background-color: $color-purple;
+                    color: $color-base;
+                    background-color: transparent;
                 }
 
                 &--disabled,

@@ -23,6 +23,7 @@ export interface IInputOwnProps {
     readOnly?: boolean;
     ref?: any;
     searchPlaceholder?: string;
+    size?: 'small';
     type?: string;
     variant?:
         'arrow'
@@ -47,6 +48,7 @@ export interface IInputPublicProps extends
 export type IConflictFreeHTMLAttributes<E> =
     Pick<React.InputHTMLAttributes<E>, Exclude<keyof React.InputHTMLAttributes<E>,
         'color'
+        | 'size'
         | 'type'
         | 'value'
         | 'onChange'

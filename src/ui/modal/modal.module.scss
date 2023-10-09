@@ -65,7 +65,7 @@ $modal-z-index: $z-modal;
     max-width: $modal-max-width;
     max-height: 100%;
     background: $color-white;
-    border-radius: $base-radius;
+    border-radius: $large-radius;
     box-shadow: $shadow-modal;
     overflow: auto;
     z-index: $modal-z-index + 10;
@@ -110,6 +110,15 @@ $modal-z-index: $z-modal;
 
 .kui-modal__slide-description {
     padding: $google-spacing * 2 $google-spacing * 3 $google-spacing * 5;
+
+    &.flexable {
+        max-height: $google-spacing * 50;
+        @include transition;
+    
+        .kui-modal__slide:not(.react-multi-carousel-item--active) & {
+            max-height: $google-spacing * 10;
+        }
+    }
 }
 
 .kui-modal__slides-arrow {
@@ -136,24 +145,28 @@ $modal-z-index: $z-modal;
 .kui-modal__slides-dot {
     width: $google-spacing * 2;
 	height: $google-spacing * 2;
-    color: $color-purple-light;
-
-    .kui-icon {
-        opacity: 1;
-    }
 
     &:before {
         width: $google-spacing * 2;
         height: $google-spacing * 3;
-        border-radius: $google-spacing * 3;
     }
 
-    &:hover {
-        color: $color-purple-hover;
+    &:after {
+        content: '';
+        display: inline-block;
+        width: $google-spacing;
+        height: $google-spacing;
+        border-radius: $google-spacing;
+        background: $color-purple-light;
+        @include transition;
+    }
+
+    &:hover:after {
+        background: $color-purple-hover;
     }
     
-    &.kui-modal__slides-dot--active {
-        color: $color-purple;
+    &.kui-modal__slides-dot--active:after {
+        background: $color-purple;
     }
 }
 

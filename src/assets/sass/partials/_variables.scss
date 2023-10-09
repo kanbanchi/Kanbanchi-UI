@@ -38,6 +38,7 @@ $google-spacing:            8px !default;
 $small-radius:              2px !default;
 $base-radius:               4px !default;
 $big-radius:                6px !default;
+$large-radius:              8px !default;
 
 //  Z-index list
 $z-initials:                10 !default;
@@ -82,3 +83,6 @@ $media-screens: (
 $shadow-default: 0 $google-spacing / 4  $google-spacing rgba($color-base, .2);
 $shadow-hover: 0 $google-spacing / 2  $google-spacing * 2 rgba($color-base, .3);
 $shadow-modal: 0 $google-spacing $google-spacing * 3 rgba($color-base, .4);
+
+// border
+$border-color-hover: #E0E3EB;

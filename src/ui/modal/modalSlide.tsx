@@ -11,26 +11,30 @@ export const ModalSlide: React.FC<IModalReleaseSlideProps> =
     } = props,
         slideSrc = null;
 
-    if (variant === 'img') {
-        slideSrc = (<img
-            className="kui-modal__slide-img"
-            src={src}
-        />);
-    } else if (variant === 'video') {
-        slideSrc = (<iframe
-            allowFullScreen={true}
-            className="kui-modal__slide-video"
-            frameBorder={0}
-            src={src}
-        ></iframe>);
+    if (src) {
+        if (variant === 'img') {
+            slideSrc = (<img
+                className="kui-modal__slide-img"
+                src={src}
+            />);
+        } else if (variant === 'video') {
+            slideSrc = (<iframe
+                allowFullScreen={true}
+                className="kui-modal__slide-video"
+                frameBorder={0}
+                src={src}
+            ></iframe>);
+        }
     }
     return (
         <div>
-            <div className="kui-modal__slide-src">
-                {slideSrc}
-            </div>
+            {!!slideSrc &&
+                <div className="kui-modal__slide-src">
+                    {slideSrc}
+                </div>
+            }
             <div
-                className="kui-modal__slide-description"
+                className={`kui-modal__slide-description ${slideSrc ? '' : 'flexable'}`}
                 dangerouslySetInnerHTML={{ __html: description }}
             ></div>
         </div>

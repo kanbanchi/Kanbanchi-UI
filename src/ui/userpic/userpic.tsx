@@ -12,6 +12,7 @@ React.forwardRef((props, ref) => {
     let {
         background,
         className,
+        initials,
         size,
         src,
         tooltip,
@@ -37,16 +38,22 @@ React.forwardRef((props, ref) => {
             ref={ref as any}
             {...attributes}
         >
-            {src ?
-                <div
+            {src
+                ? <div
                     className={'kui-userpic__img'}
                     style={{backgroundImage: 'url(' + src + ')'}}
-                /> :
-                <Icon
-                    className={'kui-userpic__ico'}
-                    size={24}
-                    xlink="user"
                 />
+                : initials
+                    ? <div
+                        className={'kui-userpic__initials'}
+                    >
+                        {initials}
+                    </div>
+                    :<Icon
+                        className={'kui-userpic__ico'}
+                        size={24}
+                        xlink="user"
+                    />
             }
         </div>
     );
@@ -67,6 +74,7 @@ React.forwardRef((props, ref) => {
 
 Userpic.defaultProps = {
     background: null,
+    initials: null,
     size: 24,
     src: null,
     tooltip: null,

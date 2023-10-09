@@ -20,8 +20,11 @@ export const ButtonDropdown = React.forwardRef((
         directionVertical,
         directionHorizontal,
         disabled,
+        dontChangeFocus,
         dropdownClassName,
         isFitWindow,
+        isMoveToFit,
+        isScaleAnimation,
         multiple,
         notBlurClasses,
         opened,
@@ -42,6 +45,7 @@ export const ButtonDropdown = React.forwardRef((
 
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [isOpenedHook, setIsOpenedHook] = React.useState(opened);
+    let [dropdownStyle, setDropdownStyle] = React.useState({});
     const [uniqueClass] = React.useState('kui-button-dropdown--' + uuidv4());
     const _buttonRef = React.useRef(null);
     const buttonRef =  useCombinedRefs(ref, _buttonRef);
@@ -66,7 +70,7 @@ export const ButtonDropdown = React.forwardRef((
         dropdownUniqueClass
     );
 
-    const calcDirection = () => {
+    const calcDirection = (didntFit?: number) => {
         const button = buttonRef.current.getBoundingClientRect();
         let portalRect: any = {
             bottom: window.innerHeight,
@@ -75,9 +79,11 @@ export const ButtonDropdown = React.forwardRef((
             top: 0,
         };
         if (directionVertical === 'auto') {
-            directionHook = (button.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+            directionHook = (button.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
             setDirectionHook(directionHook);
         }
+        let bottom = 0;
+        let top = 0;
         if (portal) {
             const portalEl = document.getElementById(portalId) as HTMLElement;
             if (portalEl) {
@@ -102,40 +108,52 @@ export const ButtonDropdown = React.forwardRef((
             }
 
             if (directionHook === 'up') {
-                dropdownRef.current.style.bottom = portalRect.bottom - button.top + 'px';
+                bottom = portalRect.bottom - button.top;
             } else {
-                dropdownRef.current.style.top = button.bottom - portalRect.top + 'px';
+                top = button.bottom - portalRect.top;
             }
         }
-        if (portal || isFitWindow) requestAnimationFrame(() => { // wait dropdownItem
-            const maxHeight = directionHook === 'up'
-                ? button.top
-                : window.innerHeight - button.bottom;
-            const dropdownItem = dropdownRef.current.children[0];
-            if (dropdownItem) dropdownItem.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
-        })
+        if (portal || isFitWindow) {
+            let padding = SCREEN_PADDING * 2;
+            let reserve = 0; // на сколько можно сдвинуть, чтобы избавиться от скролла в дропдауне
+            if (didntFit) {
+                if (directionHook === 'up') {
+                    reserve = window.innerHeight - button.top - (portalRect.bottom || padding);
+                } else {
+                    reserve = button.bottom - (portalRect.bottom || padding);
+                }
+                if (reserve < didntFit) didntFit = reserve;
+                if (didntFit) {
+                    if (bottom) bottom -= didntFit;
+                    if (top) top -= didntFit;
+                }
+            }
+            
+            let maxHeight = directionHook === 'up'
+                ? button.top - (portalRect.top || padding)
+                : window.innerHeight - button.bottom - (portalRect.bottom || padding);
+
+            if (didntFit) {
+                maxHeight += didntFit;
+            }
+
+            setDropdownStyle({
+                ...dropdownStyle,
+                maxHeight: Math.ceil(maxHeight) + 'px',
+            });
+        }
+        if (directionHook === 'up') {
+            if (bottom) dropdownRef.current.style.bottom = bottom + 'px';
+        } else {
+            if (top) dropdownRef.current.style.top = top + 'px';
+        }
     }
 
-    const onDropdownMount = () => {
+    const onDropdownMount = (didntFit?: number) => {
         if (!dropdownRef.current) return;
 
-        calcDirection();
-        /**
-         * подождать afterOpened другого дропдауна
-         * был баг: когда открывается 2й дропдаун, фокус остается на 1ом
-         */
-        setTimeout(() => {
-            const activeElement = document.activeElement as HTMLElement;
-            if (activeElement) {
-                const parents = getParentsClasses(
-                    activeElement,
-                    [dropdownUniqueClass]
-                );
-                if (parents && parents.includes(dropdownUniqueClass)) return; // если фокус уже в дропдауне
-            }
-            const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
-            if (ariaSelected) ariaSelected.focus();
-        }, 100);
+        calcDirection(isFitWindow && isMoveToFit && portal && didntFit);
+
         if (multiple && single) {
             dropdownRef.current.removeEventListener('click', onDropdownClick);
             dropdownRef.current.addEventListener('click', onDropdownClick);
@@ -149,7 +167,17 @@ export const ButtonDropdown = React.forwardRef((
             if (onOpen) onOpen();
         } else if (isOpened === false) {
             if (onClose) onClose();
-            if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
+            setTimeout(() => {
+                const activeElement = document.activeElement;
+                if (
+                    activeElement.tagName === 'INPUT' ||
+                    activeElement.tagName === 'BUTTON' ||
+                    activeElement.tagName === 'TEXTAREA' ||
+                    [...activeElement.attributes].find(attr => attr.name.startsWith('aria-'))
+                ) {
+                    // dont move focus, if it catched by another control
+                } else if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
+            });
         }
     }
 
@@ -161,6 +189,8 @@ export const ButtonDropdown = React.forwardRef((
         } else {
             afterOpened(isOpened)
         }
+
+        if (isOpened) calcDirection();
     }
 
     attributes.onClick = (e) => {
@@ -191,6 +221,15 @@ export const ButtonDropdown = React.forwardRef((
 
         setIsOpened(false);
         if (onBlur) onBlur(e);
+    }
+
+    attributes.onKeyDown = (e: React.KeyboardEvent) => {
+        if (!e) return;
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            const ariaSelected = dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
+            if (ariaSelected) ariaSelected.focus();
+        }
     }
 
     const onChange = (e: any) => {
@@ -230,6 +269,7 @@ export const ButtonDropdown = React.forwardRef((
             e.key === 'Escape' ||
             multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
         ) {
+            e.stopPropagation();
             return setIsOpened(false);
         }
     }
@@ -261,9 +301,11 @@ export const ButtonDropdown = React.forwardRef((
         directionVertical={directionHook}
         directionHorizontal={directionHorizontal}
         isFitWindow={isFitWindow}
+        isScaleAnimation={isScaleAnimation}
         opened={isOpenedHook}
         portal={portal}
         ref={dropdownRef}
+        style={dropdownStyle}
         tabIndex={-1}
         onBlur={attributes.onBlur}
         onDidMount={onDropdownMount}

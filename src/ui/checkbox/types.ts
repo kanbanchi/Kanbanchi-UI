@@ -1,7 +1,10 @@
+import { CSSProperties } from 'react';
+
 export interface ICheckboxStateProps {
     checked?: boolean;
     isIndeterminate?: boolean;
     isStateless?: boolean; // don't use useState if can be indeterminate
+    labelStyle?: CSSProperties;
 }
 
 export interface ICheckboxDispatchProps {

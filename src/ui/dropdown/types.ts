@@ -8,13 +8,15 @@ export interface IDropdownPublicProps {
     directionHorizontal?: 'left' | 'right';
     dropdownClassName?: string;
     isFitWindow?: boolean;
+    isScaleAnimation?: boolean;
     notBlurClasses?: string[];
     opened?: boolean;
     portal?: boolean;
     portalId?: string;
     portalSelector?: string;
+    style?: React.CSSProperties;
     beforeOpen?: () => Promise<any>;
-    onDidMount?: () => void;
+    onDidMount?: (didntFit?: number) => void; // сколько px не поместилось, если isFitWindow и есть скролл
     onDidUnmount?: () => void;
 }
 

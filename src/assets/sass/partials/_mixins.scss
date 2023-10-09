@@ -48,7 +48,7 @@
 
 @function calc-text-color($color) {
     @if (lightness($color) > 60) {
-        @return $color-base // Lighter backgorund, return dark color
+        @return $color-base; // Lighter backgorund, return dark color
     } @else {
         @return $color-white; // Darker background, return light color
     }
@@ -62,6 +62,19 @@
         @return calc-text-color(map-get($item, 'color'));
     }
     @return $color-base;
+}
+
+@function get-label-color($item){
+    $labelColor: $color-base;
+    @if map-has-key($item, 'text') {
+        $labelColor: map-get($item, 'text');
+    } @else if map-has-key($item, 'color') {
+        $labelColor: calc-text-color(map-get($item, 'color'));
+    }
+    @if ($labelColor == $color-white) {
+        @return calc-color(fade, $color-white, 90);
+    }
+    @return calc-color(fade, $color-base, 60);
 }
 
 //  Hide elements

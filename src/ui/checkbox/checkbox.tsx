@@ -16,6 +16,7 @@ React.forwardRef((props, ref) => {
         direction,
         isIndeterminate,
         isStateless,
+        labelStyle,
         tabIndex = 0,
         ['aria-selected']: ariaSelected,
         ['data-index']: dataIndex,
@@ -65,6 +66,7 @@ React.forwardRef((props, ref) => {
             aria-selected={ariaSelected}
             data-index={dataIndex}
             onKeyDown={onKeyDown}
+            style={labelStyle}
         >
             <input checked={isChecked} {...attributes}/>
             <span className="kui-checkbox__label">

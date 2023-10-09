@@ -39,6 +39,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <section>
                 <div className="section-relative">
                     <h2>ButtonDropdown</h2>
@@ -69,11 +70,40 @@ const Story = () => {
                             </SelectList>
                         </ButtonDropdown>
 
-                        <ButtonDropdown directionHorizontal="right">
+                        <ButtonDropdown
+                            directionHorizontal="right"
+                            isFitWindow
+                            isMoveToFit
+                            portal
+                        >
                             <Button variant="action">
                                 Actions Right
                             </Button>
                             <SelectList fixActive={false}>
+                                <li onClick={onClickHandler}>
+                                    Copy card
+                                </li>
+                                <li className="divider" onClick={onClickHandler}>
+                                    Print card
+                                </li>
+                                <li className="divider" onClick={onClickHandler}>
+                                    Get link to card
+                                </li>
+                                <li className="disabled" onClick={onClickHandler}>
+                                    Delete card
+                                </li>
+                                <li onClick={onClickHandler}>
+                                    Copy card
+                                </li>
+                                <li className="divider" onClick={onClickHandler}>
+                                    Print card
+                                </li>
+                                <li className="divider" onClick={onClickHandler}>
+                                    Get link to card
+                                </li>
+                                <li className="disabled" onClick={onClickHandler}>
+                                    Delete card
+                                </li>
                                 <li onClick={onClickHandler}>
                                     Copy card
                                 </li>

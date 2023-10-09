@@ -35,14 +35,38 @@ $color-sky:                 #00C2E0 !default;
 $color-lime:                #51E898 !default;
 $color-trelloBlack:         #4d4d4d !default;
 
+// New Colors 2022-12-01
+$color-label-purple:           #8a5cff; // fix purple label
+
+$color-label-pastel-red:       #ffa9ae;
+$color-label-pastel-orange:    #ffdcad;
+$color-label-pastel-yellow:    #fde791;
+$color-label-pastel-green:     #c8e5c2;
+$color-label-pastel-blue:      #bfd9fd;
+$color-label-pastel-purple:    #dbd3fd;
+$color-label-pastel-pink:      #f9d2e8;
+$color-label-pastel-brown:     #dfd4cd;
+$color-label-pastel-light-grey:#dfe2e7;
+$color-label-pastel-grey:      #cacfd8;
+$color-label-vivid-red:        #fe4f5a;
+$color-label-vivid-orange:     #ffb047;
+$color-label-vivid-yellow:     #fbd22d;
+$color-label-vivid-green:      #67b757;
+$color-label-vivid-blue:       #5c9efa;
+$color-label-vivid-purple:     #8b72f9;
+$color-label-vivid-pink:       #e74ba3;
+$color-label-vivid-brown:      #b79f8f;
+$color-label-vivid-light-grey: #a5adbb;
+$color-label-vivid-grey:       #718098;
+
 $colors: (
         'red':              (color: $color-red), // Old Colors
         'green':            (color: $color-green),
         'blue':             (color: $color-blue),
         'yellow':           (color: $color-yellow, text: $color-base),
-        'orange':           (color: $color-orange),
+        'orange':           (color: $color-orange, text: $color-base),
         'pink':             (color: $color-pink),
-        'purple':           (color: $color-purple),
+        'purple':           (color: $color-label-purple, text: $color-white),
         'cyan':             (color: $color-cyan),
         'sky':              (color: $color-sky), // Trello Colors
         'lime':             (color: $color-lime),
@@ -82,11 +106,31 @@ $colors: (
         'C6DEFB':           (color: #C6DEFB),
         'C0C6CF':           (color: #C0C6CF),
         '90B3EB':           (color: #90B3EB),
-        '9A9CFF':           (color: #9A9CFF),
+        '9A9CFF':           (color: #9A9CFF, text: $color-white),
         'B99AFF':           (color: #B99AFF),
-        'AD82EA':           (color: #AD82EA),
+        'AD82EA':           (color: #AD82EA, text: $color-white),
         '5E1172':           (color: #5E1172),
         'E190F8':           (color: #E190F8),
         'F691B2':           (color: #F691B2),
         'D1BFC2':           (color: #D1BFC2),
+        'pastel-red':       (color: $color-label-pastel-red), // New Colors 2022-12-01
+        'pastel-orange':    (color: $color-label-pastel-orange),
+        'pastel-yellow':    (color: $color-label-pastel-yellow),
+        'pastel-green':     (color: $color-label-pastel-green),
+        'pastel-blue':      (color: $color-label-pastel-blue),
+        'pastel-purple':    (color: $color-label-pastel-purple),
+        'pastel-pink':      (color: $color-label-pastel-pink),
+        'pastel-brown':     (color: $color-label-pastel-brown),
+        'pastel-light-grey':(color: $color-label-pastel-light-grey),
+        'pastel-grey':      (color: $color-label-pastel-grey),
+        'vivid-red':        (color: $color-label-vivid-red, text: $color-white),
+        'vivid-orange':     (color: $color-label-vivid-orange),
+        'vivid-yellow':     (color: $color-label-vivid-yellow, text: $color-base),
+        'vivid-green':      (color: $color-label-vivid-green),
+        'vivid-blue':       (color: $color-label-vivid-blue, text: $color-white),
+        'vivid-purple':     (color: $color-label-vivid-purple, text: $color-white),
+        'vivid-pink':       (color: $color-label-vivid-pink),
+        'vivid-brown':      (color: $color-label-vivid-brown, text: $color-white),
+        'vivid-light-grey': (color: $color-label-vivid-light-grey, text: $color-white),
+        'vivid-grey':       (color: $color-label-vivid-grey),
 );

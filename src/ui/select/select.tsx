@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
 import { Portal } from '../portal/portal';
+import { IInputInheritedProps } from '../input/types';
 
 // accessibility ok
 
@@ -50,7 +51,7 @@ export const Select = React.forwardRef((
         onClose,
         ...attributesOriginal
     } = props,
-        attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal,
+        attributes: IInputInheritedProps = attributesOriginal,
         dropdownBody = null,
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
@@ -59,7 +60,6 @@ export const Select = React.forwardRef((
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [initialValue, _setInitialValue] = React.useState('');
     const [valueHook, setValueHook] = React.useState('');
-    const [isFocusedHook, setIsFocusedHook] = React.useState(opened);
     const [isOpenedHook, setIsOpenedHook] = React.useState(opened);
     const [itemsRefsHook, setItemsRefsHook] = React.useState([]); // list items for auto scroll in dropdown
     const [uniqueClass] = React.useState('kui-select--' + uuidv4());
@@ -70,6 +70,7 @@ export const Select = React.forwardRef((
     const selectRef = React.useRef(null);
     const combinedRef =  useCombinedRefs(ref, selectRef);
     const timer = React.useRef(null);
+    const isOpened = React.useRef(null);
 
     className = ClassNames(
         'kui-select',
@@ -116,6 +117,7 @@ export const Select = React.forwardRef((
 
     const closeDropdown = () => {
         setIsOpenedHook(false);
+        isOpened.current = false;
         if (
             !multiple &&
             valueHook !== initialValue
@@ -129,7 +131,7 @@ export const Select = React.forwardRef((
     const calcDirection = () => {
         let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
-            directionHook = (el.top > window.innerHeight * 2 / 3) ? 'up' : 'down';
+            directionHook = (el.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
             setDirectionHook(directionHook);
         }
         if (portal) {
@@ -175,14 +177,14 @@ export const Select = React.forwardRef((
     }
 
     const focusSelectedItem = () => {
-        const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"])');
+        const ariaSelected = dropdownRef.current && dropdownRef.current.querySelector('[tabindex]:not([tabindex="-1"]') as HTMLElement;
         if (ariaSelected) ariaSelected.focus();
     }
 
     const scrollList = () => {
         if (
+            !isOpened.current && // onAnimationEnd срабатывал после каждого скрола, а надо только 1 раз при открытии
             dropdownRef.current &&
-            isFocusedHook &&
             itemsRefsHook[activeHook] &&
             itemsRefsHook[activeHook].current)
         {
@@ -192,6 +194,7 @@ export const Select = React.forwardRef((
             let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
             let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
             dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
+            isOpened.current = true;
         }
     }
 
@@ -206,6 +209,7 @@ export const Select = React.forwardRef((
             } else {
                 inputRef.current.setFocus(); // return focus to input before dropdown hide
                 setIsOpenedHook(false);
+                isOpened.current = false;
                 if (!isSearch) { // dont update search input value
                     setValue(e.item.text);
                 }
@@ -215,18 +219,13 @@ export const Select = React.forwardRef((
                 if (onChange) onChange(e);
             }
         } else { // input changed
+            if (e.target.value) setIsOpenedHook(true);
             setValue(e.target.value);
             if (onChange) onChange(e);
         }
     }
 
     attributes.onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        timer.current = setTimeout(() => {
-            if (!isFocusedHook) {
-                setIsFocusedHook(true);
-                openDropdown();
-            }
-        }, 100); // delay after onClick
         if (onFocus) onFocus(e);
     }
 
@@ -249,19 +248,17 @@ export const Select = React.forwardRef((
             }
         }
 
-        setIsFocusedHook(false);
         closeDropdown();
         if (onBlur) onBlur(e);
     }
 
     attributes.onClick = (e: React.MouseEvent<HTMLInputElement>) => {
-        if (isFocusedHook) {
-            if (!isOpenedHook) {
-                openDropdown();
-            } else if (isCloseOnClick && valueHook === initialValue) {
-                setIsOpenedHook(false);
-                if (onClose) onClose();
-            }
+        if (!isOpenedHook) {
+            openDropdown();
+        } else if (isCloseOnClick && valueHook === initialValue) {
+            setIsOpenedHook(false);
+            isOpened.current = false;
+            if (onClose) onClose();
         }
         if (onClick) onClick(e);
     }
@@ -272,7 +269,7 @@ export const Select = React.forwardRef((
         onSelectListInit
     };
 
-    if (multiple) {
+    if (multiple || active === null) {
         attributesSelectList.fixActive = false;
     }
 
@@ -359,16 +356,16 @@ export const Select = React.forwardRef((
     attributes.onKeyDown = (e: any) => {
         if (!e) return;
         if (onKeyDown) onKeyDown(e);
-        if (e.key === 'Escape') {
+        if (isOpenedHook && e.key === 'Escape') {
+            e.stopPropagation();
             return closeDropdown();
         }
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
             e.preventDefault();
             if (!isOpenedHook) {
                 openDropdown(true);
-            } else {
-                focusSelectedItem();
             }
+            focusSelectedItem();
             return;
         }
         if (e.key === 'Enter') {

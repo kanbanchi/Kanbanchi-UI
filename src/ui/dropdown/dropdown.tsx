@@ -15,26 +15,22 @@ export const Dropdown = React.forwardRef((
         directionVertical,
         directionHorizontal,
         isFitWindow,
+        isScaleAnimation,
         opened,
         portal,
+        style,
         onAnimationEnd,
         onDidMount,
         onDidUnmount,
         ...attributes
     } = props;
 
+    const classElement = 'kui-dropdown';
     const [isMount, setIsMount] = React.useState(opened);
+    const [isTry, setTry] = React.useState(false);
+    const [isOpen, setOpen] = React.useState(false);
+    const [isScroll, setScroll] = React.useState(false);
     const itemRef = React.useRef(null);
-
-    className = ClassNames(
-        'kui-dropdown',
-        (directionVertical) ? 'kui-dropdown--direction_' + directionVertical : null,
-        (directionHorizontal) ? 'kui-dropdown--direction_' + directionHorizontal : null,
-        (opened) ? 'kui-dropdown--opened' : null,
-        (portal) ? 'kui-dropdown--portal' : null,
-        (isFitWindow) ? 'kui-dropdown--fit' : null,
-        className
-    );
 
     const onAnimationEndHadler = (e: any) => {
         if (!opened) {
@@ -48,7 +44,21 @@ export const Dropdown = React.forwardRef((
     React.useEffect(() => {
         if (opened) {
             setIsMount(true);
-            if (onDidMount) onDidMount();
+
+            setScroll(false);
+            setTry(true);
+            setTimeout(()=> {
+                let scroll = 0;
+                if (itemRef.current && itemRef.current.scrollHeight && itemRef.current.offsetHeight) {
+                    scroll = itemRef.current.scrollHeight - itemRef.current.offsetHeight;
+                    setScroll(scroll > 0);
+                }
+                setTry(false);
+                setOpen(true);
+                if (onDidMount) onDidMount(scroll);
+            }, 0);
+        } else {
+            setOpen(false);
         }
     }, [opened]);
 
@@ -60,7 +70,18 @@ export const Dropdown = React.forwardRef((
 
     return (
         <div
-            className={className}
+            className={`
+                ${classElement}
+                ${directionVertical ? classElement + '--direction_' + directionVertical : ''}
+                ${directionHorizontal ? classElement + '--direction_' + directionHorizontal : ''}
+                ${isTry ? classElement + '--try' : ''}
+                ${isOpen ? classElement + '--opened' : ''}
+                ${portal ? classElement + '--portal' : ''}
+                ${isFitWindow ? classElement + '--fit' : ''}
+                ${isScaleAnimation ? classElement + '--scale' : ''}
+                ${isScroll ? classElement + '--scroll' : ''}
+                ${className}
+            `}
             onAnimationEnd={onAnimationEndHadler}
             ref={ref}
             {...attributes}
@@ -71,6 +92,7 @@ export const Dropdown = React.forwardRef((
                     ref={itemRef}
                     aria-live={'assertive'}
                     role={'alert'}
+                    style={style}
                 >
                     {children}
                 </div>
