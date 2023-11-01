@@ -22,6 +22,7 @@ React.forwardRef((props, ref) => {
     return (
         <Select
             className={className}
+            dropdownClassName={`kui-search__dropdown ${attributes.dropdownClassName ? attributes.dropdownClassName : ''}`}
             ref={ref as any}
             {...attributes}
         >

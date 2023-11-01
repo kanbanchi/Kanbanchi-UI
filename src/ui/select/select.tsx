@@ -80,6 +80,7 @@ export const Select = React.forwardRef((
         (variant) ? 'kui-select--variant_' + variant : null,
         (multiple && single) ? 'kui-select--single' : null,
         (readOnly) ? 'kui-select--readonly' : null,
+        (attributes.label) ? 'kui-select--with-label' : null,
         className
     );
 
