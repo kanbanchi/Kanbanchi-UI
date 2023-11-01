@@ -12,18 +12,23 @@ React.forwardRef((props, ref) => {
         children,
         className,
         dropdownClassName,
+        isDropdownUplifted,
         ...attributes
     } = props;
 
     className = ClassNames(
         'kui-search',
-        className
+        className,
+        (isDropdownUplifted) ? 'kui-search--uplifted' : null
     );
 
     return (
         <Select
             className={className}
-            dropdownClassName={`kui-search__dropdown ${dropdownClassName ? dropdownClassName : ''}`}
+            dropdownClassName={`
+                ${isDropdownUplifted ? 'kui-search__dropdown' : ''}
+                ${dropdownClassName ? dropdownClassName : ''}
+            `}
             ref={ref as any}
             {...attributes}
         >

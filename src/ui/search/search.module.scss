@@ -1,11 +1,14 @@
 @import '../../assets/sass/index.scss';
 .kui-search {
-    .kui-input {
-        z-index: $z-modaltop;
-    }
+}
 
+.kui-search--uplifted {
     &.kui-select--opened {
-        .kui-input--variant_search:before {
+        .kui-input {
+            z-index: $z-modaltop;
+        }
+
+        .kui-input:before {
             content: '';
             position: absolute;
             left: 0;
@@ -16,19 +19,13 @@
             z-index: -1;
         }
     }
-}
 
-.kui-select--with-label {
-    &.kui-select--opened {
-        .kui-input--variant_search:before {
-            height: $google-spacing * 10;
+    &.kui-select--with-label {
+        &.kui-select--opened {
+            .kui-input:before {
+                height: $google-spacing * 10;
+            }
         }
-    }
-}
-
-.kui-select--disabled {
-    .kui-input-search {
-        opacity: .3;
     }
 }
 
@@ -74,5 +71,11 @@
                 padding-bottom: $google-spacing * 9;
             }
         }
+    }
+}
+
+.kui-select--disabled {
+    .kui-input-search {
+        opacity: .3;
     }
 }
