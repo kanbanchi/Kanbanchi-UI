@@ -29,7 +29,13 @@
     }
 }
 
-.kui-search__dropdown {
+.kui-search__dropdown:not(.kui-search__dropdown--uplifted) {
+    .kui-dropdown__item {
+        min-width: 100%;
+    }
+}
+
+.kui-search__dropdown--uplifted {
     .kui-dropdown__item {
         min-width: calc(100% + #{$google-spacing * 2});
         margin-left: -$google-spacing;
