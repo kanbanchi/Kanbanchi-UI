@@ -3,6 +3,10 @@
 }
 
 .kui-search--uplifted {
+    .kui-input__icon--arrow {
+        display: none;
+    }
+
     &.kui-select--opened {
         .kui-input {
             z-index: $z-modaltop;
@@ -13,9 +17,9 @@
             position: absolute;
             left: 0;
             right: 0;
-            top: -$google-spacing;
-            height: $google-spacing * 7;
-            background: linear-gradient(to top, transparent 0%, $color-white 20%, $color-white 80%, transparent 100%);
+            top: -$google-spacing * 1.5;
+            height: $google-spacing * 8;
+            background: linear-gradient(to top, transparent 0%, $color-white $google-spacing * 2);
             z-index: -1;
         }
     }
@@ -23,6 +27,7 @@
     &.kui-select--with-label {
         &.kui-select--opened {
             .kui-input:before {
+                top: $google-spacing * -0.75;
                 height: $google-spacing * 10;
             }
         }
@@ -83,5 +88,22 @@
 .kui-select--disabled {
     .kui-input-search {
         opacity: .3;
+    }
+}
+
+.kui-search--up {
+    &.kui-select--opened {
+        .kui-input:before {
+            top: unset;
+            bottom: -$google-spacing;
+            background: linear-gradient(to bottom, transparent 0%, $color-white $google-spacing * 2);
+        }
+
+        &.kui-select--with-label {
+            .kui-input:before {
+                top: unset;
+                height: $google-spacing * 11;
+            }
+        }
     }
 }

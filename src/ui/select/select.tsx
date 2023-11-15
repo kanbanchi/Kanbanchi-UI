@@ -132,7 +132,16 @@ export const Select = React.forwardRef((
     const calcDirection = () => {
         let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
-            directionHook = (el.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
+            const isDirectionUp = el.top > window.innerHeight * 1 / 2;
+            directionHook = isDirectionUp ? 'up' : 'down';
+            const parentEl = combinedRef.current as HTMLElement;
+            const searchClassName = 'kui-search';
+            if (
+                parentEl &&
+                parentEl.className.includes(searchClassName + '--uplifted')
+            ) {
+                parentEl.classList.add(searchClassName + '--' + (isDirectionUp ? 'up' : 'down'));
+            }
             setDirectionHook(directionHook);
         }
         if (portal) {
