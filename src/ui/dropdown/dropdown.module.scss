@@ -116,12 +116,10 @@
 @keyframes animation_down_on_uplifted {
     0% {
         z-index: $z-modal + 5;
-        opacity: 0.3;
         transform: translateY($google-spacing) scaleY(.95);
     }
     100% {
         z-index: $z-modal + 5;
-        opacity: 1;
         transform: translateY($google-spacing) scaleY(1);
     }
 }
@@ -172,12 +170,10 @@
 @keyframes animation_up_on_uplifted {
     0% {
         z-index: $z-modal + 5;
-        opacity: 0.3;
         transform: translateY(-$google-spacing) scaleY(.95);
     }
     100% {
         z-index: $z-modal + 5;
-        opacity: 1;
         transform: translateY(-$google-spacing) scaleY(1);
     }
 }
