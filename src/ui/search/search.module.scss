@@ -66,20 +66,3 @@
         opacity: .3;
     }
 }
-
-.kui-search--up {
-    &.kui-select--opened {
-        .kui-input:before {
-            top: unset;
-            bottom: -$google-spacing;
-            background: linear-gradient(to bottom, transparent 0%, $color-white $google-spacing * 2);
-        }
-
-        &.kui-select--with-label {
-            .kui-input:before {
-                top: unset;
-                height: $google-spacing * 11;
-            }
-        }
-    }
-}
