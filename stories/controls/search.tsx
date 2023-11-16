@@ -64,6 +64,7 @@ const Story = () => {
                 <div className="section-relative">
                     <h2>Search</h2>
                     <Search
+                    isDropdownUplifted
                         searchPlaceholder={'Custom placeholder'}
                         onChange={(i: any)=>console.log(i.item)}
                         onOpen={()=>loadList()}
@@ -85,6 +86,7 @@ const Story = () => {
                 <div className="section-relative">
                     <h2>Search</h2>
                     <Search
+                        isDropdownUplifted
                         color="grey"
                         onChange={(i: any)=>console.log(i.item)}
                     >
