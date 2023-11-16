@@ -140,7 +140,7 @@ export const Select = React.forwardRef((
                 parentEl &&
                 parentEl.className.includes(searchClassName + '--uplifted')
             ) {
-                parentEl.classList.add(searchClassName + '--' + (isDirectionUp ? 'up' : 'down'));
+                parentEl.classList.add(searchClassName + '--' + directionHook);
             }
             setDirectionHook(directionHook);
         }
