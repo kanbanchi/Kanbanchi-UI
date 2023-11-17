@@ -116,11 +116,6 @@ export const Select = React.forwardRef((
                 focusSelectedItem();
             });
         }
-        setTimeout(() => {
-            const dropdownItem = dropdownRef.current && dropdownRef.current.children[0];
-            if (!dropdownItem) return;
-            setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
-        }, 50)
     }
 
     const closeDropdown = () => {
@@ -181,6 +176,12 @@ export const Select = React.forwardRef((
             const dropdownItem = dropdownRef.current.children[0];
             if (dropdownItem) dropdownItem.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
         })
+
+        setTimeout(() => {
+            const dropdownItem = dropdownRef.current && dropdownRef.current.children[0];
+            if (!dropdownItem) return;
+            setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
+        }, 50);
     }
 
     const onDropdownMount = () => {
