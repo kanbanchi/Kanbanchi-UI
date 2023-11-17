@@ -120,7 +120,7 @@ export const Select = React.forwardRef((
             const dropdownItem = dropdownRef.current && dropdownRef.current.children[0];
             if (!dropdownItem) return;
             setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
-        }, 10)
+        }, 50)
     }
 
     const closeDropdown = () => {
