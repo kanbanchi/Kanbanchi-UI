@@ -116,6 +116,11 @@ export const Select = React.forwardRef((
                 focusSelectedItem();
             });
         }
+        setTimeout(() => {
+            const dropdownItem = dropdownRef.current && dropdownRef.current.children[0];
+            if (!dropdownItem) return;
+            setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
+        }, 10)
     }
 
     const closeDropdown = () => {
@@ -210,8 +215,6 @@ export const Select = React.forwardRef((
                 dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
                 isOpened.current = true;
             }
-
-            setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
         }
     }
 
