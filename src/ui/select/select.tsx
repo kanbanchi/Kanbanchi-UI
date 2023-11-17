@@ -56,6 +56,7 @@ export const Select = React.forwardRef((
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
 
+    const [isScroll, setScroll] = React.useState(false);
     let [activeHook, _setActiveHook] = React.useState(active);
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [initialValue, _setInitialValue] = React.useState('');
@@ -81,6 +82,7 @@ export const Select = React.forwardRef((
         (multiple && single) ? 'kui-select--single' : null,
         (readOnly) ? 'kui-select--readonly' : null,
         (attributes.label) ? 'kui-select--with-label' : null,
+        (isScroll) ? 'kui-select--scroll' : null,
         className
     );
 
@@ -194,17 +196,22 @@ export const Select = React.forwardRef((
     const scrollList = () => {
         if (
             !isOpened.current && // onAnimationEnd срабатывал после каждого скрола, а надо только 1 раз при открытии
-            dropdownRef.current &&
-            itemsRefsHook[activeHook] &&
-            itemsRefsHook[activeHook].current)
-        {
+            dropdownRef.current
+        ) {
             const dropdownItem = dropdownRef.current.children[0];
             if (!dropdownItem) return;
 
-            let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
-            let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
-            dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
-            isOpened.current = true;
+            if (
+                itemsRefsHook[activeHook] &&
+                itemsRefsHook[activeHook].current
+            ) {    
+                let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
+                let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
+                dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
+                isOpened.current = true;
+            }
+
+            setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
         }
     }
 
