@@ -2,8 +2,10 @@
 .kui-select {
     position: relative;
 
-    .kui-dropdown__item {
-        min-width: 100%;
+    &:not(.kui-select--variant_search):not(.kui-search--uplifted) {
+        .kui-dropdown__item {
+            min-width: 100%;
+        }
     }
 
     &:not(.kui-select--readonly):not(.kui-select--disabled) {

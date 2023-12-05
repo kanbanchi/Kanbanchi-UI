@@ -13,6 +13,8 @@ import { IInputInheritedProps } from '../input/types';
 
 // accessibility ok
 
+const UPLIFT_EXTRA_MARGIN = 12; // на сколько торчит Dropdown над Input
+
 export const Select = React.forwardRef((
     props: ISelectInheritedProps,
     ref
@@ -30,6 +32,7 @@ export const Select = React.forwardRef((
         isCloseOnClick,
         isCloseOnEnter,
         isFitWindow,
+        isDropdownUplifted,
         multiple,
         notBlurClasses,
         opened,
@@ -56,6 +59,7 @@ export const Select = React.forwardRef((
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
 
+    const [isScroll, setScroll] = React.useState(false);
     let [activeHook, _setActiveHook] = React.useState(active);
     let [directionHook, setDirectionHook] = React.useState(directionVertical);
     let [initialValue, _setInitialValue] = React.useState('');
@@ -80,6 +84,8 @@ export const Select = React.forwardRef((
         (variant) ? 'kui-select--variant_' + variant : null,
         (multiple && single) ? 'kui-select--single' : null,
         (readOnly) ? 'kui-select--readonly' : null,
+        (attributes.label) ? 'kui-select--with-label' : null,
+        (isScroll) ? 'kui-select--scroll' : null,
         className
     );
 
@@ -131,7 +137,16 @@ export const Select = React.forwardRef((
     const calcDirection = () => {
         let el = combinedRef.current.getBoundingClientRect();
         if (directionVertical === 'auto') {
-            directionHook = (el.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
+            const isDirectionUp = el.top > window.innerHeight * 1 / 2;
+            directionHook = isDirectionUp ? 'up' : 'down';
+            const parentEl = combinedRef.current as HTMLElement;
+            const searchClassName = 'kui-search';
+            if (
+                parentEl &&
+                parentEl.className.includes(searchClassName + '--uplifted')
+            ) {
+                parentEl.classList.add(searchClassName + '--' + directionHook);
+            }
             setDirectionHook(directionHook);
         }
         if (portal) {
@@ -158,12 +173,21 @@ export const Select = React.forwardRef((
             }
         }
         if (portal || isFitWindow) requestAnimationFrame(() => { // wait dropdownItem
-            const maxHeight = directionHook === 'up'
-                ? el.top
-                : window.innerHeight - el.bottom;
+            const maxHeight = Math.max(
+                directionHook === 'up'
+                    ? el.top
+                    : window.innerHeight - (isDropdownUplifted ? el.top - UPLIFT_EXTRA_MARGIN : el.bottom),
+                isDropdownUplifted ? combinedRef.current.offsetHeight * 3 : 0 // чтобы было видно хоть что-то, если isDropdownUplifted
+            );
             const dropdownItem = dropdownRef.current.children[0];
             if (dropdownItem) dropdownItem.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
         })
+
+        setTimeout(() => {
+            const dropdownItem = dropdownRef.current && dropdownRef.current.children[0];
+            if (!dropdownItem) return;
+            setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
+        }, 50);
     }
 
     const onDropdownMount = () => {
@@ -184,17 +208,20 @@ export const Select = React.forwardRef((
     const scrollList = () => {
         if (
             !isOpened.current && // onAnimationEnd срабатывал после каждого скрола, а надо только 1 раз при открытии
-            dropdownRef.current &&
-            itemsRefsHook[activeHook] &&
-            itemsRefsHook[activeHook].current)
-        {
+            dropdownRef.current
+        ) {
             const dropdownItem = dropdownRef.current.children[0];
             if (!dropdownItem) return;
 
-            let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
-            let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
-            dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
-            isOpened.current = true;
+            if (
+                itemsRefsHook[activeHook] &&
+                itemsRefsHook[activeHook].current
+            ) {    
+                let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
+                let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
+                dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
+                isOpened.current = true;
+            }
         }
     }
 
