@@ -31,6 +31,7 @@ React.forwardRef((props, ref) => {
                 ${dropdownClassName ? dropdownClassName : ''}
             `}
             ref={ref as any}
+            isDropdownUplifted={isDropdownUplifted}
             {...attributes}
         >
             {children}

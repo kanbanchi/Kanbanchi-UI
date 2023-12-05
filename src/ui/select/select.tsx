@@ -13,6 +13,8 @@ import { IInputInheritedProps } from '../input/types';
 
 // accessibility ok
 
+const UPLIFT_EXTRA_MARGIN = 12; // на сколько торчит Dropdown над Input
+
 export const Select = React.forwardRef((
     props: ISelectInheritedProps,
     ref
@@ -30,6 +32,7 @@ export const Select = React.forwardRef((
         isCloseOnClick,
         isCloseOnEnter,
         isFitWindow,
+        isDropdownUplifted,
         multiple,
         notBlurClasses,
         opened,
@@ -170,9 +173,12 @@ export const Select = React.forwardRef((
             }
         }
         if (portal || isFitWindow) requestAnimationFrame(() => { // wait dropdownItem
-            const maxHeight = directionHook === 'up'
-                ? el.top
-                : window.innerHeight - el.bottom;
+            const maxHeight = Math.max(
+                directionHook === 'up'
+                    ? el.top
+                    : window.innerHeight - (isDropdownUplifted ? el.top - UPLIFT_EXTRA_MARGIN : el.bottom),
+                isDropdownUplifted ? combinedRef.current.offsetHeight * 3 : 0 // чтобы было видно хоть что-то, если isDropdownUplifted
+            );
             const dropdownItem = dropdownRef.current.children[0];
             if (dropdownItem) dropdownItem.style.maxHeight = Math.round(maxHeight - SCREEN_PADDING * 2) + 'px';
         })
