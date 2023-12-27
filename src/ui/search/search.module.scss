@@ -1,7 +1,96 @@
 @import '../../assets/sass/index.scss';
 .kui-search {
+}
+
+.kui-search--uplifted {
+    &.kui-select--opened {
+        .kui-input {
+            z-index: $z-modaltop;
+            transition: none;
+        }
+
+        .scroll-visible &.kui-select--scroll {
+            .kui-input {
+                margin-right: $google-spacing;
+            }
+        }
+
+        .kui-input:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: $google-spacing * -1.5;
+            height: $google-spacing * 8;
+            background: linear-gradient(to bottom, $color-white 0%, $color-white $google-spacing * 6, transparent 100%);
+            z-index: -1;
+        }
+
+        &.kui-select--with-label {
+            .kui-input:before {
+                top: $google-spacing * -.75;
+                height: $google-spacing * 10;
+            }
+        }
+
+        &.kui-search--up {
+            .kui-input:before {
+                top: unset;
+                bottom: -$google-spacing;
+                background: linear-gradient(to top, $color-white 0%, $color-white $google-spacing * 6, transparent 100%);
+            }
+    
+            &.kui-select--with-label {
+                .kui-input:before {
+                    background: linear-gradient(to top, $color-white 0%, $color-white $google-spacing * 9, transparent 100%);
+                }
+            }
+        }
+    }
+}
+
+.kui-search__dropdown:not(.kui-search__dropdown--uplifted) {
     .kui-dropdown__item {
-        width: 100%;
+        min-width: 100%;
+    }
+}
+
+.kui-search__dropdown--uplifted {
+    .kui-dropdown__item {
+        min-width: calc(100% + #{$google-spacing * 2});
+        margin-left: -$google-spacing;
+    }
+
+    &.kui-dropdown--direction_down {
+        .kui-dropdown__item {
+            margin-top: $google-spacing * -7.5;
+
+            .kui-select--with-label & {
+                margin-top: $google-spacing * -9.5;
+            }
+        }
+
+        .kui-select-list {
+            padding-top: $google-spacing * 6;
+
+            .kui-select--with-label & {
+                padding-top: $google-spacing * 8;
+            }
+        }
+    }
+
+    &.kui-dropdown--direction_up {
+        .kui-dropdown__item {
+            margin-bottom: $google-spacing * -7;
+        }
+
+        .kui-select-list {
+            padding-bottom: $google-spacing * 6;
+
+            .kui-select--with-label & {
+                padding-bottom: $google-spacing * 9;
+            }
+        }
     }
 }
 
@@ -9,5 +98,4 @@
     .kui-input-search {
         opacity: .3;
     }
-    
 }

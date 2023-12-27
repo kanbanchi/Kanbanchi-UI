@@ -176,8 +176,7 @@
         }
     }
 
-    &.kui-input--color_grey:not(&:focus-within):not(&--filled),
-    &.kui-input--color_grey.kui-input--variant_search {
+    &.kui-input--color_grey:not(&:focus-within):not(&--filled):not(&--variant_search) {
         .kui-input__item {
             border-color: transparent;
             background: $color-white;
