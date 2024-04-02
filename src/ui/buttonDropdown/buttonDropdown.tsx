@@ -132,7 +132,7 @@ export const ButtonDropdown = React.forwardRef((
                     if (top) top -= didntFit;
                 }
             }
-            
+
             let maxHeight = directionHook === 'up'
                 ? button.top - (portalRect.top || padding)
                 : window.innerHeight - button.bottom - (portalRect.bottom || padding);

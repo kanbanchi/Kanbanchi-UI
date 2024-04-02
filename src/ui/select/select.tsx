@@ -216,7 +216,7 @@ export const Select = React.forwardRef((
             if (
                 itemsRefsHook[activeHook] &&
                 itemsRefsHook[activeHook].current
-            ) {    
+            ) {
                 let lines = Math.floor(dropdownItem.offsetHeight / itemsRefsHook[activeHook].current.offsetHeight);
                 let center = Math.floor(lines / 2) * itemsRefsHook[activeHook].current.offsetHeight;
                 dropdownItem.scrollTop = itemsRefsHook[activeHook].current.offsetTop - center; // centered active item
