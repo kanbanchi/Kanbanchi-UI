@@ -22,8 +22,14 @@
         animation: animation_scale_down_off .12s ease forwards;
     }
 
-    &--opened > &__item {
-        animation: animation_down_on .25s ease forwards;
+    &.kui-dropdown--opened {
+        & > .kui-dropdown__item {
+            animation: animation_down_on .25s ease forwards;
+        }
+
+        &.kui-search__dropdown--uplifted > .kui-dropdown__item {
+            animation-name: animation_down_on_uplifted;
+        }
     }
 
     &--scale.kui-dropdown--opened > &__item {
@@ -41,8 +47,14 @@
         animation: animation_scale_up_off .12s ease forwards;
     }
 
-    &--direction_up.kui-dropdown--opened > &__item {
-        animation: animation_up_on .25s ease forwards;
+    &.kui-dropdown--direction_up.kui-dropdown--opened {
+        & > .kui-dropdown__item {
+            animation: animation_up_on .25s ease forwards;
+        }
+
+        &.kui-search__dropdown--uplifted > .kui-dropdown__item {
+            animation-name: animation_up_on_uplifted;
+        }
     }
 
     &--scale.kui-dropdown--direction_up.kui-dropdown--opened > &__item {
@@ -101,6 +113,16 @@
         transform: translateY($google-spacing) scaleY(1);
     }
 }
+@keyframes animation_down_on_uplifted {
+    0% {
+        z-index: $z-modal + 5;
+        transform: translateY($google-spacing) scaleY(.95);
+    }
+    100% {
+        z-index: $z-modal + 5;
+        transform: translateY($google-spacing) scaleY(1);
+    }
+}
 @keyframes animation_scale_down_on {
     0% {
         z-index: $z-modal + 5;
@@ -145,6 +167,17 @@
         transform: translateY(-$google-spacing) scaleY(1);
     }
 }
+@keyframes animation_up_on_uplifted {
+    0% {
+        z-index: $z-modal + 5;
+        transform: translateY(-$google-spacing) scaleY(.95);
+    }
+    100% {
+        z-index: $z-modal + 5;
+        transform: translateY(-$google-spacing) scaleY(1);
+    }
+}
+
 @keyframes animation_scale_up_on {
     0% {
         z-index: $z-modal + 5;
