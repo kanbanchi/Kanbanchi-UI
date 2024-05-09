@@ -123,3 +123,29 @@
 @mixin wrap-scroll-inner {
     max-width: $google-spacing * 118;
 }
+$color-background:          #ebedf2;
+$color-light-background:    #f8f9fa;
+$themes: (
+    light-theme: (
+        'color-background': #ebedf2,
+        'color-light-background': #f8f9fa,
+    ),
+    dark-theme: (
+        'color-background': #46474a,
+        'color-light-background': #686869,
+    ),
+);
+
+@mixin theme() {
+    @each $theme, $map in $themes {
+        $theme-map: $map !global;
+        .#{$theme} & {
+            @content;
+        }
+    }
+    $theme-map: null !global;
+}
+
+@function theme-get($key) {
+    @return map-get($theme-map, $key);
+}
