@@ -127,12 +127,16 @@ $color-background:          #ebedf2;
 $color-light-background:    #f8f9fa;
 $themes: (
     light-theme: (
+        'color-white': $color-white,
+        'color-base': $color-base,
         'color-background': #ebedf2,
         'color-light-background': #f8f9fa,
     ),
     dark-theme: (
-        'color-background': #46474a,
-        'color-light-background': #686869,
+        'color-white': #1a1b1c,
+        'color-base': $color-base-light,
+        'color-background': #2e3133,
+        'color-light-background': #2a2c2e,
     ),
 );
 
