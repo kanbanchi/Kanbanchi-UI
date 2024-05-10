@@ -12,7 +12,10 @@ $color-cyan:                material-color("cyan", "500") !default;
 $color-background:          #ebedf2;
 $color-light-background:    #f8f9fa;
 
-$color-base-light:          material-color("blue-grey", "200") !default;
+// dark-mode
+$color-base-dm:             material-color("blue-grey", "200") !default;
+$color-background-dm:       #2e3133;
+$color-light-background-dm: #2a2c2e;
 
 // New Colors 2019-01-28
 $color-jazzberry-jam:       material-color("pink", "800") !default; // Jazzberry Jam
