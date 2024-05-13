@@ -12,7 +12,7 @@
         padding: $google-spacing;
         border-radius: $large-radius;
         @include theme() {
-            box-shadow: theme-get('hadow-default');
+            box-shadow: theme-get('shadow-default');
             background: theme-get('color-white');
         }
         transform: translateY($google-spacing);

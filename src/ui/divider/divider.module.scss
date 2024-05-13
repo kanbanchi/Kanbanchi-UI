@@ -6,7 +6,7 @@ $divider: '.kui-divider';
     margin: 0;
     padding-top: $google-spacing - 1;
     box-sizing: border-box;
-    box-shadow: none;
+    box-shadow: none !important;
     overflow: visible;
     &:before {
         content: '';
