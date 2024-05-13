@@ -32,6 +32,7 @@
         @include transition;
 
         &::placeholder {
+            background: none;
             @include theme() {
                 color: calc-color(fade, theme-get('color-base'), 60);
             }

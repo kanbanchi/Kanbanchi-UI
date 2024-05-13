@@ -21,7 +21,7 @@
         @include theme() {
             background: theme-get('color-background');
         }
-        background-size: cover;
+        background-size: cover !important;
     }
 
     &__ico {
