@@ -21,7 +21,9 @@
             position: absolute;
             width: 100%;
             height: calc(100% - 4px);
-            background: $color-white;
+            @include theme() {
+                background: theme-get('color-white');
+            }
             z-index: -$z-initials;
             @include transition;
         }
@@ -44,6 +46,10 @@
             color: $color-purple;
             background: transparent;
             box-shadow: none;
+
+            .dark-theme {
+                color: $color-white
+            }
 
             &:before {
                 @include theme() {
