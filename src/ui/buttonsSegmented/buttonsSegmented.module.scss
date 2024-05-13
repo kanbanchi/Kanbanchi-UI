@@ -21,9 +21,7 @@
             position: absolute;
             width: 100%;
             height: calc(100% - 4px);
-            @include theme() {
-                background: theme-get('color-white');
-            }
+            background: $color-white;
             z-index: -$z-initials;
             @include transition;
         }
@@ -55,9 +53,7 @@
         }
 
         &--active {
-            @include theme() {
-                color: theme-get('color-white');
-            }
+            color: $color-white;
             background: $color-purple;
             cursor: default;
 
@@ -80,9 +76,7 @@
             &:active,
             &:focus,
             &:hover {
-                @include theme() {
-                    color: theme-get('color-white');
-                }
+                color: $color-white;
                 background: calc-color(tint, $color-purple, 90);
 
                 &:before {

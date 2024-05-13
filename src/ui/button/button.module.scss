@@ -47,7 +47,9 @@
     &--variant_primary {
         height: $google-spacing * 4;
         padding: 0 $google-spacing;
-        color: $color-white;
+        @include theme() {
+            color: $color-white;
+        }
         background: $color-purple;
         border-radius: $big-radius;
 
