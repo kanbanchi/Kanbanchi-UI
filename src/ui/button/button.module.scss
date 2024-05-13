@@ -47,38 +47,28 @@
     &--variant_primary {
         height: $google-spacing * 4;
         padding: 0 $google-spacing;
-        @include theme() {
-            color: theme-get('color-white');
-        }
+        color: $color-white;
         background: $color-purple;
         border-radius: $big-radius;
 
         &:focus {
-            @include theme() {
-                color: theme-get('color-white');
-            }
+            color: $color-white;
             background: $color-purple-hover;
         }
 
         &:hover {
-            @include theme() {
-                color: theme-get('color-white');
-            }
+            color: $color-white;
             background: $color-purple-hover;
         }
 
         &:active {
-            @include theme() {
-                color: theme-get('color-white');
-            }
+            color: $color-white;
             background: $color-purple;
         }
 
         &.kui-button--disabled,
         &:disabled {
-            @include theme() {
-                color: theme-get('color-white');
-            }
+            color: $color-white;
             background: $color-purple-light;
         }
     }

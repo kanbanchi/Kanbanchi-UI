@@ -6,10 +6,8 @@
     max-width: $media-iPad - $google-spacing * 4;
     min-height: $google-spacing * 7;
     padding: $google-spacing $google-spacing * 2;
-    @include theme() {
-        color: theme-get('color-white');
-        box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, theme-get('color-base'), 10);
-    }
+    color: $color-white;
+    box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-base, 10);
     border-radius: $big-radius;
     background-color: $color-purple;
     outline: none;
@@ -81,6 +79,7 @@
     &--variant_promt {
         @include theme() {
             background: theme-get('color-base');
+            color: theme-get('color-white');
         }
     }
 
@@ -92,6 +91,7 @@
     &--variant_undo {
         @include theme() {
             background: theme-get('color-base');
+            color: theme-get('color-white');
         }
 
         .kui-snackbar {
@@ -107,15 +107,11 @@
     }
 
     &__button--primary {
-        @include theme() {
-            background: calc-color(fade, theme-get('color-white'), 50);
-        }
+        background: calc-color(fade, $color-white, 50);
 
         &:focus,
         &:hover {
-            @include theme() {
-                background: calc-color(fade, theme-get('color-white'), 60);
-            }
+            background: calc-color(fade, $color-white, 60);
         }
     }
 
