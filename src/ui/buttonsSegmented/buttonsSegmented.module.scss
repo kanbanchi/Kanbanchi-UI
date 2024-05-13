@@ -43,11 +43,9 @@
         &:active,
         &:focus,
         &:hover {
-            @include theme() {
-                color: $color-purple;
-                background: transparent;
-                box-shadow: none;
-            }
+            color: $color-purple;
+            background: transparent;
+            box-shadow: none;
 
             .dark-theme {
                 color: $color-white
