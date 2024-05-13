@@ -11,8 +11,10 @@
         max-width: 100%;
         padding: $google-spacing;
         border-radius: $large-radius;
-        box-shadow: $shadow-default;
-        background: $color-white;
+        @include theme() {
+            box-shadow: theme-get('hadow-default');
+            background: theme-get('color-white');
+        }
         transform: translateY($google-spacing);
         transform-origin: 0 0;
         animation: animation_down_off .12s ease forwards;

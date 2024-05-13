@@ -11,12 +11,16 @@
         &--icon {
             flex: 0 0 $google-spacing * 2;
             margin-right: $google-spacing;
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
         }
         &--title {
             flex: 1 1 100%;
             max-width: calc(100% - #{$google-spacing * 2.5});
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+            }
 
             .kui-select-list-item--with-list & {
                 max-width: calc(60% - #{$google-spacing * 3});
@@ -36,7 +40,9 @@
     }
 
     &__list {
-        color: calc-color(fade, $color-base, 60);
+        @include theme() {
+            color: calc-color(fade, theme-get('color-base'), 60);
+        }
     }
 
     .kui-button-dropdown--single &,

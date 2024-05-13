@@ -33,26 +33,36 @@
 }
 
 .kui-hint__button-secondary {
-    background: calc-color(fade, $color-white, 0);
+    @include theme() {
+        background: calc-color(fade, theme-get('color-white'), 0);
+    }
 
     &:hover {
-        background: calc-color(fade, $color-white, 30);
+        @include theme() {
+            background: calc-color(fade, theme-get('color-white'), 30);
+        }
     }
 
     &:active {
-        background: calc-color(fade, $color-white, 20);
+        @include theme() {
+            background: calc-color(fade, theme-get('color-white'), 20);
+        }
     }
 }
 
 .kui-hint__button-tertiary {
     min-width: 0;
     padding: 0;
-    background: calc-color(fade, $color-white, 0);
+    @include theme() {
+        background: calc-color(fade, theme-get('color-white'), 0);
+    }
     opacity: .5;
 
     &:active,
     &:hover {
-        background: calc-color(fade, $color-white, 0);
+        @include theme() {
+            background: calc-color(fade, theme-get('color-white'), 0);
+        }
         opacity: .9;
     }
 }

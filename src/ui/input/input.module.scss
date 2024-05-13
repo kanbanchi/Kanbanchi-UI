@@ -24,13 +24,17 @@
         font-size: $milli-size;
         line-height: $base-line-height;
         border-radius: $big-radius;
-        border: 2px solid $color-background;
-        background: $color-white;
+        @include theme() {
+            border: 2px solid theme-get('color-background');
+            background: theme-get('color-white');
+        }
         cursor: text;
         @include transition;
 
         &::placeholder {
-            color: calc-color(fade, $color-base, 60);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 60);
+            }
         }
 
         .kui-input--noresize & {
@@ -40,13 +44,17 @@
         }
 
         &:hover {
-            border-color: $border-color-hover;
-            background: $color-white;
+            @include theme() {
+                border-color: theme-get('border-color-hover');
+                background: theme-get('color-white');
+            }
         }
 
         &:focus {
             border-color: $color-purple;
-            background: $color-white;
+            @include theme() {
+                background: theme-get('color-white');
+            }
             box-shadow: none;
         }
 
@@ -72,7 +80,9 @@
     &.kui-input--filled {
         &:not(.kui-input--readonly,):not(.kui-input--disabled) {
             .kui-input__icon:not(.kui-input__icon--clear):not(.kui-input__icon--arrow) {
-                color: calc-color(fade, $color-base, 60);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 60);
+                }
             }
         }
     }
@@ -80,22 +90,31 @@
     &.kui-input--readonly,
     &.kui-input--disabled {
         .kui-input__item {
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+                background: theme-get('color-light-background');
+            }
             border-color: transparent;
-            background: $color-light-background;
+
         }
         .kui-input__icon {
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
             pointer-events: none;
         }
     }
     
     &.kui-input--disabled {
         .kui-input__item {
-            color: calc-color(fade, $color-base, 60);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 60);
+            }
         }
         .kui-input__icon {
-            color: calc-color(fade, $color-base, 10);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 10);
+            }
         }
     }
 
@@ -115,7 +134,9 @@
         pointer-events: none;
 
         .kui-label__item {
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
         }
     }
 
@@ -123,7 +144,9 @@
         position: absolute;
         bottom: $google-spacing;
         right: $google-spacing;
-        color: calc-color(fade, $color-base, 30);
+        @include theme() {
+            color: calc-color(fade, theme-get('color-base'), 30);
+        }
         cursor: pointer;
         @include transition;
 
@@ -134,7 +157,9 @@
         &--clear {
             height: 0;
             opacity: 0;
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
             @include transition;
             transition-property: color, opacity;
 
@@ -144,7 +169,9 @@
             }
 
             &:hover {
-                color: $color-base;
+                @include theme() {
+                    color: theme-get('color-base');
+                }
             }
         }
     }
@@ -157,7 +184,9 @@
 
         &:not(.kui-input--readonly) .kui-input__item:focus + .kui-input__icon,
         &:not(.kui-input--readonly):hover .kui-input__icon {
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+            }
         }
     }
 
@@ -171,7 +200,9 @@
         &:hover,
         &.kui-input:focus-within {
             .kui-input__item {
-                border-color: $border-color-hover;
+                @include theme() {
+                    border-color: theme-get('$border-color-hover');
+                }
             }
         }
     }
@@ -179,7 +210,9 @@
     &.kui-input--color_grey:not(&:focus-within):not(&--filled):not(&--variant_search) {
         .kui-input__item {
             border-color: transparent;
-            background: $color-white;
+            @include theme() {
+                background: theme-get('color-white');
+            }
         }
     }
 }
@@ -189,7 +222,9 @@
     bottom: $google-spacing;
     left: 50%;
     transform: translateX(-50%);
-    color: calc-color(fade, $color-base, 30);
+    @include theme() {
+        color: calc-color(fade, theme-get('color-base'), 30);
+    }
     white-space: nowrap;
     cursor: pointer;
 
@@ -207,7 +242,9 @@
         transform: translateX(0);
 
         .kui-input-search__icon {
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+            }
             animation: animation_imput_search .3s ease forwards;
 
             &:focus {

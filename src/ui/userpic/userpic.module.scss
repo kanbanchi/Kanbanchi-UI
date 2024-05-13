@@ -8,7 +8,9 @@
     width: $google-spacing * 2;
     min-width: $google-spacing * 2;
     height: $google-spacing * 2;
-    background: $color-background;
+    @include theme() {
+        background: theme-get('color-background');
+    }
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
@@ -16,7 +18,9 @@
     &__img {
         width: 100%;
         height: 100%;
-        background: $color-background;
+        @include theme() {
+            background: theme-get('color-background');
+        }
         background-size: cover;
     }
 
@@ -63,8 +67,10 @@
     }
 
     &--background {
-        background: calc-color(fade, $color-white, 10);
-        border: $google-spacing / 4 solid $color-background;
+        @include theme() {
+            background: calc-color(fade, theme-get('color-white'), 10);
+            border: $google-spacing / 4 solid theme-get('color-background');
+        }
 
         .kui-userpic__img {
             border-radius: 50%;

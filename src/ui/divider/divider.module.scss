@@ -14,6 +14,8 @@ $divider: '.kui-divider';
         height: $google-spacing * 0.25;
         width: calc(100% + #{$google-spacing * 2}); // paddings in select list
         margin-left: $google-spacing * -1; // padding left in select list
-        background: calc-color(fade, $color-background, 50);
+        @include theme() {
+            background: calc-color(fade, theme-get('color-background'), 50);
+        }
     }
 }
