@@ -11,7 +11,9 @@
         margin-top: -2px;
         margin-bottom: -2px;
         color: $color-purple;
-        background: transparent;
+        @include theme() {
+            background: transparent;
+        }
         border-radius: 0;
         z-index: $z-initials;
         transition-property: color, background;
@@ -47,7 +49,7 @@
             background: transparent;
             box-shadow: none;
 
-            .dark-theme {
+            .dark-theme & {
                 color: $color-white
             }
 
