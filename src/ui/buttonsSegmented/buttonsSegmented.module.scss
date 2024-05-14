@@ -11,9 +11,7 @@
         margin-top: -2px;
         margin-bottom: -2px;
         color: $color-purple;
-        @include theme() {
-            background: transparent;
-        }
+        background: transparent;
         border-radius: 0;
         z-index: $z-initials;
         transition-property: color, background;
@@ -105,7 +103,7 @@
         
         .kui-buttons_segmented__item {
             @include theme() {
-                background: theme-get('color-base');
+                color: theme-get('color-base');
             }
 
             &:active,
