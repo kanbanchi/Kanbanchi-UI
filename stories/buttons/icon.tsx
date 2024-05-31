@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonsGroup, Icon } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     return (
         <div className="page">
+            <ThemeSwitch />
              <section>
                 <h2>Icon</h2>
                 <p>With extended transparent interaction area for touch</p>

@@ -35,8 +35,10 @@ section {
     }
 
     &-black {
-        color: $color-white;
-        background: $color-base;
+        @include theme() {
+            color: theme-get('color-white');
+            background: theme-get('color-base');
+        }
     }
 
     &-form-min {
