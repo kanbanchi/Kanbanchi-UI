@@ -27,6 +27,7 @@
         @include theme() {
             border: 2px solid theme-get('color-background');
             background: theme-get('color-white');
+            color: theme-get('color-base');
         }
         cursor: text;
         @include transition;
