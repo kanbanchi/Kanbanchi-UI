@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { IconsList } from './utils';
 import { EIconSize } from '../../src/ui/icon/types';
 import { Icon } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const icons24 = require.context(
@@ -19,6 +20,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section>
                 <Icon size={16} xlink={'account'} /> 16 account (not exists)
                 <br/>

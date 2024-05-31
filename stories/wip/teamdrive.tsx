@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, Snackbar } from './../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 // import SnackbarsQueue from './../snackbarsQueue';
 
 const Story = () => {
@@ -31,6 +32,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section className="snackbars">
                 <h2>Promt</h2>
                 <Snackbar
