@@ -2,6 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, Icon, Tooltip, Switch } from '../../src/ui';
 import * as Kui from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const [isPortal, setPortal] = React.useState(false);
@@ -19,6 +20,7 @@ const Story = () => {
     // `;
     return (
         <div className="page">
+            <ThemeSwitch />
             <section style={ {width: '160px'} }>
                 <Switch checked={ isPortal } onChange={ () => setPortal(!isPortal) }>
                     Portal

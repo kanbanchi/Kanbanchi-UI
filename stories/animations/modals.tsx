@@ -2,6 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Modal, ButtonsGroup, Button } from '../../src/ui';
 import { Portal } from '../../src/ui/portal/portal';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const [val, setVal] = React.useState(null);
@@ -123,6 +124,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
              <section className="section-form-min">
                 <h2>Modals</h2>
 
