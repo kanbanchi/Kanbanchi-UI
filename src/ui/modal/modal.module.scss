@@ -74,6 +74,11 @@ $modal-z-index: $z-modal;
     overflow: auto;
     z-index: $modal-z-index + 10;
     animation: animation_modal_item .3s ease-in-out forwards;
+    background: red !important;
+
+    .dark-theme & {
+        border: 2px solid calc-color(fade, $color-background-dm, 50);
+    }
 
     &:focus {
         outline: 0;

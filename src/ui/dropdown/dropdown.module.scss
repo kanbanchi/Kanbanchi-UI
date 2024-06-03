@@ -18,6 +18,10 @@
         transform: translateY($google-spacing);
         transform-origin: 0 0;
         animation: animation_down_off .12s ease forwards;
+
+        .dark-theme & {
+            border: 2px solid calc-color(fade, $color-background-dm, 50);
+        }
     }
 
     &--scale > &__item {
