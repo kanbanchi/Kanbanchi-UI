@@ -37,6 +37,7 @@ export const ButtonDropdown = React.forwardRef((
         onClick,
         onOpen,
         onClose,
+        onDirectionVerticalSet,
         ...attributesOriginal
     } = props,
         attributes: React.ButtonHTMLAttributes<HTMLButtonElement> = attributesOriginal,
@@ -81,6 +82,9 @@ export const ButtonDropdown = React.forwardRef((
         if (directionVertical === 'auto') {
             directionHook = (button.top > window.innerHeight * 1 / 2) ? 'up' : 'down';
             setDirectionHook(directionHook);
+        }
+        if (onDirectionVerticalSet) {
+            onDirectionVerticalSet(directionHook);
         }
         let bottom = 0;
         let top = 0;
@@ -128,7 +132,7 @@ export const ButtonDropdown = React.forwardRef((
                     if (top) top -= didntFit;
                 }
             }
-            
+
             let maxHeight = directionHook === 'up'
                 ? button.top - (portalRect.top || padding)
                 : window.innerHeight - button.bottom - (portalRect.bottom || padding);

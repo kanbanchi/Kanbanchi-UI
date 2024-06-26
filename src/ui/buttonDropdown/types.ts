@@ -1,4 +1,4 @@
-import { IDropdownPublicProps } from './../dropdown/types';
+import { IDropdownDirectionVertical, IDropdownPublicProps } from './../dropdown/types';
 
 export interface IButtonDropdownStateProps {
     disabled?: boolean;
@@ -15,6 +15,7 @@ export interface IButtonDropdownStateProps {
 export interface IButtonDropdownDispatchProps {
     onOpen?: () => void;
     onClose?: () => void;
+    onDirectionVerticalSet?: (directionVertical: IDropdownDirectionVertical) => void;
 }
 
 export interface IButtonDropdownProps extends
