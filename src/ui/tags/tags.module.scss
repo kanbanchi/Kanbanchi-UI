@@ -20,12 +20,16 @@
     padding: $google-spacing;
     font-size: $nano-size;
     font-weight: bold;
-    background: $color-background;
+    @include theme() {
+        background: theme-get('color-background');
+    }
     border-radius: $big-radius;
 
     &:focus {
         outline: 0;
-        background: calc-color(shade, $color-background, 5);
+        @include theme() {
+            background: calc-color(shade, theme-get('color-background'), 5);
+        }
     }
 
     &__text {
@@ -42,7 +46,9 @@
         @include transition;
 
         &:hover {
-            background: calc-color(shade, $color-background, 5);
+            @include theme() {
+                background: calc-color(shade, theme-get('color-background'), 5);
+            }
         }
     }
 

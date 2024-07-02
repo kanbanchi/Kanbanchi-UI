@@ -22,7 +22,9 @@
             right: 0;
             top: $google-spacing * -1.5;
             height: $google-spacing * 8;
-            background: linear-gradient(to bottom, $color-white 0%, $color-white $google-spacing * 6, transparent 100%);
+            @include theme() {
+                background: linear-gradient(to bottom, theme-get('color-white') 0%, theme-get('color-white') $google-spacing * 6, transparent 100%);
+            }
             z-index: -1;
         }
 
@@ -37,12 +39,16 @@
             .kui-input:before {
                 top: unset;
                 bottom: -$google-spacing;
-                background: linear-gradient(to top, $color-white 0%, $color-white $google-spacing * 6, transparent 100%);
+                @include theme() {
+                    background: linear-gradient(to top, theme-get('color-white') 0%, theme-get('color-white') $google-spacing * 6, transparent 100%);
+                }
             }
     
             &.kui-select--with-label {
                 .kui-input:before {
-                    background: linear-gradient(to top, $color-white 0%, $color-white $google-spacing * 9, transparent 100%);
+                    @include theme() {
+                        background: linear-gradient(to top, theme-get('color-white') 0%, theme-get('color-white') $google-spacing * 9, transparent 100%);
+                    }
                 }
             }
         }

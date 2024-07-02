@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Datepicker } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const [date, setDate] = React.useState<Date | null>(null);
@@ -9,6 +10,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section>
                 <h2>Datepicker</h2>
 

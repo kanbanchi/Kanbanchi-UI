@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonDropdown, ButtonsGroup, SelectList, SelectListItem, Checkbox, Icon, Divider, Userpic, Select } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const onClickHandler = (e: any) => console.log(e.target.innerText);
@@ -39,6 +40,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <section>
                 <div className="section-relative">

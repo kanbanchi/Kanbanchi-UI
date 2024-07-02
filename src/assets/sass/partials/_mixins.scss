@@ -123,3 +123,42 @@
 @mixin wrap-scroll-inner {
     max-width: $google-spacing * 118;
 }
+
+$themes: (
+    light-theme: (
+            'color-white':                      $color-white,
+            'color-base':                       $color-base,
+            'color-background':                 $color-background,
+            'color-light-background':           $color-light-background,
+            'border-color-hover':               $border-color-hover,
+            'shadow-default':                   0 $google-spacing / 4  $google-spacing rgba($color-base, .2),
+            'shadow-hover':                     0 $google-spacing / 2  $google-spacing * 2 rgba($color-base, .3),
+            'shadow-modal':                     0 $google-spacing $google-spacing * 3 rgba($color-base, .4),
+            'color-select-list-item-hover':     $color-select-list-item-hover,
+    ),
+    dark-theme: (
+            'color-white':                      $color-white-dm,
+            'color-base':                       $color-base-dm,
+            'color-background':                 $color-background-dm,
+            'color-light-background':           $color-light-background-dm,
+            'border-color-hover':               $border-color-hover-dm,
+            'shadow-default':                   0 $google-spacing / 4  $google-spacing rgba($color-black, .2),
+            'shadow-hover':                     0 $google-spacing / 2  $google-spacing * 2 rgba($color-black, .3),
+            'shadow-modal':                     0 $google-spacing $google-spacing * 3 rgba($color-black, .4),
+            'color-select-list-item-hover':     $color-select-list-item-hover-dm,
+    ),
+);
+
+@mixin theme() {
+    @each $theme, $map in $themes {
+        $theme-map: $map !global;
+        .#{$theme} & {
+            @content;
+        }
+    }
+    $theme-map: null !global;
+}
+
+@function theme-get($key) {
+    @return map-get($theme-map, $key);
+}

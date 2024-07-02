@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonsGroup } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const [progressHook, setProgressHook] = React.useState(0);
@@ -25,6 +26,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
              <section>
                 <h2>Primary</h2>
 

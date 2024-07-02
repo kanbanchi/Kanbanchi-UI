@@ -10,18 +10,26 @@
         padding: 0 $google-spacing * 2;
         margin-top: -2px;
         margin-bottom: -2px;
-        color: $color-purple;
+        @include theme() {
+            color: $color-purple;
+        }
         background: transparent;
         border-radius: 0;
         z-index: $z-initials;
         transition-property: color, background;
+
+        .dark-theme & {
+            color: $color-white;
+        }
 
         &:before {
             content: '';
             position: absolute;
             width: 100%;
             height: calc(100% - 4px);
-            background: $color-white;
+            @include theme() {
+                background: theme-get('color-white');
+            }
             z-index: -$z-initials;
             @include transition;
         }
@@ -45,13 +53,21 @@
             background: transparent;
             box-shadow: none;
 
+            .dark-theme & {
+                color: $color-white
+            }
+
             &:before {
-                background: $color-background;
+                @include theme() {
+                    background: theme-get('color-background');
+                }
             }
         }
 
         &--active {
-            color: $color-white;
+            @include theme() {
+                color: $color-white;
+            }
             background: $color-purple;
             cursor: default;
 
@@ -68,7 +84,9 @@
             }
 
             &:before {
-                background: transparent;
+                @include theme() {
+                    background: transparent;
+                }
             }
 
             &:active,
@@ -78,33 +96,46 @@
                 background: calc-color(tint, $color-purple, 90);
 
                 &:before {
-                    background: transparent;
+                    @include theme() {
+                        background: transparent;
+                    }
                 }
             }
         }
     }
 
     &--color_black {
-        border: 2px solid calc-color(fade, $color-base, 30);
+        @include theme() {
+            border: 2px solid calc-color(fade, theme-get('color-base'), 30);
+        }
         
         .kui-buttons_segmented__item {
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+            }
 
             &:active,
             &:focus,
             &:hover {
-                color: $color-base;
+                @include theme() {
+                    background: theme-get('color-base');
+                }
             }
 
             &--active {
-                color: $color-white;
-                background: $color-base;
+                @include theme() {
+                    color: theme-get('color-white');
+                    background: theme-get('color-base');
+                }
                 
                 &:active,
                 &:focus,
                 &:hover {
-                    color: $color-white;
-                    background: calc-color(tint, $color-base, 90);
+                    @include theme() {
+                        color: theme-get('color-white');
+                        background: calc-color(tint, theme-get('color-base'), 90);
+                    }
+
                 }
             }
         }
