@@ -24,6 +24,7 @@ export type ISelectOptions = ISelectOptionsObject | ISelectOptionsArray;
 export interface ISelectStateProps {
     active?: number;
     isDropdownUplifted?: boolean;
+    isUpdateValueOnChange?: boolean;
     options?: ISelectOptions;
 }
 
