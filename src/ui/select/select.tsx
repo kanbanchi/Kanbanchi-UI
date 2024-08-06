@@ -33,6 +33,7 @@ export const Select = React.forwardRef((
         isCloseOnEnter,
         isFitWindow,
         isDropdownUplifted,
+        isUpdateValueOnChange,
         multiple,
         notBlurClasses,
         opened,
@@ -58,6 +59,9 @@ export const Select = React.forwardRef((
         dropdownBody = null,
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
+
+    // dont update search input value if not forced
+    isUpdateValueOnChange = isUpdateValueOnChange === undefined ? !isSearch : isUpdateValueOnChange;
 
     const [isScroll, setScroll] = React.useState(false);
     let [activeHook, _setActiveHook] = React.useState(active);
@@ -237,7 +241,7 @@ export const Select = React.forwardRef((
                 inputRef.current.setFocus(); // return focus to input before dropdown hide
                 setIsOpenedHook(false);
                 isOpened.current = false;
-                if (!isSearch) { // dont update search input value
+                if (isUpdateValueOnChange) {
                     setValue(e.item.text);
                 }
                 if (e.item.index !== activeHook) {
