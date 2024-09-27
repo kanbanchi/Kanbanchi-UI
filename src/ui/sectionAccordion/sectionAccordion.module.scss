@@ -68,7 +68,7 @@
 
     &--opened {
         .kui-section-accordion-body {
-            display: block;
+            display: contents;
             animation: animation_height_open .3s ease forwards;
         }
     }
