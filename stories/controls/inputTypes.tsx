@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { ButtonsGroup, Input, Select, SelectList } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const types = [
@@ -48,6 +49,7 @@ const Story = () => {
     );
     return (
         <div className="page">
+            <ThemeSwitch />
             <section>
                     <h2>Input types</h2>
 

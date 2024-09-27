@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonsSegmented } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const [val, setVal] = React.useState(0);
@@ -8,6 +9,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section>
                 <h2>ButtonsSegmented</h2>
                 <ButtonsSegmented

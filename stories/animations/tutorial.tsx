@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, Hint, ButtonsGroup } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     let [showHint, setShowHint] = React.useState(false);
@@ -18,6 +19,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section>
                 <h2>Tutorial</h2>
 

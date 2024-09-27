@@ -2,6 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { ButtonsGroup, Select, SelectList, SelectListItem, Search, Checkbox, Userpic } from '../../src/ui';
 import { ISelectActiveInheritedProps } from '../../src/ui/select/types';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
 
@@ -55,6 +56,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section className="section-form-min">
                 <h2>Select</h2>
 

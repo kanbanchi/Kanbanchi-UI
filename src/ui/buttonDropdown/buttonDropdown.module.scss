@@ -5,15 +5,21 @@
 
     &__item {
         .kui-button__icon {
-            color: calc-color(tint, $color-base, 30);
+            @include theme() {
+                color: calc-color(tint, theme-get('color-base'), 30);
+            }
         }
 
         .kui-button-dropdown--opened > & {
-            color: $color-base;
-            background: calc-color(fade, $color-background, 50);
+            @include theme() {
+                color: theme-get('color-base');
+                background: calc-color(fade, theme-get('color-background'), 50);
+            }
             
             .kui-button__icon {
-                color: $color-base;
+                @include theme() {
+                    color: theme-get('color-base');
+                }
             }
         }
     }

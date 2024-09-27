@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonTitle, Icon } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     return (
         <div className="page">
+            <ThemeSwitch />
             <section>
                 <h2>ButtonTitle</h2>
 

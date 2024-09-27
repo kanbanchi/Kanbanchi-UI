@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const CARD_BACKGROUND_COLORS: ReadonlyArray<string> = Object.freeze([
@@ -55,6 +56,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section className="section-form-min">
                 <h2>New colors 2022-12-01</h2>
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, Icon, Radio, SectionAccordion, Switch } from '../../src/ui';
 import { IButtonInheritedProps } from '../../src/ui/button/types';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const [opened, setOpened] = React.useState(true);
@@ -28,6 +29,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section className="section-form-min">
                 <h2>Filter</h2>
                 <Switch

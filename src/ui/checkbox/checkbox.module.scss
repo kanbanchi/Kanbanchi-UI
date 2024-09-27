@@ -22,12 +22,16 @@
         top: $google-spacing / 4;
         height: $google-spacing * 2.25;
         width: $google-spacing * 2.25;
-        color: $color-white;
+        @include theme() {
+            color: theme-get('color-white');
+        }
         @include transition;
     }
     &__label:before {
         content: '';
-        border: 2px solid calc-color(fade, $color-base, 30);
+        @include theme() {
+            border: 2px solid calc-color(fade, theme-get('color-base'), 30);
+        }
         border-radius: $base-radius;
     }
     &__checkmark {
@@ -56,7 +60,9 @@
     
     &.kui-checkbox--color_black {
         .kui-checkbox__input:checked + .kui-checkbox__label:before {
-            background-color: $color-base;
+            @include theme() {
+                background: theme-get('color-base');
+            }
         }
     }
 
@@ -83,7 +89,9 @@
         }
 
         .kui-checkbox__input:not(:checked) + .kui-checkbox__label:before {
-            border-color: calc-color(fade, $color-base, 15);
+            @include theme() {
+                border-color: calc-color(fade, theme-get('color-base'), 15);
+            }
         }
     }
 
@@ -104,7 +112,10 @@
     
     &:focus:before,
     &:hover:before {
-        background: $color-light-background;
+        @include theme() {
+            background: theme-get('color-light-background');
+        }
+
     }
 
     &.kui-checkbox--indeterminate {
@@ -115,7 +126,9 @@
 
         &.kui-checkbox--color_black {
             .kui-checkbox__label:before {
-                background-color: $color-base;
+                @include theme() {
+                    background: theme-get('color-base');
+                }
             }
         }
 
@@ -127,7 +140,9 @@
             transform: translateY(-2px);
             width: 12px;
             height: 2px;
-            background: $color-white;
+            @include theme() {
+                background: theme-get('color-white');
+            }
             border-radius: $small-radius;
         }
 
@@ -147,7 +162,9 @@
         pointer-events: none;
 
         .kui-checkbox__label {
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
             
             &:before {
                 opacity: .33;

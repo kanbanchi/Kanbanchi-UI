@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button, ButtonsGroup, Files, Icon } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const files = [
@@ -30,6 +31,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section className="section-form-min">
             <h2>Files</h2>
 
