@@ -42,6 +42,10 @@ React.forwardRef((props, ref) => {
         onHide,
     } = props;
 
+    const isTouch = isTouchScreen();
+    const isHint = variant === 'hint';
+    if (!isHint && isTouch && children) return children as JSX.Element;
+
     if (isHidable === undefined) isHidable = true;
     const WAIT_BEFORE_SHOW = delay || 1000;
     const WAIT_ANIMATION = 200;
@@ -94,7 +98,6 @@ React.forwardRef((props, ref) => {
         if (!portalSelector) portalSelector = '.' + uniqueClass;
     }
 
-    const isHint = variant === 'hint';
     let html: JSX.Element[] = [];
     let ariaLabel = value || '';
 
@@ -467,8 +470,7 @@ React.forwardRef((props, ref) => {
         let childClassName = child.props.className;
         if (!isPortal) childClassName += ' tooltip-target ' + uniqueClass;
 
-        const isTouch = isTouchScreen();
-        const targetOnMouse = isHint || isTouch ? {} : {
+        const targetOnMouse = isHint ? {} : {
             onMouseEnter: (event: React.MouseEvent) => toggleMouse(event, index, true),
             onMouseLeave: (event: React.MouseEvent) => toggleMouse(event, index, false),
             onMouseMove: (event: React.MouseEvent) => mouseMove(event, index),
