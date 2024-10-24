@@ -5,6 +5,7 @@ import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
 import { v4 as uuidv4 } from 'uuid';
+import { isTouchScreen } from './helpers/isTouchScreen';
 
 // accessibility ok
 
@@ -466,7 +467,8 @@ React.forwardRef((props, ref) => {
         let childClassName = child.props.className;
         if (!isPortal) childClassName += ' tooltip-target ' + uniqueClass;
 
-        const targetOnMouse = isHint ? {} : {
+        const isTouch = isTouchScreen();
+        const targetOnMouse = isHint || isTouch ? {} : {
             onMouseEnter: (event: React.MouseEvent) => toggleMouse(event, index, true),
             onMouseLeave: (event: React.MouseEvent) => toggleMouse(event, index, false),
             onMouseMove: (event: React.MouseEvent) => mouseMove(event, index),
