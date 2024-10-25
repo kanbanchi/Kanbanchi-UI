@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Portal, KUI_PORTAL_ID } from '../portal/portal';
 import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
+import { is } from 'date-fns/locale';
 
 // accessibility ok
 
@@ -168,6 +169,11 @@ export const ButtonDropdown = React.forwardRef((
         isOpenedHook = isOpened;
         setIsOpenedHook(isOpenedHook);
         if (isOpened) {
+            const buttonDropdown = buttonRef.current as HTMLElement;
+            if (buttonDropdown) { // в сафари фокусится button dropdown и закрытие на blur не срабатывае
+                const button = buttonDropdown.firstChild as HTMLButtonElement;
+                if (button) button.focus();
+            }
             if (onOpen) onOpen();
         } else if (isOpened === false) {
             if (onClose) onClose();
@@ -328,7 +334,11 @@ export const ButtonDropdown = React.forwardRef((
         : dropdownElement;
 
     return (
-        <div className={className} ref={buttonRef}>
+        <div
+            className={className}
+            ref={buttonRef}
+            tabIndex={-1} // в сафари на десктопе и в мобилках в onBlur relatedTarget null, и закрыть на кнопку когда фокус в дропдауне не получается
+        >
             {btn}
             {dropdownPortal}
         </div>
