@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { Portal, KUI_PORTAL_ID } from '../portal/portal';
 import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
-import { is } from 'date-fns/locale';
 
 // accessibility ok
 
