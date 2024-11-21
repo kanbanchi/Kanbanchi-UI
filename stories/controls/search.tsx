@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { LoaderBlock, Search, SelectList, SelectListItem } from '../../src/ui';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const [loading, setLoading] = React.useState(false);
@@ -59,7 +60,7 @@ const Story = () => {
 
     return (
         <div className="page scroll-visible">
-
+            <ThemeSwitch />
             <section className="section-form-min">
                 <div className="section-relative">
                     <h2>Search</h2>

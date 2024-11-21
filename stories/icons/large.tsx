@@ -2,6 +2,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { IconsList } from './utils';
 import { EIconSize } from '../../src/ui/icon/types';
+import { ThemeSwitch } from '../common/themeSwitch/themeSwitch';
 
 const Story = () => {
     const icons = require.context(
@@ -12,6 +13,7 @@ const Story = () => {
 
     return (
         <div className="page">
+            <ThemeSwitch />
             <section>
                 <h2>96px</h2>
                 <div className="icons-grid icons-grid--large">

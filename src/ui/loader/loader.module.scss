@@ -9,7 +9,9 @@ $cubic: cubic-bezier(.4,.4,.15,1.4);
         position: absolute;
         width: $google-spacing * 2;
         height: $google-spacing * 2;
-        color: $color-white;
+        @include theme() {
+            color: theme-get('color-white');
+        }
         border-radius: $base-radius;
         background: $color-purple;
 
@@ -66,13 +68,17 @@ $cubic: cubic-bezier(.4,.4,.15,1.4);
 
     &--color_white {
         .kui-loader__item {
-            background: $color-white;
+            @include theme() {
+                background: theme-get('color-white');
+            }
         }
     }
 
     &--color_black {
         .kui-loader__item {
-            background: $color-base;
+            @include theme() {
+                background: theme-get('color-base');
+            }
         }
     }
 }

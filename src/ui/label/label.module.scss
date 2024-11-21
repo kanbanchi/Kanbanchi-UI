@@ -7,6 +7,8 @@
         display: block;
         margin-bottom: $google-spacing * 0.5;
         font-size: $nano-size;
-        color: calc-color(fade, $color-base, 50);
+        @include theme() {
+            color: calc-color(fade, theme-get('color-base'), 50);
+        }
     }
 }

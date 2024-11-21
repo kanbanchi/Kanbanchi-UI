@@ -6,7 +6,9 @@
     font-size: $milli-size;
     font-weight: bold;
     color: $color-green;
-    background: $color-white;
+    @include theme() {
+        background: theme-get('color-white');
+    }
     border-radius: $google-spacing * 4;
     overflow: hidden;
     cursor: pointer;
@@ -25,7 +27,9 @@
 
     &.kui-done--empty {
         &:after {
-            border-color: calc-color(fade, $color-base, 20);
+            @include theme() {
+                border-color: calc-color(fade, theme-get('color-base'), 20);
+            }
         }
 
         .kui-done__bg {
@@ -33,12 +37,16 @@
         }
 
         .kui-done__icon {
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
             transform: scale(.9);
         }
 
         .kui-done__percent {
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+            }
         }
     }
 

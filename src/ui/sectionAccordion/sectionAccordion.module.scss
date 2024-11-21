@@ -14,15 +14,19 @@
         display: flex;
         justify-content: space-between;
         padding: $google-spacing 0 $google-spacing / 2;
-        border-bottom: 1px solid calc-color(fade, $color-base, 20);
-        background: $color-white;
+        @include theme() {
+            border-bottom: 1px solid calc-color(fade, theme-get('color-base'), 20);
+            background: theme-get('color-white');
+        }
 
         &:before { // hide shadow of hovered items
             content: '';
             position: absolute;
             top: 0;
             left: -$google-spacing * 2;
-            background: $color-white;
+            @include theme() {
+                background: theme-get('color-white');
+            }
             width: calc(100% + #{$google-spacing * 4});
             height: 100%;
         }
@@ -88,10 +92,14 @@
 
     &--color_grey {
         .kui-section-accordion-header {
-            background: $color-background;
+            @include theme() {
+                background: theme-get('color-background');
+            }
 
             &:before {
-                background: $color-background;
+                @include theme() {
+                    background: theme-get('color-background');
+                }
             }
         }
     }

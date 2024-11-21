@@ -47,7 +47,9 @@
     &--variant_primary {
         height: $google-spacing * 4;
         padding: 0 $google-spacing;
-        color: $color-white;
+        @include theme() {
+            color: $color-white;
+        }
         background: $color-purple;
         border-radius: $big-radius;
 
@@ -74,23 +76,33 @@
     }
 
     &--color_white {
-        background: calc-color(fade, $color-white, 30);
+        @include theme() {
+            background: calc-color(fade, theme-get('color-white'), 30);
+        }
 
         &:focus {
-            background: calc-color(fade, $color-white, 50);
+            @include theme() {
+                background: calc-color(fade, theme-get('color-white'), 50);
+            }
         }
 
         &:hover {
-            background: calc-color(fade, $color-white, 50);
+            @include theme() {
+                background: calc-color(fade, theme-get('color-white'), 50);
+            }
         }
 
         &:active {
-            background: calc-color(fade, $color-white, 30);
+            @include theme() {
+                background: calc-color(fade, theme-get('color-white'), 30);
+            }
         }
 
         &.kui-button--disabled,
         &:disabled {
-            background: calc-color(fade, $color-white, 30);
+            @include theme() {
+                background: calc-color(fade, theme-get('color-white'), 30);
+            }
             opacity: .5;
         }
     }
@@ -128,7 +140,9 @@
 
     &--variant_fab {
         min-width: 0;
-        color: calc-color(fade, $color-base, 50);
+        @include theme() {
+            color: calc-color(fade, theme-get('color-base'), 50);
+        }
 
         .kui-button__text {
             margin-left: $google-spacing;
@@ -142,45 +156,61 @@
             width: $google-spacing * 5;
             min-width: $google-spacing * 5;
             height: $google-spacing * 5;
-            color: calc-color(fade, $color-base, 30);
-            background: $color-white;
-            border: 2px solid calc-color(fade, $color-base, 20);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+                border: 2px solid calc-color(fade, theme-get('color-base'), 20);
+                background: theme-get('color-white');
+            }
             border-radius: $big-radius;
             @include transition;
         }
 
         &.kui-button--disabled,
         &:disabled {
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
 
             .kui-button__children {
-                color: calc-color(fade, $color-base, 10);
-                border-color: calc-color(fade, $color-base, 15);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 10);
+                    border-color: calc-color(fade, theme-get('color-base'), 15);
+                }
             }
         }
 
         &:focus {
-            color: calc-color(fade, $color-base, 90);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 90);
+            }
 
             .kui-button__children {
-                color: calc-color(fade, $color-base, 50);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 50);
+                }
             }
         }
 
         &.kui-button--hover,
         &:hover {
-            color: calc-color(fade, $color-base, 90);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 90);
+            }
 
             .kui-button__children {
-                color: calc-color(fade, $color-base, 90);
-                border-color: calc-color(fade, $color-base, 30);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 90);
+                    border-color: calc-color(fade, theme-get('color-base'), 30);
+                }
             }
         }
 
         &:active {
             .kui-button__children {
-                color: $color-white;
-                border-color: calc-color(fade, $color-base, 0);
+                @include theme() {
+                    color: theme-get('color-white');
+                    border-color: calc-color(fade, theme-get('color-base'), 0);
+                }
                 background: $color-purple;
             }
         }
@@ -189,14 +219,18 @@
             color: $color-purple;
 
             .kui-button__children {
-                color: $color-white;
                 background: $color-purple;
-                border-color: calc-color(fade, $color-base, 0);
+                @include theme() {
+                    color: theme-get('color-white');
+                    border-color: calc-color(fade, theme-get('color-base'), 0);
+                }
             }
 
             &:focus {
                 .kui-button__children {
-                    color: $color-white;
+                    @include theme() {
+                        color: theme-get('color-white');
+                    }
                     background: $color-purple-hover;
                 }
             }
@@ -204,14 +238,18 @@
             &.kui-button--hover,
             &:hover {
                 .kui-button__children {
-                    color: $color-white;
+                    @include theme() {
+                        color: theme-get('color-white');
+                    }
                     background: $color-purple-hover;
                 }
             }
 
             &:active {
                 .kui-button__children {
-                    color: $color-white;
+                    @include theme() {
+                        color: theme-get('color-white');
+                    }
                     background: $color-purple;
                 }
             }
@@ -221,64 +259,88 @@
                 color: calc-color(fade, $color-purple, 30);
 
                 .kui-button__children {
-                    color: calc-color(fade, $color-white, 50);
+                    @include theme() {
+                        color: calc-color(fade, theme-get('color-white'), 50);
+                    }
                     background: calc-color(fade, $color-purple, 30);
                 }
             }
         }
 
         &.kui-button--color_black {
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+            }
 
             .kui-button__children {
-                color: $color-white;
-                background: $color-base;
+                @include theme() {
+                    color: theme-get('color-white');
+                    background: theme-get('color-base');
+                }
                 border-color: transparent;
             }
 
             &.kui-button--hover,
             &:focus,
             &:hover {
-                color: calc-color(tint, $color-base, 90);
+                @include theme() {
+                    color: calc-color(tint, theme-get('color-base'), 90);
+                }
 
                 .kui-button__children {
-                    background: calc-color(tint, $color-base, 80);
+                    @include theme() {
+                        background: calc-color(tint, theme-get('color-base'), 80);
+                    }
                 }
             }
 
             &:active {
-                color: $color-base;
+                @include theme() {
+                    color: theme-get('color-base');
+                }
 
                 .kui-button__children {
-                    background: $color-base;
+                    @include theme() {
+                        background: theme-get('color-base');
+                    }
                 }
             }
 
             &.kui-button--disabled,
             &:disabled {
-                color: calc-color(fade, $color-base, 30);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 30);
+                }
 
                 .kui-button__children {
-                    background: calc-color(fade, $color-base, 30);
+                    @include theme() {
+                        background: calc-color(fade, theme-get('color-base'), 30);
+                    }
                 }
             }
         }
 
         &.kui-button--color_white {
-            color: $color-white;
-            background: transparent;
+            @include theme() {
+                color: theme-get('color-white');
+                background: transparent;
+            }
 
             .kui-button__children {
-                color: $color-white;
-                background: calc-color(fade, $color-white, 30);
-                border-color: transparent;
+                @include theme() {
+                    color: theme-get('color-white');
+                    background: calc-color(fade, theme-get('color-white'), 30);
+                    border-color: transparent;
+                }
             }
 
             &.kui-button--hover,
             &:focus,
             &:hover {
                 .kui-button__children {
-                    background: calc-color(fade, $color-white, 50);
+                    @include theme() {
+                        background: calc-color(fade, theme-get('color-white'), 50);
+                    }
                 }
             }
 
@@ -291,8 +353,10 @@
             &.kui-button--disabled,
             &:disabled {
                 .kui-button__children {
-                    color: calc-color(fade, $color-white, 30);
-                    background: calc-color(fade, $color-white, 30);                   
+                    @include theme() {
+                        color: calc-color(fade, theme-get('color-white'), 30);
+                        background: calc-color(fade, theme-get('color-white'), 30);
+                    }
                 }
             }
         }
@@ -301,72 +365,103 @@
     &--variant_action {
         height: $google-spacing * 4;
         padding: 0 $google-spacing * 2 0 $google-spacing;
-        color: calc-color(tint, $color-base, 50);
-        border: 2px solid calc-color(tint, $color-base, 20);
+        @include theme() {
+            color: calc-color(fade, theme-get('color-base'), 50);
+            border: 2px solid calc-color(tint, theme-get('color-base'), 20);
+        }
         border-radius: $big-radius;
 
         .kui-button__icon {
             margin-right: $google-spacing / 2;
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
         }
 
         &:focus {
-            color: calc-color(fade, $color-base, 80);
-            background: calc-color(fade, $color-base, 0);
-            border: 2px solid calc-color(tint, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 80);
+                background: calc-color(fade, theme-get('color-base'), 0);
+                border: 2px solid calc-color(tint, theme-get('color-base'), 30);
+            }
+
         }
         
         &:hover {
-            color: calc-color(fade, $color-base, 80);
-            border: 2px solid calc-color(tint, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 80);
+                border: 2px solid calc-color(tint, theme-get('color-base'), 30);
+            }
 
             .kui-button__icon {
-                color: calc-color(fade, $color-base, 80);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 80);
+                }
             }
         }
 
         &:active {
-            background: calc-color(fade, $color-base, 5);
+            @include theme() {
+                background: calc-color(fade, theme-get('color-base'), 5);
+            }
 
             .kui-button__icon {
-                color: calc-color(fade, $color-base, 80);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 80);
+                }
             }
         }
 
         &.kui-button--disabled,
         &:disabled {
-            color: calc-color(fade, $color-base, 30);
-            border-color: calc-color(fade, $color-base, 15);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+                border-color: calc-color(fade, theme-get('color-base'), 15);
+            }
 
             .kui-button__icon {
-                color: calc-color(fade, $color-base, 15);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 15);
+                }
             }
         }
 
         &.kui-button--color_white {
-            color: calc-color(fade, $color-white, 90);
-            background: calc-color(fade, $color-white, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-white'), 90);
+                background: calc-color(fade, theme-get('color-white'), 30);
+            }
             border: none;
 
             .kui-button__icon {
-                color: calc-color(fade, $color-white, 50);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-white'), 50);
+                }
             }
 
             &:focus {
-                background: calc-color(fade, $color-white, 30);
+                @include theme() {
+                    background: calc-color(fade, theme-get('color-white'), 30);
+                }
             }
 
             &:hover {
-                background: calc-color(fade, $color-white, 50);
+                @include theme() {
+                    background: calc-color(fade, theme-get('color-white'), 50);
+                }
             }
 
             &:active {
-                background: calc-color(fade, $color-white, 30);
+                @include theme() {
+                    background: calc-color(fade, theme-get('color-white'), 30);
+                }
             }
 
             &.kui-button--disabled,
             &:disabled {
-                background: calc-color(fade, $color-white, 30);
+                @include theme() {
+                    background: calc-color(fade, theme-get('color-white'), 30);
+                }
                 opacity: .5;
             }
         }
@@ -476,47 +571,65 @@
         justify-content: space-between;
         height: $google-spacing * 5;
         padding: 0 $google-spacing 0 $google-spacing * 2;
-        color: $color-base;
-        border: 2px dashed calc-color(fade, $color-base, 20);
+        @include theme() {
+            color: theme-get('color-base');
+            border: 2px dashed calc-color(fade, theme-get('color-base'), 20);
+        }
         border-radius: $big-radius;
 
         .kui-button__icon {
             margin-left: $google-spacing;
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
         }
 
         &:focus {
-            color: $color-base;
-            border: 2px dashed calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: theme-get('color-base');
+                border: 2px dashed calc-color(fade, theme-get('color-base'), 30);
+            }
 
             .kui-button__icon {
-                color: $color-base;
+                @include theme() {
+                    color: theme-get('color-base');
+                }
             }
         }
 
         &:hover {
-            color: $color-base;
-            border: 2px dashed calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: theme-get('color-base');
+                border: 2px dashed calc-color(fade, theme-get('color-base'), 30);
+            }
 
             .kui-button__icon {
-                color: $color-base;
+                @include theme() {
+                    color: theme-get('color-base');
+                }
             }
         }
 
         .kui-button-dropdown--opened > &,
         &:active {
-            background: calc-color(fade, $color-base, 5);
-            border: 2px dashed calc-color(fade, $color-base, 30);
+            @include theme() {
+                background: calc-color(fade, theme-get('color-base'), 5);
+                border: 2px dashed calc-color(fade, theme-get('color-base'), 30);
+            }
 
             .kui-button__icon {
-                color: $color-base;
+                @include theme() {
+                    color: theme-get('color-base');
+                }
                 transform: rotate(-45deg);
             }
         }
 
         &.kui-button--disabled,
         &:disabled {
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
             pointer-events: none;
         }
     }
@@ -531,7 +644,9 @@
         left: 0;
         top: 0;
         height: 100%;
-        background: calc-color(fade, $color-white, 30);
+        @include theme() {
+            background: calc-color(fade, theme-get('color-white'), 30);
+        }
         @include transition;
 
         .kui-button--variant_secondary & {

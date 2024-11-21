@@ -1,16 +1,24 @@
-$color-white:               #ffffff !default;
-$color-black:               #120021 !default;
-$color-base:                material-color("blue-grey", "900") !default;
-$color-red:                 material-color("red", "600") !default;
-$color-green:               material-color("green", "500") !default;
-$color-blue:                material-color("blue", "500") !default;
-$color-yellow:              material-color("yellow", "600") !default;
-$color-orange:              material-color("orange", "500") !default;
-$color-pink:                material-color("pink", "500") !default;
-$color-purple:              material-color("deep-purple", "500") !default;
-$color-cyan:                material-color("cyan", "500") !default;
-$color-background:          #ebedf2;
-$color-light-background:    #f8f9fa;
+$color-white:                     #ffffff !default;
+$color-black:                     #120021 !default;
+$color-base:                      material-color("blue-grey", "900") !default;
+$color-red:                       material-color("red", "600") !default;
+$color-green:                     material-color("green", "500") !default;
+$color-blue:                      material-color("blue", "500") !default;
+$color-yellow:                    material-color("yellow", "600") !default;
+$color-orange:                    material-color("orange", "500") !default;
+$color-pink:                      material-color("pink", "500") !default;
+$color-purple:                    material-color("deep-purple", "500") !default;
+$color-cyan:                      material-color("cyan", "500") !default;
+$color-background:                #ebedf2;
+$color-light-background:          #f8f9fa;
+$color-select-list-item-hover:    #F0F1F5;
+
+// dark-mode
+$color-white-dm:                  #1a1b1c !default;
+$color-base-dm:                   material-color("blue-grey", "200") !default;
+$color-background-dm:             #393d40;
+$color-light-background-dm:       #2a2c2e;
+$color-select-list-item-hover-dm: #35383b;
 
 // New Colors 2019-01-28
 $color-jazzberry-jam:       material-color("pink", "800") !default; // Jazzberry Jam

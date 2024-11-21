@@ -11,8 +11,10 @@
     &:not(.kui-select--readonly):not(.kui-select--disabled) {
         .kui-input--readonly {
             .kui-input__item {
-                border: 2px solid $color-background;
-                background: $color-white;
+                @include theme() {
+                    border: 2px solid theme-get('color-background');
+                    background: theme-get('color-white');
+                }
                 cursor: pointer;
             }
         }
@@ -20,16 +22,22 @@
         &:hover,
         &.kui-select--opened {
             .kui-input__item {
-                border-color: $border-color-hover;
+                @include theme() {
+                    border-color: theme-get('border-color-hover');
+                }
             }
 
             .kui-input__icon:not(.kui-input__icon--clear) {
-                color: $color-base;
+                @include theme() {
+                    color: theme-get('color-base');
+                }
             }
         }
 
         .kui-input__item:focus {
-            border-color: $border-color-hover;
+            @include theme() {
+                border-color: theme-get('border-color-hover');
+            }
         }
 
         &.kui-select--opened {
@@ -45,8 +53,10 @@
         .kui-input__item {
             font-size: $base-font-size;
             font-weight: bold;
-            border-color: calc-color(fade, $color-base, 0) !important;
-            background: $color-white;
+            @include theme() {
+                border-color: calc-color(fade, theme-get('color-base'), 0) !important;
+                background: theme-get('color-white');
+            }
         }
 
         .kui-dropdown__item {
@@ -67,7 +77,9 @@
                 width: $google-spacing * 13;
                 height: $google-spacing * 4;
                 font-weight: bold;
-                border: 2px dashed calc-color(fade, $color-base, 20);
+                @include theme() {
+                    border: 2px dashed calc-color(fade, theme-get('color-base'), 20);
+                }
                 border-radius: $google-spacing * 4;
             }
         }
@@ -80,7 +92,9 @@
             &__col {
                 &--icon {
                     flex: 0 0 $google-spacing * 4;
-                    color: $color-base;
+                    @include theme() {
+                        border: theme-get('color-base');
+                    }
                 }
                 &--title {
                     max-width: calc(100% - #{$google-spacing * 4});
