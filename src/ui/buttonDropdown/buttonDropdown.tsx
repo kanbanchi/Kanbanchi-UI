@@ -169,7 +169,7 @@ export const ButtonDropdown = React.forwardRef((
         setIsOpenedHook(isOpenedHook);
         if (isOpened) {
             const buttonDropdown = buttonRef.current as HTMLElement;
-            if (buttonDropdown) { // в сафари фокусится button dropdown и закрытие на blur не срабатывае
+            if (buttonDropdown && !dontChangeFocus) { // в сафари фокусится button dropdown и закрытие на blur не срабатывае
                 const button = buttonDropdown.firstChild as HTMLButtonElement;
                 if (button) button.focus();
             }
