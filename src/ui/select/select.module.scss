@@ -28,13 +28,13 @@
             }
         }
 
-        .kui-input__item:focus {
-            border-color: $border-color-hover;
-        }
-
         &.kui-select--opened {
             .kui-input__icon--arrow {
                 transform: scaleY(-1);
+            }
+
+            .kui-input__item {
+                border-color: $color-purple;
             }
         }
     }
