@@ -17,15 +17,22 @@ const custom = require('./webpack.config.js');
 
 module.exports = {
   stories: [
-    '../stories/**/*.(js|tsx)'
+    '../stories/**/*.stories.(js|tsx)'
   ],
+
+  staticDirs: ['../public'],
+
   "addons": [
-    "@storybook/addon-storysource"
+    "@storybook/addon-storysource",
+    "@storybook/addon-webpack5-compiler-babel",
+    "@chromatic-com/storybook"
   ],
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-webpack5"
+
+  "framework": {
+    name: "@storybook/react-webpack5",
+    options: {}
   },
+
   webpackFinal: (config) => {
     return {
       ...config,
@@ -38,4 +45,8 @@ module.exports = {
       }
     };
   },
+
+  docs: {
+    // autodocs: true
+  }
 };
