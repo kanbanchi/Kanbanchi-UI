@@ -99,7 +99,7 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
             unmounted = true;
             clearInterval(timeoutHook);
         }
-    }, []);
+    }, [timer]); // могут быть много снекбкаров с одинаковым id (suspended), нужно сбрасывать таймер
 
     className = ClassNames(
         'kui-snackbar',
