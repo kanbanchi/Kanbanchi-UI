@@ -481,6 +481,19 @@ export const Select = React.forwardRef((
     }, []);
 
     React.useEffect(() => {
+        if (!isOpened) return;
+        function onResize() {
+            const dropdownItem = dropdownRef.current && dropdownRef.current.children[0];
+            if (!dropdownItem) return;
+            setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
+        }
+        window.addEventListener('resize', onResize);
+        return () => {
+            window.addEventListener('resize', onResize);
+        }
+    }, [isOpened]);
+
+    React.useEffect(() => {
         scrollList();
         if (onActiveChange) onActiveChange(activeHook);
     }, [activeHook]);
