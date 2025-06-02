@@ -481,15 +481,21 @@ export const Select = React.forwardRef((
     }, []);
 
     React.useEffect(() => {
-        if (!isOpened) return;
+        if (!isOpened || !dropdownRef.current) return;
         function onResize() {
             const dropdownItem = dropdownRef.current && dropdownRef.current.children[0];
             if (!dropdownItem) return;
-            setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
+            const _isScroll = dropdownItem.offsetHeight < dropdownItem.scrollHeight;
+            if (_isScroll !== isScroll) {
+                setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
+            }
         }
+        const observer = new MutationObserver(onResize);
+        observer.observe(dropdownRef.current, {attributes: false, childList: true, subtree: true});
         window.addEventListener('resize', onResize);
         return () => {
             window.addEventListener('resize', onResize);
+            observer.disconnect();
         }
     }, [isOpened]);
 
