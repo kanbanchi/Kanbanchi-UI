@@ -496,9 +496,7 @@ export const Select = React.forwardRef((
         }
         const observer = new MutationObserver(onResize);
         observer.observe(dropdownRef.current, {attributes: false, childList: true, subtree: true});
-        window.addEventListener('resize', onResize);
         return () => {
-            window.addEventListener('resize', onResize);
             observer.disconnect();
         }
     }, [isOpened]);
