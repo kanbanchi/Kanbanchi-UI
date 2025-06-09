@@ -494,10 +494,13 @@ export const Select = React.forwardRef((
                 }
             }, 200);
         }
-        const observer = new MutationObserver(onResize);
-        observer.observe(dropdownRef.current, {attributes: false, childList: true, subtree: true});
+        const mutationObserver = new MutationObserver(onResize);
+        const resizeObserver = new ResizeObserver(onResize);
+        mutationObserver.observe(dropdownRef.current, {attributes: false, childList: true, subtree: true});
+        resizeObserver.observe(dropdownRef.current);
         return () => {
-            observer.disconnect();
+            mutationObserver.disconnect();
+            resizeObserver.disconnect();
         }
     }, [isOpened]);
 
