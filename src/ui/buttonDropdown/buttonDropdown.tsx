@@ -222,6 +222,7 @@ export const ButtonDropdown = React.forwardRef((
         if (isKeepOpen) {
             if (dropdownRef.current) {
                 dropdownRef.current.focus();
+                return;
             }
         }
 
