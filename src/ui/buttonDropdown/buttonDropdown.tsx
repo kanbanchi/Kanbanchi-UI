@@ -4,7 +4,7 @@ import { ClassNames, getParentsClasses, SCREEN_PADDING, useCombinedRefs } from '
 import { Dropdown } from '../../ui';
 import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
-import { Portal, KUI_PORTAL_ID } from '../portal/portal';
+import { KUI_PORTAL_ID, Portal } from '../portal/portal';
 import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
 
@@ -24,6 +24,7 @@ export const ButtonDropdown = React.forwardRef((
         dropdownClassName,
         isFitWindow,
         isMoveToFit,
+        isKeepOpen,
         isScaleAnimation,
         multiple,
         notBlurClasses,
@@ -217,6 +218,12 @@ export const ButtonDropdown = React.forwardRef((
 
     attributes.onBlur = (e: any) => {
         if (!document.hasFocus()) return;
+
+        if (isKeepOpen) {
+            if (dropdownRef.current) {
+                dropdownRef.current.focus();
+            }
+        }
 
         const classes = getParentsClasses(
             e.relatedTarget as HTMLElement,
