@@ -219,19 +219,20 @@ export const ButtonDropdown = React.forwardRef((
     attributes.onBlur = (e: any) => {
         if (!document.hasFocus()) return;
 
-        if (isKeepOpen) {
-            if (dropdownRef.current) {
-                dropdownRef.current.focus();
-                return;
-            }
-        }
-
         const classes = getParentsClasses(
             e.relatedTarget as HTMLElement,
             notBlurClasses
         );
         for (let i = 0; i<notBlurClasses.length; i++) {
             if (classes.includes(notBlurClasses[i])) {
+                return;
+            }
+        }
+
+        if (isKeepOpen) {
+            const dropdown = dropdownRef.current && dropdownRef.current.children[0];
+            if (dropdownRef) {
+                dropdown.focus();
                 return;
             }
         }
