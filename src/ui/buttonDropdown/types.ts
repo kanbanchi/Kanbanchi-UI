@@ -5,6 +5,7 @@ export interface IButtonDropdownStateProps {
     dontChangeFocus?: boolean;
     dropdownClassName?: string;
     isMoveToFit?: boolean;
+    isKeepOpen?: boolean;
     multiple?: boolean;
     portal?: boolean;
     portalId?: string;
