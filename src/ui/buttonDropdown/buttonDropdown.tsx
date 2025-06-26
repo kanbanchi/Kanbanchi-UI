@@ -260,6 +260,17 @@ export const ButtonDropdown = React.forwardRef((
     let childrenArray: Array<{}> = // children could be string, we need array
         (Array.isArray(children)) ? children : [children];
 
+    const onButtonKeyDown = (
+        e: React.KeyboardEvent,
+        onKeyDownOwn: (e: React.KeyboardEvent) => void,
+    ) => {
+        if (e.key === 'Escape') {
+            e.stopPropagation();
+            setIsOpened(false);
+        }
+        if (onKeyDownOwn) onKeyDownOwn(e);
+    };
+
     list = React.Children.map(childrenArray, (child: any) => {
         if (!child || !child.props) return null;
         if (child.type.displayName === 'Button') {
@@ -271,7 +282,8 @@ export const ButtonDropdown = React.forwardRef((
                 ['aria-haspopup']: true,
                 ['aria-expanded']: isOpenedHook,
                 ...attributes,
-                ref: buttonButtonRef
+                ref: buttonButtonRef,
+                onKeyDown: (e: React.KeyboardEvent) => onButtonKeyDown(e, attributes.onKeyDown),
             });
             return null;
         }
