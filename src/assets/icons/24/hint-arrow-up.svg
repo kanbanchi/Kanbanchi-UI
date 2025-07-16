@@ -1,5 +1,3 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g clip-path="url(#clip0_2_46)">
-    <path d="M6.304 10.7136C7.08734 9.46026 8.91266 9.46026 9.696 10.7136L13 16H3L6.304 10.7136Z"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <path d="M6.3 10.71a2 2 0 0 1 3.4 0L13 16H3l3.3-5.29Z"/>
 </svg>
