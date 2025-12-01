@@ -517,6 +517,11 @@ export const Select = React.forwardRef((
         }
     }, [active, options]);
 
+    React.useEffect(() => {
+        if (opened === isOpenedHook) return;
+        setIsOpenedHook(opened);
+    }, [opened]);
+
     const classNameDropdown = ClassNames(
         'kui-select__dropdown',
         dropdownUniqueClass,
