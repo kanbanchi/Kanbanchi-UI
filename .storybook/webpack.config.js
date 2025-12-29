@@ -32,7 +32,20 @@ module.exports = {
                         }
                     },
                     {
-                        loader: 'sass-loader'
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            sassOptions: {
+                                quietDeps: true,
+                                silenceDeprecations: [
+                                    'import',
+                                    'color-functions',
+                                    'function-units',
+                                    'slash-div',
+                                    'legacy-js-api',
+                                ]
+                            },
+                        },
                     }
                 ]
             },
