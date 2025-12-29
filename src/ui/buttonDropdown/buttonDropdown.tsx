@@ -310,10 +310,12 @@ export const ButtonDropdown = React.forwardRef((
 
     React.useEffect(() => { // KNB-5058 - потеря фокуса, переключение табов - приводит к потере фокуса, возвращать поиск не работает во всех случаях
         const onTabBlur = () => {
+            if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
             afterOpened(false);
         };
         const onVisibilityChange = () => {
             if (document.visibilityState === 'visible') return;
+            if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
             afterOpened(false);
         };
         window.addEventListener('blur', onTabBlur);
