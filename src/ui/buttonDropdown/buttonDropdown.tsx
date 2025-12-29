@@ -308,6 +308,22 @@ export const ButtonDropdown = React.forwardRef((
         setIsOpened(opened);
     }, [opened]);
 
+    React.useEffect(() => { // KNB-5058 - потеря фокуса, переключение табов - приводит к потере фокуса, возвращать поиск не работает во всех случаях
+        const onTabBlur = () => {
+            setIsOpened(false);
+        };
+        const onVisibilityChange = () => {
+            if (document.visibilityState === 'visible') return;
+            setIsOpened(false);
+        };
+        window.addEventListener('blur', onTabBlur);
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        return () => {
+            window.removeEventListener('blur', onTabBlur);
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+        }
+    }, []);
+
     function onDropdownClick (e: React.SyntheticEvent) {
         const classes = getParentsClasses(
             e.target as HTMLElement,
