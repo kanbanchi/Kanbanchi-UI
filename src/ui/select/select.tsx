@@ -485,10 +485,12 @@ export const Select = React.forwardRef((
         if (!isOpenedHook) return;
         const onTabBlur = () => {
             setIsOpenedHook(false);
+            if (onClose) onClose();
         };
         const onVisibilityChange = () => {
             if (document.visibilityState === 'visible') return;
             setIsOpenedHook(false);
+            if (onClose) onClose();
         };
         window.addEventListener('blur', onTabBlur);
         document.addEventListener('visibilitychange', onVisibilityChange);
