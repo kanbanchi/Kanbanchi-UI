@@ -454,8 +454,8 @@ export const Select = React.forwardRef((
     const onDropdownKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
         if (
-            e.key === 'Escape' ||
-            multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
+            e.key === 'Escape'
+            // multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
         ) {
             inputRef.current.setFocus(); // return focus to input before dropdown hide
             closeDropdown();
