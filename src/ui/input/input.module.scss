@@ -70,7 +70,7 @@
     }
 
     &.kui-input--filled {
-        &:not(.kui-input--readonly,):not(.kui-input--disabled) {
+        &:not(.kui-input--readonly):not(.kui-input--disabled) {
             .kui-input__icon:not(.kui-input__icon--clear):not(.kui-input__icon--arrow) {
                 color: calc-color(fade, $color-base, 60);
             }

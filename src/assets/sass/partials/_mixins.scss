@@ -7,6 +7,8 @@
     Sample usage:
         @include material-shadow($z-depth: 3); @include material-shadow(3);
     ==================================================================  */
+@use "sass:color";
+@use "sass:map";
 
 @mixin material-shadow($z-depth: 1, $strength: 1, $color: $color-base) {
     @if $z-depth == 1 {
@@ -34,10 +36,10 @@
 
 @function calc-color($method, $color, $amount) {
     @if $method == tint {
-        @return mix($color, $color-white, $amount);
+        @return color.mix($color, $color-white, $amount);
     }
     @if $method == shade {
-        @return mix($color-black, $color, $amount);
+        @return color.mix($color-black, $color, $amount);
     }
     @if $method == fade {
         @return rgba($color, $amount / 100);
@@ -47,7 +49,7 @@
 // Text color based on a background color
 
 @function calc-text-color($color) {
-    @if (lightness($color) > 60) {
+    @if (color.lightness($color) > 60) {
         @return $color-base; // Lighter backgorund, return dark color
     } @else {
         @return $color-white; // Darker background, return light color
@@ -55,21 +57,21 @@
 }
 
 @function get-text-color($item){
-    @if map-has-key($item, 'text') {
-        @return map-get($item, 'text');
+    @if map.has-key($item, 'text') {
+        @return map.get($item, 'text');
     }
-    @if map-has-key($item, 'color') {
-        @return calc-text-color(map-get($item, 'color'));
+    @if map.has-key($item, 'color') {
+        @return calc-text-color(map.get($item, 'color'));
     }
     @return $color-base;
 }
 
 @function get-label-color($item){
     $labelColor: $color-base;
-    @if map-has-key($item, 'text') {
-        $labelColor: map-get($item, 'text');
-    } @else if map-has-key($item, 'color') {
-        $labelColor: calc-text-color(map-get($item, 'color'));
+    @if map.has-key($item, 'text') {
+        $labelColor: map.get($item, 'text');
+    } @else if map.has-key($item, 'color') {
+        $labelColor: calc-text-color(map.get($item, 'color'));
     }
     @if ($labelColor == $color-white) {
         @return calc-color(fade, $color-white, 90);
