@@ -481,6 +481,25 @@ export const Select = React.forwardRef((
         }
     }, []);
 
+    React.useEffect(() => { // KNB-5058 - потеря фокуса, переключение табов - приводит к потере фокуса, возвращать поиск не работает во всех случаях
+        if (!isOpenedHook) return;
+        const onTabBlur = () => {
+            setIsOpenedHook(false);
+            if (onClose) onClose();
+        };
+        const onVisibilityChange = () => {
+            if (document.visibilityState === 'visible') return;
+            setIsOpenedHook(false);
+            if (onClose) onClose();
+        };
+        window.addEventListener('blur', onTabBlur);
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        return () => {
+            window.removeEventListener('blur', onTabBlur);
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+        }
+    }, [isOpenedHook]);
+
     const debounceRef = React.useRef(null);
     React.useEffect(() => {
         if (!isOpened || !dropdownRef.current) return;
