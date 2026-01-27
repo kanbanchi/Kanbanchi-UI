@@ -36,7 +36,7 @@ export const Dropdown = React.forwardRef((
         if (!opened) {
             setIsMount(false);
         } else {
-            itemRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            // itemRef.current.scrollIntoView({block: 'nearest', behavior: 'smooth'});
         }
         if (onAnimationEnd) onAnimationEnd(e);
     }

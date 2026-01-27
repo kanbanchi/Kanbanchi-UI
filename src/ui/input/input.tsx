@@ -45,6 +45,7 @@ React.forwardRef((props, ref) => {
     const [uniqueClass] = React.useState('kui-input--' + uuidv4());
     const timer = React.useRef(null);
     const [cursor, setCursor] = React.useState(null);
+    const [isCmdZ, setCmdZ] = React.useState(null);
 
     className = ClassNames(
         'kui-input',
@@ -72,6 +73,9 @@ React.forwardRef((props, ref) => {
         if (e && e.key === 'Enter') {
             if (!autosize) e.preventDefault();
             if (onEnter) onEnter(e);
+        }
+        if (e && e.metaKey && e.key === 'z') {
+            setCmdZ(true);
         }
         if (onKeyDown) onKeyDown(e);
     };
@@ -256,6 +260,10 @@ React.forwardRef((props, ref) => {
 
     // fix safari cursor jump: https://stackoverflow.com/questions/46000544/react-controlled-input-cursor-jumps
     React.useEffect(() => {
+        if (isCmdZ) { // фикс путает выделение текста при команд зет
+            setCmdZ(false);
+            return;
+        }
         if (!cursor) return;
         try { // many input types do not support selection
             textarea.current.setSelectionRange(cursor, cursor);

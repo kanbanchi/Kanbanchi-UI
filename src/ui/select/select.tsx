@@ -33,6 +33,7 @@ export const Select = React.forwardRef((
         isCloseOnEnter,
         isFitWindow,
         isDropdownUplifted,
+        isUpdateValueOnChange,
         multiple,
         notBlurClasses,
         opened,
@@ -58,6 +59,9 @@ export const Select = React.forwardRef((
         dropdownBody = null,
         list: Array<React.ReactElement> = [],
         isSearch = variant === 'search';
+
+    // dont update search input value if not forced
+    isUpdateValueOnChange = isUpdateValueOnChange === undefined ? !isSearch : isUpdateValueOnChange;
 
     const [isScroll, setScroll] = React.useState(false);
     let [activeHook, _setActiveHook] = React.useState(active);
@@ -237,13 +241,14 @@ export const Select = React.forwardRef((
                 inputRef.current.setFocus(); // return focus to input before dropdown hide
                 setIsOpenedHook(false);
                 isOpened.current = false;
-                if (!isSearch) { // dont update search input value
+                if (isUpdateValueOnChange) {
                     setValue(e.item.text);
                 }
                 if (e.item.index !== activeHook) {
                     setActiveHook(e.item.index);
                 }
                 if (onChange) onChange(e);
+                if (onClose) onClose();
             }
         } else { // input changed
             if (e.target.value) setIsOpenedHook(true);
@@ -476,6 +481,49 @@ export const Select = React.forwardRef((
         }
     }, []);
 
+    React.useEffect(() => { // KNB-5058 - потеря фокуса, переключение табов - приводит к потере фокуса, возвращать поиск не работает во всех случаях
+        if (!isOpenedHook) return;
+        const onTabBlur = () => {
+            setIsOpenedHook(false);
+            if (onClose) onClose();
+        };
+        const onVisibilityChange = () => {
+            if (document.visibilityState === 'visible') return;
+            setIsOpenedHook(false);
+            if (onClose) onClose();
+        };
+        window.addEventListener('blur', onTabBlur);
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        return () => {
+            window.removeEventListener('blur', onTabBlur);
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+        }
+    }, [isOpenedHook]);
+
+    const debounceRef = React.useRef(null);
+    React.useEffect(() => {
+        if (!isOpened || !dropdownRef.current) return;
+        function onResize() {
+            if (debounceRef.current) clearTimeout(debounceRef.current);
+            debounceRef.current = setTimeout(() => {
+                const dropdownItem = dropdownRef.current && dropdownRef.current.children[0];
+                if (!dropdownItem) return;
+                const _isScroll = dropdownItem.offsetHeight < dropdownItem.scrollHeight;
+                if (_isScroll !== isScroll) {
+                    setScroll(dropdownItem.offsetHeight < dropdownItem.scrollHeight);
+                }
+            }, 200);
+        }
+        const mutationObserver = new MutationObserver(onResize);
+        const resizeObserver = new ResizeObserver(onResize);
+        mutationObserver.observe(dropdownRef.current, {attributes: false, childList: true, subtree: true});
+        resizeObserver.observe(dropdownRef.current);
+        return () => {
+            mutationObserver.disconnect();
+            resizeObserver.disconnect();
+        }
+    }, [isOpened]);
+
     React.useEffect(() => {
         scrollList();
         if (onActiveChange) onActiveChange(activeHook);
@@ -487,6 +535,11 @@ export const Select = React.forwardRef((
             onActiveChanged();
         }
     }, [active, options]);
+
+    React.useEffect(() => {
+        if (opened === isOpenedHook) return;
+        setIsOpenedHook(opened);
+    }, [opened]);
 
     const classNameDropdown = ClassNames(
         'kui-select__dropdown',

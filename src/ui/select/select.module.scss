@@ -34,15 +34,13 @@
             }
         }
 
-        .kui-input__item:focus {
-            @include theme() {
-                border-color: theme-get('border-color-hover');
-            }
-        }
-
         &.kui-select--opened {
             .kui-input__icon--arrow {
                 transform: scaleY(-1);
+            }
+
+            .kui-input__item {
+                border-color: $color-purple;
             }
         }
     }

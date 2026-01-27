@@ -1,3 +1,4 @@
+@use "sass:map";
 @import './material-colors-map';
 /*  ==================================================================  *\
     Snippets of reusable CSS to develop faster and keep code readable
@@ -21,13 +22,13 @@
   @if ($debug) {
     @warn $color-name, $color-variant;
   }
-  $colorMap: map-get($material-colors, $color-name);
+  $colorMap: map.get($material-colors, $color-name);
 
   @if ($debug) {
     @warn $colorMap;
   }
 
-  $color: map-get($colorMap, $color-variant);
+  $color: map.get($colorMap, $color-variant);
 
   @if ($debug) {
     @warn $color;

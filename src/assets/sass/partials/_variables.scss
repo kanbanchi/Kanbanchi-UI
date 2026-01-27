@@ -80,7 +80,7 @@ $media-screens: (
 );
 
 // shadows
-$shadow-default: 0 $google-spacing / 4  $google-spacing rgba($color-base, .2);
+$shadow-default: 0 $google-spacing  $google-spacing * 3 rgba($color-base, .08);
 $shadow-hover: 0 $google-spacing / 2  $google-spacing * 2 rgba($color-base, .3);
 $shadow-modal: 0 $google-spacing $google-spacing * 3 rgba($color-base, .4);
 

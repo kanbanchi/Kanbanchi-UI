@@ -5,6 +5,7 @@ import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
 import { v4 as uuidv4 } from 'uuid';
+import { isTouchScreen } from './helpers/isTouchScreen';
 
 // accessibility ok
 
@@ -40,6 +41,10 @@ React.forwardRef((props, ref) => {
         onShow,
         onHide,
     } = props;
+
+    const isTouch = isTouchScreen();
+    const isHint = variant === 'hint';
+    if (!isHint && isTouch && children) return children as JSX.Element;
 
     if (isHidable === undefined) isHidable = true;
     const WAIT_BEFORE_SHOW = delay || 1000;
@@ -93,7 +98,6 @@ React.forwardRef((props, ref) => {
         if (!portalSelector) portalSelector = '.' + uniqueClass;
     }
 
-    const isHint = variant === 'hint';
     let html: JSX.Element[] = [];
     let ariaLabel = value || '';
 
