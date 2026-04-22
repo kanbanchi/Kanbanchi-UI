@@ -2,6 +2,18 @@ import * as React from 'react';
 
 export const SCREEN_PADDING = 8; // px
 
+const TAB_BLUR_DISABLED_LOCALSTORAGE = 'kui-tab-blur-disabled';
+
+export const isTabBlurDisabled = () => { // KNB-5307 переключение, для тестирования
+    return localStorage.getItem(TAB_BLUR_DISABLED_LOCALSTORAGE) === 'true';
+};
+
+(window as any).toggleTabBlur = () => {
+    const isDisabled = !isTabBlurDisabled();
+    localStorage.setItem(TAB_BLUR_DISABLED_LOCALSTORAGE, String(isDisabled));
+    console.log(isDisabled ? 'disabled' : 'enabled');
+};
+
 export const ClassNames = (...props: any) =>
     props
         .map((i: string | Array<string>) => (Array.isArray(i)) ? i.join(' ') : i)

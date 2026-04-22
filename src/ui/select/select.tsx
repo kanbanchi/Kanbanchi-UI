@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ISelectInheritedProps, ISelectOptionsObject } from './types';
-import { ClassNames, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs, ClassList } from '../utils';
+import { ClassNames, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs, ClassList, isTabBlurDisabled } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -481,8 +481,8 @@ export const Select = React.forwardRef((
         }
     }, []);
 
-    React.useEffect(() => { // KNB-5058 - потеря фокуса, переключение табов - приводит к потере фокуса, возвращать поиск не работает во всех случаях
-        if (!isOpenedHook) return;
+    React.useEffect(() => { // KNB-5085 - потеря фокуса, переключение табов - приводит к потере фокуса, возвращать поиск не работает во всех случаях
+        if (!isOpenedHook || isTabBlurDisabled()) return;
         const onTabBlur = () => {
             setIsOpenedHook(false);
             if (onClose) onClose();
