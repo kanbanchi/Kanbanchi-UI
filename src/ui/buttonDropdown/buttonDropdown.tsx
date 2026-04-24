@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { IButtonDropdownInheritedProps } from './types';
-import { ClassNames, getParentsClasses, SCREEN_PADDING, useCombinedRefs } from '../utils';
-import { Dropdown } from '../../ui';
-import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
 import { v4 as uuidv4 } from 'uuid';
+import '../../../src/ui/buttonDropdown/buttonDropdown.module.scss';
+import { Dropdown } from '../../ui';
 import { KUI_PORTAL_ID, Portal } from '../portal/portal';
-import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
+import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
+import { ClassNames, getParentsClasses, SCREEN_PADDING, useCombinedRefs } from '../utils';
+import { IButtonDropdownInheritedProps } from './types';
 
 // accessibility ok
 
@@ -293,8 +293,9 @@ export const ButtonDropdown = React.forwardRef((
         });
     });
 
-    const onKeyDown = (e: React.KeyboardEvent) => {
+    const onKeyDown = (e: React.KeyboardEvent, onKeyDownOwn: (e: React.KeyboardEvent) => void) => {
         if (!e) return;
+        if (onKeyDownOwn) onKeyDownOwn(e);
         if (
             e.key === 'Escape' ||
             multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
@@ -358,7 +359,7 @@ export const ButtonDropdown = React.forwardRef((
         tabIndex={-1}
         onBlur={attributes.onBlur}
         onDidMount={onDropdownMount}
-        onKeyDown={onKeyDown}
+        onKeyDown={e => onKeyDown(e, attributes.onKeyDown)}
     >
         {list}
     </Dropdown>);
