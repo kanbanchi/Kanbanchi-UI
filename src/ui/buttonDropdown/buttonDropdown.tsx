@@ -264,11 +264,11 @@ export const ButtonDropdown = React.forwardRef((
         e: React.KeyboardEvent,
         onKeyDownOwn: (e: React.KeyboardEvent) => void,
     ) => {
+        if (onKeyDownOwn) onKeyDownOwn(e);
         if (e.key === 'Escape') {
             e.stopPropagation();
             setIsOpened(false);
         }
-        if (onKeyDownOwn) onKeyDownOwn(e);
     };
 
     list = React.Children.map(childrenArray, (child: any) => {
