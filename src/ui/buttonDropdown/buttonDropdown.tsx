@@ -33,6 +33,7 @@ export const ButtonDropdown = React.forwardRef((
         portalId,
         portalSelector,
         single,
+        onKeyDown: onKeyDownOwn,
         beforeOpen,
         onBlur,
         onClick,
@@ -261,8 +262,7 @@ export const ButtonDropdown = React.forwardRef((
         (Array.isArray(children)) ? children : [children];
 
     const onButtonKeyDown = (
-        e: React.KeyboardEvent,
-        onKeyDownOwn: (e: React.KeyboardEvent) => void,
+        e: React.KeyboardEvent<HTMLButtonElement>,
     ) => {
         if (onKeyDownOwn) onKeyDownOwn(e);
         if (e.key === 'Escape') {
@@ -283,7 +283,7 @@ export const ButtonDropdown = React.forwardRef((
                 ['aria-expanded']: isOpenedHook,
                 ...attributes,
                 ref: buttonButtonRef,
-                onKeyDown: (e: React.KeyboardEvent) => onButtonKeyDown(e, attributes.onKeyDown),
+                onKeyDown: onButtonKeyDown,
             });
             return null;
         }
@@ -293,9 +293,8 @@ export const ButtonDropdown = React.forwardRef((
         });
     });
 
-    const onKeyDown = (e: React.KeyboardEvent, onKeyDownOwn: (e: React.KeyboardEvent) => void) => {
+    const onKeyDown = (e: React.KeyboardEvent) => {
         if (!e) return;
-        if (onKeyDownOwn) onKeyDownOwn(e);
         if (
             e.key === 'Escape' ||
             multiple && single && e.key === 'Enter' // чекбоксы меняются пробелом, а на Enter нужно применить и закрыть дропдаун
@@ -359,7 +358,7 @@ export const ButtonDropdown = React.forwardRef((
         tabIndex={-1}
         onBlur={attributes.onBlur}
         onDidMount={onDropdownMount}
-        onKeyDown={e => onKeyDown(e, attributes.onKeyDown)}
+        onKeyDown={onKeyDown}
     >
         {list}
     </Dropdown>);
