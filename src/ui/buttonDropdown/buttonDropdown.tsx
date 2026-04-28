@@ -33,6 +33,7 @@ export const ButtonDropdown = React.forwardRef((
         portalId,
         portalSelector,
         single,
+        onKeyDown: onKeyDownOwn,
         beforeOpen,
         onBlur,
         onClick,
@@ -261,14 +262,13 @@ export const ButtonDropdown = React.forwardRef((
         (Array.isArray(children)) ? children : [children];
 
     const onButtonKeyDown = (
-        e: React.KeyboardEvent,
-        onKeyDownOwn: (e: React.KeyboardEvent) => void,
+        e: React.KeyboardEvent<HTMLButtonElement>,
     ) => {
+        if (onKeyDownOwn) onKeyDownOwn(e);
         if (e.key === 'Escape') {
             e.stopPropagation();
             setIsOpened(false);
         }
-        if (onKeyDownOwn) onKeyDownOwn(e);
     };
 
     list = React.Children.map(childrenArray, (child: any) => {
@@ -283,7 +283,7 @@ export const ButtonDropdown = React.forwardRef((
                 ['aria-expanded']: isOpenedHook,
                 ...attributes,
                 ref: buttonButtonRef,
-                onKeyDown: (e: React.KeyboardEvent) => onButtonKeyDown(e, attributes.onKeyDown),
+                onKeyDown: onButtonKeyDown,
             });
             return null;
         }
