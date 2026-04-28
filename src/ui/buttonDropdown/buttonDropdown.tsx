@@ -5,7 +5,7 @@ import { Dropdown } from '../../ui';
 import { KUI_PORTAL_ID, Portal } from '../portal/portal';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
 import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
-import { ClassNames, getParentsClasses, SCREEN_PADDING, useCombinedRefs } from '../utils';
+import { ClassNames, getParentsClasses, isTabBlurDisabled, SCREEN_PADDING, useCombinedRefs } from '../utils';
 import { IButtonDropdownInheritedProps } from './types';
 
 // accessibility ok
@@ -308,8 +308,8 @@ export const ButtonDropdown = React.forwardRef((
         setIsOpened(opened);
     }, [opened]);
 
-    React.useEffect(() => { // KNB-5058 - потеря фокуса, переключение табов - приводит к потере фокуса, возвращать поиск не работает во всех случаях
-        if (!isOpenedHook) return;
+    React.useEffect(() => { // KNB-5085 - потеря фокуса, переключение табов - приводит к потере фокуса, возвращать поиск не работает во всех случаях
+        if (!isOpenedHook || isTabBlurDisabled()) return;
         const onTabBlur = () => {
             if (buttonButtonRef.current) buttonButtonRef.current.focus(); // вернуть фокус кнопке
             afterOpened(false);

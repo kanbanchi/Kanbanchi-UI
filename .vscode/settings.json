@@ -1,0 +1,9 @@
+{
+    "js/ts.tsdk.path": "node_modules/typescript/lib",
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+        "text": "Always prefix commit messages with the Kanban ticket from the current branch name in format KNB-1234: "
+        },
+    ],
+
+}
