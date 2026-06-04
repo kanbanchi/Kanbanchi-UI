@@ -11,6 +11,7 @@ export interface ISwitchOwnProps {
     direction?:
         'left' |
         'right';
+    htmlBefore?: JSX.Element | JSX.Element[];
 }
 
 export interface ISwitchProps extends
