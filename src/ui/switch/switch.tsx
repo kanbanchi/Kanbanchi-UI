@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ISwitchInheritedProps } from './types';
 import { ClassNames } from '../utils';
 import { Label } from '../../ui';
-import './switch.module.scss';
+import '../../../src/ui/switch/switch.module.scss';
 
 // accessibility ok
 
