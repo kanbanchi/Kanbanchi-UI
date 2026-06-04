@@ -13,6 +13,7 @@ React.forwardRef((props, ref) => {
         className,
         color,
         direction,
+        htmlBefore,
         ...attributesOriginal
     } = props,
         attributes: React.InputHTMLAttributes<HTMLElement> = attributesOriginal;
@@ -29,7 +30,7 @@ React.forwardRef((props, ref) => {
         if (!e || attributes.disabled) return;
         if (e.key === ' ') {
             e.preventDefault();
-            attributes.onChange(e as any);
+            attributes.onChange && attributes.onChange(e as any);
         }
     }
 
@@ -43,6 +44,7 @@ React.forwardRef((props, ref) => {
             onKeyDown={onKeyDown}
             ref={ref as any}
         >
+            {htmlBefore}
             <input
                 className="kui-switch__input"
                 type="checkbox"
@@ -58,7 +60,6 @@ React.forwardRef((props, ref) => {
 Switch.defaultProps = {
     checked: false,
     onChange: (): void => undefined,
-    color: null,
     direction: 'right',
 }
 

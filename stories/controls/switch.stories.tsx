@@ -11,7 +11,9 @@ const Story = () => {
       <section className="section-form-min">
         <h2>Switch</h2>
 
-        <Switch checked={val} onChange={() => setVal(!val)}>
+        <Switch checked={val} onChange={() => setVal(!val)}
+          htmlBefore={<span className="hidden">html before</span>}
+        >
           01. Label
         </Switch>
 
