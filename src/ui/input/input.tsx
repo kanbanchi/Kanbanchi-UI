@@ -251,7 +251,9 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        textarea.current.value = value;
+        if (textarea.current.value !== value) {
+            textarea.current.value = value;
+        }
         setIsFilled(!!value);
         requestAnimationFrame(()=> { // подождать autosizeLibray.default. был баг высоты email в boardDetails
             autosizeLibray.default.update(textarea.current);
@@ -266,7 +268,12 @@ React.forwardRef((props, ref) => {
         }
         if (!cursor) return;
         try { // many input types do not support selection
-            textarea.current.setSelectionRange(cursor, cursor);
+            if (
+                textarea.current.selectionStart !== cursor ||
+                textarea.current.selectionEnd !== cursor
+            ) {
+                textarea.current.setSelectionRange(cursor, cursor);
+            }
         } catch (e) { /* noop */ }
     }, [cursor]);
 
