@@ -268,7 +268,12 @@ React.forwardRef((props, ref) => {
         }
         if (!cursor) return;
         try { // many input types do not support selection
-            textarea.current.setSelectionRange(cursor, cursor);
+            if (
+                textarea.current.selectionStart !== cursor ||
+                textarea.current.selectionEnd !== cursor
+            ) {
+                textarea.current.setSelectionRange(cursor, cursor);
+            }
         } catch (e) { /* noop */ }
     }, [cursor]);
 
