@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-      "baseUrl": ".",
-      "paths": { "*": ["types/*"] },
-    "outDir": "./dist/",
-    "sourceMap": true,
     "noImplicitAny": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
