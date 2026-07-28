@@ -7,10 +7,12 @@
     "noImplicitAny": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "module": "commonjs",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "target": "esnext",
     "jsx": "react",
     "allowJs": true,
+    "skipLibCheck": true,
     "noEmit": true
   },
   "include": [
