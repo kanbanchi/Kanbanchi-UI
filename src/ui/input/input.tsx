@@ -251,7 +251,9 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        textarea.current.value = value;
+        if (textarea.current.value !== value) {  // только если реально изменилось
+            textarea.current.value = value;
+        }
         setIsFilled(!!value);
         requestAnimationFrame(()=> { // подождать autosizeLibray.default. был баг высоты email в boardDetails
             autosizeLibray.default.update(textarea.current);
