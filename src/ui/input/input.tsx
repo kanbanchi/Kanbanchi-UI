@@ -251,7 +251,7 @@ React.forwardRef((props, ref) => {
     const Tag = (autosize) ? 'textarea' : 'input';
 
     React.useEffect(() => {
-        if (textarea.current.value !== value) {
+        if (textarea.current.value !== value) {  // только если реально изменилось
             textarea.current.value = value;
         }
         setIsFilled(!!value);
