@@ -16,7 +16,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "build-storybook": "storybook build -c .storybook -o ./static",
-    "preinstall": "npx npm-force-resolutions"
+    "_preinstall": "npx npm-force-resolutions"
   },
   "browserslist": [
     ">0.2%",
@@ -38,7 +38,6 @@
     "@svgr/webpack": "^6.3.1",
     "@types/node": "^20.19.43",
     "@types/react-datepicker": "^4.4.2",
-    "@types/uuid": "^8.3.4",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "date-fns": "^2.28.0",
@@ -52,7 +51,7 @@
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
-    "uuid": "^8.3.2"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
