@@ -29,7 +29,7 @@ function addRootElement(rootElem, selector) {
 	}
   	container.insertBefore(
 		rootElem,
-		container.lastElementChild.nextElementSibling,
+		container.lastElementChild?.nextElementSibling,
   	);
 }
 
