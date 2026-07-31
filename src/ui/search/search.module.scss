@@ -9,7 +9,7 @@
             transition: none;
         }
 
-        .scroll-visible &.kui-select--scroll {
+        .scroll-visible:not(.mac) &.kui-select--scroll {
             .kui-input {
                 margin-right: $google-spacing;
             }
