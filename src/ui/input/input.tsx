@@ -307,6 +307,7 @@ React.forwardRef((props, ref) => {
             readOnly={readOnly}
             rows={1}
             ref={textarea}
+            data-lpignore={'true'}
             {...attributes}
         />
     );
