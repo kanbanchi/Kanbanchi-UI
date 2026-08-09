@@ -5,7 +5,9 @@
     max-width: 100%;
     height: $google-spacing * 7;
     overflow: hidden;
-    box-shadow: 0 -1px 0 calc-color(fade, $color-base, 20) inset;
+    @include theme() {
+        box-shadow: 0 -1px 0 calc-color(fade, theme-get('color-base'), 20) inset;
+    }
 
     &__scroll {
         max-width: 100%;
@@ -25,7 +27,9 @@
         min-width: $google-spacing * 16;
         height: $google-spacing * 7;
         padding: 0 $google-spacing * 3;
-        color: calc-color(fade, $color-base, 50);
+        @include theme() {
+            color: calc-color(fade, theme-get('color-base'), 50);
+        }
         font-weight: normal;
         background: transparent;
         border-radius: 0;
@@ -57,17 +61,23 @@
         &:active,
         &:focus,
         &:hover {
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+            }
             background: transparent;
             box-shadow: none;
         }
 
         &:focus:before {
-            background: calc-color(fade, $color-base, 2.5);
+            @include theme() {
+                background: calc-color(fade, theme-get('color-base'), 2.5);
+            }
         }
 
         &--active {
-            color: $color-base;
+            @include theme() {
+                color: theme-get('color-base');
+            }
             cursor: default;
             
             &:after {

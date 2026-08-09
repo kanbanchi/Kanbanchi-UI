@@ -16,11 +16,15 @@
     min-height: $google-spacing * 4;
     padding: $google-spacing;
     white-space: normal;
-    color: $color-white;
+    @include theme() {
+        color: theme-get('color-white');
+    }
     font-size: $milli-size;
     text-align: left;
     border-radius: $big-radius;
-    background: calc-color(fade, $color-base, 90);
+    @include theme() {
+        background: calc-color(fade, theme-get('color-base'), 90);
+    }
     visibility: hidden;
     will-change: transform;
 
@@ -39,7 +43,9 @@
     }
 
     a {
-        color: $color-white;
+        @include theme() {
+            color: theme-get('color-white');
+        }
     }
 
     &.kui-tooltip--link {
@@ -147,7 +153,9 @@
 
 .kui-tooltip__arrow {
     position: absolute;
-    color: calc-color(fade, $color-base, 90);
+    @include theme() {
+        color: calc-color(fade, theme-get('color-base'), 90);
+    }
 
     .kui-tooltip--arrow-up &,
     .kui-tooltip--arrow-down & {

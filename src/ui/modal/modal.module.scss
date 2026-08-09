@@ -55,7 +55,9 @@ $modal-z-index: $z-modal;
     top: 0;
     width: 100%;
     min-height: 100%;
-    background: calc-color(fade, $color-white, 70);
+    @include theme() {
+        background: calc-color(fade, theme-get('color-white'), 70);
+    }
     z-index: $modal-z-index;
     animation: animation_modal_overlay .5s ease-in-out forwards;
 }
@@ -64,12 +66,18 @@ $modal-z-index: $z-modal;
     width: 100%;
     max-width: $modal-max-width;
     max-height: 100%;
-    background: $color-white;
     border-radius: $large-radius;
-    box-shadow: $shadow-modal;
+    @include theme() {
+        background: theme-get('color-white');
+        box-shadow: theme-get('shadow-modal');
+    }
     overflow: auto;
     z-index: $modal-z-index + 10;
     animation: animation_modal_item .3s ease-in-out forwards;
+
+    .dark-theme & {
+        border: 2px solid calc-color(fade, $color-background-dm, 50);
+    }
 
     &:focus {
         outline: 0;
@@ -82,7 +90,9 @@ $modal-z-index: $z-modal;
     align-items: flex-start;
     min-height: $google-spacing * 7;
     padding: $google-spacing * 2 $google-spacing * 2 $google-spacing * 2 $google-spacing * 3;
-    border-bottom: 1px solid calc-color(fade, $color-base, 10);
+    @include theme() {
+        border-bottom: 1px solid calc-color(fade, theme-get('color-base'), 10);
+    }
 }
 
 .kui-modal__close {
@@ -175,7 +185,9 @@ $modal-z-index: $z-modal;
     align-items: center;
     min-height: $google-spacing * 7;
     padding: $google-spacing * 2 $google-spacing * 3;
-    border-top: 1px solid calc-color(fade, $color-base, 10);
+    @include theme() {
+        border-top: 1px solid calc-color(fade, theme-get('color-base'), 10);
+    }
 
     &.kui-modal__footer--buttons {
         justify-content: flex-end;
@@ -184,7 +196,9 @@ $modal-z-index: $z-modal;
     &.kui-modal__footer--release {
         justify-content: space-between;
         border: none;
-        background: calc-color(tint, $color-background, 50);
+        @include theme() {
+            background: calc-color(tint, theme-get('color-background'), 50);
+        }
     }
 }
 

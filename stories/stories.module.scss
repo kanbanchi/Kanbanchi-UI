@@ -9,7 +9,9 @@ section {
 
 .section {
     &-grey {
-        background: $color-background;
+        @include theme() {
+            background: theme-get('color-background');
+        }
     }
 
     &-purple {
@@ -18,8 +20,10 @@ section {
     }
 
     &-black {
-        color: $color-white;
-        background: $color-base;
+        @include theme() {
+            color: theme-get('color-white');
+            background: theme-get('color-base');
+        }
     }
 
     &-form-min {
@@ -126,7 +130,9 @@ section {
     width: 300px;
     height: 100px;
     text-align: center;
-    background: $color-background;
+    @include theme() {
+        background: theme-get('color-background');
+    }
 }
 
 .w100px {

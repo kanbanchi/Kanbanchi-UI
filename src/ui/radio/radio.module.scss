@@ -16,7 +16,9 @@
         height: $google-spacing * 2.5;
         width: $google-spacing * 2.5;
         background-color: transparent;
-        border: 2px solid calc-color(fade, $color-base, 30);
+        @include theme() {
+            border: 2px solid calc-color(fade, theme-get('color-base'), 30);
+        }
         border-radius: 50%;
         outline: 0;
         box-shadow: none;
@@ -74,15 +76,21 @@
             pointer-events: none;
 
             .kui-radio__label {
-                color: calc-color(fade, $color-base, 30);
+                @include theme() {
+                    color: calc-color(fade, theme-get('color-base'), 30);
+                }
             }
 
             .kui-radio__input {
-                border-color: calc-color(fade, $color-base, 10);
+                @include theme() {
+                    border-color: calc-color(fade, theme-get('color-base'), 10);
+                }
             }
 
             .kui-radio__input:checked:after {
-                background-color: calc-color(fade, $color-base, 30);
+                @include theme() {
+                    background: calc-color(fade, theme-get('color-base'), 30);
+                }
             }
         }
 
@@ -103,7 +111,9 @@
         
         &:focus:before,
         &:hover:before {
-            background: $color-light-background;
+            @include theme() {
+                background: theme-get('color-light-background');
+            }
         }
     }
 

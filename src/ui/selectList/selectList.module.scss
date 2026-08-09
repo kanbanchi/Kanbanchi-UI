@@ -1,6 +1,5 @@
 @import '../../assets/sass/index.scss';
 $selectList: '.kui-select-list';
-$selectListItemHoverColor: #F0F1F5;
 
 #{$selectList} {
     display: block;
@@ -9,8 +8,10 @@ $selectListItemHoverColor: #F0F1F5;
     list-style: none;
     font-size: $milli-size;
     white-space: nowrap;
-    color: calc-color(fade, $color-base, 90);
-    background: $color-white;
+    @include theme() {
+        color: calc-color(fade, theme-get('color-base'), 90);
+        background: theme-get('color-white');
+    }
 
     &__item {
         width: 100%;
@@ -41,30 +42,40 @@ $selectListItemHoverColor: #F0F1F5;
         }
 
         &:hover {
-            color: $color-base;
-            background: $selectListItemHoverColor;
+            @include theme() {
+                color: theme-get('color-base');
+                background: theme-get('color-select-list-item-hover');
+            }
         }
 
         #{$selectList}--noactive
         &:hover:not(&--disabled) {
-            background: $color-background;
+            @include theme() {
+                background: theme-get('color-background');
+            }
         }
 
         &:focus {
-            background: $selectListItemHoverColor;
+            @include theme() {
+                background: theme-get('color-select-list-item-hover');
+            }
             outline: 0;
         }
 
         &--active,
         &--active:hover,
         &--active:focus {
-            color: $color-base;
-            background: calc-color(fade, $color-background, 50);
+            @include theme() {
+                color: theme-get('color-base');
+                background: calc-color(fade, theme-get('color-background'), 50);
+            }
         }
 
         &--disabled,
         &--disabled:hover {
-            color: calc-color(fade, $color-base, 30);
+            @include theme() {
+                color: calc-color(fade, theme-get('color-base'), 30);
+            }
             background: none;
             cursor: default;
         }

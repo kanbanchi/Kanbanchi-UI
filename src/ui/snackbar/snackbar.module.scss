@@ -7,9 +7,9 @@
     min-height: $google-spacing * 7;
     padding: $google-spacing $google-spacing * 2;
     color: $color-white;
+    box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-base, 10);
     border-radius: $big-radius;
     background-color: $color-purple;
-    box-shadow: 0 $google-spacing $google-spacing * 2 calc-color(fade, $color-base, 10);
     outline: none;
     :global {
         animation: snackbarShow .5s ease-in-out forwards;
@@ -77,7 +77,10 @@
     }
 
     &--variant_promt {
-        background-color: $color-base;
+        @include theme() {
+            background: theme-get('color-base');
+            color: theme-get('color-white');
+        }
     }
 
     &--variant_success {
@@ -86,7 +89,10 @@
 
     &--variant_timer,
     &--variant_undo {
-        background-color: $color-base;
+        @include theme() {
+            background: theme-get('color-base');
+            color: theme-get('color-white');
+        }
 
         .kui-snackbar {
             &__body {
