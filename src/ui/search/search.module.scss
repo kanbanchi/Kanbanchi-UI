@@ -9,12 +9,6 @@
             transition: none;
         }
 
-        .scroll-visible:not(.mac) &.kui-select--scroll {
-            .kui-input {
-                margin-right: $google-spacing;
-            }
-        }
-
         .kui-input:before {
             content: '';
             position: absolute;
@@ -56,9 +50,15 @@
 }
 
 .kui-search__dropdown--uplifted {
+    // справа резервируем место под скроллбар всегда, чтобы инпут, лежащий поверх дропдауна,
+    // его не перекрывал и при этом не менял свою ширину, когда скроллбар появляется
     .kui-dropdown__item {
-        min-width: calc(100% + #{$google-spacing * 2});
+        min-width: calc(100% + #{$google-spacing * 3});
         margin-left: -$google-spacing;
+    }
+
+    .kui-select-list {
+        padding-right: $google-spacing;
     }
 
     &.kui-dropdown--direction_down {
