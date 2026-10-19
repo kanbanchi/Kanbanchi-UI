@@ -166,3 +166,36 @@ export const stripHtml = (
     const htmlFree = html.replace(/<[^>]*>/g, ' ');
     return htmlFree;
 };
+
+/**
+ * Закрытие дропдауна в блюр, с гашением клика по элементу.
+ */
+
+let isPointerDown = false;
+
+if (typeof document !== 'undefined') {
+    document.addEventListener('mousedown', () => { isPointerDown = true; }, true);
+    document.addEventListener('mouseup', () => { isPointerDown = false; }, true);
+}
+
+export const swallowClickAfterBlur = () => {
+    if (!isPointerDown) return; // blur не от мыши (Tab, Escape, потеря фокуса) — click не придёт
+
+    const cleanup = () => {
+        document.removeEventListener('click', onClick, true);
+        document.removeEventListener('mouseup', onMouseUp, true);
+    };
+
+    const onClick = (e: MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        cleanup();
+    };
+
+    const onMouseUp = () => { // click приходит сразу после mouseup, а если не пришёл (drag, правая кнопка) — снять слушатель
+        setTimeout(cleanup);
+    };
+
+    document.addEventListener('click', onClick, true);
+    document.addEventListener('mouseup', onMouseUp, true);
+};
