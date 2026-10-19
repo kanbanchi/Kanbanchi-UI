@@ -46,7 +46,7 @@
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-focus-lock": "^2.9.1",
-    "react-multi-carousel": "^2.8.2",
+    "react-multi-carousel": "2.8.5",
     "sass": "^1.94.2",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
