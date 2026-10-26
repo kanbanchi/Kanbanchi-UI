@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ISelectInheritedProps, ISelectOptionsObject } from './types';
-import { ClassNames, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, useCombinedRefs, ClassList, isTabBlurDisabled } from '../utils';
+import { ClassNames, getParentsClasses, getParentsScrollTop, SCREEN_PADDING, swallowClickAfterBlur, useCombinedRefs, ClassList, isTabBlurDisabled } from '../utils';
 import { Input, Dropdown, SelectList } from '../../ui';
 import '../../../src/ui/select/select.module.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -280,6 +280,7 @@ export const Select = React.forwardRef((
             }
         }
 
+        if (isOpenedHook) swallowClickAfterBlur(); // не нажимать кнопку под курсором кликом, которым закрыли дропдаун
         closeDropdown();
         if (onBlur) onBlur(e);
     }

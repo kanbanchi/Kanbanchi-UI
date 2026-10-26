@@ -5,7 +5,7 @@ import { Dropdown } from '../../ui';
 import { KUI_PORTAL_ID, Portal } from '../portal/portal';
 import { SELECT_LIST_CLASS } from '../selectList/selectList';
 import { SELECT_LIST_ITEM_CLASS } from '../selectListItem/selectListItem';
-import { ClassNames, getParentsClasses, isTabBlurDisabled, SCREEN_PADDING, useCombinedRefs } from '../utils';
+import { ClassNames, getParentsClasses, isTabBlurDisabled, SCREEN_PADDING, swallowClickAfterBlur, useCombinedRefs } from '../utils';
 import { IButtonDropdownInheritedProps } from './types';
 
 // accessibility ok
@@ -238,6 +238,7 @@ export const ButtonDropdown = React.forwardRef((
             }
         }
 
+        if (isOpenedHook) swallowClickAfterBlur(); // не нажимать кнопку под курсором кликом, которым закрыли дропдаун
         setIsOpened(false);
         if (onBlur) onBlur(e);
     }
