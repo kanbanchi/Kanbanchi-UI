@@ -173,17 +173,19 @@ export const stripHtml = (
 
 let isPointerDown = false;
 
-if (typeof document !== 'undefined') {
-    document.addEventListener('mousedown', () => { isPointerDown = true; }, true);
-    document.addEventListener('mouseup', () => { isPointerDown = false; }, true);
+// window capture, а не document: react-beautiful-dnd на window capture mousedown делает activeElement.blur(),
+// и blur дропдауна случается раньше, чем document capture успел бы выставить флаг
+if (typeof window !== 'undefined') {
+    window.addEventListener('mousedown', () => { isPointerDown = true; }, true);
+    window.addEventListener('mouseup', () => { isPointerDown = false; }, true);
 }
 
 export const swallowClickAfterBlur = () => {
     if (!isPointerDown) return; // blur не от мыши (Tab, Escape, потеря фокуса) — click не придёт
 
     const cleanup = () => {
-        document.removeEventListener('click', onClick, true);
-        document.removeEventListener('mouseup', onMouseUp, true);
+        window.removeEventListener('click', onClick, true);
+        window.removeEventListener('mouseup', onMouseUp, true);
     };
 
     const onClick = (e: MouseEvent) => {
@@ -196,6 +198,6 @@ export const swallowClickAfterBlur = () => {
         setTimeout(cleanup);
     };
 
-    document.addEventListener('click', onClick, true);
-    document.addEventListener('mouseup', onMouseUp, true);
+    window.addEventListener('click', onClick, true);
+    window.addEventListener('mouseup', onMouseUp, true);
 };
