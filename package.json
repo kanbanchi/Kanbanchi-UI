@@ -63,10 +63,14 @@
     "@storybook/test": "8.6.18",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/react": "^18.0.14",
+    "dompurify": "^3.4.17",
     "eslint": "^10.8.0",
     "storybook": "8.6.18",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.65.0"
+  },
+  "peerDependencies": {
+    "dompurify": "^3.4.17"
   },
   "resolutions": {
     "@babel/helpers": "^7.29.7",

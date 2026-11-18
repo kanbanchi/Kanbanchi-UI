@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { IModalReleaseSlideProps } from './types';
+import { sanitizeHtml } from '../utils';
 
 export const ModalSlide: React.FC<IModalReleaseSlideProps> =
 (props) => {
@@ -35,7 +36,7 @@ export const ModalSlide: React.FC<IModalReleaseSlideProps> =
             }
             <div
                 className={`kui-modal__slide-description ${slideSrc ? '' : 'flexable'}`}
-                dangerouslySetInnerHTML={{ __html: description }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }}
             ></div>
         </div>
     );
