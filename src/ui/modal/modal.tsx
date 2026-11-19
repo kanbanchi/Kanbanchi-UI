@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ClassNames } from '../utils';
+import { ClassNames, sanitizeHtml } from '../utils';
 import '../../../src/ui/modal/modal.module.scss';
 import { IModalInheritedProps } from './types';
 import { Button } from '../button/button';
@@ -93,7 +93,7 @@ export const Modal: React.FC<IModalInheritedProps> =
                     <Icon size={24} xlink="google-color"/>
                     <div
                         className="kui-modal__footer-stars-text"
-                        dangerouslySetInnerHTML={{ __html: release.footer.stars }}
+                        dangerouslySetInnerHTML={{ __html: sanitizeHtml(release.footer.stars) }}
                     ></div>
                 </div>
                 <div className="kui-modal__footer-follow">
@@ -275,7 +275,7 @@ export const Modal: React.FC<IModalInheritedProps> =
                 <div
                     className="kui-modal__header-title"
                     id={uniqueClass + '__header-title'}
-                    dangerouslySetInnerHTML={{__html: titleHook}}
+                    dangerouslySetInnerHTML={{__html: sanitizeHtml(titleHook)}}
                 ></div>
                 {closeButton}
             </div>

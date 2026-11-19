@@ -166,3 +166,5 @@ export const stripHtml = (
     const htmlFree = html.replace(/<[^>]*>/g, ' ');
     return htmlFree;
 };
+
+export { sanitizeHtml } from './sanitizeHtml';

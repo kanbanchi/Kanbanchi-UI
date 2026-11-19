@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
-import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs, stripHtml } from '../utils';
+import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs, stripHtml, sanitizeHtml } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
@@ -115,14 +115,14 @@ React.forwardRef((props, ref) => {
         html.push(<div
             className={'kui-tooltip__header'}
             key={'header'}
-            dangerouslySetInnerHTML={{ __html: header }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(header) }}
         />);
         ariaLabel = header;
     }
     html.push(<div
         className={'kui-tooltip__text'}
         key={'text'}
-        dangerouslySetInnerHTML={{ __html: value }} />
+        dangerouslySetInnerHTML={{ __html: sanitizeHtml(value) }} />
     );
     if (footer || link) {
         html.push(<div
