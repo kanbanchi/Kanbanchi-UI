@@ -1,5 +1,4 @@
 import * as React from 'react';
-import DOMPurify from 'dompurify';
 
 export const SCREEN_PADDING = 8; // px
 
@@ -168,13 +167,4 @@ export const stripHtml = (
     return htmlFree;
 };
 
-/**
- * Removes scripts, event handlers and javascript: urls, keeps safe markup (<b>, <br>, <a href>...).
- * Use for every string passed to dangerouslySetInnerHTML.
- */
-export const sanitizeHtml = (
-    html: string
-): string => {
-    if (!html) return '';
-    return DOMPurify.sanitize(String(html));
-};
+export { sanitizeHtml } from './sanitizeHtml';
