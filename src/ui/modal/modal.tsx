@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ClassNames, sanitizeHtml } from '../utils';
+import { ClassNames, sanitizeHtml, getContentProps } from '../utils';
 import '../../../src/ui/modal/modal.module.scss';
 import { IModalInheritedProps } from './types';
 import { Button } from '../button/button';
@@ -20,6 +20,7 @@ export const Modal: React.FC<IModalInheritedProps> =
         className,
         blockSelector,
         buttons,
+        isHtml,
         isNotFocusLock,
         release,
         title,
@@ -31,10 +32,11 @@ export const Modal: React.FC<IModalInheritedProps> =
         footer = null;
 
     const [uniqueClass] = React.useState('kui-modal--' + uuidv4());
+    // header title: slide title for release, otherwise title prop. Keeps own isHtml flag
     const [titleHook, setTitleHook] = React.useState(
         variant === 'release' && release && release.slides && release.slides[0] && release.slides[0].title
-        ? release.slides[0].title
-        : title
+        ? { title: release.slides[0].title, isHtml: release.slides[0].isHtml }
+        : { title, isHtml }
     );
 
     className = ClassNames(
@@ -156,7 +158,8 @@ export const Modal: React.FC<IModalInheritedProps> =
             } else if (newIndex >= slidesCount) {
                 newIndex -= slidesCount;
             }
-            setTitleHook(release.slides[newIndex].title);
+            const slide = release.slides[newIndex];
+            setTitleHook({ title: slide.title, isHtml: slide.isHtml });
         }
 
         if (release.slides.length > 1) {
@@ -275,7 +278,7 @@ export const Modal: React.FC<IModalInheritedProps> =
                 <div
                     className="kui-modal__header-title"
                     id={uniqueClass + '__header-title'}
-                    dangerouslySetInnerHTML={{__html: sanitizeHtml(titleHook)}}
+                    {...getContentProps(titleHook.title, titleHook.isHtml)}
                 ></div>
                 {closeButton}
             </div>

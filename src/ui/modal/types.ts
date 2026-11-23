@@ -26,6 +26,7 @@ export interface IModalReleaseFooterProps {
 
 export interface IModalReleaseSlideProps {
     description: string;
+    isHtml?: boolean; // description & title (shown in modal header) are rendered as sanitized HTML. Default: plain text
     src?: string;
     title: string;
     variant?: 'img' | 'video';
@@ -47,6 +48,7 @@ export interface IModalDispatchProps {
 
 export interface IModalOwnProps {
     buttons?: IModalButtonProps[];
+    isHtml?: boolean; // title is rendered as sanitized HTML. Default: plain text. Release slides have own isHtml
     isNotFocusLock?: boolean;
     release?: IModalReleaseProps;
     variant?:

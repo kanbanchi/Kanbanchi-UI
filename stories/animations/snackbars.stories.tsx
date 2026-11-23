@@ -41,12 +41,14 @@ const Story = () => {
         <Snackbar
           key="1"
           variant="error"
+          isHtml
           text="The <b>email</b> address is not valid. Please, use name@domain.com format."
         />
         <br />
         <Snackbar
           key="2"
           variant="error"
+          isHtml
           text="The maximum number of seats is exceeded. <br>Click Manage subscription to buy more seats."
           buttons={[{ text: "Close" }]}
         />

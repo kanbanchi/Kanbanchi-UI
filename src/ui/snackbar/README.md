@@ -2,6 +2,23 @@
 
 Popup with icon, text, button
 
+## title, text
+
+> **Breaking (KNB-5757):** `title` and `text` are rendered as **plain text** by default.  
+> Before they were rendered as HTML. Markup like `<b>` or `<br>` is now shown as is.  
+> If you need markup, pass `isHtml`.
+
+User data (board, card names, emails) - pass as is, without `escape(...)`, otherwise user sees `&lt;`.
+
+## isHtml
+
+`title` and `text` are rendered as HTML, sanitized by DOMPurify (scripts, event handlers, `javascript:` urls are removed).  
+The flag applies to both `title` and `text`. If only one of them has markup, escape user data in the other one.
+
+```html
+<Snackbar isHtml text="The <b>email</b> address is not valid." />
+```
+
 ## variant
 
 Change background & default icon.  

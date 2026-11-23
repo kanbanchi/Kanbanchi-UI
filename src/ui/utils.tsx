@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { sanitizeHtml } from './sanitizeHtml';
 
 export const SCREEN_PADDING = 8; // px
 
@@ -168,3 +169,17 @@ export const stripHtml = (
 };
 
 export { sanitizeHtml } from './sanitizeHtml';
+
+/**
+ * Props for an element that shows user-facing content.
+ * Plain text by default (React escapes it). With isHtml - sanitized HTML.
+ * Usage: <div {...getContentProps(value, isHtml)} />
+ */
+export const getContentProps = (
+    content: string,
+    isHtml?: boolean
+): Pick<React.HTMLAttributes<HTMLElement>, 'children' | 'dangerouslySetInnerHTML'> => {
+    return isHtml
+        ? { dangerouslySetInnerHTML: { __html: sanitizeHtml(content) } }
+        : { children: content };
+};

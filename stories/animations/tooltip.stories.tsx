@@ -292,6 +292,7 @@ const Story = () => {
         <Tooltip
           isPortal={isPortal}
           direction={"right"}
+          isHtml
           value="Connect related tasks <br/>to switch between them <br/>quickly."
           link={
             <a href="#1" onClick={() => console.log("You learned more")}>
@@ -310,6 +311,7 @@ const Story = () => {
         <Tooltip
           isPortal={isPortal}
           direction={"right"}
+          isHtml
           value="Connect related tasks <br/>to switch between them <br/>quickly."
           footer={
             <Button color={"white"} onClick={() => console.log("Ok")}>
