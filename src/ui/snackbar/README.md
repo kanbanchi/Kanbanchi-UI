@@ -12,7 +12,7 @@ User data (board, card names, emails) - pass as is, without `escape(...)`, other
 
 ## isHtml
 
-`title` and `text` are rendered as HTML, sanitized by DOMPurify (scripts, event handlers, `javascript:` urls are removed).  
+`title` and `text` are rendered as HTML, sanitized by DOMPurify (scripts, event handlers, `javascript:` urls, `<style>`, form elements are removed).  
 The flag applies to both `title` and `text`. If only one of them has markup, escape user data in the other one.
 
 ```html

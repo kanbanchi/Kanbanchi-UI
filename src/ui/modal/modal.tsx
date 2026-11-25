@@ -32,12 +32,14 @@ export const Modal: React.FC<IModalInheritedProps> =
         footer = null;
 
     const [uniqueClass] = React.useState('kui-modal--' + uuidv4());
-    // header title: slide title for release, otherwise title prop. Keeps own isHtml flag
-    const [titleHook, setTitleHook] = React.useState(
+    // header title of current release slide, keeps own isHtml flag. null - show title prop
+    const [slideTitleHook, setTitleHook] = React.useState<{ title: string; isHtml?: boolean }>(
         variant === 'release' && release && release.slides && release.slides[0] && release.slides[0].title
         ? { title: release.slides[0].title, isHtml: release.slides[0].isHtml }
-        : { title, isHtml }
+        : null
     );
+    // title & isHtml props are not stored in state, so their changes after mount are shown
+    const titleHook = slideTitleHook && slideTitleHook.title ? slideTitleHook : { title, isHtml };
 
     className = ClassNames(
         'kui-modal',

@@ -16,7 +16,7 @@ User data (card, tag, file names, emails) - pass as is, without `escape(...)`, o
 
 ## isHtml
 
-`value` and `header` are rendered as HTML, sanitized by DOMPurify (scripts, event handlers, `javascript:` urls are removed).  
+`value` and `header` are rendered as HTML, sanitized by DOMPurify (scripts, event handlers, `javascript:` urls, `<style>`, form elements are removed).  
 Do not concatenate user data into HTML without escaping.
 
 ```html

@@ -9,7 +9,7 @@ Modal popup
 
 ## isHtml
 
-`title` is rendered as HTML, sanitized by DOMPurify (scripts, event handlers, `javascript:` urls are removed).
+`title` is rendered as HTML, sanitized by DOMPurify (scripts, event handlers, `javascript:` urls, `<style>`, form elements are removed).
 
 ```html
 <Modal isHtml title="Delete <b>board</b>?" onClose={onClose} />
