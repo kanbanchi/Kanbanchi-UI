@@ -106,6 +106,7 @@ const Story = () => {
         },
         slides: [
           {
+            isHtml: true,
             description: `Bingo! With Shared Drives integration your team's workflow becomes even smoother. Create boards within your Shared Drives and easily work with them in a team. <a href="https://www.kanbanchi.com/faqwd/kanbanchi-boards-in-shared-drives" target="_blank">Learn more</a>`,
             src: "http://kanban-chi.appspot.com/dist/img/releases/2-41/2-41@2.png",
             title: "Shared Drives integration",
@@ -131,6 +132,7 @@ const Story = () => {
       release={{
         slides: [
           {
+            isHtml: true,
             description: `Bingo! With Shared Drives integration your team's workflow becomes even smoother. Create boards within your Shared Drives and easily work with them in a team. <a href="https://www.kanbanchi.com/faqwd/kanbanchi-boards-in-shared-drives" target="_blank">Learn more</a>`,
             title: "Shared Drives integration",
           },

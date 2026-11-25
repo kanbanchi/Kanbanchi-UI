@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ClassNames } from '../utils';
+import { ClassNames, sanitizeHtml, getContentProps } from '../utils';
 import '../../../src/ui/modal/modal.module.scss';
 import { IModalInheritedProps } from './types';
 import { Button } from '../button/button';
@@ -20,6 +20,7 @@ export const Modal: React.FC<IModalInheritedProps> =
         className,
         blockSelector,
         buttons,
+        isHtml,
         isNotFocusLock,
         release,
         title,
@@ -31,11 +32,14 @@ export const Modal: React.FC<IModalInheritedProps> =
         footer = null;
 
     const [uniqueClass] = React.useState('kui-modal--' + uuidv4());
-    const [titleHook, setTitleHook] = React.useState(
+    // header title of current release slide, keeps own isHtml flag. null - show title prop
+    const [slideTitleHook, setTitleHook] = React.useState<{ title: string; isHtml?: boolean }>(
         variant === 'release' && release && release.slides && release.slides[0] && release.slides[0].title
-        ? release.slides[0].title
-        : title
+        ? { title: release.slides[0].title, isHtml: release.slides[0].isHtml }
+        : null
     );
+    // title & isHtml props are not stored in state, so their changes after mount are shown
+    const titleHook = slideTitleHook && slideTitleHook.title ? slideTitleHook : { title, isHtml };
 
     className = ClassNames(
         'kui-modal',
@@ -93,7 +97,7 @@ export const Modal: React.FC<IModalInheritedProps> =
                     <Icon size={24} xlink="google-color"/>
                     <div
                         className="kui-modal__footer-stars-text"
-                        dangerouslySetInnerHTML={{ __html: release.footer.stars }}
+                        dangerouslySetInnerHTML={{ __html: sanitizeHtml(release.footer.stars) }}
                     ></div>
                 </div>
                 <div className="kui-modal__footer-follow">
@@ -156,7 +160,8 @@ export const Modal: React.FC<IModalInheritedProps> =
             } else if (newIndex >= slidesCount) {
                 newIndex -= slidesCount;
             }
-            setTitleHook(release.slides[newIndex].title);
+            const slide = release.slides[newIndex];
+            setTitleHook({ title: slide.title, isHtml: slide.isHtml });
         }
 
         if (release.slides.length > 1) {
@@ -275,7 +280,7 @@ export const Modal: React.FC<IModalInheritedProps> =
                 <div
                     className="kui-modal__header-title"
                     id={uniqueClass + '__header-title'}
-                    dangerouslySetInnerHTML={{__html: titleHook}}
+                    {...getContentProps(titleHook.title, titleHook.isHtml)}
                 ></div>
                 {closeButton}
             </div>

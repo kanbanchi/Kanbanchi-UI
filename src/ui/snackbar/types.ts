@@ -51,6 +51,7 @@ export type SnackbarPosition =
 
 export interface ISnackbarOwnProps {
     icon?: string;
+    isHtml?: boolean; // title & text are rendered as sanitized HTML. Default: plain text
     key: string;
     timer?: number;
     variant?: SnackbarVariant;

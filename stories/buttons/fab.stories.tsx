@@ -7,7 +7,7 @@ const Story = () => {
       <section>
         <h2>FAB</h2>
         <ButtonsGroup>
-          <Button variant="fab" tooltip={"Search <strong>Text</strong>"}>
+          <Button variant="fab" tooltip={{ value: "Search <strong>Text</strong>", isHtml: true }}>
             <Icon xlink="search" size={24} />
           </Button>
           <Button variant="fab" disabled>
@@ -34,6 +34,7 @@ const Story = () => {
             color="purple"
             tooltip={{
               header: "Tooltip <strong>header</strong>",
+              isHtml: true,
               value: "Plus",
             }}
           >

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITooltipInheritedProps } from './types';
-import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs, stripHtml } from '../utils';
+import { ClassNames, getScrollClient, getHasScroll, SCREEN_PADDING, useCombinedRefs, stripHtml, getContentProps } from '../utils';
 import '../../../src/ui/tooltip/tooltip.module.scss';
 import { Portal, KUI_PORTAL_ID } from './../portal/portal';
 import { Icon } from '../icon/icon';
@@ -21,6 +21,7 @@ React.forwardRef((props, ref) => {
         direction,
         footer,
         isHidable,
+        isHtml,
         isNeedCalc,
         isNoEvents,
         isNoWrap,
@@ -115,14 +116,14 @@ React.forwardRef((props, ref) => {
         html.push(<div
             className={'kui-tooltip__header'}
             key={'header'}
-            dangerouslySetInnerHTML={{ __html: header }}
+            {...getContentProps(header, isHtml)}
         />);
         ariaLabel = header;
     }
     html.push(<div
         className={'kui-tooltip__text'}
         key={'text'}
-        dangerouslySetInnerHTML={{ __html: value }} />
+        {...getContentProps(value, isHtml)} />
     );
     if (footer || link) {
         html.push(<div
@@ -489,7 +490,7 @@ React.forwardRef((props, ref) => {
             className: childClassName,
             title: null,
             tooltip: null,
-            ['aria-label']: child.props['aria-label'] === undefined ? stripHtml(ariaLabel) : child.props['aria-label'],
+            ['aria-label']: child.props['aria-label'] === undefined ? (isHtml ? stripHtml(ariaLabel) : ariaLabel) :child.props['aria-label'],
             onBlur: (event: React.FocusEvent) => {
                 if (isHidable) {
                     closeTooltip();

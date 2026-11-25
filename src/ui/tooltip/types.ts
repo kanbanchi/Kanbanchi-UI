@@ -28,6 +28,7 @@ export interface ITooltipStateProps {
     footer?: any;
     header?: string;
     isHidable?: boolean;
+    isHtml?: boolean; // value & header are rendered as sanitized HTML. Default: plain text
     isNeedCalc?: number;
     isNoEvents?: boolean;
     isNoWrap?: boolean;

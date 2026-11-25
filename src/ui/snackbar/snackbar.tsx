@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ISnackbarDefaultIcons, ISnackbarInheritedProps } from './types';
-import { ClassNames } from '../utils';
+import { ClassNames, getContentProps } from '../utils';
 import { Button, ButtonsGroup, Icon } from '../../ui';
 import '../../../src/ui/snackbar/snackbar.module.scss';
 import { TButtonVariant } from '../button/types';
@@ -14,6 +14,7 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
         className,
         buttons,
         icon,
+        isHtml,
         text,
         timer,
         title,
@@ -130,10 +131,10 @@ export const Snackbar: React.FC<ISnackbarInheritedProps> =
                 }
                 <div className="kui-snackbar__body">
                     {title &&
-                        <div className="kui-snackbar__title" dangerouslySetInnerHTML={{ __html: title }}></div>
+                        <div className="kui-snackbar__title" {...getContentProps(title, isHtml)}></div>
                     }
                     {text &&
-                        <div className="kui-snackbar__text" dangerouslySetInnerHTML={{ __html: text }}></div>
+                        <div className="kui-snackbar__text" {...getContentProps(text, isHtml)}></div>
                     }
                 </div>
                 {variant === 'timer' &&
